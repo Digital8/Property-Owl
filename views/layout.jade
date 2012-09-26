@@ -1,0 +1,65 @@
+!!! 5
+html(lang='en')
+head
+    meta(charset='utf-8')
+    title= globals.site.name
+    
+    link(href="/styles/bootstrap.css", rel="stylesheet")
+    link(href="/styles/bootstrap-responsive.css", rel="stylesheet")
+    script(src="/scripts/jquery.js")
+    script(src="/scripts/bootstrap.js")
+    script(src="/scripts/jquery.timeago.js")
+    
+    
+    style
+      body {
+        padding-top: 60px;
+      } 
+  body
+    div(class="navbar navbar-fixed-top")
+      .navbar-inner
+        .container
+          a.brand(href='/') #{globals.site.name}
+          ul#main-menu-right(class="nav pull-right")
+            li.dropdown(id="preview-menu")
+              a(class="dropdown-toggle",data-toggle="dropdown",href="#") 
+                i.icon-user.icon-white 
+                | &nbsp; #{objUser.alias} 
+                b.caret
+              ul.dropdown-menu
+                if (!objUser.isAuthed())
+                  if(modules.login == true)
+                    li
+                      a(href="/login",id="login") Login
+                    li.divider
+                  if(modules.register == true)
+                    li
+                      a(href="/sign-up") Sign Up
+                else
+                  li
+                    a(href="/user/#{objUser.id}/edit")
+                      i.icon-wrench
+                      | &nbsp; Account Settings
+                      
+                    a(href="#")
+                      i.icon-list
+                      | &nbsp; My Questions
+                      
+                    a(href="/issues")
+                      i.icon-bookmark
+                      | &nbsp; My Issues
+                      
+                    if (objUser.isStaff())
+                      a(href="/administration")
+                        i.icon-lock
+                        | &nbsp; Administration
+                      
+                  li.divider
+                  li
+                    
+                    a(href="/logout")
+                      i.icon-off
+                      | &nbsp; Logout
+                  
+    div(class="container")
+      block content

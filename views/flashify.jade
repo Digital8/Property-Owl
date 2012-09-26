@@ -1,0 +1,27 @@
+if (flash.error != undefined)
+  div(class="alert alert-error")
+    a.close(data-dismiss="alert") &times;
+    h4.alert-header Error 
+    each error in flash.error
+      li= error
+      
+if (flash.notice != undefined)
+  div(class="alert alert-notice")
+    a.close(data-dismiss="alert") &times;
+    h4.alert-header Hold up! 
+    each notice in flash.notice
+      li= notice
+
+if (flash.info != undefined)
+  div(class="alert alert-info")
+    a.close(data-dismiss="alert") &times;
+    h4.alert-header Attention: 
+    each info in flash.info
+      li= info
+      
+if (flash.success != undefined)
+  div(class="alert alert-success")
+    a.close(data-dismiss="alert") &times;
+    h4.alert-header Woot! 
+    each success in flash.success
+      li= success
