@@ -28,16 +28,8 @@ head
   body
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
-        .container-fluid
-          a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
           a.brand(href='#')= globals.site.name
           .nav-collapse.collapse
-            p.navbar-text.pull-right
-              | Logged in as 
-              a.navbar-link(href='#') Username
             ul.nav
               li.active
                 a(href='#') Home
@@ -45,6 +37,16 @@ head
                 a(href='#about') About
               li
                 a(href='#contact') Contact
+            ul.nav.pull-right
+              li.dropdown
+                a(href="#",role="button",class="dropdown-toggle",data-toggle="dropdown") Dropdown 3 
+                  b.caret
+                ul.dropdown-menu(role="menu")
+                  li
+                    a(tabindex="-1",href="#") Separated link
+                  li.divider
+                  li
+                    a(tabindex="-1",href="#",data-toggle="modal",href="#loginModal") Login / Register
           //
             /.nav-collapse 
     header.jumbotron.subhead.offset2.well#overview
@@ -92,8 +94,19 @@ head
       //
         /row
       hr
+      .modal.hide.fade#loginModal
+          .modal-header
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+              h3 Modal header
+            .modal-body
+              p One fine body…
+            .modal-footer
+              a.btn(href='#') Close
+              a.btn.btn-primary(href='#') Save changes
+      
       footer
-        p © Company 2012
+        p © #{globals.site.name} 201| Empowered by 
+          a(href="http://digital8.com.au") Digital8
     //
       /.fluid-container
     
