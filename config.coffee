@@ -24,7 +24,6 @@ module.exports =
   modules:
     login     : true
     register  : true
-    questions : true
   
   acl:
     banned : 102
@@ -33,4 +32,4 @@ module.exports =
     staff  : 105
     admin  : 106
     
-  port: 3000
+  port: 8080
