@@ -38,6 +38,8 @@ head
               li
                 a(href='#contact') Contact
             ul.nav.pull-right
+              li
+                a(tabindex="-1",href="#",data-toggle="modal",href="#loginModal") Login
               li.dropdown
                 a(href="#",role="button",class="dropdown-toggle",data-toggle="dropdown") Dropdown 3 
                   b.caret
@@ -46,7 +48,7 @@ head
                     a(tabindex="-1",href="#") Separated link
                   li.divider
                   li
-                    a(tabindex="-1",href="#",data-toggle="modal",href="#loginModal") Login / Register
+                    a(tabindex="-1",href="#",data-toggle="modal",href="#loginModal") Login
           //
             /.nav-collapse 
     header.jumbotron.subhead.offset2.well#overview
@@ -66,14 +68,44 @@ head
           .well.sidebar-nav
             ul.nav.nav-list
               li.nav-header Find Deals
-              li.active
-                a(href='#') Link
-              li
-                a(href='#') Link
-              li
-                a(href='#') Link
-              li
-                a(href='#') Link
+              li State / Territory
+                select.span9
+                  option All
+              li Property Type
+                select.span9
+                  option All
+              li Deal Type
+                select.span9
+                  option All
+                  
+              li Min. Price
+                select.span9
+                  option All
+                  
+              li Max. Price
+                select.span9
+                  option All
+                  
+              li Min. Beds
+                select.span9
+                  option Any
+                  
+              li Max. Beds
+                select.span9
+                  option Any
+                  
+              li Bathrooms
+                select.span9
+                  option Any
+                  
+              li Car Spaces
+                select.span9
+                  option Any
+              
+              li Development Stage
+                select.span9
+                  option All
+              button.btn-primary.btn Search
           //
             /.well 
         //
@@ -97,16 +129,30 @@ head
       .modal.hide.fade#loginModal
           .modal-header
               button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-              h3 Modal header
+              h3 Login
             .modal-body
-              p One fine body…
+              input(type="text",name="email",id="modalEmail")
+              input(type="password",name="password",id="modalPwd")
             .modal-footer
-              a.btn(href='#') Close
-              a.btn.btn-primary(href='#') Save changes
+              a.btn.btn-primary(href='#',id="modalLogin") Login
+              a.btn(href='#',data-dismiss='modal') Cancel
       
       footer
         p © #{globals.site.name} 201| Empowered by 
           a(href="http://digital8.com.au") Digital8
+          
+      script
+        $(document).ready(function(){
+          $("#modalLogin").click(function(){
+            $.ajax({
+              url: "/ajax/login",
+              type: "post",
+              data: "e="+$("#modalEmail").val()+"&p="+$("#modalPwd").val()
+            }).done(function (res) {
+              console.log(res.status);
+            });
+          });
+        });
     //
       /.fluid-container
     
