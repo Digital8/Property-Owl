@@ -3,8 +3,8 @@
  *
  * Controller for homepage of website
  *
- * @package   Time for Advice
- * @author    Brendan Scarvell <bscarvell@gmail.com>
+ * @package   Property Owl
+ * @author    Brendan Scarvell <brendan@digital8.com.au>
  * @copyright Copyright (c) 2012 - Current
  ###
 

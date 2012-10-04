@@ -27,5 +27,6 @@ helpers =
 module.exports = (app) ->
   # index
   app.get '/', controllers.index.index
+  app.get '/sign-up', controllers.signup.index
   
   app.post '/ajax/login', controllers.ajax.login
