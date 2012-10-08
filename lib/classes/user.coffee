@@ -17,30 +17,24 @@ module.exports = class User
 	  # Properties
 	  @id = userData.user_id or 0
 	  @alias = userData.alias or 'Guest'
-	  @firstName = userData.first_name or ''
+	  @firstName = userData.first_name or 'Guest'
 	  @lastName = userData.last_name or ''
-	  @displayName = "#{@firstName} #{@lastName}" or ''
+	  @displayName = "#{@firstName} #{@lastName}"
 	  @email = userData.email or ''
-	  @level = userData.acl or 0
+	  @level = userData.account_type_id or 0
 	  @funds = userData.funds or 0
 	  @notes = userData.admin_notes or ''
 	  @rights = userData.admin_rights.split '.'
 	  @avatar = if userData.photo  then "/uploads/#{userData.photo}" else 'http://placehold.it/150x150'
 	
-	isMember: ->
-	  return (@level >= accountLevel.member) ? true : false
+	isBuyer: ->
+	  return (@level >= accountLevel.buyer) ? true : false
 	
-	isExpert: ->
-	  return (@level >= accountLevel.expert) ? true : false
-	
-	isStaff: ->
-	  return (@level >= accountLevel.staff) ? true : false
+	isDeveloper: ->
+	  return (@level >= accountLevel.developer) ? true : false
 	
 	isAdmin: ->
 	  return (@level == accountLevel.admin) ? true : false
-
-	isBanned: ->
-	   return (@level == accountLevel.banned) ? true : false
 	   
 	isOwner: (owner_id) ->
 	  
