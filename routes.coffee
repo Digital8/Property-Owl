@@ -35,10 +35,19 @@ module.exports = (app) ->
   app.get '/contact', controllers.contact.index
   app.post '/contact', controllers.contact.create
   
+  app.get '/account', helpers.requireAuth, controllers.account.index
+  app.post '/account', helpers.requireAuth, controllers.account.update
+  
   app.get '/deals/state', controllers.deals_state.index
   app.get '/deals/state/:state', controllers.deals_state.view
   
   app.get '/properties/view/:id', controllers.properties.view
   
+  # Administration Routes
+  app.get '/administration', helpers.restrictTo(system.config.acl.admin), controllers.admin_index.index
+  
+  # Misc Routes
+  app.get '/login', controllers.misc.login
   app.get '/logout', controllers.misc.logout
   app.post '/ajax/login', controllers.ajax.login
+  
