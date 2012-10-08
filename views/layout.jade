@@ -30,47 +30,65 @@ head
       .navbar-inner
           a.brand(href='/')= globals.site.name
           .nav-collapse.collapse
-            ul.nav
-              li
-                a(href='/contact') Contact
             ul.nav.pull-right
+              li
+                a(tabindex="-1",href="#") Australia's Best Deal
+                
+              li
+                a(tabindex="-1",href="/deals/state") Best State Deal
+                
+              li
+                a(tabindex="-1",href="#") Owl Deals
+                    
+              li.dropdown
+                a(href="#",role="button",class="dropdown-toggle",data-toggle="dropdown") Wise Owl 
+                  b.caret
+                ul.dropdown-menu(role="menu")
+                  li
+                    a(tabindex="-1",href="#")
+                      i.icon-globe
+                      |  News Updates
+                  li
+                    a(tabindex="-1",href="#") 
+                      i.icon-book
+                      |  Research
               - if (!objUser.isAuthed())
                 li
                   a(href='/sign-up') Sign Up
                 li
-                  a(tabindex="-1",data-toggle="modal",href="#loginModal") Login
-              - else
-                li
-                  a(tabindex="-1",href="#") Australia's Best Deal
-                  
-                li
-                  a(tabindex="-1",href="/deals/state") Best State Deal
-                  
-                li
-                  a(tabindex="-1",href="#") Owl Deals
-                      
+                  a(tabindex="-1",data-toggle="modal",href="#loginModal") 
+                    i.icon-lock
+                    |  Login
+              - else      
                 li.dropdown
-                  a(href="#",role="button",class="dropdown-toggle",data-toggle="dropdown") Wise Owl
+                  
+                  a(href="#",role="button",class="dropdown-toggle",data-toggle="dropdown") 
+                    i.icon-user 
+                    |  My Nest 
                     b.caret
                   ul.dropdown-menu(role="menu")
                     li
-                      a(tabindex="-1",href="#") News Updates
+                      a(tabindex="-1",href="/account")
+                        i.icon-user 
+                        |  My Account
+                    - if (objUser.isAdmin())
+                      li
+                        a(tabindex="-1",href="/administration") 
+                          i.icon-trash
+                          |  Administration
                     li
-                      a(tabindex="-1",href="#") Research
-                      
-                li.dropdown
-                  a(href="#",role="button",class="dropdown-toggle",data-toggle="dropdown") My Nest
-                    b.caret
-                  ul.dropdown-menu(role="menu")
+                      a(tabindex="-1",href="/contact") 
+                        i.icon-envelope
+                        |  Contact Us
                     li
-                      a(tabindex="-1",href="#") My Account
-                    li
-                      a(tabindex="-1",href="/contact") Contact Us
-                    li
-                      a(tabindex="-1",href="#") Refer A Friend
+                      a(tabindex="-1",href="#") 
+                        i.icon-bullhorn
+                        |  Refer A Friend
                     li.divider
                     li
-                      a(href="/logout") Sign Out
+                      a(href="/logout") 
+                        i.icon-off
+                        |  Sign Out
           //
             /.nav-collapse 
     header.jumbotron.subhead.offset2.well#overview
@@ -133,6 +151,7 @@ head
         //
           /span
         .span8
+          div.alert.alert-info d8Debug: Logged in as #{objUser.displayName}
           block content
         //
           /span
@@ -158,11 +177,11 @@ head
                 div.control-group  
                   label.control-label(for="inputEmail") Email:
                   div.controls
-                    input#modalEmail(type="text",placeholder="Email",name="email",value="")
+                    input#modalEmail(type="text",placeholder="Email",name="email",value="bscarvell@gmail.com")
                 div.control-group
                   label.control-label(for="password") Password:
                   div.controls
-                    input#modalPwd(type="password",placeholder="Password",name="password")  
+                    input#modalPwd(type="password",placeholder="Password",name="password",value="password")  
                     
             .modal-footer
               a.btn.btn-primary(href='#',id="modalLogin") Login
