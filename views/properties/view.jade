@@ -3,6 +3,11 @@ extends ../layout
 block content
   legend
     h3= property.title
+      - if (objUser.isAdmin())
+        small
+          a(href="#") 
+            i.icon-edit
+            |  Edit
   include ../flashify
   img(src="http://placehold.it/800x300")
   p
