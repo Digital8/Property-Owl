@@ -26,10 +26,8 @@ module.exports =
     register  : true
   
   acl:
-    banned : 102
-    member : 103
-    expert : 104
-    staff  : 105
-    admin  : 106
+    buyer    : 1
+    developer: 2
+    admin    : 3
     
   port: 3005
