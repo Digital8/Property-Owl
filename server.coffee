@@ -51,10 +51,7 @@ app.configure ->
         if err then throw err
         if results.length > 0
           res.locals.objUser = new classes.user results.pop()
-          if res.locals.objUser.isBanned()
-            res.render 'errors/banned'
-          else
-            done()
+          done()
     else
       done()
   
