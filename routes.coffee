@@ -43,6 +43,9 @@ module.exports = (app) ->
   
   app.get '/properties/view/:id', controllers.properties.view
   
+  # News
+  app.get '/news', controllers.news.index
+  
   # Administration Routes
   app.get '/administration', helpers.restrictTo(system.config.acl.admin), controllers.admin_index.index
   
