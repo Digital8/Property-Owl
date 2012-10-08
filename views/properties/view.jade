@@ -1,0 +1,47 @@
+extends ../layout
+
+block content
+  legend
+    h3= property.title
+  include ../flashify
+  img(src="http://placehold.it/800x300")
+  p
+    div.row.offset1
+      div.span2
+        img(src="http://placehold.it/250x200") 
+      div.span2
+        img(src="http://placehold.it/250x200") 
+      div.span2
+        img(src="http://placehold.it/250x200") 
+      div.span2
+        img(src="http://placehold.it/250x200")
+  br
+  br
+  legend
+    h3 Property Description
+  p= property.description
+  hr
+  div.row.offset1
+    div.span4
+      legend
+        b General Features
+      p Property Type: #{property.property_type}
+      p Bedrooms: #{property.bedrooms}
+      p Bathrooms: #{property.bathrooms}
+      
+      legend
+        b More Information
+      li some file
+      li some other file
+      
+    div.span4.offset2
+      legend
+        b Indoor Features
+      br
+      legend
+        b Outdoor Features
+      p Garage Spaces: #{property.cars}
+      br
+      legend
+        b Other Features
+      p Garage Spaces: #{property.cars}

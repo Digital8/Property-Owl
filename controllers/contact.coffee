@@ -1,34 +1,26 @@
 ###
- * Index Controller
+ * Contact Controller
  *
- * Controller for homepage of website
+ * Renders and handles the site contact page
  *
- * @package   Property Owl
+ * @package   Digital8
  * @author    Brendan Scarvell <brendan@digital8.com.au>
  * @copyright Copyright (c) 2012 - Current
  ###
 
-system = require '../system'
-
-# GET
 exports.index = (req,res) ->
-  res.render 'index'
-
-# GET    
+  res.render 'contact/index'
+  
 exports.view = (req,res) ->
-
-# GET
+  
 exports.add = (req,res) ->
 
-# PUT
 exports.create = (req,res) ->
+  req.flash('info','Send the email yo')
+  res.redirect '/contact'
 
-# GET
 exports.edit = (req,res) ->
-
-# POST
+  
 exports.update = (req,res) ->
-
-# DEL
+  
 exports.destroy = (req,res) ->
-

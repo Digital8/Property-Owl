@@ -10,9 +10,9 @@
 
 db = require('../system').db
 
-exports.login = (credentials, callback) ->
+exports.login = (email, password, callback) ->
   db.query "SELECT * FROM #{db.prefix}users WHERE email = ? AND password = ?"
-  , [credentials.email, credentials.password], callback
+  , [email, password], callback
 
 exports.getAllUsers = (callback) ->
   db.query "SELECT * FROM #{db.prefix}users ORDER BY acl DESC", callback
@@ -27,7 +27,7 @@ exports.getUserByEmail = (email, callback) ->
   db.query "SELECT * FROM #{db.prefix}users WHERE email = ?", [email], callback
 
 exports.createUser = (user, callback) ->
-  db.query "INSERT INTO #{db.prefix}users (alias,password,acl,email,first_name,last_name) VALUES(?,?,?,?,?,?)", [user.username, user.password, user.acl, user.email, user.fname, user.lname], callback
+  db.query "INSERT INTO #{db.prefix}users (email,password,first_name,last_name) VALUES(?,?,?,?)", [user.email, user.password, user.fname, user.lname], callback
 
 exports.updateUser = (user, callback) ->
   db.query "UPDATE #{db.prefix}users SET alias = ?, acl = ?, email = ?, funds = ?, first_name = ?, last_name = ?, admin_notes = ? WHERE user_id = ?", [user.username, user.group, user.email, user.funds, user.fname, user.lname, user.admin_notes, user.id], callback

@@ -1,0 +1,26 @@
+extends ../../layout
+
+block content
+  legend
+    h1 Best State Deals
+  - if (properties.length == 0)
+    h4 No properties have been listed for this state yet
+  - else
+    - each property in properties
+      div.row
+        div.span3.well
+          img(src="http://placehold.it/130x100")
+        div.span5
+          b
+            p= property.address
+            small= property.property_type
+          br
+          | #{property.bedrooms} x Bedrooms |  #{property.bathrooms} x Bathrooms | #{property.cars} x Garage Spaces
+          h4= property.title
+          p= property.description
+          p
+            a.btn(href="#") Save
+            | 
+            a.btn.btn-primary(href="/properties/view/#{property.property_id}") Details
+      hr
+  

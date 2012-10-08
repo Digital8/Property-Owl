@@ -1,7 +1,7 @@
 ###
- * Index Controller
+ * Dashboard Controller
  *
- * Controller for homepage of website
+ * Controller for user dashboard
  *
  * @package   Property Owl
  * @author    Brendan Scarvell <brendan@digital8.com.au>
@@ -12,7 +12,7 @@ system = require '../system'
 
 # GET
 exports.index = (req,res) ->
-  res.render 'index'
+  if res.locals.objUser.isAuthed() then res.redirect '/dashboard' else res.render 'index'
 
 # GET    
 exports.view = (req,res) ->
