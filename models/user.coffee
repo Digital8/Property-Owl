@@ -18,7 +18,7 @@ exports.getAllUsers = (callback) ->
   db.query "SELECT * FROM #{db.prefix}users ORDER BY acl DESC", callback
   
 exports.getUserById = (user_id, callback) ->
-  db.query "SELECT * FROM #{db.prefix}users WHERE user_id = ?", [user_id], callback
+  db.query "SELECT * FROM #{db.prefix}users as U INNER JOIN #{db.prefix}account_types AS AT ON U.account_type_id = AT.account_type_id WHERE user_id = ?", [user_id], callback
   
 exports.getUserByAlias = (user_alias, callback) ->
   db.query "SELECT * FROM #{db.prefix}users WHERE alias = ?", [user_alias], callback
@@ -30,7 +30,7 @@ exports.createUser = (user, callback) ->
   db.query "INSERT INTO #{db.prefix}users (email,password,first_name,last_name) VALUES(?,?,?,?)", [user.email, user.password, user.fname, user.lname], callback
 
 exports.updateUser = (user, callback) ->
-  db.query "UPDATE #{db.prefix}users SET alias = ?, acl = ?, email = ?, funds = ?, first_name = ?, last_name = ?, admin_notes = ? WHERE user_id = ?", [user.username, user.group, user.email, user.funds, user.fname, user.lname, user.admin_notes, user.id], callback
+  db.query "UPDATE #{db.prefix}users SET email = ?, first_name = ?, last_name = ? WHERE user_id = ?", [user.email, user.fname, user.lname, user.id], callback
 
 exports.updatePassword = (user,callback) ->
   db.query "UPDATE #{db.prefix}users SET password = ? WHERE user_id = ?", [user.password, user.id], callback
