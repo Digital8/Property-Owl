@@ -67,7 +67,7 @@ exports.update = (req,res) ->
           req.flash('error', "An unknown error has occured. Error code: #{err.code}")
         else
           req.flash('success', 'Your details have successfully been updated')
-          req.flash('success', 'Your password has been successfully changed')
+          
         res.redirect 'back'
 
 # DEL
