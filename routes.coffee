@@ -46,6 +46,10 @@ module.exports = (app) ->
   # News
   app.get '/news', controllers.news.index
   
+  # Search
+  
+  app.get '/search', controllers.search.index
+  
   # Administration Routes
   app.get '/administration', helpers.restrictTo(system.config.acl.admin), controllers.admin_index.index
   
