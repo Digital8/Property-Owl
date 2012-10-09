@@ -18,7 +18,6 @@ exports.index = (req,res) ->
   
 exports.view = (req,res) ->
   models.properties.getAllPropertiesById req.params.id, (err, results) ->
-    console.log results
     if err then console.log err
     if results.length is 0
       res.render 'properties/not_found'
