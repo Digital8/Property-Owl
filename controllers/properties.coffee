@@ -1,7 +1,7 @@
 ###
- * Skeleton Controller
+ * Properies Controller
  *
- * Controller Template
+ * Controller for viewing a property
  *
  * @package   Property Owl
  * @author    Brendan Scarvell <brendan@digital8.com.au>

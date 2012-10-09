@@ -1,7 +1,7 @@
 ###
  * Properties Model
  *
- * Handles all queries and actions to the database for the admin pages
+ * Handles all queries and actions to the database for the listed properties
  *
  * @package   Property Owl
  * @author    Brendan Scarvell <brendan@digital8.com.au>
