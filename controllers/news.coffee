@@ -9,12 +9,17 @@
  ###
 system = require '../system'
 
-models = {}
+models = 
+  news: system.load.model 'news'
 
 helpers = {}
  
 exports.index = (req,res) ->
-  res.render 'news/index'
+  models.news.getAllNews (err, results) ->
+    if err then throw err
+    
+    console.log results
+    res.render 'news/index', news: results or {}
   
 exports.view = (req,res) ->
   
