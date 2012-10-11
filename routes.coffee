@@ -52,6 +52,13 @@ module.exports = (app) ->
   
   # Administration Routes
   app.get '/administration', helpers.restrictTo(system.config.acl.admin), controllers.admin_index.index
+  app.get '/administration/news', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.index
+  app.post '/administration/news/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.create
+  app.get '/administration/news/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.add
+  app.get '/administration/news/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.edit
+  app.put '/administration/news/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.update
+  app.get '/administration/news/delete/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.delete
+  app.delete '/administration/news/delete/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.destroy
   
   # Misc Routes
   app.get '/login', controllers.misc.login

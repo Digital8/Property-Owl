@@ -1,0 +1,24 @@
+extends ../../layout
+
+block content
+  legend
+    h2 Administration: Site News
+  include ../../flashify
+  a.btn.btn-primary(href="/administration/news/add") Post News
+  div
+    table.table.table-striped
+      thead
+        th.span2 ID
+        th.span8 Title
+        th Actions
+      tbody
+        - each post in news
+          tr
+            td.span2= post.news_id
+            td= post.title
+            td
+              a(href="/administration/news/edit/#{post.news_id}")
+                i.icon-edit.offset
+              | &nbsp;
+              a(href="/administration/news/delete/#{post.news_id}")
+                i.icon-trash
