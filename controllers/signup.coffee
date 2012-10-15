@@ -53,6 +53,7 @@ exports.create = (req,res) ->
       res.redirect 'back'
     else
       user = req.body
+      user.group = 1
       user.password = helpers.hash(user.password)
     
       models.user.createUser user, (err, results) ->

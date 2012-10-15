@@ -4,8 +4,8 @@ block content
   legend
     h3 Best State Deals
   p Select State Please
+  - var states = [ {c: 'qld',n: 'Queensland'}, {c: 'nsw',n: 'New South Wales'}, {c: 'act',n: 'A.C.T'},{c: 'vic',n: 'Victoria'},{c: 'sa',n: 'South Australia'},{c: 'wa',n: 'Western Australia'},{c: 'nt',n: 'Northen Territory'},{c: 'tas',n: 'Tasmania'}]
   ul
-    li
-      a(href="/deals/state/qld") Queensland
-    li
-      a(href="/deals/state/nsw") New South Wales
+    - each state in states
+      li
+        a(href="/deals/state/#{state.c}")= state.n

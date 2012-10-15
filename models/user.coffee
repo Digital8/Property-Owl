@@ -15,19 +15,22 @@ exports.login = (email, password, callback) ->
   , [email, password], callback
 
 exports.getAllUsers = (callback) ->
-  db.query "SELECT * FROM #{db.prefix}users ORDER BY acl DESC", callback
+  db.query "SELECT U.*, AT.name AS account_type FROM #{db.prefix}users AS U INNER JOIN #{db.prefix}account_types AS AT ON U.account_type_id = AT.account_type_id ", callback
   
 exports.getUserById = (user_id, callback) ->
-  db.query "SELECT * FROM #{db.prefix}users as U INNER JOIN #{db.prefix}account_types AS AT ON U.account_type_id = AT.account_type_id WHERE user_id = ?", [user_id], callback
+  db.query "SELECT U.*, AT.name AS account_type FROM #{db.prefix}users as U INNER JOIN #{db.prefix}account_types AS AT ON U.account_type_id = AT.account_type_id WHERE user_id = ?", [user_id], callback
   
 exports.getUserByAlias = (user_alias, callback) ->
   db.query "SELECT * FROM #{db.prefix}users WHERE alias = ?", [user_alias], callback
+
+exports.getAllGroups = (callback) ->
+  db.query "SELECT * FROM #{db.prefix}account_types", callback
 
 exports.getUserByEmail = (email, callback) ->
   db.query "SELECT * FROM #{db.prefix}users WHERE email = ?", [email], callback
 
 exports.createUser = (user, callback) ->
-  db.query "INSERT INTO #{db.prefix}users (email,password,first_name,last_name) VALUES(?,?,?,?)", [user.email, user.password, user.fname, user.lname], callback
+  db.query "INSERT INTO #{db.prefix}users (email,password,first_name,last_name,account_type_id) VALUES(?,?,?,?,?)", [user.email, user.password, user.fname, user.lname, user.group], callback
 
 exports.updateUser = (user, callback) ->
   db.query "UPDATE #{db.prefix}users SET email = ?, first_name = ?, last_name = ? WHERE user_id = ?", [user.email, user.fname, user.lname, user.id], callback

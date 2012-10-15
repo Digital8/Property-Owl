@@ -52,6 +52,7 @@ module.exports = (app) ->
   
   # Administration Routes
   app.get '/administration', helpers.restrictTo(system.config.acl.admin), controllers.admin_index.index
+  
   app.get '/administration/news', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.index
   app.post '/administration/news/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.create
   app.get '/administration/news/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.add
@@ -59,6 +60,12 @@ module.exports = (app) ->
   app.put '/administration/news/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.update
   app.get '/administration/news/delete/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.delete
   app.delete '/administration/news/delete/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.destroy
+  
+  app.get '/administration/members', helpers.restrictTo(system.config.acl.admin), controllers.admin_members.index
+  app.get '/administration/members/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_members.add
+  app.post '/administration/members/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_members.create
+  app.get '/administration/members/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_members.edit
+  app.put '/administration/members/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_members.update
   
   # Misc Routes
   app.get '/login', controllers.misc.login
