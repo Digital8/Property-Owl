@@ -53,6 +53,22 @@ head
                     a(tabindex="-1",href="#") 
                       i.icon-book
                       |  Research
+                - if (objUser.isDeveloper())
+                  li.dropdown
+                    a(href="#",role="button",class="dropdown-toggle",data-toggle="dropdown") 
+                      i.icon-wrench
+                      |  Developers 
+                      b.caret
+                    ul.dropdown-menu(role="menu")
+                      li
+                        a(tabindex="-1",href="/developers/properties")
+                          i.icon-home
+                          |  Manage Properties
+                      li
+                        a(tabindex="-1",href="#")
+                          i.icon-star-empty
+                          |  Manage Deals
+
               - if (!objUser.isAuthed())
                 li
                   a(href='/sign-up') Sign Up
@@ -68,6 +84,7 @@ head
                     |  My Nest 
                     b.caret
                   ul.dropdown-menu(role="menu")
+                    h5 &nbsp;#{objUser.displayName}
                     li
                       a(tabindex="-1",href="/account")
                         i.icon-user 
@@ -75,7 +92,7 @@ head
                     - if (objUser.isAdmin())
                       li
                         a(tabindex="-1",href="/administration") 
-                          i.icon-trash
+                          i.icon-lock
                           |  Administration
                     li
                       a(tabindex="-1",href="/contact") 
@@ -92,7 +109,7 @@ head
                         |  Sign Out
           //
             /.nav-collapse 
-    header.jumbotron.subhead.offset2.well#overview
+    header.jumbotron.subhead.well#overview
       div.container
         img(src="http://placehold.it/1000x86")
 
@@ -214,6 +231,5 @@ head
             });
           });
         });
-    //
-      /.fluid-container
+    ///.fluid-container
     

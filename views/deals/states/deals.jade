@@ -2,7 +2,7 @@ extends ../../layout
 
 block content
   legend
-    h1 Best State Deals
+    h3 Best State Deals
   - if (properties.length == 0)
     h4 No properties have been listed for this state yet
   - else
@@ -19,8 +19,6 @@ block content
           h4= property.title
           p= property.description
           p
-            a.btn(href="#") Save
-            | 
             a.btn.btn-primary(href="/properties/view/#{property.property_id}") Details
       hr
   

@@ -15,3 +15,6 @@ exports.getAllPropertiesById = (id, callback) ->
 
 exports.getAllPropertiesByState = (state, callback) ->
   db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE P.state = ?",[state], callback
+
+exports.getPropertyTypes = (callback) ->
+  db.query "SELECT PT.* FROM #{db.prefix}property_types AS PT", callback

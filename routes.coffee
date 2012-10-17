@@ -43,11 +43,14 @@ module.exports = (app) ->
   
   app.get '/properties/view/:id', controllers.properties.view
   
+  app.get '/developers/properties', helpers.restrictTo(system.config.acl.developer), helpers.restrictTo(system.config.acl.admin), controllers.dev_properties.index
+  app.get '/developers/properties/add', helpers.restrictTo(system.config.acl.developer), helpers.restrictTo(system.config.acl.admin), controllers.dev_properties.add
+  app.post '/developers/properties/add', helpers.restrictTo(system.config.acl.developer), helpers.restrictTo(system.config.acl.admin), controllers.dev_properties.create
+  
   # News
   app.get '/news', controllers.news.index
   
   # Search
-  
   app.get '/search', controllers.search.index
   
   # Administration Routes
