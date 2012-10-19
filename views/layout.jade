@@ -65,9 +65,13 @@ head
                           i.icon-home
                           |  Manage Properties
                       li
-                        a(tabindex="-1",href="#")
+                        a(tabindex="-1",href="/developers/deals")
                           i.icon-star-empty
                           |  Manage Deals
+                      li
+                        a(tabindex="-1",href="/developers/deals")
+                          i.icon-star-empty
+                          |  Manage Barn Deals
 
               - if (!objUser.isAuthed())
                 li
@@ -169,7 +173,6 @@ head
         //
           /span
         .span8
-          div.alert.alert-info d8Debug: Logged in as #{objUser.displayName}
           block content
         //
           /span

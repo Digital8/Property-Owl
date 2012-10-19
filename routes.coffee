@@ -47,6 +47,11 @@ module.exports = (app) ->
   app.get '/developers/properties/add', helpers.restrictTo(system.config.acl.developer), helpers.restrictTo(system.config.acl.admin), controllers.dev_properties.add
   app.post '/developers/properties/add', helpers.restrictTo(system.config.acl.developer), helpers.restrictTo(system.config.acl.admin), controllers.dev_properties.create
   
+  app.get '/developers/deals', helpers.restrictTo(system.config.acl.developer), helpers.restrictTo(system.config.acl.admin), controllers.dev_deals.index
+  app.get '/developers/deals/add', helpers.restrictTo(system.config.acl.deeveloper), helpers.restrictTo(system.config.acl.admin), controllers.dev_deals.add
+  app.post '/developers/deals/add', helpers.restrictTo(system.config.acl.deeveloper), helpers.restrictTo(system.config.acl.admin), controllers.dev_deals.create
+  
+  
   # News
   app.get '/news', controllers.news.index
   

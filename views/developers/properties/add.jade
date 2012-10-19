@@ -20,7 +20,7 @@ block content
     div.control-group  
       label.control-label(for="Address") Address:
       div.controls
-        textarea.span7(rows=4,placeholder="Address of the property")
+        textarea.span7(rows=4,placeholder="Address of the property",name="address")
         
     div.control-group  
       label.control-label(for="inputTitle") State:
@@ -59,4 +59,4 @@ block content
     div.form-actions
      input.btn.btn-primary(type="submit",value="List Property")
      | &nbsp;
-     a.btn(href="#") Cancel
+     a.btn(href="/developers/properties") Cancel

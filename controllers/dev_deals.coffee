@@ -11,27 +11,23 @@ system = require '../system'
 
 models =
   properties: system.load.model('properties')
+  deals: system.load.model('deals')
 
 helpers = {}
  
 exports.index = (req,res) ->
-  models.properties.getPropertyByUserId res.locals.objUser.id, (err, properties) ->
+  models.deals.getDealsByUserId res.locals.objUser.id, (err, results) ->
     if err then throw err
-    console.log properties
-    res.render 'developers/properties/index', properties: properties
+    res.render 'developers/deals/index', deals: results or {}
   
 exports.view = (req,res) ->
   
 exports.add = (req,res) ->
-  models.properties.getPropertyTypes (err, results) ->
-    res.render 'developers/properties/add', p_types: results
+  models.properties.getPropertyByUserId res.locals.objUser.id , (err, properties) ->
+    res.render 'developers/deals/add', properties: properties or {}
 
 exports.create = (req,res) ->
-  req.flash('info','do da foo')
-  req.body.user_id = res.locals.objUser.id
-  models.properties.addProperty req.body, (err, results) ->
-    if err then throw err
-    res.redirect 'back'
+  res.send req.body
 
 exports.edit = (req,res) ->
   
