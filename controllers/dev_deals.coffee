@@ -2,18 +2,21 @@
  * Developer Properties Controller
  *
  * Controller For adding/editing properties
- *
+ * 
  * @package   Property Owl
  * @author    Brendan Scarvell <brendan@digital8.com.au>
  * @copyright Copyright (c) 2012 - Current
  ###
 system = require '../system'
+async = require 'async'
 
 models =
   properties: system.load.model('properties')
   deals: system.load.model('deals')
 
 helpers = {}
+
+i = 0
  
 exports.index = (req,res) ->
   models.deals.getDealsByUserId res.locals.objUser.id, (err, results) ->
@@ -27,7 +30,16 @@ exports.add = (req,res) ->
     res.render 'developers/deals/add', properties: properties or {}
 
 exports.create = (req,res) ->
-  res.send req.body
+  addDealFeatures = (value,cb) ->
+    console.log "#{value}  = #{req.body.price[i]}"
+    i++
+    cb()
+  
+  # Check that there are no existing deals for this property already
+  # models.deals.getDealByPropertyId req.body.property
+  
+  async.map req.body.feature, addDealFeatures, (err, results) ->
+    res.send req.body
 
 exports.edit = (req,res) ->
   
