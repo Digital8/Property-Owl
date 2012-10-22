@@ -38,6 +38,8 @@ module.exports = (app) ->
   app.get '/account', helpers.requireAuth, controllers.account.index
   app.post '/account', helpers.requireAuth, controllers.account.update
   
+  app.get '/best-deal', controllers.best_deal.index
+  
   app.get '/deals/state', controllers.deals_state.index
   app.get '/deals/state/:state', controllers.deals_state.view
   
