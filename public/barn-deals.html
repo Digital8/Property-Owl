@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     
     <!-- styles -->
-    <link rel="stylesheet/less" href="less/styles.less">
+    <link rel="stylesheet" href="css/styles.css">
     <!--[if lt IE 9]>
     <link rel="stylesheet/less" href="less/styles-ie.less">
     <![endif]-->
@@ -23,19 +23,6 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     
     <script src="js/libs/modernizr-2.5.3.min.js"></script>
-    
-    <!--superfish drop down menu-->
-    <script type="text/javascript" src="../assets/js/hoverIntent.js"></script>
-    		<script type="text/javascript" src="js/superfish.js"></script>
-    		<script type="text/javascript">
-    
-    		// initialise plugins
-    		jQuery(function(){
-    			jQuery('ul.sf-menu').superfish();
-    		});
-    
-	</script>
-	
     </head>
 <body>
     
@@ -52,40 +39,13 @@
         		<img src="images/banner-ad.png" id="banner" alt="Banner Advert" />
     		</div>
     		<nav id="menu">
-    			<ul class="sf-menu">
+    			<ul>
     				<li><a href="best-deal.html">Australia&#39;s Best Deal</a></li>
     				<li><a href="#">Best State Deal</a></li>
-    				<li>
-    				    <a href="#" class="active">Owl Deals</a>
-    				    <ul>
-    				        <li><a href="#">ACT</a></li>
-    				        <li><a href="#">NSW</a></li>
-    				        <li><a href="#">NT</a></li>
-    				        <li><a href="#">QLD</a></li>
-    				        <li><a href="#">SA</a></li>
-    				        <li><a href="#">TAS</a></li>
-    				        <li><a href="#">VIC</a></li>
-    				        <li><a href="#">WA</a></li>
-    				    </ul>
-    				</li>
-    				<li>
-    				    <a href="#" class="active">Wise Owl</a>
-    				    <ul>
-    				        <li><a href="#">News Updates</a></li>
-    				        <li><a href="#">Research</a></li>
-    				    </ul>
-        			</li>
+    				<li><a href="#">Owl Deals</a></li>
+    				<li><a href="#">Wise Owl</a></li>
     				<li><a href="#">Products &#38; Services</a></li>
-    				<li>
-    				    <a href="#">My Nest</a>
-    				    <ul>
-    				        <li><a href="#">My Account</a></li>
-    				        <li><a href="#">Contact Us</a></li>
-    				        <li><a href="#">Refer A Friend</a></li>
-    				        <li><a href="#">Saved Deals</a></li>
-    				        <li><a href="#">Sign Out</a></li>
-    				    </ul>
-				    </li>
+    				<li><a href="#">My Nest</a></li>
     			</ul>
     		</nav>
         </header>
@@ -130,11 +90,6 @@
                     <span class="label">Number of Enquiries</span>
                     <span class="value">1,345</span>
                 </div>
-            </div>
-            <div class="barn-box">
-                <h2>The Barn</h2>
-                <img src="images/barn.png" id="barn-image" alt="The Barn Group Deals" />
-                <h3>Group Deals</h3>
             </div>
             <img src="images/ad-box.jpg" class="ad-box" id="ad-box1" alt="Box Advert" />
             <img src="images/ad-box.jpg" class="ad-box" id="ad-box2" alt="Box Advert" />
@@ -292,26 +247,33 @@
         <!--end left-col-->
         <!--center-col-->
         <div id="center-col">
-            <h1>News Updates</h1>
+            <a href="#" id="forward-button">How It Works</a>
+            <h1>The Barn - Group Buying Power</h1>
             
-            <h3>Innovation in delivering Australia's best property deals</h3>
+            <p>Take advantage of great deals on offer through group buying power for new properties and land across Australia – Welcome to The Barn.</p>
+            <p>Simply put &#39;The Barn&#39; is a place where Sellers can display 3 to 5 properties that are in the same location or within the same residential development.  Other Property Owl subscribers then have the opportunity to view and select the properties, and swoop on the offers within the designated time frame.</p>
+            <p>When the minimum number of properties have been swooped upon the deal is activated.  See a great offer, need to move fast?? Then simply tell your friends on Facebook, Twitter or use the &#39;Refer a Friend&#39; link within The Barn.  Even if you do not wish to take up the opportunity in securing a deal but know of someone who would, then simply tell them to subscribe to Property Owl and you will be rewarded with a &#36;1,000 nest egg when they &#39;secure the deal&#39; and purchase.</p>
+            <p>If you want to buy but can't wait for the required number of buyers to &#39;secure the deal&#39;, search through Owl Deals for the same property with another special offer.  You decide.  This is now your opportunity to be involved in a unique and innovative concept that we at Property Owl believe will revolutionise the method in which new properties and land are sold.</p>
+            <p>Swoop in today and share in the benefits and rewards available to you and your friends.</p>
+            <p><span class="emphasis">Property Owl – Innovation in Delivering Australia&#39;s Best Property Deals.</span></p>
             
             <!--listing-->
             <div class="listing-summary">
                 <div class="header">
-                    <h2>News item 1</h2>
+                    <h2>23 Catherine Street, manly, NSW</h2>
                 </div>
                 <div class="listing-body">
                     <div class="listing-thumb">
-                        <img src="images/news-thumb.jpg" class="thumb" alt="76 Orchard Terrace, St Lucia" />
+                        <img src="images/barn-thumb.jpg" class="thumb" alt="76 Orchard Terrace, St Lucia" />
                     </div>
                     <div class="listing-details">
                         <div class="summary">
-                            <p>25/06/2012</p>
+                            <h3>Title of barn deal goes here</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...</p>
                         </div>
                         <div class="listing-links">
-                            <a href="#" class="details-button"><img src="images/info-icon.png" id="info-icon" alt="View details" /> Details</a>
+                            <a href="#" class="save-button"><img src="images/plus-icon.png" id="save-icon" alt="Save this barn listing" /> Save</a>
+                            <a href="#" class="details-button"><img src="images/info-icon.png" id="info-icon" alt="View barn deal" /> Details</a>
                         </div>
                     </div>
                 </div>
@@ -321,19 +283,20 @@
             <!--listing-->
             <div class="listing-summary">
                 <div class="header">
-                    <h2>News item 2</h2>
+                    <h2>23 Catherine Street, manly, NSW</h2>
                 </div>
                 <div class="listing-body">
                     <div class="listing-thumb">
-                        <img src="images/news-thumb.jpg" class="thumb" alt="76 Orchard Terrace, St Lucia" />
+                        <img src="images/barn-thumb.jpg" class="thumb" alt="76 Orchard Terrace, St Lucia" />
                     </div>
                     <div class="listing-details">
                         <div class="summary">
-                            <p>25/06/2012</p>
+                            <h3>Title of barn deal goes here</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...</p>
                         </div>
                         <div class="listing-links">
-                            <a href="#" class="details-button"><img src="images/info-icon.png" id="info-icon" alt="View details" /> Details</a>
+                            <a href="#" class="save-button"><img src="images/plus-icon.png" id="save-icon" alt="Save this barn listing" /> Save</a>
+                            <a href="#" class="details-button"><img src="images/info-icon.png" id="info-icon" alt="View barn deal" /> Details</a>
                         </div>
                     </div>
                 </div>
@@ -343,46 +306,26 @@
             <!--listing-->
             <div class="listing-summary">
                 <div class="header">
-                    <h2>News item 3</h2>
+                    <h2>23 Catherine Street, manly, NSW</h2>
                 </div>
                 <div class="listing-body">
                     <div class="listing-thumb">
-                        <img src="images/news-thumb.jpg" class="thumb" alt="76 Orchard Terrace, St Lucia" />
+                        <img src="images/barn-thumb.jpg" class="thumb" alt="76 Orchard Terrace, St Lucia" />
                     </div>
                     <div class="listing-details">
                         <div class="summary">
-                            <p>25/06/2012</p>
+                            <h3>Title of barn deal goes here</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...</p>
                         </div>
                         <div class="listing-links">
-                            <a href="#" class="details-button"><img src="images/info-icon.png" id="info-icon" alt="View details" /> Details</a>
+                            <a href="#" class="save-button"><img src="images/plus-icon.png" id="save-icon" alt="Save this barn listing" /> Save</a>
+                            <a href="#" class="details-button"><img src="images/info-icon.png" id="info-icon" alt="View barn deal" /> Details</a>
                         </div>
                     </div>
                 </div>
             </div>
             <!--end listing-->
             
-            <!--listing-->
-            <div class="listing-summary">
-                <div class="header">
-                    <h2>News item 4</h2>
-                </div>
-                <div class="listing-body">
-                    <div class="listing-thumb">
-                        <img src="images/news-thumb.jpg" class="thumb" alt="76 Orchard Terrace, St Lucia" />
-                    </div>
-                    <div class="listing-details">
-                        <div class="summary">
-                            <p>25/06/2012</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...</p>
-                        </div>
-                        <div class="listing-links">
-                            <a href="#" class="details-button"><img src="images/info-icon.png" id="info-icon" alt="View details" /> Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end listing-->
             
         </div>
         <!--end center-col-->

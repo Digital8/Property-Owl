@@ -32,6 +32,8 @@ module.exports = (app) ->
   app.get '/sign-up', controllers.signup.index
   app.post '/sign-up', controllers.signup.create
   
+  app.get '/about', controllers.about.index
+  
   app.get '/contact', controllers.contact.index
   app.post '/contact', controllers.contact.create
   
