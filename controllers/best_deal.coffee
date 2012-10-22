@@ -15,7 +15,7 @@ helpers = {}
 models = {}
 
 exports.index = (req,res) ->
-  res.render 'deals/best_deal'
+  res.render 'deals/best_deal', menu: 'aus-best-deal'
 
 exports.view = (req,res) ->
 

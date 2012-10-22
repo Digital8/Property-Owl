@@ -20,9 +20,20 @@ head
     script(type='text/javascript')
       try{Typekit.load();}catch(e){}
     script(src='/js/libs/modernizr-2.5.3.min.js')
-  body
     script(src='/js/libs/jquery-1.7.2.min.js')
+    
+    //
+      superfish drop down menu
+    <script type="text/javascript" src="/js/hoverIntent.js"></script>
+    <script type="text/javascript" src="/js/superfish.js"></script>
+    script(type="text/javascript")
+      // initialise plugins
+      $(document).ready(function(){
+        jQuery('ul.sf-menu').superfish();
+      });
+    
     script(src='/js/scripts.js')
+  body
     .container.row
       header#header
         #logo-box
@@ -31,19 +42,55 @@ head
         #banner-box
           img#banner(src='/images/banner-ad.png', alt='Banner Advert')
         nav#menu
-          ul
-            li
-              a.active(href='/best-deal') Australia's Best Deal
-            li
-              a(href='/deals/state/qld') Best State Deal
-            li
-              a(href='#') Owl Deals
-            li
-              a(href='#') Wise Owl
-            li
-              a(href='#') Products & Services
-            li
-              a(href='#') My Nest
+            ul.sf-menu
+                li
+                  - var c = (menu == 'aus-best-deal') ? 'active' : ''
+                  a(href='/best-deal',class="#{c}") Australia's Best Deal
+                li
+                  - var c = (menu == 'best-state-deal') ? 'active' : ''
+                  a(href='/deals/state/qld',class="#{c}") Best State Deal
+                li
+                  - var c = (menu == 'owl-deals') ? 'active' : ''
+                  a(href='#',class="#{c}") Owl Deals
+                  ul
+                    li
+                      a(href='/deals/state/act') ACT
+                    li
+                      a(href='/deals/state/nsw') NSW
+                    li
+                      a(href='/deals/state/nt') NT
+                    li
+                      a(href='/deals/state/qld') QLD
+                    li
+                      a(href='/deals/state/sa') SA
+                    li
+                      a(href='/deals/state/tas') TAS
+                    li
+                      a(href='/deals/state/vic') VIC
+                    li
+                      a(href='/deals/state/wa') WA
+                li
+                  a(href='#') Wise Owl
+                  ul
+                    li
+                      a(href='/news') News Updates
+                    li
+                      a(href='#') Research
+                li
+                  a(href='#') Products & Services
+                li
+                  a(href='#') My Nest
+                  ul
+                    li
+                      a(href='#') My Account
+                    li
+                      a(href='#') Contact Us
+                    li
+                      a(href='#') Refer A Friend
+                    li
+                      a(href='#') Saved Deals
+                    li
+                      a(href='#') Sign Out
     block content
     footer#footer.row
       div
