@@ -12,7 +12,9 @@ block content
       - if (properties.length == 0)
          h4 No properties have been listed for this state yet
        - else
+         - var i = 0; // Just a hack for PoC
          - each property in properties
+          - i++
           //
             listing
           .listing-summary
@@ -25,7 +27,8 @@ block content
                 img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
                 //
                   show if top listing
-                img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
+                - if (i == 1)
+                  img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
               .listing-details
                 .features
                   span.property-type
@@ -48,10 +51,10 @@ block content
                 .listing-links
                   a.save-button(href='#')
                     img#save-icon(src='/images/plus-icon.png', alt='Save this property')
-                    | Save
+                    |  Save
                   a.details-button(href='#')
                     img#info-icon(src='/images/info-icon.png', alt='View property details')
-                    | Details
+                    |  Details
             hr
           //
             end listing
