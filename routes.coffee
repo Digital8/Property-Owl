@@ -58,6 +58,8 @@ module.exports = (app) ->
   
   app.get '/barn/deals/:id', controllers.barn_deals.view
   
+  app.get '/how-it-works', controllers.how.index
+  
   app.get '/faq', controllers.faq.index
   
   app.get '/deals/state', controllers.deals_state.index
