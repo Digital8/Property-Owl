@@ -42,6 +42,24 @@ module.exports = (app) ->
   
   app.get '/best-deal', controllers.best_deal.index
   
+  app.get '/owl-deals', controllers.owl_deals.index
+  
+  app.get '/terms-and-conditions', controllers.tac.index
+  
+  app.get '/research', controllers.research.index
+  
+  app.get '/privacy', controllers.privacy.index
+  
+  app.get '/why-the-owl', controllers.wto.index
+  
+  app.get '/products', controllers.products.index
+  
+  app.get '/barn-deals', controllers.barn_deals.index
+  
+  app.get '/barn/deals/:id', controllers.barn_deals.view
+  
+  app.get '/faq', controllers.faq.index
+  
   app.get '/deals/state', controllers.deals_state.index
   app.get '/deals/state/:state', controllers.deals_state.view
   

@@ -51,24 +51,7 @@ head
                   a(href='/deals/state/qld',class="#{c}") Best State Deal
                 li
                   - var c = (menu == 'owl-deals') ? 'active' : ''
-                  a(href='#',class="#{c}") Owl Deals
-                  ul
-                    li
-                      a(href='/deals/state/act') ACT
-                    li
-                      a(href='/deals/state/nsw') NSW
-                    li
-                      a(href='/deals/state/nt') NT
-                    li
-                      a(href='/deals/state/qld') QLD
-                    li
-                      a(href='/deals/state/sa') SA
-                    li
-                      a(href='/deals/state/tas') TAS
-                    li
-                      a(href='/deals/state/vic') VIC
-                    li
-                      a(href='/deals/state/wa') WA
+                  a(href='/owl-deals',class="#{c}") Owl Deals
                 li
                   - var c = (menu == 'wise-owl') ? 'active' : ''
                   a(href='#',class="#{c}") Wise Owl
@@ -76,9 +59,9 @@ head
                     li
                       a(href='/news') News Updates
                     li
-                      a(href='#') Research
+                      a(href='/research') Research
                 li
-                  a(href='#') Products & Services
+                  a(href='/products') Products & Services
                 li
                   a(href='#') My Nest
                   ul
@@ -98,20 +81,20 @@ head
         h4 Company
         ul
           li
-            a(href='#') Terms and Conditions
+            a(href='/terms-and-conditions') Terms and Conditions
           li
-            a(href='#') Privacy Policy
+            a(href='/privacy') Privacy Policy
           li
             a(href='/about') About Us
       div
         h4 What is Property Owl?
         ul
           li
-            a(href='#') Why the Owl?
+            a(href='/why-the-owl') Why the Owl?
           li
             a(href='/') Home Page
           li
-            a(href='#') FAQs
+            a(href='/faq') FAQs
       .social
         h4 Follow Us
         ul

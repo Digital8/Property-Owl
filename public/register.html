@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Property Owl</title>
+    <meta name="description" content="" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--[if lt IE 9]>
+    <link rel="stylesheet/less" href="less/styles-ie.less">
+    <![endif]-->
+    <script src="js/libs/less-1.3.0.min.js"></script>
+    <!--<link rel="stylesheet" href="css/styles.css" />-->
+    
+    <!-- fonts -->
+    <script type="text/javascript" src="//use.typekit.net/rej6muq.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    
+    <script src="js/libs/modernizr-2.5.3.min.js"></script>
+    </head>
+<body>
+
+    <!-- quick view product modal -->
+    <div class="quick-view-modal" id="register" onclick="javascript: window.location='best-deal.html';" style="">
+        <div class="modal">
+            <a href="#" class="modal-close"></a>
+            
+        </div>
+    </div>
+    
+    <!--header-->
+    <div class="container row">
+        <header id="header">
+            <div id="logo-box">
+        		<a href="index.html" id="logo"><img src="images/logo.png" /></a>
+    		</div>
+    		<div id="banner-box">
+        		<img src="images/banner-ad.png" id="banner" alt="Banner Advert" />
+    		</div>
+    		<nav id="menu">
+    			<ul>
+    				<li><a href="best-deal.html">Australia&#39;s Best Deal</a></li>
+    				<li><a href="state-deals.html">Best State Deal</a></li>
+    				<li><a href="#">Owl Deals</a></li>
+    				<li><a href="#">Wise Owl</a></li>
+    				<li><a href="#">Products &#38; Services</a></li>
+    				<li><a href="#">My Nest</a></li>
+    			</ul>
+    		</nav>
+        </header>
+    </div>
+    <!--end header-->
+    
+    <!--main content-->
+    <div class="container row best-deal">
+        <div class="home-deal-stats">
+            <div class="home-timer">
+                <div id="timer">
+                    <div id="day-timer">
+                        <span class="label">Days</span>
+                        <span class="value">01</span>
+                    </div>
+                    <div id="hour-timer">
+                        <span class="label">Hours</span>
+                        <span class="value">13</span>
+                    </div>
+                    <div id="minute-timer">
+                        <span class="label">Minutes</span>
+                        <span class="value">07</span>
+                    </div>
+                </div>
+                <div id="map">
+                    <img src="images/map.png" id="map-image" usemap="#australia" alt="Click on a State of Australia" />
+                    <map name="australia">
+                        <area shape="polygon" coords="65,25,65,100,17,116,3,62,57,19" id="map-wa" href="#">
+                        <area shape="polygon" coords="65,25,65,69,103,69,103,35,91,24,94,13,75,10" id="map-nt" href="#"> 
+                        <area shape="polygon" coords="103,68,103,34,111,39,119,10,159,82,116,82,116,68" id="map-qld" href="#">
+                        <area shape="polygon" coords="116,68,65,68,65,100,116,129" id="map-sa" href="#">
+                        <area shape="polygon" coords="116,82,159,82,145,126,116,104" id="map-nsw" href="#">
+                        <area shape="polygon" coords="116,104,145,126,137,131,110,128,116,129" id="map-vic" href="#">
+                        <area shape="square" coords="155,110,185,110,185,120,155,120" id="map-act" href="#">
+                        <area shape="square" coords="120,140,170,140,170,155,120,155" id="map-tas" href="#">
+                    </map>
+                </div>
+            </div>
+            <div class="home-counter">
+                <span class="label">Number of Enquiries</span>
+                <span class="value">1,345</span>
+            </div>
+        </div>
+        <div class="deal-summary" style="background-image: url('images/hero-image.jpg')">
+            <div class="home-hero-caption">
+                <img src="images/house-icon.png" id="house-icon" alt="Australia's Best Property Deal" />
+                <h2>Australia's Best Property Deal</h2>
+                <p>Developer pays Stamp Duty, Window Coverings and 1 Year rental Guarantee. <a href="#" alt="Find out more about Australia's best property deal">Find out more</a></p>
+            </div>
+            <a href="#" class="secure-button">Secure this deal! <img src="images/arrow-icon.png" id="secure-arrow" alt="Secure this deal!" /></a>
+        </div>
+    </div>
+    
+    <div class="container row main">
+        <!--left-col-->
+        <div id="left-col">
+            <div class="barn-box">
+                <h2>The Barn</h2>
+                <img src="images/barn.png" id="barn-image" alt="The Barn Group Deals" />
+                <h3>Group Deals</h3>
+            </div>
+            <img src="images/ad-box.jpg" class="ad-box" id="ad-box1" alt="Box Advert" />
+            <img src="images/ad-box.jpg" class="ad-box" id="ad-box2" alt="Box Advert" />
+            <div class="find-deals">
+                <h2>Find Deals</h2>
+                <form id="input-form">
+                <img src="images/search-map-icon.png" alt="State / Territory" />
+                <label for="propertyState">State / Territory</label>
+                <select id="propertyState">
+                    <option>All</option>
+                    <option>ACT</option>
+                    <option>NSW</option>
+                    <option>NT</option>
+                    <option>QLD</option>
+                    <option>SA</option>
+                    <option>TAS</option>
+                    <option>VIC</option>
+                    <option>WA</option>
+                    
+                </select>
+                <img src="images/search-property-icon.png" alt="Property Type" />
+                <label for="propertyType">Property Type</label>
+                <select id="propertyType">
+                    <option>All</option>
+                    <option>Apartment</option>
+                    <option>Townhouse</option>
+                    <option>Unit</option>
+                    <option>House</option>
+                    <option>Land</option>
+                    <option>House and Land</option>
+                    <option>Villa</option>
+                    <option>Acreage</option>
+                </select>
+                <img src="images/search-deal-icon.png" alt="Deal Type" />
+                <label for="propertyDealType">Deal Type</label>
+                <select id="propertyDealType">
+                    <option>All</option>
+                    <option>Stamp Duty</option>
+                    <option>Furniture Package</option>
+                    <option>Blinds</option>
+                    <option>Rental Guarantee</option>
+                    <option>Entertainment System</option>
+                </select>
+                <img src="images/search-price-icon.png" alt="Minimum Price" />
+                <label for="propertyMinPrice">Min. Price</label>
+                <select id="propertyMinPrice">
+                    <option>Any</option>
+                    <option>50,000</option>
+                    <option>100,000</option>
+                    <option>150,000</option>
+                    <option>200,000</option>
+                    <option>250,000</option>
+                    <option>300,000</option>
+                    <option>350,000</option>
+                    <option>400,000</option>
+                    <option>450,000</option>
+                    <option>500,000</option>
+                    <option>550,000</option>
+                </select>
+                <img src="images/search-price-icon.png" alt="Maximum Price" />
+                <label for="propertyMaxPrice">Max. Price</label>
+                <select id="propertyMaxPrice">
+                    <option>Any</option>
+                    <option>50,000</option>
+                    <option>100,000</option>
+                    <option>150,000</option>
+                    <option>200,000</option>
+                    <option>250,000</option>
+                    <option>300,000</option>
+                    <option>350,000</option>
+                    <option>400,000</option>
+                    <option>450,000</option>
+                    <option>500,000</option>
+                    <option>550,000</option>
+                    <option>600,000</option>
+                    <option>650,000</option>
+                    <option>700,000</option>
+                    <option>750,000</option>
+                    <option>800,000</option>
+                    <option>850,000</option>
+                    <option>900,000</option>
+                    <option>950,000</option>
+                    <option>1,000,000</option>
+                    <option>1,250,000</option>
+                    <option>1,500,000</option>
+                    <option>1,750,000</option>
+                    <option>2,000,000</option>
+                    <option>2,500,000</option>
+                    <option>3,000,000</option>
+                    <option>4,000,000</option>
+                    <option>5,000,000</option>
+                    <option>10,000,000</option>
+                </select>
+                <div class="small-left">
+                    <img src="images/search-bed-icon.png" class="small" alt="Number of Beds" />
+                    <label for="propertyMinBeds">Min. Beds</label>
+                    <select id="propertyMinBeds">
+                        <option>Any</option>
+                        <option>Studio</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="small-right">
+                    <img src="images/search-bed-icon.png" class="small" alt="Number of Beds" />
+                    <label for="propertyMaxBeds">Max. Beds</label>
+                    <select id="propertyMaxBeds">
+                        <option>Any</option>
+                        <option>Studio</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="small-left">
+                    <img src="images/search-bath-icon.png" class="small" alt="Number of Bathrooms" />
+                    <label for="propertyBathrooms">Bathrooms</label>
+                    <select id="propertyBathrooms">
+                        <option>Any</option>
+                        <option>1+</option>
+                        <option>2+</option>
+                        <option>3+</option>
+                        <option>4+</option>
+                        <option>5+</option>
+                    </select>
+                </div>
+                <div class="small-right">
+                    <img src="images/search-car-icon.png" class="small" alt="Number of Car Spaces" />
+                    <label for="propertyCarSpaces">Car Spaces</label>
+                    <select id="propertyCarSpaces">
+                        <option>Any</option>
+                        <option>1+</option>
+                        <option>2+</option>
+                        <option>3+</option>
+                        <option>4+</option>
+                        <option>5+</option>
+                    </select>
+                </div>
+                <img src="images/search-development-icon.png" alt="Development Stage" />
+                <label for="propertyState">Development Stage</label>
+                <select id="propertyState">
+                    <option>All</option>
+                    <option>Off The Plan</option>
+                    <option>Newly Constructed</option>
+                </select>
+                <input type="submit" class="button" value="Submit" />
+                </form>
+            </div>
+        </div>
+        <!--end left-col-->
+        <!--center-col-->
+        <div id="home-center-col">
+            <h1>Innovation in delivering Australia&#39;s best property deals</h1>
+            <h2>Welcome to Property Owl!</h2>
+            <p>Property Owl offers the best deals on new residential properties Australia wide, with new deals uploaded to the website every Wednesday at 12 midday!</p>
+            <p>The Property Owl website provides for the best possible deals on selected new properties across the Australian real estate market.  Properties listed on Property Owl must include a minimum value deal to advertise on the website.  It is important to note that these deals are not available through the Seller direct.</p>
+            <p>So how does it work?</p>
+            <p>New deals are uploaded to the Property Owl website on a weekly basis via the <span class="emphasis">&#39;Owl Deals&#39;</span> tab.  All properties represented on the website are then assessed by the Property Owl system where the best &#39;value for money&#39; deal for each state across Australia is accessed via the <span class="emphasis">&#39;Best State Deal&#39;</span> tab.   Once the best value for money deals have been selected for each state, the Property Owl system then assesses and selects the best deal nationally and is accessed via the <span class="emphasis">&#39;Australia&#39;s Best Property Deal&#39;</span> tab.</p>
+            <p>The &#39;value for money&#39; deals (based on percentage value) calculated and selected by the Property Owl system are legitimate deals.  Sellers cannot secure the &#39;The Best State&#39; and &#39;Australia&#39;s Best Property Deal&#39; positions on the website through paid advertising.  In order to secure these positions the Sellers must put forward their best deal - Simple.</p>
+            <p>You must be quick in securing these deals in &#39;Best State Deal&#39; and &#39;Australia&#39;s Best Property Deal&#39; as they are for a 7 day period, unless sold sooner.  The timer on the left hand side of the web page indicates how much time remains before the deal finishes.</p>
+            <p>If you like any of the deals represented then simply click on the <span style="color:#009300;"><strong>green</strong></span> <span class="emphasis">&#39;Secure the Deal&#39;</span> tab where you will be prompted to complete the relevant enquiry form.  Once completed it is then forwarded to the Sellers representative who will contact you in relation to the next step of the purchasing process.</p>
+            <p>If you are interested in obtaining an even better deal, then swoop on a selected property within <span class="emphasis">&#39;The Barn&#39;</span>.  In &#39;The Barn&#39; Sellers list a number of similar new properties in the one location and offer further deals to groups of individuals who collectively take up the offer within the required time.</p>
+            <p>Not currently in the market to purchase a property yourself?  Refer a friend who then registers with and subsequently purchases a property through Property Owl and you will be rewarded with a $1000.00 nest egg for your referral.</p>
+            <p>So what are you waiting for - Swoop in today!</p>
+            <p><span class="emphasis">Property Owl – Innovation in delivering Australia&#39;s Best Property Deals.</span></p>
+        </div>
+        <!--end center-col-->
+        <!--right-col-->
+        <div id="right-col">
+            <img src="images/ad-tower.jpg" class="ad-tower" id="ad-tower1" alt="Tower Advert" />
+            <img src="images/ad-tower.jpg" class="ad-tower" id="ad-tower2" alt="Tower Advert" />
+        </div>
+        <!--end right-col-->
+    </div>
+    <!--end main content-->
+    
+    <!--footer-->
+    <footer id="footer" class="row">
+        
+        <div>
+            <h4>Company</h4>
+            <ul>
+                <li><a href="#">Terms and Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </div>
+        
+        <div>
+            <h4>What is Property Owl?</h4>
+            <ul>
+                <li><a href="#">Why the Owl?</a></li>
+                <li><a href="#">Home Page</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+        </div>
+        
+        <div class="social">
+            <h4>Follow Us</h4>
+            <ul>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+            </ul>
+        </div>
+        
+        <div>
+            <h4>Partnerships</h4>
+            <ul>
+                <li><a href="#">Developer Enquiries</a></li>
+                <li><a href="#">Agent Enquiries</a></li>
+                <li><a href="#">Advertising Enquiries</a></li>
+            </ul>
+        </div>
+        
+    </footer>
+    <!--end footer--> 
+    
+    <script src="js/libs/jquery-1.7.2.min.js"></script>
+    <script src="js/scripts.js"></script>
+    
+</body>
+</html>
