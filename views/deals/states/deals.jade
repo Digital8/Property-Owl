@@ -1,24 +1,108 @@
 extends ../../layout
 
 block content
-  legend
-    h3 Best State Deals
-  - if (properties.length == 0)
-    h4 No properties have been listed for this state yet
-  - else
-    - each property in properties
-      div.row
-        div.span3.well
-          img(src="/images/image1.jpeg")
-        div.span5
-          b
-            p= property.address
-            small= property.property_type
-          br
-          | #{property.bedrooms} x Bedrooms |  #{property.bathrooms} x Bathrooms | #{property.cars} x Garage Spaces
-          h4= property.title
-          p= property.description
-          p
-            a.btn.btn-primary(href="/properties/view/#{property.property_id}") Details
-      hr
+  //
+    main content
+  .container.row.main
+    //
+      left-col
+    #left-col
+      .deal-stats
+        .timer
+          #timer
+            #day-timer
+              span.label Days
+              span.value 01
+            #hour-timer
+              span.label Hours
+              span.value 13
+            #minute-timer
+              span.label Mins
+              span.value 07
+          #map
+            img#map-image(src='/images/map.png', usemap='#australia', alt='Click on a State of Australia')
+            map(name='australia')
+              area#map-wa(shape='polygon', coords='65,25,65,100,17,116,3,62,57,19', href='#')
+              area#map-nt(shape='polygon', coords='65,25,65,69,103,69,103,35,91,24,94,13,75,10', href='#')
+              area#map-qld(shape='polygon', coords='103,68,103,34,111,39,119,10,159,82,116,82,116,68', href='#')
+              area#map-sa(shape='polygon', coords='116,68,65,68,65,100,116,129', href='#')
+              area#map-nsw(shape='polygon', coords='116,82,159,82,145,126,116,104', href='#')
+              area#map-vic(shape='polygon', coords='116,104,145,126,137,131,110,128,116,129', href='#')
+              area#map-act(shape='square', coords='155,110,185,110,185,120,155,120', href='#')
+              area#map-tas(shape='square', coords='120,140,170,140,170,155,120,155', href='#')
+        .counter
+          span.label Number of Enquiries
+          span.value 1,345
+      .barn-box
+        h2 The Barn
+        img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
+        h3 Group Deals
+      img#ad-box1.ad-box(src='/images/ad-box.jpg', alt='Box Advert')
+      img#ad-box2.ad-box(src='/images/ad-box.jpg', alt='Box Advert')
+      
+      include ../../search
+    //
+      end left-col
+    //
+      center-col
+    #center-col
+      h1 Best State Deals
+      - if (properties.length == 0)
+         h4 No properties have been listed for this state yet
+       - else
+         - each property in properties
+          //
+            listing
+          .listing-summary
+            .header
+              .listing-price
+                $ #{property.price}
+              h2 #{property.address}, St Lucia
+            .listing-body
+              .listing-thumb
+                img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+                //
+                  show if top listing
+                img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
+              .listing-details
+                .features
+                  span.property-type
+                    strong= property.type
+                  span
+                    img(src='/images/bed-icon.png', alt='3 Bedroom')
+                    strong= property.bedrooms
+                    |  Bedrooms
+                  span
+                    img(src='/images/bath-icon.png', alt='2 Bathroom')
+                    strong= property.bathrooms
+                    |  Bathrooms
+                  span
+                    img(src='/images/car-icon.png', alt='2 Car Spaces')
+                    strong= property.cars
+                    |  Car Spaces
+                .summary
+                  h3= property.title
+                  p= property.description
+                .listing-links
+                  a.save-button(href='#')
+                    img#save-icon(src='/images/plus-icon.png', alt='Save this property')
+                    | Save
+                  a.details-button(href='#')
+                    img#info-icon(src='/images/info-icon.png', alt='View property details')
+                    | Details
+            hr
+          //
+            end listing
+
+    //
+      end center-col
+    //
+      right-col
+    #right-col
+      img#ad-tower1.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
+      img#ad-tower2.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
+    //
+      end right-col
+  //
+    end main content
   
