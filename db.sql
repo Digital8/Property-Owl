@@ -185,7 +185,13 @@ CREATE TABLE IF NOT EXISTS `po_properties` (
 
 INSERT INTO `po_properties` (`property_id`, `title`, `address`, `state`, `description`, `property_type_id`, `price`, `bedrooms`, `bathrooms`, `cars`, `development_stage`, `feature_image`, `listed_by`, `created_at`) VALUES
 (1, 'deal of a lifetime!', '123 example street', 'qld', 'This is a once in a life time opportunity', 1, 345000, 4, 2, 2, '', '', 1, '2012-10-08 19:49:47'),
-(2, '132', '345 fake road', 'qld', 'some descriptive description', 3, 1341411, 2, 2, 1, '', '', 1, '2012-10-19 09:54:52');
+(2, 'Qld property!', '345 fake road', 'qld', 'some descriptive description', 3, 1341411, 2, 2, 1, '', '', 1, '2012-10-19 09:54:52'),
+(3, 'Blue wonder', '11 Caithness Street', 'nsw', 'some descriptive description', 3, 1341411, 2, 2, 1, '', '', 1, '2012-10-19 09:54:52'),
+(4, 'Cold estate', '27 Mansion Court', 'vic', 'some descriptive description', 3, 1341411, 2, 2, 1, '', '', 1, '2012-10-19 09:54:52'),
+(5, 'Title', '12 Karen Court', 'nt', 'some descriptive description', 3, 1341411, 2, 2, 1, '', '', 1, '2012-10-19 09:54:52'),
+(6, 'Wow, awesome!', '9 Ellie Court', 'wa', 'some descriptive description', 3, 1341411, 2, 2, 1, '', '', 1, '2012-10-19 09:54:52'),
+(7, 'LOCATION LOCATION LOCATION', '26 Kurrajong Street', 'sa', 'some descriptive description', 3, 1341411, 2, 2, 1, '', '', 1, '2012-10-19 09:54:52'),
+(8, 'Some final entry', '123 example street', 'tas', 'This is a once in a life time opportunity', 1, 345000, 4, 2, 2, '', '', 1, '2012-10-08 19:49:47');
 
 -- --------------------------------------------------------
 
