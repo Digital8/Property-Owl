@@ -17,7 +17,7 @@ helpers = {}
 exports.index = (req,res) ->
   models.news.getAllNews (err, results) ->
     if err then throw err
-    res.render 'news/index', news: results or {}
+    res.render 'news/index', news: results or {}, menu: 'wise-owl'
   
 exports.view = (req,res) ->
   

@@ -70,7 +70,8 @@ head
                     li
                       a(href='/deals/state/wa') WA
                 li
-                  a(href='#') Wise Owl
+                  - var c = (menu == 'wise-owl') ? 'active' : ''
+                  a(href='#',class="#{c}") Wise Owl
                   ul
                     li
                       a(href='/news') News Updates

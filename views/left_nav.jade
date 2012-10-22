@@ -1,0 +1,36 @@
+//
+  left-col
+#left-col
+  .deal-stats
+    .timer
+      #timer
+        #day-timer
+          span.label Days
+          span.value 01
+        #hour-timer
+          span.label Hours
+          span.value 13
+        #minute-timer
+          span.label Mins
+          span.value 07
+      #map
+        img#map-image(src='/images/map.png', usemap='#australia', alt='Click on a State of Australia')
+        map(name='australia')
+          area#map-wa(shape='polygon', coords='65,25,65,100,17,116,3,62,57,19', href='#')
+          area#map-nt(shape='polygon', coords='65,25,65,69,103,69,103,35,91,24,94,13,75,10', href='#')
+          area#map-qld(shape='polygon', coords='103,68,103,34,111,39,119,10,159,82,116,82,116,68', href='#')
+          area#map-sa(shape='polygon', coords='116,68,65,68,65,100,116,129', href='#')
+          area#map-nsw(shape='polygon', coords='116,82,159,82,145,126,116,104', href='#')
+          area#map-vic(shape='polygon', coords='116,104,145,126,137,131,110,128,116,129', href='#')
+          area#map-act(shape='square', coords='155,110,185,110,185,120,155,120', href='#')
+          area#map-tas(shape='square', coords='120,140,170,140,170,155,120,155', href='#')
+    .counter
+      span.label Number of Enquiries
+      span.value 1,345
+  .barn-box
+    h2 The Barn
+    img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
+    h3 Group Deals
+  img#ad-box1.ad-box(src='/images/ad-box.jpg', alt='Box Advert')
+  img#ad-box2.ad-box(src='/images/ad-box.jpg', alt='Box Advert')
+  include search

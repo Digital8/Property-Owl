@@ -20,7 +20,7 @@ exports.index = (req,res) ->
 exports.view = (req,res) ->
   models.properties.getAllPropertiesByState req.params.state, (err, results) ->
     if err then console.log err
-    res.render 'deals/states/deals', properties: results
+    res.render 'deals/states/deals', properties: results, menu: 'best-state-deal'
   
 exports.add = (req,res) ->
 
