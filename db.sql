@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 17, 2012 at 02:19 AM
+-- Generation Time: Oct 22, 2012 at 10:41 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -38,6 +38,46 @@ INSERT INTO `po_account_types` (`account_type_id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `po_barn`
+--
+
+CREATE TABLE IF NOT EXISTS `po_barn` (
+  `barn_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `owner_id` mediumint(8) unsigned NOT NULL,
+  `barn_created_at` datetime NOT NULL,
+  PRIMARY KEY (`barn_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `po_barn`
+--
+
+INSERT INTO `po_barn` (`barn_id`, `title`, `description`, `owner_id`, `barn_created_at`) VALUES
+(1, 'the name', '- Developer pays stampduty\r\n- Some thing\r\n- Some other thing\r\n- Some other other thing', 1, '2012-10-18 16:24:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `po_barn_to_property`
+--
+
+CREATE TABLE IF NOT EXISTS `po_barn_to_property` (
+  `barn_id` mediumint(8) unsigned NOT NULL,
+  `property_id` mediumint(8) unsigned NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `po_barn_to_property`
+--
+
+INSERT INTO `po_barn_to_property` (`barn_id`, `property_id`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `po_deals`
 --
 
@@ -45,6 +85,8 @@ CREATE TABLE IF NOT EXISTS `po_deals` (
   `deal_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `deal_type_id` int(10) unsigned NOT NULL,
   `property_id` mediumint(8) unsigned NOT NULL,
+  `created_by` mediumint(8) unsigned NOT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`deal_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -135,14 +177,15 @@ CREATE TABLE IF NOT EXISTS `po_properties` (
   `listed_by` mediumint(8) unsigned NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`property_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `po_properties`
 --
 
 INSERT INTO `po_properties` (`property_id`, `title`, `address`, `state`, `description`, `property_type_id`, `price`, `bedrooms`, `bathrooms`, `cars`, `development_stage`, `feature_image`, `listed_by`, `created_at`) VALUES
-(1, 'deal of a lifetime!', '123 example street', 'qld', 'This is a once in a life time opportunity', 1, 345000, 4, 2, 2, '', '', 0, '2012-10-08 19:49:47');
+(1, 'deal of a lifetime!', '123 example street', 'qld', 'This is a once in a life time opportunity', 1, 345000, 4, 2, 2, '', '', 1, '2012-10-08 19:49:47'),
+(2, '132', '345 fake road', 'qld', 'some descriptive description', 3, 1341411, 2, 2, 1, '', '', 1, '2012-10-19 09:54:52');
 
 -- --------------------------------------------------------
 
@@ -182,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `po_users` (
   `last_name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `address` text NOT NULL,
+  `user_address` text NOT NULL,
   `account_type_id` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
@@ -191,6 +234,6 @@ CREATE TABLE IF NOT EXISTS `po_users` (
 -- Dumping data for table `po_users`
 --
 
-INSERT INTO `po_users` (`user_id`, `first_name`, `last_name`, `email`, `password`, `address`, `account_type_id`) VALUES
+INSERT INTO `po_users` (`user_id`, `first_name`, `last_name`, `email`, `password`, `user_address`, `account_type_id`) VALUES
 (1, 'Brendan', 'Scarvell', 'bscarvell@gmail.com', '7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73', '', 3),
 (2, 'Test', 'Developer', 'foo@bar.com', '7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73', '', 2);
