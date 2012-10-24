@@ -14,7 +14,7 @@ models = {}
 helpers = {}
  
 exports.index = (req,res) ->
-  res.render 'deals/index'
+  res.render 'deals/index', menu: 'owl-deals'
   
 exports.view = (req,res) ->
   

@@ -26,6 +26,15 @@ block content
           sync: "#carousel"
         });
       });
+    div#fb-root
+    script
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
     //
       left-col
     #left-col
@@ -63,13 +72,13 @@ block content
         ul
           li
             img(src='/images/share-print-icon.png', alt='Print')
-            | Print
+            | Print Deal
           li
             img(src='/images/share-save-icon.png', alt='Save')
-            | Save
+            | Save Deal
           li
             img(src='/images/share-refer-icon.png', alt='Refer')
-            | Refer
+            | Refer A Friend
           li
             .fb-like(data-href='http://www.propertyowl.com.au/property-details', data-send='false', data-layout='button_count', data-width='125', data-show-faces='false')
           li
@@ -93,8 +102,6 @@ block content
     //
       center-col
     #wide-center-col
-      a#back-button(href='/barn-deals') Back
-      h1 Barn Deals - Project Heading
       //
         image slider
       .slider-box

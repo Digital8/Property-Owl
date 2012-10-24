@@ -18,7 +18,7 @@ models =
 
 # GET
 exports.index = (req,res) ->
-  res.render 'research'
+  res.render 'research', menu: 'wise-owl'
 
 # GET    
 exports.view = (req,res) ->

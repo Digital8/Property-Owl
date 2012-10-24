@@ -18,7 +18,7 @@ models =
 
 # GET
 exports.index = (req,res) ->
-  res.render 'products'
+  res.render 'products', menu: 'products'
 
 # GET    
 exports.view = (req,res) ->

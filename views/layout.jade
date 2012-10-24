@@ -33,6 +33,7 @@ head
       });
     
     script(src='/js/scripts.js')
+    
   body
     .container.row
       header#header
@@ -61,7 +62,8 @@ head
                     li
                       a(href='/research') Research
                 li
-                  a(href='/products') Products & Services
+                  - var c = (menu == 'products') ? 'active' : ''
+                  a(href='/products',class="#{c}") Products & Services
                 li
                   a(href='#') My Nest
                   ul
