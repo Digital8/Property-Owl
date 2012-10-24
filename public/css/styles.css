@@ -2111,11 +2111,8 @@ body {
 }
 .main > div#center-col #canvas {
   height: 300px;
-  left: 50%;
-  margin: 0px 0 0 -300px;
-  position: absolute;
-  top: 50%;
   width: 600px;
+  position: relative;
 }
 .main > div#center-col #paper {
   height: 300px;
