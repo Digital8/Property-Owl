@@ -1,35 +1,41 @@
 extends ../layout
 
 block content
-  legend
-    h3 Sign Up
-  include ../flashify
-  form.form-horizontal(action="/sign-up",method="post")
+  //
+    main content
+  .container.row.main
+    include ../left_nav
+    //
+      center-col
+    #center-col
+      h1 Sign Up
+      include ../flashify
+      form.form-horizontal(action="/sign-up",method="post")
 
-    div.control-group  
-      label.control-label(for="inputEmail") Email:
-      div.controls
-        - if (values.email == undefined) values.email = ''
-        input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
+        div.control-group  
+          label.control-label(for="inputEmail") Email:
+          div.controls
+            - if (values.email == undefined) values.email = ''
+            input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
 
-    div.control-group
-      label.control-label(for="password") Password:
-      div.controls
-        input#password(type="password",placeholder="Password",name="password")
-        | &nbsp;
-        input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
+        div.control-group
+          label.control-label(for="password") Password:
+          div.controls
+            input#password(type="password",placeholder="Password",name="password")
+            | &nbsp;
+            input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
 
-    div.control-group  
-      label.control-label(for="inputEmail") First Name:
-      div.controls
-        - if (values.fname == undefined) values.fname = ''
-        input#email(type="text",name="fname",placeholder="First Name",value="#{values.fname}")
+        div.control-group  
+          label.control-label(for="inputEmail") First Name:
+          div.controls
+            - if (values.fname == undefined) values.fname = ''
+            input#email(type="text",name="fname",placeholder="First Name",value="#{values.fname}")
 
-    div.control-group  
-      label.control-label(for="inputEmail") Last Name:
-      div.controls
-        - if (values.lname == undefined) values.lname = ''
-        input#email(type="text",name="lname",placeholder="Last Name",value="#{values.lname}")
+        div.control-group  
+          label.control-label(for="inputEmail") Last Name:
+          div.controls
+            - if (values.lname == undefined) values.lname = ''
+            input#email(type="text",name="lname",placeholder="Last Name",value="#{values.lname}")
 
-    div.form-actions
-      input.btn.btn-primary(type="submit",value="Sign Up")
+        div.form-actions
+          input.btn.btn-primary(type="submit",value="Sign Up")

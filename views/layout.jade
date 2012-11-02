@@ -71,7 +71,7 @@ head
                       li
                         a(href='/account') My Account
                       li
-                        a(href='#') Contact Us
+                        a(href='/contact') Contact Us
                       - if( objUser.isAdmin())
                         li
                           a(href="/administration") Administration
@@ -84,6 +84,8 @@ head
                 - else
                   li
                     a(href="/login") Login
+                  li
+                    a(href="/sign-up") Sign Up
     block content
     footer#footer.row
       div

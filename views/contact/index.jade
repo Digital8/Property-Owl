@@ -1,70 +1,76 @@
 extends ../layout
 
 block content
-  legend
-    h3 Contact Us
-  include ../flashify
-  form.form-horizontal(action="/contact",method="post")
-    div.control-group  
-      label.control-label(for="type") Contact:
-      div.controls
-        select#type(name="type")
-          option General Enquiries
+  //
+    main content
+  .container.row.main
+    include ../left_nav
+    //
+      center-col
+    #center-col
+      h1 Contact Us
+      include ../flashify
+      form.form-horizontal(action="/contact",method="post")
+        div.control-group  
+          label.control-label(for="type") Contact:
+          div.controls
+            select#type(name="type")
+              option General Enquiries
           
-    div.control-group  
-      label.control-label(for="name") Name:
-      div.controls
-        input#name(type="text",name="name")
+        div.control-group  
+          label.control-label(for="name") Name:
+          div.controls
+            input#name(type="text",name="name")
         
-    div.control-group  
-      label.control-label(for="phone") Phone:
-      div.controls
-        input#phone(type="text",name="phone")
+        div.control-group  
+          label.control-label(for="phone") Phone:
+          div.controls
+            input#phone(type="text",name="phone")
         
-    div.control-group  
-      label.control-label(for="email") Email:
-      div.controls
-        input#email(type="text",name="email")
+        div.control-group  
+          label.control-label(for="email") Email:
+          div.controls
+            input#email(type="text",name="email")
     
-    div.control-group  
-      label.control-label(for="contact_method") Contact Method:
-      div.controls
-        select#contact_method(name="contact_method")
-          option Phone
+        div.control-group  
+          label.control-label(for="contact_method") Contact Method:
+          div.controls
+            select#contact_method(name="contact_method")
+              option Phone
     
-    div.control-group  
-      label.control-label(for="company") Company:
-      div.controls
-        input#company(type="text",name="company")
+        div.control-group  
+          label.control-label(for="company") Company:
+          div.controls
+            input#company(type="text",name="company")
     
-    div.control-group  
-      label.control-label(for="address") Address:
-      div.controls
-        input#email(type="text",name="address")
+        div.control-group  
+          label.control-label(for="address") Address:
+          div.controls
+            input#email(type="text",name="address")
     
-    div.control-group  
-      label.control-label(for="city") City/Suburb:
-      div.controls
-        input#city(type="text",name="city")
+        div.control-group  
+          label.control-label(for="city") City/Suburb:
+          div.controls
+            input#city(type="text",name="city")
     
-    div.control-group  
-      label.control-label(for="state") State:
-      div.controls
-        select#state(name="state")
-          option ACT
-          option NSW
-          option QLD
-          option NT
-          option VIC
-          option WA
-          option TAS
+        div.control-group  
+          label.control-label(for="state") State:
+          div.controls
+            select#state(name="state")
+              option ACT
+              option NSW
+              option QLD
+              option NT
+              option VIC
+              option WA
+              option TAS
           
-    div.control-group  
-      label.control-label(for="city") Comments:
-      div.controls
-        textarea.span9(rows=7)
+        div.control-group  
+          label.control-label(for="city") Comments:
+          div.controls
+            textarea.span9(rows=7)
         
-    div.control-group  
-      div.controls
-        button.btn.btn-primary Send
+        div.control-group  
+          div.controls
+            button.btn.btn-primary Send
     
