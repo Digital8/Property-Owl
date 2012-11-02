@@ -1,22 +1,27 @@
 extends ../../layout
 
 block content
-  legend
-    h3 Submit News
-      small 
-        a(href="/administration/news") Cancel
-  form.form-horizontal(action="/administration/news/add",method="post")
-    include ../../flashify
-    div.control-group  
-      label.control-label(for="inputTitle") Title:
-      div.controls
-        input#inputTitle(type="text",name="title",value="")
+  //
+    main content
+  .container.row.main
+    include ../../left_nav
+    //
+      center-col
+    #center-col
+      h3 Submit News
+      form.form-horizontal(action="/administration/news/add",method="post")
+        include ../../flashify
+        div.control-group  
+          label.control-label(for="inputTitle") Title:
+          div.controls
+            input#inputTitle(type="text",name="title",value="")
         
-    div.control-group  
-      label.control-label(for="inputContent") Content:
-      div.controls
-        textarea#inputContent.span8(name="content",rows="10")
+        div.control-group  
+          label.control-label(for="inputContent") Content:
+          div.controls
+            textarea#inputContent.span8(name="content",rows="10")
         
-    div.control-group  
-      div.controls
-        input.btn.btn-primary(type="submit",value="Post News")
+        div.control-group  
+          div.controls
+            input(type="submit",value="Post News")
+            a(href="/administration/news") Cancel

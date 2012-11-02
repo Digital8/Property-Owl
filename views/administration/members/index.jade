@@ -1,27 +1,31 @@
 extends ../../layout
 
 block content
-
-  legend
-    h3 Members 
-      small
-        a(href="/administration") Administration
-  a.btn.btn-primary(href="/administration/members/add") + New Member
-  table.table.table-striped
-    thead
-      th.span3 Name
-      th.span4 Email
-      th.span7 Member Type
-      th Actions
-    tbody
-      - each user in users
-        tr
-          td #{user.first_name} #{user.last_name}
-          td= user.email
-          td= user.account_type
-          td
-            a(href="/administration/members/edit/#{user.user_id}")
-              i.icon-edit.offset
-            | &nbsp;
-            a(href="/administration/members/delete/#{user.user_id}")
-              i.icon-trash
+  //
+    main content
+  .container.row.main
+    include ../../left_nav
+    //
+      center-col
+    #center-col
+      h1 Members 
+      
+      table(width="100%")
+        thead
+          th Name
+          th Email
+          th Member Type
+          th Actions
+        tbody
+          - each user in users
+            tr
+              td #{user.first_name} #{user.last_name}
+              td= user.email
+              td= user.account_type
+              td
+                small
+                  a(href="/administration/members/edit/#{user.user_id}") Edit
+                  | &nbsp;|&nbsp;
+                  a(href="/administration/members/delete/#{user.user_id}") Delete
+      br
+      a(href="/administration/members/add") + New Member

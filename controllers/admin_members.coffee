@@ -79,6 +79,7 @@ exports.update = (req,res) ->
  
   req.assert('fname', 'First name is invalid').isAlpha().len(2,20).notEmpty()
   req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
+  
   models.user.getUserById req.body.id, (err, user) ->
     user = user.pop()
     models.user.getUserByEmail req.body.email, (err, email) ->
@@ -101,6 +102,7 @@ exports.update = (req,res) ->
             console.log err
             req.flash('error', "An unknown error has occured. Error code: #{err.code}")
           else
+            # todo: Update the users group
             req.flash('success', 'Your details have successfully been updated')
           
           res.redirect 'back'

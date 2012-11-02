@@ -1,6 +1,12 @@
 extends ../layout
 
 block content
-  legend
-    h1 Page 404
-  p This page doesn't seem to exist :(
+  //
+    main content
+  .container.row.main
+    include ../left_nav
+    //
+      center-col
+    #center-col
+      h1 Page 404
+      p This page doesn't seem to exist :(

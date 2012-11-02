@@ -1,46 +1,50 @@
 extends ../../layout
 
 block content
-
-  legend
-    h3 Members 
-      small
-        a(href="/administration") Administration
+  //
+    main content
+  .container.row.main
+    include ../../left_nav
+    //
+      center-col
+    #center-col
+      h1 Members 
         
   
-  h4 Create New Member:
-  form.form-horizontal(action="/administration/members/add",method="post")
-    include ../../flashify
-    div.control-group  
-      label.control-label(for="inputEmail") Email:
-      div.controls
-        - if (values.email == undefined) values.email = ''
-        input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
-
-    div.control-group
-      label.control-label(for="password") Password:
-      div.controls
-        input#password(type="password",placeholder="Password",name="password")
-        | &nbsp;
-        input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
-
-    div.control-group  
-      label.control-label(for="inputEmail") Group:
-      div.controls
-        select(name="group")
-          - each group in groups
-            option(value="#{group.account_type_id}")= group.name
-
-    div.control-group  
-      label.control-label(for="inputEmail") First Name:
-      div.controls
-        - if (values.fname == undefined) values.fname = ''
-        input#email(type="text",name="fname",placeholder="First Name",value="#{values.fname}")
-
-    div.control-group  
-      label.control-label(for="inputEmail") Last Name:
-      div.controls
-        - if (values.lname == undefined) values.lname = ''
-        input#email(type="text",name="lname",placeholder="Last Name",value="#{values.lname}")
-    div.form-actions
-      input.btn.btn-primary(type="submit",value="Create User")
+      h4 Create New Member:
+      form.form-horizontal(action="/administration/members/add",method="post")
+        include ../../flashify
+        div.control-group  
+          label.control-label(for="inputEmail") Email:
+          div.controls
+            - if (values.email == undefined) values.email = ''
+            input#email(type="text",placeholder="Email",name="email",value="")
+        br
+        div.control-group
+          label.control-label(for="password") Password:
+          div.controls
+            input#password(type="password",placeholder="Password",name="password")
+            | &nbsp;
+            input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") Group:
+          div.controls
+            select(name="group")
+              - each group in groups
+                option(value="#{group.group_id}")= group.name
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") First Name:
+          div.controls
+            - if (values.fname == undefined) values.fname = ''
+            input#email(type="text",name="fname",placeholder="First Name",value="")
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") Last Name:
+          div.controls
+            - if (values.lname == undefined) values.lname = ''
+            input#email(type="text",name="lname",placeholder="Last Name",value="")
+        br
+        div.form-actions
+          input.btn.btn-primary(type="submit",value="Create User")

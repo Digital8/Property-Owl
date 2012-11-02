@@ -1,53 +1,58 @@
 extends ../../layout
 
 block content
-
-  legend
-    h3 Members 
-      small
-        a(href="/administration") Administration
+  //
+    main content
+  .container.row.main
+    include ../../left_nav
+    //
+      center-col
+    #center-col
+      h1 Members 
         
   
-  h4 Editing Member: #{values.first_name} #{values.last_name}
-  form.form-horizontal(action="/administration/members/edit/#{values.user_id}",method="post")
-    include ../../flashify
-    input(type="hidden",name="_method",value="put")
-    div.control-group  
-      label.control-label(for="inputEmail") Email:
-      div.controls
-        - if (values.email == undefined) values.email = ''
-        input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
-
-    div.control-group
-      label.control-label(for="password") Password:
-      div.controls
-        input#password(type="password",placeholder="Password",name="password")
-        | &nbsp;
-        input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
-        span.help-block Password will not be changed if left blank
-
-    div.control-group  
-      label.control-label(for="inputEmail") Group:
-      div.controls
-        select(name="group")
-          - each group in groups
-            - if (group.account_type_id == values.account_type_id)
-              option(value="#{group.account_type_id}",selected)= group.name
-            else
-              option(value="#{group.account_type_id}")= group.name
-
-    div.control-group  
-      label.control-label(for="inputEmail") First Name:
-      div.controls
-        - if (values.first_name == undefined) values.first_name = ''
-        input#email(type="text",name="fname",placeholder="First Name",value="#{values.first_name}")
-
-    div.control-group  
-      label.control-label(for="inputEmail") Last Name:
-      div.controls
-        - if (values.last_name == undefined) values.last_name = ''
-        input#email(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}")
-    div.form-actions
-      input.btn.btn-primary(type="submit",value="Update User")
-      | &nbsp;
-      a.btn(href="/administration/members") Cancel
+      h4 Editing Member: #{values.first_name} #{values.last_name}
+      form.form-horizontal(action="/administration/members/edit/#{values.user_id}",method="post")
+        include ../../flashify
+        input(type="hidden",name="_method",value="put")
+        div.control-group  
+          label.control-label(for="inputEmail") Email:
+          div.controls
+            - if (values.email == undefined) values.email = ''
+            input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
+        br
+        div.control-group
+          label.control-label(for="password") Password:
+          div.controls
+            input#password(type="password",placeholder="Password",name="password")
+            | &nbsp;
+            input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
+            br
+            span Password will not be changed if left blank
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") Group:
+          div.controls
+            select(name="group")
+              - each group in groups
+                - if (group.account_type_id == values.account_type_id)
+                  option(value="#{group.account_type_id}",selected)= group.name
+                else
+                  option(value="#{group.account_type_id}")= group.name
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") First Name:
+          div.controls
+            - if (values.first_name == undefined) values.first_name = ''
+            input#email(type="text",name="fname",placeholder="First Name",value="#{values.first_name}")
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") Last Name:
+          div.controls
+            - if (values.last_name == undefined) values.last_name = ''
+            input#email(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}")
+        br
+        div.form-actions
+          input.btn.btn-primary(type="submit",value="Update User")
+          | &nbsp;
+          a.btn(href="/administration/members") Cancel

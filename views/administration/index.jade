@@ -1,10 +1,15 @@
 extends ../layout
 
 block content
-  legend
-    h3 Site Administration
-  
-  li
-    a(href="/administration/news") News
-  li
-    a(href="/administration/members") Members
+  //
+    main content
+  .container.row.main
+    include ../left_nav
+    //
+      center-col
+    #center-col 
+      h1 Administration
+      li
+        a(href="/administration/news") News
+      li
+        a(href="/administration/members") Members
