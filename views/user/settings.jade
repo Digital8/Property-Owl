@@ -1,32 +1,39 @@
 extends ../layout
 
 block content
-  legend
-    h3 My Account
-  include ../flashify
-  form.form-horizontal(action="/account",method="post")
-    div.control-group  
-      label.control-label(for="inputEmail") Email:
-      div.controls
-        input#email(type="text",placeholder="Email",name="email",value="#{objUser.email}")
-
-    div.control-group
-      label.control-label(for="password") Password:
-      div.controls
-        input#password(type="password",placeholder="Password",name="password")
-        | &nbsp;
-        input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
-        span.help-block Password will not be changed if left blank
-
-    div.control-group  
-      label.control-label(for="inputEmail") First Name:
-      div.controls
-        input#email(type="text",name="fname",placeholder="First Name",value="#{objUser.firstName}")
-
-    div.control-group  
-      label.control-label(for="inputEmail") Last Name:
-      div.controls
-        input#email(type="text",name="lname",placeholder="Last Name",value="#{objUser.lastName}")
-
-    div.form-actions
-      input.btn.btn-primary(type="submit",value="Update")
+  .container.row.main
+     include ../left_nav
+     //
+       center-col
+     #center-col
+      legend
+        h1 My Account
+      include ../flashify
+      form.form-horizontal(action="/account",method="post")
+        div.control-group  
+          label.control-label(for="inputEmail") Email:
+          div.controls
+            input#email(type="text",placeholder="Email",name="email",value="#{objUser.email}")
+        br
+        div.control-group
+          label.control-label(for="password") Password:
+          div.controls
+            input#password(type="password",placeholder="Password",name="password")
+            | &nbsp;
+            input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
+            br
+            span.help-block 
+              small Password will not be changed if left blank
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") First Name:
+          div.controls
+            input#email(type="text",name="fname",placeholder="First Name",value="#{objUser.firstName}")
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") Last Name:
+          div.controls
+            input#email(type="text",name="lname",placeholder="Last Name",value="#{objUser.lastName}")
+        br
+        div.form-actions
+          input(type="submit",value="Update")

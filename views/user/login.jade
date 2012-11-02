@@ -1,0 +1,18 @@
+extends ../layout
+block content
+  //
+    main content
+  .container.row.main
+    include ../left_nav
+      //
+       center-col
+     #center-col
+       h1 Login
+       include ../flashify
+       form(action="/login",method="post")
+        p
+          input(type="text",name="email",placeholder="email")
+        p
+          input(type="password",name="password",placeholder="password")
+        p
+          input(type="submit",value="login")

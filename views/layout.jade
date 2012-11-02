@@ -64,19 +64,26 @@ head
                 li
                   - var c = (menu == 'products') ? 'active' : ''
                   a(href='/products',class="#{c}") Products & Services
-                li
-                  a(href='#') My Nest
-                  ul
-                    li
-                      a(href='#') My Account
-                    li
-                      a(href='#') Contact Us
-                    li
-                      a(href='#') Refer A Friend
-                    li
-                      a(href='#') Saved Deals
-                    li
-                      a(href='#') Sign Out
+                - if (objUser.isAuthed())
+                  li
+                    a(href='#') My Nest
+                    ul
+                      li
+                        a(href='/account') My Account
+                      li
+                        a(href='#') Contact Us
+                      - if( objUser.isAdmin())
+                        li
+                          a(href="/administration") Administration
+                      li
+                        a(href='#') Refer A Friend
+                      li
+                        a(href='#') Saved Deals
+                      li
+                        a(href='/sign-out') Sign Out
+                - else
+                  li
+                    a(href="/login") Login
     block content
     footer#footer.row
       div

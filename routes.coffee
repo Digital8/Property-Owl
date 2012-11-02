@@ -28,6 +28,11 @@ module.exports = (app) ->
   # index
   app.get '/', controllers.index.index
   
+  app.all '/login', controllers.login.index
+  
+  # Sign-Out
+  app.get '/sign-out', controllers.signout.index
+  
   # Sign-Up
   app.get '/sign-up', controllers.signup.index
   app.post '/sign-up', controllers.signup.create
