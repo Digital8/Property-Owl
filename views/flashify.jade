@@ -1,6 +1,6 @@
 if (flash.error != undefined)
-  div
-    h4.alert-header Error 
+  div(style="border: 1px solid #dd3c10;background: #ffebe8;padding:10px;")
+    h4.alert-header Houston, we have a problem: 
     each error in flash.error
       li= error
       
@@ -17,7 +17,7 @@ if (flash.info != undefined)
       li= info
       
 if (flash.success != undefined)
-  div
+  div(style="background-color: honeyDew;padding: 10px;border: 1px solid #008000")
     h4.alert-header Woot! 
     each success in flash.success
       li= success

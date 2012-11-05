@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  //
+    main content
+  .container.row.main
+    include left_nav
+    //
+      center-col
+    #center-col
+      h1= page.header
+      !{page.content}
+    //
+      end center-col
+    //
+      right-col
+    #right-col
+      img#ad-tower1.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
+      img#ad-tower2.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')

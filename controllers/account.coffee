@@ -66,9 +66,19 @@ exports.update = (req,res) ->
           console.log err
           req.flash('error', "An unknown error has occured. Error code: #{err.code}")
         else
-          req.flash('success', 'Your details have successfully been updated')
-          
-        res.redirect 'back'
+          # validation has already been checked so we're checking if we need to update pwd
+          if req.body.password != '' 
+            req.body.password = helpers.hash(req.body.password)
+            models.user.updatePassword req.body, (err, results) ->
+              if err
+                console.log err
+                req.flash('error', "An unknown error has occured. Error code: #{err.code}")
+              else
+                req.flash('success', 'Your details have successfully been updated')
+              res.redirect 'back'
+          else  
+            req.flash('success', 'Your details have successfully been updated')
+            res.redirect 'back'
 
 # DEL
 exports.destroy = (req,res) ->

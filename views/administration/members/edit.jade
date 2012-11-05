@@ -16,10 +16,14 @@ block content
         include ../../flashify
         input(type="hidden",name="_method",value="put")
         div.control-group  
-          label.control-label(for="inputEmail") Email:
+          label.control-label(for="inputEmail") User Type:
           div.controls
-            - if (values.email == undefined) values.email = ''
-            input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
+            select(name="group")
+              - each group in groups
+                - if (group.account_type_id == values.account_type_id)
+                  option(value="#{group.account_type_id}",selected)= group.name
+                else
+                  option(value="#{group.account_type_id}")= group.name
         br
         div.control-group
           label.control-label(for="password") Password:
@@ -29,16 +33,6 @@ block content
             input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
             br
             span Password will not be changed if left blank
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") Group:
-          div.controls
-            select(name="group")
-              - each group in groups
-                - if (group.account_type_id == values.account_type_id)
-                  option(value="#{group.account_type_id}",selected)= group.name
-                else
-                  option(value="#{group.account_type_id}")= group.name
         br
         div.control-group  
           label.control-label(for="inputEmail") First Name:
@@ -52,6 +46,69 @@ block content
             - if (values.last_name == undefined) values.last_name = ''
             input#email(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}")
         br
+        div.control-group  
+          label.control-label(for="inputEmail") Company:
+          div.controls
+            - if (values.company == undefined) values.company = ''
+            input#email(type="text",placeholder="Company",name="company",value="#{values.company}")
+        br
+        
+        div.control-group  
+          label.control-label(for="inputEmail") Email:
+          div.controls
+           - if (values.email == undefined) values.email = ''
+           input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
+        br
+        div.control-group  
+           label.control-label(for="inputEmail") Phone:
+           div.controls
+             - if (values.phone == undefined) values.phone = ''
+             input#email(type="text",placeholder="Phone",name="phone",value="#{values.phone}")
+        br
+        div.control-group  
+           label.control-label(for="inputEmail") Work Phone:
+           div.controls
+             - if (values.work_phone == undefined) values.work_phone = ''
+             input#email(type="text",placeholder="Work Phone",name="work_phone",value="#{values.work_phone}")
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") Mobile:
+          div.controls
+            - if (values.mobile == undefined) values.mobile = ''
+            input#email(type="text",placeholder="Mobile",name="mobile",value="#{values.mobile}")
+        br
+        div.control-group  
+           label.control-label(for="inputEmail") Address Line 1*:
+           div.controls
+             - if (values.address == undefined) values.address = ''
+             input#email(type="text",placeholder="Address Line 1*",name="address",value="#{values.address}")
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") Suburb:
+          div.controls
+            - if (values.suburb == undefined) values.suburb = ''
+            input#email(type="text",placeholder="Suburb",name="suburb",value="#{values.suburb}")     
+        br    
+        div.control-group  
+          label.control-label(for="inputEmail") State:
+          div.controls
+            select(name="state")
+              option(value="qld") QLD
+              option(value="nsw") NSW
+              option(value="vic") VIC
+              option(value="act") ACT
+              option(value="sa") SA
+              option(value="wa") WA
+              option(value="nt") NT
+              option(value="tas") TAS
+              
+        br
+        div.control-group  
+          label.control-label(for="inputEmail") Postcode:
+          div.controls
+            - if (values.postcode == undefined) values.postcode = ''
+            input#email(type="text",placeholder="postcode",name="postcode",value="#{values.postcode}")     
+        br    
         div.form-actions
           input.btn.btn-primary(type="submit",value="Update User")
           | &nbsp;

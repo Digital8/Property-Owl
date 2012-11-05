@@ -66,6 +66,7 @@ exports.edit = (req,res) ->
         res.render 'administration/members/edit', values: results.pop(), groups: groups
   
 exports.update = (req,res) ->
+  console.log req.body
   req.body.email ?= ''
   req.body.fname ?= ''
   req.body.lname ?= ''

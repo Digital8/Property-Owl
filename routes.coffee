@@ -37,8 +37,6 @@ module.exports = (app) ->
   app.get '/sign-up', controllers.signup.index
   app.post '/sign-up', controllers.signup.create
   
-  app.get '/about', controllers.about.index
-  
   app.get '/contact', controllers.contact.index
   app.post '/contact', controllers.contact.create
   
@@ -108,4 +106,6 @@ module.exports = (app) ->
   app.get '/login', controllers.misc.login
   app.get '/logout', controllers.misc.logout
   app.post '/ajax/login', controllers.ajax.login
+  
+  app.all '*', controllers.pages.index
   

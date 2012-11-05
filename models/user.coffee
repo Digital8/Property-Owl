@@ -11,8 +11,7 @@
 db = require('../system').db
 
 exports.login = (email, password, callback) ->
-  db.query "SELECT * FROM #{db.prefix}users WHERE email = ? AND password = ?"
-  , [email, password], callback
+  db.query "SELECT * FROM #{db.prefix}users WHERE email = ? AND password = ?", [email, password], callback
 
 exports.getAllUsers = (callback) ->
   db.query "SELECT U.*, AT.name AS account_type FROM #{db.prefix}users AS U INNER JOIN #{db.prefix}account_types AS AT ON U.account_type_id = AT.account_type_id ", callback
@@ -33,9 +32,9 @@ exports.createUser = (user, callback) ->
   db.query "INSERT INTO #{db.prefix}users (email,password,first_name,last_name,account_type_id) VALUES(?,?,?,?,?)", [user.email, user.password, user.fname, user.lname, user.group], callback
 
 exports.updateUser = (user, callback) ->
-  db.query "UPDATE #{db.prefix}users SET email = ?, first_name = ?, last_name = ? WHERE user_id = ?", [user.email, user.fname, user.lname, user.id], callback
+  db.query "UPDATE #{db.prefix}users SET email = ?, first_name = ?, last_name = ?, company = ?, phone = ?, work_phone = ?, mobile = ?, address = ?, suburb = ?, state = ?, postcode = ? WHERE user_id = ?", [user.email, user.fname, user.lname, user.company, user.phone, user.work_phone, user.mobile, user.address, user.suburb, user.state, user.postcode, user.id], callback
 
-exports.updatePassword = (user,callback) ->
+exports.updatePassword = (user, callback) ->
   db.query "UPDATE #{db.prefix}users SET password = ? WHERE user_id = ?", [user.password, user.id], callback
 
 exports.updatePermissions = (user_id, permissions,callback) ->
