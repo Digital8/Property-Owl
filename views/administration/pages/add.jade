@@ -1,0 +1,25 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+   include ../../left_nav
+   //
+     center-col
+   #center-col
+    h1 Pages
+    include ../../flashify
+    form(action="/administration/pages/add",method="post")
+      p
+        input(type="text",name="url",placeholder="/url")
+      p
+        input(type="text",name="header",placeholder="Page Title")
+      p
+        textarea(name="content",placeholder="Page Content",rows="30",cols="100")
+      p
+        select(name="enabled")
+          option(value="1") Enabled
+          option(value="0") Disabled
+      p
+        input(type="submit")

@@ -1,0 +1,31 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+   include ../../left_nav
+   //
+     center-col
+   #center-col
+    h1 Pages
+    include ../../flashify
+    a(href="/administration/pages/add") Create Page
+    div
+      table(width="100%")
+        thead
+          th Page Title
+          th URL
+          th Status
+          th Actions
+        tbody
+          - each page in pages
+            tr
+              td= page.header
+              th= page.url
+              td=(page.enabled == 1) ? 'Enabled' : 'Disabled'
+              td
+                small
+                  a(href="/administration/pages/edit/#{page.page_id}") Edit
+                  | &nbsp;|&nbsp;
+                  a(href="/administration/pagess/delete/#{page.page_id}") Delete

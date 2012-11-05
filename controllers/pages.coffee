@@ -24,10 +24,11 @@ exports.index = (req,res) ->
   models.pages.getPageByUrl url, (err, results) ->
     if err then throw err
     
-    if results.length is 0
+    if results.length is 0 
       res.render 'errors/404'
     else
-      res.render 'page', page: results.pop();
+      page = results.pop();
+      if page.enabled is 0 then res.render 'errors/404' else res.render 'page', page: page
   
 
 # GET    

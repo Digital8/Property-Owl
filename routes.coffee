@@ -47,8 +47,6 @@ module.exports = (app) ->
   
   app.get '/owl-deals', controllers.owl_deals.index
   
-  app.get '/terms-and-conditions', controllers.tac.index
-  
   app.get '/research', controllers.research.index
   
   app.get '/privacy', controllers.privacy.index
@@ -101,6 +99,11 @@ module.exports = (app) ->
   app.post '/administration/members/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_members.create
   app.get '/administration/members/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_members.edit
   app.put '/administration/members/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_members.update
+  
+  app.get '/administration/pages', helpers.restrictTo(system.config.acl.admin), controllers.admin_pages.index
+  app.get '/administration/pages/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_pages.add
+  app.get '/administration/pages/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_pages.edit
+  app.post '/administration/pages/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_pages.create
   
   # Misc Routes
   app.get '/login', controllers.misc.login
