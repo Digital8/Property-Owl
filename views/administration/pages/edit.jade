@@ -18,7 +18,8 @@ block content
         input(type="text",name="header",placeholder="Page Title",value="#{page.header}")
       p
         textarea(name="content",placeholder="Page Content",rows="30",cols="100")
-          #{page.content.replace(/<p>&nbsp;<\/p>/,"\r\n")}
+          - var content = page.content.replace(/<p>&nbsp;<\/p>/g, "\r\n");
+          = content
       p
         select(name="enabled")
           option(value="1") Enabled
