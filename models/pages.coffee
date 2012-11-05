@@ -21,3 +21,6 @@ exports.getPageById = (id, callback) ->
   
 exports.createPage = (page, callback) ->
   db.query "INSERT INTO #{db.prefix}pages(url, header, content, enabled, page_created_at) VALUES(?,?,?,?, NOW())", [page.url, page.header, page.content, page.enabled], callback
+
+exports.updatePage = (page, callback) ->
+  db.query "UPDATE #{db.prefix}pages SET url = ?, header = ?, content = ?, enabled = ? WHERE page_id = ?", [page.url, page.header, page.content, page.enabled, page.id], callback

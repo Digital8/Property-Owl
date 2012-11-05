@@ -10,7 +10,7 @@ block content
    #center-col
     h1 Edit Page
     include ../../flashify
-    form(action="/administration/pages/edit/#{page.id}",method="post")
+    form(action="/administration/pages/edit/#{page.page_id}",method="post")
       input(type="hidden",name="_method",value="put")
       p
         input(type="text",name="url",placeholder="/url",value="#{page.url}")
@@ -18,7 +18,7 @@ block content
         input(type="text",name="header",placeholder="Page Title",value="#{page.header}")
       p
         textarea(name="content",placeholder="Page Content",rows="30",cols="100")
-          = page.content.replace(/<p>&nbsp;<\/p>/g,"\r\n")
+          = page.content.replace(/<br \/>/g,"\r\n")
       p
         select(name="enabled")
           option(value="1") Enabled

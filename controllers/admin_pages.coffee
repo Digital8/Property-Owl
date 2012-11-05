@@ -47,7 +47,7 @@ exports.create = (req,res) ->
       if results.length >= 1
         req.flash('error','Sorry, page URL is already in use')
       else
-        req.body.content = req.body.content.replace(/\r\n/g, "<p>&nbsp;</p>")
+        req.body.content = req.body.content.replace(/\r\n/g, "<br />")
         models.pages.createPage req.body, (err, results) ->
           if err then throw err
           req.flash('success','Page created')
@@ -64,5 +64,17 @@ exports.edit = (req,res) ->
       res.render 'administration/pages/edit', page: results.pop()
   
 exports.update = (req,res) ->
+  models.pages.getPageById req.params.id, (err, results) ->
+    if err then throw err
+    if results.length is 0
+      req.flash('error','Page not found')
+      res.redirect 'back'
+    else
+      req.body.id = req.params.id
+      req.body.content = req.body.content.replace(/\r\n/g, "<br />")
+      models.pages.updatePage req.body, (err, results) ->
+        if err then throw err
+        req.flash('success', 'Page updated successfully!')
+        res.redirect 'back'
   
 exports.destroy = (req,res) ->
