@@ -8,6 +8,8 @@
  * @copyright Copyright (c) 2012 - Current
  ###
 
+Email = require('email').Email
+
 exports.index = (req,res) ->
   res.render 'contact/index'
   
@@ -16,8 +18,18 @@ exports.view = (req,res) ->
 exports.add = (req,res) ->
 
 exports.create = (req,res) ->
-  req.flash('info','Send the email yo')
-  res.redirect '/contact'
+  myMsg = new Email
+    from: "bscarvell@gmail.com"
+    to:   "bscarvell@gmail.com"
+    subject: "Knock knock..."
+    body: "Who's there?"
+
+  myMsg.send (err) ->
+    if err
+      req.flash('error','an error occured')
+    else
+      req.flash('success','message sent successfully')
+    res.redirect '/contact'
 
 exports.edit = (req,res) ->
   
