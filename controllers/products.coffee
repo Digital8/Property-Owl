@@ -14,11 +14,14 @@ helpers =
   hash: system.load.helper('hash')
   
 models = 
-  user: system.load.model 'user'
+  services: system.load.model 'services'
+  
 
 # GET
 exports.index = (req,res) ->
-  res.render 'products', menu: 'products'
+  models.services.getAllServices (err, results) ->
+    if err then throw err
+    res.render 'products', menu: 'products', services: results or {}
 
 # GET    
 exports.view = (req,res) ->

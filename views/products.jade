@@ -9,54 +9,26 @@ block content
       center-col
     #center-col
       h1 Products & Services
-      //
-        listing
-      .listing-summary
-        .header
-          h2 Company Name
-        .listing-body
-          .listing-thumb
-            img.thumb(src='/images/services-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
-          .listing-details
-            .summary
-              p
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...
-            .listing-links
-              a.enquire-button(href='#') Enquire
-      //
-        end listing
-      //
-        listing
-      .listing-summary
-        .header
-          h2 Company Name
-        .listing-body
-          .listing-thumb
-            img.thumb(src='/images/services-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
-          .listing-details
-            .summary
-              p
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...
-            .listing-links
-              a.enquire-button(href='#') Enquire
-      //
-        end listing
-      //
-        listing
-      .listing-summary
-        .header
-          h2 Company Name
-        .listing-body
-          .listing-thumb
-            img.thumb(src='/images/services-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
-          .listing-details
-            .summary
-              p
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...
-            .listing-links
-              a.enquire-button(href='#') Enquire
-      //
-        end listing
+      - if (services.length == 0)
+        p No services have been listed on Property Owl
+      - else
+        - each service in services
+          //
+            listing
+          .listing-summary
+            .header
+              h2= service.name
+            .listing-body
+              .listing-thumb
+                img.thumb(src='/images/services-thumb.jpg')
+              .listing-details
+                .summary
+                  p= service.description
+                .listing-links
+                  a.enquire-button(href='#') Enquire
+          //
+            end listing
+
       //
         end center-col
     //
