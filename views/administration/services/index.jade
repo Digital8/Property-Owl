@@ -1,0 +1,28 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+   include ../../left_nav
+   //
+     center-col
+   #center-col
+    h1 Products and Services
+    include ../../flashify
+    p
+      a(href="/administration/services/add") Add Product/Service
+    div
+      table(width="100%")
+        thead
+          th Name
+          th Actions
+        tbody
+          - each service in services
+            tr
+              td= service.name
+              td
+                small
+                  a(href="#") edit
+                  | &nbsp;|&nbsp;
+                  a(href="#") delete

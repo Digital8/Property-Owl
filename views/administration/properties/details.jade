@@ -1,0 +1,80 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+   include ../../left_nav
+   //
+     center-col
+   #center-col
+    h1 Add New Property
+    h3 Details
+    include ../../flashify
+    form(action="/administration/properties/add?step=1",method="post")
+      table(width="100%")
+        tr
+          td
+            p Listed By *
+              br
+              select(name="developer")
+                - each developer in developers
+                  option(value="#{developer.user_id}") #{developer.first_name} #{developer.last_name} 
+          td
+            p Address line 1*
+              br
+              input(type="text",name="address")
+        tr      
+          td
+            p Property Type *
+              br
+              select(name="ptype")
+                - each ptype in property_types
+                  option(value="#{ptype.property_type_id}")= ptype.type
+              
+          td
+            p Suburb
+              br
+              input(type="text",name="suburb")
+        tr
+          td
+            p Price *
+              br
+              input(type="text",name="price")
+
+          td
+            p State
+              br
+              select(name="state")
+                option(value="qld") QLD
+                option(value="nsw") NSW
+                option(value="act") ACT
+                option(value="vic") VIC
+                option(value="sa") SA
+                option(value="wa") WA
+                option(value="nt") NT
+                option(value="tas") TAS
+          
+        tr
+          td
+            p Development Stage
+              br
+              select(name="development_stage")
+                option(value="otp") Off the Plan
+                option(value="completed") Completed
+          td
+            p Postcode *
+              br
+              input(type="text",name="postcode")
+        tr
+          td
+            p Title:
+              br
+              input(type="text",name="title")
+        tr
+          td
+            p Description
+              br
+              textarea(name="description",rows="10",cols="40")
+  
+      input(type="submit",value="Next")

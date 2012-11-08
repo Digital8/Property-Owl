@@ -1,0 +1,44 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+   include ../../left_nav
+   //
+     center-col
+   #center-col
+    h1 Add New Property
+    h3 Images
+    include ../../flashify
+    - if (images.length < 5)
+      p Add up to 
+        strong= (5 - images.length) 
+        |  more images
+        form(action="/administration/properties/add?step=4",method="post",enctype="multipart/form-data")
+          p
+            input(type="file",name="file")
+            input(type="submit",name="cmdAddImage", value="Upload Image")
+    p
+      hr
+    - if (images.length == 0)
+      em No images have been uploaded for this property
+    - else
+      table(width="100%")
+        thead
+          th
+          th Order
+          th Banner
+          th Actions
+        tbody
+          - each img in images
+            tr
+              td
+                img(src="/uploads/#{img.filename}",width="50px")
+              th 0
+              th 
+                input(type="radio")
+              th
+                a(href="#") &times;
+      hr
+      a(href="/administration/properties/add?step=finish") Finish

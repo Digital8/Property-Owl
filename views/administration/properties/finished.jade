@@ -1,0 +1,15 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+   include ../../left_nav
+   //
+     center-col
+   #center-col
+    h1 Add New Property
+    h3 Finished
+    include ../../flashify
+    p Your property has successfully been submitted for approval.
+    a(href="/administration/properties/") Back

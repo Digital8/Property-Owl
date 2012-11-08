@@ -9,11 +9,7 @@ block content
       center-col
     #center-col 
       h1 Administration
-      li
-        a(href="/administration/news") News
-      li
-        a(href="/administration/members") Members
-      li
-        a(href="/administration/pages") Custom Pages
-      li
-        a(href="#") Web Links
+      ul
+      - each page in pages
+        li
+          a(href="/administration/#{page.url}")= page.name

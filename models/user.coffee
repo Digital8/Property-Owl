@@ -21,6 +21,9 @@ exports.getUserById = (user_id, callback) ->
   
 exports.getUserByAlias = (user_alias, callback) ->
   db.query "SELECT * FROM #{db.prefix}users WHERE alias = ?", [user_alias], callback
+  
+exports.getUsersByGroup = (group, callback) ->
+  db.query "SELECT * FROM #{db.prefix}users AS U INNER JOIN #{db.prefix}account_types AS AT ON U.account_type_id = AT.account_type_id WHERE AT.account_type_id = ?", [group], callback
 
 exports.getAllGroups = (callback) ->
   db.query "SELECT * FROM #{db.prefix}account_types", callback

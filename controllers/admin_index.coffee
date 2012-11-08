@@ -9,12 +9,14 @@
  ###
 system = require '../system'
 
-models = {}
+models = 
+  admin: system.load.model('admin')
 
 helpers = {}
  
 exports.index = (req,res) ->
-  res.render 'administration/index'
+  models.admin.getAdminPages (err, results) ->
+    res.render 'administration/index', pages: results or {}
   
 exports.view = (req,res) ->
   

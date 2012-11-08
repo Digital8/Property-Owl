@@ -1,0 +1,41 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+   include ../../left_nav
+   //
+     center-col
+   #center-col
+    h1 Add New Property
+    h3 Owl Deals
+    include ../../flashify
+    form(action="/administration/properties/add?step=3",method="post")
+      p Type
+        br
+        input(type="text",name="type",placeholder="Stamp Duty etc..")
+      p Dollar Value
+        br
+        | $ 
+        input(type="text",name="value",placeholder="")
+      
+      p More Information - Deal Terms (if any)
+        br
+        textarea(rows="10",cols="40",name="terms")
+      p
+        a(href="#") Back 
+        | &nbsp; 
+        input(type="submit",value="Add Deal")
+        
+    - if (deals.length == 0)
+      p No deals have been uploaded
+    - else
+      - each deal in deals
+        li= deal.type
+          |  $
+          = deal.value
+          |  
+          a(href="#") &times;
+    form(action="/administration/properties/add?step=3",method="post")
+      input(type="submit", value="Next", name="cmdNext")
