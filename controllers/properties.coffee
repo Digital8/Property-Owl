@@ -10,7 +10,9 @@
 system = require '../system'
 
 models =  
-  properties: system.load.model 'properties'
+  properties: system.load.model('properties')
+  media: system.load.model('media')
+  deals: system.load.model('deals')
 
 helpers = {}
  
@@ -22,7 +24,10 @@ exports.view = (req,res) ->
     if results.length is 0
       res.render 'properties/not_found'
     else
-      res.render 'properties/view', property: results.pop()
+      models.deals.getDealsByPropertyId req.params.id, (err, deals) ->
+        models.media.getMediaByPropertyId req.params.id, (err, files) ->
+          models.media.getImagesByPropertyId req.params.id, (err, images) ->
+            res.render 'properties/view', property: results.pop(), deals: deals or {}, files: files or {} , images: images or {}
   
 exports.add = (req,res) ->
 

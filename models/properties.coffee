@@ -20,7 +20,7 @@ exports.getPropertyTypes = (callback) ->
   db.query "SELECT PT.* FROM #{db.prefix}property_types AS PT", callback
 
 exports.addProperty = (vals, callback) ->
-  db.query "INSERT INTO #{db.prefix}properties(title, address, state, development_stage, description, property_type_id, price, listed_by, created_at) VALUES(?,?,?,?,?,?,?, NOW())", [vals.title, vals.address, vals.state, vals.development_stage, vals.description, vals.ptype, vals.price, vals.developer], callback
+  db.query "INSERT INTO #{db.prefix}properties(title, address, suburb, state, development_stage, description, property_type_id, price, listed_by, created_at) VALUES(?,?,?,?,?,?,?,?,?, NOW())", [vals.title, vals.address, vals.suburb, vals.state, vals.development_stage, vals.description, vals.ptype, vals.price, vals.developer], callback
 
 exports.getPropertyByUserId = (user_id, callback) ->
   db.query "SELECT * FROM #{db.prefix}properties AS P RIGHT JOIN #{db.prefix}users AS U ON p.listed_by = U.user_id WHERE listed_by = ?", [user_id], callback
