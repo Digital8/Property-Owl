@@ -47,7 +47,6 @@ exports.create = (req,res) ->
       if results.length >= 1
         req.flash('error','Sorry, page URL is already in use')
       else
-        req.body.content = req.body.content.replace(/\r\n/g, "<br />")
         models.pages.createPage req.body, (err, results) ->
           if err then throw err
           req.flash('success','Page created')
@@ -71,7 +70,6 @@ exports.update = (req,res) ->
       res.redirect 'back'
     else
       req.body.id = req.params.id
-      req.body.content = req.body.content.replace(/\r\n/g, "<br />")
       models.pages.updatePage req.body, (err, results) ->
         if err then throw err
         req.flash('success', 'Page updated successfully!')
