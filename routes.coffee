@@ -113,7 +113,7 @@ module.exports = (app) ->
   app.get '/login', controllers.misc.login
   app.get '/logout', controllers.misc.logout
   app.post '/ajax/login', controllers.ajax.login
-  app.post '/ajax/savdeal', helpers.requireAuth, controllers.ajax.savedeal
+  app.post '/ajax/savedeal', helpers.requireAuth, controllers.ajax.savedeal
   
   app.all '*', controllers.pages.index
   

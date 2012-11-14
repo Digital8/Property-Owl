@@ -28,7 +28,8 @@ exports.login = (req, res) ->
 exports.savedeal = (req, res) ->
   req.assert('id', 'Property ID Not Numeric').isInt()
   errors = req.validationErrors(true)
-    if errors
-      res.send status: false
-    else
-      res.send status: true
+
+  if errors
+    res.send status: false
+  else
+    res.send status: true
