@@ -17,7 +17,7 @@ module.exports =
     type    : 'mysql'
     host    : 'localhost'
     user    : 'root'
-    password: ''
+    password: 'l3tm3in'
     name    : 'po'
     prefix  : 'po_'
   
