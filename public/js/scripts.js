@@ -9,6 +9,20 @@ $(window).load(function() {
 
 $(function(){
     
-    
+  $("#savedeal").on("click", function(){
+	  $.ajax({
+	    url: '/ajax/savedeal',
+	    type: 'post',
+	    data: 'id=4324324'
+	  }).done(function(d){
+	    if (d.status == 200) {
+	      alert('ok sweet!');
+	    }
+	    else {
+	      alert('uh oh! spaghettio!');
+	    }
+	  });
+	  return false;
+	});
     	
 });
