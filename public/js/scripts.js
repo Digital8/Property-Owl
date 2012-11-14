@@ -15,11 +15,11 @@ $(function(){
 	    type: 'post',
 	    data: 'id=4324324'
 	  }).done(function(d){
-	    if (d.status == 200) {
+	    if (d.status == true) {
 	      alert('ok sweet!');
 	    }
 	    else {
-	      alert(d.status + ': uh oh! spaghettio!');
+	      alert('uh oh! spaghettio!');
 	    }
 	  });
 	  return false;
