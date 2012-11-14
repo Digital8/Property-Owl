@@ -29,6 +29,8 @@ exports.savedeal = (req, res) ->
   req.assert('id', 'Property ID Not Numeric').isInt()
   errors = req.validationErrors(true)
 
+  #this also needs to check that its a valid property
+  #if the property is already saved just return true and do nothing
   if errors
     res.send status: false
   else

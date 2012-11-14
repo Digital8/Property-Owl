@@ -13,7 +13,7 @@ $(function(){
 	  $.ajax({
 	    url: '/ajax/savedeal',
 	    type: 'post',
-	    data: 'id=4h324324'
+	    data: 'id=1234'
 	  }).done(function(d){
 	    if (d.status == true) {
 	      alert('ok sweet!');
