@@ -19,7 +19,7 @@ $(function(){
 	      alert('ok sweet!');
 	    }
 	    else {
-	      alert('uh oh! spaghettio!');
+	      alert(d+'uh oh! spaghettio!');
 	    }
 	  });
 	  return false;
