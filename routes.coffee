@@ -43,22 +43,22 @@ module.exports = (app) ->
   app.get '/account', helpers.requireAuth, controllers.account.index
   app.post '/account', helpers.requireAuth, controllers.account.update
   
-  app.get '/best-deal', controllers.best_deal.index
+  app.get '/best-deal', helpers.requireAuth, controllers.best_deal.index
   
-  app.get '/owl-deals', controllers.owl_deals.index
+  app.get '/owl-deals', helpers.requireAuth, controllers.owl_deals.index
   
   app.get '/why-the-owl', controllers.wto.index
   
-  app.get '/products', controllers.products.index
+  app.get '/products', helpers.requireAuth, controllers.products.index
   
-  app.get '/barn-deals', controllers.barn_deals.index
+  app.get '/barn-deals', helpers.requireAuth, controllers.barn_deals.index
   
-  app.get '/barn/deals/:id', controllers.barn_deals.view
+  app.get '/barn/deals/:id', helpers.requireAuth, controllers.barn_deals.view
   
-  app.get '/deals/state', controllers.deals_state.index
-  app.get '/deals/state/:state', controllers.deals_state.view
+  app.get '/deals/state', helpers.requireAuth, controllers.deals_state.index
+  app.get '/deals/state/:state', helpers.requireAuth, controllers.deals_state.view
   
-  app.get '/properties/view/:id', controllers.properties.view
+  app.get '/properties/view/:id', helpers.requireAuth, controllers.properties.view
   
   app.get '/developers/properties', helpers.restrictTo(system.config.acl.developer), helpers.restrictTo(system.config.acl.admin), controllers.dev_properties.index
   app.get '/developers/properties/add', helpers.restrictTo(system.config.acl.developer), helpers.restrictTo(system.config.acl.admin), controllers.dev_properties.add
@@ -70,10 +70,10 @@ module.exports = (app) ->
   
   
   # News
-  app.get '/news', controllers.news.index
+  app.get '/news', helpers.requireAuth, controllers.news.index
   
   # Search
-  app.get '/search', controllers.search.index
+  app.get '/search', helpers.requireAuth, controllers.search.index
   
   # Administration Routes
   app.get '/administration', helpers.restrictTo(system.config.acl.admin), controllers.admin_index.index
