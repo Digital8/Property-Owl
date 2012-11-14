@@ -24,3 +24,12 @@ exports.login = (req, res) ->
       results = results.pop()
       req.session.user_id = results.user_id
       res.send status: true
+      
+exports.favorite = (req, res) ->
+   models.user.login req.body.e, helpers.hash(req.body.p), (err, results) ->
+     if results.length is 0
+       res.send status: false
+     else
+       results = results.pop()
+       req.session.user_id = results.user_id
+       res.send status: true

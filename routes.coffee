@@ -45,6 +45,8 @@ module.exports = (app) ->
   
   app.get '/best-deal', helpers.requireAuth, controllers.best_deal.index
   
+  app.get '/saved', helpers.requireAuth, controllers.best_deal.index
+  
   app.get '/owl-deals', helpers.requireAuth, controllers.owl_deals.index
   
   app.get '/why-the-owl', controllers.wto.index
@@ -111,6 +113,7 @@ module.exports = (app) ->
   app.get '/login', controllers.misc.login
   app.get '/logout', controllers.misc.logout
   app.post '/ajax/login', controllers.ajax.login
+  app.post '/ajax/favorite', helpers.requireAuth, controllers.ajax.favorite
   
   app.all '*', controllers.pages.index
   
