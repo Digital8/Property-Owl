@@ -26,6 +26,7 @@ $(function(){
 	});
 	
 	$(".removebuttons").on("click", function(){
+	  var that = this;
 	  $.ajax({
 	    url: '/ajax/removedeal',
 	    type: 'post',
@@ -33,8 +34,8 @@ $(function(){
 	  }).done(function(d){
 	    if (d.status == true) {
 	      alert('Property Removed!');
-	      console.log($(this).data('property').toString());
-	      $("#property-" + $(this).data('property').toString()).remove();
+	      console.log($(that).data('property').toString());
+	      $("#property-" + $(that).data('property').toString()).remove();
 	    }
 	    else {
 	      alert('uh oh! spaghettio!');
