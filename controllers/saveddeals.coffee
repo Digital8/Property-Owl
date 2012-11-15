@@ -21,10 +21,10 @@ exports.index = (req,res) ->
   console.log 'user_id:', res.locals.objUser.id
   
   models.saveddeals.getSavedDealsByUserId res.locals.objUser.id, (err, results) ->
-<<<<<<< HEAD
+
     if err then throw err
-    res.render 'deals/saveddeals', properties: results or {}
-=======
+    res.render 'deals/saveddeals', properties: results or []
+    
     if results.length is not 0
       console.log 'number of saved properties:', results.length
       
@@ -43,7 +43,7 @@ exports.index = (req,res) ->
     else
       console.log 'no saved properties'
       res.render 'deals/saveddeals', properties: []
->>>>>>> 9c2671adb70fe20afead456851f562e78dc0cbce
+      
 
 exports.view = (req,res) ->
 
