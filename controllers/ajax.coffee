@@ -12,6 +12,7 @@ system = require '../system'
 
 models = 
   user: system.load.model 'user'
+  saveddeals: system.load.model 'saveddeals'
   
 helpers =
   hash: system.load.helper 'hash'
@@ -34,4 +35,12 @@ exports.savedeal = (req, res) ->
   if errors
     res.send status: false
   else
-    res.send status: true
+    models.saveddeals.checkDeal req.body.id, res.locals.objUser.id, (err, results) ->
+      if results.length is 0
+        models.saveddeals.saveDeal req.body.id, res.locals.objUser.id, (err, results) ->
+          if err?
+            res.send status: false
+          else
+            res.send status: true
+      else
+        res.send status: true
