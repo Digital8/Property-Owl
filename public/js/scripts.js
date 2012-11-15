@@ -25,6 +25,20 @@ $(function(){
 	  return false;
 	});
 
-
+  $(".savebuttons").on("click", function(){
+	  $.ajax({
+	    url: '/ajax/savedeal',
+	    type: 'post',
+	    data: 'id=' + $(this).data('property')
+	  }).done(function(d){
+	    if (d.status == true) {
+	      alert('ok sweet!');
+	    }
+	    else {
+	      alert('uh oh! spaghettio!');
+	    }
+	  });
+	  return false;
+	});
     	
 });
