@@ -44,15 +44,14 @@ $(function(){
 	
 	updateTimer = function(){
 	  var newDealTime = moment.utc().startOf('day').day(3).hours(2);
-  	var timeNow = moment.utc();
-	  diff = newDealTime.diff(timeNow, 'seconds');
+	  var diff = newDealTime.diff(moment.utc(), 'seconds');
 	
   	if (diff < 0) {
   	  newDealTime = newDealTime.hours(24*7);
 	  }
   	
-  	$("#day-timer-mins").html(newDealTime.diff(timeNow, 'minutes'));
-  	$("#day-timer-hours").html(newDealTime.diff(timeNow, 'hours'));
+  	$("#day-timer-mins").html(newDealTime.diff(timeNow, 'minutes') % 60);
+  	$("#day-timer-hours").html(newDealTime.diff(timeNow, 'hours') % 24);
   	$("#day-timer-days").html(newDealTime.diff(timeNow, 'days'));  	
   }
   
