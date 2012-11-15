@@ -18,6 +18,8 @@ models =
   saveddeals: system.load.model 'saveddeals'
 
 exports.index = (req,res) ->
+  console.log 'user_id:', res.locals.objUser.id
+  
   models.saveddeals.getSavedDealsByUserId res.locals.objUser.id, (err, results) ->
     if results.length is not 0
       console.log 'number of saved properties:', results.length
