@@ -49,13 +49,12 @@ block content
                   h3= property.title
                   p= property.description
                 .listing-links
-                  a.save-button(href='#')
+                  a#savebuttons.save-button(href='#', data-property="#{property.property_id}")
                     img#save-icon(src='/images/plus-icon.png', alt='Save this property')
                     |  Save
                   a.details-button(href='/properties/view/#{property.property_id}')
                     img#info-icon(src='/images/info-icon.png', alt='View property details')
                     |  Details
-            hr
           //
             end listing
 
