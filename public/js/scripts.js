@@ -42,8 +42,7 @@ $(function(){
 	  return false;
 	});
 	
-	//timer code :)
-	setTimeout(function(){
+	updateTimer = function(){
 	  var diff, days, hours, minutes, seconds;
 	
   	diff = moment.utc().startOf('day').day(3).hours(2).diff(moment.utc(), 'seconds');
@@ -66,6 +65,9 @@ $(function(){
   	$("#day-timer-hours").html(hours);
   	$("#day-timer-days").html(days);
   	
-  }, 5000);
+  }
+  
+  updateTimer();
+  setInterval(updateTimer, 5000);
 	
 });
