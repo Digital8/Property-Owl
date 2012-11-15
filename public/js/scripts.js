@@ -45,25 +45,31 @@ $(function(){
 	updateTimer = function(){
 	  var diff, days, hours, minutes, seconds;
 	
-  	diff = moment.utc().startOf('day').day(3).hours(2).diff(moment.utc(), 'seconds');
+  	//diff = moment.utc().startOf('day').day(3).hours(2).diff(moment.utc(), 'seconds');
+  	timespan = moment.utc().startOf('day').day(3).hours(2);
 	
   	if (diff < 0){
-  	  diff += 604800;
+  	  //diff += 604800;
+  	  timespan = timespan.hours(24*7);
   	}
 	
-  	days = Math.floor(diff/86400);
-  	diff -= days*86400;
+  	//days = Math.floor(diff/86400);
+  	//diff -= days*86400;
 	
-  	hours = Math.floor(diff/3600);
-  	diff -= hours*3600;
+  	//hours = Math.floor(diff/3600);
+  	//diff -= hours*3600;
 	
-  	minutes = Math.floor(diff/60);
-  	diff -= minutes*60;
-  	seconds = diff;
+  	//minutes = Math.floor(diff/60);
+  	//diff -= minutes*60;
+  	//seconds = diff;
   	
-  	$("#day-timer-mins").html(minutes);
-  	$("#day-timer-hours").html(hours);
-  	$("#day-timer-days").html(days);
+  	//$("#day-timer-mins").html(minutes);
+  	//$("#day-timer-hours").html(hours);
+  	//$("#day-timer-days").html(days);
+  	
+  	$("#day-timer-mins").html(timespan.minutes());
+  	$("#day-timer-hours").html(timespan.hours());
+  	$("#day-timer-days").html(timespan.days());
   	
   }
   
