@@ -18,9 +18,32 @@ models =
   saveddeals: system.load.model 'saveddeals'
 
 exports.index = (req,res) ->
+  console.log 'user_id:', res.locals.objUser.id
+  
   models.saveddeals.getSavedDealsByUserId res.locals.objUser.id, (err, results) ->
+<<<<<<< HEAD
     if err then throw err
     res.render 'deals/saveddeals', properties: results or {}
+=======
+    if results.length is not 0
+      console.log 'number of saved properties:', results.length
+      
+      properties = []
+      
+      iterator = (item, callback) ->
+        models.properties.getAllPropertiesById item.deal_id, (err, results) ->
+          if results.length is not 0
+            properties.push results[0]
+            
+          callback
+      
+      async.forEach results, iterator, (err) ->
+        res.render 'deals/saveddeals', properties: properties or []
+    
+    else
+      console.log 'no saved properties'
+      res.render 'deals/saveddeals', properties: []
+>>>>>>> 9c2671adb70fe20afead456851f562e78dc0cbce
 
 exports.view = (req,res) ->
 

@@ -22,4 +22,4 @@ exports.checkDeal = (deal_id, user_id, callback) ->
   db.query "SELECT * FROM #{db.prefix}saveddeals WHERE deal_id = ? and user_id = ?", [deal_id, user_id], callback
 
 exports.removeSavedDeal = (deal_id, user_id, callback) ->
-  db.query "UPDATE #{db.prefix}saveddeals SET enabled = ? WHERE deal_id = ? AND user_id = ?", [0, deal_id, user_id], callback
+  db.query "UPDATE #{db.prefix}saveddeals SET enabled = ? WHERE deal_id = ? AND user_id = ?", ['0', deal_id, user_id], callback
