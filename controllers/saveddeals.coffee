@@ -30,7 +30,7 @@ exports.index = (req,res) ->
         callback()
       
       async.forEach results, iterator, (err) ->
-        res.render 'deals/saveddeals', properties: properties
+        res.render 'deals/saveddeals', properties: properties or []
     
     else
       res.render 'deals/saveddeals', properties: []
