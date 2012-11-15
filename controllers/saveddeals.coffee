@@ -27,7 +27,7 @@ exports.index = (req,res) ->
           if results.length is not 0
             properties.push results[0]
             
-        callback()
+          callback()
       
       async.forEach results, iterator, (err) ->
         res.render 'deals/saveddeals', properties: properties or []
