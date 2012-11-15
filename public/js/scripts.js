@@ -14,7 +14,7 @@ $(function(){
 	  $.ajax({
 	    url: '/ajax/savedeal',
 	    type: 'post',
-	    data: 'id=' + $("#deal_id").val()
+	    data: 'id=' + parseInt($("#deal_id").html()).toString()
 	  }).done(function(d){
 	    if (d.status == true) {
 	      alert('ok sweet!');
