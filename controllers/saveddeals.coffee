@@ -20,6 +20,8 @@ models =
 exports.index = (req,res) ->
   models.saveddeals.getSavedDealsByUserId res.locals.objUser.id, (err, results) ->
     if results.length is not 0
+      console.log 'number of saved properties:', results.length
+      
       properties = []
       
       iterator = (item, callback) ->
