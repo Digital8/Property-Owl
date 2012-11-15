@@ -45,7 +45,7 @@ module.exports = (app) ->
   
   app.get '/best-deal', helpers.requireAuth, controllers.best_deal.index
   
-  app.get '/saved', helpers.requireAuth, controllers.best_deal.index
+  app.get '/saved', helpers.requireAuth, controllers.saveddeals.index
   
   app.get '/owl-deals', helpers.requireAuth, controllers.owl_deals.index
   
