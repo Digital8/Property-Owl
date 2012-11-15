@@ -9,7 +9,6 @@ $(window).load(function() {
 
 $(function(){
   
-  //we need to dynamically calculate the property deals id
   $("#savedeal").on("click", function(){
 	  $.ajax({
 	    url: '/ajax/savedeal',
@@ -25,5 +24,7 @@ $(function(){
 	  });
 	  return false;
 	});
+
+
     	
 });
