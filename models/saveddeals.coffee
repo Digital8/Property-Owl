@@ -11,7 +11,7 @@
 db = require('../system').db
 
 exports.getSavedDealsByUserId = (id, callback) ->
-  db.query "SELECT * FROM #{db.prefix}saveddeals WHERE user_id = ? AND enabled = ?", [id, '1'], callback
+  db.query "SELECT * FROM #{db.prefix}saveddeals WHERE user_id = ?", [id], callback
 
 exports.saveDeal = (deal_id, user_id, callback) ->
   #this prolly needs to have a check to make sure the deal doesn't already exist
