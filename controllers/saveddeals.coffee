@@ -14,7 +14,7 @@ async = require 'async'
 helpers = {}
   
 models =
-  properties: system.load.model('properties')
+  properties: system.load.model 'properties'
   saveddeals: system.load.model 'saveddeals'
 
 exports.index = (req,res) ->
