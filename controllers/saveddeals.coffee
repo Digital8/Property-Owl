@@ -1,5 +1,5 @@
 ###
- * Sign Up Controller
+ * Saved Deals Controller
  *
  * Controller for homepage of website
  *
