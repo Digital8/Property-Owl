@@ -33,7 +33,8 @@ $(function(){
 	  }).done(function(d){
 	    if (d.status == true) {
 	      alert('Property Removed!');
-	      $("#property-" + $(this).data('property')).remove();
+	      console.log($(this).data('property').toString());
+	      $("#property-" + $(this).data('property').toString()).remove();
 	    }
 	    else {
 	      alert('uh oh! spaghettio!');
