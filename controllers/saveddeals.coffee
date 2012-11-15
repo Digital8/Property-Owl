@@ -37,6 +37,7 @@ exports.index = (req,res) ->
         res.render 'deals/saveddeals', properties: properties or []
     
     else
+      console.log 'no saved properties'
       res.render 'deals/saveddeals', properties: []
 
 exports.view = (req,res) ->
