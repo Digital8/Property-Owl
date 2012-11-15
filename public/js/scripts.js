@@ -43,8 +43,9 @@ $(function(){
 	});
 	
 	updateTimer = function(){
+	  var timeNow = moment.utc();
 	  var newDealTime = moment.utc().startOf('day').day(3).hours(2);
-	  var diff = newDealTime.diff(moment.utc(), 'seconds');
+	  var diff = newDealTime.diff(timeNow, 'seconds');
 	
   	if (diff < 0) {
   	  newDealTime = newDealTime.hours(24*7);
