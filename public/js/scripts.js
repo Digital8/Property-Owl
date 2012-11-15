@@ -24,5 +24,22 @@ $(function(){
 	  });
 	  return false;
 	});
+	
+	$(".removebuttons").on("click", function(){
+	  $.ajax({
+	    url: '/ajax/removedeal',
+	    type: 'post',
+	    data: 'id=' + $(this).data('property')
+	  }).done(function(d){
+	    if (d.status == true) {
+	      alert('Property Removed!');
+	      $("#property-" + $(this).data('property')).remove();
+	    }
+	    else {
+	      alert('uh oh! spaghettio!');
+	    }
+	  });
+	  return false;
+	});
     	
 });

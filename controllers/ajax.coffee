@@ -42,3 +42,16 @@ exports.savedeal = (req, res) ->
             res.send status: true
       else
         res.send status: true
+        
+exports.removedeal = (req, res) ->
+  req.assert('id', 'Property ID Not Numeric').isInt()
+  errors = req.validationErrors(true)
+
+  if errors
+    res.send status: false
+  else
+    models.saveddeals.removeSavedDeal req.body.id, res.locals.objUser.id, (err, results) ->
+      if err?
+        res.send status: false
+      else
+        res.send status:true

@@ -114,6 +114,7 @@ module.exports = (app) ->
   app.get '/logout', controllers.misc.logout
   app.post '/ajax/login', controllers.ajax.login
   app.post '/ajax/savedeal', helpers.requireAuth, controllers.ajax.savedeal
+  app.post '/ajax/removedeal', helpers.requireAuth, controllers.ajax.removedeal
   
   app.all '*', controllers.pages.index
   
