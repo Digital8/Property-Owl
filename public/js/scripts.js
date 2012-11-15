@@ -8,22 +8,6 @@ $(window).load(function() {
 });
 
 $(function(){
-  
-  $("#savedeal").on("click", function(){
-	  $.ajax({
-	    url: '/ajax/savedeal',
-	    type: 'post',
-	    data: 'id=' + parseInt($("#deal_id").html()).toString()
-	  }).done(function(d){
-	    if (d.status == true) {
-	      alert('ok sweet!');
-	    }
-	    else {
-	      alert('uh oh! spaghettio!');
-	    }
-	  });
-	  return false;
-	});
 
   $(".savebuttons").on("click", function(){
 	  $.ajax({
@@ -32,7 +16,7 @@ $(function(){
 	    data: 'id=' + $(this).data('property')
 	  }).done(function(d){
 	    if (d.status == true) {
-	      alert('ok sweet!');
+	      alert('Property Saved!');
 	    }
 	    else {
 	      alert('uh oh! spaghettio!');
