@@ -42,6 +42,10 @@ $(function(){
 	  return false;
 	});
 	
+  $(".secure-button").on("click", function(){
+    $('body').append('<div class="quick-view-modal" id="register" onclick="javascript: window.location=\'/best-deal\';" style=""><div class="modal"><a href="#" class="modal-close"></a></div></div>');
+  });
+	
 	updateTimer = function(){
 	  var timeNow = moment.utc();
 	  var newDealTime = moment.utc().startOf('day').day(3).hours(2);
