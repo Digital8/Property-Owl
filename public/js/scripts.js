@@ -33,8 +33,6 @@ $(function(){
 	    data: 'id=' + $(this).data('property')
 	  }).done(function(d){
 	    if (d.status == true) {
-	      alert('Property Removed!');
-	      console.log($(that).data('property').toString());
 	      $("#property-" + $(that).data('property').toString()).remove();
 	    }
 	    else {
@@ -43,5 +41,31 @@ $(function(){
 	  });
 	  return false;
 	});
-    	
+	
+	//timer code :)
+	setTimeout(function(){
+	  var diff, days, hours, minutes, seconds;
+	
+  	diff = moment.utc().startOf('day').day(3).hours(2).diff(moment.utc(), 'seconds');
+	
+  	if (diff < 0){
+  	  diff += 604800;
+  	}
+	
+  	days = Math.floor(diff/86400);
+  	diff -= days*86400;
+	
+  	hours = Math.floor(diff/3600);
+  	diff -= hours*3600;
+	
+  	minutes = Math.floor(diff/60);
+  	diff -= minutes*60;
+  	seconds = diff;
+  	
+  	$("#day-timer-mins").html(minutes);
+  	$("#day-timer-hours").html(hours);
+  	$("#day-timer-days").html(days);
+  	
+  }, 5000);
+	
 });
