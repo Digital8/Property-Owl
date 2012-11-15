@@ -19,21 +19,8 @@ models =
 
 exports.index = (req,res) ->
   models.saveddeals.getSavedDealsByUserId res.locals.objUser.id, (err, results) ->
-    if results.length is not 0
-      properties = []
-      
-      iterator = (item, callback) ->
-        models.properties.getAllPropertiesById item.deal_id, (err, results) ->
-          if results.length is not 0
-            properties.push results[0]
-            
-          callback()
-      
-      async.forEach results, iterator, (err) ->
-        res.render 'deals/saveddeals', properties: properties or []
-    
-    else
-      res.render 'deals/saveddeals', properties: []
+    if err then throw err
+    res.render 'deals/saveddeals', properties: results or {}
 
 exports.view = (req,res) ->
 
