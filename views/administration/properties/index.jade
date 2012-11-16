@@ -1,0 +1,37 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+   include ../../left_nav
+   //
+     center-col
+   #center-col
+    h1 Properties
+    include ../../flashify
+    p
+      a(href="/properties/add") Create Property
+    
+    - if (properties.length == 0)
+      p No properties have been created yet.
+    - else
+        table(width="100%")
+          thead
+            td
+              u Address
+            td
+              u Suburb
+            td
+              u State
+            td
+              u Postcode
+            td 
+              u Deal Type
+          - each property in properties
+            tbody
+              td= property.address
+              td= property.suburb
+              td= property.state.toUpperCase()
+              td= property.postcode
+              td= property.deal_type.toUpperCase()

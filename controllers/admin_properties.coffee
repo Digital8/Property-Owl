@@ -19,7 +19,9 @@ classes =
 helpers = {}
  
 exports.index = (req,res) ->
-  
+  models.properties.getAllProperties (err, results) ->
+    res.render 'administration/properties/index', properties: results or {}
+    
 exports.view = (req,res) ->
 
 ## GET ##  

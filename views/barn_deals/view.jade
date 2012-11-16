@@ -145,70 +145,22 @@ block content
             td Floor Plan
             td Owl Deal
             td Register
-          tbody
-            td
-              a(href='#', alt='View Property Details') 1
-            td 2
-            td 2
-            td 1
-            td 5
-            td 50 sq.m
-            td 100 sq.m
-            td North
-            td $500,000
-            td
-              a(href='#') Download
-            td Yes
-            td
-              a.barn-register(href='#', alt='Register') Register
-          tbody
-            td
-              a(href='#', alt='View Property Details') 2
-            td 2
-            td 2
-            td 1
-            td 5
-            td 50 sq.m
-            td 100 sq.m
-            td North
-            td $500,000
-            td
-              a(href='#') Download
-            td Yes
-            td
-              a.barn-register(href='#', alt='Register') Register
-          tbody
-            td
-              a(href='#', alt='View Property Details') 3
-            td 2
-            td 2
-            td 1
-            td 5
-            td 50 sq.m
-            td 100 sq.m
-            td North
-            td $500,000
-            td
-              a(href='#') Download
-            td Yes
-            td
-              a.barn-register(href='#', alt='Register') Register
-          tbody
-            td
-              a(href='#', alt='View Property Details') 4
-            td 2
-            td 2
-            td 1
-            td 5
-            td 50 sq.m
-            td 100 sq.m
-            td North
-            td $500,000
-            td
-              a(href='#') Download
-            td Yes
-            td
-              a.barn-register(href='#', alt='Register') Register
+          - each deal in barn_deals
+            tbody
+              td= deal.lot
+              td= deal.bedrooms
+              td= deal.bathrooms
+              td= deal.cars
+              td= deal.level
+              td= deal.internal_area
+              td= deal.external_area
+              td= deal.aspect
+              td= deal.price
+              td
+                a(href='#') Download
+              td Yes
+              td
+                a.barn-register(href='#', alt='Register') Register
         #left
           p #{property.address}, #{property.suburb}, #{property.postcode}, 
           h2= property.title

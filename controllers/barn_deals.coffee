@@ -28,9 +28,11 @@ exports.view = (req,res) ->
     if err then throw err
     property = results.pop()
     if property.deal_type.toLowerCase() != 'barn' and property.deal_type.toLowerCase() != 'all'
-      res.send 'no barn deal found for this ID'
+      res.render 'barn_deals/404'
     else
-      res.render 'barn_deals/view', property: property, barn_deals: {}
+      # Get the deals
+      models.properties.getPropertiesOfBarnDeal req.params.id, (err, barn_deals) ->
+        res.render 'barn_deals/view', property: property, barn_deals: barn_deals or {}
 
 # GET
 exports.add = (req,res) ->

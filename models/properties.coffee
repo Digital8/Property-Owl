@@ -10,6 +10,9 @@
 
 db = require('../system').db
 
+exports.getAllProperties = (callback) ->
+  db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id", callback
+
 exports.getAllPropertiesById = (id, callback) ->
   db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE P.property_id = ?",[id], callback
 
@@ -29,7 +32,7 @@ exports.addProperty = (vals, callback) ->
   db.query "INSERT INTO #{db.prefix}properties(title, address, suburb, state, development_stage, description, property_type_id, price, deal_type, listed_by, created_at) VALUES(?,?,?,?,?,?,?,?,?,?, NOW())", [vals.title, vals.address, vals.suburb, vals.state, vals.development_stage, vals.description, vals.ptype, vals.price, vals.deal_type, vals.developer], callback
 
 exports.getPropertiesOfBarnDeal = (property_id, callback) ->
-  db.query "SELECT * FROM #{db.prefix}barn AS B WHERE B.property_id = ?", [property_id], callback
+  db.query "SELECT * FROM #{db.prefix}properties AS P WHERE P.deal_of = ?", [property_id], callback
 
 exports.getPropertyByUserId = (user_id, callback) ->
   db.query "SELECT * FROM #{db.prefix}properties AS P RIGHT JOIN #{db.prefix}users AS U ON p.listed_by = U.user_id WHERE listed_by = ?", [user_id], callback

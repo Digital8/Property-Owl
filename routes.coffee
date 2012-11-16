@@ -106,6 +106,7 @@ module.exports = (app) ->
   app.put '/administration/services/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_services.update
   app.post '/administration/services/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_services.create
   
+  app.get '/administration/properties', helpers.restrictTo(system.config.acl.admin), controllers.admin_properties.index
   app.get '/administration/properties/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_properties.add
   app.post '/administration/properties/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_properties.create
   
