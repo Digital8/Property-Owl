@@ -8,6 +8,18 @@ $(window).load(function() {
 });
 
 $(function(){
+	
+	
+	// show modal
+	var modal = $(".modal-overlay");
+	
+	$(".show-modal, .close-modal").on("click", function(){
+		modal.fadeToggle(150);
+		
+		return false;
+	});
+	
+	
 
   $(".savebuttons").on("click", function(){
 	  $.ajax({
