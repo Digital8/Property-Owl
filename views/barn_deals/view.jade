@@ -210,14 +210,13 @@ block content
             td
               a.barn-register(href='#', alt='Register') Register
         #left
-          p 12 Property Rd, Teneriffe, QLD 4000
-          h2 Project Details
-          p
-            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          p #{property.address}, #{property.suburb}, #{property.postcode}, 
+          h2= property.title
+          p= property.description
           .general-features
             h3 General Features
             ul
-              li Property Type: Apartment
+              li Property Type: #{property.property_type}
             h3 More Info
             .file-row
               .file

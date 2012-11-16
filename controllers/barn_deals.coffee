@@ -14,15 +14,23 @@ helpers =
   hash: system.load.helper('hash')
   
 models = 
-  user: system.load.model 'user'
+  properties: system.load.model 'properties'
 
 # GET
 exports.index = (req,res) ->
-  res.render 'barn_deals/index'
+  models.properties.getPropertiesByDealType 'barn', true, (err, results) ->
+    if err then throw err
+    res.render 'barn_deals/index', barn: results
 
 # GET    
 exports.view = (req,res) ->
-  res.render 'barn_deals/view'
+  models.properties.getAllPropertiesById req.params.id, (err, results) ->
+    if err then throw err
+    property = results.pop()
+    if property.deal_type.toLowerCase() != 'barn' and property.deal_type.toLowerCase() != 'all'
+      res.send 'no barn deal found for this ID'
+    else
+      res.render 'barn_deals/view', property: property, barn_deals: {}
 
 # GET
 exports.add = (req,res) ->

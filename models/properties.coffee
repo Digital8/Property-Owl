@@ -19,8 +19,17 @@ exports.getAllPropertiesByState = (state, callback) ->
 exports.getPropertyTypes = (callback) ->
   db.query "SELECT PT.* FROM #{db.prefix}property_types AS PT", callback
 
+exports.getPropertiesByDealType = (dealType, includeAllCategory, callback) ->
+  if includeAllCategory != true
+    db.query "SELECT * FROM #{db.prefix}properties AS P WHERE p.deal_type = ? ", [dealType] ,callback
+  else
+    db.query "SELECT * FROM #{db.prefix}properties AS P WHERE p.deal_type = ? OR p.deal_type = 'all'", [dealType] ,callback
+
 exports.addProperty = (vals, callback) ->
-  db.query "INSERT INTO #{db.prefix}properties(title, address, suburb, state, development_stage, description, property_type_id, price, listed_by, created_at) VALUES(?,?,?,?,?,?,?,?,?, NOW())", [vals.title, vals.address, vals.suburb, vals.state, vals.development_stage, vals.description, vals.ptype, vals.price, vals.developer], callback
+  db.query "INSERT INTO #{db.prefix}properties(title, address, suburb, state, development_stage, description, property_type_id, price, deal_type, listed_by, created_at) VALUES(?,?,?,?,?,?,?,?,?,?, NOW())", [vals.title, vals.address, vals.suburb, vals.state, vals.development_stage, vals.description, vals.ptype, vals.price, vals.deal_type, vals.developer], callback
+
+exports.getPropertiesOfBarnDeal = (property_id, callback) ->
+  db.query "SELECT * FROM #{db.prefix}barn AS B WHERE B.property_id = ?", [property_id], callback
 
 exports.getPropertyByUserId = (user_id, callback) ->
   db.query "SELECT * FROM #{db.prefix}properties AS P RIGHT JOIN #{db.prefix}users AS U ON p.listed_by = U.user_id WHERE listed_by = ?", [user_id], callback

@@ -22,72 +22,33 @@ block content
         | Swoop in today and share in the benefits and rewards available to you and your friends.
       p
         span.emphasis Property Owl – Innovation in Delivering Australia's Best Property Deals.
-      //
-        listing
-      .listing-summary
-        .header
-          h2 23 Catherine Street, manly, NSW
-        .listing-body
-          .listing-thumb
-            img.thumb(src='/images/barn-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
-          .listing-details
-            .summary
-              h3 Title of barn deal goes here
-              p
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...
-            .listing-links
-              a.save-button(href='#')
-                img#save-icon(src='/images/plus-icon.png', alt='Save this barn listing')
-                |  Save
-              a.details-button(href='/barn/deals/1')
-                img#info-icon(src='/images/info-icon.png', alt='View barn deal')
-                |  Details
-      //
-        end listing
-      //
-        listing
-      .listing-summary
-        .header
-          h2 23 Catherine Street, manly, NSW
-        .listing-body
-          .listing-thumb
-            img.thumb(src='/images/barn-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
-          .listing-details
-            .summary
-              h3 Title of barn deal goes here
-              p
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...
-            .listing-links
-              a.save-button(href='#')
-                img#save-icon(src='/images/plus-icon.png', alt='Save this barn listing')
-                |  Save
-              a.details-button(href='/barn/deals/2')
-                img#info-icon(src='/images/info-icon.png', alt='View barn deal')
-                |  Details
-      //
-        end listing
-      //
-        listing
-      .listing-summary
-        .header
-          h2 23 Catherine Street, manly, NSW
-        .listing-body
-          .listing-thumb
-            img.thumb(src='/images/barn-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
-          .listing-details
-            .summary
-              h3 Title of barn deal goes here
-              p
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...
-            .listing-links
-              a.save-button(href='#')
-                img#save-icon(src='/images/plus-icon.png', alt='Save this barn listing')
-                |  Save
-              a.details-button(href='/barn/deals/3')
-                img#info-icon(src='/images/info-icon.png', alt='View barn deal')
-                |  Details
-      //
-        end listing
+        
+      - if (barn.length == 0)
+        hr
+        h3 Sorry there are no barn deals available at the moment.
+      - else
+        - each property in barn
+          //
+            listing
+          .listing-summary
+            .header
+              h2 #{property.address}, #{property.suburb}, #{property.postcode}
+            .listing-body
+              .listing-thumb
+                img.thumb(src='/images/barn-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+              .listing-details
+                .summary
+                  h3= property.title
+                  p= property.description
+                .listing-links
+                  a.save-button(href='#')
+                    img#save-icon(src='/images/plus-icon.png', alt='Save this barn listing')
+                    |  Save
+                  a.details-button(href='/barn/deals/#{property.property_id}')
+                    img#info-icon(src='/images/info-icon.png', alt='View barn deal')
+                    |  Details
+        //
+          end listing
     //
       end center-col
     //
