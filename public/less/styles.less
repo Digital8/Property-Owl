@@ -43,7 +43,7 @@
 /* @group modal */
 
 .modal-overlay {
-	display: none;
+	//display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -61,7 +61,7 @@
 		background: #FFF;
 		.rounded(6px);
 		.box-shadow(~"0px 3px 5px rgba(0,0,0,0.5)");
-		padding: 2.5em;
+		padding: 5em 2.5em 2.5em;
 		
 		&.small {
 			width: 40em;
@@ -91,6 +91,48 @@
 			&:hover {
 				.opacity(1);
 			}
+		}
+		
+		.modal-title {
+			position: absolute;
+			top: 1.2em;
+			margin: 0;
+		}
+		
+		&.warning,
+		&.error,
+		&.success,
+		&.info {
+			h1 {
+				padding-left: 1.5em;
+				background-repeat: no-repeat;
+				background-size: auto 100%;
+				background-position: left center;
+			}
+		}
+		
+		&.warning h1 {
+			background-image: url(../images/icon-warning.png);
+			color: #e6b000;
+			.text-shadow(~"0px 1px 0px " darken(#e6b000, 10%));
+		}
+		
+		&.error h1 {
+			background-image: url(../images/icon-error.png);
+			color: #cd4101;
+			.text-shadow(~"0px 1px 0px " darken(#cd4101, 10%));
+		}
+		
+		&.success h1 {
+			background-image: url(../images/icon-success.png);
+			color: #60ba00;
+			.text-shadow(~"0px 1px 0px " darken(#60ba00, 10%));
+		}
+		
+		&.info h1 {
+			background-image: url(../images/icon-info.png);
+			color: #0085C6;
+			.text-shadow(~"0px 1px 0px " darken(#0085C6, 10%));
 		}
 		
 		.modal-content {
