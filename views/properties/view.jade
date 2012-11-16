@@ -46,13 +46,13 @@ block content
           #timer
             #day-timer
               span.label Days
-              span.value 01
+              span#day-timer-days.value
             #hour-timer
               span.label Hours
-              span.value 13
+              span#day-timer-hours.value
             #minute-timer
               span.label Mins
-              span.value 07
+              span#day-timer-mins.value
           #map
             img#map-image(src='/images/map.png', usemap='#australia', alt='Click on a State of Australia')
             map(name='australia')
@@ -77,7 +77,7 @@ block content
             a(href='#', onclick='javascript:window.print()')
               img(src='/images/share-print-icon.png', alt='Print')
               | Print Deal
-          li#savedeal
+          li.savebuttons(data-property="#{property.property_id}")
             img(src='/images/share-save-icon.png', alt='Save')
             | Save Deal
           li

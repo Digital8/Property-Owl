@@ -1,0 +1,433 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* @group large format specific content */
+@media screen and (min-width: 650px) {
+}
+/* @end */
+
+
+
+/* @group tablet device: 640px */
+@media screen and (max-width: 999px) {
+    body {
+        font-size: 13px;
+    }
+    
+    .row {
+        width: 640px;
+    }
+    
+    #header {
+        > div {
+            &#logo-box {
+                .column(2, 0);
+            }
+            &#banner-box {
+                .column(10, 0px);
+            }
+        }
+    
+        #menu {
+            ul {
+                .column(10, 0px);
+                float: right;
+            }
+            li {
+            	
+            	
+            	a {
+            	    font-size: 0.7em;
+            	}
+        	}
+        }
+    }
+    
+    .best-deal {
+        
+        > div {
+        
+            &.home-deal-stats {
+                .home-timer {
+                    #timer {
+                        > div {
+                            + div {
+                                
+                                &:before {
+                                    .box-shadow(~"0px 0px 0.313em 0.313em #c51212");
+                                }
+                            }
+                        
+                            .label {
+                                font-size: 0.6em;
+                            }
+                        }
+                    }
+                    
+                    #map {
+                        #map-image {
+                            margin: @padding-small 0 0 0;
+                        }
+                    }
+                }
+            }
+            
+            &.deal-summary {
+                            
+                .home-hero-caption {                    
+                    p {
+                        font-size: 0.9em;
+                        line-height: 1.5em;
+                    }
+                }
+            }
+        }
+    }
+    
+    .main {
+            
+        > div {
+            &#left-col {
+                
+                h2 {
+                    font-size: 1.1em;
+                }
+                
+                h3 {
+                    font-size: 0.8em;
+                }
+                
+                .deal-stats {
+                                
+                    .timer {
+                        
+                        #timer {
+                        
+                            > div { 
+                                padding-left: 0;
+                                padding-right: 0;
+                                
+                                .label {
+                                    font-size: 0.5em;
+                                }
+                            }
+                        }
+                        
+                        #map {
+                        height: 8.5em;
+                        }
+                    }
+                }
+                
+                
+                .find-deals {
+                                    
+                    #input-form {
+                    
+                       img.small {
+                           display: inline;
+                       }    
+                                
+                        .small-left, .small-right {
+                        .no-column(0);
+                        }
+                    }
+                }
+                
+            }
+            
+            &#center-col {
+                .listing-summary {
+                    .listing-body {
+                        .listing-details {
+                            .features {
+                                
+                                span {
+                                    
+                                    img {
+                                        display: block;
+                                    }
+                                }
+                            }
+                            
+                            p {
+                                font-size: 0.9em;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            &#wide-center-col { 
+            
+                .slider-box {
+                    height: 24.9em;
+                }
+                
+                .property-info {
+                
+                    #right {
+                    
+                        .secure-deal {
+                            top: -115px;
+                            
+                            > a {
+                                font-size: 1.1em;
+                            } 
+                        }
+                        
+                        .deal {
+                                                    
+                            h2 {
+                                font-size: 1.2em;
+                                line-height: 1.8em;
+                            }
+                        }
+                    }   
+                }      
+            }         
+                            
+                            
+                            
+                            
+        }
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+}
+/* @end */
+
+
+
+/* @group smart phone device - landscape: 320px */
+@media screen and (max-width: 649px) {
+    body {
+        font-size: 13px;
+    }
+    
+    .row {
+        width: 320px;
+    }
+    
+    #header {
+        > div {
+            &#logo-box {
+            	margin: 3.5em 0 0 0;
+            	position: absolute;
+            	.column(3,0);
+            	
+            	#logo {
+            	    width: 11.813em;
+            	}
+            }
+            &#banner-box {
+                .no-column(0);
+                position: relative;
+                .clearfix;
+                top: 0;
+                
+                #banner {
+                    margin-top: 0;
+                }
+            }
+        }
+        
+        #menu {
+            .column(8,0);
+            float: right;
+            ul {
+                width: 100%;
+            }
+            li {
+                float: none;
+                text-align: center;
+                + li {
+                    border-top: solid 1px #084c81;
+                    .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+                	&:before {
+                    	content: none;
+                	}
+                }
+                
+                a {
+                    width: 100%;
+                    font-size: 0.9em;
+                }
+            }
+        }
+    }
+    
+    .best-deal {
+        height: 42em;
+        position: relative;
+        
+        > div {
+            &.home-deal-stats {
+                .column(12, 0);
+                margin-bottom: @padding-small;
+                position: absolute;
+                top: 20.625em;
+                            
+                .home-timer {
+                    .rounded(0.313em);
+                                        
+                    #timer {
+                        .rounded(0.313em);
+                    
+                        > div {
+                            
+                            + div {
+                                
+                                &:before {
+                                    .box-shadow(~"0px 0px 0.4em 0.4em #c51212");
+                                }
+                            }
+                        }
+                    }
+                    
+                    #map {
+                        height: 13.5em;
+                        .rounded(0.313em);
+                        
+                        #map-image {
+                            margin-left: 5em;
+                            margin-right: 5em;
+                        }
+                    }
+                    
+                }
+                .home-counter {
+                    .rounded(0.313em);
+                }
+            }
+            
+            &.deal-summary {
+                .rounded(0.313em);
+                .column(12, 0px);
+                height: 20em;
+                position: absolute;
+                top: 0;
+                
+                .home-hero-caption {
+                    .rounded-top-left(0.313em);
+                    .rounded-top-right(0.313em);
+                    
+                    h2 {
+                        font-size: 1.4em;
+                    }
+                    
+                    img {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    
+    .main {
+        display: table;
+                
+        > div {
+            &#left-col {
+                .no-column(0);
+                width: 320px;
+                padding-left: 0;
+                
+                .deal-stats {
+                                
+                    .timer {
+                        #map {
+                        height: 14em;
+                        
+                            img {
+                                margin-left: 4.063em;
+                            }
+                        }
+                    }
+                }
+            }
+            &#center-col {
+                .no-column(0);
+                padding-left: 1.875em;
+                display: table-header-group;
+                
+                .listing-summary {
+                                    
+                    .listing-body {
+                        
+                        .listing-details {
+                            
+                            .features {
+                                
+                                span {
+                                    font-size: 0.7em;
+                                }                            
+                            }
+                            
+                            .listing-links {
+                                
+                                > a {
+                                    font-size: 0.8em;
+                                    margin-bottom: -1px;                                    
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            &#wide-center-col { 
+                .no-column(0);
+                width: 320px;
+                
+                .slider-box {
+                    height: 17.6em;
+                }
+                
+                .property-info {
+                    #left, #right {
+                        .no-column(0);
+                    }
+                    
+                    #right {
+                        position: none;
+                        float: left;
+                        padding-right: 0;
+                    }
+                }
+            }
+            &#right-col {
+                .no-column(0);
+                width: 320px;
+                padding-right: 0;
+            }
+        }
+    }
+    
+    h1 {
+        font-size: 1.5em;
+    }
+    
+    .quote {
+        font-size: 0.9em;
+    }
+    
+    #footer {
+        > div {
+            .column(6, 1.250em);
+            padding-top: 0.313em;
+        }
+    }
+    
+}
+/* @end */
+
+
+
+img {
+	max-width: 100%;
+	height: auto;
+	width: auto\9; /* ie8 */
+}

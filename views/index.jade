@@ -1,13 +1,6 @@
 extends layout
 
 block content
-  // quick view product modal
-  script
-    $(document).ready(function(){
-      $(".secure-button").click(function(){
-        $('body').append('<div class="quick-view-modal" id="register" onclick="javascript: window.location=\'/best-deal\';" style=""><div class="modal"><a href="#" class="modal-close"></a></div></div>');
-      });
-    });
   //
     main content
   .container.row.best-deal
@@ -16,13 +9,13 @@ block content
         #timer
           #day-timer
             span.label Days
-            span.value 01
+            span#day-timer-days.value
           #hour-timer
             span.label Hours
-            span.value 13
+            span#day-timer-hours.value
           #minute-timer
-            span.label Minutes
-            span.value 07
+            span.label Mins
+            span#day-timer-mins.value
         #map
           img#map-image(src='/images/map.png', usemap='#australia', alt='Click on a State of Australia')
           map(name='australia')

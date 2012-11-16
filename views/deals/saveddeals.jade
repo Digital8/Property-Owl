@@ -17,7 +17,7 @@ block content
           - i++
           //
             listing
-          .listing-summary
+          div(id="property-#{property.property_id}").listing-summary
             .header
               .listing-price
                 $ #{property.price}
@@ -49,6 +49,9 @@ block content
                   h3= property.title
                   p= property.description
                 .listing-links
+                  a.removebuttons.save-button(href='#', data-property="#{property.property_id}")
+                    img#save-icon(src='/images/plus-icon.png', alt='Remove this property')
+                    |  Remove
                   a.details-button(href='/properties/view/#{property.property_id}')
                     img#info-icon(src='/images/info-icon.png', alt='View property details')
                     |  Details
