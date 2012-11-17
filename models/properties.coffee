@@ -39,3 +39,6 @@ exports.getPropertyByUserId = (user_id, callback) ->
 
 exports.updateProperty = (values, callback) ->
   db.query "UPDATE #{db.prefix}properties SET bedrooms = ?, bathrooms = ?, cars = ?, internal_area = ?, external_area = ?", [values.bedrooms, values.bathrooms, values.cars, values.internal_area, values.external_area], callback
+
+exports.removeBarnDeal = (property_id, callback) ->
+  db.query "UPDATE #{db.prefix}properties SET deal_of = 0 WHERE property_id = ?", [property_id], callback

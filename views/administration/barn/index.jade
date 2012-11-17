@@ -8,12 +8,10 @@ block content
    //
      center-col
    #center-col
-    h1 Properties
+    h1 Barn Deals
     include ../../flashify
-    p
-      a(href="/administration/properties/add") Create Property
     
-    - if (properties.length == 0)
+    - if (barn_deals.length == 0)
       p No properties have been created yet.
     - else
         table(width="100%")
@@ -30,15 +28,15 @@ block content
               u Deal Type
             td
               
-          - each property in properties
+          - each barn in barn_deals
             tbody
-              td= property.address
-              td= property.suburb
-              td= property.state.toUpperCase()
-              td= property.postcode
-              td= property.deal_type.toUpperCase()
+              td= barn.address
+              td= barn.suburb
+              td= barn.state.toUpperCase()
+              td= barn.postcode
+              td= barn.deal_type.toUpperCase()
               td
                 small
-                  a(href="/administration/properties/edit/#{property.property_id}") Edit
+                  a(href="/administration/barn/edit/#{barn.property_id}") Edit
                   |  | 
-                  a(href="/administration/properties/delete/#{property.property_id}") Delete
+                  a(href="/administration/barn/delete/#{barn.property_id}") Delete

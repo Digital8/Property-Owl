@@ -26,13 +26,16 @@ exports.index = (req,res) ->
 exports.view = (req,res) ->
   models.properties.getAllPropertiesById req.params.id, (err, results) ->
     if err then throw err
-    property = results.pop()
-    if property.deal_type.toLowerCase() != 'barn' and property.deal_type.toLowerCase() != 'all'
+    if results.length is 0
       res.render 'barn_deals/404'
-    else
-      # Get the deals
-      models.properties.getPropertiesOfBarnDeal req.params.id, (err, barn_deals) ->
-        res.render 'barn_deals/view', property: property, barn_deals: barn_deals or {}
+    else    
+      property = results.pop()
+      if property.deal_type.toLowerCase() != 'barn' and property.deal_type.toLowerCase() != 'all'
+        res.render 'barn_deals/404'
+      else
+        # Get the deals
+        models.properties.getPropertiesOfBarnDeal req.params.id, (err, barn_deals) ->
+          res.render 'barn_deals/view', property: property, barn_deals: barn_deals or {}
 
 # GET
 exports.add = (req,res) ->
