@@ -23,17 +23,24 @@ exports.index = (req, res) ->
 exports.view = (req, res) ->
   
 exports.add = (req,res) ->
-  models.properties.getAllPropertiesById req.params.id, (err, results) ->
-    if results.length is 0
-      req.flash('error','Barn deal not found')
+  if req.query.pid?
+    
+    models.properties.addBarnDeal req.params.id, req.query.pid, (err, results) ->
+      req.flash('success','Property added')
       res.redirect 'back'
-    else
-      barn = results.pop()
-      if (barn.deal_type != 'barn' or barn.deal_type != 'all') and barn.deal_of != 0
+  else
+    models.properties.getAllPropertiesById req.params.id, (err, results) ->
+      if results.length is 0
         req.flash('error','Barn deal not found')
         res.redirect 'back'
       else
-        res.render 'administration/barn/add', barn: barn or {}
+        barn = results.pop()
+        if (barn.deal_type != 'barn' or barn.deal_type != 'all') and barn.deal_of != 0
+          req.flash('error','Barn deal not found')
+          res.redirect 'back'
+        else
+          models.properties.getAllProperties (err, properties) ->
+            res.render 'administration/barn/add', barn: barn or {}, properties: properties
   
 exports.create = (req, res) ->
   
