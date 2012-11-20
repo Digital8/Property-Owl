@@ -24,9 +24,9 @@ exports.getPropertyTypes = (callback) ->
 
 exports.getPropertiesByDealType = (dealType, includeAllCategory, callback) ->
   if includeAllCategory != true
-    db.query "SELECT * FROM #{db.prefix}properties AS P WHERE p.deal_type = ? ", [dealType] ,callback
+    db.query "SELECT * FROM #{db.prefix}properties AS P WHERE P.deal_type = ? ", [dealType] ,callback
   else
-    db.query "SELECT * FROM #{db.prefix}properties AS P WHERE p.deal_type = ? OR p.deal_type = 'all'", [dealType] ,callback
+    db.query "SELECT * FROM #{db.prefix}properties AS P WHERE P.deal_type = ? OR P.deal_type = 'all'", [dealType] ,callback
 
 exports.addProperty = (vals, callback) ->
   db.query "INSERT INTO #{db.prefix}properties(title, address, suburb, state, development_stage, description, property_type_id, price, deal_type, listed_by, created_at) VALUES(?,?,?,?,?,?,?,?,?,?, NOW())", [vals.title, vals.address, vals.suburb, vals.state, vals.development_stage, vals.description, vals.ptype, vals.price, vals.deal_type, vals.developer], callback
