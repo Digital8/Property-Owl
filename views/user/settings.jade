@@ -8,32 +8,92 @@ block content
      #center-col
       legend
         h1 My Account
-      include ../flashify
-      form.form-horizontal(action="/account",method="post")
-        div.control-group  
-          label.control-label(for="inputEmail") Email:
-          div.controls
-            input#email(type="text",placeholder="Email",name="email",value="#{objUser.email}")
-        br
-        div.control-group
-          label.control-label(for="password") Password:
-          div.controls
-            input#password(type="password",placeholder="Password",name="password")
-            | &nbsp;
-            input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
-            br
-            span.help-block 
-              small Password will not be changed if left blank
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") First Name:
-          div.controls
-            input#email(type="text",name="fname",placeholder="First Name",value="#{objUser.firstName}")
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") Last Name:
-          div.controls
-            input#email(type="text",name="lname",placeholder="Last Name",value="#{objUser.lastName}")
-        br
-        div.form-actions
-          input(type="submit",value="Update")
+      .tabs.account
+        ul.menu
+        ul.menu
+          li.active
+            a(href="/account") My details
+          li Property Preferences
+          li
+            a(href="/saved") Saved Properties
+          li Deal Registrations
+        .tabs-content
+          include ../flashify
+          .padding.top-row
+            a.button(href='#') Change Password
+          .padding
+            form(action="/account",method="post")
+              table.admin-gridview.no-head
+                tbody
+                  tr
+                    td First name
+                    td
+                      input(type="text",name="fname",value="#{objUser.firstName}")
+                  tr
+                    td Last name
+                    td
+                      input(type="text",name="lname",value="#{objUser.lastName}")
+                  tr
+                    td Company
+                    td
+                      input(type="text",name="company",value="#{objUser.company}")
+                  tr
+                    td Email
+                    td
+                      input(type="text",name="email",value="#{objUser.email}")
+                  tr
+                    td Phone
+                    td
+                      input(type="text",name="phone",value="#{objUser.phone}")
+                  tr
+                    td Work Phone
+                    td
+                      input(type="text",name="work_phone",value="#{objUser.work}")
+                  tr
+                    td Mobile
+                    td
+                      input(type="text",name="mobile",value="#{objUser.mobile}")
+                  tr
+                    td Address
+                    td
+                      textarea(name="address")
+                        = objUser.address
+                  tr
+                    td Suburb
+                    td
+                      input(type="text",name="suburb",value="#{objUser.suburb}")
+                  tr
+                    td Postcode
+                    td
+                      input(type="text",name="postcode",value="#{objUser.postcode}")
+                  tr
+                    td Subscribed to Newsletter
+                    td
+                      select(name="subscribed_news")
+                        - var sel = (objUser.subscribedNewsletters == '1') ? true : false
+                        option(value="1",selected=sel) Yes
+                        - var sel = (objUser.subscribedNewsletters == '0') ? true : false
+                        option(value="0",selected=sel) No
+                  tr
+                    td Subscribed to Property Alerts
+                    td
+                      select(name="property_alerts")
+                        - var sel = (objUser.subscribedAlerts == '1') ? true : false
+                        option(value="1",selected=sel) Yes
+                        - var sel = (objUser.subscribedAlerts == '0') ? true : false
+                        option(value="0",selected=sel) No
+                  tr
+                    td
+                    td
+                      input(type="submit",value="Save Details")
+    //
+      end center-col
+    //
+      right-col
+    #right-col
+      img#ad-tower1.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
+      img#ad-tower2.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
+    //
+      end right-col
+    //
+      end main content

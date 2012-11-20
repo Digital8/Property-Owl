@@ -1,21 +1,21 @@
 .find-deals
   h2 Find Deals
-  form#input-form(action="/owl-deals",method="get")
+  form#input-form(action="/search",method="get")
     img(src='/images/search-map-icon.png', alt='State / Territory')
     label(for='propertyState') State / Territory
-    select#propertyState
-      option All
-      option ACT
-      option NSW
-      option NT
-      option QLD
-      option SA
-      option TAS
-      option VIC
-      option WA
+    select#propertyState(name="state")
+      option(value='all') All
+      option(value="act") ACT
+      option(value="nsw") NSW
+      option(value="nt") NT
+      option(value="qld") QLD
+      option(value="sa") SA
+      option(value="tas") TAS
+      option(value="vic") VIC
+      option(value="wa") WA
     img(src='/images/search-property-icon.png', alt='Property Type')
     label(for='propertyType') Property Type
-    select#propertyType
+    select#propertyType(name="pType")
       option All
       option Apartment
       option Townhouse
@@ -27,7 +27,7 @@
       option Acreage
     img(src='/images/search-deal-icon.png', alt='Deal Type')
     label(for='propertyDealType') Deal Type
-    select#propertyDealType
+    select#propertyDealType(name="dType")
       option All
       option Stamp Duty
       option Furniture Package
@@ -36,7 +36,7 @@
       option Entertainment System
     img(src='/images/search-price-icon.png', alt='Minimum Price')
     label(for='propertyMinPrice') Min. Price
-    select#propertyMinPrice
+    select#propertyMinPrice(name="minPrice")
       option Any
       option 50,000
       option 100,000
@@ -51,7 +51,7 @@
       option 550,000
     img(src='/images/search-price-icon.png', alt='Maximum Price')
     label(for='propertyMaxPrice') Max. Price
-    select#propertyMaxPrice
+    select#propertyMaxPrice(name="maxPrice")
       option Any
       option 50,000
       option 100,000
@@ -85,7 +85,7 @@
     .small-left
       img.small(src='/images/search-bed-icon.png', alt='Number of Beds')
       label(for='propertyMinBeds') Min. Beds
-      select#propertyMinBeds
+      select#propertyMinBeds(name="minBeds")
         option Any
         option Studio
         option 1
@@ -96,7 +96,7 @@
     .small-right
       img.small(src='/images/search-bed-icon.png', alt='Number of Beds')
       label(for='propertyMaxBeds') Max. Beds
-      select#propertyMaxBeds
+      select#propertyMaxBeds(name="maxBeds")
         option Any
         option Studio
         option 1
@@ -107,7 +107,7 @@
     .small-left
       img.small(src='/images/search-bath-icon.png', alt='Number of Bathrooms')
       label(for='propertyBathrooms') Bathrooms
-      select#propertyBathrooms
+      select#propertyBathrooms(name="bathrooms")
         option Any
         option 1+
         option 2+
@@ -117,7 +117,7 @@
     .small-right
       img.small(src='/images/search-car-icon.png', alt='Number of Car Spaces')
       label(for='propertyCarSpaces') Car Spaces
-      select#propertyCarSpaces
+      select#propertyCarSpaces(name="cars")
         option Any
         option 1+
         option 2+
@@ -126,7 +126,7 @@
         option 5+
     img(src='/images/search-development-icon.png', alt='Development Stage')
     label(for='propertyState') Development Stage
-    select#propertyState
+    select#propertyState(name="devStage")
       option All
       option Off The Plan
       option Completed

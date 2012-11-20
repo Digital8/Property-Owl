@@ -41,9 +41,7 @@ exports.update = (req,res) ->
   
   req.assert('email', 'Invalid Email Address').isEmail()
  
-  if req.body.password != ''
-    req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
-    req.assert('confirmPassword', 'Password does not match').isIn [req.body.password]
+ 
  
   req.assert('fname', 'First name is invalid').isAlpha().len(2,20).notEmpty()
   req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
@@ -67,18 +65,18 @@ exports.update = (req,res) ->
           req.flash('error', "An unknown error has occured. Error code: #{err.code}")
         else
           # validation has already been checked so we're checking if we need to update pwd
-          if req.body.password != '' 
-            req.body.password = helpers.hash(req.body.password)
-            models.user.updatePassword req.body, (err, results) ->
-              if err
-                console.log err
-                req.flash('error', "An unknown error has occured. Error code: #{err.code}")
-              else
-                req.flash('success', 'Your details have successfully been updated')
-              res.redirect 'back'
-          else  
-            req.flash('success', 'Your details have successfully been updated')
-            res.redirect 'back'
+          # if req.body.password != '' 
+          #        req.body.password = helpers.hash(req.body.password)
+          #        models.user.updatePassword req.body, (err, results) ->
+          #          if err
+          #            console.log err
+          #            req.flash('error', "An unknown error has occured. Error code: #{err.code}")
+          #          else
+          #            req.flash('success', 'Your details have successfully been updated')
+          #          res.redirect 'back'
+          #else
+          req.flash('success', 'Your details have successfully been updated')
+          res.redirect 'back'
 
 # DEL
 exports.destroy = (req,res) ->

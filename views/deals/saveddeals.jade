@@ -8,53 +8,47 @@ block content
     //
       center-col
     #center-col
-      h1 Saved Deals
-      - if (properties.length == 0)
-         h4 No property deals have been saved yet
-       - else
-         - var i = 0; // Just a hack for PoC
-         - each property in properties
-          - i++
-          //
-            listing
-          div(id="property-#{property.property_id}").listing-summary
-            .header
-              .listing-price
-                $ #{property.price}
-              h2 #{property.address}, St Lucia
-            .listing-body
-              .listing-thumb
-                img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
-                //
-                  show if top listing
-                - if (i == 1)
-                  img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
-              .listing-details
-                .features
-                  span.property-type
-                    strong= property.type
-                  span
-                    img(src='/images/bed-icon.png', alt='3 Bedroom')
-                    strong= property.bedrooms
-                    |  Bedrooms
-                  span
-                    img(src='/images/bath-icon.png', alt='2 Bathroom')
-                    strong= property.bathrooms
-                    |  Bathrooms
-                  span
-                    img(src='/images/car-icon.png', alt='2 Car Spaces')
-                    strong= property.cars
-                    |  Car Spaces
-                .summary
-                  h3= property.title
-                  p= property.description
-                .listing-links
-                  a.removebuttons.save-button(href='#', data-property="#{property.property_id}")
-                    img#save-icon(src='/images/plus-icon.png', alt='Remove this property')
-                    |  Remove
-                  a.details-button(href='/properties/view/#{property.property_id}')
-                    img#info-icon(src='/images/info-icon.png', alt='View property details')
-                    |  Details
+        h1 My Account
+        .tabs.account
+          ul.menu
+            li
+              a(href="/account") My details
+            li Property Preferences
+            li.active
+              a(href="/saved") Saved Properties
+            li Deal Registrations
+          .tabs-content
+            .padding
+              table.admin-gridview
+                thead
+                  tr
+                    td Title
+                    td Deal Type
+                    td Deal Status
+                    td Date Listed
+                    td Actions
+                tbody
+                  - if (properties.length == 0)
+                     h4 No property deals have been saved yet
+                   - else
+                     - var i = 0; // Just a hack for PoC
+                     - each property in properties
+                      - i++
+                          //
+                            listing          
+                          tr
+                            td= property.title
+                            td
+                              strong= property.deal_type
+                            td Current
+                            - var created = new Date(property.created_at);
+                            td #{created.getDay()}/#{created.getMonth()}/#{created.getFullYear()}
+                            td
+                              a.removebuttons(href='#', data-property="#{property.property_id}")
+                                img(src='images/delete.png')
+                                | Remove
+      
+
           //
             end listing
 
