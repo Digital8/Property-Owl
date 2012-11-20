@@ -19,7 +19,7 @@ models =
 # GET
 exports.index = (req,res) ->
   models.properties.getPropertiesByDealType 'barn', true, (err, results) ->
-    if err then throw err
+    if err then console.log err
     res.render 'barn_deals/index', barn: results
 
 # GET    
