@@ -27,7 +27,7 @@ exports.view = (req,res) ->
 ## GET ##  
 exports.add = (req,res) ->
   # debug part
-  req.session.newPropertyId = 9
+  # req.session.newPropertyId = 9
   models.properties.getPropertyTypes (err, property_types) ->
     models.users.getUsersByGroup 2, (err, developers) ->
       if err then throw err
@@ -35,7 +35,7 @@ exports.add = (req,res) ->
       if req.query.step? and req.session.newPropertyId?        
         switch req.query.step
           when '1'
-            # delete req.session.newPropertyId
+            delete req.session.newPropertyId
             res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}
           when '2'
             models.media.getMediaByPropertyId req.session.newPropertyId, (err, files) ->
