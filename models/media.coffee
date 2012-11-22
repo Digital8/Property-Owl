@@ -18,3 +18,9 @@ exports.addMedia = (mediaInfo, callback) ->
   
 exports.getImagesByPropertyId = (property_id, callback) ->
   db.query "SELECT * FROM #{db.prefix}media WHERE image = true AND property_id = ?", [property_id], callback
+
+exports.clearHero = (property_id, callback) ->
+  db.query "UPDATE #{db.prefix}media SET hero = 0 WHERE property_id = ?", [property_id], callback
+  
+exports.setHero = (media_id, callback) ->
+  db.query "UPDATE #{db.prefix}media SET hero = 1 WHERE media_id = ?", [media_id], callback

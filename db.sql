@@ -148,6 +148,17 @@ CREATE TABLE IF NOT EXISTS `po_deal_types` (
 --
 
 
+-- phpMyAdmin SQL Dump
+-- version 3.2.4
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Nov 22, 2012 at 06:37 AM
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
 -- --------------------------------------------------------
 
 --
@@ -161,19 +172,23 @@ CREATE TABLE IF NOT EXISTS `po_media` (
   `filename` varchar(100) NOT NULL,
   `description` varchar(100) NOT NULL,
   `image` tinyint(1) NOT NULL DEFAULT '0',
+  `hero` tinyint(1) NOT NULL DEFAULT '0',
   `uploaded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`media_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
 
 --
 -- Dumping data for table `po_media`
 --
 
-INSERT INTO `po_media` (`media_id`, `property_id`, `owner_id`, `filename`, `description`, `image`, `uploaded`) VALUES
-(1, 9, 1, '4faff930-287a-11e2-94f7-bbcff633a73b.mp3', 'beep :)', 0, '2012-11-07 11:27:36'),
-(2, 9, 1, 'd481be50-287a-11e2-94f7-bbcff633a73b.jpg', 'news-thumb', 0, '2012-11-07 11:31:19'),
-(4, 9, 1, '465a3200-2943-11e2-a445-2f39375b57ff.png', '', 1, '2012-11-08 11:26:09'),
-(11, 9, 1, '8ad19750-2945-11e2-b4bc-5f66e9f836b9.jpg', '', 1, '2012-11-08 11:42:23');
+INSERT INTO `po_media` (`media_id`, `property_id`, `owner_id`, `filename`, `description`, `image`, `hero`, `uploaded`) VALUES
+(1, 9, 1, '4faff930-287a-11e2-94f7-bbcff633a73b.mp3', 'beep :)', 0, 0, '2012-11-07 11:27:36'),
+(2, 9, 1, 'd481be50-287a-11e2-94f7-bbcff633a73b.jpg', 'news-thumb', 0, 0, '2012-11-07 11:31:19'),
+(4, 9, 1, '465a3200-2943-11e2-a445-2f39375b57ff.png', '', 1, 0, '2012-11-22 16:36:59'),
+(11, 9, 1, '8ad19750-2945-11e2-b4bc-5f66e9f836b9.jpg', '', 1, 0, '2012-11-22 16:34:37'),
+(12, 9, 1, 'ea037e10-3394-11e2-bad3-cd982acbcfc3.JPG', 'photo.JPG', 0, 0, '2012-11-21 14:35:44'),
+(13, 9, 1, 'd77d3cf0-3460-11e2-a1c1-75b0dcd6ca17.png', 'profile-pic.png', 1, 1, '2012-11-22 16:36:59');
 
 -- --------------------------------------------------------
 

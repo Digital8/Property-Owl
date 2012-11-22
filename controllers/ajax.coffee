@@ -13,7 +13,8 @@ system = require '../system'
 models = 
   user: system.load.model 'user'
   saveddeals: system.load.model 'saveddeals'
-  
+  deals: system.load.model 'deals'
+  media: system.load.model('media')
 helpers =
   hash: system.load.helper 'hash'
 
@@ -55,3 +56,25 @@ exports.removedeal = (req, res) ->
         res.send status: false
       else
         res.send status:true
+
+exports.addDeal = (req, res) ->
+  req.body.property_id ?= req.body.pid
+  req.body.created_by = res.locals.objUser.id
+  
+  models.deals.addDeal req.body, (err, results) ->
+    if err then throw err
+    res.send results
+
+exports.delDeal = (req, res) ->
+  models.deals.getDealById req.body.id, (err, results) ->
+    if err then throw err
+    if results.length is 1 then results = results.pop()
+    models.deals.deleteDealById req.body.id, (err) ->
+      res.send results
+  
+exports.updateHero = (req, res) ->
+  models.media.clearHero req.body.pid, (err) ->
+    models.media.setHero req.body.mid, (err, results) ->
+      res.send results
+      
+  

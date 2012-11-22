@@ -121,9 +121,14 @@ module.exports = (app) ->
   # Misc Routes
   app.get '/login', controllers.misc.login
   app.get '/logout', controllers.misc.logout
-  app.post '/ajax/login', controllers.ajax.login
-  app.post '/ajax/savedeal', helpers.requireAuth, controllers.ajax.savedeal
-  app.post '/ajax/removedeal', helpers.requireAuth, controllers.ajax.removedeal
+  app.post '/ajax/login', helpers.restrictTo(system.config.acl.admin), controllers.ajax.login
+  app.post '/ajax/savedeal', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.savedeal
+  app.post '/ajax/removedeal', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.removedeal
+    
+  app.post '/ajax/addDeal', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.addDeal
+  app.del '/ajax/deleteDeal', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.delDeal
+  app.put '/ajax/updateHero', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.updateHero
+
   
   app.all '*', controllers.pages.index
   

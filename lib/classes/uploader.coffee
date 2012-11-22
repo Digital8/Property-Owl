@@ -19,7 +19,6 @@ module.exports = class fileUploader
   constructor: (options) ->
     if not options? then options = {}
     @uploadPath = options.uploadDir or __dirname + '/'
-    console.log @uploadPath
 
   upload: (fInfo, callback) -> 
     uploadPath = @uploadPath

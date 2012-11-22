@@ -4,41 +4,109 @@ block content
  //
    main content
  .container.row.main
-   include ../../left_nav
+    //
+      main content
+   .container.row.main
+     h1
+       | Add New Project 
+       span.secondary - Images
+     .admin-actions
+       ul
+         li
+           a(href='#')
+             img(src='/images/manage.png')
+             | Manage Projects
+         li.disabled
+           img(src='/images/add.png')
+           | Add New Project
+     .grid-header.form-header
+       ol.six
+         li.active
+           .ol-1-active
+           | Details
+         li.active
+           .ol-2-active
+           | Features
+         li.active
+           .ol-3-active
+           | Barn Deal
+         li.active
+           .ol-4-active
+           | Images
+         li
+           .ol-5
+           | Property Lots
+         li
+           .ol-6
+           | Complete!
+     .details
+       h2 Images
+       hr
+       include ../../flashify
+       .left
+         .inputs
+           p.note Attach images in JPG, GIF, PNG format. Max file size 5MB.
+           - if (images.length < 5)
+             p Add up to 
+               strong= (5 - images.length) 
+               |  more images
+               br
+               form(action="/administration/properties/add?step=4",method="post",enctype="multipart/form-data")
+                p
+                  input(type="file",name="file")
+                  input.button(type="submit",name="cmdAddImage", value="Upload Image")
+        form.details-form
+         .right
+           .inputs
+             table.admin-gridview
+               thead
+                 tr
+                   td Thumb
+                   td File Name
+                   td Order
+                   td Hero
+                   td Size
+                   td Actions
+               tbody
+                 - each img in images
+                   tr
+                     td
+                        img(src="/uploads/#{img.filename}",width="50px")
+                     td= img.description
+                     td.order
+                       img(src='/images/order-arrow.png')
+                     td
+                       input.hero(type='radio',name="hero",data-id="#{img.media_id}", checked=((img.hero == 1) ? true : false))
+                     td 200KB
+                     td
+                      a(href="#",data-id="#{img.meda_id}")
+                       img(src='/images/delete.png')
+         .inputs  
+         .submit
+           input.left-button(type='submit', value='Previous Step')
+           input.button(type='submit', value='Next Step')
+     //
+       end details
    //
-     center-col
-   #center-col
-    h1 Add New Property
-    h3 Images
-    include ../../flashify
-    - if (images.length < 5)
-      p Add up to 
-        strong= (5 - images.length) 
-        |  more images
-        form(action="/administration/properties/add?step=4",method="post",enctype="multipart/form-data")
-          p
-            input(type="file",name="file")
-            input(type="submit",name="cmdAddImage", value="Upload Image")
-    p
-      hr
-    - if (images.length == 0)
-      em No images have been uploaded for this property
-    - else
-      table(width="100%")
-        thead
-          th
-          th Order
-          th Banner
-          th Actions
-        tbody
-          - each img in images
-            tr
-              td
-                img(src="/uploads/#{img.filename}",width="50px")
-              th 0
-              th 
-                input(type="radio")
-              th
-                a(href="#") &times;
-      hr
-      a(href="/administration/properties/add?step=finish") Finish
+      end main content
+  
+  script
+    $(document).ready(function(){
+      $('.deleteImage').click(function(e){
+        e.preventDefault();
+      });
+      
+      $('.hero').click(function(){
+        var mid = $(this).data('id');
+        
+        $.ajax({
+          url: '/ajax/updateHero',
+          type: 'put',
+          data: 'pid=#{property[0].property_id}&mid='+mid
+        }).done(function(d){
+          console.log(d);
+        });
+      });
+    });
+ 
+ 
