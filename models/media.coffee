@@ -24,3 +24,6 @@ exports.clearHero = (property_id, callback) ->
   
 exports.setHero = (media_id, callback) ->
   db.query "UPDATE #{db.prefix}media SET hero = 1 WHERE media_id = ?", [media_id], callback
+
+exports.deleteMedia = (media_id, callback) ->
+  db.query "DELETE FROM #{db.prefix}media WHERE media_id = ?", [media_id], callback

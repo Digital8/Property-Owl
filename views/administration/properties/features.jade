@@ -68,8 +68,9 @@ block content
                     td= file.description
                     td 200KB
                     td
-                      img(src='/images/delete.png')
-                      | Remove
+                      a.deleteImage(href="#",data-id="#{file.media_id}")
+                        img(src='/images/delete.png')
+                        | Remove
           hr
           h2 Features
           form.details-form(action="/administration/properties/add?step=2",method="post")
@@ -105,5 +106,24 @@ block content
               input.button(type='submit', value='Next Step')
         //
           end details
+      script
+        $(document).ready(function(){
+          $('.deleteImage').click(function(e){
+            e.preventDefault();
+
+            var p = $(this);
+            var id = $(this).data('id');
+            $.ajax({
+              url: '/ajax/deleteMedia',
+              type: 'DELETE',
+              data: 'mid='+id
+
+            }).done(function(d){
+              $(p).parent().parent().fadeOut();
+            });
+
+          });
+        });
+  
     //
       end main content

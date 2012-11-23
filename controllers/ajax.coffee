@@ -15,6 +15,7 @@ models =
   saveddeals: system.load.model 'saveddeals'
   deals: system.load.model 'deals'
   media: system.load.model('media')
+  
 helpers =
   hash: system.load.helper 'hash'
 
@@ -76,5 +77,11 @@ exports.updateHero = (req, res) ->
   models.media.clearHero req.body.pid, (err) ->
     models.media.setHero req.body.mid, (err, results) ->
       res.send results
+
+exports.deleteMedia = (req, res) ->
+  req.body.mid ?= 0
+  models.media.deleteMedia req.body.mid, (err, results) ->
+    if err then console.log err
+    res.send results
       
   

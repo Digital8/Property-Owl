@@ -128,7 +128,7 @@ module.exports = (app) ->
   app.post '/ajax/addDeal', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.addDeal
   app.del '/ajax/deleteDeal', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.delDeal
   app.put '/ajax/updateHero', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.updateHero
-
+  app.del '/ajax/deleteMedia', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.deleteMedia
   
   app.all '*', controllers.pages.index
   

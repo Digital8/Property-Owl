@@ -37,7 +37,8 @@ block content
                           //
                             listing          
                           tr
-                            td= property.title
+                            td
+                              a(href="/properties/view/#{property.property_id}")= property.title
                             td
                               strong= property.deal_type
                             td Current

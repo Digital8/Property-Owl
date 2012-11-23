@@ -79,11 +79,11 @@ block content
                        input.hero(type='radio',name="hero",data-id="#{img.media_id}", checked=((img.hero == 1) ? true : false))
                      td 200KB
                      td
-                      a(href="#",data-id="#{img.meda_id}")
+                      a.deleteImage(href="#",data-id="#{img.media_id}")
                        img(src='/images/delete.png')
          .inputs  
          .submit
-           input.left-button(type='submit', value='Previous Step')
+           a.left-button(href="/administration/properties/add?step=3") Previous Step
            input.button(type='submit', value='Next Step')
      //
        end details
@@ -94,6 +94,18 @@ block content
     $(document).ready(function(){
       $('.deleteImage').click(function(e){
         e.preventDefault();
+        
+        var p = $(this);
+        var id = $(this).data('id');
+        $.ajax({
+          url: '/ajax/deleteMedia',
+          type: 'DELETE',
+          data: 'mid='+id
+        
+        }).done(function(d){
+          $(p).parent().parent().fadeOut();
+        });
+        
       });
       
       $('.hero').click(function(){
@@ -104,7 +116,6 @@ block content
           type: 'put',
           data: 'pid=#{property[0].property_id}&mid='+mid
         }).done(function(d){
-          console.log(d);
         });
       });
     });
