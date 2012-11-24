@@ -12,6 +12,7 @@ models =
   properties: system.load.model('properties')
   media: system.load.model('media')
   deals: system.load.model('deals')
+  lots: system.load.model('lots')
 
 classes =
   uploader: system.load.class('uploader')
@@ -50,10 +51,13 @@ exports.add = (req,res) ->
               models.media.getImagesByPropertyId req.session.newPropertyId, (err, files) ->
                 if err then throw err
                 res.render 'administration/properties/images', images: files or {}, property: property or {}
+          when '5'
+            models.lots.getLotsByPropertyId req.session.newPropertyId, (err, lots) ->
+              res.render 'administration/properties/lots', lots: lots or {}
           when 'finish'
             res.render 'administration/properties/finished'
           else
-            res.render 'administration/properties/details', developers: developers, property_types: property_types
+            res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}
       else
         res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}
 
@@ -151,6 +155,10 @@ exports.create = (req,res) ->
             else
               req.flash('error','A system error occured processing the upload :(')
               res.redirect '/administration/properties/add?step=4'
+      # Step 5
+      when '5'
+        req.flash('success',JSON.stringify(req.body))
+        res.redirect 'back'
               
       else
         res.send 'an error occured'
