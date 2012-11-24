@@ -40,111 +40,6 @@
 
 /* @end */
 
-/* @group modal */
-
-.modal-overlay {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(30,100,181,0.8);
-	
-	.modal {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 50em;
-		height: 25em;
-		margin: -12.5em 0 0 -25em;
-		background: #FFF;
-		.rounded(6px);
-		.box-shadow(~"0px 3px 5px rgba(0,0,0,0.5)");
-		padding: 5em 2.5em 2.5em;
-		
-		&.small {
-			width: 40em;
-			height: 15em;
-			margin: -7.5em 0 0 -20em;
-		}
-		
-		&.large {
-			width: 50em;
-			height: 35em;
-			margin: -17.5em 0 0 -25em;
-		}
-		
-		.close-modal {
-			position: absolute;
-			top: 1.2em;
-			right: 1.2em;
-			width: 1.3em;
-			height: 1.3em;
-			.opacity(0.2);
-			.transition(all, 0.15s);
-			
-			img {
-				display: block;
-			}
-			
-			&:hover {
-				.opacity(1);
-			}
-		}
-		
-		.modal-title {
-			position: absolute;
-			top: 1.2em;
-			margin: 0;
-		}
-		
-		&.warning,
-		&.error,
-		&.success,
-		&.info {
-			h1 {
-				padding-left: 1.5em;
-				background-repeat: no-repeat;
-				background-size: auto 100%;
-				background-position: left center;
-			}
-		}
-		
-		&.warning h1 {
-			background-image: url(../images/icon-warning.png);
-			color: #e6b000;
-			.text-shadow(~"0px 1px 0px " darken(#e6b000, 10%));
-		}
-		
-		&.error h1 {
-			background-image: url(../images/icon-error.png);
-			color: #cd4101;
-			.text-shadow(~"0px 1px 0px " darken(#cd4101, 10%));
-		}
-		
-		&.success h1 {
-			background-image: url(../images/icon-success.png);
-			color: #60ba00;
-			.text-shadow(~"0px 1px 0px " darken(#60ba00, 10%));
-		}
-		
-		&.info h1 {
-			background-image: url(../images/icon-info.png);
-			color: #0085C6;
-			.text-shadow(~"0px 1px 0px " darken(#0085C6, 10%));
-		}
-		
-		.modal-content {
-			width: 100%;
-			height: 100%;
-			overflow-y: auto;
-		}
-	}
-}
-
-/* @end */
-
 /* @group text formatting */
 
 
@@ -171,42 +66,50 @@ body {
 }
 
 #header {
-    margin: 1.250em auto @padding-small auto;
+    margin: @padding-small auto;
     .clearfix;
     
     > div {
-        &#logo-box {
-            .column(3, 0);
-            padding-left: 1.9em;
-            padding-right: 1.9em;
-        	display: block;
-        	float: left;
-        	position: relative;
-        	margin: 0 0 -3.125em 0;
-        	z-index: 1;
-        }
-        &#admin-logo-box {
-            .column(2,0);
-            display: block;
-            float: left;
+        &#top-header {
+            .clearfix;
             position: relative;
-            margin: 0 0 -100px 0;
-            z-index: 1;
-            
-            img {
-                width: 90%;
-            }
+            margin: 0 0 -3.125em 0;
         }
-        &#banner-box {
-            .column(9, 0px);
-            margin-bottom: @padding-small;
+        
+        > div {
+            &#logo-box {
+                .column(3, 0);
+                padding-left: 1.875em;
+                padding-right: 1.875em;
+            	display: block;
+            	float: left;
+            	z-index: 1;
+            }
+            &#admin-logo-box {
+                .column(2,0);
+                display: block;
+                float: left;
+                position: relative;
+                margin: 0 0 -100px 0;
+                z-index: 1;
+                
+                img {
+                    width: 90%;
+                }
+            }
+            &#banner-box {
+                .column(9, 0px);
+                margin-top: 14px;
+                margin-bottom: @padding-small;
+            }
         }
     }
     
     #banner {
         float: right;
         width: 100%;
-        margin-top: @padding-small;
+        max-width: 728px;
+        max-height: 90px;
         .rounded(0.313em);
     }
     
@@ -333,7 +236,7 @@ body {
         li {
         	float: left;
     	    margin-right: 3px;
-    	    line-height: 30px;
+    	    line-height: 1.875em;
     	    padding: 5px;
         	
         	&:after {
@@ -349,7 +252,7 @@ body {
         	
         	&.disabled {  
         	    color: #9a9a9a;
-        	    padding: 5px 20px;
+        	    padding: 5px 1.250em;
         	    
         	    &:after {
         	        content: '';
@@ -360,7 +263,7 @@ body {
 }
 
 .admin-header {
-    height: 130px;
+    height: 11.875em;
 }
 
 .best-deal {
@@ -382,7 +285,7 @@ body {
                 .rounded-top-right(0.313em);
                 .rounded-bottom-right(0.313em);
                 border: solid 1px #051726;
-                margin-bottom: 10px;
+                margin-bottom: @padding-small;
                 
                 #timer {
                     height: 4.063em;
@@ -582,6 +485,7 @@ body {
     > div {
         &#left-col {
             .column(2, 0px);
+            padding-right: 5px;
             
             h2, h3 {
                 margin-top: 0.313em;
@@ -606,7 +510,7 @@ body {
                     background: #e21515;
                     .rounded(0.313em);
                     border: solid 1px #051726;
-                    margin-bottom: 10px;
+                    margin-bottom: @padding-small;
                     
                     #timer {
                         height: 3.063em;
@@ -809,12 +713,14 @@ body {
             
             .ad-box {
                 width: 100%;
+                max-width: 160px;
+                max-height: 3@padding-small;
                 margin-bottom: 0.625em;
                 .rounded(0.313em);
             }
         }
         &#home-center-col {
-            .column(8, 1.875em);
+            .column(8, 25px);
             padding-top: 0.625em;
             padding-bottom: 6.250em;
             
@@ -823,8 +729,7 @@ body {
             }
         }
         &#wide-center-col {
-            .column(10,0);
-            padding-left: @padding-small;
+            .column(10,5px);
             padding-bottom: 6.250em;
             
             #back-button {
@@ -834,7 +739,7 @@ body {
                 background-size: cover;
                 display: block;
                 padding: @padding-small;
-                padding-left: 30px;
+                padding-left: 1.875em;
                 text-transform: uppercase;
                 text-decoration: none;
             }
@@ -1085,7 +990,7 @@ body {
             }
         }
         &#center-col {
-            .column(8, @padding-small);
+            .column(8, 5px);
             padding-bottom: 6.250em;
             
             #back-button {
@@ -1095,7 +1000,7 @@ body {
                 background-size: cover;
                 display: block;
                 padding: @padding-small;
-                padding-left: 30px;
+                padding-left: 1.875em;
                 text-transform: uppercase;
                 text-decoration: none;
             }
@@ -1112,7 +1017,7 @@ body {
                 background-size: cover;
                 display: block;
                 padding: @padding-small;
-                padding-right: 30px;
+                padding-right: 1.875em;
                 text-transform: uppercase;
                 text-decoration: none;
             }
@@ -1318,9 +1223,12 @@ body {
         }
         &#right-col {
             .column(2, 0px);
+            padding-left: 5px;
             
             .ad-tower {
                 width: 100%;
+                max-width: 160px;
+                max-height: 600px;
                 margin-bottom: 0.625em;
                 .rounded(0.313em);
             }
@@ -1439,6 +1347,9 @@ body {
             div.ol-5:before {
                 content: url(../images/ol5.png);
             }
+            div.ol-6:before{
+            	content: url(../images/ol6.png);
+            }
             div.ol-1-active:before {
                 content: url(../images/ol1-active.png);
                 vertical-align: middle;
@@ -1455,12 +1366,15 @@ body {
             div.ol-5-active:before {
                 content: url(../images/ol5-active.png);
             }
+			div.ol-6-active:before {
+			    content: url(../images/ol6-active.png);
+			}
         }
         
         li {
             float: left;
             width: 20%;
-            padding: 0 20px;
+            padding: 0 1.250em;
             text-transform: uppercase;
             font-weight: bold;
             line-height: 50px;
@@ -1471,7 +1385,7 @@ body {
                 display: inline-block;
                 height: 40px;
                 vertical-align: middle;
-                padding-right: 10px;
+                padding-right: @padding-small;
             }
             
             + li {
@@ -1521,7 +1435,7 @@ body {
                 border: solid 1px #adadad;
                 .rounded(0.313em);
                 .box-shadow(~"inset 0px 1px 1px rgba(0,0,0,0.1)");
-                line-height: 30px;
+                line-height: 1.875em;
                 background: #fff url(../images/input-bg.png) repeat-x top center;
             }
             
@@ -1566,10 +1480,9 @@ body {
         .rounded(0.313em);
         width: 100%;
         background: #f5f5f5;
-        margin-bottom: 20px;
+        margin-bottom: 1.250em;
         font-size: 0.9em;
         font-family: Arial, sans-serif;
-        
         thead {
             background: #e3e3e3;
             font-weight: bold;
@@ -1663,7 +1576,7 @@ body {
                 	a {
                 	    .regular;
                 	    .text-shadow(~"0px -1px 0px rgba(0,0,0,100)");
-                	    padding: 5px 10px;
+                	    padding: 5px @padding-small;
                 	    color: #fff;
                 	    text-decoration: none;
                 	    text-transform: uppercase;
@@ -1734,13 +1647,13 @@ body {
     .details {
         background: #f5f5f5;
         border: solid 1px #a4a4a4;
-        margin-bottom: 10px;
+        margin-bottom: @padding-small;
         .rounded-bottom-left(5px);
         .rounded-bottom-right(5px);
         .clearfix;
         
         h2 {
-            padding: 20px 40px 0 40px;
+            padding: 1.250em 40px 0 40px;
         }
              
         .left, .right {
@@ -1750,14 +1663,14 @@ body {
         .left {
             .inputs {
                 margin-right: 0;
-                padding-right: 20px;
+                padding-right: 1.250em;
             }
         }
         
         .right {
             .inputs {
                 margin-left: 0;
-                padding-left: 20px;
+                padding-left: 1.250em;
             }
         }
         
@@ -1766,7 +1679,7 @@ body {
                 padding: 0;
             }
             
-            line-height: 30px;
+            line-height: 1.875em;
             padding: 0 40px;
             .clearfix;
         }
@@ -1779,7 +1692,7 @@ body {
     .details-form {        
         label {
             display: block;
-            margin-top: 10px;
+            margin-top: @padding-small;
         }
         
         p.note {
@@ -1801,7 +1714,7 @@ body {
         }
         
         .inputs .button {
-            margin-top: 20px;
+            margin-top: 1.250em;
             float: right;
         }
         
@@ -1962,7 +1875,7 @@ a, a:visited {
     color: #0085c6;
 }
 
-//modal popups
+/* modal popups */
 .quick-view-modal {
     position: fixed;
     top: 0;
@@ -2038,7 +1951,7 @@ html[xmlns] .slides {display: block;}
 
 /* Direction Nav */
 .flex-direction-nav {*height: 0;}
-.flex-direction-nav a {width: 30px; height: 30px; margin: -20px 0 0; display: block; background: url(images/bg_direction_nav.png) no-repeat 0 0; position: absolute; top: 50%; z-index: 10; cursor: pointer; text-indent: -9999px; opacity: 0; -webkit-transition: all .3s ease;}
+.flex-direction-nav a {width: 1.875em; height: 1.875em; margin: -1.250em 0 0; display: block; background: url(images/bg_direction_nav.png) no-repeat 0 0; position: absolute; top: 50%; z-index: 10; cursor: pointer; text-indent: -9999px; opacity: 0; -webkit-transition: all .3s ease;}
 .flex-direction-nav .flex-next {background-position: 100% 0; right: -36px; }
 .flex-direction-nav .flex-prev {left: -36px;}
 .flexslider:hover .flex-next {opacity: 0.8; right: 5px;}
@@ -2049,7 +1962,7 @@ html[xmlns] .slides {display: block;}
 /* Control Nav */
 .flex-control-nav {width: 100%; position: absolute; bottom: -40px; text-align: center;}
 .flex-control-nav li {margin: 0 6px; display: inline-block; zoom: 1; *display: inline;}
-.flex-control-paging li a {width: 11px; height: 11px; display: block; background: #666; background: rgba(0,0,0,0.5); cursor: pointer; text-indent: -9999px; -webkit-border-radius: 20px; -moz-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; box-shadow: inset 0 0 3px rgba(0,0,0,0.3);}
+.flex-control-paging li a {width: 11px; height: 11px; display: block; background: #666; background: rgba(0,0,0,0.5); cursor: pointer; text-indent: -9999px; -webkit-border-radius: 1.250em; -moz-border-radius: 1.250em; -o-border-radius: 1.250em; border-radius: 1.250em; box-shadow: inset 0 0 3px rgba(0,0,0,0.3);}
 .flex-control-paging li a:hover { background: #333; background: rgba(0,0,0,0.7); }
 .flex-control-paging li a.flex-active { background: #000; background: rgba(0,0,0,0.9); cursor: default; }
 
@@ -2068,7 +1981,7 @@ html[xmlns] .slides {display: block;}
 /* @end */
 
 
-//Superfish menu
+/*Superfish menu */
 /*** ESSENTIAL STYLES ***/
 .sf-menu ul {
 	position:		absolute;
@@ -2129,8 +2042,8 @@ ul.sf-menu li li li.sfHover ul {
 	display:		block;
 	right:			.75em;
 	top:			1.05em; /* IE6 only */
-	width:			10px;
-	height:			10px;
+	width:			@padding-small;
+	height:			@padding-small;
 	text-indent: 	-999em;
 	overflow:		hidden;
 }
@@ -2144,11 +2057,11 @@ a:hover > .sf-sub-indicator,
 a:active > .sf-sub-indicator,
 li:hover > a > .sf-sub-indicator,
 li.sfHover > a > .sf-sub-indicator {
-	background-position: -10px -100px; /* arrow hovers for modern browsers*/
+	background-position: -@padding-small -100px; /* arrow hovers for modern browsers*/
 }
 
 /* point right for anchors in subs */
-.sf-menu ul .sf-sub-indicator { background-position:  -10px 0; }
+.sf-menu ul .sf-sub-indicator { background-position:  -@padding-small 0; }
 .sf-menu ul a > .sf-sub-indicator { background-position:  0 0; }
 /* apply hovers to modern browsers */
 .sf-menu ul a:focus > .sf-sub-indicator,
@@ -2156,8 +2069,9 @@ li.sfHover > a > .sf-sub-indicator {
 .sf-menu ul a:active > .sf-sub-indicator,
 .sf-menu ul li:hover > a > .sf-sub-indicator,
 .sf-menu ul li.sfHover > a > .sf-sub-indicator {
-	background-position: -10px 0; /* arrow hovers for modern browsers*/
+	background-position: -@padding-small 0; /* arrow hovers for modern browsers*/
 }
 /* @end */
 
 @import "_media.less";
+@import "gav.less";
