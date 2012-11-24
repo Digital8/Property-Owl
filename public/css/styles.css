@@ -289,6 +289,7 @@ td {
   border: 1px solid lime !important;
 }
 /* shadows */
+/* 'optional: inset - for internal shadows', 'left inset', 'top inset', 'size', 'optional: spread', 'colour'*/
 /* border radius */
 .round {
   -webkit-border-top-left-radius: 3000px;
@@ -351,6 +352,8 @@ td {
 .word-wrap {
   -ms-word-break: break-all;
   word-break: break-all;
+  /* Non standard for webkit */
+
   word-break: break-word;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
@@ -358,7 +361,7 @@ td {
 }
 /* @end *//* grid system */
 .row {
-  width: 1000px;
+  width: 995px;
   margin: 0 auto;
   zoom: 1;
   -webkit-transition: width 0.15s ease-in-out;
@@ -415,7 +418,7 @@ body {
   font-weight: 100;
 }
 #header {
-  margin: 1.25em auto 0.625em auto;
+  margin: 0.625em auto;
   zoom: 1;
 }
 #header:before,
@@ -426,18 +429,29 @@ body {
 #header:after {
   clear: both;
 }
-#header > div#logo-box {
-  width: 24.9999999%;
-  padding: 0;
-  padding-left: 1.9em;
-  padding-right: 1.9em;
-  display: block;
-  float: left;
+#header > div#top-header {
+  zoom: 1;
   position: relative;
   margin: 0 0 -3.125em 0;
+}
+#header > div#top-header:before,
+#header > div#top-header:after {
+  content: "";
+  display: table;
+}
+#header > div#top-header:after {
+  clear: both;
+}
+#header > div > div#logo-box {
+  width: 24.9999999%;
+  padding: 0;
+  padding-left: 1.875em;
+  padding-right: 1.875em;
+  display: block;
+  float: left;
   z-index: 1;
 }
-#header > div#admin-logo-box {
+#header > div > div#admin-logo-box {
   width: 16.6666666%;
   padding: 0;
   display: block;
@@ -446,19 +460,21 @@ body {
   margin: 0 0 -100px 0;
   z-index: 1;
 }
-#header > div#admin-logo-box img {
+#header > div > div#admin-logo-box img {
   width: 90%;
 }
-#header > div#banner-box {
+#header > div > div#banner-box {
   float: left;
   width: 74.99999969999999%;
   padding: 0px;
+  margin-top: 14px;
   margin-bottom: 0.625em;
 }
 #header #banner {
   float: right;
   width: 100%;
-  margin-top: 0.625em;
+  max-width: 728px;
+  max-height: 90px;
   -webkit-border-top-left-radius: 0.313em;
   -moz-border-radius-topleft: 0.313em;
   border-top-left-radius: 0.313em;
@@ -685,7 +701,7 @@ body {
 #header .breadcrumbs li {
   float: left;
   margin-right: 3px;
-  line-height: 30px;
+  line-height: 1.875em;
   padding: 5px;
 }
 #header .breadcrumbs li:after {
@@ -699,13 +715,13 @@ body {
 }
 #header .breadcrumbs li.disabled {
   color: #9a9a9a;
-  padding: 5px 20px;
+  padding: 5px 1.250em;
 }
 #header .breadcrumbs li.disabled:after {
   content: '';
 }
 .admin-header {
-  height: 130px;
+  height: 11.875em;
 }
 .best-deal {
   background: #0c3559;
@@ -745,7 +761,7 @@ body {
   -moz-border-radius-bottomright: 0.313em;
   border-bottom-right-radius: 0.313em;
   border: solid 1px #051726;
-  margin-bottom: 10px;
+  margin-bottom: 0.625em;
 }
 .best-deal > div.home-deal-stats .home-timer #timer {
   height: 4.063em;
@@ -1008,6 +1024,7 @@ body {
   float: left;
   width: 16.6666666%;
   padding: 0px;
+  padding-right: 5px;
 }
 .main > div#left-col h2,
 .main > div#left-col h3 {
@@ -1044,7 +1061,7 @@ body {
   -webkit-border-radius: 0.313em;
   border-radius: 0.313em;
   border: solid 1px #051726;
-  margin-bottom: 10px;
+  margin-bottom: 0.625em;
 }
 .main > div#left-col .deal-stats .timer #timer {
   height: 3.063em;
@@ -1404,6 +1421,8 @@ body {
 }
 .main > div#left-col .ad-box {
   width: 100%;
+  max-width: 160px;
+  max-height: 3 0.625em;
   margin-bottom: 0.625em;
   -webkit-border-top-left-radius: 0.313em;
   -moz-border-radius-topleft: 0.313em;
@@ -1424,7 +1443,7 @@ body {
 .main > div#home-center-col {
   float: left;
   width: 66.6666664%;
-  padding: 1.875em;
+  padding: 25px;
   padding-top: 0.625em;
   padding-bottom: 6.250em;
 }
@@ -1434,8 +1453,7 @@ body {
 .main > div#wide-center-col {
   float: left;
   width: 83.333333%;
-  padding: 0;
-  padding-left: 0.625em;
+  padding: 5px;
   padding-bottom: 6.250em;
 }
 .main > div#wide-center-col #back-button {
@@ -1445,7 +1463,7 @@ body {
   background-size: cover;
   display: block;
   padding: 0.625em;
-  padding-left: 30px;
+  padding-left: 1.875em;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -1910,7 +1928,7 @@ body {
 .main > div#center-col {
   float: left;
   width: 66.6666664%;
-  padding: 0.625em;
+  padding: 5px;
   padding-bottom: 6.250em;
 }
 .main > div#center-col #back-button {
@@ -1920,7 +1938,7 @@ body {
   background-size: cover;
   display: block;
   padding: 0.625em;
-  padding-left: 30px;
+  padding-left: 1.875em;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -1935,7 +1953,7 @@ body {
   background-size: cover;
   display: block;
   padding: 0.625em;
-  padding-right: 30px;
+  padding-right: 1.875em;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -2117,6 +2135,8 @@ body {
   padding-bottom: 0;
   -ms-word-break: break-all;
   word-break: break-all;
+  /* Non standard for webkit */
+
   word-break: break-word;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
@@ -2234,9 +2254,12 @@ body {
   float: left;
   width: 16.6666666%;
   padding: 0px;
+  padding-left: 5px;
 }
 .main > div#right-col .ad-tower {
   width: 100%;
+  max-width: 160px;
+  max-height: 600px;
   margin-bottom: 0.625em;
   -webkit-border-top-left-radius: 0.313em;
   -moz-border-radius-topleft: 0.313em;
@@ -2493,7 +2516,7 @@ body {
 .main .grid-header li {
   float: left;
   width: 20%;
-  padding: 0 20px;
+  padding: 0 1.250em;
   text-transform: uppercase;
   font-weight: bold;
   line-height: 50px;
@@ -2504,7 +2527,7 @@ body {
   display: inline-block;
   height: 40px;
   vertical-align: middle;
-  padding-right: 10px;
+  padding-right: 0.625em;
 }
 .main .grid-header li + li {
   border-left: solid 1px #c5c5c5;
@@ -2616,7 +2639,7 @@ body {
   box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
   -moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
   -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
-  line-height: 30px;
+  line-height: 1.875em;
   background: #ffffff url(../images/input-bg.png) repeat-x top center;
 }
 .main .grid-header #search-form .button {
@@ -2716,7 +2739,7 @@ body {
   border-radius: 0.313em;
   width: 100%;
   background: #f5f5f5;
-  margin-bottom: 20px;
+  margin-bottom: 1.250em;
   font-size: 0.9em;
   font-family: Arial, sans-serif;
 }
@@ -2890,7 +2913,7 @@ body {
 .main table.admin-gridview tfoot ul.pager li a {
   font-weight: 300;
   text-shadow: 0px -1px 0px rgba(0,0,0,100);
-  padding: 5px 10px;
+  padding: 5px 0.625em;
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
@@ -2975,7 +2998,7 @@ body {
 .main .details {
   background: #f5f5f5;
   border: solid 1px #a4a4a4;
-  margin-bottom: 10px;
+  margin-bottom: 0.625em;
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
@@ -2993,7 +3016,7 @@ body {
   clear: both;
 }
 .main .details h2 {
-  padding: 20px 40px 0 40px;
+  padding: 1.250em 40px 0 40px;
 }
 .main .details .left,
 .main .details .right {
@@ -3003,14 +3026,14 @@ body {
 }
 .main .details .left .inputs {
   margin-right: 0;
-  padding-right: 20px;
+  padding-right: 1.250em;
 }
 .main .details .right .inputs {
   margin-left: 0;
-  padding-left: 20px;
+  padding-left: 1.250em;
 }
 .main .details .inputs {
-  line-height: 30px;
+  line-height: 1.875em;
   padding: 0 40px;
   zoom: 1;
 }
@@ -3030,7 +3053,7 @@ body {
 }
 .main .details-form label {
   display: block;
-  margin-top: 10px;
+  margin-top: 0.625em;
 }
 .main .details-form p.note {
   font-style: italic;
@@ -3067,7 +3090,7 @@ body {
   line-height: 25px;
 }
 .main .details-form .inputs .button {
-  margin-top: 20px;
+  margin-top: 1.250em;
   float: right;
 }
 .main .details-form .inputs .button,
@@ -3482,9 +3505,9 @@ html[xmlns] .slides {
   *height: 0;
 }
 .flex-direction-nav a {
-  width: 30px;
-  height: 30px;
-  margin: -20px 0 0;
+  width: 1.875em;
+  height: 1.875em;
+  margin: -1.25em 0 0;
   display: block;
   background: url(images/bg_direction_nav.png) no-repeat 0 0;
   position: absolute;
@@ -3540,10 +3563,10 @@ html[xmlns] .slides {
   background: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   text-indent: -9999px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -o-border-radius: 20px;
-  border-radius: 20px;
+  -webkit-border-radius: 1.250em;
+  -moz-border-radius: 1.250em;
+  -o-border-radius: 1.250em;
+  border-radius: 1.250em;
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
 }
 .flex-control-paging li a:hover {
@@ -3663,8 +3686,8 @@ ul.sf-menu li li li.sfHover ul {
   top: 1.05em;
   /* IE6 only */
 
-  width: 10px;
-  height: 10px;
+  width: 0.625em;
+  height: 0.625em;
   text-indent: -999em;
   overflow: hidden;
 }
@@ -3682,13 +3705,13 @@ a:hover > .sf-sub-indicator,
 a:active > .sf-sub-indicator,
 li:hover > a > .sf-sub-indicator,
 li.sfHover > a > .sf-sub-indicator {
-  background-position: -10px -100px;
+  background-position: -0.625em -100px;
   /* arrow hovers for modern browsers*/
 
 }
 /* point right for anchors in subs */
 .sf-menu ul .sf-sub-indicator {
-  background-position: -10px 0;
+  background-position: -0.625em 0;
 }
 .sf-menu ul a > .sf-sub-indicator {
   background-position: 0 0;
@@ -3699,7 +3722,7 @@ li.sfHover > a > .sf-sub-indicator {
 .sf-menu ul a:active > .sf-sub-indicator,
 .sf-menu ul li:hover > a > .sf-sub-indicator,
 .sf-menu ul li.sfHover > a > .sf-sub-indicator {
-  background-position: -10px 0;
+  background-position: -0.625em 0;
   /* arrow hovers for modern browsers*/
 
 }
@@ -3719,19 +3742,24 @@ li.sfHover > a > .sf-sub-indicator {
   .row {
     width: 640px;
   }
-  #header > div#logo-box {
-    float: left;
-    width: 16.6666666%;
-    padding: 0;
+  #header > div#top-header {
+    margin: 0 0 -2.188em 0;
   }
-  #header > div#banner-box {
+  #header > div > div#logo-box {
     float: left;
-    width: 83.333333%;
+    width: 24.9999999%;
+    padding: 0;
+    padding: 0 20px;
+  }
+  #header > div > div#banner-box {
+    float: left;
+    width: 74.99999969999999%;
     padding: 0px;
+    margin-top: 0.625em;
   }
   #header #menu ul {
     float: left;
-    width: 83.333333%;
+    width: 74.99999969999999%;
     padding: 0px;
     float: right;
   }
@@ -3810,17 +3838,14 @@ li.sfHover > a > .sf-sub-indicator {
   .row {
     width: 320px;
   }
-  #header > div#logo-box {
-    margin: 3.5em 0 0 0;
+  #header > div > div#logo-box {
+    margin: 4em 0 0 0;
     position: absolute;
     float: left;
-    width: 24.9999999%;
+    width: 41.6666665%;
     padding: 0;
   }
-  #header > div#logo-box #logo {
-    width: 11.813em;
-  }
-  #header > div#banner-box {
+  #header > div > div#banner-box {
     float: none;
     width: auto;
     padding: 0;
@@ -3828,16 +3853,17 @@ li.sfHover > a > .sf-sub-indicator {
     zoom: 1;
     top: 0;
   }
-  #header > div#banner-box:before,
-  #header > div#banner-box:after {
+  #header > div > div#banner-box:before,
+  #header > div > div#banner-box:after {
     content: "";
     display: table;
   }
-  #header > div#banner-box:after {
+  #header > div > div#banner-box:after {
     clear: both;
   }
-  #header > div#banner-box #banner {
+  #header > div > div#banner-box #banner {
     margin-top: 0;
+    margin-bottom: 2.188em;
   }
   #header #menu {
     float: left;

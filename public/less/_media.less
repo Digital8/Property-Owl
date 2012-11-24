@@ -20,17 +20,25 @@
     
     #header {
         > div {
-            &#logo-box {
-                .column(2, 0);
+            &#top-header {
+                margin: 0 0 -2.188em 0;
             }
-            &#banner-box {
-                .column(10, 0px);
+            
+            > div {
+                &#logo-box {
+                    .column(3, 0);
+                    padding: 0 20px;
+                }
+                &#banner-box {
+                    .column(9, 0px);
+                    margin-top: @padding-small;
+                }
             }
         }
     
         #menu {
             ul {
-                .column(10, 0px);
+                .column(9, 0px);
                 float: right;
             }
             li {
@@ -213,23 +221,22 @@
     
     #header {
         > div {
-            &#logo-box {
-            	margin: 3.5em 0 0 0;
-            	position: absolute;
-            	.column(3,0);
-            	
-            	#logo {
-            	    width: 11.813em;
-            	}
-            }
-            &#banner-box {
-                .no-column(0);
-                position: relative;
-                .clearfix;
-                top: 0;
-                
-                #banner {
-                    margin-top: 0;
+            > div {
+                &#logo-box {
+                	margin: 4em 0 0 0;
+                	position: absolute;
+                	.column(5,0);
+                }
+                &#banner-box {
+                    .no-column(0);
+                    position: relative;
+                    .clearfix;
+                    top: 0;
+                    
+                    #banner {
+                        margin-top: 0;
+                        margin-bottom: 2.188em;
+                    }
                 }
             }
         }
