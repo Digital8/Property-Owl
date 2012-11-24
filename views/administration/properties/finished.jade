@@ -1,15 +1,40 @@
 extends ../../layout
 
-block content
- //
-   main content
- .container.row.main
-   include ../../left_nav
-   //
-     center-col
-   #center-col
-    h1 Add New Property
-    h3 Finished
-    include ../../flashify
-    p Your property has successfully been submitted for approval.
-    a(href="/administration/properties/") Back
+block content  
+  //
+    main content
+  .container.row.main
+    h1
+      | Add New Project 
+      span.secondary - Complete!
+    .admin-actions
+      ul
+        li
+          a(href='#')
+            img(src='/images/manage.png')
+            | Manage Projects
+        li.disabled
+          img(src='/images/add.png')
+          | Add New Project
+    .grid-header.form-header
+      ol.six
+        li.active
+          .ol-1-active
+          | Details
+        li.active
+          .ol-2-active
+          | Features
+        li.active
+          .ol-3-active
+          | Barn Deal
+        li.active
+          .ol-4-active
+          | Images
+        li.active
+          .ol-5-active
+          | Property Lots
+        li.active
+          .ol-6.active
+          | Complete!
+    .details
+      h2 You're all done!

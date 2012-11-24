@@ -4,41 +4,96 @@ block content
  //
    main content
  .container.row.main
-   include ../../left_nav
+    //
+      main content
+   .container.row.main
+     h1 Project Listings
+     .admin-actions
+       ul
+         li.disabled
+           img(src='/images/manage.png')
+           | Manage Projects
+         li
+           a(href='/administration/properties/add')
+             img(src='/images/add.png')
+             | Add New Project
+       .grid-summary 1 - 4 of 24
+     .grid-header
+       form#search-form
+         input#propertySearch(type='text')
+         input.button(type='submit', value='Go')
+         input.button(type='submit', value='Reset')
+         .divider
+         select#propertySuburb
+           option Suburb
+         select#propertyState
+           option State
+           option ACT
+           option NSW
+           option NT
+           option QLD
+           option SA
+           option TAS
+           option VIC
+           option WA
+         select#propertyStatus
+           option Status
+           option Pending
+           option Pre-release
+           option Current
+           option Ended
+         select#propertyDeveloper
+           option Developer
+     table.admin-gridview
+       thead
+         tr
+           td ID
+           td Project Title
+           td Listed On
+           td Suburb
+           td State
+           td Status
+           td Lots
+           td Registrations
+           td(colspan='3') Actions
+       tbody
+        - each property in properties
+          tr
+           td= property.property_id
+           td= property.title
+           td= property.created_at
+           td= property.suburb
+           td= property.state.toUpperCase()
+           td Current
+           td 4
+           td 134
+           td.actions
+             a(href='/properties/view/#{property.property_id}', alt='view property', target="_blank")
+               img(src='/images/view.png', alt='View')
+               | View
+           td.actions
+             a(href='#', alt='edit property')
+               img(src='/images/edit.png', alt='Edit')
+               | Edit
+           td.actions
+             a(href='#', alt='delete property')
+               img(src='/images/delete.png', alt='Delete')
+               | Delete
+       tfoot
+         tr
+           td(colspan='12')
+             ul.pager
+               li.disabled
+                 a(href='#') Prev
+               li.selected
+                 a(href='#') 1
+               li
+                 a(href='#') 2
+               li
+                 a(href='#') 3
+               li
+                 a(href='#') 4
+               li
+                 a(href='#') Next
    //
-     center-col
-   #center-col
-    h1 Properties
-    include ../../flashify
-    p
-      a(href="/administration/properties/add") Create Property
-    
-    - if (properties.length == 0)
-      p No properties have been created yet.
-    - else
-        table(width="100%")
-          thead
-            td
-              u Address
-            td
-              u Suburb
-            td
-              u State
-            td
-              u Postcode
-            td 
-              u Deal Type
-            td
-              
-          - each property in properties
-            tbody
-              td= property.address
-              td= property.suburb
-              td= property.state.toUpperCase()
-              td= property.postcode
-              td= property.deal_type.toUpperCase()
-              td
-                small
-                  a(href="/administration/properties/edit/#{property.property_id}") Edit
-                  |  | 
-                  a(href="/administration/properties/delete/#{property.property_id}") Delete
+     end main content

@@ -40,7 +40,7 @@ block content
       h2 Property Lots
       include ../../flashify
       hr
-      form.details-form.add-new(action="/administration/properties/add?step=5",method="post")
+      form.details-form.add-new(action="/administration/properties/add?step=5",method="post",  enctype="multipart/form-data")
         .tabs
           ul.menu
             li.active Add New Property
@@ -56,7 +56,7 @@ block content
                   option(value='5') 5
               .inputs
                 label.required(for='numberOfBathrooms') Number of Bathrooms
-                select#numberOfBathrooms(name="properties")
+                select#numberOfBathrooms(name="bathrooms")
                   option(value='1') 1
                   option(value='2') 2
                   option(value='3') 3
@@ -75,7 +75,7 @@ block content
                 input#level(type='text',name="level")
               .inputs
                 label Floor Plan
-                input(type='file')
+                input(type='file',name="upload")
                 input.button(type='submit', value='Upload')
             .right
               .inputs
@@ -123,7 +123,11 @@ block content
                     td #{lot.exterior_size} sq.m
                     td= lot.aspect
                     td $ #{lot.price}
-                    td Download
+                    td
+                      - if (lot.floor_plan.length == 0)
+                        em Not Available
+                      - else
+                        a(href='#') Download
                     //
                       td.actions
                         a(href='#')
@@ -134,8 +138,8 @@ block content
                         img(src='/images/delete.png')
                         | Remove
           .submit
-            a.left-button(href="#") Previous Step
-            a.button(href="#") Finish
+            a.left-button(href="/administration/properties/add?step=4") Previous Step
+            a.button(href="/administration/properties/add?step=finish") Finish
     //  
       end details
   //

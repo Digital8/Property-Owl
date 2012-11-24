@@ -15,6 +15,7 @@ helpers =
   
 models = 
   properties: system.load.model 'properties'
+  lots: system.load.model('lots')
 
 # GET
 exports.index = (req,res) ->
@@ -34,8 +35,9 @@ exports.view = (req,res) ->
         res.render 'barn_deals/404'
       else
         # Get the deals
-        models.properties.getPropertiesOfBarnDeal req.params.id, (err, barn_deals) ->
-          res.render 'barn_deals/view', property: property, barn_deals: barn_deals or {}
+        #models.properties.getPropertiesOfBarnDeal req.params.id, (err, barn_deals) ->
+        models.lots.getLotsByPropertyId req.params.id, (err,lots) ->
+          res.render 'barn_deals/view', property: property, lots: lots or {}
 
 # GET
 exports.add = (req,res) ->

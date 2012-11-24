@@ -143,22 +143,25 @@ block content
             td Aspect
             td List Price
             td Floor Plan
-            td Owl Deal
             td Register
-          - each deal in barn_deals
+          - var i = 0;
+          - each lot in lots
+            - i++
             tbody
-              td= deal.lot
-              td= deal.bedrooms
-              td= deal.bathrooms
-              td= deal.cars
-              td= deal.level
-              td= deal.internal_area
-              td= deal.external_area
-              td= deal.aspect
-              td= deal.price
+              td= i
+              td= lot.bedrooms
+              td= lot.bathrooms
+              td= lot.carspaces
+              td= lot.level
+              td #{lot.interior_size} sq.m
+              td #{lot.exterior_size} sq.m
+              td= lot.aspect
+              td= lot.price
               td
-                a(href='#') Download
-              td Yes
+                - if (lot.floor_plan.length == 0)
+                  em Not Available
+                - else
+                  a(href='#') Download
               td
                 a.barn-register(href='#', alt='Register') Register
         #left
