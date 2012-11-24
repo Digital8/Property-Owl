@@ -289,7 +289,6 @@ td {
   border: 1px solid lime !important;
 }
 /* shadows */
-/* 'optional: inset - for internal shadows', 'left inset', 'top inset', 'size', 'optional: spread', 'colour'*/
 /* border radius */
 .round {
   -webkit-border-top-left-radius: 3000px;
@@ -352,8 +351,6 @@ td {
 .word-wrap {
   -ms-word-break: break-all;
   word-break: break-all;
-  /* Non standard for webkit */
-
   word-break: break-word;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
@@ -361,7 +358,7 @@ td {
 }
 /* @end *//* grid system */
 .row {
-  width: 995px;
+  width: 1000px;
   margin: 0 auto;
   zoom: 1;
   -webkit-transition: width 0.15s ease-in-out;
@@ -418,7 +415,7 @@ body {
   font-weight: 100;
 }
 #header {
-  margin: 0.625em auto;
+  margin: 1.25em auto 0.625em auto;
   zoom: 1;
 }
 #header:before,
@@ -429,29 +426,18 @@ body {
 #header:after {
   clear: both;
 }
-#header > div#top-header {
-  zoom: 1;
-  position: relative;
-  margin: 0 0 -3.125em 0;
-}
-#header > div#top-header:before,
-#header > div#top-header:after {
-  content: "";
-  display: table;
-}
-#header > div#top-header:after {
-  clear: both;
-}
-#header > div > div#logo-box {
+#header > div#logo-box {
   width: 24.9999999%;
   padding: 0;
-  padding-left: 1.875em;
-  padding-right: 1.875em;
+  padding-left: 1.9em;
+  padding-right: 1.9em;
   display: block;
   float: left;
+  position: relative;
+  margin: 0 0 -3.125em 0;
   z-index: 1;
 }
-#header > div > div#admin-logo-box {
+#header > div#admin-logo-box {
   width: 16.6666666%;
   padding: 0;
   display: block;
@@ -460,21 +446,19 @@ body {
   margin: 0 0 -100px 0;
   z-index: 1;
 }
-#header > div > div#admin-logo-box img {
+#header > div#admin-logo-box img {
   width: 90%;
 }
-#header > div > div#banner-box {
+#header > div#banner-box {
   float: left;
   width: 74.99999969999999%;
   padding: 0px;
-  margin-top: 14px;
   margin-bottom: 0.625em;
 }
 #header #banner {
   float: right;
   width: 100%;
-  max-width: 728px;
-  max-height: 90px;
+  margin-top: 0.625em;
   -webkit-border-top-left-radius: 0.313em;
   -moz-border-radius-topleft: 0.313em;
   border-top-left-radius: 0.313em;
@@ -701,8 +685,8 @@ body {
 #header .breadcrumbs li {
   float: left;
   margin-right: 3px;
-  line-height: 1.875em;
-  padding: 0.313em;
+  line-height: 30px;
+  padding: 5px;
 }
 #header .breadcrumbs li:after {
   content: '>';
@@ -710,18 +694,18 @@ body {
 #header .breadcrumbs li a {
   font-weight: 300;
   color: #3895dd;
-  padding: 0.313em;
+  padding: 5px;
   text-decoration: none;
 }
 #header .breadcrumbs li.disabled {
   color: #9a9a9a;
-  padding: 0.313em 1.250em;
+  padding: 5px 20px;
 }
 #header .breadcrumbs li.disabled:after {
   content: '';
 }
 .admin-header {
-  height: 11.875em;
+  height: 130px;
 }
 .best-deal {
   background: #0c3559;
@@ -761,7 +745,7 @@ body {
   -moz-border-radius-bottomright: 0.313em;
   border-bottom-right-radius: 0.313em;
   border: solid 1px #051726;
-  margin-bottom: 0.625em;
+  margin-bottom: 10px;
 }
 .best-deal > div.home-deal-stats .home-timer #timer {
   height: 4.063em;
@@ -1011,16 +995,10 @@ body {
   text-shadow: 0px -1px 0px rgba(0,0,0,100);
 }
 .best-deal > div.deal-summary > a.secure-button #secure-arrow {
-  padding-left: 0.313em;
+  padding-left: 5px;
 }
 .main {
   margin: 0 auto 0 auto;
-  /* end admin-grid-view */
-
-  /* footer summary for admin-grid-view (used in owl deals table) */
-
-  /* details view */
-
 }
 .main > div {
   /* admin styles */
@@ -1030,7 +1008,6 @@ body {
   float: left;
   width: 16.6666666%;
   padding: 0px;
-  padding-right: 0.313em;
 }
 .main > div#left-col h2,
 .main > div#left-col h3 {
@@ -1067,7 +1044,7 @@ body {
   -webkit-border-radius: 0.313em;
   border-radius: 0.313em;
   border: solid 1px #051726;
-  margin-bottom: 0.625em;
+  margin-bottom: 10px;
 }
 .main > div#left-col .deal-stats .timer #timer {
   height: 3.063em;
@@ -1334,7 +1311,7 @@ body {
   border-top: solid 1px #7a7a7a;
 }
 .main > div#left-col .share li img {
-  margin-bottom: 0.313em;
+  margin-bottom: 5px;
   margin-right: 0.625em;
 }
 .main > div#left-col .find-deals,
@@ -1386,7 +1363,7 @@ body {
   background: #dfdfdf;
   border-bottom: solid 1px #d7d7d7;
   margin: 0 auto;
-  padding: 0.313em 0;
+  padding: 5px 0;
   color: #0085c6;
 }
 .main > div#left-col .find-deals #input-form,
@@ -1417,7 +1394,7 @@ body {
   float: left;
   width: 49.9999998%;
   padding: 0;
-  padding-right: 0.313em;
+  padding-right: 5px;
 }
 .main > div#left-col .find-deals #input-form .small-right,
 .main > div#left-col .enquiry #input-form .small-right {
@@ -1427,8 +1404,6 @@ body {
 }
 .main > div#left-col .ad-box {
   width: 100%;
-  max-width: 13.750em;
-  max-height: 3 0.625em;
   margin-bottom: 0.625em;
   -webkit-border-top-left-radius: 0.313em;
   -moz-border-radius-topleft: 0.313em;
@@ -1449,7 +1424,7 @@ body {
 .main > div#home-center-col {
   float: left;
   width: 66.6666664%;
-  padding: 1.563em;
+  padding: 1.875em;
   padding-top: 0.625em;
   padding-bottom: 6.250em;
 }
@@ -1460,7 +1435,7 @@ body {
   float: left;
   width: 83.333333%;
   padding: 0;
-  padding-left: 0.313em;
+  padding-left: 0.625em;
   padding-bottom: 6.250em;
 }
 .main > div#wide-center-col #back-button {
@@ -1470,7 +1445,7 @@ body {
   background-size: cover;
   display: block;
   padding: 0.625em;
-  padding-left: 1.875em;
+  padding-left: 30px;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -1804,7 +1779,7 @@ body {
 }
 .main > div#wide-center-col .property-info #right .deal h2 img.arrow {
   float: right;
-  margin-top: 0.313em;
+  margin-top: 5px;
 }
 .main > div#wide-center-col .property-info #right .deal ul,
 .main > div#wide-center-col .property-info #right .deal li {
@@ -1935,7 +1910,7 @@ body {
 .main > div#center-col {
   float: left;
   width: 66.6666664%;
-  padding: 0.313em;
+  padding: 0.625em;
   padding-bottom: 6.250em;
 }
 .main > div#center-col #back-button {
@@ -1945,7 +1920,7 @@ body {
   background-size: cover;
   display: block;
   padding: 0.625em;
-  padding-left: 1.875em;
+  padding-left: 30px;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -1960,7 +1935,7 @@ body {
   background-size: cover;
   display: block;
   padding: 0.625em;
-  padding-right: 1.875em;
+  padding-right: 30px;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -2142,8 +2117,6 @@ body {
   padding-bottom: 0;
   -ms-word-break: break-all;
   word-break: break-all;
-  /* Non standard for webkit */
-
   word-break: break-word;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
@@ -2163,10 +2136,10 @@ body {
 .main > div#center-col .listing-summary .listing-body .listing-details h3 {
   color: #0085c6;
   font-size: 0.9em;
-  margin-top: 0.313em;
+  margin-top: 5px;
 }
 .main > div#center-col .listing-summary .listing-body .listing-details p {
-  margin-top: 0.313em;
+  margin-top: 5px;
   font-size: 0.8em;
   color: #00557f;
   line-height: 1.3em;
@@ -2261,12 +2234,9 @@ body {
   float: left;
   width: 16.6666666%;
   padding: 0px;
-  padding-left: 0.313em;
 }
 .main > div#right-col .ad-tower {
   width: 100%;
-  max-width: 13.750em;
-  max-height: 600px;
   margin-bottom: 0.625em;
   -webkit-border-top-left-radius: 0.313em;
   -moz-border-radius-topleft: 0.313em;
@@ -2401,9 +2371,9 @@ body {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  padding: 0.313em;
+  padding: 5px;
   font-size: 0.9em;
-  margin: 0.313em 0;
+  margin: 5px 0;
   /* fallback/image non-cover color */
 
   background-color: #7d7d7d;
@@ -2465,8 +2435,6 @@ body {
   border-top-right-radius: 0.313em;
   padding: 0.625em;
   zoom: 1;
-  /*dashboard page */
-
 }
 .main .grid-header:before,
 .main .grid-header:after {
@@ -2525,18 +2493,18 @@ body {
 .main .grid-header li {
   float: left;
   width: 20%;
-  padding: 0 1.250em;
+  padding: 0 20px;
   text-transform: uppercase;
   font-weight: bold;
-  line-height: 3.125em;
+  line-height: 50px;
   color: #a7a7a7;
   vertical-align: middle;
 }
 .main .grid-header li > div {
   display: inline-block;
-  height: 2.500em;
+  height: 40px;
   vertical-align: middle;
-  padding-right: 0.625em;
+  padding-right: 10px;
 }
 .main .grid-header li + li {
   border-left: solid 1px #c5c5c5;
@@ -2598,7 +2566,7 @@ body {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  padding: 0.313em;
+  padding: 5px;
   font-size: 0.9em;
   /* fallback/image non-cover color */
 
@@ -2648,7 +2616,7 @@ body {
   box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
   -moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
   -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
-  line-height: 1.875em;
+  line-height: 30px;
   background: #ffffff url(../images/input-bg.png) repeat-x top center;
 }
 .main .grid-header #search-form .button {
@@ -2692,7 +2660,7 @@ body {
 
   background-image: -o-linear-gradient(top, #407eaf, #326288);
   text-shadow: 0px -1px 0px rgba(0,0,0,100);
-  line-height: 1.563em;
+  line-height: 25px;
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
@@ -2748,7 +2716,7 @@ body {
   border-radius: 0.313em;
   width: 100%;
   background: #f5f5f5;
-  margin-bottom: 1.250em;
+  margin-bottom: 20px;
   font-size: 0.9em;
   font-family: Arial, sans-serif;
 }
@@ -2781,7 +2749,7 @@ body {
 }
 .main table.admin-gridview tbody td.actions a {
   text-decoration: none;
-  min-width: 5em;
+  min-width: 80px;
   margin: 0;
   padding: 0;
 }
@@ -2820,7 +2788,7 @@ body {
 .main table.admin-gridview tfoot .button {
   float: left;
   padding: 7px 0.625em;
-  margin: 0.313em 0 0.313em 0.313em;
+  margin: 5px 0 5px 5px;
   border: solid 1px #004400;
   box-shadow: inset 0px 1px 0px rgba(255,255,255,0.25);
   -moz-box-shadow: inset 0px 1px 0px rgba(255,255,255,0.25);
@@ -2868,7 +2836,7 @@ body {
 }
 .main table.admin-gridview tfoot ul.pager {
   float: right;
-  margin: 0.313em 0;
+  margin: 5px 0;
   padding: 0;
   list-style: none;
 }
@@ -2877,7 +2845,7 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
-  padding: 8px 0.313em;
+  padding: 8px 5px;
   border: solid 1px #004400;
   box-shadow: inset 0px 1px 0px rgba(255,255,255,0.25);
   -moz-box-shadow: inset 0px 1px 0px rgba(255,255,255,0.25);
@@ -2922,7 +2890,7 @@ body {
 .main table.admin-gridview tfoot ul.pager li a {
   font-weight: 300;
   text-shadow: 0px -1px 0px rgba(0,0,0,100);
-  padding: 0.313em 0.625em;
+  padding: 5px 10px;
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
@@ -2996,7 +2964,7 @@ body {
   font-family: Arial, sans-serif;
   font-size: 0.9em;
   width: 100%;
-  margin-top: 2.500em;
+  margin-top: 40px;
 }
 .main table.admin-details td {
   border-bottom: solid 1px #dcdcdc;
@@ -3007,13 +2975,13 @@ body {
 .main .details {
   background: #f5f5f5;
   border: solid 1px #a4a4a4;
-  margin-bottom: 0.625em;
-  -webkit-border-bottom-left-radius: 0.313em;
-  -moz-border-radius-bottomleft: 0.313em;
-  border-bottom-left-radius: 0.313em;
-  -webkit-border-bottom-right-radius: 0.313em;
-  -moz-border-radius-bottomright: 0.313em;
-  border-bottom-right-radius: 0.313em;
+  margin-bottom: 10px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
   zoom: 1;
 }
 .main .details:before,
@@ -3025,7 +2993,7 @@ body {
   clear: both;
 }
 .main .details h2 {
-  padding: 1.250em 2.500em 0 2.500em;
+  padding: 20px 40px 0 40px;
 }
 .main .details .left,
 .main .details .right {
@@ -3035,15 +3003,15 @@ body {
 }
 .main .details .left .inputs {
   margin-right: 0;
-  padding-right: 1.250em;
+  padding-right: 20px;
 }
 .main .details .right .inputs {
   margin-left: 0;
-  padding-left: 1.250em;
+  padding-left: 20px;
 }
 .main .details .inputs {
-  line-height: 1.875em;
-  padding: 0 2.500em;
+  line-height: 30px;
+  padding: 0 40px;
   zoom: 1;
 }
 .main .details .inputs h2 {
@@ -3058,11 +3026,11 @@ body {
   clear: both;
 }
 .main .details .padding-top {
-  padding-top: 3.750em;
+  padding-top: 60px;
 }
 .main .details-form label {
   display: block;
-  margin-top: 0.625em;
+  margin-top: 10px;
 }
 .main .details-form p.note {
   font-style: italic;
@@ -3096,10 +3064,10 @@ body {
 .main .details-form textarea,
 .main .details-form select {
   width: 100%;
-  line-height: 1.563em;
+  line-height: 25px;
 }
 .main .details-form .inputs .button {
-  margin-top: 1.250em;
+  margin-top: 20px;
   float: right;
 }
 .main .details-form .inputs .button,
@@ -3145,7 +3113,7 @@ body {
 
   background-image: -o-linear-gradient(top, #407eaf, #326288);
   text-shadow: 0px -1px 0px rgba(0,0,0,100);
-  line-height: 1.563em;
+  line-height: 25px;
   color: #fff;
   text-decoration: none;
 }
@@ -3181,8 +3149,8 @@ body {
 
   background-image: -o-linear-gradient(top, #a9a9a9, #8a8a8a);
   zoom: 1;
-  padding: 0.313em;
-  margin: 2.5em -1px -1px -1px;
+  padding: 5px;
+  margin: 40px -1px -1px -1px;
 }
 .main .details-form .submit:before,
 .main .details-form .submit:after {
@@ -3507,16 +3475,16 @@ html[xmlns] .slides {
   width: 10em;
 }
 .carousel li {
-  margin-right: 0.313em;
+  margin-right: 5px;
 }
 /* Direction Nav */
 .flex-direction-nav {
   *height: 0;
 }
 .flex-direction-nav a {
-  width: 1.875em;
-  height: 1.875em;
-  margin: -1.25em 0 0;
+  width: 30px;
+  height: 30px;
+  margin: -20px 0 0;
   display: block;
   background: url(images/bg_direction_nav.png) no-repeat 0 0;
   position: absolute;
@@ -3536,11 +3504,11 @@ html[xmlns] .slides {
 }
 .flexslider:hover .flex-next {
   opacity: 0.8;
-  right: 0.313em;
+  right: 5px;
 }
 .flexslider:hover .flex-prev {
   opacity: 0.8;
-  left: 0.313em;
+  left: 5px;
 }
 .flexslider:hover .flex-next:hover,
 .flexslider:hover .flex-prev:hover {
@@ -3555,7 +3523,7 @@ html[xmlns] .slides {
 .flex-control-nav {
   width: 100%;
   position: absolute;
-  bottom: -2.5em;
+  bottom: -40px;
   text-align: center;
 }
 .flex-control-nav li {
@@ -3572,10 +3540,10 @@ html[xmlns] .slides {
   background: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   text-indent: -9999px;
-  -webkit-border-radius: 1.250em;
-  -moz-border-radius: 1.250em;
-  -o-border-radius: 1.250em;
-  border-radius: 1.250em;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
 }
 .flex-control-paging li a:hover {
@@ -3588,7 +3556,7 @@ html[xmlns] .slides {
   cursor: default;
 }
 .flex-control-thumbs {
-  margin: 0.313em 0 0;
+  margin: 5px 0 0;
   position: static;
   overflow: hidden;
 }
@@ -3610,7 +3578,7 @@ html[xmlns] .slides {
   opacity: 1;
   cursor: default;
 }
-@media screen and (max-width: 83.75em) {
+@media screen and (max-width: 860px) {
   .flex-direction-nav .flex-prev {
     opacity: 1;
     left: 0;
@@ -3695,8 +3663,8 @@ ul.sf-menu li li li.sfHover ul {
   top: 1.05em;
   /* IE6 only */
 
-  width: 0.625em;
-  height: 0.625em;
+  width: 10px;
+  height: 10px;
   text-indent: -999em;
   overflow: hidden;
 }
@@ -3714,13 +3682,13 @@ a:hover > .sf-sub-indicator,
 a:active > .sf-sub-indicator,
 li:hover > a > .sf-sub-indicator,
 li.sfHover > a > .sf-sub-indicator {
-  background-position: -0.625em -100px;
+  background-position: -10px -100px;
   /* arrow hovers for modern browsers*/
 
 }
 /* point right for anchors in subs */
 .sf-menu ul .sf-sub-indicator {
-  background-position: -0.625em 0;
+  background-position: -10px 0;
 }
 .sf-menu ul a > .sf-sub-indicator {
   background-position: 0 0;
@@ -3731,7 +3699,7 @@ li.sfHover > a > .sf-sub-indicator {
 .sf-menu ul a:active > .sf-sub-indicator,
 .sf-menu ul li:hover > a > .sf-sub-indicator,
 .sf-menu ul li.sfHover > a > .sf-sub-indicator {
-  background-position: -0.625em 0;
+  background-position: -10px 0;
   /* arrow hovers for modern browsers*/
 
 }
@@ -3751,24 +3719,19 @@ li.sfHover > a > .sf-sub-indicator {
   .row {
     width: 640px;
   }
-  #header > div#top-header {
-    margin: 0 0 -2.188em 0;
-  }
-  #header > div > div#logo-box {
+  #header > div#logo-box {
     float: left;
-    width: 24.9999999%;
+    width: 16.6666666%;
     padding: 0;
-    padding: 0 20px;
   }
-  #header > div > div#banner-box {
+  #header > div#banner-box {
     float: left;
-    width: 74.99999969999999%;
+    width: 83.333333%;
     padding: 0px;
-    margin-top: 0.625em;
   }
   #header #menu ul {
     float: left;
-    width: 74.99999969999999%;
+    width: 83.333333%;
     padding: 0px;
     float: right;
   }
@@ -3847,14 +3810,17 @@ li.sfHover > a > .sf-sub-indicator {
   .row {
     width: 320px;
   }
-  #header > div > div#logo-box {
-    margin: 4em 0 0 0;
+  #header > div#logo-box {
+    margin: 3.5em 0 0 0;
     position: absolute;
     float: left;
-    width: 41.6666665%;
+    width: 24.9999999%;
     padding: 0;
   }
-  #header > div > div#banner-box {
+  #header > div#logo-box #logo {
+    width: 11.813em;
+  }
+  #header > div#banner-box {
     float: none;
     width: auto;
     padding: 0;
@@ -3862,17 +3828,16 @@ li.sfHover > a > .sf-sub-indicator {
     zoom: 1;
     top: 0;
   }
-  #header > div > div#banner-box:before,
-  #header > div > div#banner-box:after {
+  #header > div#banner-box:before,
+  #header > div#banner-box:after {
     content: "";
     display: table;
   }
-  #header > div > div#banner-box:after {
+  #header > div#banner-box:after {
     clear: both;
   }
-  #header > div > div#banner-box #banner {
+  #header > div#banner-box #banner {
     margin-top: 0;
-    margin-bottom: 2.188em;
   }
   #header #menu {
     float: left;
