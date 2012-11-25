@@ -17,15 +17,15 @@ block content
            a(href='/administration/properties/add')
              img(src='/images/add.png')
              | Add New Project
-       .grid-summary 1 - 4 of 24
+       // .grid-summary 1 - 4 of 24
      .grid-header
        form#search-form
          input#propertySearch(type='text')
+         | &nbsp;
          input.button(type='submit', value='Go')
+         | &nbsp;
          input.button(type='submit', value='Reset')
          .divider
-         select#propertySuburb
-           option Suburb
          select#propertyState
            option State
            option ACT
@@ -36,14 +36,18 @@ block content
            option TAS
            option VIC
            option WA
+         | &nbsp;
          select#propertyStatus
            option Status
            option Pending
            option Pre-release
            option Current
            option Ended
+         | &nbsp;
          select#propertyDeveloper
            option Developer
+           - each developer in developers
+            option(value=developer.user_id) #{developer.first_name} #{developer.last_name}
      table.admin-gridview
        thead
          tr
@@ -61,7 +65,8 @@ block content
           tr
            td= property.property_id
            td= property.title
-           td= property.created_at
+           - var listed = new Date(property.created_at)
+           td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
            td= property.suburb
            td= property.state.toUpperCase()
            td Current

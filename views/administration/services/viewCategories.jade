@@ -1,0 +1,32 @@
+extends ../../layout
+
+block content
+  //
+    main content
+  .container.row.main
+    h1 Supplier Categories
+    include navigation
+    .grid-header
+      form#search-form
+        input.button(type='submit', value='Add new category')
+    table.admin-gridview
+      thead
+        tr
+          td Category Name
+          td No. of Companies
+          td(colspan='2') Actions
+      tbody
+        - each c in categories
+          tr
+            td= c.category
+            td
+            td.actions
+              a(href='/administration/services/categories/edit/#{c.category_id}', alt='edit property')
+                img(src='/images/edit.png', alt='Edit')
+                | Edit
+            td.actions
+              a(href='/administration/services/categories/delete/#{c.category_id}', alt='delete property')
+                img(src='/images/delete.png', alt='Delete')
+                | Delete
+  //
+    end main content

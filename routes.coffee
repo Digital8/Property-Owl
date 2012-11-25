@@ -105,6 +105,9 @@ module.exports = (app) ->
   app.get '/administration/services/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_services.edit
   app.put '/administration/services/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_services.update
   app.post '/administration/services/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_services.create
+  app.get '/administration/services/categories', helpers.restrictTo(system.config.acl.admin), controllers.admin_services.viewCategories
+  app.get '/administration/services/categories/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_services.addCategory
+  app.post '/administration/services/categories/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_services.createCategory
   
   app.get '/administration/barn', helpers.restrictTo(system.config.acl.admin), controllers.admin_barn.index
   app.get '/administration/barn/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_barn.edit

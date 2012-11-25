@@ -1,0 +1,15 @@
+extends ../../layout
+
+block content
+  
+  //
+    main content
+  .container.row.main
+    h1 Supplier Categories
+    include navigation
+    .grid-header
+      h3 Add Category
+      form#search-form(action="/administration/services/categories/add",method="post")
+        input(type="text",name="category")
+        p
+          input.button(type="submit",value="Save")

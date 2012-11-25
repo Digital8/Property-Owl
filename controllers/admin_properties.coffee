@@ -21,7 +21,8 @@ helpers = {}
  
 exports.index = (req,res) ->
   models.properties.getAllProperties (err, results) ->
-    res.render 'administration/properties/index', properties: results or {}
+    models.users.getUsersByGroup 2, (err, developers) ->
+      res.render 'administration/properties/index', properties: results or {}, developers: developers or {}
     
 exports.view = (req,res) ->
 
