@@ -30,55 +30,55 @@ block content
       .inputs
        label(for='group') User Type
        select(name="group")
-       - each group in groups
-        option(value="#{group.group_id}")= group.name
+        - each group in groups
+         option(value="#{group.account_type_id}")= group.name
       .inputs
        label.required(for='fname') First Name
        - if (values.fname == undefined) values.fname = ''
-        input#fname(type="text",name="fname",placeholder="First Name",value="")
+        input#fname(type="text",name="fname",value="")
       .inputs
        label.required(for='lname') Last Name
        - if (values.lname == undefined) values.lname = ''
-        input#lname(type="text",name="lname",placeholder="Last Name",value="")
+        input#lname(type="text",name="lname",value="")
       .inputs
        label(for='company') Company
        - if (values.company == undefined) values.company = ''
-        input#company(type="text",name="company",placeholder="Company",value="")
+        input#company(type="text",name="company",value="")
       .inputs
        label.required(for='phone') Phone
        - if (values.phone == undefined) values.phone = ''
-        input#phone(type="text",name="phone",placeholder="Phone",value="")
+        input#phone(type="text",name="phone",value="")
       .inputs
        label(for='workPhone') Work Phone
        - if (values.workPhone == undefined) values.workPhone = ''
-        input#workPhone(type="text",name="workPhone",placeholder="Work Phone",value="")
+        input#workPhone(type="text",name="workPhone",value="")
       .inputs
        label(for='mobile') Mobile
        - if (values.mobile == undefined) values.mobile = ''
-        input#mobile(type="text",name="mobile",placeholder="Mobile",value="")
+        input#mobile(type="text",name="mobile",value="")
      .right
       .inputs
        label.required(for='email') Email
        - if (values.email == undefined) values.email = ''
-        input#email(type="text",placeholder="Email",name="email",value="")
+        input#email(type="text",value="")
       .inputs
        label.required(for='password') Password
        - if (values.email == undefined) values.email = ''
-        input#password(type="password",placeholder="Password",name="password")
+        input#password(type="password",name="password")
         | &nbsp;
-        input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
+        input#confirmPassword(type="password",name="confirmPassword")
       .inputs
        label.required(for='address') Address
        - if (values.address == undefined) values.address = ''
-        input#address(type="text",name="address",placeholder="Address",value="")
+        input#address(type="text",name="address",value="")
       .inputs
        label.required(for='suburb') Suburb
        - if (values.suburb == undefined) values.suburb = ''
-        input#suburb(type="text",name="suburb",placeholder="Suburb",value="")
+        input#suburb(type="text",name="suburb",value="")
       .inputs
        label.required(for='postcode') Postcode
        - if (values.postcode == undefined) values.postcode = ''
-        input#postcode(type="text",name="postcode",placeholder="Postcode",value="")
+        input#postcode(type="text",name="postcode",value="")
       br
       .inputs
        input(type='checkbox', name='newsletterSubscription', value='newsletterSubscription')
