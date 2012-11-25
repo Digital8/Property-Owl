@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2012 at 04:20 AM
+-- Generation Time: Nov 25, 2012 at 04:26 PM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -59,7 +59,6 @@ INSERT INTO `po_admin_pages` (`admin_page_id`, `name`, `url`, `enabled`) VALUES
 (3, 'Services', 'services', 1),
 (4, 'Custom Pages', 'pages', 1),
 (5, 'Properties', 'properties', 1),
-(6, 'Barn Properties', 'barn', 1),
 (7, 'Reports', 'reports', 1);
 
 -- --------------------------------------------------------
@@ -121,15 +120,14 @@ CREATE TABLE IF NOT EXISTS `po_deals` (
   `value` int(11) NOT NULL DEFAULT '0',
   `approved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`deal_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `po_deals`
 --
 
 INSERT INTO `po_deals` (`deal_id`, `type`, `property_id`, `created_by`, `value`, `approved`) VALUES
-(1, 'stamp duty', 9, 1, 10000, 0),
-(2, 'furniture package', 9, 1, 2000, 0);
+(9, 'afo', 9, 1, 10000, 0);
 
 -- --------------------------------------------------------
 
@@ -148,16 +146,31 @@ CREATE TABLE IF NOT EXISTS `po_deal_types` (
 --
 
 
--- phpMyAdmin SQL Dump
--- version 3.2.4
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Nov 22, 2012 at 06:37 AM
--- Server version: 5.1.44
--- PHP Version: 5.3.1
+-- --------------------------------------------------------
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+--
+-- Table structure for table `po_lots`
+--
+
+CREATE TABLE IF NOT EXISTS `po_lots` (
+  `lot_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `property_id` mediumint(8) unsigned NOT NULL,
+  `bedrooms` tinyint(4) NOT NULL,
+  `bathrooms` tinyint(4) NOT NULL,
+  `carspaces` tinyint(4) NOT NULL,
+  `level` int(11) NOT NULL,
+  `interior_size` int(11) NOT NULL,
+  `exterior_size` int(11) NOT NULL,
+  `aspect` varchar(10) NOT NULL,
+  `floor_plan` varchar(100) NOT NULL,
+  `price` int(11) NOT NULL,
+  PRIMARY KEY (`lot_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+--
+-- Dumping data for table `po_lots`
+--
+
 
 -- --------------------------------------------------------
 
@@ -175,20 +188,16 @@ CREATE TABLE IF NOT EXISTS `po_media` (
   `hero` tinyint(1) NOT NULL DEFAULT '0',
   `uploaded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`media_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `po_media`
 --
 
 INSERT INTO `po_media` (`media_id`, `property_id`, `owner_id`, `filename`, `description`, `image`, `hero`, `uploaded`) VALUES
-(1, 9, 1, '4faff930-287a-11e2-94f7-bbcff633a73b.mp3', 'beep :)', 0, 0, '2012-11-07 11:27:36'),
-(2, 9, 1, 'd481be50-287a-11e2-94f7-bbcff633a73b.jpg', 'news-thumb', 0, 0, '2012-11-07 11:31:19'),
-(4, 9, 1, '465a3200-2943-11e2-a445-2f39375b57ff.png', '', 1, 0, '2012-11-22 16:36:59'),
-(11, 9, 1, '8ad19750-2945-11e2-b4bc-5f66e9f836b9.jpg', '', 1, 0, '2012-11-22 16:34:37'),
+(11, 9, 1, '8ad19750-2945-11e2-b4bc-5f66e9f836b9.jpg', '', 1, 1, '2012-11-24 08:04:42'),
 (12, 9, 1, 'ea037e10-3394-11e2-bad3-cd982acbcfc3.JPG', 'photo.JPG', 0, 0, '2012-11-21 14:35:44'),
-(13, 9, 1, 'd77d3cf0-3460-11e2-a1c1-75b0dcd6ca17.png', 'profile-pic.png', 1, 1, '2012-11-22 16:36:59');
+(13, 9, 1, 'd77d3cf0-3460-11e2-a1c1-75b0dcd6ca17.png', 'profile-pic.png', 1, 0, '2012-11-24 08:04:42');
 
 -- --------------------------------------------------------
 
@@ -210,8 +219,7 @@ CREATE TABLE IF NOT EXISTS `po_news` (
 --
 
 INSERT INTO `po_news` (`news_id`, `user_id`, `title`, `content`, `posted_at`) VALUES
-(1, 1, 'test', 'hello this is a test post woo!', '2012-10-09 10:02:11'),
-(3, 1, 'testing 2', 'Test of another post :o', '2012-10-13 00:44:53');
+(1, 1, 'test', 'hello this is a test post woo!', '2012-10-09 10:02:11');
 
 -- --------------------------------------------------------
 
@@ -252,6 +260,7 @@ CREATE TABLE IF NOT EXISTS `po_properties` (
   `title` varchar(100) NOT NULL,
   `address` text NOT NULL,
   `suburb` varchar(100) NOT NULL,
+  `postcode` varchar(10) NOT NULL,
   `state` varchar(5) NOT NULL,
   `description` text NOT NULL,
   `property_type_id` int(11) NOT NULL DEFAULT '1',
@@ -268,24 +277,24 @@ CREATE TABLE IF NOT EXISTS `po_properties` (
   `approved` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`property_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `po_properties`
 --
 
-INSERT INTO `po_properties` (`property_id`, `deal_of`, `title`, `address`, `suburb`, `state`, `description`, `property_type_id`, `price`, `bedrooms`, `bathrooms`, `cars`, `development_stage`, `internal_area`, `external_area`, `feature_image`, `deal_type`, `listed_by`, `approved`, `created_at`) VALUES
-(2, 0, 'Qld property!', '345 fake road', '', 'qld', 'some descriptive description', 3, 1341411, 1, 1, 1, '', '', '', '', 'barn', 1, 0, '2012-10-19 09:54:52'),
-(1, 2, 'deal of a lifetime!', '123 example street', '', 'qld', 'This is a once in a life time opportunity', 6, 345000, 1, 1, 1, '', '', '', '', 'owl', 1, 0, '2012-10-08 19:49:47'),
-(3, 2, 'Blue wonder', '11 Caithness Street', '', 'nsw', 'some descriptive description', 3, 1341411, 1, 1, 1, '', '', '', '', 'owl', 1, 0, '2012-10-19 09:54:52'),
-(4, 2, 'Cold estate', '27 Mansion Court', '', 'vic', 'some descriptive description', 3, 1341411, 1, 1, 1, '', '', '', '', 'owl', 1, 0, '2012-10-19 09:54:52'),
-(5, 0, 'Title', '12 Karen Court', '', 'nt', 'some descriptive description', 3, 1341411, 1, 1, 1, '', '', '', '', 'owl', 1, 0, '2012-10-19 09:54:52'),
-(6, 0, 'Wow, awesome!', '9 Ellie Court', '', 'wa', 'some descriptive description', 3, 1341411, 1, 1, 1, '', '', '', '', 'owl', 1, 0, '2012-10-19 09:54:52'),
-(7, 0, 'LOCATION LOCATION LOCATION', '26 Kurrajong Street', '', 'sa', 'some descriptive description', 3, 1341411, 1, 1, 1, '', '', '', '', 'owl', 1, 0, '2012-10-19 09:54:52'),
-(8, 0, 'Some final entry', '123 example street', '', 'tas', 'This is a once in a life time opportunity', 1, 345000, 1, 1, 1, '', '', '', '', 'owl', 1, 0, '2012-10-08 19:49:47'),
-(9, 0, 'Foobar', '12 fazcvn street', '', 'qld', 'this is a foobar', 1, 10, 1, 2, 3, '', '', '', '', 'owl', 2, 0, '2012-11-06 18:32:56'),
-(10, 0, 'Redbank Plains', '12 Karen Corut', 'Redbank Plains', 'qld', 'This is a redbank plains', 1, 900000, 0, 0, 0, 'completed', '', '', '', 'owl', 2, 1, '2012-11-08 22:34:19'),
-(11, 0, '', '', '', 'qld', '', 1, 0, 0, 0, 0, 'otp', '', '', '', 'owl', 2, 0, '2012-11-15 11:09:38');
+INSERT INTO `po_properties` (`property_id`, `deal_of`, `title`, `address`, `suburb`, `postcode`, `state`, `description`, `property_type_id`, `price`, `bedrooms`, `bathrooms`, `cars`, `development_stage`, `internal_area`, `external_area`, `feature_image`, `deal_type`, `listed_by`, `approved`, `created_at`) VALUES
+(2, 0, 'Qld property!', '345 fake road', 'asdf', '1324', 'qld', 'some descriptive descriptionv', 1, 1341411, 3, 2, 2, 'otp', '', '', '', 'barn', 2, 0, '2012-10-19 09:54:52'),
+(1, 2, 'deal of a lifetime!', '123 example street', '', '', 'qld', 'This is a once in a life time opportunity', 6, 345000, 3, 2, 2, '', '', '', '', 'owl', 1, 0, '2012-10-08 19:49:47'),
+(3, 2, 'Blue wonder', '11 Caithness Street', '', '', 'nsw', 'some descriptive description', 3, 1341411, 3, 2, 2, '', '', '', '', 'owl', 1, 0, '2012-10-19 09:54:52'),
+(4, 2, 'Cold estate', '27 Mansion Court', '', '', 'vic', 'some descriptive description', 3, 1341411, 3, 2, 2, '', '', '', '', 'owl', 1, 0, '2012-10-19 09:54:52'),
+(5, 0, 'Title', '12 Karen Court', '', '', 'nt', 'some descriptive description', 3, 1341411, 3, 2, 2, '', '', '', '', 'owl', 1, 0, '2012-10-19 09:54:52'),
+(6, 0, 'Wow, awesome!', '9 Ellie Court', '', '', 'wa', 'some descriptive description', 3, 1341411, 3, 2, 2, '', '', '', '', 'owl', 1, 0, '2012-10-19 09:54:52'),
+(7, 0, 'LOCATION LOCATION LOCATION', '26 Kurrajong Street', '', '', 'sa', 'some descriptive description', 3, 1341411, 3, 2, 2, '', '', '', '', 'owl', 1, 0, '2012-10-19 09:54:52'),
+(8, 0, 'Some final entry', '123 example street', '', '', 'tas', 'This is a once in a life time opportunity', 1, 345000, 3, 2, 2, '', '', '', '', 'owl', 1, 0, '2012-10-08 19:49:47'),
+(9, 0, 'Foobar', '12 fazcvn street', '', '', 'qld', 'this is a foobar', 1, 140000, 3, 2, 2, '', '', '', '', 'owl', 2, 0, '2012-11-06 18:32:56'),
+(10, 0, 'Redbank Plains', '12 Karen Corut', 'Redbank Plains', '', 'qld', 'This is a redbank plains', 1, 900000, 3, 2, 2, 'completed', '', '', '', 'owl', 2, 1, '2012-11-08 22:34:19'),
+(17, 0, 'Dont buy it', '12 Bell Street', 'Ipswich', '', 'qld', 'Dont buy this place.', 5, 493100, 3, 2, 2, 'otp', '', '', '', 'all', 2, 0, '2012-11-21 12:06:27');
 
 -- --------------------------------------------------------
 
@@ -325,7 +334,7 @@ CREATE TABLE IF NOT EXISTS `po_saveddeals` (
   `user_id` mediumint(8) unsigned NOT NULL,
   `enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `po_saveddeals`
@@ -333,7 +342,8 @@ CREATE TABLE IF NOT EXISTS `po_saveddeals` (
 
 INSERT INTO `po_saveddeals` (`id`, `deal_id`, `user_id`, `enabled`) VALUES
 (1, 9, 1, 0),
-(2, 9, 1, 1);
+(2, 9, 1, 1),
+(3, 17, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -343,20 +353,50 @@ INSERT INTO `po_saveddeals` (`id`, `deal_id`, `user_id`, `enabled`) VALUES
 
 CREATE TABLE IF NOT EXISTS `po_services` (
   `service_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
+  `category_id` mediumint(9) NOT NULL,
+  `company` varchar(100) NOT NULL,
+  `logo` varchar(100) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `address` text NOT NULL,
+  `suburb` varchar(100) NOT NULL,
+  `state` varchar(10) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `postcode` varchar(20) NOT NULL,
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
   `description` varchar(100) NOT NULL,
   `image` varchar(100) NOT NULL,
   `service_created_at` datetime NOT NULL,
   PRIMARY KEY (`service_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `po_services`
 --
 
-INSERT INTO `po_services` (`service_id`, `name`, `description`, `image`, `service_created_at`) VALUES
-(1, 'testaroo', 'this is a test service', '', '2012-11-06 10:27:16'),
-(2, 'testing 2..', 'this is another test service', '', '2012-11-06 10:27:16');
+INSERT INTO `po_services` (`service_id`, `category_id`, `company`, `logo`, `phone`, `address`, `suburb`, `state`, `email`, `postcode`, `visible`, `description`, `image`, `service_created_at`) VALUES
+(1, 2, 'testaroo', '', '', '', 'Ipswich', 'qld', '', '', 0, 'this is a test service', '', '2012-11-06 10:27:16'),
+(2, 1, 'testing 2..', '', '', '', 'blacktown', 'nsw', '', '', 0, 'this is another test service', '', '2012-11-06 10:27:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `po_service_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `po_service_categories` (
+  `category_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `category` varchar(100) NOT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `po_service_categories`
+--
+
+INSERT INTO `po_service_categories` (`category_id`, `category`) VALUES
+(1, 'Interior Design'),
+(2, 'Exterior Designers'),
+(3, 'Digital Media');
 
 -- --------------------------------------------------------
 
