@@ -4,24 +4,32 @@ block content
  //
    main content
  .container.row.main
-   include ../../left_nav
-   //
-     center-col
-   #center-col
-    h1 Edit Page
-    include ../../flashify
-    form(action="/administration/pages/edit/#{page.page_id}",method="post")
-      input(type="hidden",name="_method",value="put")
-      p
-        input(type="text",name="url",placeholder="/url",value="#{page.url}")
-      p
-        input(type="text",name="header",placeholder="Page Title",value="#{page.header}")
-      p
-        textarea(name="content",placeholder="Page Content",rows="30",cols="100")
+   h1 Edit Page
+   .grid-header.form-header
+    ol.six
+     li.active
+      .ol-1-active
+      | Details
+   .details
+    h2 Page Details
+    hr
+    form.details-form(action="/administration/pages/edit/#{page.page_id}",method="post")
+     input(type="hidden",name="_method",value="put")
+     include ../../flashify
+     .inputs
+      label.control-label(for="inputTitle") Page URL
+      input#inputUrl(type="text",name="url",placeholder="/url",value="#{page.url}")
+     .inputs
+      label.control-label(for="inputTitle") Page Title
+      input#inputTitle(type="text",name="header",placeholder="Page Title",value="#{page.header}")
+     .inputs 
+      label.control-label(for="inputContent") Content
+      textarea#inputContent(name="content",placeholder="Page Content",rows="30",cols="100")
           = page.content.replace(/<br \/>/g,"\r\n")
-      p
-        select(name="enabled")
-          option(value="1") Enabled
-          option(value="0") Disabled
-      p
-        input(type="submit")
+     .inputs
+      select(name="enabled")
+       option(value="1") Enabled
+       option(value="0") Disabled
+     .submit
+      input.button(type="submit",value="Update Page")
+      a.left-button(href="/administration/pages/") Cancel

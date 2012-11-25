@@ -4,112 +4,95 @@ block content
   //
     main content
   .container.row.main
-    include ../../left_nav
-    //
-      center-col
-    #center-col
-      h1 Members 
+   h1 Edit Member: #{values.first_name} #{values.last_name}
+   .admin-actions
+    ul
+     li
+      a(href="/administration/members")
+       img(src='/images/manage.png')
+       | Manage Members
+     li.disabled
+      img(src='/images/add.png')
+      | Add New Member
+   .grid-header.form-header
+    ol.six
+     li.active
+      .ol-1-active
+      | Details
         
-  
-      h4 Editing Member: #{values.first_name} #{values.last_name}
-      form.form-horizontal(action="/administration/members/edit/#{values.user_id}",method="post")
-        include ../../flashify
-        input(type="hidden",name="_method",value="put")
-        div.control-group  
-          label.control-label(for="inputEmail") User Type:
-          div.controls
-            select(name="group")
-              - each group in groups
-                - if (group.account_type_id == values.account_type_id)
-                  option(value="#{group.account_type_id}",selected)= group.name
-                else
-                  option(value="#{group.account_type_id}")= group.name
+
+   .details
+    h2 User Details
+    hr
+    form.details-form(action="/administration/members/edit/#{values.user_id}",method="post")
+     include ../../flashify
+     input(type="hidden",name="_method",value="put")
+     .left
+      .inputs
+       label(for='group') User Type
+       select(name="group")
+       - each group in groups
+        - if (group.account_type_id == values.account_type_id)
+         option(value="#{group.account_type_id}",selected)= group.name
+        else
+         option(value="#{group.account_type_id}")= group.name
+      .inputs
+       label.required(for='first_name') First Name
+       - if (values.first_name == undefined) values.first_name = ''
+        input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.first_name}")
+      .inputs
+       label.required(for='last_name') Last Name
+       - if (values.last_name == undefined) values.last_name = ''
+        input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}")
+      .inputs
+       label(for='company') Company
+       - if (values.company == undefined) values.company = ''
+        input#company(type="text",placeholder="Company",name="company",value="#{values.company}")
+      .inputs
+       label.required(for='phone') Phone
+       - if (values.phone == undefined) values.phone = ''
+        input#phone(type="text",placeholder="Phone",name="phone",value="#{values.phone}")
+      .inputs
+       label(for='workPhone') Work Phone
+       - if (values.work_phone == undefined) values.work_phone = ''
+        input#work_phone(type="text",placeholder="Work Phone",name="work_phone",value="#{values.work_phone}")
+      .inputs
+       label(for='mobile') Mobile
+       - if (values.mobile == undefined) values.mobile = ''
+        input#mobile(type="text",placeholder="Mobile",name="mobile",value="#{values.mobile}")
+     .right
+      .inputs
+       label.required(for='email') Email
+       - if (values.email == undefined) values.email = ''
+        input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
+      .inputs
+       label.required(for='password') Password
+       - if (values.email == undefined) values.email = ''
+        input#password(type="password",placeholder="Password",name="password")
+        | &nbsp;
+        input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
         br
-        div.control-group
-          label.control-label(for="password") Password:
-          div.controls
-            input#password(type="password",placeholder="Password",name="password")
-            | &nbsp;
-            input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
-            br
-            span Password will not be changed if left blank
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") First Name:
-          div.controls
-            - if (values.first_name == undefined) values.first_name = ''
-            input#email(type="text",name="fname",placeholder="First Name",value="#{values.first_name}")
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") Last Name:
-          div.controls
-            - if (values.last_name == undefined) values.last_name = ''
-            input#email(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}")
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") Company:
-          div.controls
-            - if (values.company == undefined) values.company = ''
-            input#email(type="text",placeholder="Company",name="company",value="#{values.company}")
-        br
-        
-        div.control-group  
-          label.control-label(for="inputEmail") Email:
-          div.controls
-           - if (values.email == undefined) values.email = ''
-           input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
-        br
-        div.control-group  
-           label.control-label(for="inputEmail") Phone:
-           div.controls
-             - if (values.phone == undefined) values.phone = ''
-             input#email(type="text",placeholder="Phone",name="phone",value="#{values.phone}")
-        br
-        div.control-group  
-           label.control-label(for="inputEmail") Work Phone:
-           div.controls
-             - if (values.work_phone == undefined) values.work_phone = ''
-             input#email(type="text",placeholder="Work Phone",name="work_phone",value="#{values.work_phone}")
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") Mobile:
-          div.controls
-            - if (values.mobile == undefined) values.mobile = ''
-            input#email(type="text",placeholder="Mobile",name="mobile",value="#{values.mobile}")
-        br
-        div.control-group  
-           label.control-label(for="inputEmail") Address Line 1*:
-           div.controls
-             - if (values.address == undefined) values.address = ''
-             input#email(type="text",placeholder="Address Line 1*",name="address",value="#{values.address}")
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") Suburb:
-          div.controls
-            - if (values.suburb == undefined) values.suburb = ''
-            input#email(type="text",placeholder="Suburb",name="suburb",value="#{values.suburb}")     
-        br    
-        div.control-group  
-          label.control-label(for="inputEmail") State:
-          div.controls
-            select(name="state")
-              option(value="qld") QLD
-              option(value="nsw") NSW
-              option(value="vic") VIC
-              option(value="act") ACT
-              option(value="sa") SA
-              option(value="wa") WA
-              option(value="nt") NT
-              option(value="tas") TAS
-              
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") Postcode:
-          div.controls
-            - if (values.postcode == undefined) values.postcode = ''
-            input#email(type="text",placeholder="postcode",name="postcode",value="#{values.postcode}")     
-        br    
-        div.form-actions
-          input.btn.btn-primary(type="submit",value="Update User")
-          | &nbsp;
-          a.btn(href="/administration/members") Cancel
+        p.note Password will not be changed if left blank
+      .inputs
+       label.required(for='address') Address
+       - if (values.address == undefined) values.address = ''
+        input#address(type="text",placeholder="Address",name="address",value="#{values.address}")
+      .inputs
+       label.required(for='suburb') Suburb
+       - if (values.suburb == undefined) values.suburb = ''
+        input#suburb(type="text",placeholder="Suburb",name="suburb",value="#{values.suburb}")
+      .inputs
+       label.required(for='postcode') Postcode
+       - if (values.postcode == undefined) values.postcode = ''
+        input#postcode(type="text",name="postcode",placeholder="Postcode",value="")
+      br
+      .inputs
+       input(type='checkbox', name='newsletterSubscription', value='newsletter_subscription')
+       |  Subscribed to newsletter
+      .inputs
+       input(type='checkbox', name='propertySubscription', value='property_subscription')
+       |  Subscribed to property alerts
+     .inputs
+     .submit
+      input.button(type='submit', value='Update User')
+      a.left-button(href="/administration/members") Cancel

@@ -4,12 +4,137 @@ block content
   //
     main content
   .container.row.main
-    include ../left_nav
-    //
-      center-col
-    #center-col 
-      h1 Administration
-      ul
-      - each page in pages
-        li
-          a(href="/administration/#{page.url}")= page.name
+   h1 Administration
+   #dashboard-left-col
+    ul
+    - each page in pages
+     li
+      a(href="/administration/#{page.url}")= page.name
+    .grid-header
+     h2 Pending Property Listings
+     .grid-summary 1 - 4 of 24
+    table.admin-gridview
+     tbody
+      //- each property in properties
+      tr
+       td
+        | 1234
+       td
+        | Property 1
+       td.actions
+        a(href='#')
+         img(src='images/view.png', alt='View')
+         | View
+       td.actions
+        a(href='#')
+         img(src='images/edit.png', alt='View')
+         | Edit
+       td.actions
+        a(href='#')
+         img(src='images/approve.png', alt='View')
+         | Approve
+     tfoot
+      tr
+       td(colspan='5')
+        a.button(href="/administration/properties") Manage All Properties
+        ul.pager
+         li
+          a(href='#') Prev
+         li.selected
+          a(href='#') 1
+         li
+          a(href='#') 2
+         li
+          a(href='#') 3
+         li
+          a(href='#') 4
+         li
+          a(href='#') Next
+    .grid-header
+     h2 Pending Project Listings
+     .grid-summary 1 - 4 of 24
+    table.admin-gridview
+     tbody
+      //- each property in properties
+      tr
+       td Project Listing 1
+       td.actions
+        a(href='#')
+         img(src='images/view.png', alt='View')
+         | View
+       td.actions
+        a(href='#')
+         img(src='images/edit.png', alt='View')
+         | Edit
+       td.actions
+        a(href='#')
+         img(src='images/approve.png', alt='View')
+         | Approve
+     tfoot
+      tr
+       td(colspan='4')
+        a.button(href="/administration/properties") Manage All Projects
+        ul.pager
+         li
+          a(href='#') Prev
+         li.selected
+          a(href='#') 1
+         li
+          a(href='#') 2
+         li
+          a(href='#') 3
+         li
+          a(href='#') 4
+         li
+          a(href='#') Next
+   #dashboard-right-col
+    .grid-header
+     h2 This Month
+    table.admin-gridview
+     tbody
+      tr
+       td
+        img(src='images/grey-arrow.png')
+        | Website Signups
+       td 135
+      tr
+       td
+        img(src='images/grey-arrow.png')
+        | Deal Enquiries
+       td 135
+      tr
+       td
+        img(src='images/grey-arrow.png')
+        | Deal Registrations
+       td 135
+      tr
+       td
+        img(src='images/grey-arrow.png')
+        | Shared Deal Registrations
+       td 135
+     tfoot
+      tr
+       td(colspan='4')
+        a.button(href='#') View More Statistics
+    .grid-header
+     h2 Advertising
+    table.admin-gridview
+     tbody
+      tr
+       td Ads currently in rotation
+       td 24
+     tfoot
+      tr
+       td(colspan='4')
+        a.button(href='#') Manage Ads
+    .grid-header
+     h2 Product and Service Suppliers
+    table.admin-gridview
+     tbody
+      tr
+       td Suppliers currently in rotation
+       td 36
+     tfoot
+      tr
+       td(colspan='4')
+        a.button(href="/administration/services") Manage Suppliers
