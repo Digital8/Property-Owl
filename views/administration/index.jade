@@ -7,10 +7,6 @@ block content
     include ../admin-menu
     h1 Administration
     #dashboard-left-col
-      ul
-        - each page in pages
-          li
-            a(href="/administration/#{page.url}")= page.name
       .grid-header
        h2 Pending Property Listings
        .grid-summary 1 - 4 of 24
