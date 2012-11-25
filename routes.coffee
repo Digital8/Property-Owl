@@ -125,6 +125,7 @@ module.exports = (app) ->
   app.get '/administration/properties/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_properties.add
   app.post '/administration/properties/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_properties.create
   app.get '/administration/properties/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_properties.edit
+  app.put '/administration/properties/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_properties.update
   
   # Misc Routes
   app.get '/login', controllers.misc.login
