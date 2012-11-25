@@ -102,7 +102,10 @@ block content
                   option(value="4") 4
                   option(value="5") 5
             .submit
-              a.left-button(href="/administration/properties/add?step=1") Previous Step
+              - if (mode == 'edit')
+                a.left-button(href="/administration/properties/add?step=1&edit") Previous Step
+              - else
+                a.left-button(href="/administration/properties/add?step=1") Previous Step
               input.button(type='submit', value='Next Step')
         //
           end details

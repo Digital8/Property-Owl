@@ -37,12 +37,18 @@ exports.add = (req,res) ->
       if req.query.step? and req.session.newPropertyId?        
         switch req.query.step
           when '1'
-            delete req.session.newPropertyId
-            res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}
+            if req.query.edit?
+              models.properties.getAllPropertiesById req.session.newPropertyId, (err, results) ->
+                if results.length >= 1 then results = results.pop()
+                res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: results or {}, mode: 'edit'
+            else
+              delete req.session.newPropertyId
+              res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}, mode: 'create'
           when '2'
+            if req.query.edit? then mode = 'edit' else mode = ''
             models.media.getMediaByPropertyId req.session.newPropertyId, (err, files) ->
               if err then throw err
-              res.render 'administration/properties/features', files: files or {}
+              res.render 'administration/properties/features', files: files or {}, mode: mode or {}
           when '3'
             models.properties.getAllPropertiesById req.session.newPropertyId, (err, property) ->
               models.deals.getDealsByPropertyId req.session.newPropertyId, (err, deals) ->
@@ -60,7 +66,7 @@ exports.add = (req,res) ->
           else
             res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}
       else
-        res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}
+        res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}, mode: 'create'
 
 ## POST ##
 exports.create = (req,res) ->
@@ -90,7 +96,7 @@ exports.create = (req,res) ->
         else
           models.properties.addProperty req.body, (err, results) ->
             if err then throw err
-            #req.session.newPropertyId = results.insertId
+            req.session.newPropertyId = results.insertId
             res.redirect "/administration/properties/add?step=2"
       when '2'
         if req.body.cmdUpload?
@@ -109,13 +115,11 @@ exports.create = (req,res) ->
                 image: '0'
                   
               models.media.addMedia mediaInfo, (err, results) ->
-                console.log err
-                console.log results
                 req.flash('success','File uploaded successfully!')
-                res.redirect "/administration/properties/add?step=2"
+                res.redirect 'back'
             else
               req.flash('error','A system error occured processing the upload :(')
-              res.redirect "/administration/properties/add?step=2"
+              res.redirect 'back'
         else
           models.properties.updateProperty req.body, (err, results) ->
             res.redirect "/administration/properties/add?step=3"
@@ -185,7 +189,32 @@ exports.create = (req,res) ->
     res.render 'administration/properties/details'
   
 exports.edit = (req,res) ->
+  req.session.newPropertyId = req.params.id
+  res.redirect '/administration/properties/add?step=1&edit'
   
 exports.update = (req,res) ->
+  req.assert('developer','Please enter a developer').isNumeric()
+  req.assert('address','Please enter a valid address').notEmpty()
+  req.assert('ptype','Please enter a developer').isNumeric().notEmpty()
+  req.assert('suburb','Please enter a valid suburb').notEmpty()
+  req.assert('deal_type','Please enter a valid suburb').notEmpty()
+  req.assert('state','Please enter a valid state').notEmpty()
+  req.assert('postcode','Please enter a valid postcode').isNumeric().len(4,4).notEmpty()
+  req.assert('title','Please enter a title for the deal').notEmpty()
+  req.assert('price','Please enter a numeric only value.').isNumeric()
+  
+  errors = req.validationErrors(true)
+  if errors
+    keys = Object.keys(errors)
+
+    for key in keys
+      req.flash('error', errors[key].msg)
+      
+    req.session.step1 = req.body
+    res.redirect "/administration/properties/add?step=1&edit"
+  else
+    models.properties.updatePropertyDetails req.session.newPropertyId, req.body, (err, results) ->
+      if err then throw err
+      res.redirect "/administration/properties/add?step=2&edit"
   
 exports.destroy = (req,res) ->
