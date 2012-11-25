@@ -22,27 +22,27 @@ $(function(){
 	// show register form
 	var registerModal = $(".register-overlay");
 	
-	$(".show-register, .close-register").on("click", function(){
+	$(".show-register, .close-register").on("click", function(event){
+		event.preventDefault();
 		registerModal.fadeToggle(150);
-		
 		return false;
 	});
 	
 	// show login form
 	var loginModal = $(".login-overlay");
 	
-	$(".show-login, .close-login").on("click", function(){
+	$(".show-login, .close-login").on("click", function(event){
+		event.preventDefault();
 		loginModal.fadeToggle(150);
-		
 		return false;
 	});
 	
 	// show modal
 	var modal = $(".modal-overlay");
 	
-	$(".show-modal, .close-modal").on("click", function(){
+	$(".show-modal, .close-modal").on("click", function(event){
+	  event.preventDefault();
 		modal.fadeToggle(150);
-		
 		return false;
 	});
 
