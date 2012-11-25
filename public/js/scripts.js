@@ -19,32 +19,50 @@ $(function(){
 		return false;
 	});*/
 	
+	$(".overlay .modal").on("click", function(event){
+	  event.stopPropagation()
+	  event.preventDefault();
+	  return false;
+	});
+	
+	$(".overlay").on("click", function(event){
+	  event.preventDefault();
+	  $(this).fadeToggle(150);
+	  return false;
+	});
+	
 	// show register form
 	var registerModal = $(".register-overlay");
 	
-	$(".show-register, .close-register").on("click", function(){
+	$(".show-register, .close-register").on("click", function(event){
+		event.preventDefault();
 		registerModal.fadeToggle(150);
-		
 		return false;
 	});
 	
 	// show login form
 	var loginModal = $(".login-overlay");
 	
-	$(".show-login, .close-login").on("click", function(){
+	$(".show-login, .close-login").on("click", function(event){
+		event.preventDefault();
 		loginModal.fadeToggle(150);
-		
 		return false;
 	});
 	
 	// show modal
 	var modal = $(".modal-overlay");
 	
-	$(".show-modal, .close-modal").on("click", function(){
+	$(".show-modal, .close-modal").on("click", function(event){
+	  event.preventDefault();
 		modal.fadeToggle(150);
-		
 		return false;
 	});
+
+  // find deals form (mobile breakpoint)
+  $(".find-deals h2").on("click", function(){
+    var findDeals = $(this).closest(".find-deals");
+    findDeals.toggleClass("display");
+  });
 
   $(".savebuttons").on("click", function(){
 	  $.ajax({
