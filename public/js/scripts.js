@@ -19,6 +19,18 @@ $(function(){
 		return false;
 	});*/
 	
+	$(".overlay.modal").on("click", function(event){
+	  event.stopPropogation();
+	  event.preventDefault();
+	  return false;
+	});
+	
+	$(".overlay").on("click", function(event){
+	  event.preventDefault();
+	  $(this).fadeToggle(150);
+	  return false;
+	});
+	
 	// show register form
 	var registerModal = $(".register-overlay");
 	
