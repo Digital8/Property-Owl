@@ -30,10 +30,22 @@ exports.create = (req, res) ->
     res.redirect '/administration/services'
           
 exports.edit = (req, res) ->
+  models.services.getServiceById req.params.id, (err, results) ->
+    models.services.getAllServiceCategories (err, categories) ->
+      if results.length >= 1 then results = results.pop()
+      res.render 'administration/services/edit', service: results or {}, categories: categories or {}
   
 exports.update = (req, res) ->
+  req.body.logo ?= ''
+  req.body.visible ?= 1
+  models.services.updateService req.params.id, req.body, (err, results) ->
+    if err then throw err
+    res.redirect '/administration/services/edit/' + req.params.id
   
-exports.destroy = (req, res) ->
+exports.delete = (req, res) ->
+  models.services.deleteService req.params.id, (err, results) ->
+    if err then throw err
+    res.redirect 'back'
   
 # Cateogries section
 
@@ -49,3 +61,18 @@ exports.createCategory = (req, res) ->
 
 exports.addCategory = (req, res) ->
   res.render 'administration/services/addCategory'
+
+exports.editCategory = (req, res) ->
+  models.services.getCategoryById req.params.id, (err, results) ->
+    if results.length >= 1 then results = results.pop()
+    res.render 'administration/services/editCategory', category: results or {}
+  
+exports.updateCategory = (req, res) ->
+  models.services.updateCategory req.params.id, req.body, (err, results) ->
+    if err then throw err
+    res.redirect 'back'
+
+exports.deleteCategory = (req, res) ->
+  models.services.deleteCategory req.params.id, (err, results) ->
+    if err then throw err
+    res.redirect 'back'

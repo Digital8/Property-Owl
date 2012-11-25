@@ -52,10 +52,10 @@ block content
            td= service.category
            td= service.suburb
            td= service.state.toUpperCase()
-           td Y
-           td 124
+           td Yes
+           td 
            td.actions
-             a(href='#', alt='view property')
+             a(href='/products/#{service.service_id}', alt='view property', target="_blank")
                img(src='/images/view.png', alt='View')
                | View
            td.actions
@@ -68,8 +68,9 @@ block content
                | Delete
      tfoot
        tr
-         td(colspan='12')
-           ul.pager
+         td(colspan='12')&nbsp;
+           //
+            ul.pager
              li.disabled
                a(href='#') Prev
              li.selected

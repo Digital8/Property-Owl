@@ -1,0 +1,16 @@
+extends ../../layout
+
+block content
+  
+  //
+    main content
+  .container.row.main
+    h1 Supplier Categories
+    include navigation
+    .grid-header
+      h3 Add Category
+      form#search-form(action="/administration/services/categories/edit/#{category.category_id}",method="post")
+        input(type="hidden",name="_method",value="put")
+        input(type="text",name="category",value="#{category.category}")
+        p
+          input.button(type="submit",value="Save")
