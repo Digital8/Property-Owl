@@ -1889,6 +1889,247 @@ a, a:visited {
     cursor: pointer;
 }
 
+/* @group register modal */
+
+.register-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.85);
+	
+	.modal {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 36.125em;
+		height: 30.5625em;
+		margin: 30.5625em / 2 * -1 0 0 36.125em / 2 * -1;
+		padding: 175px 55px 0;
+		background: url(../images/register-form-bg.png) no-repeat center center;
+		background-size: 100% auto;
+		
+		.close-register {
+			display: block;
+			position: absolute;
+			top: 8em;
+			right: 8.75em;
+			width: 1.125em;
+			height: 1.125em;
+		}
+		
+		.modal-title {
+			text-align: center;
+			color: #FFF;
+			font-size: 1.8em;
+			margin: 0 0 0.5em;
+			.text-shadow(~"0px -1px 0px rgba(0,0,0,0.3)");
+		}
+		
+		.modal-content {
+			input {
+				padding: 0 0.5em;
+				line-height: 2.2em;
+				height: 2.2em;
+				border: 1px solid #005b86 !important;
+				.box-shadow(~"inset 0px 1px 0px rgba(255,255,255,1), inset 0px 3px 5px rgba(0,0,0,0.05), 0px 1px 0px rgba(255,255,255,0.2) !important");
+				
+				&.half {
+					display: block;
+					float: left;
+					width: 48%;
+					margin: 0 2% 2% 0;
+				}
+			}
+			
+			.button {
+				.inline-block;
+				text-decoration: none;
+				background: #009300;
+				.box-shadow(~"inset 0px -50px 30px -30px rgba(0,87,0,0.5), inset 0px 1px 0px rgba(255,255,255,0.2) !important");
+				border: 1px solid #00375a !important;
+				color: #FFF;
+				.text-shadow(~"0px -1px 0px rgba(0,0,0,0.3)");
+				.rounded(4px);
+				height: 2.4em;
+				line-height: 2.4em;
+				padding: 0 0.5em;
+				text-align: center;
+				text-transform: uppercase;
+				.transition(all, 0.15s);
+				
+				&:hover {
+					background: #009300 + #222;
+				}
+				
+				&.right {
+					width: 40%;
+					margin-right: 3em;
+				}
+			}
+			
+			.submit-buttons {
+				.clearfix;
+				
+				.terms-checkbox {
+					float: left;
+					color: #75cfff;
+					font-size: 12px;
+					font-weight: normal;
+					width: 35%;
+					white-space: nowrap;
+					margin-left: 3em;
+					
+					input,
+					label {
+						.inline-block;
+						vertical-align: middle;
+					}
+					
+					label {
+						white-space: normal;
+						padding-left: 10px;
+						margin: 0;
+					}
+					
+					a {
+						color: #75cfff;
+						text-decoration: underline;
+					}
+				}
+			}
+			
+			hr {
+				clear: both;
+				margin: 10px 7em 10px 4em;
+				border-top: 1px solid #267ab6;
+			}
+			
+			.center {
+				text-align: center;
+				font-size: 12px;
+				color: #75cfff;
+				
+				.button {
+					margin-top: 0.2em;
+					line-height: 2em;
+					height: 2em;
+				}
+			}
+		}
+	}
+}
+
+/* @end */
+
+/* @group modal */
+
+.modal-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 99999;
+	background: rgba(30,100,181,0.8);
+	
+	.modal {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 50em;
+		height: 25em;
+		margin: -12.5em 0 0 -25em;
+		background: #FFF;
+		.rounded(6px);
+		.box-shadow(~"0px 3px 5px rgba(0,0,0,0.5)");
+		padding: 5em 2.5em 2.5em;
+		
+		&.small {
+			width: 40em;
+			height: 15em;
+			margin: -7.5em 0 0 -20em;
+		}
+		
+		&.large {
+			width: 50em;
+			height: 35em;
+			margin: -17.5em 0 0 -25em;
+		}
+		
+		.close-modal {
+			position: absolute;
+			top: 1.2em;
+			right: 1.2em;
+			width: 1.3em;
+			height: 1.3em;
+			.opacity(0.2);
+			.transition(all, 0.15s);
+			
+			img {
+				display: block;
+			}
+			
+			&:hover {
+				.opacity(1);
+			}
+		}
+		
+		.modal-title {
+			position: absolute;
+			top: 1.2em;
+			margin: 0;
+		}
+		
+		&.warning,
+		&.error,
+		&.success,
+		&.info {
+			h1 {
+				padding-left: 1.5em;
+				background-repeat: no-repeat;
+				background-size: auto 100%;
+				background-position: left center;
+			}
+		}
+		
+		&.warning h1 {
+			background-image: url(../images/icon-warning.png);
+			color: #e6b000;
+			.text-shadow(~"0px 1px 0px " darken(#e6b000, 10%));
+		}
+		
+		&.error h1 {
+			background-image: url(../images/icon-error.png);
+			color: #cd4101;
+			.text-shadow(~"0px 1px 0px " darken(#cd4101, 10%));
+		}
+		
+		&.success h1 {
+			background-image: url(../images/icon-success.png);
+			color: #60ba00;
+			.text-shadow(~"0px 1px 0px " darken(#60ba00, 10%));
+		}
+		
+		&.info h1 {
+			background-image: url(../images/icon-info.png);
+			color: #0085C6;
+			.text-shadow(~"0px 1px 0px " darken(#0085C6, 10%));
+		}
+		
+		.modal-content {
+			width: 100%;
+			height: 100%;
+			overflow-y: auto;
+		}
+	}
+}
+
+/* @end */
+
 /*
  * jQuery FlexSlider v2.0
  * http://www.woothemes.com/flexslider/

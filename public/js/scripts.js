@@ -11,6 +11,25 @@ $(function(){
 	
 	
 	// show modal
+	/*var modal = $(".modal-overlay");
+	
+	$(".show-modal, .close-modal").on("click", function(){
+		modal.fadeToggle(150);
+		
+		return false;
+	});*/
+	
+	// show register form
+	var registerModal = $(".register-overlay");
+	
+	$(".show-register, .close-register").on("click", function(){
+		registerModal.fadeToggle(150);
+		
+		return false;
+	});
+	
+	
+	// show modal
 	var modal = $(".modal-overlay");
 	
 	$(".show-modal, .close-modal").on("click", function(){
@@ -18,8 +37,6 @@ $(function(){
 		
 		return false;
 	});
-	
-	
 
   $(".savebuttons").on("click", function(){
 	  $.ajax({
