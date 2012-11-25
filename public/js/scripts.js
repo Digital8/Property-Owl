@@ -46,6 +46,12 @@ $(function(){
 		return false;
 	});
 
+  // find deals form (mobile breakpoint)
+  $(".find-deals h2").on("click", function(){
+    var findDeals = $(this).closest(".find-deals");
+    findDeals.toggleClass("display");
+  });
+
   $(".savebuttons").on("click", function(){
 	  $.ajax({
 	    url: '/ajax/savedeal',
