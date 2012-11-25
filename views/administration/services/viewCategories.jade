@@ -16,7 +16,7 @@ block content
         - each c in categories
           tr
             td= c.category
-            td
+            td= c.cnt
             td.actions
               a(href='/administration/services/categories/edit/#{c.category_id}', alt='edit property')
                 img(src='/images/edit.png', alt='Edit')
