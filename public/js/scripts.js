@@ -28,6 +28,14 @@ $(function(){
 		return false;
 	});
 	
+	// show login form
+	var loginModal = $(".login-overlay");
+	
+	$(".show-login, .close-login").on("click", function(){
+		loginModal.fadeToggle(150);
+		
+		return false;
+	});
 	
 	// show modal
 	var modal = $(".modal-overlay");

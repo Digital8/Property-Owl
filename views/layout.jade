@@ -76,6 +76,27 @@ head
             | Already registered?
             br
             a.button(href='#') Click here!
+    .login-overlay
+      .modal.main.success
+          a.close-login(href='#')
+            img(src='images/modal-close-white.png', alt='Close')
+          br
+          br
+          h1.modal-title Login
+          .modal-content.details-form
+            input.half(type='text', placeholder='Email Address')
+            input.half(type='text', placeholder='Password')
+            .submit-buttons
+              input.button.right(type='submit', value='Login')
+              .terms-checkbox(style='text-align: right;')
+                input#remember(type='checkbox')
+                label(for='terms') Remember Me
+            hr
+            .center
+              | Don't have an account?
+              br
+              a.button(href='#') Click here!
+      
   
     .container.row
       header#header
