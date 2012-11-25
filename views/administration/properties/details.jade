@@ -47,6 +47,8 @@ block content
         hr
         include ../../flashify
         form.details-form(action="/administration/properties/add?step=1",method="post")
+          - if (mode == 'edit')
+            input(type="hidden",name="_method",value="put")
           .left
             .inputs
               label.required(for='propertyDeveloper') Listed By

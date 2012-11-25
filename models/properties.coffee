@@ -29,7 +29,10 @@ exports.getPropertiesByDealType = (dealType, includeAllCategory, callback) ->
     db.query "SELECT * FROM #{db.prefix}properties AS P WHERE P.deal_type = ? OR P.deal_type = 'all'", [dealType] ,callback
 
 exports.addProperty = (vals, callback) ->
-  db.query "INSERT INTO #{db.prefix}properties(title, address, suburb, state, development_stage, description, property_type_id, price, deal_type, listed_by, created_at) VALUES(?,?,?,?,?,?,?,?,?,?, NOW())", [vals.title, vals.address, vals.suburb, vals.state, vals.development_stage, vals.description, vals.ptype, vals.price, vals.deal_type, vals.developer], callback
+  db.query "INSERT INTO #{db.prefix}properties(title, address, suburb, postcode, state, development_stage, description, property_type_id, price, deal_type, listed_by, created_at) VALUES(?,?,?,?,?,?,?,?,?,?, NOW())", [vals.title, vals.address, vals.suburb, vals.postcode, vals.state, vals.development_stage, vals.description, vals.ptype, vals.price, vals.deal_type, vals.developer], callback
+
+exports.updatePropertyDetails = (id, vals, callback) ->
+  db.query "UPDATE #{db.prefix}properties SET title = ?, address = ?, suburb = ?, postcode = ?, state = ?, development_stage = ?, description = ?, property_type_id = ?, price = ?, deal_type = ?, listed_by = ? WHERE property_id = ?", [vals.title, vals.address, vals.suburb, vals.postcode, vals.state, vals.development_stage, vals.description, vals.ptype, vals.price, vals.deal_type, vals.developer, id], callback
 
 exports.getPropertiesOfBarnDeal = (property_id, callback) ->
   db.query "SELECT * FROM #{db.prefix}properties AS P WHERE P.deal_of = ?", [property_id], callback
