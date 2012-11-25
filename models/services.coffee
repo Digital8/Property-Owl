@@ -23,7 +23,7 @@ exports.getCountServicesByCategory = (cat_id, callback) ->
   db.query "SELECT COUNT(*) FROM #{db.prefix}services WHERE category_id = ?", [cat_id], callback 
 
 exports.getAllServiceCategories = (callback) ->
-  db.query "SELECT * FROM #{db.prefix}service_categories", callback
+  db.query "SELECT C.*, COUNT(S.service_id) AS cnt FROM #{db.prefix}service_categories AS C LEFT JOIN #{db.prefix}services AS S ON C.category_id = S.category_id GROUP BY C.category", callback
   
 exports.createService = (vals, callback) ->
   db.query "INSERT INTO #{db.prefix}services(category_id, company, logo, phone, address, suburb, state, email, postcode, visible, description) VALUES(?,?,?,?,?,?,?,?,?,?,?)", [vals.category, vals.company, vals.logo, vals.phone, vals.address, vals.suburb, vals.state, vals.email, vals.postcode, vals.visible, vals.description], callback  
