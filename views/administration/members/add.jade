@@ -4,47 +4,88 @@ block content
   //
     main content
   .container.row.main
-    include ../../left_nav
-    //
-      center-col
-    #center-col
-      h1 Members 
-        
-  
-      h4 Create New Member:
-      form.form-horizontal(action="/administration/members/add",method="post")
-        include ../../flashify
-        div.control-group  
-          label.control-label(for="inputEmail") Email:
-          div.controls
-            - if (values.email == undefined) values.email = ''
-            input#email(type="text",placeholder="Email",name="email",value="")
-        br
-        div.control-group
-          label.control-label(for="password") Password:
-          div.controls
-            input#password(type="password",placeholder="Password",name="password")
-            | &nbsp;
-            input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") Group:
-          div.controls
-            select(name="group")
-              - each group in groups
-                option(value="#{group.group_id}")= group.name
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") First Name:
-          div.controls
-            - if (values.fname == undefined) values.fname = ''
-            input#email(type="text",name="fname",placeholder="First Name",value="")
-        br
-        div.control-group  
-          label.control-label(for="inputEmail") Last Name:
-          div.controls
-            - if (values.lname == undefined) values.lname = ''
-            input#email(type="text",name="lname",placeholder="Last Name",value="")
-        br
-        div.form-actions
-          input.btn.btn-primary(type="submit",value="Create User")
+   h1 Add Member
+   .admin-actions
+    ul
+     li
+      a(href="/administration/members")
+       img(src='/images/manage.png')
+       | Manage Members
+     li.disabled
+      img(src='/images/add.png')
+      | Add New Member
+   .grid-header.form-header
+    ol.six
+     li.active
+      .ol-1-active
+      | Details
+
+   .details
+    h2 User Details
+    hr
+    form.details-form(action="/administration/members/add",method="post")
+     include ../../flashify
+     .left
+      .inputs
+       label(for='group') User Type
+       select(name="group")
+       - each group in groups
+        option(value="#{group.group_id}")= group.name
+      .inputs
+       label.required(for='fname') First Name
+       - if (values.fname == undefined) values.fname = ''
+        input#fname(type="text",name="fname",placeholder="First Name",value="")
+      .inputs
+       label.required(for='lname') Last Name
+       - if (values.lname == undefined) values.lname = ''
+        input#lname(type="text",name="lname",placeholder="Last Name",value="")
+      .inputs
+       label(for='company') Company
+       - if (values.company == undefined) values.company = ''
+        input#company(type="text",name="company",placeholder="Company",value="")
+      .inputs
+       label.required(for='phone') Phone
+       - if (values.phone == undefined) values.phone = ''
+        input#phone(type="text",name="phone",placeholder="Phone",value="")
+      .inputs
+       label(for='workPhone') Work Phone
+       - if (values.workPhone == undefined) values.workPhone = ''
+        input#workPhone(type="text",name="workPhone",placeholder="Work Phone",value="")
+      .inputs
+       label(for='mobile') Mobile
+       - if (values.mobile == undefined) values.mobile = ''
+        input#mobile(type="text",name="mobile",placeholder="Mobile",value="")
+     .right
+      .inputs
+       label.required(for='email') Email
+       - if (values.email == undefined) values.email = ''
+        input#email(type="text",placeholder="Email",name="email",value="")
+      .inputs
+       label.required(for='password') Password
+       - if (values.email == undefined) values.email = ''
+        input#password(type="password",placeholder="Password",name="password")
+        | &nbsp;
+        input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
+      .inputs
+       label.required(for='address') Address
+       - if (values.address == undefined) values.address = ''
+        input#address(type="text",name="address",placeholder="Address",value="")
+      .inputs
+       label.required(for='suburb') Suburb
+       - if (values.suburb == undefined) values.suburb = ''
+        input#suburb(type="text",name="suburb",placeholder="Suburb",value="")
+      .inputs
+       label.required(for='postcode') Postcode
+       - if (values.postcode == undefined) values.postcode = ''
+        input#postcode(type="text",name="postcode",placeholder="Postcode",value="")
+      br
+      .inputs
+       input(type='checkbox', name='newsletterSubscription', value='newsletterSubscription')
+       |  Subscribed to newsletter
+      .inputs
+       input(type='checkbox', name='propertySubscription', value='propertySubscription')
+       |  Subscribed to property alerts
+     .inputs
+     .submit
+      input.button(type='submit', value='Create User')
+      a.left-button(href="/administration/members") Cancel
