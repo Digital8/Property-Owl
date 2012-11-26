@@ -16,3 +16,6 @@ block content
           input(type="password",name="password",placeholder="Password",value="password")
         p
           input(type="submit",value="login")
+        p
+          - var redirect_url = (typeof(redirect) !== "undefined") ? redirect : '/'
+          input(type="hidden",name="redirect",value="#{redirect_url}")
