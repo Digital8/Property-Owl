@@ -14,7 +14,6 @@ exports.index = (req, res) ->
 exports.add = (req, res) ->
   res.render 'administration/advertisers/add'
 
-
 exports.create = (req, res) ->
   # req.assert('email', 'Invalid Email Address').isEmail()
   # req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
@@ -60,6 +59,17 @@ exports.edit = (req, res) ->
           unless value then advertiser[key] = ''
         
         res.render 'administration/advertisers/edit', advertiser: advertiser
+
+exports.update = (req, res) ->
+  req.body.id = req.params.id
+  
+  models.advertiser.update req.body, (err, results) ->
+    if err
+      req.flash 'error', 'an error occured updating the advertiser'
+      res.redirect 'back'
+    else
+      req.flash 'success', 'advertised updated'
+      res.redirect '/administration/advertisers'
 
 exports.delete = (req, res) ->
   models.advertiser.find req.params.id, (err, results) ->

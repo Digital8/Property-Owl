@@ -13,5 +13,8 @@ exports.create = (advertiser, callback) ->
   
   db.query "INSERT INTO #{table} (name,description,contactee,email,phone,address,suburb,state,postcode) VALUES(?,?,?,?,?,?,?,?,?)", [advertiser.name, advertiser.description, advertiser.contactee, advertiser.email, advertiser.phone, advertiser.address, advertiser.suburb, advertiser.state, advertiser.postcode], callback
 
+exports.update = (advertiser, callback) ->
+  db.query "UPDATE #{table} SET name = ?, description = ?, contactee = ?, email = ?, phone = ?, address = ?, suburb = ?, state = ?, postcode = ? WHERE advertiser_id = ?", [advertiser.name, advertiser.description, advertiser.contactee, advertiser.email, advertiser.phone, advertiser.address, advertiser.suburb, advertiser.state, advertiser.postcode, advertiser.id], callback
+
 exports.delete = (id, callback) ->
   db.query "DELETE FROM #{table} WHERE advertiser_id = ?", [id], callback

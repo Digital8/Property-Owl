@@ -1,0 +1,67 @@
+extends ../../layout
+
+block content
+  .container.row.main
+   
+    include ../../admin-menu
+    
+    h1 Add Advertisement
+    
+    .admin-actions
+      ul
+        li
+          a(href="/administration/advertisements")
+            img(src='/images/manage.png')
+            | Manage
+    
+    .grid-header.form-header
+      ol.six
+        li.active
+          .ol-1-active
+          | Details
+    
+    .details
+      h2 Advertisement Details
+      hr
+      form.details-form(action="/administration/advertisements/add", method="post")
+        include ../../flashify
+        
+        .inputs
+          label.required(for="description") Description
+            textarea#description(type="text", name="description")
+        
+        .inputs
+          label.required(for='page') Page
+            input#page(type="text",name="page", value="")
+        
+        .inputs
+          label(for='group') Space
+            select(name="group")
+              - each adspace in adspaces
+                option(value="#{adspace.adspace_id}")= adspace.name
+        
+        .inputs
+          label.required(for='image') Image
+            input#image(type="file", name="image", value="")
+        
+        .inputs
+          label.required(for='hyperlink') Hyperlink
+            input#hyperlink(type="url", name="hyperlink", value="")
+        
+        .inputs
+          label.required(for='visible') Visible
+            input#visible(type="checkbox", name="visible", value="")
+        
+        .inputs
+          label.required(for='start') Start
+            input#start(type="date", name="start", value="")
+        
+        .inputs
+          label.required(for='stop') Stop
+            input#stop(type="date", name="stop", value="")
+        
+        .inputs
+        
+        .submit
+          input.button(type='submit', value='Post Advertisement')
+          a.left-button(href="/administration/advertisements") Cancel

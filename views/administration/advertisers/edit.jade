@@ -39,7 +39,7 @@ block content
           
           .inputs
             label(for='description') Description
-            input#description(type="text", placeholder="Company", name="company", value="#{advertiser.description}")
+            input#description(type="text", placeholder="Description", name="description", value="#{advertiser.description}")
           
           .inputs
             label.required(for='contactee') Contactee
@@ -65,6 +65,10 @@ block content
           .inputs
             label.required(for='postcode') Postcode
             input#postcode(type="text", name="postcode", placeholder="Postcode", value="#{advertiser.postcode}")
+          
+          .inputs
+            label.required(for='state') State
+            input#state(type="text", name="state", placeholder="State", value="#{advertiser.state}")
         
         .inputs
         
