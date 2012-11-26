@@ -129,7 +129,7 @@ module.exports = (app) ->
   
   # Misc Routes
   #app.get '/login', controllers.misc.login
-  app.get '/logout', controllers.misc.logout
+  #app.get '/logout', controllers.misc.logout
   app.post '/ajax/login', controllers.ajax.login
   app.post '/ajax/savedeal', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.savedeal
   app.post '/ajax/removedeal', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.removedeal
