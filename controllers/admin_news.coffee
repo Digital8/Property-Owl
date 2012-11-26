@@ -26,17 +26,19 @@ exports.add = (req,res) ->
 
 exports.create = (req,res) ->
   req.body.id = res.locals.objUser.id
+  
   models.news.insert req.body, (err, results) ->
     if err
-      req.flash('error','Some unknown error occured')
+      req.flash 'error','Some unknown error occured'
+      res.redirect 'back'
     else
-      req.flash('success','News post submitted')
-    res.redirect 'back'
+      req.flash 'success','News post submitted'
+      res.redirect 'administration/news'
 
 exports.edit = (req,res) ->
   models.news.getNewsById req.params.id, (err, results) ->
     if results.length is 0
-      req.flash('error','Uh Oh, that news post doesn\'t exist.')
+      req.flash 'error', "Uh Oh, that news post doesn't exist."
       res.redirect '/administration/news'
     else
       res.render 'administration/news/edit', news: results.pop() or {}
