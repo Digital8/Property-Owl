@@ -14,7 +14,7 @@ fs = require 'fs'
 
 module.exports = (template, objUser, objProperty) ->
   #the first thing we need to do is try to load the template
-  fs.readFile '../emails/question-notification.html', 'utf-8', (err, data) ->
+  fs.readFile "../emails/#{template}.html", 'utf-8', (err, data) ->
     if err?
       console.log 'Error:', err
       throw err
