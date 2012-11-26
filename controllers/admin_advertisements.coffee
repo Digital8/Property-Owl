@@ -1,4 +1,7 @@
+fs = require 'fs'
+
 async = require 'async'
+uuid = require 'node-uuid'
 
 system = require '../system'
 
@@ -28,4 +31,21 @@ exports.add = (req, res) ->
       pages: results.page
 
 exports.create = (req, res) ->
-  console.dir files: req.files
+  fs.readFile req.files.image.path, (error, data) ->
+    id = uuid()
+    
+    path = "#{system.bucket}/#{id}"
+    
+    fs.writeFile path, data, (error) ->
+      
+      req.assert('description', 'Please enter a description').notEmpty()
+      
+      errors = req.validationErrors true
+      if errors
+        keys = Object.keys errors
+        
+        req.flash('error', errors[key].msg) for key in keys 
+        
+        res.redirect 'back'
+      
+      res.redirect '/administration/advertisements'

@@ -23,6 +23,8 @@ exports.config = config
 
 exports.db.prefix = config.database.prefix
 
+exports.bucket = "#{__dirname}/uploads"
+
 # Give our loader some methods to load in specific resources
 exports.load = 
   model: (model) ->
