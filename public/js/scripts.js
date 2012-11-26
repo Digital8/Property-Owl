@@ -119,7 +119,7 @@ $(function(){
 	  var pass = $(".login-password").val();
 	  var error = $(".login-error");
 	  
-	  login(user, pass, function(success){
+	  login(email, pass, function(success){
 	    if (success){
 	      window.location.replace("/");
 	    }
