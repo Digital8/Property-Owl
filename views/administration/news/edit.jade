@@ -1,28 +1,35 @@
 extends ../../layout
 
 block content
-  //
-    main content
   .container.row.main
-   include ../../admin-menu
-   h1 Edit Article
-   .grid-header.form-header
-    ol.six
-     li.active
-      .ol-1-active
-      | Details
-   .details
-    h2 News Details
-    hr
-    form.details-form(action="/administration/news/edit/#{news.news_id}",method="post")
-     input(type="hidden",name="_method",value="put")
-     include ../../flashify
-     .inputs
-      label.control-label(for="inputTitle") Title
-      input#inputTitle(type="text",name="title",value="#{news.title}")
-     .inputs 
-      label.control-label(for="inputContent") Content
-      textarea#inputContent.span8(name="content",rows="10",value="#{news.content}")
-     .submit
-      input.button(type="submit",value="Update News")
-      a.left-button(href="/administration/news/") Cancel
+    include ../../admin-menu
+    
+    h1 Edit Article
+    
+    .grid-header.form-header
+      ol.six
+        li.active
+          .ol-1-active
+          | Details
+    
+    .details
+      h2 News Details
+      
+      hr
+      
+      form.details-form(action="/administration/news/edit/#{news.news_id}", method="post")
+        input(type="hidden", name="_method", value="put")
+        
+        include ../../flashify
+        
+        .inputs
+          label.control-label(for="inputTitle") Title
+          input#inputTitle(type="text", name="title", value="#{news.title}")
+        
+        .inputs 
+          label.control-label(for="inputContent") Content
+          textarea#inputContent.span8(name="content", rows="10")= news.content
+        
+        .submit
+          input.button(type="submit", value="Update News")
+          a.left-button(href="/administration/news") Cancel
