@@ -70,7 +70,6 @@ module.exports = (app) ->
   app.get '/developers/deals/add', helpers.restrictTo(system.config.acl.deeveloper), helpers.restrictTo(system.config.acl.admin), controllers.dev_deals.add
   app.post '/developers/deals/add', helpers.restrictTo(system.config.acl.deeveloper), helpers.restrictTo(system.config.acl.admin), controllers.dev_deals.create
   
-  
   # News
   app.get '/news', helpers.requireAuth, controllers.news.index
   
@@ -80,6 +79,9 @@ module.exports = (app) ->
   # Administration Routes
   app.get '/administration', helpers.restrictTo(system.config.acl.admin), controllers.admin_index.index
   
+  app.get '/administration/advertising', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertising.index
+  
+  # advertisers
   app.get '/administration/advertisers', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisers.index
   app.post '/administration/advertisers/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisers.create
   app.get '/administration/advertisers/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisers.add
@@ -87,6 +89,15 @@ module.exports = (app) ->
   app.put '/administration/advertisers/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisers.update
   app.get '/administration/advertisers/delete/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisers.delete
   app.delete '/administration/advertisers/delete/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisers.destroy
+  
+  # advertisements
+  app.get '/administration/advertisements', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisements.index
+  app.post '/administration/advertisements/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisements.create
+  app.get '/administration/advertisements/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisements.add
+  app.get '/administration/advertisements/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisements.edit
+  app.put '/administration/advertisements/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisements.update
+  app.get '/administration/advertisements/delete/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisements.delete
+  app.delete '/administration/advertisements/delete/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisements.destroy
   
   app.get '/administration/news', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.index
   app.post '/administration/news/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.create

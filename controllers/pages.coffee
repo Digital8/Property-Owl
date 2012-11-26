@@ -11,17 +11,17 @@
 system = require '../system'
 
 helpers = 
-  hash: system.load.helper('hash')
-  
-models = 
-  pages: system.load.model 'pages'
+  hash: system.load.helper 'hash'
+
+models =
+  page: system.load.model 'page'
   user: system.load.model 'user'
 
 # GET
 exports.index = (req,res) ->
   url = req.params.pop()
   
-  models.pages.getPageByUrl url, (err, results) ->
+  models.page.getPageByUrl url, (err, results) ->
     if err then throw err
     
     if results.length is 0 

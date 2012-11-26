@@ -8,13 +8,13 @@
 system = require '../system'
 
 models = 
-  pages: system.load.model('pages')
+  page: system.load.model 'page'
 
 helpers = {}
  
 exports.index = (req,res) ->
-  models.pages.getAllPages (err, results) ->
-    if err then throw err
+  models.page.all (error, results) ->
+    if error then throw error
     res.render 'administration/pages/index', pages: results or {}
   
 exports.view = (req,res) ->
@@ -28,7 +28,6 @@ exports.create = (req,res) ->
   req.body.content ?= ''
   req.body.enabled ?= 1
   
-
   req.assert('url', 'Please enter a URL for page').len(1,100).notEmpty()
   req.assert('header', 'Page title is empty').len(1,100).notEmpty()
   
@@ -42,19 +41,19 @@ exports.create = (req,res) ->
 
     res.redirect 'back'
   else
-    models.pages.getPageByUrl req.body.url, (err, results) ->
+    models.page.getPageByUrl req.body.url, (err, results) ->
       if err then throw err
       if results.length >= 1
         req.flash('error','Sorry, page URL is already in use')
       else
-        models.pages.createPage req.body, (err, results) ->
+        models.page.create req.body, (err, results) ->
           if err then throw err
           req.flash('success','Page created')
           res.redirect 'back'
           
 
 exports.edit = (req,res) ->
-  models.pages.getPageById req.params.id, (err, results) ->
+  models.page.find req.params.id, (err, results) ->
     if err then throw err
     if results.length is 0
       req.flash('error','Page not found')
@@ -63,14 +62,14 @@ exports.edit = (req,res) ->
       res.render 'administration/pages/edit', page: results.pop()
   
 exports.update = (req,res) ->
-  models.pages.getPageById req.params.id, (err, results) ->
+  models.page.find req.params.id, (err, results) ->
     if err then throw err
     if results.length is 0
       req.flash('error','Page not found')
       res.redirect 'back'
     else
       req.body.id = req.params.id
-      models.pages.updatePage req.body, (err, results) ->
+      models.page.update req.body, (err, results) ->
         if err then throw err
         req.flash('success', 'Page updated successfully!')
         res.redirect 'back'
