@@ -124,7 +124,7 @@ $(function(){
 	      window.location.replace("/");
 	    }
 	    else {
-	      error.val("Login Failed, Please try again.");
+	      error.html("Login Failed, Please try again.");
 	      error.fadeIn().fadeOut().fadeIn().fadeOut().fadeIn();
 	    }
 	  });
