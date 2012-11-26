@@ -29,22 +29,22 @@ block content
      tbody
       - each advertisement in advertisements
          tr
-           td= advertiser.advertisement_id
-           td= advertiser.description
-           td= advertiser.advertisers
-           td= advertiser.pages
-           td= advertiser.spaces
-           td= advertiser.image
-           td= advertiser.hyperlink
-           td= advertiser.duration
-           td= advertiser.visible
+           td= advertisement.advertisement_id
+           td= advertisement.description
+           td= advertisement.advertisers
+           td= advertisement.pages
+           td= advertisement.spaces
+           td= advertisement.image
+           td= advertisement.hyperlink
+           td= advertisement.duration
+           td= advertisement.visible
            
            td.actions
-             a(href='/administration/advertisers/edit/#{advertiser.advertiser_id}', alt='edit')
+             a(href='/administration/advertisements/edit/#{advertisement.advertisement_id}', alt='edit')
                img(src='/images/edit.png', alt='edit')
                | Edit
            
            td.actions
-             a(href='/administration/advertisers/delete/#{advertiser.advertiser_id}', alt='delete')
+             a(href='/administration/advertisements/delete/#{advertisement.advertisement_id}', alt='delete')
                img(src='/images/delete.png', alt='delete')
                | Delete
