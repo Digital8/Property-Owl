@@ -125,7 +125,7 @@ $(function(){
 	    }
 	    else {
 	      error.html("Login Failed, Please try again.");
-	      error.fadeIn().fadeOut().fadeIn().fadeOut().fadeIn();
+	      error.fadeIn(350).fadeOut(350).fadeIn(350).fadeOut(350).fadeIn(350);
 	    }
 	  });
 	  
