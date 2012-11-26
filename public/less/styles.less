@@ -1701,14 +1701,19 @@ body {
             font-size: 0.8em;
         }
         
-        input[type=text], textarea {
+        input[type=text], input[type=password], textarea {
             border: solid 1px #adadad;
             .rounded(0.313em);
             .box-shadow(~"inset 0px 1px 1px rgba(0,0,0,0.1)");
             background: #fff url(../images/input-bg.png) repeat-x top center;
         }
         
-        input[type=text], textarea, select {
+        input[type=password] {
+            width: 49.5% !important;
+            display: inline;
+        }
+        
+        input[type=text], input[type=password], textarea, select {
             width: 100%;
             line-height: 25px;
         }

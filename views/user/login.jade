@@ -8,14 +8,28 @@ block content
        center-col
      #center-col
        h1 Login
-       include ../flashify
-       form(action="/login",method="post")
-        p
-          input(type="text",name="email",placeholder="Email",value="bscarvell@gmail.com")
-        p
-          input(type="password",name="password",placeholder="Password",value="password")
-        p
-          input(type="submit",value="login")
-        p
-          - var redirect_url = (typeof(redirect) !== "undefined") ? redirect : '/'
-          input(type="hidden",name="redirect",value="#{redirect_url}")
+       .details
+         form.details-form(action="/login",method="post")
+          .inputs
+            include ../flashify
+          .left
+            .inputs
+              label(for='email') Email
+              input#email(type="text",name="email",placeholder="Email",value="bscarvell@gmail.com")
+            .inputs
+              label(for='password') Password
+              input#password(type="password",name="password",placeholder="Password",value="password")
+          .inputs
+          .submit
+            input.button(type="submit",value="login")
+            - var redirect_url = (typeof(redirect) !== "undefined") ? redirect : '/'
+            input(type="hidden",name="redirect",value="#{redirect_url}")
+    //
+      end center-col
+    //
+      right-col
+    #right-col
+      img#ad-tower1.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
+      img#ad-tower2.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
+    //
+      end right-col
