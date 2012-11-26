@@ -14,19 +14,19 @@ models =
   user: system.load.model 'user'
   saveddeals: system.load.model 'saveddeals'
   deals: system.load.model 'deals'
-  media: system.load.model('media')
+  media: system.load.model 'media'
   
 helpers =
   hash: system.load.helper 'hash'
 
 exports.login = (req, res) ->
   models.user.login req.body.e, helpers.hash(req.body.p), (err, results) ->
-    if results.length is 0
-      res.send status: false
-    else
+    if results.length >= 1
       results = results.pop()
       req.session.user_id = results.user_id
-      res.send status: true
+      res.send status: 200
+    else
+      res.send status: 401
       
 exports.savedeal = (req, res) ->
   req.assert('id', 'Property ID Not Numeric').isInt()

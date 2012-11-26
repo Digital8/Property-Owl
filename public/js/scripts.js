@@ -100,6 +100,24 @@ $(function(){
   /*$(".secure-button").on("click", function(){
     $('body').append('<div class="quick-view-modal" id="register" onclick="javascript: window.location=\'/best-deal\';" style=""><div class="modal"><a href="#" class="modal-close"></a></div></div>');
   });*/
+  
+  // Login
+	var login = function(user, pass, callback){
+	  $.ajax({
+	    url: '/ajax/login',
+	    type: 'post',
+	    data: 'e=' + user + '&p=' + pass
+	  }).done(function(d){
+	    callback(d.status == 200);
+	  });
+	  //return false;
+	}
+	
+	$(".login-button").on("click", function(event){
+	  event.preventDefault();
+	  
+	  return false;
+	});
 	
 	updateTimer = function(){
 	  var timeNow = moment.utc();
