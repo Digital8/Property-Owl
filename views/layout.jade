@@ -1,39 +1,45 @@
 !!! 5
 html.no-js(lang='en')
   head
+    title Property Owl
+    
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-    title Property Owl
     meta(name='description', content='')
-    link(rel='icon', href='favicon.ico', type='image/x-icon')
     meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0')
-    //
-       styles 
-    //
-      <link rel="stylesheet/less" href="less/styles.less">
+    
+    link(rel='icon', href='favicon.ico', type='image/x-icon')
+    
+    // styles
+    link(rel="stylesheet/less", href="/less/styles.less")
+    
     //if lt IE 9
     script(src='/js/libs/less-1.3.0.min.js')
     link(rel='stylesheet', href='/css/styles.css')
-    //
-       fonts 
+    link(rel='stylesheet', href='/vendor/chosen/chosen/chosen.css')
+    
+    // fonts 
     script(type='text/javascript', src='//use.typekit.net/rej6muq.js')
     script(type='text/javascript')
       try{Typekit.load();}catch(e){}
     script(src='/js/libs/modernizr-2.5.3.min.js')
     script(src='/js/libs/jquery-1.7.2.min.js')
     script(src='/js/moment.min.js')
-  
-    //
-      superfish drop down menu
-    <script type="text/javascript" src="/js/hoverIntent.js"></script>
-    <script type="text/javascript" src="/js/superfish.js"></script>
+    script(src="/vendor/chosen/chosen/chosen.jquery.js")
+    
+    // superfish drop down menu
+    script(src="/js/hoverIntent.js")
+    script(src="/js/superfish.js")
+    
     script(type="text/javascript")
       // initialise plugins
       $(document).ready(function(){
         jQuery('ul.sf-menu').superfish();
       });
-  
+    
     script(src='/js/scripts.js')
+    
+    script(src='/js/chosen.js')
   
   body
 

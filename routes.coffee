@@ -117,7 +117,9 @@ module.exports = (app) ->
   app.get '/administration/pages/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_pages.add
   app.get '/administration/pages/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_pages.edit
   app.put '/administration/pages/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_pages.update
+  app.get '/administration/pages/delete/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_pages.delete
   app.post '/administration/pages/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_pages.create
+  app.delete '/administration/pages/delete/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_pages.destroy
   
   app.get '/administration/services', helpers.restrictTo(system.config.acl.admin), controllers.admin_services.index
   app.get '/administration/services/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_services.add

@@ -10,17 +10,17 @@
 
 db = require('../system').db
 
-exports.getAllPages = (callback) ->
+exports.all = (callback) ->
   db.query "SELECT * FROM #{db.prefix}pages", callback
-  
-exports.getPageByUrl = (url, callback) ->
+
+exports.findByUrl = (url, callback) ->
   db.query "SELECT * FROM #{db.prefix}pages WHERE url = ?", [url], callback
 
-exports.getPageById = (id, callback) ->
+exports.find = (id, callback) ->
   db.query "SELECT * FROM #{db.prefix}pages WHERE page_id = ?", [id], callback
   
-exports.createPage = (page, callback) ->
+exports.create = (page, callback) ->
   db.query "INSERT INTO #{db.prefix}pages(url, header, content, enabled, page_created_at) VALUES(?,?,?,?, NOW())", [page.url, page.header, page.content, page.enabled], callback
 
-exports.updatePage = (page, callback) ->
+exports.update = (page, callback) ->
   db.query "UPDATE #{db.prefix}pages SET url = ?, header = ?, content = ?, enabled = ? WHERE page_id = ?", [page.url, page.header, page.content, page.enabled, page.id], callback

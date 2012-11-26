@@ -21,7 +21,7 @@ models =
 exports.index = (req,res) ->
   url = req.params.pop()
   
-  models.page.getPageByUrl url, (err, results) ->
+  models.page.findByUrl url, (err, results) ->
     if err then throw err
     
     if results.length is 0 
@@ -45,6 +45,10 @@ exports.edit = (req,res) ->
 
 # POST
 exports.update = (req,res) ->
+
+# GET
+exports.delete = (req, res) ->
+  
 
 # DEL
 exports.destroy = (req,res) ->

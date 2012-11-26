@@ -23,7 +23,7 @@ block content
     .details
       h2 Advertisement Details
       hr
-      form.details-form(action="/administration/advertisements/add", method="post")
+      form.details-form(action="/administration/advertisements/add", method="post", enctype="multipart/form-data")
         include ../../flashify
         
         .inputs
@@ -31,18 +31,22 @@ block content
             textarea#description(type="text", name="description")
         
         .inputs
-          label.required(for='page') Page
-            input#page(type="text",name="page", value="")
+          label(for='page') Page
+            select(name="page", class="chzn-select", data-placeholder="Choose a page")
+              option(value="")
+              - each page in pages
+                option(value="#{page.page_id}")= page.header
         
         .inputs
-          label(for='group') Space
-            select(name="group")
+          label(for='adspace') Space
+            select(name="adspace", class="chzn-select", data-placeholder="Choose an ad space")
+              option(value="")
               - each adspace in adspaces
                 option(value="#{adspace.adspace_id}")= adspace.name
         
         .inputs
           label.required(for='image') Image
-            input#image(type="file", name="image", value="")
+            input#image(type="file", name="image")
         
         .inputs
           label.required(for='hyperlink') Hyperlink

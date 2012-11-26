@@ -18,12 +18,14 @@ exports.index = (req, res) ->
 exports.add = (req, res) ->
   
   async.parallel
-    adspace: (callback) -> models.adspace.all callback
-    page: (callback) -> models.page.all callback
+    adspace: (callback) -> models.adspace.all (error, results) -> callback error, results
+    page: (callback) -> models.page.all (error, results) -> callback error, results
   , (error, results) ->
+    throw error if error
     
-    console.dir arguments
-    
-    # throw error if error
-    
-    # res.render 'administration/advertisements/add', adspaces: results
+    res.render 'administration/advertisements/add',
+      adspaces: results.adspace
+      pages: results.page
+
+exports.create = (req, res) ->
+  console.dir files: req.files

@@ -33,30 +33,31 @@ exports.create = (req,res) ->
   
   if req.body.enabled != '1' then req.body.enabled = '0'
 
-  errors = req.validationErrors(true)
+  errors = req.validationErrors true
+  
   if errors
-    keys = Object.keys(errors)
+    keys = Object.keys errors
   
     req.flash('error', errors[key].msg) for key in keys 
 
     res.redirect 'back'
+  
   else
-    models.page.getPageByUrl req.body.url, (err, results) ->
+    models.page.findByUrl req.body.url, (err, results) ->
       if err then throw err
       if results.length >= 1
-        req.flash('error','Sorry, page URL is already in use')
+        req.flash 'error', 'Sorry, page URL is already in use'
       else
         models.page.create req.body, (err, results) ->
           if err then throw err
-          req.flash('success','Page created')
+          req.flash 'success', 'Page created'
           res.redirect 'back'
-          
 
 exports.edit = (req,res) ->
   models.page.find req.params.id, (err, results) ->
     if err then throw err
     if results.length is 0
-      req.flash('error','Page not found')
+      req.flash 'error', 'Page not found'
       res.redirect 'back'
     else
       res.render 'administration/pages/edit', page: results.pop()
@@ -65,13 +66,13 @@ exports.update = (req,res) ->
   models.page.find req.params.id, (err, results) ->
     if err then throw err
     if results.length is 0
-      req.flash('error','Page not found')
+      req.flash 'error', 'Page not found'
       res.redirect 'back'
     else
       req.body.id = req.params.id
       models.page.update req.body, (err, results) ->
         if err then throw err
-        req.flash('success', 'Page updated successfully!')
+        req.flash 'success', 'Page updated successfully!'
         res.redirect 'back'
   
 exports.destroy = (req,res) ->
