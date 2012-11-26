@@ -20,7 +20,7 @@ $(function(){
 	});*/
 	
 	$(".overlay .modal").on("click", function(event){
-	  event.stopPropagation()
+	  event.stopPropagation();
 	  event.preventDefault();
 	  return false;
 	});
