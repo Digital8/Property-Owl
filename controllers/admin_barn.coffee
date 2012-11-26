@@ -9,6 +9,7 @@ system = require '../system'
 
 models = 
   properties: system.load.model('properties')
+  users: system.load.model('user')
 
 helpers = {}
  
@@ -17,8 +18,9 @@ exports.index = (req, res) ->
     barn_results = []
     for i in [0...results.length]
       if results[i].deal_of is 0 then barn_results.push(results[i])
-      
-    res.render 'administration/barn/index', barn_deals: barn_results or {}
+    
+    models.users.getUsersByGroup 2, (err, developers) ->      
+      res.render 'administration/barn/index', barn_deals: barn_results or {}, developers: developers or {}
   
 exports.view = (req, res) ->
   

@@ -1,5 +1,5 @@
 ###
- * Admin Pages Controller
+ * Admin Properties Controller
  *
  * @package   Property Owl
  * @author    Brendan Scarvell <brendan@digital8.com.au>

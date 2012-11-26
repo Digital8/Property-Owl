@@ -5,18 +5,18 @@ block content
    main content
  .container.row.main
      include ../../admin-menu
-     h1 Project Listings
+     h1 Property Listings
      .admin-actions
        ul
          li.disabled
            img(src='/images/manage.png')
            | &nbsp;
-           | Manage Projects
+           | Manage Properties
          li
            a(href='/administration/properties/add')
              img(src='/images/add.png')
              | &nbsp;
-             | Add New Project
+             | Add New Property
        // .grid-summary 1 - 4 of 24
      .grid-header
        form#search-form
@@ -52,12 +52,11 @@ block content
        thead
          tr
            td ID
-           td Project Title
+           td Property Title
            td Listed On
            td Suburb
            td State
            td Status
-           td Lots
            td Registrations
            td(colspan='3') Actions
        tbody
@@ -70,7 +69,6 @@ block content
            td= property.suburb
            td= property.state.toUpperCase()
            td Current
-           td 4
            td 134
            td.actions
              a(href='/properties/view/#{property.property_id}', alt='view property', target="_blank")
@@ -86,7 +84,7 @@ block content
                | Delete
        tfoot
          tr
-           td(colspan='12')
+           td(colspan='11')
              ul.pager
                li.disabled
                  a(href='#') Prev
