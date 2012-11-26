@@ -1,0 +1,50 @@
+extends ../../layout
+
+block content
+ .container.row.main
+   include ../../admin-menu
+   
+   h1 Advertisers
+   
+   include navigation
+   
+   table.admin-gridview
+     thead
+       tr
+         td ID
+         td Name
+         td Description
+         td Contactee
+         td Email
+         td Phone
+         td Address
+         td Suburb
+         td State
+         td Postcode
+         td(colspan='3') Actions
+     tbody
+      - each advertiser in advertisers
+         tr
+           td= advertiser.advertiser_id
+           td= advertiser.name
+           td= advertiser.description
+           td= advertiser.contactee
+           td= advertiser.email
+           td= advertiser.phone
+           td= advertiser.address
+           td= advertiser.suburb
+           td= advertiser.state
+           td= advertiser.postcode
+           td= advertiser.created_at
+           td.actions
+             a(href='/administration/advertisers/view/#{advertiser.advertiser_id}', alt='view')
+               img(src='/images/view.png', alt='view')
+               | View
+           td.actions
+             a(href='/administration/advertisers/edit/#{advertiser.advertiser_id}', alt='edit')
+               img(src='/images/edit.png', alt='edit')
+               | Edit
+           td.actions
+             a(href='/administration/advertisers/delete/#{advertiser.advertiser_id}', alt='delete')
+               img(src='/images/delete.png', alt='delete')
+               | Delete

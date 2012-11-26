@@ -1,0 +1,69 @@
+extends ../../layout
+
+block content
+  .container.row.main
+   
+    include ../../admin-menu
+    
+    h1 Add Advertiser
+    
+    .admin-actions
+      ul
+        li
+          a(href="/administration/advertisers")
+            img(src='/images/manage.png')
+            | Manage Advertisers
+    
+    .grid-header.form-header
+      ol.six
+        li.active
+          .ol-1-active
+          | Details
+    
+    .details
+      h2 Advertiser Details
+      hr
+      form.details-form(action="/administration/advertisers/add", method="post")
+        include ../../flashify
+        
+        .inputs
+          label.required(for='inputName') Name
+            input#inputName(type="text",name="name", value="")
+        
+        .inputs
+          label.required(for="inputDescription") Description
+            input#inputDescription(type="text", name="description", value="")
+        
+        .inputs
+          label.required(for='inputContactee') Contactee
+            input#inputContactee(type="text",name="contactee", value="")
+        
+        .inputs
+          label.required(for='inputEmail') Email
+            input#inputEmail(type="text",name="email", value="")
+        
+        .inputs
+          label.required(for='inputPhone') Phone
+            input#inputPhone(type="text",name="phone", value="")
+        
+        .inputs
+          label.required(for='inputAddress') Address
+            input#inputAddress(type="text",name="address", value="")
+        
+        .inputs
+          label.required(for='inputSuburb') Suburb
+            input#inputSuburb(type="text",name="suburb", value="")
+        
+        .inputs
+          label.required(for='inputState') State
+            input#inputState(type="text",name="state", value="")
+        
+        .inputs
+          label.required(for='inputPostcode') Postcode
+            input#inputPostcode(type="text",name="postcode", value="")
+        
+        .inputs
+        
+        .submit
+          input.button(type='submit', value='Post Advertiser')
+          a.left-button(href="/administration/advertisers") Cancel

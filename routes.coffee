@@ -80,6 +80,10 @@ module.exports = (app) ->
   # Administration Routes
   app.get '/administration', helpers.restrictTo(system.config.acl.admin), controllers.admin_index.index
   
+  app.get '/administration/advertisers', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisers.index
+  app.get '/administration/advertisers/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisers.add
+  app.post '/administration/advertisers/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_advertisers.create
+  
   app.get '/administration/news', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.index
   app.post '/administration/news/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.create
   app.get '/administration/news/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_news.add
