@@ -14,6 +14,7 @@ exports.index = (req, res) ->
 exports.add = (req, res) ->
   res.render 'administration/advertisers/add'
 
+
 exports.create = (req, res) ->
   # req.assert('email', 'Invalid Email Address').isEmail()
   # req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
@@ -37,5 +38,39 @@ exports.create = (req, res) ->
     advertiser = req.body
     
     models.advertiser.create advertiser, (error, results) ->
-      req.flash 'success', 'Great Success!'
-      res.redirect 'back'
+      if error
+        # res.render 'errors/404'
+        req.flash 'error', error.message
+        res.redirect 'back'
+      else
+        req.flash 'success', 'Great Success!'
+        res.redirect '/administration/advertisers'
+
+exports.edit = (req, res) ->
+  models.advertiser.find req.params.id, (error, results) ->
+    if error
+      throw error
+    else
+      if results.length < 1
+        res.render 'errors/404'
+      else
+        advertiser = results.pop()
+      
+        for key, value of advertiser
+          unless value then advertiser[key] = ''
+        
+        res.render 'administration/advertisers/edit', advertiser: advertiser
+
+exports.delete = (req, res) ->
+  models.advertiser.find req.params.id, (err, results) ->
+    if results.length is 0
+      req.flash 'error', "Uh Oh, that news post doesn't exist."
+      res.redirect '/administration/advertisers'
+    else
+      res.render 'administration/advertisers/delete', advertiser: results.pop() or {}
+
+exports.destroy = (req, res) ->
+  models.advertiser.delete req.params.id, (err, results) ->
+    req.flash 'success','news post deleted'
+    
+    res.redirect '/administration/advertisers'

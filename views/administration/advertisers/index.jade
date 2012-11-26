@@ -6,7 +6,12 @@ block content
    
    h1 Advertisers
    
-   include navigation
+   .admin-actions
+     ul
+       li
+         a(href='/administration/advertisers/add')
+           img(src='/images/add.png')
+           | Add
    
    table.admin-gridview
      thead
@@ -21,7 +26,7 @@ block content
          td Suburb
          td State
          td Postcode
-         td(colspan='3') Actions
+         td(colspan='2') Actions
      tbody
       - each advertiser in advertisers
          tr
@@ -35,11 +40,6 @@ block content
            td= advertiser.suburb
            td= advertiser.state
            td= advertiser.postcode
-           td= advertiser.created_at
-           td.actions
-             a(href='/administration/advertisers/view/#{advertiser.advertiser_id}', alt='view')
-               img(src='/images/view.png', alt='view')
-               | View
            td.actions
              a(href='/administration/advertisers/edit/#{advertiser.advertiser_id}', alt='edit')
                img(src='/images/edit.png', alt='edit')
