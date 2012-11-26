@@ -83,9 +83,10 @@ html.no-js(lang='en')
           br
           br
           h1.modal-title Login
+          .login-error(style="display:none; color:red;")
           .modal-content.details-form
-            input.half(type='text', placeholder='Email Address')
-            input.half(type='text', placeholder='Password')
+            input.half.login-email(type='text', placeholder='Email Address')
+            input.half.login-password(type='text', placeholder='Password')
             .submit-buttons
               input.button.right.login-button(type='submit', value='Login')
               .terms-checkbox(style='text-align: right;')

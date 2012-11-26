@@ -102,11 +102,11 @@ $(function(){
   });*/
   
   // Login
-	var login = function(user, pass, callback){
+	var login = function(email, pass, callback){
 	  $.ajax({
 	    url: '/ajax/login',
 	    type: 'post',
-	    data: 'e=' + user + '&p=' + pass
+	    data: 'e=' + email + '&p=' + pass
 	  }).done(function(d){
 	    callback(d.status == 200);
 	  });
@@ -115,6 +115,19 @@ $(function(){
 	
 	$(".login-button").on("click", function(event){
 	  event.preventDefault();
+	  var email = $(".login-email").val();
+	  var pass = $(".login-password").val();
+	  var error = $(".login-error");
+	  
+	  login(user, pass, function(success){
+	    if (success){
+	      window.location.replace("/");
+	    }
+	    else {
+	      error.val("Login Failed, Please try again.");
+	      error.fadeIn().fadeOut().fadeIn().fadeOut().fadeIn();
+	    }
+	  });
 	  
 	  return false;
 	});
