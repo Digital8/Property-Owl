@@ -9,8 +9,10 @@
  ###
 
 module.exports = (req,res,next) ->
+  
   if req.session.user_id
     next()
   else
     req.flash('notice','You must be logged in to do this')
-    res.redirect '/login'
+    #res.redirect '/login', redirect: req.url or '/'
+    res.render 'user/login', redirect: req.url or '/'

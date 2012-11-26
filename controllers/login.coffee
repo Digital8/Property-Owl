@@ -25,11 +25,16 @@ exports.index = (req,res) ->
       
       if results.length is 0
         req.flash('error','Invalid login details')
-        res.redirect '/login'
+        #res.redirect '/login'
+        res.render 'user/login'
       else
         results = results.pop()
         req.session.user_id = results.user_id
-        res.redirect '/'
+        
+        if req.body.redirect?
+          res.redirect req.body.redirect
+        else
+          res.redirect '/'
     
   else
     res.render 'user/login'

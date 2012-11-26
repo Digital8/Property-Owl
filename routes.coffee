@@ -132,9 +132,9 @@ module.exports = (app) ->
   app.put '/administration/properties/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_properties.update
   
   # Misc Routes
-  app.get '/login', controllers.misc.login
-  app.get '/logout', controllers.misc.logout
-  app.post '/ajax/login', helpers.restrictTo(system.config.acl.admin), controllers.ajax.login
+  #app.get '/login', controllers.misc.login
+  #app.get '/logout', controllers.misc.logout
+  app.post '/ajax/login', controllers.ajax.login
   app.post '/ajax/savedeal', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.savedeal
   app.post '/ajax/removedeal', helpers.requireAuth, helpers.restrictTo(system.config.acl.admin), controllers.ajax.removedeal
     

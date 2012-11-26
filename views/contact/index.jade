@@ -9,68 +9,63 @@ block content
       center-col
     #center-col
       h1 Contact Us
-      include ../flashify
-      form.form-horizontal(action="/contact",method="post")
-        div.control-group  
-          label.control-label(for="type") Contact:
-          div.controls
-            select#type(name="type")
-              option General Enquiries
-        br
-        div.control-group  
-          label.control-label(for="name") Name:
-          div.controls
-            input#name(type="text",name="name")
-        br
-        div.control-group  
-          label.control-label(for="phone") Phone:
-          div.controls
-            input#phone(type="text",name="phone")
-        br
-        div.control-group  
-          label.control-label(for="email") Email:
-          div.controls
-            input#email(type="text",name="email")
-        br
-        div.control-group  
-          label.control-label(for="contact_method") Contact Method:
-          div.controls
-            select#contact_method(name="contact_method")
-              option Phone
-        br
-        div.control-group  
-          label.control-label(for="company") Company:
-          div.controls
-            input#company(type="text",name="company")
-        br
-        div.control-group  
-          label.control-label(for="address") Address:
-          div.controls
-            input#email(type="text",name="address")
-        br
-        div.control-group  
-          label.control-label(for="city") City/Suburb:
-          div.controls
-            input#city(type="text",name="city")
-        br
-        div.control-group  
-          label.control-label(for="state") State:
-          div.controls
-            select#state(name="state")
-              option ACT
-              option NSW
-              option QLD
-              option NT
-              option VIC
-              option WA
-              option TAS
-        br
-        div.control-group  
-          label.control-label(for="city") Comments:
-          div.controls
-            textarea.span9(rows=7)
-        br
-        div.control-group  
-          div.controls
-            button.btn.btn-primary Send
+      .details
+        form.details-form(action="/contact",method="post")
+          include ../flashify
+          .left
+            .inputs 
+              label(for="type") Enquiry Type
+              select#type(name="type")
+                option General Enquiry
+                option Developer Enquiry
+                option Advertising Enquiry
+            .inputs
+              label(for="name") Name
+              input#name(type="text",name="name",placeholder="Full Name")
+            .inputs
+              label(for="phone") Phone
+              input#phone(type="text",name="phone",placeholder="Contact Phone")
+            .inputs
+              label(for="email") Email
+              input#email(type="text",name="email",placeholder="Email")
+            .inputs
+              label(for="contact_method") Preferred Contact Method
+              select#contact_method(name="contact_method")
+                option Phone
+                option Email
+          .right
+            .inputs
+              label(for="company") Company
+              input#company(type="text",name="company",placeholder="Company")
+            .inputs
+              label(for="address") Address
+              input#email(type="text",name="address",placeholder="Address")
+            .inputs
+              label(for="city") City/Suburb
+              input#city(type="text",name="city",placeholder="City or Suburb")
+            .inputs 
+              label(for="state") State
+              select#state(name="state")
+                option ACT
+                option NSW
+                option QLD
+                option NT
+                option VIC
+                option WA
+                option TAS
+          .inputs
+          .inputs 
+            label(for="city") Comments
+            textarea(rows=7,placeholder="Comments")
+          .submit
+            button.button Send Enquiry
+    //
+      end center-col
+    //
+      right-col
+    #right-col
+      img#ad-tower1.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
+      img#ad-tower2.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
+    //
+      end right-col
     

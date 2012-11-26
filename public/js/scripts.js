@@ -100,6 +100,37 @@ $(function(){
   /*$(".secure-button").on("click", function(){
     $('body').append('<div class="quick-view-modal" id="register" onclick="javascript: window.location=\'/best-deal\';" style=""><div class="modal"><a href="#" class="modal-close"></a></div></div>');
   });*/
+  
+  // Login
+	var login = function(email, pass, callback){
+	  $.ajax({
+	    url: '/ajax/login',
+	    type: 'post',
+	    data: 'e=' + email + '&p=' + pass
+	  }).done(function(d){
+	    callback(d.status == 200);
+	  });
+	  //return false;
+	}
+	
+	$(".login-button").on("click", function(event){
+	  event.preventDefault();
+	  var email = $(".login-email").val();
+	  var pass = $(".login-password").val();
+	  var error = $(".login-error");
+	  
+	  login(email, pass, function(success){
+	    if (success){
+	      window.location.replace("/");
+	    }
+	    else {
+	      error.html("Login Failed, Please try again.");
+	      error.stop().fadeOut(100).fadeIn(350).fadeOut(350).fadeIn(350).fadeOut(350).fadeIn(350);
+	    }
+	  });
+	  
+	  return false;
+	});
 	
 	updateTimer = function(){
 	  var timeNow = moment.utc();
