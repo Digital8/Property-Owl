@@ -12,8 +12,8 @@
 sendgrid = new SendGrid 'digital8', '1lovedDMDN'
 fs = require 'fs'
 
-module.exports = (template, objUser, objProperty) ->
-  #the first thing we need to do is try to load the template
+module.exports = (template, subject, objUser, objProperty) ->
+
   fs.readFile "../emails/#{template}.html", 'utf-8', (err, data) ->
     if err?
       console.log 'Error:', err
@@ -21,14 +21,17 @@ module.exports = (template, objUser, objProperty) ->
     else     
       email = new Email
         to: objUser.email
-        from: 'mailer@timeforadvice.com.au'
-        fromname: 'Time For Advice'
-        subject: 'Question Updated'
+        from: 'no-reply@propertyowl.com.au'
+        fromname: 'Property Owl'
+        subject: subject
         html: data
 
-      email.setCategory 'TFA Question Updated'
-      email.addSubVal '||first_name||', objUser.firstName
-      email.addSubVal '||question||', objQuestion.text
+      switch template
+        when 'barn-deal-enquiry', 'barn-deal-registration-developer'
+          email.setCategory 'Property Owl'
+          email.addSubVal '{{first_name}}', objUser.firstName
+          email.addSubVal '{{address}}', objProperty.address
+        
 
       sendgrid.send email, (success, message) ->
         if success
