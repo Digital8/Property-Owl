@@ -28,7 +28,10 @@ exports.create = (req,res) ->
 
   if errors is false then errors = {}
   if Object.keys(errors)?.length > 0
-    req.flash('error', JSON.stringify(errors))
+    
+    keys = Object.keys errors
+    req.flash('error', errors[key].msg) for key in keys 
+
     res.redirect '/contact'
   
   else    

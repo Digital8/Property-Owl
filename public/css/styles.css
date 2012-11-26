@@ -3379,8 +3379,16 @@ body {
 .main .details-form .submit .button {
   text-transform: uppercase;
 }
+.main .details-form .submit .left-button {
+  float: left;
+}
 .main .details-form .submit .button {
   float: right;
+}
+.main .details-form a.button,
+.main .details-form a.left-button {
+  padding: 0.188em;
+  display: block;
 }
 #input-form {
   padding: 0.625em;

@@ -26,6 +26,11 @@ block content
          | &nbsp;
          input.button(type='submit', value='Reset')
          .divider
+         select#propertyDeveloper
+           option Developer
+           - each developer in developers
+            option(value=developer.user_id) #{developer.first_name} #{developer.last_name}
+         | &nbsp;
          select#propertyState
            option State
            option ACT
@@ -43,32 +48,27 @@ block content
            option Pre-release
            option Current
            option Ended
-         | &nbsp;
-         select#propertyDeveloper
-           option Developer
-           - each developer in developers
-            option(value=developer.user_id) #{developer.first_name} #{developer.last_name}
      table.admin-gridview
        thead
          tr
            td ID
-           td Property Title
            td Listed On
-           td Suburb
+           td Developer
            td State
            td Status
+           td Deal Value
            td Registrations
            td(colspan='3') Actions
        tbody
         - each property in properties
           tr
            td= property.property_id
-           td= property.title
            - var listed = new Date(property.created_at)
            td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
-           td= property.suburb
+           td Developer Name
            td= property.state.toUpperCase()
            td Current
+           td 20 %
            td 134
            td.actions
              a(href='/properties/view/#{property.property_id}', alt='view property', target="_blank")

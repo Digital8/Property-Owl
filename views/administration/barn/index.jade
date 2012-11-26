@@ -27,6 +27,11 @@ block content
         | &nbsp;
         input.button(type='submit', value='Reset')
         .divider
+        select#propertyDeveloper
+          option Developer
+          - each developer in developers
+            option(value=developer.user_id) #{developer.first_name} #{developer.last_name}
+        | &nbsp;
         select#propertyState
           option State
           option ACT
@@ -44,11 +49,6 @@ block content
           option Pre-release
           option Current
           option Ended
-        | &nbsp;
-        select#propertyDeveloper
-          option Developer
-          - each developer in developers
-            option(value=developer.user_id) #{developer.first_name} #{developer.last_name}
     - if (barn_deals.length == 0)
       p No barn deals have been created yet.
     - else
@@ -56,8 +56,8 @@ block content
         thead
           tr
             td ID
-            td Project Title
-            td Suburb
+            td Listed On
+            td Developer
             td State
             td Status
             td Lots
@@ -67,8 +67,8 @@ block content
          - each barn in barn_deals
            tr
             td= barn.property_id
-            td= barn.title
-            td= barn.suburb
+            td 01/03/2012
+            td Developer Name
             td= barn.state.toUpperCase()
             td Current
             td 4
