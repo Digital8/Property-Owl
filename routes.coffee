@@ -72,6 +72,7 @@ module.exports = (app) ->
   
   # News
   app.get '/news', helpers.requireAuth, controllers.news.index
+  app.get '/news/:id', helpers.requireAuth, controllers.news.view
   
   # Search
   app.get '/search', helpers.requireAuth, controllers.search.index
