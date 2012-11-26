@@ -1,24 +1,27 @@
 if (flash.error != undefined)
-  div(style="border: 1px solid #dd3c10;background: #ffebe8;padding:10px;")
-    audio(src="/a13-problemo.wav", controls="controls", autoplay="autoplay")
-    h4.alert-header Houston, we have a problem: 
-    each error in flash.error
-      li= error
+  .alert.alert-error
+    h4 Houston, we have a problem:
+    ul
+      each error in flash.error
+        li= error
       
 if (flash.notice != undefined)
-  div
-    h4.alert-header Hold up! 
-    each notice in flash.notice
-      li= notice
+  .alert.alert-block
+    h4 Hold up!
+    ul
+      each notice in flash.notice
+        li= notice
 
 if (flash.info != undefined)
-  div
-    h4.alert-header Attention: 
-    each info in flash.info
-      li= info
+  .alert.alert-info
+    h4 Attention: 
+    ul
+      each info in flash.info
+        li= info
       
 if (flash.success != undefined)
-  div(style="background-color: honeyDew;padding: 10px;border: 1px solid #008000")
-    h4.alert-header Woot! 
-    each success in flash.success
-      li= success
+  .alert.alert-success
+    h4 Woot!
+    ul
+      each success in flash.success
+        li= success

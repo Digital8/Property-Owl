@@ -22,13 +22,6 @@ block content
           .listing-summary
             .header
               h2= service.company
-              - if(objUser.isAdmin())
-                p(align="right")
-                  small
-                    a(href="/administration/services/edit/#{service.service_id}") Edit 
-                    | &nbsp;| 
-                    a(href="/administration/services/delete/#{service.service_id}") Delete
-                    
             .listing-body
               .listing-thumb
                 img.thumb(src='/images/services-thumb.jpg')

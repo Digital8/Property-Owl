@@ -40,7 +40,7 @@ html.no-js(lang='en')
     .modal-overlay.overlay
       .modal.main.success
         a.close-modal(href='#')
-          img(src='images/modal-close.png', alt='Close')
+          img(src='/images/modal-close.png', alt='Close')
         h1.modal-title Modal title!
         .modal-content.details-form
           label Test input
@@ -55,7 +55,7 @@ html.no-js(lang='en')
     .register-overlay.overlay
       .modal.main.success
         a.close-register(href='#')
-          img(src='images/modal-close.png', alt='Close')
+          img(src='/images/modal-close.png', alt='Close')
         h1.modal-title Register to see more!
         .modal-content.details-form
           input.half(type='text', placeholder='First Name')
@@ -79,7 +79,7 @@ html.no-js(lang='en')
     .login-overlay.overlay
       .modal.main.success
           a.close-login(href='#')
-            img(src='images/modal-close-white.png', alt='Close')
+            img(src='/images/modal-close-white.png', alt='Close')
           br
           br
           h1.modal-title Login
@@ -133,17 +133,15 @@ html.no-js(lang='en')
                   li
                     a(href='/account') My Nest
                     ul
-                      li
-                        a(href='/account') My Account
-                      li
-                        a(href='/contact') Contact Us
                       - if( objUser.isAdmin())
                         li
                           a(href="/administration") Administration
                       li
-                        a(href='#') Refer A Friend
+                        a(href='/account') My Account
                       li
                         a(href='/saved') Saved Deals
+                      li
+                        a(href='/contact') Contact Us
                       li
                         a(href='/sign-out') Sign Out
                 - else

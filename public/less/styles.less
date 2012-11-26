@@ -181,7 +181,7 @@ body {
         	
         	ul {
         	    .rounded(0.313em);
-        	    border: solid 1px #7a7a7a;
+//        	    border: solid 1px #7a7a7a;
         	}
         	
         	ul, li {
@@ -189,12 +189,12 @@ body {
         	}
         	
         	li {
-        	    background: #b3b3b3;
+//        	    background: #b3b3b3;
         	    .rounded-top-right(0.313em);
         	    
         	    +li {
         	        .rounded-top-right(0);        	        
-        	        border-top: solid 1px #7a7a7a;
+//        	        border-top: solid 1px #7a7a7a;
         	        
     	        	&:before {
     	            	content: none;
@@ -206,6 +206,35 @@ body {
         	        width: 100%;
         	        .text-shadow(~"0px 0px 0px rgba(0,0,0,0)");
         	    }
+        	}
+        	
+        	
+        	
+        	
+        	ul {
+        		background: #DDD;
+        		.rounded(5px);
+        		width: 20em;
+        		left: 0;
+        		padding: 0.5em 0;
+        		
+        		li {
+        			display: block;
+        			float: none;
+        			width: 100%;
+        			
+        			a {
+        				display: block;
+        				padding: 0.4em 1em;
+        				text-decoration: none;
+        				.text-shadow(~"none");
+        				
+        				&:hover {
+        					background: #CCC;
+        					color: #000;
+        				}
+        			}
+        		}
         	}
         }
     }
@@ -264,6 +293,82 @@ body {
 
 .admin-header {
     height: 11.875em;
+}
+
+#admin-menu {
+	display: block;
+	background: #003a66;
+	border: 1px solid #01385d;
+	.box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.3)");
+	.rounded(0.313em);
+	.clearfix;
+	padding: .938em;
+	
+	> ul,
+	> ul > li {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	> ul {
+		> li {
+			float: left;
+			color: #7DD3FF;
+			.text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
+			margin-left: 2em;
+			
+			+ li {
+				list-style: disc;
+			}
+			
+			> a {
+				text-decoration: none;
+				.bold;
+				color: #7DD3FF;
+				.text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
+				padding: 0 !important;
+				
+				&:hover {
+					color: #FFF;
+				}
+			}
+			
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			
+			ul {
+				background: #DDD;
+				.rounded(5px);
+				width: 20em;
+				left: 0;
+				padding: 0.5em 0;
+				
+				li {
+					display: block;
+					float: none;
+					width: 100%;
+					
+					a {
+						display: block;
+						.bold;
+						padding: 0.4em 1em;
+						text-decoration: none;
+						.text-shadow(~"none");
+						
+						&:hover {
+							background: #CCC;
+							color: #000;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 .best-deal {
@@ -663,6 +768,15 @@ body {
                         margin-bottom: 5px;
                         margin-right: @padding-small;
                     }
+                    
+                    a {
+                      text-decoration: none;
+                      color: #FFF;
+                    }
+                }
+                    
+                li:hover {
+                  cursor: pointer;
                 }
             }
             
@@ -1020,6 +1134,18 @@ body {
                 padding-right: 1.875em;
                 text-transform: uppercase;
                 text-decoration: none;
+            }
+            
+            #map {
+                /* fallback image */
+                background-image: url(../images/menu-bg.png);
+                background-repeat: repeat-x;
+                background-size: cover;
+                padding: 20px;
+                border: solid 1px #061b2d;
+                .gradient(@color-accent, #09518a);
+                .rounded(0.313em);
+                .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
             }
             
             .listing-summary {
@@ -1708,7 +1834,7 @@ body {
             background: #fff url(../images/input-bg.png) repeat-x top center;
         }
         
-        input[type=password] {
+        input.half {
             width: 49.5% !important;
             display: inline;
         }
@@ -1880,22 +2006,9 @@ a, a:visited {
     color: #0085c6;
 }
 
-/* modal popups */
-.quick-view-modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 9999999;
-    background-color: rgba(0, 0, 0, 0.85);
-    background: url(../images/register-form.png) no-repeat center center;
-    background-color: rgba(0, 0, 0, 0.85098);
-    cursor: pointer;
-}
-
 /* @group register modal */
 
+.login-overlay,
 .register-overlay {
 	display: none;
 	position: fixed;
@@ -1903,6 +2016,7 @@ a, a:visited {
 	left: 0;
 	right: 0;
 	bottom: 0;
+	z-index: 99999;
 	background: rgba(0,0,0,0.85);
 	
 	.modal {
@@ -1916,6 +2030,7 @@ a, a:visited {
 		background: url(../images/register-form-bg.png) no-repeat center center;
 		background-size: 100% auto;
 		
+		.close-login,
 		.close-register {
 			display: block;
 			position: absolute;
@@ -2133,7 +2248,61 @@ a, a:visited {
 	}
 }
 
+/* flash alerts */
+.alert {
+    padding: 8px 35px 10px 35px;
+    margin: @padding-small;
+    .rounded(0.313em);
+    border: 1px solid;
+    .text-shadow(~"0px 1px 0px rgba(255,255,255,1)"); 
+
+    h4 {
+      margin: @padding-small 0;
+    }
+    ul,li {
+      margin:0;
+    }
+    ul,ol,p {
+        font-size:0.9em;
+        font-weight:normal;
+    }
+}
+.alert-info {
+    color:#3A87AD;
+    background-color:#D9EDF7;
+    border-color:#BCE8F1;
+}
+.alert-block {
+    color:#AC8C55;
+    background-color:#F0E6B3;
+    border-color:#FBEED5;
+}
+.alert-error {
+    color:#B94A48;
+    background-color:#F2DEDE;
+    border-color: #EED3D7;
+}
+.alert-success {
+    color:#468847;
+    background-color:#DFF0D8;
+    border-color:#D6E9C6;
+}
+
 /* @end */
+
+/* modal popups */
+.quick-view-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999999;
+    background-color: rgba(0, 0, 0, 0.85);
+    background: url(../images/register-form.png) no-repeat center center;
+    background-color: rgba(0, 0, 0, 0.85098);
+    cursor: pointer;
+}
 
 /*
  * jQuery FlexSlider v2.0

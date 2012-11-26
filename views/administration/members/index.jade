@@ -10,22 +10,27 @@ block content
        ul
         li.disabled
          img(src='/images/manage.png')
+         | &nbsp;
          | Manage Members
         li
          a(href="/administration/members/add")
           img(src='/images/add.png')
+          | &nbsp;
           | Add New Member
        .grid-summary 1 - 4 of 24
       .grid-header
        form#search-form
         input#memberSearch(type='text')
+        | &nbsp;
         input.button(type='submit', value='Go')
+        | &nbsp;
         input.button(type='submit', value='Reset')
         .divider
         select#memberType
          option Potential Buyer
          option Property Developer
          option Administrator
+        | &nbsp;
         select#propertyState
          option State
          option ACT
