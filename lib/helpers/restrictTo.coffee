@@ -13,4 +13,6 @@ module.exports = (acl) ->
     if res.locals.objUser.level is acl or res.locals.objUser.isAdmin()
       next()
     else
-      res.render 'errors/404'
+      #res.render 'errors/404'
+      req.flash('notice','You must be logged in to do this')
+      res.render 'user/login', redirect: req.url or '/'
