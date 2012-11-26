@@ -19,21 +19,25 @@ block content
          td ID
          td Description
          td Advertiser
-         td Pages
-         td Spaces
+         td Page
+         td Space
          td Image
          td Hyperlink
          td Duration
          td Visible
          td(colspan='2') Actions
+     
      tbody
       - each advertisement in advertisements
          tr
            td= advertisement.advertisement_id
            td= advertisement.description
-           td= advertisement.advertisers
-           td= advertisement.pages
-           td= advertisement.spaces
+           if advertisement.advertiser != null
+             td= advertisement.advertiser.name
+           else
+             td
+           td= advertisement.page
+           td= advertisement.space
            td= advertisement.image
            td= advertisement.hyperlink
            td= advertisement.duration
