@@ -11,19 +11,20 @@ block content
     #center-col
       h1 News Updates
       h3 Innovation in delivering Australia's best property deals
-      - each post in news
-        //
-          listing
-        .listing-summary
-          .header
-            h2= post.title
-          .listing-body
-            .listing-thumb
-              img.thumb(src='/images/news-thumb.jpg', alt='')
-            .listing-details
-              .summary
-                p= post.posted_at
-                p= post.content
+          
+      //
+        listing
+      .listing-summary
+        .header
+          h2= post.title
+        .listing-body
+          .listing-thumb
+            img.thumb(src='/images/news-thumb.jpg', alt='')
+          .listing-details
+            .summary
+              p= post.posted_at
+              p= post.content
+            //
               .listing-links
                 a.details-button(href="/news/#{post.news_id}")
                   img#info-icon(src='/images/info-icon.png', alt='View details')

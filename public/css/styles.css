@@ -3271,7 +3271,7 @@ body {
   background: #ffffff url(../images/input-bg.png) repeat-x top center;
 }
 .main .details-form input.half {
-  width: 49.5% !important;
+  margin: 0 2% 2% 0;
   display: inline;
 }
 .main .details-form input[type=text],
