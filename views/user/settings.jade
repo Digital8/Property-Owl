@@ -2,10 +2,8 @@ extends ../layout
 
 block content
   .container.row.main
-     include ../left_nav
-     //
-       center-col
-     #center-col
+    include ../left_nav
+    #center-col
       legend
         h1 My Account
       .tabs.account
@@ -86,14 +84,6 @@ block content
                     td
                     td
                       input(type="submit",value="Save Details")
-    //
-      end center-col
-    //
-      right-col
     #right-col
       img#ad-tower1.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
       img#ad-tower2.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
-    //
-      end right-col
-    //
-      end main content

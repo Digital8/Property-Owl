@@ -37,7 +37,6 @@ block content
    table.admin-gridview
      thead
        tr
-         td ID
          td Name
          td Category
          td Suburb
@@ -48,13 +47,12 @@ block content
      tbody
       - each service in services
          tr
-           td= service.service_id
            td= service.company
            td= service.category
            td= service.suburb
            td= service.state.toUpperCase()
            td Yes
-           td 
+           td 65
            td.actions
              a(href='/products/#{service.service_id}', alt='view property', target="_blank")
                img(src='/images/view.png', alt='View')
