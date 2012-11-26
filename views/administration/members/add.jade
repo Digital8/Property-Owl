@@ -33,13 +33,12 @@ block content
         - each group in groups
          option(value="#{group.account_type_id}")= group.name
       .inputs
-       label.required(for='fname') First Name
+       label.required(for='fname') Full Name
        - if (values.fname == undefined) values.fname = ''
-        input#fname(type="text",name="fname",value="")
-      .inputs
-       label.required(for='lname') Last Name
+        input#fname(type="text",name="fname",value="",class="half", placeholder="First Name")
+        | &nbsp;
        - if (values.lname == undefined) values.lname = ''
-        input#lname(type="text",name="lname",value="")
+        input#lname(type="text",name="lname",value="",class="half", placeholder="Last Name")
       .inputs
        label(for='company') Company
        - if (values.company == undefined) values.company = ''
@@ -63,10 +62,10 @@ block content
         input#email(type="text",value="")
       .inputs
        label.required(for='password') Password
-       - if (values.email == undefined) values.email = ''
-        input#password(type="password",name="password")
+       - if (values.password == undefined) values.password = ''
+        input#password(type="password",name="password",class="half",placeholder="Password")
         | &nbsp;
-        input#confirmPassword(type="password",name="confirmPassword")
+        input#confirmPassword(type="password",name="confirmPassword",class="half",placeholder="Confirm Password")
       .inputs
        label.required(for='address') Address
        - if (values.address == undefined) values.address = ''

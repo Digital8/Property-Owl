@@ -38,13 +38,12 @@ block content
         else
          option(value="#{group.account_type_id}")= group.name
       .inputs
-       label.required(for='first_name') First Name
+       label.required(for='first_name') Full Name
        - if (values.first_name == undefined) values.first_name = ''
-        input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.first_name}")
-      .inputs
-       label.required(for='last_name') Last Name
+        input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.first_name}",class="half")
+        | &nbsp;
        - if (values.last_name == undefined) values.last_name = ''
-        input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}")
+        input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}",class="half")
       .inputs
        label(for='company') Company
        - if (values.company == undefined) values.company = ''
@@ -69,9 +68,8 @@ block content
       .inputs
        label.required(for='password') Password
        - if (values.email == undefined) values.email = ''
-        input#password(type="password",placeholder="Password",name="password")
-        | &nbsp;
-        input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
+        input#password(type="password",placeholder="Password",name="password",class="half")
+        input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword",class="half")
         br
         p.note Password will not be changed if left blank
       .inputs

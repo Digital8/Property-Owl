@@ -78,6 +78,13 @@
                         }
                     }
                 }
+                
+                .home-counter {
+                	.label {
+                		font-size: 0.8em;
+                		line-height: 1.3;
+                	}
+                }
             }
             
             &.deal-summary {
@@ -211,6 +218,12 @@
 
 /* @group smart phone device - landscape: 320px */
 @media screen and (max-width: 649px) {
+	#banner-box,
+	.ad-box,
+	.ad-tower {
+		display: none;
+	}
+	
     body {
         font-size: 13px;
     }
@@ -220,10 +233,14 @@
     }
     
     #header {
-        > div {
+    	> div {
+	        &#top-header {
+	            margin: 0 0 1em 0;
+	        }
+	        
             > div {
                 &#logo-box {
-                	margin: 4em 0 0 0;
+                	margin: 2em 0 0 0;
                 	position: absolute;
                 	.column(5,0);
                 }
@@ -307,6 +324,12 @@
                 }
                 .home-counter {
                     .rounded(0.313em);
+                    
+                    .label {
+                    	font-size: 1em;
+                    	line-height: 1.8;
+                    	max-width: 60%;
+                    }
                 }
             }
             
@@ -342,6 +365,32 @@
                 width: 320px;
                 padding-left: 0;
                 
+                .find-deals {
+                	h2 {
+                		cursor: pointer;
+                		
+                		&:after {
+                			content: '';
+                			float: right;
+                			margin: 7px 15px 0 0;
+                			border-top: 6px solid #0085C6;
+                			border-left: 6px solid transparent;
+                			border-right: 6px solid transparent;
+                			border-bottom: none;
+                		}
+                	}
+                	
+                    #input-form {
+                    	display: none;
+					}
+					
+					&.display {
+						#input-form {
+							display: block;
+						}
+					}
+				}
+                
                 .deal-stats {
                                 
                     .timer {
@@ -355,6 +404,7 @@
                     }
                 }
             }
+            &#home-center-col,
             &#center-col {
                 .no-column(0);
                 padding-left: 1.875em;

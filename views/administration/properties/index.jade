@@ -4,18 +4,18 @@ block content
  //
    main content
  .container.row.main
-    //
-      main content
-   .container.row.main
+     include ../../admin-menu
      h1 Project Listings
      .admin-actions
        ul
          li.disabled
            img(src='/images/manage.png')
+           | &nbsp;
            | Manage Projects
          li
            a(href='/administration/properties/add')
              img(src='/images/add.png')
+             | &nbsp;
              | Add New Project
        // .grid-summary 1 - 4 of 24
      .grid-header

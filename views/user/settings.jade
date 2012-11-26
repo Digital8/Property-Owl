@@ -18,11 +18,11 @@ block content
             a(href="/saved") Saved Properties
           // li Deal Registrations
         .tabs-content
-          include ../flashify
           .padding.top-row
             a.button(href='#') Change Password
           .padding
             form(action="/account",method="post")
+              include ../flashify
               table.admin-gridview.no-head
                 tbody
                   tr
