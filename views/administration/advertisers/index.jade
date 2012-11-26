@@ -26,6 +26,7 @@ block content
          td Suburb
          td State
          td Postcode
+         td Map
          td(colspan='2') Actions
      tbody
       - each advertiser in advertisers
@@ -33,13 +34,19 @@ block content
            td= advertiser.advertiser_id
            td= advertiser.name
            td= advertiser.description
-           td= advertiser.contactee
-           td= advertiser.email
-           td= advertiser.phone
+           td
+             a(href='http://google.com/search?q=' + advertiser.contactee)= advertiser.contactee
+           td
+             a(href='mailto:' + advertiser.email, target='_blank')= advertiser.email
+           td
+             a(href='tel:' + advertiser.phone, target='_blank')= advertiser.phone
            td= advertiser.address
            td= advertiser.suburb
            td= advertiser.state
            td= advertiser.postcode
+           td
+             a(href='http://maps.google.com/?q=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode, target='_blank')
+               img(src='http://maps.googleapis.com/maps/api/staticmap?sensor=false&center=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode + '&zoom=1&size=80x80')
            td.actions
              a(href='/administration/advertisers/edit/#{advertiser.advertiser_id}', alt='edit')
                img(src='/images/edit.png', alt='edit')

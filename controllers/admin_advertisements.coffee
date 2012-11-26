@@ -62,6 +62,35 @@ exports.create = (req, res) ->
           throw err if err
           res.redirect '/administration/advertisements'
 
+exports.edit = (req, res) ->
+  async.parallel
+    adspace: (callback) -> models.adspace.all (error, results) -> callback error, results
+    page: (callback) -> models.page.all (error, results) -> callback error, results
+    advertiser: (callback) -> models.advertiser.all (error, results) -> callback error, results
+    advertisement: (callback) -> models.advertisement.find req.params.id, (error, results) -> callback error, results.pop()
+  , (error, results) ->
+    throw error if error
+    
+    res.render 'administration/advertisements/edit',
+      adspaces: results.adspace
+      pages: results.page
+      advertisers: results.advertiser
+      advertisement: results.advertisement
+
+exports.update = (req, res) ->
+  req.body.id = req.params.id
+  req.body.page_id = req.body.page
+  req.body.advertiser_id = req.body.advertiser
+  req.body.adspace_id = req.body.adspace
+  
+  models.advertisement.update req.body, (err, results) ->
+    if err
+      req.flash 'error', 'an error occured updating the advertisement'
+      res.redirect 'back'
+    else
+      req.flash 'success', 'advertisement updated'
+      res.redirect '/administration/advertisements'
+
 exports.delete = (req, res) ->
   models.advertisement.find req.params.id, (err, results) ->
     if results.length is 0

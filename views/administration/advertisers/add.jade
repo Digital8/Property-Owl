@@ -27,40 +27,49 @@ block content
         include ../../flashify
         
         .inputs
-          label.required(for='inputName') Name
-            input#inputName(type="text", name="name", value="")
+          label.required(for='name') Name
+            input#name(type='text', name='name')
         
         .inputs
-          label.required(for="inputDescription") Description
-            input#inputDescription(type="text", name="description", value="")
+          label.required(for='description') Description
+            input#description(type='text', name='description')
         
         .inputs
-          label.required(for='inputContactee') Contactee
-            input#inputContactee(type="text", name="contactee", value="")
+          label.required(for='contactee') Contactee
+            input#contactee(type='text', name='contactee')
         
         .inputs
-          label.required(for='inputEmail') Email
-            input#inputEmail(type="text",name="email", value="")
+          label.required(for='email') Email
+            input#email(type='email', name='email')
         
         .inputs
-          label.required(for='inputPhone') Phone
-            input#inputPhone(type="text", name="phone", value="")
+          label.required(for='phone') Phone
+            input#phone(type='tel', name='phone')
         
         .inputs
-          label.required(for='inputAddress') Address
-            input#inputAddress(type="text", name="address", value="")
+          label.required(for='address') Address
+            input#address(type='text', name='address')
         
         .inputs
-          label.required(for='inputSuburb') Suburb
-            input#inputSuburb(type="text", name="suburb", value="")
+          label.required(for='suburb') Suburb
+            input#suburb(type='text', name='suburb')
         
         .inputs
-          label.required(for='inputState') State
-            input#inputState(type="text", name="state", value="")
+          label.required(for='state') State
+            select#state(name="state", class="select2")
+              option(value="")
+              option(value="act") ACT
+              option(value="nsw") NSW
+              option(value="nt") NT
+              option(value="qld") QLD
+              option(value="sa") SA
+              option(value="tas") TAS
+              option(value="vic") VIC
+              option(value="wa") WA
         
         .inputs
-          label.required(for='inputPostcode') Postcode
-            input#inputPostcode(type="text", name="postcode", value="")
+          label.required(for='postcode') Postcode
+            input#postcode(type='text', name="postcode")
         
         .inputs
         
