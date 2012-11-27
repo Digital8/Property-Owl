@@ -46,7 +46,7 @@ block content
            td= advertiser.postcode
            td
              a(href='http://maps.google.com/?q=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode, target='_blank')
-               img(src='http://maps.googleapis.com/maps/api/staticmap?sensor=false&center=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode + '&zoom=1&size=80x80')
+               img(src='http://maps.googleapis.com/maps/api/staticmap?sensor=false&center=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode + '&zoom=7&size=192x128')
            td.actions
              a(href='/administration/advertisers/edit/#{advertiser.advertiser_id}', alt='edit')
                img(src='/images/edit.png', alt='edit')

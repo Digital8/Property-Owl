@@ -46,7 +46,7 @@ block content
         
         .inputs
           label(for='adspace') Space
-            select(name="adspace", class="select2", data-placeholder="Choose a position")
+            select(name="adspace", class="select2 iconed", data-placeholder="Choose a position")
               option(value="")
               - each adspace in adspaces
                 option(value="#{adspace.adspace_id}")= adspace.name
