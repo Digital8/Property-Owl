@@ -1,5 +1,4 @@
 extends ../layout
-
 block content
   //
     main content
@@ -9,33 +8,40 @@ block content
       center-col
     #center-col
       h1 Sign Up
-      include ../flashify
-      form.form-horizontal(action="/sign-up",method="post")
-
-        div.control-group  
-          label.control-label(for="inputEmail") Email:
-          div.controls
-            - if (values.email == undefined) values.email = ''
-            input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
-
-        div.control-group
-          label.control-label(for="password") Password:
-          div.controls
+      .details
+       form.details-form(action="/sign-up",method="post")
+        include ../flashify
+        .left
+          .inputs
+            label(for='first-name') First Name
+            - if (values.fname == undefined) values.fname = ''
+            input#first-name(type="text",name="fname",placeholder="First Name",value="#{values.fname}")
+          .inputs
+            label(for='password') Password
             input#password(type="password",placeholder="Password",name="password")
             | &nbsp;
             input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword")
-
-        div.control-group  
-          label.control-label(for="inputEmail") First Name:
-          div.controls
-            - if (values.fname == undefined) values.fname = ''
-            input#email(type="text",name="fname",placeholder="First Name",value="#{values.fname}")
-
-        div.control-group  
-          label.control-label(for="inputEmail") Last Name:
-          div.controls
+        .right
+          .inputs
+            label(for='last-name') Last Name
             - if (values.lname == undefined) values.lname = ''
-            input#email(type="text",name="lname",placeholder="Last Name",value="#{values.lname}")
-
-        div.form-actions
-          input.btn.btn-primary(type="submit",value="Sign Up")
+            input#last-name(type="text",name="lname",placeholder="Last Name",value="#{values.lname}")
+          .inputs
+            label(for='email') Email
+            - if (values.email == undefined) values.email = ''
+            input#email(type="text",name="email",placeholder="Email",value="#{values.email}")
+        .inputs
+        .submit
+          a.left-button(href="/login") Login
+          input.button(type="submit",value="Sign Up")
+          - var redirect_url = (typeof(redirect) !== "undefined") ? redirect : '/'
+          input(type="hidden",name="redirect",value="#{redirect_url}")
+    //
+      end center-col
+    //
+      right-col
+    #right-col
+      img#ad-tower1.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
+      img#ad-tower2.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
+    //
+      end right-col
