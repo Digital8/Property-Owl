@@ -432,52 +432,49 @@ INSERT INTO `po_users` (`user_id`, `first_name`, `last_name`, `email`, `password
 (1, 'Brendan', 'Scarvell', 'bscarvell@gmail.com', '7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73', 3, 'Digital8', '3288 2222', '3288 1111', '0412 345 678', '123 asdf street!', 'Redbank Plainz', '', '4302', 1, 1),
 (2, 'Test', 'Developer', 'foo@bar.com', '7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73', 2, '', '', '', '', '', '', '', '', 0, 0);
 
----
---- ad tables
----
+--
+-- ad tables
+--
 
-delimiter $$
 
 CREATE TABLE `po_adspaces` (
-  `adspace_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`adspace_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1$$
+`adspace_id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(100) NOT NULL,
+PRIMARY KEY (`adspace_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 
-delimiter $$
 
 CREATE TABLE `po_advertisements` (
-  `advertisement_id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(100) NOT NULL,
-  `advertiser_id` int(11) NOT NULL,
-  `page_id` int(11) NOT NULL,
-  `adspace_id` int(11) NOT NULL,
-  `image_id` varchar(100) NOT NULL,
-  `hyperlink` varchar(100) NOT NULL,
-  `visible` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` datetime NOT NULL,
-  `start` datetime NOT NULL,
-  `stop` varchar(45) NOT NULL,
-  PRIMARY KEY (`advertisement_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1$$
+`advertisement_id` int(11) NOT NULL AUTO_INCREMENT,
+`description` varchar(100) NOT NULL,
+`advertiser_id` int(11) NOT NULL,
+`page_id` int(11) NOT NULL,
+`adspace_id` int(11) NOT NULL,
+`image_id` varchar(100) NOT NULL,
+`hyperlink` varchar(100) NOT NULL,
+`visible` tinyint(1) NOT NULL DEFAULT '1',
+`created_at` datetime NOT NULL,
+`start` datetime NOT NULL,
+`stop` varchar(45) NOT NULL,
+PRIMARY KEY (`advertisement_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 
-delimiter $$
 
 CREATE TABLE `po_advertisers` (
-  `advertiser_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `description` varchar(100) NOT NULL,
-  `contactee` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(100) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `suburb` varchar(100) NOT NULL,
-  `state` varchar(100) NOT NULL,
-  `postcode` varchar(100) NOT NULL,
-  `advertiser_created_at` datetime NOT NULL,
-  PRIMARY KEY (`advertiser_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1$$
+`advertiser_id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(100) NOT NULL,
+`description` varchar(100) NOT NULL,
+`contactee` varchar(100) NOT NULL,
+`email` varchar(100) NOT NULL,
+`phone` varchar(100) NOT NULL,
+`address` varchar(100) NOT NULL,
+`suburb` varchar(100) NOT NULL,
+`state` varchar(100) NOT NULL,
+`postcode` varchar(100) NOT NULL,
+`advertiser_created_at` datetime NOT NULL,
+PRIMARY KEY (`advertiser_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 
