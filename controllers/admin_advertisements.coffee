@@ -83,13 +83,39 @@ exports.update = (req, res) ->
   req.body.advertiser_id = req.body.advertiser
   req.body.adspace_id = req.body.adspace
   
-  models.advertisement.update req.body, (err, results) ->
-    if err
-      req.flash 'error', 'an error occured updating the advertisement'
+  afterUpload = ->
+    req.assert('description', 'Please enter a description').notEmpty()
+    
+    req.sanitize('visible').toBoolean()
+    
+    errors = req.validationErrors true
+    
+    if errors
+      keys = Object.keys errors
+      
+      req.flash('error', errors[key].msg) for key in keys 
+      
       res.redirect 'back'
+    
     else
-      req.flash 'success', 'advertisement updated'
-      res.redirect '/administration/advertisements'
+      models.advertisement.update req.body, (err, results) ->
+        if err
+          req.flash 'error', 'an error occured updating the advertisement'
+          res.redirect 'back'
+        else
+          req.flash 'success', 'advertisement updated'
+          res.redirect '/administration/advertisements'
+  
+  if req.files.image
+    fs.readFile req.files.image.path, (error, data) ->
+      req.body.image_id = uuid()
+      
+      path = "#{system.bucket}/#{req.body.image_id}"
+      
+      fs.writeFile path, data, (error) ->
+        do afterUpload
+  else
+    do afterUpload
 
 exports.delete = (req, res) ->
   models.advertisement.find req.params.id, (err, results) ->

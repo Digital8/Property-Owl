@@ -36,3 +36,7 @@ exports.delete = (id, callback) ->
 exports.countActive = (callback) ->
   db.query "SELECT COUNT(*) FROM #{table} WHERE NOW() BETWEEN start AND stop", (error, result) ->
     callback null, result[0]['COUNT(*)']
+
+exports.random = (callback) ->
+  db.query "SELECT * FROM #{table} ORDER BY RAND()", (error, results) ->
+    callback null, results.pop()
