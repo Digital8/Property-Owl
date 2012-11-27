@@ -38,7 +38,8 @@ block content
              td
            td= advertisement.page
            td= advertisement.space
-           td= advertisement.image
+           td
+             img(src='/uploads/' + advertisement.image_id)
            td= advertisement.hyperlink
            td= advertisement.duration
            td= advertisement.visible

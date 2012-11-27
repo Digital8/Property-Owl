@@ -15,13 +15,13 @@ flashify = require 'flashify'
 # Include system core
 system = require './system'
 
-  
 # Load some helpers
 helpers = {}
 
 # Load global models
 models =
   user: system.load.model 'user'
+  advertisement: system.load.model 'advertisement'
 
 classes = 
   user: system.load.class 'user'
@@ -55,14 +55,17 @@ app.configure ->
       {key: 'my-nest', href: '#', label: 'My Nest'}
     ]
     
-    if req.session.user_id?
-      models.user.getUserById req.session.user_id, (err, results) ->
-        if err then throw err
-        if results.length > 0
-          res.locals.objUser = new classes.user results.pop()
-          done()
-    else
-      done()
+    models.advertisement.random (err, ad) ->
+      res.locals.ad = ad.image_id
+      
+      if req.session.user_id?
+        models.user.getUserById req.session.user_id, (err, results) ->
+          if err then throw err
+          if results.length > 0
+            res.locals.objUser = new classes.user results.pop()
+            done()
+      else
+        done()
   
   app.use app.router
   
