@@ -1,0 +1,11 @@
+.select2 {
+  width: 100%;
+}
+
+.select2-glyph {
+  margin-right: 10px;
+}
+
+input[type=date], input[type=url] {
+  text-align: center;
+}

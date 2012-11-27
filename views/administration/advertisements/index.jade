@@ -19,32 +19,37 @@ block content
          td ID
          td Description
          td Advertiser
-         td Pages
-         td Spaces
+         td Page
+         td Space
          td Image
          td Hyperlink
          td Duration
          td Visible
          td(colspan='2') Actions
+     
      tbody
       - each advertisement in advertisements
          tr
-           td= advertiser.advertisement_id
-           td= advertiser.description
-           td= advertiser.advertisers
-           td= advertiser.pages
-           td= advertiser.spaces
-           td= advertiser.image
-           td= advertiser.hyperlink
-           td= advertiser.duration
-           td= advertiser.visible
+           td= advertisement.advertisement_id
+           td= advertisement.description
+           if advertisement.advertiser != null
+             td= advertisement.advertiser.name
+           else
+             td
+           td= advertisement.page
+           td= advertisement.space
+           td
+             img(src='/uploads/' + advertisement.image_id)
+           td= advertisement.hyperlink
+           td= advertisement.duration
+           td= advertisement.visible
            
            td.actions
-             a(href='/administration/advertisers/edit/#{advertiser.advertiser_id}', alt='edit')
+             a(href='/administration/advertisements/edit/#{advertisement.advertisement_id}', alt='edit')
                img(src='/images/edit.png', alt='edit')
                | Edit
            
            td.actions
-             a(href='/administration/advertisers/delete/#{advertiser.advertiser_id}', alt='delete')
+             a(href='/administration/advertisements/delete/#{advertisement.advertisement_id}', alt='delete')
                img(src='/images/delete.png', alt='delete')
                | Delete

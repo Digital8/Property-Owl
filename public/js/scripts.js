@@ -36,6 +36,7 @@ $(function(){
 	
 	$(".show-register, .close-register").on("click", function(event){
 		event.preventDefault();
+		loginModal.hide(50);
 		registerModal.fadeToggle(150);
 		return false;
 	});
@@ -45,6 +46,7 @@ $(function(){
 	
 	$(".show-login, .close-login").on("click", function(event){
 		event.preventDefault();
+		registerModal.hide(50);
 		loginModal.fadeToggle(150);
 		return false;
 	});

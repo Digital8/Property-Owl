@@ -25,7 +25,7 @@ block content
                 p= post.posted_at
                 p= post.content
               .listing-links
-                a.details-button(href='#')
+                a.details-button(href="/news/#{post.news_id}")
                   img#info-icon(src='/images/info-icon.png', alt='View details')
                   |  Details
       //

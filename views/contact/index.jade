@@ -1,51 +1,64 @@
 extends ../layout
 
 block content
-  //
-    main content
+  
   .container.row.main
+  
     include ../left_nav
-    //
-      center-col
+    
     #center-col
+      
       h1 Contact Us
+      
       .details
-        form.details-form(action="/contact",method="post")
+        form.details-form(action='/contact', method='post')
+          
           include ../flashify
+          
           .left
             .inputs 
-              label(for="type") Enquiry Type
-              select#type(name="type")
+              label(for='type') Enquiry Type
+              select#type(name='type', class='select2')
                 option General Enquiry
                 option Developer Enquiry
                 option Advertising Enquiry
+            
             .inputs
-              label(for="name") Name
-              input#name(type="text",name="name",placeholder="Full Name")
+              label(for='name') Name
+              input#name(type='text', name='name', placeholder='Full Name')
+            
             .inputs
-              label(for="phone") Phone
-              input#phone(type="text",name="phone",placeholder="Contact Phone")
+              label(for='phone') Phone
+              input#phone(type='tel', name='phone', placeholder='Contact Phone')
+            
             .inputs
-              label(for="email") Email
-              input#email(type="text",name="email",placeholder="Email")
+              label(for='email') Email
+              input#email(type='email', name='email', placeholder='Email')
+            
             .inputs
-              label(for="contact_method") Preferred Contact Method
-              select#contact_method(name="contact_method")
+              label(for='contact_method') Preferred Contact Method
+              select#contact_method(name='contact_method', class='select2')
+                option
                 option Phone
                 option Email
+          
           .right
             .inputs
-              label(for="company") Company
-              input#company(type="text",name="company",placeholder="Company")
+              label(for='company') Company
+              input#company(type='text', name='company', placeholder='Company')
+            
             .inputs
-              label(for="address") Address
-              input#email(type="text",name="address",placeholder="Address")
+              label(for='address') Address
+              input#email(type='text', name='address', placeholder='Address')
+            
             .inputs
-              label(for="city") City/Suburb
-              input#city(type="text",name="city",placeholder="City or Suburb")
-            .inputs 
-              label(for="state") State
-              select#state(name="state")
+              label(for='city') City/Suburb
+              input#city(type='text', name='city', placeholder='City or Suburb')
+            
+            .inputs
+              label(for='state') State
+              select#state(name='state', class='select2')
+                option
                 option ACT
                 option NSW
                 option QLD
@@ -53,19 +66,16 @@ block content
                 option VIC
                 option WA
                 option TAS
+          
           .inputs
+          
           .inputs 
-            label(for="city") Comments
-            textarea(rows="7",name="comments",placeholder="Comments")
+            label(for='city') Comments
+            textarea(rows='7', name='comments', placeholder='Comments')
+          
           .submit
             button.button Send Enquiry
-    //
-      end center-col
-    //
-      right-col
+    
     #right-col
       img#ad-tower1.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
       img#ad-tower2.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
-    //
-      end right-col
-    

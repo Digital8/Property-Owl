@@ -72,6 +72,7 @@ module.exports = (app) ->
   
   # News
   app.get '/news', helpers.requireAuth, controllers.news.index
+  app.get '/news/:id', helpers.requireAuth, controllers.news.view
   
   # Search
   app.get '/search', helpers.requireAuth, controllers.search.index
@@ -137,8 +138,8 @@ module.exports = (app) ->
   
   app.get '/administration/barn', helpers.restrictTo(system.config.acl.admin), controllers.admin_barn.index
   app.get '/administration/barn/edit/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_barn.edit
-  app.get '/administration/barn/add/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_barn.add
-  app.post '/administration/barn/add/:id', helpers.restrictTo(system.config.acl.admin), controllers.admin_barn.create
+  app.get '/administration/barn/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_barn.add
+  app.post '/administration/barn/add', helpers.restrictTo(system.config.acl.admin), controllers.admin_barn.create
   app.get '/administration/barn/delete/:barn_id/:property_id', helpers.restrictTo(system.config.acl.admin), controllers.admin_barn.delete
   app.del '/administration/barn/delete/:barn_id/:property_id', helpers.restrictTo(system.config.acl.admin), controllers.admin_barn.destroy
   

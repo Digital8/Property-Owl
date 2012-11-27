@@ -73,14 +73,14 @@ body {
         &#top-header {
             .clearfix;
             position: relative;
-            margin: 0 0 -3.125em 0;
+            margin: 0 0 -4.3em 0;
         }
         
         > div {
             &#logo-box {
                 .column(3, 0);
-                padding-left: 1.875em;
-                padding-right: 1.875em;
+                padding-left: 20px;
+                padding-right: 20px;
             	display: block;
             	float: left;
             	z-index: 1;
@@ -99,7 +99,7 @@ body {
             }
             &#banner-box {
                 .column(9, 0px);
-                margin-top: 14px;
+                margin-top: 10px;
                 margin-bottom: @padding-small;
             }
         }
@@ -1834,12 +1834,12 @@ body {
             background: #fff url(../images/input-bg.png) repeat-x top center;
         }
         
-        input.half {
+        input.half-field {
             width: 49.5% !important;
             display: inline;
         }
         
-        input[type=text], input[type=password], textarea, select {
+        input[type=text], input[type=password], textarea, select, input[type=url], input[type=email], input[type=date], input[type=tel] {
             width: 100%;
             line-height: 25px;
         }

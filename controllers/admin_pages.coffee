@@ -23,9 +23,6 @@ exports.add = (req,res) ->
   res.render 'administration/pages/add'
   
 exports.create = (req, res) ->
-  
-  console.dir req
-  
   req.body.url ?= ''
   req.body.header ?= ''
   req.body.content ?= ''

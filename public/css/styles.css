@@ -432,7 +432,7 @@ body {
 #header > div#top-header {
   zoom: 1;
   position: relative;
-  margin: 0 0 -3.125em 0;
+  margin: 0 0 -4.3em 0;
 }
 #header > div#top-header:before,
 #header > div#top-header:after {
@@ -445,8 +445,8 @@ body {
 #header > div > div#logo-box {
   width: 24.9999999%;
   padding: 0;
-  padding-left: 1.875em;
-  padding-right: 1.875em;
+  padding-left: 20px;
+  padding-right: 20px;
   display: block;
   float: left;
   z-index: 1;
@@ -467,7 +467,7 @@ body {
   float: left;
   width: 74.99999969999999%;
   padding: 0px;
-  margin-top: 14px;
+  margin-top: 10px;
   margin-bottom: 0.625em;
 }
 #header #banner {
@@ -3270,14 +3270,18 @@ body {
   -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
   background: #ffffff url(../images/input-bg.png) repeat-x top center;
 }
-.main .details-form input.half {
+.main .details-form input.half-field {
   width: 49.5% !important;
   display: inline;
 }
 .main .details-form input[type=text],
 .main .details-form input[type=password],
 .main .details-form textarea,
-.main .details-form select {
+.main .details-form select,
+.main .details-form input[type=url],
+.main .details-form input[type=email],
+.main .details-form input[type=date],
+.main .details-form input[type=tel] {
   width: 100%;
   line-height: 25px;
 }
