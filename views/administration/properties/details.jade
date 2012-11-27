@@ -73,7 +73,7 @@ block content
               select#propertyStage(name="development_stage")
                 - if (step1.development_stage == undefined) step1.development_stage = ''
                 option(value="otp",selected= (step1.development_stage.toLowerCase() == 'otp') ? true :false) Off the Plan
-                option(value="completed",selected= (step1.development_stage.toLowerCase() == 'completed') ? true :false)) Completed
+                option(value="completed",selected= (step1.development_stage.toLowerCase() == 'completed') ? true :false) Completed
                 
             .inputs
               label.required(for='propertyTitle') Price

@@ -22,9 +22,6 @@ block content
         
         .tabs-content
           
-          .padding.top-row
-            a.button(href='#') Change Password
-          
           .padding
             form(action="/account",method="post")
               
@@ -40,6 +37,15 @@ block content
                     td Last name
                     td
                       input(type='text', name='lname', value=objUser.lastName)
+                  tr
+                    td Password
+                      br
+                      small Password will not be changed if left blank
+                    td
+                      input(type='password', name='password', value="")
+                      br
+                      br
+                      input(type='password', name='confirmPassword', value="")
                   tr
                     td Company
                     td
