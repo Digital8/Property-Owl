@@ -46,6 +46,7 @@ $(function(){
 	
 	$(".show-login, .close-login").on("click", function(event){
 		event.preventDefault();
+		registerModal.hide(50);
 		loginModal.fadeToggle(150);
 		return false;
 	});
