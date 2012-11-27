@@ -131,39 +131,40 @@ block content
             //
                items mirrored twice, total of 12 
       .property-info
-        table.barn-lots
-          thead
-            td Lot
-            td Bed
-            td Bath
-            td Car
-            td Level
-            td Int. Size
-            td Ext. Size
-            td Aspect
-            td List Price
-            td Floor Plan
-            td Register
-          - var i = 0;
-          - each lot in lots
-            - i++
-            tbody
-              td= i
-              td= lot.bedrooms
-              td= lot.bathrooms
-              td= lot.carspaces
-              td= lot.level
-              td #{lot.interior_size} sq.m
-              td #{lot.exterior_size} sq.m
-              td= lot.aspect
-              td= lot.price
-              td
-                - if (lot.floor_plan.length == 0)
-                  em Not Available
-                - else
-                  a(href='#') Download
-              td
-                a.barn-register(href='#', alt='Register') Register
+        - if (lots.length > 0 )
+          table.barn-lots
+            thead
+              td Lot
+              td Bed
+              td Bath
+              td Car
+              td Level
+              td Int. Size
+              td Ext. Size
+              td Aspect
+              td List Price
+              td Floor Plan
+              td Register
+            - var i = 0;
+            - each lot in lots
+              - i++
+              tbody
+                td= i
+                td= lot.bedrooms
+                td= lot.bathrooms
+                td= lot.carspaces
+                td= lot.level
+                td #{lot.interior_size} sq.m
+                td #{lot.exterior_size} sq.m
+                td= lot.aspect
+                td= lot.price
+                td
+                  - if (lot.floor_plan.length == 0)
+                    em Not Available
+                  - else
+                    a(href='#') Download
+                td
+                  a.barn-register(href='#', alt='Register') Register
         #left
           p #{property.address}, #{property.suburb}, #{property.postcode}, 
           h2= property.title
@@ -209,10 +210,12 @@ block content
             h2
               | Reveal the Deal
               img.arrow(src='/images/blue-arrow-icon.png', alt='Reveal the Deal')
-            ul
-              li Stamp Duty
-              li Furniture Package
-              li 1 Year Rental Guarantee
+            - if (deals.length == 0)
+              li No deals have been listed
+            - else
+              ul
+                - each deal in deals
+                  li= deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
           .time-left
             p
               | Time left

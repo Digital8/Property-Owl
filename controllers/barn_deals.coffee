@@ -1,5 +1,5 @@
 ###
- * Sign Up Controller
+ * Barn Deals
  *
  * Controller for homepage of website
  *
@@ -16,6 +16,7 @@ helpers =
 models = 
   properties: system.load.model 'properties'
   lots: system.load.model('lots')
+  deals: system.load.model('deals')
 
 # GET
 exports.index = (req,res) ->
@@ -36,8 +37,9 @@ exports.view = (req,res) ->
       else
         # Get the deals
         #models.properties.getPropertiesOfBarnDeal req.params.id, (err, barn_deals) ->
-        models.lots.getLotsByPropertyId req.params.id, (err,lots) ->
-          res.render 'barn_deals/view', property: property, lots: lots or {}
+        models.deals.getDealsByPropertyId req.params.id, (err, deals) ->
+          models.lots.getLotsByPropertyId req.params.id, (err,lots) ->
+            res.render 'barn_deals/view', property: property, lots: lots or {}, deals: deals or {}
 
 # GET
 exports.add = (req,res) ->
