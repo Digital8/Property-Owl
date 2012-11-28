@@ -375,14 +375,14 @@ body {
     background: #0c3559;
     height: 20.625em;
     .rounded(0.313em);
-    padding: 0.625em 0;
+    padding: @padding-small 0;
     color: #FFFFFF;
     margin-bottom: @padding-small;
     
     > div {
         &.home-deal-stats {
             .column(3, 0px);
-            padding-right: 0.625em;
+            padding-right: @padding-small;
             text-transform: uppercase;
                         
             .home-timer {
@@ -420,7 +420,7 @@ body {
                                 padding-bottom: 0.2em;
                                 line-height: 0.6;
                                 background: #c51212;
-                                .box-shadow(~"0px 0px 0.625em 0.625em #c51212");
+                                .box-shadow(~"0px 0px @padding-small @padding-small #c51212");
                             }
                         }
                         
@@ -527,7 +527,7 @@ body {
                 .rounded-top-left(0.313em);
                 border-bottom: solid 1px #0c395d;
                 .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
-                padding: 0.625em;
+                padding: @padding-small;
                 line-height: 0.5em;
                 .clearfix;
                 
@@ -561,7 +561,7 @@ body {
                 
                 &.secure-button {
                     display: block;
-                    padding: 0.313em 0.625em;
+                    padding: 0.313em @padding-small;
                     position: absolute;
                     bottom: 0;
                     right: 0;
@@ -581,6 +581,7 @@ body {
                 }
             }
         }
+        
     }
 }
 
@@ -707,7 +708,7 @@ body {
             
             .barn-box {
                 background: #009200;
-                padding: 0.625em;
+                padding: @padding-small;
                 text-align: center;
                 text-transform: uppercase;
                 color: #FFFFFF;
@@ -829,13 +830,13 @@ body {
                 width: 100%;
                 max-width: 160px;
                 max-height: 3@padding-small;
-                margin-bottom: 0.625em;
+                margin-bottom: @padding-small;
                 .rounded(0.313em);
             }
         }
         &#home-center-col {
             .column(8, 25px);
-            padding-top: 0.625em;
+            padding-top: @padding-small;
             padding-bottom: 6.250em;
             
             h1 {
@@ -843,7 +844,8 @@ body {
             }
         }
         &#wide-center-col {
-            .column(10,5px);
+            .column(10,0);
+            padding-left: 0.313em;
             padding-bottom: 6.250em;
             
             #back-button {
@@ -859,12 +861,12 @@ body {
             }
             
             .slider-box {
-                background: #0c3559;
-                height: 30em;
-                .rounded(0.313em);
-                padding: @padding-small;
-                color: #FFFFFF;
-                position: relative;
+                 background: #0c3559;
+                 height: 29.6em;
+                 .rounded(0.313em);
+                 padding: @padding-small;
+                 color: #FFFFFF;
+                 position: relative;
                 
                 .slider {
                     img {
@@ -873,7 +875,7 @@ body {
                         width: 62.438em;
                     }
                 }
-            }
+             }
             
             .property-info {
             
@@ -1010,51 +1012,63 @@ body {
                     }
                     
                     .deal {
-                        border: solid 1px #051726;
-                        .rounded(0.250em);
-                        .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
-                        background: #0b63a8;
-                        margin-bottom: @padding-small;
-                        color: #FFF;
-                        
-                        h2 {
-                            padding: 0.1em @padding-small;
-                            margin: 0;
-                            background: #0a5b9a;
-                            color: #FFF;
-                            .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");
-                            
-                            img {
-                                &.arrow {
-                                    float: right;
-                                    margin-top: 5px;
-                                }
-                            }
-                        }
-                        
-                        ul, li {
-                            margin: 0;
-                            padding: 0;
-                            list-style-type: none;
-                        }
-                        
-                        li {
-                            .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");
-                            border-top: solid 1px #084c81;
-                            .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
-                            padding: @padding-small;
-                            
-                        	&:before {
-                            	content: url(../images/deal-arrow.png);
-                            	.inline-block;
-                            	margin: 0 0.5em;
-                            	vertical-align: middle;
-                            }
-                        }
-                    }
+      			            border: solid 1px #051726;
+      			            .rounded(0.250em);
+      			            .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+      			            background: #0b63a8;
+      			            margin-bottom: @padding-small;
+      			            color: #FFF;
+			            
+      			            h2 {
+      			                padding: 0.1em @padding-small;
+      			                margin: 0;
+      			                background: #0a5b9a;
+      			                color: #FFF;
+      			                .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");
+      			                cursor: pointer;
+			                
+      			                img {
+      			                    &.arrow {
+      			                        float: right;
+      			                        margin-top: 5px;
+      			                    }
+      			                }
+      			            }
+			            
+      			            ul {
+      			            	height: 0;
+      			            	overflow: hidden;
+      			            }
+			            
+      			            &.display {
+      			            	ul {
+      			            		height: auto;
+      			            	}
+      			            }
+			            
+      			            ul, li {
+      			                margin: 0;
+      			                padding: 0;
+      			                list-style-type: none;
+      			            }
+			            
+      			            li {
+      			                .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");
+      			                border-top: solid 1px #084c81;
+      			                .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+      			                padding: @padding-small;
+			                
+      			            	&:before {
+      			                	content: url(../images/deal-arrow.png);
+      			                	.inline-block;
+      			                	margin: 0 0.5em;
+      			                	vertical-align: middle;
+      			                }
+      			            }
+      			        }
                     
                     .time-left {
-                        padding: 0.15em 0.625em;
+                        padding: 0.15em @padding-small;
                         line-height: 1.3em;
                         text-align: center;
                         border-bottom: solid 1px #830000;
@@ -1355,7 +1369,7 @@ body {
                 width: 100%;
                 max-width: 160px;
                 max-height: 600px;
-                margin-bottom: 0.625em;
+                margin-bottom: @padding-small;
                 .rounded(0.313em);
             }
         }
@@ -1663,7 +1677,7 @@ body {
             
             .button {
                     float: left;
-                    padding: 7px 0.625em;
+                    padding: 7px @padding-small;
                     margin: 5px 0 5px 5px;
                     border: solid 1px #004400;
                     .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
@@ -1915,7 +1929,7 @@ body {
     
     .button {
         background: #009200;
-        padding: 0.625em;
+        padding: @padding-small;
         text-align: center;
         text-transform: uppercase;
         color: #FFFFFF;
@@ -1973,7 +1987,7 @@ h1 {
     line-height: 1.1em;
     text-transform: capitalize;
     color: #0085c6;
-    margin-top: 0.625em;
+    margin-top: @padding-small;
 }
 
 span.secondary {
@@ -1981,7 +1995,7 @@ span.secondary {
 }
 
 h3 {
-    margin-bottom: 0.625em;
+    margin-bottom: @padding-small;
     text-transform: none;
 }
 
@@ -2313,6 +2327,7 @@ a, a:visited {
     cursor: pointer;
 }
 
+
 /*
  * jQuery FlexSlider v2.0
  * http://www.woothemes.com/flexslider/
@@ -2404,7 +2419,6 @@ html[xmlns] .slides {display: block;}
 
 /* @end */
 
-
 /*Superfish menu */
 /*** ESSENTIAL STYLES ***/
 .sf-menu ul {
@@ -2429,7 +2443,7 @@ html[xmlns] .slides {display: block;}
 .sf-menu li:hover ul,
 .sf-menu li.sfHover ul {
 	left:			17px;
-	top:			1.75em; /* match top ul list item height */
+	top:			2.3em; /* match top ul list item height */
 	z-index:		99;
 }
 ul.sf-menu li:hover li ul,
