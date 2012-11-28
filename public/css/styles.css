@@ -931,9 +931,9 @@ body {
   padding-bottom: 0.2em;
   line-height: 0.6;
   background: #c51212;
-  box-shadow: 0px 0px 0.625em 0.625em #c51212;
-  -moz-box-shadow: 0px 0px 0.625em 0.625em #c51212;
-  -webkit-box-shadow: 0px 0px 0.625em 0.625em #c51212;
+  box-shadow: 0px 0px @padding-small @padding-small #c51212;
+  -moz-box-shadow: 0px 0px @padding-small @padding-small #c51212;
+  -webkit-box-shadow: 0px 0px @padding-small @padding-small #c51212;
 }
 .best-deal > div.home-deal-stats .home-timer #timer > div .label {
   display: block;
@@ -1594,7 +1594,8 @@ body {
 .main > div#wide-center-col {
   float: left;
   width: 83.333333%;
-  padding: 5px;
+  padding: 0;
+  padding-left: 0.313em;
   padding-bottom: 6.250em;
 }
 .main > div#wide-center-col #back-button {
@@ -1610,7 +1611,7 @@ body {
 }
 .main > div#wide-center-col .slider-box {
   background: #0c3559;
-  height: 30em;
+  height: 29.6em;
   -webkit-border-top-left-radius: 0.313em;
   -moz-border-radius-topleft: 0.313em;
   border-top-left-radius: 0.313em;
@@ -1935,10 +1936,18 @@ body {
   background: #0a5b9a;
   color: #FFF;
   text-shadow: 0px -1px 0px rgba(0,0,0,1);
+  cursor: pointer;
 }
 .main > div#wide-center-col .property-info #right .deal h2 img.arrow {
   float: right;
   margin-top: 5px;
+}
+.main > div#wide-center-col .property-info #right .deal ul {
+  height: 0;
+  overflow: hidden;
+}
+.main > div#wide-center-col .property-info #right .deal.display ul {
+  height: auto;
 }
 .main > div#wide-center-col .property-info #right .deal ul,
 .main > div#wide-center-col .property-info #right .deal li {
@@ -4179,7 +4188,7 @@ html[xmlns] .slides {
 .sf-menu li:hover ul,
 .sf-menu li.sfHover ul {
   left: 17px;
-  top: 1.75em;
+  top: 2.3em;
   /* match top ul list item height */
 
   z-index: 99;

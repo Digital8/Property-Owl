@@ -9,6 +9,33 @@ $(window).load(function() {
 
 $(function(){
 	
+	// reveal deal list
+	var dealsHeight = 0;
+	
+	$(".deal h2").on("click", function(){
+		var deals = $(this).closest(".deal"),
+			dealsList = $("ul", deals);
+		
+		if (dealsHeight <= 0){
+			dealsList.hide().css("height","auto");
+			dealsHeight = dealsList.height();
+			dealsList.css("height","0").show();
+		}
+		else {
+			dealsHeight = 0;
+		}
+		
+		dealsList.animate({
+			height: dealsHeight
+		}, 150, function(){
+			deals.toggleClass("display");
+		});
+	});
+
+});
+
+$(function(){
+	
 	
 	// show modal
 	/*var modal = $(".modal-overlay");
