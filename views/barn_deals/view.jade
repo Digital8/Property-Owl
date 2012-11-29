@@ -65,9 +65,10 @@ block content
           span.label Number of Enquiries
           span.value 1,345
       .barn-box
-        h2 The Barn
-        img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
-        h3 Group Deals
+        a(href="/barn-deals")
+          h2 The Barn
+          img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
+          h3 Group Deals
       .share
         ul
           li
@@ -166,7 +167,7 @@ block content
                 td
                   a.barn-register(href='#', alt='Register') Register
         #left
-          p #{property.address}, #{property.suburb}, #{property.postcode}, 
+          p #{property.address}, #{property.suburb}, #{property.state.toUpperCase()} #{property.postcode}
           h2= property.title
           p= property.description
           .general-features

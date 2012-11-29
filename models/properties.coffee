@@ -18,6 +18,12 @@ db = require('../system').db
 exports.getAllProperties = (callback) ->
   db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id", callback
 
+exports.getPendingProperties = (callback) ->
+  db.query "SELECT * FROM #{db.prefix}properties WHERE approved = false AND (deal_type = 'owl' OR deal_type = 'all')", callback
+
+exports.getPendingBarnDeals = (callback) ->
+  db.query "SELECT * FROM #{db.prefix}properties WHERE approved = false AND (deal_type = 'barn' OR deal_type = 'all')", callback
+  
 # TODO add wednesday condition to query
 exports.getAllApprovedProperties = (callback) ->
   db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE approved AND (P.deal_type = 'All' OR P.deal_type = 'Owl')", callback
@@ -57,9 +63,9 @@ exports.getPropertyTypes = (callback) ->
 
 exports.getPropertiesByDealType = (dealType, includeAllCategory, callback) ->
   if includeAllCategory != true
-    db.query "SELECT * FROM #{db.prefix}properties AS P WHERE P.deal_type = ? ", [dealType] ,callback
+    db.query "SELECT * FROM #{db.prefix}properties AS P WHERE P.deal_type = ? AND approved", [dealType] ,callback
   else
-    db.query "SELECT * FROM #{db.prefix}properties AS P WHERE P.deal_type = ? OR P.deal_type = 'all'", [dealType] ,callback
+    db.query "SELECT * FROM #{db.prefix}properties AS P WHERE (P.deal_type = ? OR P.deal_type = 'all') AND approved", [dealType] ,callback
 
 exports.addProperty = (vals, callback) ->
   db.query "INSERT INTO #{db.prefix}properties(title, address, suburb, postcode, state, development_stage, description, property_type_id, price, deal_type, listed_by, created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?, NOW())", [vals.title, vals.address, vals.suburb, vals.postcode, vals.state, vals.development_stage, vals.description, vals.ptype, vals.price, vals.deal_type, vals.developer], callback

@@ -125,7 +125,7 @@ block content
       .property-info
         #left
           h1 Australia's Best Property Deal
-          | #{property.address}, #{property.suburb}, #{property.state.toUpperCase()}
+          | #{property.address}, #{property.suburb}, #{property.state.toUpperCase()} #{property.postcode}
           h2 Property Details
           p= property.description
           .general-features

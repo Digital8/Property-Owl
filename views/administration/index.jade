@@ -9,84 +9,115 @@ block content
     
     #dashboard-left-col
       .grid-header
-        h2 Pending Property Listings
+        h2 Pending Owl Deal Listings
         .grid-summary 1 - 4 of 24
       
-      table.admin-gridview
-        tbody
-          tr
-            td
-              | 1234
-            td
-              | Property 1
-            td.actions
-              a(href='#')
-                img(src='images/view.png', alt='View')
-                | View
-            td.actions
-              a(href='#')
-                img(src='images/edit.png', alt='View')
-                | Edit
-            td.actions
-              a(href='#')
-                img(src='images/approve.png', alt='View')
-                | Approve
-        tfoot
-          tr
-            td(colspan='5')
-              a.button(href="/administration/properties") Manage All Properties
-              ul.pager
-                li
-                  a(href='#') Prev
-                li.selected
-                  a(href='#') 1
-                li
-                  a(href='#') 2
-                li
-                  a(href='#') 3
-                li
-                  a(href='#') 4
-                li
-                  a(href='#') Next
-      
+      - if (properties.length == 0)
+        table.admin-gridview
+         thead
+           tr 
+             td(colspan='6')
+              | There are no pending owl deals. 
+      - else
+        table.admin-gridview
+         thead
+           tr
+             td ID
+             td Listed On
+             td Title
+             td(colspan='3') Actions
+          tbody
+          - each property in properties
+            tr
+             td= property.property_id
+             - var listed = new Date(property.created_at)
+             td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+             td= property.title
+             td.actions
+               a(href='/properties/view/#{property.property_id}', alt='view property', target="_blank")
+                 img(src='/images/view.png', alt='View')
+                 | View
+             td.actions
+               a(href='/administration/properties/edit/#{property.property_id}', alt='edit property')
+                 img(src='/images/edit.png', alt='Edit')
+                 | Edit
+              td.actions
+                a(href='#')
+                  img(src='images/approve.png', alt='View')
+                  | Approve
+          tfoot
+            tr
+              td(colspan='6')
+                a.button(href="/administration/properties") Manage All Properties
+                ul.pager
+                  li
+                    a(href='#') Prev
+                  li.selected
+                    a(href='#') 1
+                  li
+                    a(href='#') 2
+                  li
+                    a(href='#') 3
+                  li
+                    a(href='#') 4
+                  li
+                    a(href='#') Next
+          //- TODO paging for all front and admin list views and gridviews
       .grid-header
-        h2 Pending Project Listings
+        h2 Pending Barn Deal Listings
         
         .grid-summary 1 - 4 of 24
       
-      table.admin-gridview
-       tbody
-        tr
-         td Project Listing 1
-         td.actions
-          a(href='#')
-           img(src='images/view.png', alt='View')
-           | View
-         td.actions
-          a(href='#')
-           img(src='images/edit.png', alt='View')
-           | Edit
-         td.actions
-          a(href='#')
-           img(src='images/approve.png', alt='View')
-           | Approve
-       tfoot
-        tr
-         td(colspan='4')
-          a.button(href="/administration/properties") Manage All Projects
-          ul.pager
-           li
-            a(href='#') Prev
-           li.selected
-            a(href='#') 1
-           li
-            a(href='#') 2
-           li
-            a(href='#') 3
-           li
-            a(href='#') 4
-           li
-            a(href='#') Next
+      - if (projects.length == 0)
+        table.admin-gridview
+         thead
+           tr 
+             td(colspan='6')
+              | There are no pending barn deals. 
+      - else
+        table.admin-gridview
+         thead
+           tr
+             td ID
+             td Listed On
+             td Title
+             td(colspan='3') Actions
+          tbody
+          - each project in projects
+            tr
+             td= project.property_id
+             - var listed = new Date(project.created_at)
+             td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+             td= project.title
+             td.actions
+               a(href='/properties/view/#{project.property_id}', alt='view property', target="_blank")
+                 img(src='/images/view.png', alt='View')
+                 | View
+             td.actions
+               a(href='/administration/properties/edit/#{project.property_id}', alt='edit property')
+                 img(src='/images/edit.png', alt='Edit')
+                 | Edit
+              td.actions
+                a(href='#')
+                  img(src='images/approve.png', alt='View')
+                  | Approve
+         tfoot
+          tr
+           td(colspan='6')
+            a.button(href="/administration/barn") Manage All Projects
+            ul.pager
+             li
+              a(href='#') Prev
+             li.selected
+              a(href='#') 1
+             li
+              a(href='#') 2
+             li
+              a(href='#') 3
+             li
+              a(href='#') 4
+             li
+              a(href='#') Next
     #dashboard-right-col
       .grid-header
        h2 This Month
@@ -129,7 +160,7 @@ block content
         tfoot
           tr
             td(colspan='4')
-              a.button(href='#') Manage Ads
+              a.button(href='/administration/advertisements') Manage Ads
       
       .grid-header
         h2 Product and Service Suppliers

@@ -26,10 +26,14 @@ $(function(){
 		}
 		
 		dealsList.animate({
-			height: dealsHeight
-		}, 150, function(){
-			deals.toggleClass("display");
-		});
+            height: dealsHeight
+       }, 150, function(){
+           deals.toggleClass("display");
+           
+           if (dealsHeight > 0){
+               dealsList.css("height","auto");
+           }
+       });
 	});
 
 });

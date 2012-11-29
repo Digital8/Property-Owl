@@ -16,7 +16,7 @@ helpers = {}
 
 # Gets all news by type news
 exports.index = (req,res) ->
-  models.news.getAllNewsByType 1, (err, results) ->
+  models.news.getAllNewsByType 'news', (err, results) ->
     if err then throw err
     res.render 'news/index', news: results or {}, menu: 'wise-owl'
     
