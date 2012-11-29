@@ -2,3 +2,4 @@ config.coffee
 node_modules
 .DS_Store
 uploads/
+*.espressostorage
