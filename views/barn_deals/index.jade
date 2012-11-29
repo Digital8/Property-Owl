@@ -1,12 +1,11 @@
 extends ../layout
 
 block content
-  //
-    main content
+  
   .container.row.main
+    
     include ../left_nav
-    //
-      center-col
+    
     #center-col
       a#forward-button(href='/how-it-works') How It Works
       h1 The Barn - Group Buying Power
@@ -28,8 +27,7 @@ block content
         h3 Sorry there are no barn deals available at the moment.
       - else
         - each property in barn
-          //
-            listing
+          
           .listing-summary
             .header
               h2 #{property.address}, #{property.suburb}, #{property.postcode}
@@ -47,14 +45,7 @@ block content
                   a.details-button(href='/barn/deals/#{property.property_id}')
                     img#info-icon(src='/images/info-icon.png', alt='View barn deal')
                     |  Details
-        //
-          end listing
-    //
-      end center-col
-    //
-      right-col
+    
     #right-col
       img#ad-tower1.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
       img#ad-tower2.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
-    //
-      end right-col

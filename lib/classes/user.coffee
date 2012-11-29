@@ -1,13 +1,3 @@
-###
- * User class
- *
- * Creates an object of the users credentials
- *
- * @package		Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
-
 accountLevel = require('../../system').config.acl
 
 module.exports = class User

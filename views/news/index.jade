@@ -1,13 +1,11 @@
 extends ../layout
 
 block content
-  //
-    main content
+  
   .container.row.main
+    
     include ../left_nav
-   
-    //
-      center-col
+    
     #center-col
       h1 News Updates
       h3 Innovation in delivering Australia's best property deals
@@ -15,36 +13,29 @@ block content
         p There are no news items for now. Please check back soon. 
       - else
         - each post in news
-          //
-            listing
+          
           .listing-summary
             .header
               h2= post.title
+            
             .listing-body
               .listing-thumb
                 a.details-button(href="/news/#{post.news_id}")
                   img.thumb(src='/images/news-thumb.jpg', alt='')
+              
               .listing-details
                 .summary
                   p= post.posted_at
                   p= post.content
+                
                 .listing-links
                   a.details-button(href="/news/#{post.news_id}")
                     img#info-icon(src='/images/info-icon.png', alt='View details')
                     |  Details
-      //
-        end listing
-    //
-      end center-col
-    //
-      right-col
+    
     #right-col
       img#ad-tower1.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
       img#ad-tower2.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
-    //
-      end right-col
-  //
-    end main content
-
+    
     script
       $('small.timeago').timeago();

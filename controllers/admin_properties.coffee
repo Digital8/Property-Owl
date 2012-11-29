@@ -1,35 +1,25 @@
-###
- * Admin Properties Controller
- *
- * @package   Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
 system = require '../system'
 
-models = 
-  users: system.load.model('user')
-  properties: system.load.model('properties')
-  media: system.load.model('media')
-  deals: system.load.model('deals')
-  lots: system.load.model('lots')
+models =
+  users: system.load.model 'user'
+  properties: system.load.model 'properties'
+  media: system.load.model 'media'
+  deals: system.load.model 'deals'
+  lots: system.load.model 'lots'
 
-classes =
-  uploader: system.load.class('uploader')
+classes = uploader: system.load.class 'uploader'
 
 helpers = {}
- 
+
 exports.index = (req,res) ->
   models.properties.getAllProperties (err, results) ->
     models.users.getUsersByGroup 2, (err, developers) ->
       res.render 'administration/properties/index', properties: results or {}, developers: developers or {}
-    
+
 exports.view = (req,res) ->
 
-## GET ##  
 exports.add = (req,res) ->
-  # debug part
-  #req.session.newPropertyId = 9
+  
   models.properties.getPropertyTypes (err, property_types) ->
     models.users.getUsersByGroup 2, (err, developers) ->
       if err then throw err
@@ -68,7 +58,6 @@ exports.add = (req,res) ->
       else
         res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}, mode: 'create'
 
-## POST ##
 exports.create = (req,res) ->
   if req.query.step?
     switch req.query.step
@@ -83,8 +72,8 @@ exports.create = (req,res) ->
         req.assert('title','Please enter a title for the deal').notEmpty()
         req.assert('price','Please enter a numeric only value.').isNumeric()
         
+        errors = req.validationErrors true
         
-        errors = req.validationErrors(true)
         if errors
           keys = Object.keys(errors)
 
@@ -92,12 +81,17 @@ exports.create = (req,res) ->
             req.flash('error', errors[key].msg)
             
           req.session.step1 = req.body
+          
           res.redirect 'back'
+        
         else
           models.properties.addProperty req.body, (err, results) ->
             if err then throw err
+            
             req.session.newPropertyId = results.insertId
-            res.redirect "/administration/properties/add?step=2"
+            
+            res.redirect '/administration/properties/add?step=2'
+      
       when '2'
         if req.body.cmdUpload?
           uploader = new classes.uploader(uploadDir: __dirname + '/../public/uploads/')            
@@ -160,27 +154,36 @@ exports.create = (req,res) ->
             else
               req.flash('error','A system error occured processing the upload :(')
               res.redirect '/administration/properties/add?step=4'
+      
       # Step 5
       when '5'
         req.body.floorPlans ?= ''
         
         if req.files.upload.size > 0
-          uploader = new classes.uploader(uploadDir: __dirname + '/../public/uploads/')            
+          uploader = new classes.uploader uploadDir: "#{__dirname}/../public/uploads/"
+          
           uploader.upload req.files.upload, (err, results) ->
             if err then throw err
+            
             if results.status is 200
               req.body.floorPlans = results.filename
+              
               models.lots.addLotToProperty req.session.newPropertyId, req.body, (err, results) ->
                 if err then throw err
-                req.flash('success','Lot added to property');
+                
+                req.flash 'success', 'Lot added to property'
+                
                 res.redirect 'back'
             else
-              req.flash('error','an error occured while trying to upload floor plans')
+              req.flash 'error', 'an error occured while trying to upload floor plans'
+              
               res.redirect 'back'
         else
           models.lots.addLotToProperty req.session.newPropertyId, req.body, (err, results) ->
             if err then throw err
-            req.flash('success','Lot added to property');
+            
+            req.flash 'success', 'Lot added to property'
+            
             res.redirect 'back'
               
       else
@@ -190,6 +193,7 @@ exports.create = (req,res) ->
   
 exports.edit = (req,res) ->
   req.session.newPropertyId = req.params.id
+  
   res.redirect '/administration/properties/add?step=1&edit'
   
 exports.update = (req,res) ->
@@ -203,18 +207,22 @@ exports.update = (req,res) ->
   req.assert('title','Please enter a title for the deal').notEmpty()
   req.assert('price','Please enter a numeric only value.').isNumeric()
   
-  errors = req.validationErrors(true)
+  errors = req.validationErrors true
+  
   if errors
-    keys = Object.keys(errors)
-
+    keys = Object.keys errors
+    
     for key in keys
-      req.flash('error', errors[key].msg)
+      req.flash 'error', errors[key].msg
       
     req.session.step1 = req.body
-    res.redirect "/administration/properties/add?step=1&edit"
+    
+    res.redirect '/administration/properties/add?step=1&edit'
+  
   else
     models.properties.updatePropertyDetails req.session.newPropertyId, req.body, (err, results) ->
       if err then throw err
-      res.redirect "/administration/properties/add?step=2&edit"
-  
+      
+      res.redirect '/administration/properties/add?step=2&edit'
+
 exports.destroy = (req,res) ->

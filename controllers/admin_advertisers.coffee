@@ -1,7 +1,6 @@
 system = require '../system'
 
-models =
-  advertiser: system.load.model 'advertiser'
+models = advertiser: system.load.model 'advertiser'
 
 helpers = {}
 
@@ -38,11 +37,12 @@ exports.create = (req, res) ->
     
     models.advertiser.create advertiser, (error, results) ->
       if error
-        # res.render 'errors/404'
         req.flash 'error', error.message
+        
         res.redirect 'back'
       else
         req.flash 'success', 'Great Success!'
+        
         res.redirect '/administration/advertisers'
 
 exports.edit = (req, res) ->

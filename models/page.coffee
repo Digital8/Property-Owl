@@ -1,14 +1,4 @@
-###
- * Custom Pages Model
- *
- * Handles all queries and actions to the database for the custom pages
- *
- * @package   Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
-
-db = require('../system').db
+{db} = require '../system'
 
 table = "#{db.prefix}pages"
 

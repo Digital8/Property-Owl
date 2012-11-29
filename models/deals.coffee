@@ -1,14 +1,4 @@
-###
- * Deals Model
- *
- * Handles all queries and actions to the database for the listed deals
- *
- * @package   Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
-
-db = require('../system').db
+{db} = require '../system'
 
 exports.getAllDeals = (callback) ->
   db.query "SELECT * FROM #{db.prefix}deals", callback

@@ -1,14 +1,4 @@
-###
- * User Model
- *
- * Handles all queries and actions to the database for the user
- *
- * @package   Time for Advice
- * @author    Brendan Scarvell <bscarvell@gmail.com>
- * @copyright Copyright (c) 2012 - Current
- ###
-
-db = require('../system').db
+{db} = require '../system'
 
 exports.login = (email, password, callback) ->
   db.query "SELECT * FROM #{db.prefix}users WHERE email = ? AND password = ?", [email, password], callback

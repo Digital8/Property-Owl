@@ -1,23 +1,10 @@
-###
- * Search Controller
- *
- * Allows one to search for deals matching certain criteria
- *
- * @package   Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
 system = require '../system'
 
-models =
-  properties: system.load.model('properties')
+models = properties: system.load.model 'properties'
 
 helpers = {}
- 
+
 exports.index = (req,res) ->
-  
-  
-  
   if req.query.state is 'all' then req.query.state = '%'
   if req.query.pType is 'all' then req.query.pType = '%'
   if req.query.dType is 'all' then req.query.dType = '%'

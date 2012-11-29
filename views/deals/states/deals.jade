@@ -1,12 +1,11 @@
 extends ../../layout
 
 block content
-  //
-    main content
+  
   .container.row.main
+    
     include ../../left_nav
-    //
-      center-col
+    
     #center-col
       h1 Owl Deals for #{state.toUpperCase()}
       - if (properties.length == 0)
@@ -15,20 +14,23 @@ block content
          - var i = 0; // Just a hack for PoC
          - each property in properties
           - i++
-          //
-            listing
+          
           .listing-summary
+            
             .header
               .listing-price
                 $ #{property.price}
               h2 #{property.address}, #{property.suburb} #{property.state.toUpperCase()}
+            
             .listing-body
+              
               .listing-thumb
                 img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
                 //
                   show if top listing
                 - if (i == 1)
                   img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
+              
               .listing-details
                 .features
                   span.property-type
@@ -45,9 +47,11 @@ block content
                     img(src='/images/car-icon.png', alt='2 Car Spaces')
                     strong= property.cars
                     |  Car Spaces
+                
                 .summary
                   h3= property.title
                   p= property.description
+                
                 .listing-links
                   a.savebuttons.save-button(href='#', data-property="#{property.property_id}")
                     img#save-icon(src='/images/plus-icon.png', alt='Save this property')
@@ -55,18 +59,7 @@ block content
                   a.details-button(href='/properties/view/#{property.property_id}')
                     img#info-icon(src='/images/info-icon.png', alt='View property details')
                     |  Details
-          //
-            end listing
-
-    //
-      end center-col
-    //
-      right-col
+    
     #right-col
       img#ad-tower1.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
       img#ad-tower2.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
-    //
-      end right-col
-  //
-    end main content
-  

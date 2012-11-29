@@ -32,8 +32,6 @@ module.exports = (app) ->
   
   app.get '/owl-deals', authenticate, controllers.owl_deals.index
   
-  app.get '/why-the-owl', controllers.wto.index
-  
   app.get '/products', authenticate, controllers.products.index
   
   app.get '/barn-deals', authenticate, controllers.barn_deals.index

@@ -1,20 +1,9 @@
-###
- * News Controller
- *
- * Handles website research
- *
- * @package   Property Owl
- * @author    Alexandra Wheeler <alex@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
 system = require '../system'
 
-models = 
-  news: system.load.model 'news'
+models = news: system.load.model 'news'
 
 helpers = {}
 
-# Gets all news by type research
 exports.index = (req,res) ->
   models.news.getAllNewsByType 2, (err, results) ->
     if err then throw err
@@ -24,7 +13,7 @@ exports.view = (req,res) ->
   models.news.getNewsById req.params.id, (err, results) ->
     if err then throw err
     res.render 'research/view', post: results.pop() or {}, menu: 'wise-owl'
-    
+
 exports.add = (req,res) ->
 
 exports.create = (req,res) ->

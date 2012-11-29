@@ -1,14 +1,4 @@
-###
- * Media Model
- *
- * Handles all queries and actions to the database for the uploaded media
- *
- * @package   Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
-
-db = require('../system').db
+{db} = require '../system'
 
 exports.getMediaByPropertyId = (property_id, callback) ->
   db.query "SELECT * FROM #{db.prefix}media WHERE property_id = ? AND image = 0", [property_id], callback

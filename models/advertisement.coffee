@@ -2,8 +2,7 @@ async = require 'async'
 
 {db} = system = require '../system'
 
-models =
-  advertiser: system.load.model 'advertiser'
+models = advertiser: system.load.model 'advertiser'
 
 table = "#{db.prefix}advertisements"
 

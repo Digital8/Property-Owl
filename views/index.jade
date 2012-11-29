@@ -1,8 +1,6 @@
 extends layout
 
 block content
-  //
-    main content
   .container.row.best-deal
     .home-deal-stats
       .home-timer
@@ -16,6 +14,7 @@ block content
           #minute-timer
             span.label Mins
             span#day-timer-mins.value
+        
         #map
           img#map-image(src='/images/map.png', usemap='#australia', alt='Click on a State of Australia')
           map(name='australia')
@@ -27,35 +26,37 @@ block content
             area#map-vic(shape='polygon', coords='116,104,145,126,137,131,110,128,116,129', href='/deals/state/vic')
             area#map-act(shape='square', coords='155,110,185,110,185,120,155,120', href='/deals/state/act')
             area#map-tas(shape='square', coords='120,140,170,140,170,155,120,155', href='/deals/state/tas')
+      
       .home-counter
         span.label Number of Enquiries
         span.value 1,345
+    
     .deal-summary(style='background-image: url(\'/images/hero-image.jpg\');')
       .home-hero-caption
-        img#house-icon(src='/images/house-icon.png', alt='Australia\'s Best Property Deal')
+        img#house-icon(src='/images/house-icon.png', alt="Australia's Best Property Deal")
         h2 Australia's Best Property Deal
         p
           | Developer pays Stamp Duty, Window Coverings and 1 Year rental Guarantee.
-          a(href='#', alt='Find out more about Australia\'s best property deal') Find out more
+          a(href='#', alt="Find out more about Australia's best property deal") Find out more
+      
       a.secure-button(href='/best-deal')
         | Secure this deal!
         img#secure-arrow(src='/images/arrow-icon.png', alt='Secure this deal!')
+  
   .container.row.main
-    //
-      left-col
+    
     #left-col
       .barn-box
         a(href="/barn-deals")
           h2 The Barn
           img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
           h3 Group Deals
+      
       img#ad-box1.ad-box(src='/images/ad-box.jpg', alt='Box Advert')
       img#ad-box2.ad-box(src='/images/ad-box.jpg', alt='Box Advert')
+      
       include search
-    //
-      end left-col
-    //
-      center-col
+    
     #home-center-col
       h1 Welcome to Property Owl!
       p
@@ -90,19 +91,12 @@ block content
       p So what are you waiting for - Swoop in today!
       p
         span.emphasis Property Owl – Innovation in delivering Australia's Best Property Deals.
-    //
-      end center-col
-    //
-      right-col
+    
     #right-col
       img#ad-tower1.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
       img#ad-tower2.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
-    //
-      end right-col
-  //
-    end main content
-      
+  
   <script src="/js/wwv_client.js" type="text/javascript"></script>
   <script src="/js/swfobject.js" type="text/javascript"></script>
   script(type='text/javascript')
-    try { attachWebWalkVideo('262'); } catch (err) { }
+    try { attachWebWalkVideo('262'); } catch (err) {}

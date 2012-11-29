@@ -1,8 +1,7 @@
 extends ../layout
 
 block content
-  //
-    main content
+  
   .container.row.main
     script(defer,src="/js/jquery.flexslider.js")
     script(type="text/javascript")
@@ -35,10 +34,10 @@ block content
         js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    //
-      left-col
+    
     #left-col
       .deal-stats
+         
         .timer
           #timer
             #day-timer
@@ -50,6 +49,7 @@ block content
             #minute-timer
               span.label Mins
               span.value 07
+          
           #map
             img#map-image(src='/images/map.png', usemap='#australia', alt='Click on a State of Australia')
             map(name='australia')
@@ -61,13 +61,16 @@ block content
               area#map-vic(shape='polygon', coords='116,104,145,126,137,131,110,128,116,129', href='#')
               area#map-act(shape='square', coords='155,110,185,110,185,120,155,120', href='#')
               area#map-tas(shape='square', coords='120,140,170,140,170,155,120,155', href='#')
+        
         .counter
           span.label Number of Enquiries
           span.value 1,345
+      
       .barn-box
         h2 The Barn
         img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
         h3 Group Deals
+      
       .share
         ul
           li
@@ -86,6 +89,7 @@ block content
             a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/property-details') Tweet
             script
               !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+      
       .enquiry
         h2 Enquire About This Deal
         form#input-form
@@ -98,13 +102,9 @@ block content
           label(for='propertyComments') Comments
           textarea#propertyComments(rows='5')
           input.button(type='submit', value='Submit')
-    //
-      end left-col
-    //
-      center-col
+    
     #wide-center-col
-      //
-        image slider
+      
       .slider-box
         #slider.flexslider
           ul.slides
@@ -116,8 +116,8 @@ block content
               img(src='/images/slider1.jpg')
             li
               img(src='/images/slider1.jpg')
-            //
-               items mirrored twice, total of 12 
+            // items mirrored twice, total of 12
+         
         #carousel.flexslider
           ul.slides
             li
@@ -128,8 +128,9 @@ block content
               img(src='/images/slider1.jpg')
             li
               img(src='/images/slider1.jpg')
-            //
-               items mirrored twice, total of 12 
+            
+            // items mirrored twice, total of 12 
+      
       .property-info
         - if (lots.length > 0 )
           table.barn-lots
@@ -166,9 +167,11 @@ block content
                 td
                   a.barn-register(href='#', alt='Register') Register
         #left
-          p #{property.address}, #{property.suburb}, #{property.postcode}, 
+          p #{property.address}, #{property.suburb}, #{property.postcode}
           h2= property.title
+          
           p= property.description
+          
           .general-features
             h3 General Features
             ul
@@ -196,6 +199,7 @@ block content
                 p
                   | Floor Plans
                   span (1.6mb)
+          
           .other-features
             h3 Indoor Features
             ul
@@ -206,6 +210,7 @@ block content
             h3 Other Features
             p Close to shops, close to transport, secure parking, terrace/balcony.
         #right
+          
           .deal
             h2
               | Reveal the Deal
@@ -216,12 +221,14 @@ block content
               ul
                 - each deal in deals
                   li= deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
+          
           .time-left
             p
               | Time left
               span.time 04:02:35
+          
           iframe#google-map(width='100%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913&output=embed')
+          
           br
+          
           a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913') View Larger Map
-    //
-      end center-col

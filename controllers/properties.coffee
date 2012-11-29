@@ -1,15 +1,6 @@
-###
- * Properies Controller
- *
- * Controller for viewing a property
- *
- * @package   Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
 system = require '../system'
 
-models =  
+models =
   properties: system.load.model('properties')
   media: system.load.model('media')
   deals: system.load.model('deals')
