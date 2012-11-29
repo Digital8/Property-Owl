@@ -14,7 +14,8 @@ helpers =
   hash: system.load.helper('hash')
   
 models = 
-  properties: system.load.model 'properties'
+  properties: system.load.model('properties')
+  media: system.load.model('media')
   lots: system.load.model('lots')
   deals: system.load.model('deals')
 
@@ -38,8 +39,10 @@ exports.view = (req,res) ->
         # Get the deals
         #models.properties.getPropertiesOfBarnDeal req.params.id, (err, barn_deals) ->
         models.deals.getDealsByPropertyId req.params.id, (err, deals) ->
-          models.lots.getLotsByPropertyId req.params.id, (err,lots) ->
-            res.render 'barn_deals/view', property: property, lots: lots or {}, deals: deals or {}
+          models.media.getMediaByPropertyId req.params.id, (err, files) ->
+            models.media.getImagesByPropertyId req.params.id, (err, images) ->
+              models.lots.getLotsByPropertyId req.params.id, (err,lots) ->
+                res.render 'barn_deals/view', property: property, deals: deals or {}, files: files or {}, images: images or {}, lots: lots or {}
 
 # GET
 exports.add = (req,res) ->

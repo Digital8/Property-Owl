@@ -1,23 +1,18 @@
-###
- * System
- *
- * Core component to application.
- * The general go-to file to load in resources required
- *
- * @package		Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
-
-config = require './config'
-mysql = require 'mysql'
 fs = require 'fs'
 
+mysql = require 'mysql'
+
+config = require './config'
+
+exports.acl = config.acl
+
+exports.controllers = {}
+
 exports.db = mysql.createConnection
-  host     : config.database.host
-  user     : config.database.user
-  password : config.database.password
-  database : config.database.name
+  host: config.database.host
+  user: config.database.user
+  password: config.database.password
+  database: config.database.name
 
 exports.config = config
 

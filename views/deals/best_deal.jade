@@ -125,45 +125,46 @@ block content
       .property-info
         #left
           h1 Australia's Best Property Deal
+          | #{property.address}, #{property.suburb}, #{property.state.toUpperCase()} #{property.postcode}
           h2 Property Details
-          p
-            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          p= property.description
           .general-features
             h3 General Features
             ul
-              li Property Type: Apartment
-              li Bedrooms: 3
-              li Bathrooms: 2
+              li Property Type: #{property.property_type}
+              li Bedrooms: #{property.bedrooms}
+              li Bathrooms: #{property.bathrooms}
+              li Garage Space: #{property.cars}
+              
             h3 More Info
-            .file
-              img(src='/images/file-icon.gif', alt='Floor Plans')
-              p
-                | Floor Plans
-                span (1.6mb)
-            .file
-              img(src='/images/file-icon.gif', alt='Appraisal')
-              p
-                | Appraisal
-                span (1.6mb)
+            .file-row
+              - if (files.length == 0)
+                p No files have been uploaded for this property
+              - else
+                - each file in files
+                  .file
+                    a(href="/uploads/#{file.filename}")
+                      img(src='/images/file-icon.gif', alt='Floor Plans')
+                      | #{file.description}
+
           .other-features
             h3 Indoor Features
-            ul
-              li Air Conditioning
+            p= property.indoor_features
             h3 Outdoor Features
-            ul
-              li Garage Space: 2
-              li Swimming Pool: In-ground
+            p= property.outdoor_features
             h3 Other Features
-            p Close to shops, close to transport, secure parking, terrace/balcony.
+            p= property.other_features
         #right
           .deal
             h2
               | Reveal the Deal
-              img.arrow(src='/images/blue-arrow-icon.png', alt='Reveal the Deal')
-            ul
-              li Stamp Duty
-              li Furniture Package
-              li 1 Year Rental Guarantee
+              img.arrow(src='/images/blue-arrow-icon-down.png', alt='Reveal the Deal')
+            - if (deals.length == 0)
+              li No deals have been listed
+            - else
+              ul
+                - each deal in deals
+                  li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
           .secure-deal
             a.secure-button(href='#') Secure the Deal!
           iframe#google-map(width='100%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913&output=embed')

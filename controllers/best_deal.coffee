@@ -12,10 +12,22 @@ system = require '../system'
 
 helpers = {}
   
-models = {}
+models =
+  properties: system.load.model 'properties'
+  deals: system.load.model 'deals'
+  media: system.load.model 'media'
 
 exports.index = (req,res) ->
-  res.render 'deals/best_deal', menu: 'aus-best-deal'
+  models.properties.getBestDeal (err, property) ->
+    console.log arguments
+    if err then console.log err
+    unless property
+      res.render 'properties/not_found'
+    else
+      models.deals.getDealsByPropertyId property.property_id, (err, deals) ->
+        models.media.getMediaByPropertyId property.property_id, (err, files) ->
+          models.media.getImagesByPropertyId property.property_id, (err, images) ->
+            res.render 'deals/best_deal', menu: 'aus-best-deal', property: property, deals: deals or {}, files: files or {} , images: images or {}
 
 exports.view = (req,res) ->
 

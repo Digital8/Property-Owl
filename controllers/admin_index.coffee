@@ -15,16 +15,16 @@ system = require '../system'
 models =
   admin: system.load.model 'admin'
   advertisement: system.load.model 'advertisement'
+  properties: system.load.model('properties')
 
 helpers = {}
  
 exports.index = (req,res) ->
-  async.parallel
-    pages: (callback) -> models.admin.getAdminPages callback
-    activeAdvertisementCount: (callback) -> models.advertisement.countActive callback
-  , (error, results) ->
-    res.render 'administration/index', results
-  
+  models.properties.getPendingProperties (err, properties) ->
+    models.properties.getPendingBarnDeals (err, projects) ->
+      models.advertisement.countActive (err, results) ->
+        res.render 'administration/index', activeAdvertisementCount: results, properties: properties or {}, projects: projects or {}, menu: 'dashboard'
+
 exports.view = (req,res) ->
   
 exports.add = (req,res) ->

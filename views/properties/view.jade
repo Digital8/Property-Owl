@@ -87,7 +87,7 @@ block content
           li
             .fb-like(data-href='http://www.propertyowl.com.au/properties/view/#{property.property_id}', data-send='false', data-layout='button_count', data-width='125', data-show-faces='false')
           li
-            a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/property-details') Tweet
+            a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/properties/view/#{property.property_id}') Tweet
             script
               !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
       .enquiry
@@ -107,7 +107,6 @@ block content
     //
       center-col
     #wide-center-col
-      a#back-button(href='/deals/state/qld') Back
       //
         image slider
       .slider-box
@@ -139,7 +138,7 @@ block content
       .property-info
         #left
           h1= property.title
-          | #{property.address}, #{property.suburb}, #{property.state.toUpperCase()}
+          | #{property.address}, #{property.suburb}, #{property.state.toUpperCase()} #{property.postcode}
           h2 Property Details
           p= property.description
           .general-features
@@ -151,40 +150,39 @@ block content
               li Garage Space: #{property.cars}
               
             h3 More Info
-            - if (files.length == 0)
-              strong No files have been uploaded for this property
-            - else
-              - each file in files
-                .file
-                  img(src='/images/file-icon.gif', alt='Floor Plans')
-                  p
-                    a(href="/uploads/#{file.filename}")= file.description
-                    
+            .file-row
+              - if (files.length == 0)
+                p No files have been uploaded for this property
+              - else
+                - each file in files
+                  .file
+                    a(href="/uploads/#{file.filename}")
+                      img(src='/images/file-icon.gif', alt='Floor Plans')
+                      | #{file.description}
+
           .other-features
             h3 Indoor Features
-            ul
-              li Air Conditioning
+            p= property.indoor_features
             h3 Outdoor Features
-            ul
-              li Swimming Pool: In-ground
+            p= property.outdoor_features
             h3 Other Features
-            p Close to shops, close to transport, secure parking, terrace/balcony.
+            p= property.other_features
         #right
           .deal
             h2
               | Reveal the Deal
-              img.arrow(src='/images/blue-arrow-icon.png', alt='Reveal the Deal')
+              img.arrow(src='/images/blue-arrow-icon-down.png', alt='Reveal the Deal')
             - if (deals.length == 0)
               li No deals have been listed
             - else
               ul
                 - each deal in deals
-                  li= deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
+                  li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
           .secure-deal
             a.secure-button(href='#') Secure the Deal!
           iframe#google-map(width='100%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913&output=embed')
           br
-          a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913') View Larger Map
+          a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913', target="_blank") View Larger Map
     //
       end center-col
   //
