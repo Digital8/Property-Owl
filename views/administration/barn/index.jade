@@ -9,15 +9,11 @@ block content
     include ../../flashify
     .admin-actions
       ul
-        li.disabled
-          img(src='/images/manage.png')
-          | &nbsp;
-          | Manage Projects
         li
-          a(href='/administration/barn/add')
+          a(href='/administration/properties/add')
             img(src='/images/add.png')
             | &nbsp;
-            | Add New Project
+            | Add New Deal
         // .grid-summary 1 - 4 of 24
     .grid-header
       form#search-form
@@ -74,11 +70,11 @@ block content
             td 4
             td 134
             td.actions
-              a(href="/administration/barn/edit/#{barn.property_id}")
+              a(href="/administration/properties/edit/#{barn.property_id}")
                 img(src='/images/edit.png', alt='Edit')
                 | Edit
             td.actions
-              a(href="/administration/barn/delete/#{barn.property_id}")
+              a(href="/administration/properties/delete/#{barn.property_id}")
                 img(src='/images/delete.png', alt='Delete')
                 | Delete
         tfoot

@@ -8,9 +8,9 @@ nav#admin-menu
       a(href='/administration/properties',class="#{c}") Property Deals
       ul
         li
-          a(href='/administration/properties') Manage Property Listings
+          a(href='/administration/properties') Owl Deal Listings
         li
-          a(href='/administration/properties') Manage Barn Deal Listings
+          a(href='/administration/barn') Barn Deal Listings
     li
       - var c = (menu == 'advertising') ? 'active' : ''
       a(href='/administration/advertisements',class="#{c}") Advertising
@@ -22,14 +22,19 @@ nav#admin-menu
     li
       - var c = (menu == 'products-service-suppliers') ? 'active' : ''
       a(href='/administration/services',class="#{c}") Products & Service Suppliers
+      ul
+        li
+          a(href='/administration/services') Suppliers
+        li
+          a(href='/administration/services/categories') Categories
     li
       - var c = (menu == 'content') ? 'active' : ''
       a(href='/administration/pages',class="#{c}") Content
       ul
         li
-          a(href='/administration/news') Manage News
+          a(href='/administration/news') News & Research
         li
-          a(href='/administration/pages') Manage Pages
+          a(href='/administration/pages') Pages
     li
       - var c = (menu == 'reports') ? 'active' : ''
       a(href='#',class="#{c}") Reports

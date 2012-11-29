@@ -22,7 +22,7 @@ helpers = {}
 exports.index = (req,res) ->
   models.properties.getAllProperties (err, results) ->
     models.users.getUsersByGroup 2, (err, developers) ->
-      res.render 'administration/properties/index', properties: results or {}, developers: developers or {}
+      res.render 'administration/properties/index', properties: results or {}, developers: developers or {}, menu: 'property-deals'
     
 exports.view = (req,res) ->
 
@@ -40,33 +40,33 @@ exports.add = (req,res) ->
             if req.query.edit?
               models.properties.getAllPropertiesById req.session.newPropertyId, (err, results) ->
                 if results.length >= 1 then results = results.pop()
-                res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: results or {}, mode: 'edit'
+                res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: results or {}, mode: 'edit', menu: 'property-deals'
             else
               delete req.session.newPropertyId
-              res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}, mode: 'create'
+              res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}, mode: 'create', menu: 'property-deals'
           when '2'
             if req.query.edit? then mode = 'edit' else mode = ''
             models.media.getMediaByPropertyId req.session.newPropertyId, (err, files) ->
               if err then throw err
-              res.render 'administration/properties/features', files: files or {}, mode: mode or {}
+              res.render 'administration/properties/features', files: files or {}, mode: mode or {}, menu: 'property-deals'
           when '3'
             models.properties.getAllPropertiesById req.session.newPropertyId, (err, property) ->
               models.deals.getDealsByPropertyId req.session.newPropertyId, (err, deals) ->
-                res.render 'administration/properties/deals', deals: deals or {}, property: property or {}
+                res.render 'administration/properties/deals', deals: deals or {}, property: property or {}, menu: 'property-deals'
           when '4'
             models.properties.getAllPropertiesById req.session.newPropertyId, (err, property) ->
               models.media.getImagesByPropertyId req.session.newPropertyId, (err, files) ->
                 if err then throw err
-                res.render 'administration/properties/images', images: files or {}, property: property or {}
+                res.render 'administration/properties/images', images: files or {}, property: property or {}, menu: 'property-deals'
           when '5'
             models.lots.getLotsByPropertyId req.session.newPropertyId, (err, lots) ->
-              res.render 'administration/properties/lots', lots: lots or {}
+              res.render 'administration/properties/lots', lots: lots or {}, menu: 'property-deals'
           when 'finish'
-            res.render 'administration/properties/finished'
+            res.render 'administration/properties/finished', menu: 'property-deals'
           else
-            res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}
+            res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}, menu: 'property-deals'
       else
-        res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}, mode: 'create'
+        res.render 'administration/properties/details', developers: developers, property_types: property_types, step1: req.session.step1 or {}, mode: 'create', menu: 'property-deals'
 
 ## POST ##
 exports.create = (req,res) ->
@@ -186,7 +186,7 @@ exports.create = (req,res) ->
       else
         res.send 'an error occured'
   else
-    res.render 'administration/properties/details'
+    res.render 'administration/properties/details', menu: 'property-deals'
   
 exports.edit = (req,res) ->
   req.session.newPropertyId = req.params.id

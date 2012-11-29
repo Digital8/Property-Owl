@@ -6,12 +6,20 @@ block content
     main content
   .container.row.main
     include ../../admin-menu
-    h1 Supplier Categories
-    include navigation
-    .grid-header
-      h3 Add Category
-      form#search-form(action="/administration/services/categories/edit/#{category.category_id}",method="post")
+    h1 Edit Category - #{category.category}
+    .admin-actions
+      ul
+        li
+          a(href='/administration/services/categories')
+            img(src='/images/manage.png')
+            | &nbsp;
+            | Manage Categories
+    .details
+      h2 Category Details
+      form#search-form.details-form(action="/administration/services/categories/edit/#{category.category_id}",method="post")
         input(type="hidden",name="_method",value="put")
-        input(type="text",name="category",value="#{category.category}")
-        p
+        .inputs
+          label(for="categoryName") Category Name
+          input(type="text",name="category",value="#{category.category}")
+        .submit
           input.button(type="submit",value="Save")

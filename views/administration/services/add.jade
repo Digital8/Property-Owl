@@ -6,9 +6,15 @@ block content
   .container.row.main
     include ../../admin-menu
     h1 Add New Supplier
-    include navigation
+    .admin-actions
+      ul
+        li
+          a(href="/administration/services/")
+            img(src='/images/manage.png')
+            | &nbsp;
+            | Manage Suppliers
     .details
-      h2 Add New Supplier
+      h2 Supplier Details
       hr
       form.details-form(action="/administration/services/add",method="post")
         .left

@@ -14,13 +14,13 @@ helpers = {}
  
 exports.index = (req, res) ->
   models.services.getAllServices (err, results) ->
-    res.render 'administration/services/index', services: results or {}
+    res.render 'administration/services/index', services: results or {}, menu: 'products-service-suppliers'
   
 exports.view = (req, res) ->
   
 exports.add = (req,res) ->
   models.services.getAllServiceCategories (err, categories) ->
-    res.render 'administration/services/add', categories: categories or {}
+    res.render 'administration/services/add', categories: categories or {}, menu: 'products-service-suppliers'
   
 exports.create = (req, res) ->
   req.body.logo ?= ''
@@ -33,7 +33,7 @@ exports.edit = (req, res) ->
   models.services.getServiceById req.params.id, (err, results) ->
     models.services.getAllServiceCategories (err, categories) ->
       if results.length >= 1 then results = results.pop()
-      res.render 'administration/services/edit', service: results or {}, categories: categories or {}
+      res.render 'administration/services/edit', service: results or {}, categories: categories or {}, menu: 'products-service-suppliers'
   
 exports.update = (req, res) ->
   req.body.logo ?= ''
@@ -52,7 +52,7 @@ exports.delete = (req, res) ->
 exports.viewCategories = (req, res) ->
   models.services.getAllServiceCategories (err, categories) ->
     if err then throw err
-    res.render 'administration/services/viewCategories', categories: categories or {}
+    res.render 'administration/services/viewCategories', categories: categories or {}, menu: 'products-service-suppliers'
 
 exports.createCategory = (req, res) ->
   models.services.createCategory req.body, (err) ->
@@ -60,12 +60,12 @@ exports.createCategory = (req, res) ->
     res.redirect '/administration/services/categories'
 
 exports.addCategory = (req, res) ->
-  res.render 'administration/services/addCategory'
+  res.render 'administration/services/addCategory', menu: 'products-service-suppliers'
 
 exports.editCategory = (req, res) ->
   models.services.getCategoryById req.params.id, (err, results) ->
     if results.length >= 1 then results = results.pop()
-    res.render 'administration/services/editCategory', category: results or {}
+    res.render 'administration/services/editCategory', category: results or {}, menu: 'products-service-suppliers'
   
 exports.updateCategory = (req, res) ->
   models.services.updateCategory req.params.id, req.body, (err, results) ->

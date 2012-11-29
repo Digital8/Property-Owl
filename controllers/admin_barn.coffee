@@ -20,7 +20,7 @@ exports.index = (req, res) ->
       if results[i].deal_of is 0 then barn_results.push(results[i])
     
     models.users.getUsersByGroup 2, (err, developers) ->      
-      res.render 'administration/barn/index', barn_deals: barn_results or {}, developers: developers or {}
+      res.render 'administration/barn/index', barn_deals: barn_results or {}, developers: developers or {}, menu: 'property-deals'
   
 exports.view = (req, res) ->
   
@@ -42,7 +42,7 @@ exports.add = (req,res) ->
           res.redirect 'back'
         else
           models.properties.getAllProperties (err, properties) ->
-            res.render 'administration/barn/add', barn: barn or {}, properties: properties
+            res.render 'administration/barn/add', barn: barn or {}, properties: properties, menu: 'property-deals'
   
 exports.create = (req, res) ->
   
@@ -59,7 +59,7 @@ exports.edit = (req, res) ->
         res.redirect 'back'
       else
         models.properties.getPropertiesOfBarnDeal req.params.id, (err, properties) ->
-          res.render 'administration/barn/edit', barn: barn or {}, properties: properties or {}
+          res.render 'administration/barn/edit', barn: barn or {}, properties: properties or {}, menu: 'property-deals'
 
       
   
@@ -80,7 +80,7 @@ exports.delete = (req, res) ->
        else
          models.properties.getAllPropertiesById property_id, (err, properties) ->
            if properties.length >= 1 then property = properties.pop()
-           res.render 'administration/barn/delete', barn: barn or {}, property: property or {}
+           res.render 'administration/barn/delete', barn: barn or {}, property: property or {}, menu: 'property-deals'
   
   
 exports.destroy = (req,  res) ->

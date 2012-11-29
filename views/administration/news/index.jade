@@ -9,10 +9,6 @@ block content
     include ../../flashify
     .admin-actions
      ul
-      li.disabled
-       img(src='/images/manage.png')
-       | &nbsp;
-       | Manage News
       li
        a(href="/administration/news/add")
         img(src='/images/add.png')
@@ -29,12 +25,14 @@ block content
     table.admin-gridview
      thead
       tr
+       td Type
        td Headline
        td Date
        td(colspan='2') Actions
      tbody
      - each post in news
       tr
+       td= post.news_type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
        td= post.title
        td= post.posted_at
        td.actions
@@ -47,7 +45,7 @@ block content
          | Delete
      tfoot
       tr
-       td(colspan='5')
+       td(colspan='6')
         ul.pager
          li.disabled
           a(href='#') Prev
