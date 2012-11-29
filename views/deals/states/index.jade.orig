@@ -24,12 +24,22 @@ block content
             .listing-body
               
               .listing-thumb
+<<<<<<< HEAD
+                
+                img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+                //
+                  show if top listing
+                - if (i == 1)
+                  img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
+              
+=======
                 a(href='/properties/view/#{property.property_id}')
                   img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
                   //
                     show if top listing
                   - if (i == 1)
                     img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
+>>>>>>> 689b993d33928f90e355924eb64739d6bcab5577
               .listing-details
                 .features
                   span.property-type

@@ -68,6 +68,7 @@ block content
         
         .grid-summary 1 - 4 of 24
       
+<<<<<<< HEAD
       table.admin-gridview
        
        tbody
@@ -104,6 +105,58 @@ block content
            li
             a(href='#') Next
     
+=======
+      - if (projects.length == 0)
+        table.admin-gridview
+         thead
+           tr 
+             td(colspan='6')
+              | There are no pending barn deals. 
+      - else
+        table.admin-gridview
+         thead
+           tr
+             td ID
+             td Listed On
+             td Title
+             td(colspan='3') Actions
+          tbody
+          - each project in projects
+            tr
+             td= project.property_id
+             - var listed = new Date(project.created_at)
+             td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+             td= project.title
+             td.actions
+               a(href='/properties/view/#{project.property_id}', alt='view property', target="_blank")
+                 img(src='/images/view.png', alt='View')
+                 | View
+             td.actions
+               a(href='/administration/properties/edit/#{project.property_id}', alt='edit property')
+                 img(src='/images/edit.png', alt='Edit')
+                 | Edit
+              td.actions
+                a(href='#')
+                  img(src='images/approve.png', alt='View')
+                  | Approve
+         tfoot
+          tr
+           td(colspan='6')
+            a.button(href="/administration/barn") Manage All Projects
+            ul.pager
+             li
+              a(href='#') Prev
+             li.selected
+              a(href='#') 1
+             li
+              a(href='#') 2
+             li
+              a(href='#') 3
+             li
+              a(href='#') 4
+             li
+              a(href='#') Next
+>>>>>>> 689b993d33928f90e355924eb64739d6bcab5577
     #dashboard-right-col
       .grid-header
         h2 This Month

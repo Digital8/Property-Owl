@@ -1,31 +1,38 @@
 nav#admin-menu
   ul.sf-menu
     li
-      a.active(href='/administration') Dashboard
+      - var c = (menu == 'dashboard') ? 'active' : ''
+      a(href='/administration',class="#{c}") Dashboard
     li
-      a(href='/administration/properties') Property Deals
+      - var c = (menu == 'property-deals') ? 'active' : ''
+      a(href='/administration/properties',class="#{c}") Property Deals
       ul
         li
           a(href='/administration/properties') Manage Property Listings
         li
           a(href='/administration/properties') Manage Barn Deal Listings
     li
-      a(href='/administration/advertising') Advertising
+      - var c = (menu == 'advertising') ? 'active' : ''
+      a(href='/administration/advertisements',class="#{c}") Advertising
       ul
         li
-          a(href='/administration/advertisers') Advertisers
+          a(href='/administration/advertisements') Advertisements
         li
-          a(href='/administration/adspaces') Spaces
+          a(href='/administration/advertisers') Advertisers
     li
-      a(href='/administration/services') Products & Service Suppliers
+      - var c = (menu == 'products-service-suppliers') ? 'active' : ''
+      a(href='/administration/services',class="#{c}") Products & Service Suppliers
     li
-      a(href='/administration/pages') Content
+      - var c = (menu == 'content') ? 'active' : ''
+      a(href='/administration/pages',class="#{c}") Content
       ul
         li
           a(href='/administration/news') Manage News
         li
           a(href='/administration/pages') Manage Pages
     li
-      a(href='#') Reports
+      - var c = (menu == 'reports') ? 'active' : ''
+      a(href='#',class="#{c}") Reports
     li  
-      a(href='/administration/members') Members
+      - var c = (menu == 'members') ? 'active' : ''
+      a(href='/administration/members',class="#{c}") Members

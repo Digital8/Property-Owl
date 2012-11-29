@@ -780,7 +780,7 @@ body {
   -webkit-border-radius: 0.313em;
   border-radius: 0.313em;
   zoom: 1;
-  padding: .938em;
+  padding: 0.625em;
 }
 #admin-menu:before,
 #admin-menu:after {
@@ -798,7 +798,7 @@ body {
 }
 #admin-menu .sf-menu li:hover ul,
 #admin-menu .sf-menu li.sfHover ul {
-  top: 1.55em !important;
+  top: 2em !important;
   /* match top ul list item height */
 
 }
@@ -816,10 +816,32 @@ body {
   font-weight: 700;
   color: #7DD3FF;
   text-shadow: 0px -1px 0px rgba(0,0,0,0.5);
-  padding: 0 !important;
+  padding: 0.313em;
 }
 #admin-menu > ul > li > a:hover {
   color: #FFF;
+}
+#admin-menu > ul > li > a.active {
+  color: #FFF;
+  background: #0a2d4a;
+  -webkit-border-top-left-radius: 0.188em;
+  -moz-border-radius-topleft: 0.188em;
+  border-top-left-radius: 0.188em;
+  -webkit-border-top-right-radius: 0.188em;
+  -moz-border-radius-topright: 0.188em;
+  border-top-right-radius: 0.188em;
+  -webkit-border-bottom-left-radius: 0.188em;
+  -moz-border-radius-bottomleft: 0.188em;
+  border-bottom-left-radius: 0.188em;
+  -webkit-border-bottom-right-radius: 0.188em;
+  -moz-border-radius-bottomright: 0.188em;
+  border-bottom-right-radius: 0.188em;
+  -moz-border-radius: 0.188em;
+  -webkit-border-radius: 0.188em;
+  border-radius: 0.188em;
+  box-shadow: inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25);
+  -moz-box-shadow: inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25);
+  -webkit-box-shadow: inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25);
 }
 #admin-menu > ul > li ul,
 #admin-menu > ul > li li {
@@ -1844,6 +1866,8 @@ body {
 .main > div#wide-center-col .property-info #left > div.general-features > div.file-row > div.file {
   background: #ededed;
   text-align: center;
+  min-height: 12.5em;
+  margin-bottom: 0.313em;
 }
 .main > div#wide-center-col .property-info #left > div.general-features > div.file-row > div.file span {
   display: block;

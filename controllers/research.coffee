@@ -5,7 +5,7 @@ models = news: system.load.model 'news'
 helpers = {}
 
 exports.index = (req,res) ->
-  models.news.getAllNewsByType 2, (err, results) ->
+  models.news.getAllNewsByType 'research', (err, results) ->
     if err then throw err
     res.render 'research/index', news: results or {}, menu: 'wise-owl'
 

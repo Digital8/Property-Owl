@@ -17,7 +17,7 @@ exports.index = (req, res) ->
   models.advertisement.all (error, results) ->
     throw error if error
     
-    res.render 'administration/advertisements/index', advertisements: results
+    res.render 'administration/advertisements/index', advertisements: results, menu: 'advertising'
 
 exports.add = (req, res) ->
   
@@ -32,6 +32,7 @@ exports.add = (req, res) ->
       adspaces: results.adspace
       pages: results.page
       advertisers: results.advertiser
+      menu: 'advertising'
 
 exports.create = (req, res) ->
   fs.readFile req.files.image.path, (error, data) ->
@@ -75,6 +76,7 @@ exports.edit = (req, res) ->
       pages: results.page
       advertisers: results.advertiser
       advertisement: results.advertisement
+      menu: 'advertising'
 
 exports.update = (req, res) ->
   req.body.id = req.params.id

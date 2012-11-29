@@ -1,8 +1,7 @@
 extends ../layout
 
 block content
-  //
-    main content
+  
   .container.row.main
     script(defer,src="/js/jquery.flexslider.js")
     script(type="text/javascript")
@@ -26,60 +25,80 @@ block content
           sync: "#carousel"
         });
       });
-    //
-      left-col
-    #deal_id(style="display:none")
-      | 9
+    div#fb-root
+    script
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    
     #left-col
       .deal-stats
+         
         .timer
           #timer
             #day-timer
               span.label Days
-              span#day-timer-days.value
+              span.value 01
             #hour-timer
               span.label Hours
-              span#day-timer-hours.value
+              span.value 13
             #minute-timer
               span.label Mins
-              span#day-timer-mins.value
+              span.value 07
+          
           #map
             img#map-image(src='/images/map.png', usemap='#australia', alt='Click on a State of Australia')
             map(name='australia')
-              area#map-wa(shape='polygon', coords='65,25,65,100,17,116,3,62,57,19', href='/deals/state/wa')
-              area#map-nt(shape='polygon', coords='65,25,65,69,103,69,103,35,91,24,94,13,75,10', href='/deals/state/nt')
-              area#map-qld(shape='polygon', coords='103,68,103,34,111,39,119,10,159,82,116,82,116,68', href='/deals/state/qld')
-              area#map-sa(shape='polygon', coords='116,68,65,68,65,100,116,129', href='/deals/state/sa')
-              area#map-nsw(shape='polygon', coords='116,82,159,82,145,126,116,104', href='/deals/state/nsw')
-              area#map-vic(shape='polygon', coords='116,104,145,126,137,131,110,128,116,129', href='/deals/state/vic')
-              area#map-act(shape='square', coords='155,110,185,110,185,120,155,120', href='/deals/state/act')
-              area#map-tas(shape='square', coords='120,140,170,140,170,155,120,155', href='/deals/state/tas')
+              area#map-wa(shape='polygon', coords='65,25,65,100,17,116,3,62,57,19', href='#')
+              area#map-nt(shape='polygon', coords='65,25,65,69,103,69,103,35,91,24,94,13,75,10', href='#')
+              area#map-qld(shape='polygon', coords='103,68,103,34,111,39,119,10,159,82,116,82,116,68', href='#')
+              area#map-sa(shape='polygon', coords='116,68,65,68,65,100,116,129', href='#')
+              area#map-nsw(shape='polygon', coords='116,82,159,82,145,126,116,104', href='#')
+              area#map-vic(shape='polygon', coords='116,104,145,126,137,131,110,128,116,129', href='#')
+              area#map-act(shape='square', coords='155,110,185,110,185,120,155,120', href='#')
+              area#map-tas(shape='square', coords='120,140,170,140,170,155,120,155', href='#')
+        
         .counter
           span.label Number of Enquiries
           span.value 1,345
+      
       .barn-box
+<<<<<<< HEAD
+        h2 The Barn
+        img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
+        h3 Group Deals
+      
+=======
         a(href="/barn-deals")
           h2 The Barn
           img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
           h3 Group Deals
+>>>>>>> 689b993d33928f90e355924eb64739d6bcab5577
       .share
         ul
-          li(onclick='javascript:window.print()')
-            img(src='/images/share-print-icon.png', alt='Print')
-            | Print Deal
-          li.savebuttons(data-property="9")
+          li
+            a(href='#', onclick='javascript:window.print()')
+              img(src='/images/share-print-icon.png', alt='Print')
+              | Print Deal
+          li
             img(src='/images/share-save-icon.png', alt='Save')
             | Save Deal
           li
             img(src='/images/share-refer-icon.png', alt='Refer')
             | Refer A Friend
           li
-            .fb-like(data-href='http://www.propertyowl.com.au/properties/view/', data-send='false', data-layout='button_count', data-width='125', data-show-faces='false')
+            .fb-like(data-href='http://www.propertyowl.com.au/property-details', data-send='false', data-layout='button_count', data-width='125', data-show-faces='false')
           li
             a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/property-details') Tweet
             script
               !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+      
       .enquiry
+        h2 Enquire About This Deal
         form#input-form
           label(for='propertyPhone') Phone
           input#propertyPhone(type='text')
@@ -90,13 +109,9 @@ block content
           label(for='propertyComments') Comments
           textarea#propertyComments(rows='5')
           input.button(type='submit', value='Submit')
-    //
-      end left-col
-    //
-      center-col
+    
     #wide-center-col
-      //
-        image slider
+      
       .slider-box
         #slider.flexslider
           ul.slides
@@ -108,8 +123,8 @@ block content
               img(src='/images/slider1.jpg')
             li
               img(src='/images/slider1.jpg')
-            //
-               items mirrored twice, total of 12 
+            // items mirrored twice, total of 12
+         
         #carousel.flexslider
           ul.slides
             li
@@ -120,24 +135,84 @@ block content
               img(src='/images/slider1.jpg')
             li
               img(src='/images/slider1.jpg')
-            //
-               items mirrored twice, total of 12 
+            
+            // items mirrored twice, total of 12 
+      
       .property-info
+        - if (lots.length > 0 )
+          table.barn-lots
+            thead
+              td Lot
+              td Bed
+              td Bath
+              td Car
+              td Level
+              td Int. Size
+              td Ext. Size
+              td Aspect
+              td List Price
+              td Floor Plan
+              td Register
+            - var i = 0;
+            - each lot in lots
+              - i++
+              tbody
+                td= i
+                td= lot.bedrooms
+                td= lot.bathrooms
+                td= lot.carspaces
+                td= lot.level
+                td #{lot.interior_size} sq.m
+                td #{lot.exterior_size} sq.m
+                td= lot.aspect
+                td= lot.price
+                td
+                  - if (lot.floor_plan.length == 0)
+                    em Not Available
+                  - else
+                    a(href='#') Download
+                td
+                  a.barn-register(href='#', alt='Register') Register
         #left
-          h1 Australia's Best Property Deal
-          | #{property.address}, #{property.suburb}, #{property.state.toUpperCase()} #{property.postcode}
-          h2 Property Details
+<<<<<<< HEAD
+          p #{property.address}, #{property.suburb}, #{property.postcode}
+=======
+          p #{property.address}, #{property.suburb}, #{property.state.toUpperCase()} #{property.postcode}
+>>>>>>> 689b993d33928f90e355924eb64739d6bcab5577
+          h2= property.title
+          
           p= property.description
+          
           .general-features
             h3 General Features
             ul
               li Property Type: #{property.property_type}
-              li Bedrooms: #{property.bedrooms}
-              li Bathrooms: #{property.bathrooms}
-              li Garage Space: #{property.cars}
-              
             h3 More Info
             .file-row
+<<<<<<< HEAD
+              .file
+                img(src='/images/file-icon.gif', alt='Community Management Statement')
+                p
+                  | Community Management Statement
+                  span (1.6mb)
+              .file
+                img(src='/images/file-icon.gif', alt='Depreciation Schedule')
+                p
+                  | Depreciation Schedule
+                  span (1.6mb)
+            .file-row
+              .file
+                img(src='/images/file-icon.gif', alt='Rental Appraisal')
+                p
+                  | Rental Appraisal
+                  span (1.6mb)
+              .file
+                img(src='/images/file-icon.gif', alt='Floor Plans')
+                p
+                  | Floor Plans
+                  span (1.6mb)
+          
+=======
               - if (files.length == 0)
                 p No files have been uploaded for this property
               - else
@@ -147,6 +222,7 @@ block content
                       img(src='/images/file-icon.gif', alt='Floor Plans')
                       | #{file.description}
 
+>>>>>>> 689b993d33928f90e355924eb64739d6bcab5577
           .other-features
             h3 Indoor Features
             p= property.indoor_features
@@ -155,22 +231,25 @@ block content
             h3 Other Features
             p= property.other_features
         #right
+          
           .deal
             h2
               | Reveal the Deal
-              img.arrow(src='/images/blue-arrow-icon-down.png', alt='Reveal the Deal')
+              img.arrow(src='/images/blue-arrow-icon.png', alt='Reveal the Deal')
             - if (deals.length == 0)
               li No deals have been listed
             - else
               ul
                 - each deal in deals
-                  li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
-          .secure-deal
-            a.secure-button(href='#') Secure the Deal!
+                  li= deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
+          
+          .time-left
+            p
+              | Time left
+              span.time 04:02:35
+          
           iframe#google-map(width='100%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913&output=embed')
+          
           br
+          
           a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913') View Larger Map
-    //
-      end center-col
-  //
-    end main content

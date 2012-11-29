@@ -7,7 +7,7 @@ block content
     include ../../left_nav
     
     #center-col
-      h1 Best State Deals
+      h1 Owl Deals for #{state.toUpperCase()}
       - if (properties.length == 0)
          p There are no current property deals for #{state.toUpperCase()} right now but keep an eye out because we are always listing new deals. 
        - else
@@ -16,6 +16,7 @@ block content
           - i++
           
           .listing-summary
+            
             .header
               .listing-price
                 $ #{property.price}
@@ -24,12 +25,17 @@ block content
             .listing-body
               
               .listing-thumb
+<<<<<<< HEAD
+                img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+                //
+                  show if top listing
+                - if (i == 1)
+                  img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
+              
+=======
                 a(href='/properties/view/#{property.property_id}')
                   img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
-                  //
-                    show if top listing
-                  - if (i == 1)
-                    img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
+>>>>>>> 689b993d33928f90e355924eb64739d6bcab5577
               .listing-details
                 .features
                   span.property-type
@@ -52,11 +58,9 @@ block content
                   p= property.description
                 
                 .listing-links
-                  
                   a.savebuttons.save-button(href='#', data-property="#{property.property_id}")
                     img#save-icon(src='/images/plus-icon.png', alt='Save this property')
                     |  Save
-                  
                   a.details-button(href='/properties/view/#{property.property_id}')
                     img#info-icon(src='/images/info-icon.png', alt='View property details')
                     |  Details
@@ -64,4 +68,3 @@ block content
     #right-col
       img#ad-tower1.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
       img#ad-tower2.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
-  

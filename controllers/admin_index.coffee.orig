@@ -10,10 +10,18 @@ models =
 helpers = {}
 
 exports.index = (req,res) ->
+<<<<<<< HEAD
+  async.parallel
+    pages: (callback) -> models.admin.getAdminPages callback
+    activeAdvertisementCount: (callback) -> models.advertisement.countActive callback
+  , (error, results) ->
+    res.render 'administration/index', results
+=======
   models.properties.getPendingProperties (err, properties) ->
     models.properties.getPendingBarnDeals (err, projects) ->
       models.advertisement.countActive (err, results) ->
         res.render 'administration/index', activeAdvertisementCount: results, properties: properties or {}, projects: projects or {}, menu: 'dashboard'
+>>>>>>> 689b993d33928f90e355924eb64739d6bcab5577
 
 exports.view = (req,res) ->
 
