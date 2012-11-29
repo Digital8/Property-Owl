@@ -8,6 +8,8 @@
  * @copyright Copyright (c) 2012 - Current
  ###
 
+
+
 async = require 'async'
 _ = require 'underscore'
 
@@ -16,8 +18,9 @@ db = require('../system').db
 exports.getAllProperties = (callback) ->
   db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id", callback
 
+# TODO add wednesday condition to query
 exports.getAllApprovedProperties = (callback) ->
-  db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE approved", callback
+  db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE approved AND (P.deal_type = 'All' OR P.deal_type = 'Owl')", callback
 
 exports.getAllPropertiesById = (id, callback) ->
   db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE P.property_id = ?",[id], callback
@@ -41,11 +44,13 @@ exports.getBestDeal = (callback) ->
       bestdeal = _.max properties, (property) -> property.awesomeness
       callback null, bestdeal
 
+# TODO add wednesday condition to query
+# TODO select top deal for each state (like in above query)
 exports.getBestStateDeals = (callback) ->
-  db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id", callback
+  db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id AND (P.deal_type = 'All' OR P.deal_type = 'Owl')", callback
 
 exports.getAllPropertiesByState = (state, callback) ->
-  db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE P.state = ?",[state], callback
+  db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE P.state = ? AND (P.deal_type = 'All' OR P.deal_type = 'Owl')",[state], callback
 
 exports.getPropertyTypes = (callback) ->
   db.query "SELECT PT.* FROM #{db.prefix}property_types AS PT", callback
