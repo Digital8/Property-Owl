@@ -40,7 +40,10 @@ exports.getBestDeal = (callback) ->
 
       bestdeal = _.max properties, (property) -> property.awesomeness
       callback null, bestdeal
-                    
+
+exports.getBestStateDeals = (callback) ->
+  db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id", callback
+
 exports.getAllPropertiesByState = (state, callback) ->
   db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE P.state = ?",[state], callback
 

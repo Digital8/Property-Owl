@@ -57,6 +57,10 @@ module.exports = (app) ->
   app.get '/news', authenticate, controllers.news.index
   app.get '/news/:id', authenticate, controllers.news.view
   
+  # research
+  app.get '/research', authenticate, controllers.research.index
+  app.get '/research/:id', authenticate, controllers.research.view
+  
   # search
   app.get '/search', authenticate, controllers.search.index
   

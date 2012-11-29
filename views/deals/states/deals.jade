@@ -8,9 +8,9 @@ block content
     //
       center-col
     #center-col
-      h1 Best State Deals
+      h1 Owl Deals for #{state.toUpperCase()}
       - if (properties.length == 0)
-         h4 No properties have been listed for this state yet but keep an eye out because we are always listing new deals. 
+         p There are no current property deals for #{state.toUpperCase()} right now but keep an eye out because we are always listing new deals. 
        - else
          - var i = 0; // Just a hack for PoC
          - each property in properties
@@ -21,7 +21,7 @@ block content
             .header
               .listing-price
                 $ #{property.price}
-              h2 #{property.address}, #{property.suburb}
+              h2 #{property.address}, #{property.suburb} #{property.state.toUpperCase()}
             .listing-body
               .listing-thumb
                 img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
