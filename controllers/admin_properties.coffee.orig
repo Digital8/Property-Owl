@@ -14,8 +14,13 @@ helpers = {}
 exports.index = (req,res) ->
   models.properties.getAllProperties (err, results) ->
     models.users.getUsersByGroup 2, (err, developers) ->
+<<<<<<< HEAD
+      res.render 'administration/properties/index', properties: results or {}, developers: developers or {}
+
+=======
       res.render 'administration/properties/index', properties: results or {}, developers: developers or {}, menu: 'property-deals'
     
+>>>>>>> 35f737dfbbd1afac97298bf21ceee4b43c92f5e5
 exports.view = (req,res) ->
 
 exports.add = (req,res) ->

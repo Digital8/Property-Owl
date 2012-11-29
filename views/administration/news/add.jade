@@ -11,10 +11,8 @@ block content
      li
       a(href="/administration/news")
        img(src='/images/manage.png')
+       | &nbsp;
        | Manage News
-     li.disabled
-      img(src='/images/add.png')
-      | Add New Article
    .grid-header.form-header
     ol.six
      li.active
@@ -24,14 +22,19 @@ block content
     h2 News Details
     hr
     form.details-form(action="/administration/news/add",method="post")
-     include ../../flashify
-     .inputs
-      label.required(for='inputTitle') Headline
-       input#inputTitle(type="text",name="title",value="")
-     .inputs
-      label.control-label(for="inputContent") Content:
-       textarea#inputContent.span8(name="content",rows="10")
-     .inputs
-     .submit
-      input.button(type='submit', value='Post News')
-      a.left-button(href="/administration/news") Cancel
+      include ../../flashify
+      .inputs
+        label.required(for='newsType') Article Type
+        select#newsType.half-field(name="news_type")
+          option(value="news") News
+          option(value="research") Research
+      .inputs
+        label.required(for='inputTitle') Headline
+        input#inputTitle(type="text",name="title",value="")
+      .inputs
+        label.control-label(for="inputContent") Content:
+        textarea#inputContent.span8(name="content",rows="10")
+      .inputs
+      .submit
+        input.button(type='submit', value='Post News')
+        a.left-button(href="/administration/news") Cancel

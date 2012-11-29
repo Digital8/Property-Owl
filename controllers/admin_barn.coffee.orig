@@ -13,8 +13,13 @@ exports.index = (req, res) ->
       if results[i].deal_of is 0 then barn_results.push(results[i])
     
     models.users.getUsersByGroup 2, (err, developers) ->      
+<<<<<<< HEAD
       res.render 'administration/barn/index', barn_deals: barn_results or {}, developers: developers or {}
+
+=======
+      res.render 'administration/barn/index', barn_deals: barn_results or {}, developers: developers or {}, menu: 'property-deals'
   
+>>>>>>> 35f737dfbbd1afac97298bf21ceee4b43c92f5e5
 exports.view = (req, res) ->
 
 exports.add = (req,res) ->
@@ -86,9 +91,15 @@ exports.delete = (req, res) ->
        else
          models.properties.getAllPropertiesById property_id, (err, properties) ->
            if properties.length >= 1 then property = properties.pop()
+<<<<<<< HEAD
            
            res.render 'administration/barn/delete', barn: barn or {}, property: property or {}
 
+=======
+           res.render 'administration/barn/delete', barn: barn or {}, property: property or {}, menu: 'property-deals'
+  
+  
+>>>>>>> 35f737dfbbd1afac97298bf21ceee4b43c92f5e5
 exports.destroy = (req,  res) ->
   barn_id = req.params.barn_id
   property_id = req.params.property_id

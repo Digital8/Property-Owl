@@ -6,7 +6,7 @@ block content
  .container.row.main
       include ../../admin-menu
       h1
-        | Add New Project 
+        | Add New Deal 
         span.secondary - Details
       .admin-actions
         ul
@@ -14,11 +14,12 @@ block content
             a(href='/administration/properties')
               img(src='/images/manage.png') 
               | &nbsp;
-              | Manage Projects
-          li.disabled
-            img(src='/images/add.png') 
-            | &nbsp;
-            | Add New Project
+              | Manage Owl Deals
+          li
+            a(href='/administration/barn')
+              img(src='/images/manage.png') 
+              | &nbsp;
+              | Manage Barn Deals
       .grid-header.form-header
         ol.six
           li.active

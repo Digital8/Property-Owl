@@ -1,7 +1,10 @@
 {db} = require '../system'
 
+exports.getAllNews = (callback) ->
+  db.query "SELECT * FROM #{db.prefix}news AS N INNER JOIN #{db.prefix}users AS U on N.user_id = U.user_id ORDER BY N.posted_at DESC", callback
+
 exports.getAllNewsByType = (type, callback) ->
-  db.query "SELECT * FROM #{db.prefix}news AS N INNER JOIN #{db.prefix}users AS U on N.user_id = U.user_id WHERE N.type = ? ORDER BY N.posted_at DESC", [type], callback
+  db.query "SELECT * FROM #{db.prefix}news AS N INNER JOIN #{db.prefix}users AS U on N.user_id = U.user_id WHERE N.news_type = ? ORDER BY N.posted_at DESC", [type], callback
 
 exports.getNewsById = (id, callback) ->
   db.query "SELECT * FROM #{db.prefix}news AS N INNER JOIN #{db.prefix}users AS U on N.user_id = U.user_id WHERE N.news_id = ?", [id], callback
