@@ -8,14 +8,39 @@
  * @copyright Copyright (c) 2012 - Current
  ###
 
+async = require 'async'
+_ = require 'underscore'
+
 db = require('../system').db
 
 exports.getAllProperties = (callback) ->
   db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id", callback
 
+exports.getAllApprovedProperties = (callback) ->
+  db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE approved", callback
+
 exports.getAllPropertiesById = (id, callback) ->
   db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE P.property_id = ?",[id], callback
 
+# TODO add wednesday condition to query
+exports.getBestDeal = (callback) ->
+  db.query "SELECT * FROM #{db.prefix}properties WHERE approved", (error, properties) ->
+    async.map properties, (property, callback) ->
+      db.query "SELECT * FROM #{db.prefix}deals WHERE property_id = #{property.property_id}", (error, deals) ->
+        property.deals = deals
+        callback null, property
+    , (error, properties) ->
+      for property in properties
+        property.blah = 0
+        
+        for deal in property.deals
+          property.blah += deal.value
+        
+        property.awesomeness = property.blah / property.price * 100
+
+      bestdeal = _.max properties, (property) -> property.awesomeness
+      callback null, bestdeal
+                    
 exports.getAllPropertiesByState = (state, callback) ->
   db.query "SELECT P.*, PT.type AS property_type FROM #{db.prefix}properties AS P INNER JOIN #{db.prefix}property_types AS PT ON P.property_type_id = PT.property_type_id WHERE P.state = ?",[state], callback
 

@@ -68,6 +68,7 @@ body {
 #header {
     margin: @padding-small auto;
     .clearfix;
+    height: 10.875em;
     
     > div {
         &#top-header {
@@ -161,22 +162,21 @@ body {
         		text-decoration: none;
         		font-size: 1em;
         		.transition(all, 0.05s);
-            	.text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
-            	.inline-block;
-            	padding: 0.4em 0.3em;
-            	vertical-align: middle;
+            .text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
+          	.inline-block;
+          	padding: 0.4em 0.3em;
+          	vertical-align: middle;
             	
-        	
-            	&.active {
-            	    color: #FFF;
-                	background: #0a2d4a;
-                	.rounded(0.188em);
-                	.box-shadow(~"inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25)");
-            	}
-            	
-            	&:hover {
-            	    color: #FFFFFF;
-            	}
+          	&.active {
+          	    color: #FFF;
+              	background: #0a2d4a;
+              	.rounded(0.188em);
+              	.box-shadow(~"inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25)");
+          	}
+          	
+          	&:hover {
+          	    color: #FFFFFF;
+          	}
         	}
         	
         	ul {
@@ -310,6 +310,12 @@ body {
 		padding: 0;
 		list-style: none;
 	}
+	
+	
+  .sf-menu li:hover ul,
+  .sf-menu li.sfHover ul {
+  	top:			1.55em !important; /* match top ul list item height */
+  }
 	
 	> ul {
 		> li {
@@ -962,12 +968,18 @@ body {
                                         .rounded(0.313em);
                                         
                                         &.file {
-                                            background: #fcfcfc;
+                                            background: #ededed;
                                             text-align: center;
                                             
                                             span {
                                                 display: block;
                                                 color: #a4a4a4;
+                                            }
+                                            
+                                            a {
+                                              text-decoration: none;
+                                              color: #0085C6;
+                                              font-size:0.8em;
                                             }
                                         }
                                     }

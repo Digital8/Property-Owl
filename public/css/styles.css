@@ -420,6 +420,7 @@ body {
 #header {
   margin: 0.625em auto;
   zoom: 1;
+  height: 10.875em;
 }
 #header:before,
 #header:after {
@@ -794,6 +795,12 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+#admin-menu .sf-menu li:hover ul,
+#admin-menu .sf-menu li.sfHover ul {
+  top: 1.55em !important;
+  /* match top ul list item height */
+
 }
 #admin-menu > ul > li {
   float: left;
@@ -1835,12 +1842,17 @@ body {
   border-radius: 0.313em;
 }
 .main > div#wide-center-col .property-info #left > div.general-features > div.file-row > div.file {
-  background: #fcfcfc;
+  background: #ededed;
   text-align: center;
 }
 .main > div#wide-center-col .property-info #left > div.general-features > div.file-row > div.file span {
   display: block;
   color: #a4a4a4;
+}
+.main > div#wide-center-col .property-info #left > div.general-features > div.file-row > div.file a {
+  text-decoration: none;
+  color: #0085C6;
+  font-size: 0.8em;
 }
 .main > div#wide-center-col .property-info #right {
   float: left;
