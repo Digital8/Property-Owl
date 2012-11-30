@@ -7,7 +7,7 @@ exports.addMedia = (mediaInfo, callback) ->
   db.query "INSERT INTO #{db.prefix}media(property_id, owner_id, filename, description, image) VALUES(?,?,?,?,?)", [mediaInfo.property_id, mediaInfo.owner_id, mediaInfo.filename, mediaInfo.description, mediaInfo.image], callback
   
 exports.getImagesByPropertyId = (property_id, callback) ->
-  db.query "SELECT * FROM #{db.prefix}media WHERE image = true AND property_id = ?", [property_id], callback
+  db.query "SELECT * FROM #{db.prefix}media WHERE image = true AND property_id = ? ORDER BY hero DESC", [property_id], callback
 
 exports.clearHero = (property_id, callback) ->
   db.query "UPDATE #{db.prefix}media SET hero = 0 WHERE property_id = ?", [property_id], callback
