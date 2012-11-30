@@ -34,6 +34,8 @@ app.configure ->
     res.locals.objUser = new classes.user [] # Empty user object
     res.locals.menu = {}
     
+    req.session.user_id = 1
+    
     res.locals.navigation = [
       {key: 'aus-best-deal', href: '/best-deal', label: "Australia's Best Deal"}
       {key: 'best-state-deal', href: '/deals/state/qld', label: 'Best State Deal'}
@@ -44,7 +46,7 @@ app.configure ->
     ]
     
     models.advertisement.random (err, ad) ->
-      res.locals.ad = ad.image_id
+      res.locals.ad = if ad? then ad.image_id else ''
       
       if req.session.user_id?
         models.user.getUserById req.session.user_id, (err, results) ->

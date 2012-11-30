@@ -112,27 +112,17 @@ block content
       .slider-box
         #slider.flexslider
           ul.slides
-            li
-              img(src='/images/slider1.jpg')
-            li
-              img(src='/images/slider1.jpg')
-            li
-              img(src='/images/slider1.jpg')
-            li
-              img(src='/images/slider1.jpg')
+            - each image in images
+              li
+                img(src='/uploads/#{image.filename}',style="height: 375px;")
             //
                items mirrored twice, total of 12 
                
         #carousel.flexslider
           ul.slides
-            li
-              img(src='/images/slide1-thumb.jpg')
-            li
-              img(src='/images/slider1.jpg')
-            li
-              img(src='/images/slider1.jpg')
-            li
-              img(src='/images/slider1.jpg')
+            - each image in images
+              li
+                img(src='/uploads/#{image.filename}')
             //
                items mirrored twice, total of 12 
       .property-info
