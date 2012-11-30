@@ -22,12 +22,14 @@
         > div {
             &#top-header {
                 margin: 0 0 -2.188em 0;
+                margin: 0;
             }
             
             > div {
                 &#logo-box {
                     .column(3, 0);
                     padding: 0 20px;
+                    margin-bottom: -2.188em;
                 }
                 &#banner-box {
                     .column(9, 0px);
@@ -234,29 +236,32 @@
     
     #header {
     	> div {
-	        &#top-header {
-	            margin: 0 0 1em 0;
-	        }
-	        
-            > div {
-                &#logo-box {
-                	margin: 2em 0 0 0;
-                	position: absolute;
-                	.column(5,0);
-                }
-                &#banner-box {
-                    .no-column(0);
-                    position: relative;
-                    .clearfix;
-                    top: 0;
-                    
-                    #banner {
-                        margin-top: 0;
-                        margin-bottom: 2.188em;
-                    }
-                }
-            }
-        }
+    	    &#top-header {
+    	        margin: 0 0 1em 0;
+    	        margin: 0;
+    	    }
+    	    
+    	    > div {
+    	        &#logo-box {
+    	        	margin: 2em 0 0 0;
+    	        	position: absolute;
+    	        	.column(5,0);
+    	        	margin-bottom: 0;
+    	        	margin-top: 1em;
+    	        }
+    	        &#banner-box {
+    	            .no-column(0);
+    	            position: relative;
+    	            .clearfix;
+    	            top: 0;
+    	            
+    	            #banner {
+    	                margin-top: 0;
+    	                margin-bottom: 2.188em;
+    	            }
+    	        }
+    	    }
+    	}
         
         #menu {
             .column(8,0);

@@ -434,6 +434,7 @@ body {
   zoom: 1;
   position: relative;
   margin: 0 0 -4.3em 0;
+  margin: 0;
 }
 #header > div#top-header:before,
 #header > div#top-header:after {
@@ -451,6 +452,7 @@ body {
   display: block;
   float: left;
   z-index: 1;
+  margin-bottom: -4.3em;
 }
 #header > div > div#admin-logo-box {
   width: 16.6666666%;
@@ -3315,7 +3317,8 @@ body {
   -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
   background: #ffffff url(../images/input-bg.png) repeat-x top center;
 }
-.main .details-form input.half-field {
+.main .details-form input.half-field,
+.main .details-form select.half-field {
   width: 49.5% !important;
   display: inline;
 }
@@ -4328,12 +4331,14 @@ li.sfHover > a > .sf-sub-indicator {
   }
   #header > div#top-header {
     margin: 0 0 -2.188em 0;
+    margin: 0;
   }
   #header > div > div#logo-box {
     float: left;
     width: 24.9999999%;
     padding: 0;
     padding: 0 20px;
+    margin-bottom: -2.188em;
   }
   #header > div > div#banner-box {
     float: left;
@@ -4433,6 +4438,7 @@ li.sfHover > a > .sf-sub-indicator {
   }
   #header > div#top-header {
     margin: 0 0 1em 0;
+    margin: 0;
   }
   #header > div > div#logo-box {
     margin: 2em 0 0 0;
@@ -4440,6 +4446,8 @@ li.sfHover > a > .sf-sub-indicator {
     float: left;
     width: 41.6666665%;
     padding: 0;
+    margin-bottom: 0;
+    margin-top: 1em;
   }
   #header > div > div#banner-box {
     float: none;

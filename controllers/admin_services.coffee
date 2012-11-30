@@ -6,13 +6,13 @@ helpers = {}
 
 exports.index = (req, res) ->
   models.services.getAllServices (err, results) ->
-    res.render 'administration/services/index', services: results or {}
+    res.render 'administration/services/index', services: results or {}, menu: 'products-service-suppliers'
   
 exports.view = (req, res) ->
 
 exports.add = (req,res) ->
   models.services.getAllServiceCategories (err, categories) ->
-    res.render 'administration/services/add', categories: categories or {}
+    res.render 'administration/services/add', categories: categories or {}, menu: 'products-service-suppliers'
   
 exports.create = (req, res) ->
   req.body.logo ?= ''
@@ -27,7 +27,7 @@ exports.edit = (req, res) ->
   models.services.getServiceById req.params.id, (err, results) ->
     models.services.getAllServiceCategories (err, categories) ->
       if results.length >= 1 then results = results.pop()
-      res.render 'administration/services/edit', service: results or {}, categories: categories or {}
+      res.render 'administration/services/edit', service: results or {}, categories: categories or {}, menu: 'products-service-suppliers'
   
 exports.update = (req, res) ->
   req.body.logo ?= ''
@@ -47,7 +47,7 @@ exports.delete = (req, res) ->
 exports.viewCategories = (req, res) ->
   models.services.getAllServiceCategories (err, categories) ->
     if err then throw err
-    res.render 'administration/services/viewCategories', categories: categories or {}
+    res.render 'administration/services/viewCategories', categories: categories or {}, menu: 'products-service-suppliers'
 
 exports.createCategory = (req, res) ->
   models.services.createCategory req.body, (err) ->
