@@ -34,7 +34,7 @@ app.configure ->
     res.locals.objUser = new classes.user [] # Empty user object
     res.locals.menu = {}
     
-    req.session.user_id = 1
+    # req.session.user_id = 1
     
     res.locals.navigation = [
       {key: 'aus-best-deal', href: '/best-deal', label: "Australia's Best Deal"}
