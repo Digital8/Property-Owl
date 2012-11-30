@@ -28,13 +28,13 @@ app.configure ->
   app.use express.static "#{__dirname}/public"
   
   app.use (req,res,done) ->
+
     res.locals.session  = req.session
     res.locals.globals = system.config.globals
     res.locals.modules = system.config.modules ? {} # If modules exist, allow views to check its status
     res.locals.objUser = new classes.user [] # Empty user object
     res.locals.menu = {}
-    
-    # req.session.user_id = 1
+    req.session.user_id = 1
     
     res.locals.navigation = [
       {key: 'aus-best-deal', href: '/best-deal', label: "Australia's Best Deal"}

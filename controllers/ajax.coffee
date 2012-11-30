@@ -5,6 +5,7 @@ models =
   saveddeals: system.load.model 'saveddeals'
   deals: system.load.model 'deals'
   media: system.load.model 'media'
+  registrations: system.load.model 'registrations'
 
 helpers = hash: system.load.helper 'hash'
 
@@ -79,7 +80,26 @@ exports.deleteMedia = (req, res) ->
   
   models.media.deleteMedia req.body.mid, (err, results) ->
     if err then console.log err
-    
     res.send results
-      
-  
+
+exports.addRegistration = (req, res) ->
+  req.query.id ?= ''
+  req.query.type ?= ''
+  req.query.user_id ?= res.locals.objUser.id
+
+  if req.query.id is '' or req.query.type is ''
+    res.send status: 400
+  else
+    # Check if we have already registered
+    models.registrations.checkIfRegistered req.query, (err, results) ->
+      if results.length is 0
+        models.registrations.add req.query, (err, results) ->
+          if err then console.log err
+          res.send status: 200 if results.affectedRows is 1
+
+exports.delRegistration = (req, res) ->
+  req.query.id ?= ''
+  req.query.user_id = res.locals.objUser.id
+
+  models.registrations.delete req.query, (err, results) ->
+    if err then res.send status: 400 else res.send status: 200

@@ -173,6 +173,7 @@ $(function(){
   	if (diff < 0) {
   	  newDealTime = newDealTime.hours(24*7);
 	  }
+
   	
   	$("#day-timer-mins").html(newDealTime.diff(timeNow, 'minutes') % 60);
   	$("#day-timer-hours").html(newDealTime.diff(timeNow, 'hours') % 24);
@@ -181,5 +182,18 @@ $(function(){
   
   updateTimer();
   setInterval(updateTimer, 5000);
-	
+  
+  $('.register').click(function(){
+  	var type = $(this).data('type');
+  	var id = $(this).data('id');
+
+    $.ajax({
+      url: '/ajax/addRegistration',
+      method: 'GET',
+      data: 'id='+id+'&type='+type
+    }).done(function(d){
+      console.log(d);
+      if(d.status == 200) alert('You have registered for this property')
+  	});
+  });	
 });

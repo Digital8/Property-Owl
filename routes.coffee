@@ -144,5 +144,7 @@ module.exports = (app) ->
   app.del '/ajax/deleteDeal', authenticate, (authorize acl.admin), controllers.ajax.delDeal
   app.put '/ajax/updateHero', authenticate, (authorize acl.admin), controllers.ajax.updateHero
   app.del '/ajax/deleteMedia', authenticate, (authorize acl.admin), controllers.ajax.deleteMedia
-  
+  app.get '/ajax/addRegistration', authenticate, controllers.ajax.addRegistration
+  app.get '/ajax/delRegistration', authenticate, controllers.ajax.delRegistration
+
   app.all '*', controllers.pages.index
