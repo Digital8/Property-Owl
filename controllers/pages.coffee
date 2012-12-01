@@ -1,7 +1,5 @@
 system = require '../system'
 
-helpers = hash: system.load.helper 'hash'
-
 models =
   page: system.load.model 'page'
   user: system.load.model 'user'

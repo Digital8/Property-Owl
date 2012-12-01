@@ -2,8 +2,6 @@ async = require 'async'
 
 system = require '../system'
 
-helpers = {}
-  
 models =
   properties: system.load.model 'properties'
   saveddeals: system.load.model 'saveddeals'
@@ -18,7 +16,7 @@ exports.view = (req,res) ->
 exports.add = (req,res) ->
 
 exports.create = (req,res) ->
-  
+
 exports.edit = (req,res) ->
 
 exports.update = (req,res) ->

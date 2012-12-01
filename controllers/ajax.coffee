@@ -81,7 +81,7 @@ exports.deleteMedia = (req, res) ->
   models.media.deleteMedia req.body.mid, (err, results) ->
     if err then console.log err
     res.send results
-
+      
 exports.addRegistration = (req, res) ->
   req.query.id ?= ''
   req.query.type ?= ''

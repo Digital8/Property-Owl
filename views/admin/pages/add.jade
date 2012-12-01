@@ -1,0 +1,48 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+   include ../../admin-menu
+   h1 Add Page
+   .admin-actions
+    ul
+     li
+      a(href="/admin/pages")
+       img(src='/images/manage.png')
+       | &nbsp;
+       | Manage Pages
+   .grid-header.form-header
+    ol.six
+     li.active
+      .ol-1-active
+      | Details
+   .details
+     h2 Page Details
+     
+     hr
+     
+     form.details-form(action="/admin/pages/add", method="post")
+       include ../../flashify
+       
+       .inputs
+         label.required(for='inputUrl') Page URL
+           input#inputUrl(type="text",name="url",placeholder="/url")
+       
+       .inputs
+         label.required(for='inputTitle') Page Title
+           input#inputTitle(type="text",name="header",placeholder="Page Title")
+       
+       .inputs
+         label.control-label(for="inputContent") Content:
+           textarea#inputContent.span8(name="content", placeholder="Page Content", rows="30")
+       
+       .inputs
+         select(name="enabled")
+           option(value="1") Enabled
+           option(value="0") Disabled
+       
+       .submit
+         input.button(type='submit', value='Create Page')
+         a.left-button(href="/admin/pages") Cancel

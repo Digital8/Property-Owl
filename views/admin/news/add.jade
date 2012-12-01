@@ -1,0 +1,40 @@
+extends ../../layout
+
+block content
+  //
+    main content
+  .container.row.main
+   include ../../admin-menu
+   h1 Add Article
+   .admin-actions
+    ul
+     li
+      a(href="/admin/news")
+       img(src='/images/manage.png')
+       | &nbsp;
+       | Manage News
+   .grid-header.form-header
+    ol.six
+     li.active
+      .ol-1-active
+      | Details
+   .details
+    h2 News Details
+    hr
+    form.details-form(action="/admin/news/add",method="post")
+      include ../../flashify
+      .inputs
+        label.required(for='newsType') Article Type
+        select#newsType.half-field(name="news_type")
+          option(value="news") News
+          option(value="research") Research
+      .inputs
+        label.required(for='inputTitle') Headline
+        input#inputTitle(type="text",name="title",value="")
+      .inputs
+        label.control-label(for="inputContent") Content:
+        textarea#inputContent.span8(name="content",rows="10")
+      .inputs
+      .submit
+        input.button(type='submit', value='Post News')
+        a.left-button(href="/admin/news") Cancel

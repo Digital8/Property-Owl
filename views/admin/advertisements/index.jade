@@ -1,0 +1,56 @@
+extends ../../layout
+
+block content
+ .container.row.main
+   include ../../admin-menu
+   
+   h1 Advertisements
+   
+   .admin-actions
+     ul
+       li
+         a(href='/admin/advertisements/add')
+           img(src='/images/add.png')
+           | &nbsp;
+           | Add New Advertisement
+   
+   table.admin-gridview
+     thead
+       tr
+         td ID
+         td Description
+         td Advertiser
+         //- td Page
+         //- td Space
+         td Image
+         td Hyperlink
+         //- td Duration
+         td Visible
+         td(colspan='2') Actions
+     
+     tbody
+      - each advertisement in advertisements
+         tr
+           td= advertisement.advertisement_id
+           td= advertisement.description
+           if advertisement.advertiser != null
+             td= advertisement.advertiser.name
+           else
+             td
+           //- td= advertisement.page
+           //- td= advertisement.space
+           td
+             img(src='/uploads/' + advertisement.image_id)
+           td= advertisement.hyperlink
+           //- td= advertisement.duration
+           td= advertisement.visible
+           
+           td.actions
+             a(href='/admin/advertisements/edit/#{advertisement.advertisement_id}', alt='edit')
+               img(src='/images/edit.png', alt='edit')
+               | Edit
+           
+           td.actions
+             a(href='/admin/advertisements/delete/#{advertisement.advertisement_id}', alt='delete')
+               img(src='/images/delete.png', alt='delete')
+               | Delete

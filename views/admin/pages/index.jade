@@ -1,0 +1,57 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+    include ../../admin-menu
+    h1 Pages
+    include ../../flashify
+    .admin-actions
+     ul
+      li
+       a(href="/admin/pages/add")
+        img(src='/images/add.png')
+        | &nbsp;
+        | Add New Page
+     .grid-summary 1 - 4 of 24
+    .grid-header
+     form#search-form
+      input#memberSearch(type='text')
+      | &nbsp;
+      input.button(type='submit', value='Go')
+      | &nbsp;
+      input.button(type='submit', value='Reset')
+    table.admin-gridview
+     thead
+      tr
+       td Page Title
+       td URL
+       td Status
+       td(colspan='2') Actions
+     tbody
+     - each page in pages
+      tr
+       td= page.header
+       td= page.url
+       td=(page.enabled == 1) ? 'Enabled' : 'Disabled'
+       td.actions
+        a(href="/admin/pages/edit/#{page.page_id}")
+         img(src='/images/edit.png', alt='Edit')
+         | Edit
+       td.actions
+        a(href="/admin/pages/delete/#{page.page_id}")
+         img(src='/images/delete.png', alt='Delete')
+         | Delete
+     tfoot
+      tr
+       td(colspan='5')
+        ul.pager
+         li.disabled
+          a(href='#') Prev
+         li.selected
+          a(href='#') 1
+         li
+          a(href='#') 2
+         li
+          a(href='#') Next

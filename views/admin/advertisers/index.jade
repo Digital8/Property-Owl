@@ -1,0 +1,58 @@
+extends ../../layout
+
+block content
+ .container.row.main
+   include ../../admin-menu
+   
+   h1 Advertisers
+   
+   .admin-actions
+     ul
+       li
+         a(href='/admin/advertisers/add')
+           img(src='/images/add.png')
+           | &nbsp;
+           | Add New Advertiser
+   
+   table.admin-gridview
+     thead
+       tr
+         td ID
+         td Name
+         td Description
+         td Contactee
+         td Email
+         td Phone
+         td Address
+         td Suburb
+         td State
+         td Postcode
+         td Map
+         td(colspan='2') Actions
+     tbody
+      - each advertiser in advertisers
+         tr
+           td= advertiser.advertiser_id
+           td= advertiser.name
+           td= advertiser.description
+           td
+             a(href='http://google.com/search?q=' + advertiser.contactee)= advertiser.contactee
+           td
+             a(href='mailto:' + advertiser.email, target='_blank')= advertiser.email
+           td
+             a(href='tel:' + advertiser.phone, target='_blank')= advertiser.phone
+           td= advertiser.address
+           td= advertiser.suburb
+           td= advertiser.state
+           td= advertiser.postcode
+           td
+             a(href='http://maps.google.com/?q=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode, target='_blank')
+               img(src='http://maps.googleapis.com/maps/api/staticmap?sensor=false&center=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode + '&zoom=7&size=192x128')
+           td.actions
+             a(href='/admin/advertisers/edit/#{advertiser.advertiser_id}', alt='edit')
+               img(src='/images/edit.png', alt='edit')
+               | Edit
+           td.actions
+             a(href='/admin/advertisers/delete/#{advertiser.advertiser_id}', alt='delete')
+               img(src='/images/delete.png', alt='delete')
+               | Delete

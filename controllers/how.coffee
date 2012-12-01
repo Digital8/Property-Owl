@@ -1,9 +1,5 @@
 system = require '../system'
 
-helpers = {}
-
-models = {}
-
 exports.index = (req,res) -> res.render 'how-it-works'
 
 exports.view = (req,res) ->

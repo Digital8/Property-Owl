@@ -2,42 +2,42 @@ nav#admin-menu
   ul.sf-menu
     li
       - var c = (menu == 'dashboard') ? 'active' : ''
-      a(href='/administration',class="#{c}") Dashboard
+      a(href='/admin',class="#{c}") Dashboard
     li
       - var c = (menu == 'property-deals') ? 'active' : ''
-      a(href='/administration/properties',class="#{c}") Property Deals
+      a(href='/admin/properties',class="#{c}") Property Deals
       ul
         li
-          a(href='/administration/properties') Owl Deal Listings
+          a(href='/admin/properties') Owl Deal Listings
         li
-          a(href='/administration/barn') Barn Deal Listings
+          a(href='/admin/barn') Barn Deal Listings
     li
       - var c = (menu == 'advertising') ? 'active' : ''
-      a(href='/administration/advertisements',class="#{c}") Advertising
+      a(href='/admin/advertisements',class="#{c}") Advertising
       ul
         li
-          a(href='/administration/advertisements') Advertisements
+          a(href='/admin/advertisements') Advertisements
         li
-          a(href='/administration/advertisers') Advertisers
+          a(href='/admin/advertisers') Advertisers
     li
       - var c = (menu == 'products-service-suppliers') ? 'active' : ''
-      a(href='/administration/services',class="#{c}") Products & Service Suppliers
+      a(href='/admin/services',class="#{c}") Products & Service Suppliers
       ul
         li
-          a(href='/administration/services') Suppliers
+          a(href='/admin/services') Suppliers
         li
-          a(href='/administration/services/categories') Categories
+          a(href='/admin/services/categories') Categories
     li
       - var c = (menu == 'content') ? 'active' : ''
-      a(href='/administration/pages',class="#{c}") Content
+      a(href='/admin/pages',class="#{c}") Content
       ul
         li
-          a(href='/administration/news') News & Research
+          a(href='/admin/news') News & Research
         li
-          a(href='/administration/pages') Pages
+          a(href='/admin/pages') Pages
     li
       - var c = (menu == 'reports') ? 'active' : ''
       a(href='/administration/reports',class="#{c}") Reports
     li  
       - var c = (menu == 'members') ? 'active' : ''
-      a(href='/administration/members',class="#{c}") Members
+      a(href='/admin/members',class="#{c}") Members

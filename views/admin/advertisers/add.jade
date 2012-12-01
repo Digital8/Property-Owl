@@ -1,0 +1,79 @@
+extends ../../layout
+
+block content
+  .container.row.main
+   
+    include ../../admin-menu
+    
+    h1 Add Advertiser
+    
+    .admin-actions
+      ul
+        li
+          a(href="/admin/advertisers")
+            img(src='/images/manage.png')
+            | &nbsp;
+            | Manage Advertisers
+    
+    .grid-header.form-header
+      ol.six
+        li.active
+          .ol-1-active
+          | Details
+    
+    .details
+      h2 Advertiser Details
+      hr
+      form.details-form(action="/admin/advertisers/add", method="post")
+        include ../../flashify
+        
+        .inputs
+          label.required(for='name') Name
+            input#name(type='text', name='name')
+        
+        .inputs
+          label.required(for='description') Description
+            input#description(type='text', name='description')
+        
+        .inputs
+          label.required(for='contactee') Contactee
+            input#contactee(type='text', name='contactee')
+        
+        .inputs
+          label.required(for='email') Email
+            input#email(type='email', name='email')
+        
+        .inputs
+          label.required(for='phone') Phone
+            input#phone(type='tel', name='phone')
+        
+        .inputs
+          label.required(for='address') Address
+            input#address(type='text', name='address')
+        
+        .inputs
+          label.required(for='suburb') Suburb
+            input#suburb(type='text', name='suburb')
+        
+        .inputs
+          label.required(for='state') State
+            select#state(name="state", class="select2")
+              option(value="")
+              option(value="act") ACT
+              option(value="nsw") NSW
+              option(value="nt") NT
+              option(value="qld") QLD
+              option(value="sa") SA
+              option(value="tas") TAS
+              option(value="vic") VIC
+              option(value="wa") WA
+        
+        .inputs
+          label.required(for='postcode') Postcode
+            input#postcode(type='text', name="postcode")
+        
+        .inputs
+        
+        .submit
+          input.button(type='submit', value='Post Advertiser')
+          a.left-button(href="/admin/advertisers") Cancel

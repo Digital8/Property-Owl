@@ -1,0 +1,124 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+     include ../../admin-menu
+     h1
+       | Add New Deal 
+       span.secondary - Images
+     .admin-actions
+       ul
+          li
+            a(href='/admin/properties')
+              img(src='/images/manage.png') 
+              | &nbsp;
+              | Manage Owl Deals
+          li
+            a(href='/admin/barn')
+              img(src='/images/manage.png') 
+              | &nbsp;
+              | Manage Barn Deals
+     .grid-header.form-header
+       ol.six
+         li.active
+           .ol-1-active
+           | Details
+         li.active
+           .ol-2-active
+           | Features
+         li.active
+           .ol-3-active
+           | Barn Deal
+         li.active
+           .ol-4-active
+           | Images
+         li
+           .ol-5
+           | Property Lots
+         li
+           .ol-6
+           | Complete!
+     .details
+       h2 Images
+       hr
+       include ../../flashify
+       .left
+         .inputs
+           p.note Attach images in JPG, GIF, PNG format. Max file size 5MB.
+           - if (images.length < 5)
+             p Add up to 
+               strong= (5 - images.length) 
+               |  more images
+               br
+               form(action="/admin/properties/add?step=4",method="post",enctype="multipart/form-data")
+                p
+                  input(type="file",name="file")
+                  input.button(type="submit",name="cmdAddImage", value="Upload Image")
+        form.details-form(action="/admin/properties/add?step=4",method="post")
+         .right
+           .inputs
+             table.admin-gridview
+               thead
+                 tr
+                   td Thumb
+                   td File Name
+                   td Order
+                   td Hero
+                   td Size
+                   td Actions
+               tbody
+                 - each img in images
+                   tr
+                     td
+                        img(src="/uploads/#{img.filename}",width="50px")
+                     td= img.description
+                     td.order
+                       img(src='/images/order-arrow.png')
+                     td
+                       input.hero(type='radio',name="hero",data-id="#{img.media_id}", checked=((img.hero == 1) ? true : false))
+                     td 200KB
+                     td
+                      a.deleteImage(href="#",data-id="#{img.media_id}")
+                       img(src='/images/delete.png')
+         .inputs  
+         .submit
+           a.left-button(href="/admin/properties/add?step=3") Previous Step
+           a.button(href="/admin/properties/add?step=5") Next Step
+     //
+       end details
+   //
+      end main content
+  
+  script
+    $(document).ready(function(){
+      $('.deleteImage').click(function(e){
+        e.preventDefault();
+        
+        var p = $(this);
+        var id = $(this).data('id');
+        $.ajax({
+          url: '/ajax/deleteMedia',
+          type: 'DELETE',
+          data: 'mid='+id
+        
+        }).done(function(d){
+          $(p).parent().parent().fadeOut();
+        });
+        
+      });
+      
+      $('.hero').click(function(){
+        var mid = $(this).data('id');
+        
+        $.ajax({
+          url: '/ajax/updateHero',
+          type: 'put',
+          data: 'pid=#{property[0].property_id}&mid='+mid
+        }).done(function(d){
+        });
+      });
+    });
+ 
+ 

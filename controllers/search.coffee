@@ -2,8 +2,6 @@ system = require '../system'
 
 models = properties: system.load.model 'properties'
 
-helpers = {}
-
 exports.index = (req,res) ->
   if req.query.state is 'all' then req.query.state = '%'
   if req.query.pType is 'all' then req.query.pType = '%'

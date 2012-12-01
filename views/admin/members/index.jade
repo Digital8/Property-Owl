@@ -1,0 +1,72 @@
+extends ../../layout
+
+block content
+  //
+    main content
+  .container.row.main
+      include ../../admin-menu
+      h1 Members
+      .admin-actions
+       ul
+        li
+         a(href="/admin/members/add")
+          img(src='/images/add.png')
+          | &nbsp;
+          | Add New Member
+       .grid-summary 1 - 4 of 24
+      .grid-header
+       form#search-form
+        input#memberSearch(type='text')
+        | &nbsp;
+        input.button(type='submit', value='Go')
+        | &nbsp;
+        input.button(type='submit', value='Reset')
+        .divider
+        select#memberType
+         option Potential Buyer
+         option Property Developer
+         option Administrator
+        | &nbsp;
+        select#propertyState
+         option State
+         option ACT
+         option NSW
+         option NT
+         option QLD
+         option SA
+         option TAS
+         option VIC
+         option WA
+      table.admin-gridview
+       thead
+        tr
+         td Name
+         td Email
+         td Member Type
+         td(colspan='2') Actions
+       tbody
+       - each user in users
+        tr
+         td #{user.first_name} #{user.last_name}
+         td= user.email
+         td= user.account_type
+         td.actions
+          a(href="/admin/members/edit/#{user.user_id}")
+           img(src='/images/edit.png', alt='Edit')
+           | Edit
+         td.actions
+          a(href="/admin/members/delete/#{user.user_id}")
+           img(src='/images/delete.png', alt='Delete')
+           | Delete
+       tfoot
+        tr
+         td(colspan='5')
+          ul.pager
+           li.disabled
+            a(href='#') Prev
+           li.selected
+            a(href='#') 1
+           li
+            a(href='#') 2
+           li
+            a(href='#') Next

@@ -1,6 +1,4 @@
 system = require '../system'
-
-helpers = hash: system.load.helper 'hash'
   
 models = services: system.load.model 'services'
 

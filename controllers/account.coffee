@@ -1,9 +1,9 @@
 system = require '../system'
 
 helpers = hash: system.load.helper 'hash'
-  
+
 models = user: system.load.model 'user'
-  
+
 exports.index = (req,res) -> res.render 'user/settings'
 
 exports.view = (req,res) ->

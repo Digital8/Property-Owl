@@ -1,3 +1,7 @@
+repl = require 'repl'
+
+argv = (require 'optimist').alias('verbose', 'v').alias('hack', 'h').argv
+
 express = require 'express'
 expressValidator = require 'express-validator'
 flashify = require 'flashify'
@@ -28,13 +32,15 @@ app.configure ->
   app.use express.static "#{__dirname}/public"
   
   app.use (req,res,done) ->
-
+    
     res.locals.session  = req.session
     res.locals.globals = system.config.globals
     res.locals.modules = system.config.modules ? {} # If modules exist, allow views to check its status
     res.locals.objUser = new classes.user [] # Empty user object
     res.locals.menu = {}
-    req.session.user_id = 1
+    
+    if argv.hack?
+      req.session.user_id = 1
     
     res.locals.navigation = [
       {key: 'aus-best-deal', href: '/best-deal', label: "Australia's Best Deal"}
@@ -44,7 +50,6 @@ app.configure ->
       {key: 'products', href: '#', label: 'Products & Services'}
       {key: 'my-nest', href: '#', label: 'My Nest'}
     ]
-    
 
     url = '/' + req.url.split('/')[1] + '%'
     if url is '/%' then url = '/'
@@ -81,3 +86,9 @@ server = app.listen system.config.port
 (require './routes') app
 
 console.log "Server started on port #{system.config.port}"
+
+repl.start
+  prompt: '> '
+  input: process.stdin
+  output: process.stdout
+  global: on

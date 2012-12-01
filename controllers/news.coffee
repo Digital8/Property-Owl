@@ -2,8 +2,6 @@ system = require '../system'
 
 models = news: system.load.model 'news'
 
-helpers = {}
-
 exports.index = (req,res) ->
   models.news.getAllNews (err, results) ->
     if err then throw err

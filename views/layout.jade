@@ -32,6 +32,9 @@ html.no-js(lang='en')
     
     script(src='/js/scripts.js')
     
+    script(src='/raphael/raphael.js')
+    script(src='/js/map.js')
+    
     script(src='/js/dropdowns.js')
   
   body
@@ -138,7 +141,7 @@ html.no-js(lang='en')
                     ul
                       - if( objUser.isAdmin())
                         li
-                          a(href="/administration") Administration
+                          a(href="/admin") admin
                       li
                         a(href='/account') My Account
                       li

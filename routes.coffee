@@ -1,17 +1,33 @@
-fs = require 'fs'
-
-{acl, controllers} = system = require './system'
-
-fs.readdirSync("./controllers").forEach (module) -> 
-  controllers[module.split('.')[0]] = require("./controllers/" + module)
-
-helpers =
-  authenticate: system.load.helper 'requireAuth'
-  authorize: system.load.helper 'restrictTo'
+{acl, helpers, controllers} = require './system'
 
 {authenticate, authorize} = helpers
 
 module.exports = (app) ->
+  app._all = app.all
+  app.all = (path, middleware...) ->
+    console.log "[route] [all] #{path}"
+    app._all arguments...
+
+  app._get = app.get
+  app.get = (path, middleware...) ->
+    console.log "[route] [get] #{path}"
+    app._get arguments...
+
+  app._put = app.put
+  app.put = (path, middleware...) ->
+    console.log "[route] [put] #{path}"
+    app._put arguments...
+
+  app._post = app.post
+  app.post = (path, middleware...) ->
+    console.log "[route] [post] #{path}"
+    app._post arguments...
+
+  app._delete = app.delete
+  app.delete = (path, middleware...) ->
+    console.log "[route] [delete] #{path}"
+    app._delete arguments...
+  
   app.get '/', controllers.index.index
   
   # auth
@@ -32,26 +48,27 @@ module.exports = (app) ->
   
   app.get '/saved', authenticate, controllers.saveddeals.index
   
-  app.get '/owl-deals', authenticate, controllers.owl_deals.index
-  
   app.get '/products', authenticate, controllers.products.index
   
-  app.get '/barn-deals', authenticate, controllers.barn_deals.index
+  # properties (owl deals)
+  app.get '/properties', authenticate, controllers.properties.index
+  app.get '/properties/state/:state', authenticate, controllers.properties.view
+  app.get '/properties/:id', authenticate, controllers.properties.view
   
-  app.get '/barn/deals/:id', authenticate, controllers.barn_deals.view
+  # packages (barn deals)
+  app.get '/packages', authenticate, controllers.packages.index
+  app.get '/packages/:id', authenticate, controllers.packages.view
   
-  app.get '/deals/state', authenticate, controllers.deals_state.index
-  app.get '/deals/state/:state', authenticate, controllers.deals_state.view
+  #####
+  # developer
+  #####
+  app.get '/developer/properties', (authorize acl.developer), (authorize acl.admin), controllers.dev.properties.index
+  app.get '/developer/properties/add', (authorize acl.developer), (authorize acl.admin), controllers.dev.properties.add
+  app.post '/developer/properties/add', (authorize acl.developer), (authorize acl.admin), controllers.dev.properties.create
   
-  app.get '/properties/view/:id', authenticate, controllers.properties.view
-  
-  app.get '/developers/properties', (authorize acl.developer), (authorize acl.admin), controllers.dev_properties.index
-  app.get '/developers/properties/add', (authorize acl.developer), (authorize acl.admin), controllers.dev_properties.add
-  app.post '/developers/properties/add', (authorize acl.developer), (authorize acl.admin), controllers.dev_properties.create
-  
-  app.get '/developers/deals', (authorize acl.developer), (authorize acl.admin), controllers.dev_deals.index
-  app.get '/developers/deals/add', (authorize acl.developer), (authorize acl.admin), controllers.dev_deals.add
-  app.post '/developers/deals/add', (authorize acl.developer), (authorize acl.admin), controllers.dev_deals.create
+  app.get '/developer/deals', (authorize acl.developer), (authorize acl.admin), controllers.dev.deals.index
+  app.get '/developer/deals/add', (authorize acl.developer), (authorize acl.admin), controllers.dev.deals.add
+  app.post '/developer/deals/add', (authorize acl.developer), (authorize acl.admin), controllers.dev.deals.create
   
   # news
   app.get '/news', authenticate, controllers.news.index
@@ -64,83 +81,90 @@ module.exports = (app) ->
   # search
   app.get '/search', authenticate, controllers.search.index
   
-  # administration
-  app.get '/administration', (authorize acl.admin), controllers.admin_index.index
+  #####
+  # admin
+  #####
+  app.get '/admin', (authorize acl.admin), controllers.admin.index.index
   
   # advertising
-  app.get '/administration/advertising', (authorize acl.admin), controllers.admin_advertising.index
+  app.get '/admin/advertising', (authorize acl.admin), controllers.admin.advertising.index
   
   # advertisers
-  app.get '/administration/advertisers', (authorize acl.admin), controllers.admin_advertisers.index
-  app.post '/administration/advertisers/add', (authorize acl.admin), controllers.admin_advertisers.create
-  app.get '/administration/advertisers/add', (authorize acl.admin), controllers.admin_advertisers.add
-  app.get '/administration/advertisers/edit/:id', (authorize acl.admin), controllers.admin_advertisers.edit
-  app.put '/administration/advertisers/edit/:id', (authorize acl.admin), controllers.admin_advertisers.update
-  app.get '/administration/advertisers/delete/:id', (authorize acl.admin), controllers.admin_advertisers.delete
-  app.delete '/administration/advertisers/delete/:id', (authorize acl.admin), controllers.admin_advertisers.destroy
+  app.get '/admin/advertisers', (authorize acl.admin), controllers.admin.advertisers.index
+  app.post '/admin/advertisers/add', (authorize acl.admin), controllers.admin.advertisers.create
+  app.get '/admin/advertisers/add', (authorize acl.admin), controllers.admin.advertisers.add
+  app.get '/admin/advertisers/edit/:id', (authorize acl.admin), controllers.admin.advertisers.edit
+  app.put '/admin/advertisers/edit/:id', (authorize acl.admin), controllers.admin.advertisers.update
+  app.get '/admin/advertisers/delete/:id', (authorize acl.admin), controllers.admin.advertisers.delete
+  app.delete '/admin/advertisers/delete/:id', (authorize acl.admin), controllers.admin.advertisers.destroy
   
   # advertisements
-  app.get '/administration/advertisements', (authorize acl.admin), controllers.admin_advertisements.index
-  app.post '/administration/advertisements/add', (authorize acl.admin), controllers.admin_advertisements.create
-  app.get '/administration/advertisements/add', (authorize acl.admin), controllers.admin_advertisements.add
-  app.get '/administration/advertisements/edit/:id', (authorize acl.admin), controllers.admin_advertisements.edit
-  app.put '/administration/advertisements/edit/:id', (authorize acl.admin), controllers.admin_advertisements.update
-  app.get '/administration/advertisements/delete/:id', (authorize acl.admin), controllers.admin_advertisements.delete
-  app.delete '/administration/advertisements/delete/:id', (authorize acl.admin), controllers.admin_advertisements.destroy
+  app.get '/admin/advertisements', (authorize acl.admin), controllers.admin.advertisements.index
+  app.post '/admin/advertisements/add', (authorize acl.admin), controllers.admin.advertisements.create
+  app.get '/admin/advertisements/add', (authorize acl.admin), controllers.admin.advertisements.add
+  app.get '/admin/advertisements/edit/:id', (authorize acl.admin), controllers.admin.advertisements.edit
+  app.put '/admin/advertisements/edit/:id', (authorize acl.admin), controllers.admin.advertisements.update
+  app.get '/admin/advertisements/delete/:id', (authorize acl.admin), controllers.admin.advertisements.delete
+  app.delete '/admin/advertisements/delete/:id', (authorize acl.admin), controllers.admin.advertisements.destroy
   
-  app.get '/administration/news', (authorize acl.admin), controllers.admin_news.index
-  app.post '/administration/news/add', (authorize acl.admin), controllers.admin_news.create
-  app.get '/administration/news/add', (authorize acl.admin), controllers.admin_news.add
-  app.get '/administration/news/edit/:id', (authorize acl.admin), controllers.admin_news.edit
-  app.put '/administration/news/edit/:id', (authorize acl.admin), controllers.admin_news.update
-  app.get '/administration/news/delete/:id', (authorize acl.admin), controllers.admin_news.delete
-  app.delete '/administration/news/delete/:id', (authorize acl.admin), controllers.admin_news.destroy
+  # news
+  app.get '/admin/news', (authorize acl.admin), controllers.admin.news.index
+  app.post '/admin/news/add', (authorize acl.admin), controllers.admin.news.create
+  app.get '/admin/news/add', (authorize acl.admin), controllers.admin.news.add
+  app.get '/admin/news/edit/:id', (authorize acl.admin), controllers.admin.news.edit
+  app.put '/admin/news/edit/:id', (authorize acl.admin), controllers.admin.news.update
+  app.get '/admin/news/delete/:id', (authorize acl.admin), controllers.admin.news.delete
+  app.delete '/admin/news/delete/:id', (authorize acl.admin), controllers.admin.news.destroy
   
-  app.get '/administration/members', (authorize acl.admin), controllers.admin_members.index
-  app.get '/administration/members/add', (authorize acl.admin), controllers.admin_members.add
-  app.post '/administration/members/add', (authorize acl.admin), controllers.admin_members.create
-  app.get '/administration/members/edit/:id', (authorize acl.admin), controllers.admin_members.edit
-  app.put '/administration/members/edit/:id', (authorize acl.admin), controllers.admin_members.update
+  # members
+  app.get '/admin/members', (authorize acl.admin), controllers.admin.members.index
+  app.get '/admin/members/add', (authorize acl.admin), controllers.admin.members.add
+  app.post '/admin/members/add', (authorize acl.admin), controllers.admin.members.create
+  app.get '/admin/members/edit/:id', (authorize acl.admin), controllers.admin.members.edit
+  app.put '/admin/members/edit/:id', (authorize acl.admin), controllers.admin.members.update
   
-  app.get '/administration/pages', (authorize acl.admin), controllers.admin_pages.index
-  app.get '/administration/pages/add', (authorize acl.admin), controllers.admin_pages.add
-  app.get '/administration/pages/edit/:id', (authorize acl.admin), controllers.admin_pages.edit
-  app.put '/administration/pages/edit/:id', (authorize acl.admin), controllers.admin_pages.update
-  app.get '/administration/pages/delete/:id', (authorize acl.admin), controllers.admin_pages.delete
-  app.post '/administration/pages/add', (authorize acl.admin), controllers.admin_pages.create
-  app.delete '/administration/pages/delete/:id', (authorize acl.admin), controllers.admin_pages.destroy
+  # pages
+  app.get '/admin/pages', (authorize acl.admin), controllers.admin.pages.index
+  app.get '/admin/pages/add', (authorize acl.admin), controllers.admin.pages.add
+  app.get '/admin/pages/edit/:id', (authorize acl.admin), controllers.admin.pages.edit
+  app.put '/admin/pages/edit/:id', (authorize acl.admin), controllers.admin.pages.update
+  app.get '/admin/pages/delete/:id', (authorize acl.admin), controllers.admin.pages.delete
+  app.post '/admin/pages/add', (authorize acl.admin), controllers.admin.pages.create
+  app.delete '/admin/pages/delete/:id', (authorize acl.admin), controllers.admin.pages.destroy
   
-  app.get '/administration/services', (authorize acl.admin), controllers.admin_services.index
-  app.get '/administration/services/add', (authorize acl.admin), controllers.admin_services.add
-  app.get '/administration/services/edit/:id', (authorize acl.admin), controllers.admin_services.edit
-  app.put '/administration/services/edit/:id', (authorize acl.admin), controllers.admin_services.update
-  app.get '/administration/services/delete/:id', (authorize acl.admin), controllers.admin_services.delete
-  app.post '/administration/services/add', (authorize acl.admin), controllers.admin_services.create
+  app.get '/admin/services', (authorize acl.admin), controllers.admin.services.index
+  app.get '/admin/services/add', (authorize acl.admin), controllers.admin.services.add
+  app.get '/admin/services/edit/:id', (authorize acl.admin), controllers.admin.services.edit
+  app.put '/admin/services/edit/:id', (authorize acl.admin), controllers.admin.services.update
+  app.get '/admin/services/delete/:id', (authorize acl.admin), controllers.admin.services.delete
+  app.post '/admin/services/add', (authorize acl.admin), controllers.admin.services.create
   
   # TODO
-  app.get '/administration/services/categories', (authorize acl.admin), controllers.admin_services.viewCategories
-  app.get '/administration/services/categories/add', (authorize acl.admin), controllers.admin_services.addCategory
-  app.post '/administration/services/categories/add', (authorize acl.admin), controllers.admin_services.createCategory
-  app.get '/administration/services/categories/edit/:id', (authorize acl.admin), controllers.admin_services.editCategory
-  app.put '/administration/services/categories/edit/:id', (authorize acl.admin), controllers.admin_services.updateCategory
-  app.get '/administration/services/categories/delete/:id', (authorize acl.admin), controllers.admin_services.deleteCategory
+  app.get '/admin/services/categories', (authorize acl.admin), controllers.admin.services.viewCategories
+  app.get '/admin/services/categories/add', (authorize acl.admin), controllers.admin.services.addCategory
+  app.post '/admin/services/categories/add', (authorize acl.admin), controllers.admin.services.createCategory
+  app.get '/admin/services/categories/edit/:id', (authorize acl.admin), controllers.admin.services.editCategory
+  app.put '/admin/services/categories/edit/:id', (authorize acl.admin), controllers.admin.services.updateCategory
+  app.get '/admin/services/categories/delete/:id', (authorize acl.admin), controllers.admin.services.deleteCategory
   
-  app.get '/administration/barn', (authorize acl.admin), controllers.admin_barn.index
-  app.get '/administration/barn/edit/:id', (authorize acl.admin), controllers.admin_barn.edit
-  app.get '/administration/barn/add', (authorize acl.admin), controllers.admin_barn.add
-  app.post '/administration/barn/add', (authorize acl.admin), controllers.admin_barn.create
-  app.get '/administration/barn/delete/:barn_id/:property_id', (authorize acl.admin), controllers.admin_barn.delete
-  app.del '/administration/barn/delete/:barn_id/:property_id', (authorize acl.admin), controllers.admin_barn.destroy
+  # barn
+  app.get '/admin/barn', (authorize acl.admin), controllers.admin.barn.index
+  app.get '/admin/barn/edit/:id', (authorize acl.admin), controllers.admin.barn.edit
+  app.get '/admin/barn/add', (authorize acl.admin), controllers.admin.barn.add
+  app.post '/admin/barn/add', (authorize acl.admin), controllers.admin.barn.create
+  app.get '/admin/barn/delete/:barn_id/:property_id', (authorize acl.admin), controllers.admin.barn.delete
+  app.del '/admin/barn/delete/:barn_id/:property_id', (authorize acl.admin), controllers.admin.barn.destroy
   
-  app.get '/administration/properties', (authorize acl.admin), controllers.admin_properties.index
-  app.get '/administration/properties/add', (authorize acl.admin), controllers.admin_properties.add
-  app.post '/administration/properties/add', (authorize acl.admin), controllers.admin_properties.create
-  app.get '/administration/properties/edit/:id', (authorize acl.admin), controllers.admin_properties.edit
-  app.put '/administration/properties/add', (authorize acl.admin), controllers.admin_properties.update
-
-  app.get '/administration/reports', (authorize acl.admin), controllers.admin_reports.index
+  # properties
+  app.get '/admin/properties', (authorize acl.admin), controllers.admin.properties.index
+  app.get '/admin/properties/add', (authorize acl.admin), controllers.admin.properties.add
+  app.post '/admin/properties/add', (authorize acl.admin), controllers.admin.properties.create
+  app.get '/admin/properties/edit/:id', (authorize acl.admin), controllers.admin.properties.edit
+  app.put '/admin/properties/add', (authorize acl.admin), controllers.admin.properties.update
   
+  #####
   # ajax
+  #####
   app.post '/ajax/login', controllers.ajax.login
   app.post '/ajax/savedeal', authenticate, (authorize acl.admin), controllers.ajax.savedeal
   app.post '/ajax/removedeal', authenticate, (authorize acl.admin), controllers.ajax.removedeal

@@ -1,8 +1,8 @@
 {
-  "name": "Time-For-Advice",
-  "author": "Brendan Scarvell <brendan@digital8.com.au>",
+  "name": "Property-Owl",
+  "author": "Digital8",
   "version": "0.0.1",
-  "description": "Time for Advice CMS",
+  "description": "We give a hoot!",
   "dependencies": {
     "express": "~3.0.0rc3",
     "jade": "~0.27.2",
@@ -13,6 +13,7 @@
     "async": "~0.1.22",
     "email": "~0.2.5",
     "sendgrid": "~0.2.5",
-    "underscore": "~1.4.2"
+    "underscore": "~1.4.2",
+    "optimist": "~0.3.5"
   }
 }

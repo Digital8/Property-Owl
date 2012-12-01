@@ -2,8 +2,6 @@ system = require '../system'
 
 models = news: system.load.model 'news'
 
-helpers = {}
-
 exports.index = (req,res) ->
   models.news.getAllNewsByType 'research', (err, results) ->
     if err then throw err
@@ -19,7 +17,7 @@ exports.add = (req,res) ->
 exports.create = (req,res) ->
 
 exports.edit = (req,res) ->
-  
+
 exports.update = (req,res) ->
-  
+
 exports.destroy = (req,res) ->

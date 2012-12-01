@@ -1,7 +1,5 @@
 system = require '../system'
 
-helpers = {}
-
 models =
   properties: system.load.model 'properties'
   deals: system.load.model 'deals'
@@ -17,6 +15,7 @@ exports.index = (req,res) ->
       models.deals.getDealsByPropertyId property.property_id, (err, deals) ->
         models.media.getMediaByPropertyId property.property_id, (err, files) ->
           models.media.getImagesByPropertyId property.property_id, (err, images) ->
+            console.log deals
             res.render 'deals/best_deal', menu: 'aus-best-deal', property: property, deals: deals or {}, files: files or {} , images: images or {}
 
 exports.view = (req,res) ->

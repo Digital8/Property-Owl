@@ -10,11 +10,11 @@ exports.create = (req,res) ->
   req.assert('email', 'Invalid Email Address').isEmail()
   req.assert('name', 'Please enter a name').notEmpty()
   req.assert('comments', 'Please enter the comments').notEmpty()
-
+  
   console.log req.body
   
-  errors = req.validationErrors(true)
-
+  errors = req.validationErrors true
+  
   if errors is false then errors = {}
   
   if Object.keys(errors)?.length > 0
@@ -28,9 +28,9 @@ exports.create = (req,res) ->
   else
     
     myMsg = new Email
-      from: "bscarvell@gmail.com"
-      to:   "bscarvell@gmail.com"
-      subject: "Knock knock..."
+      from: 'bscarvell@gmail.com'
+      to:   'bscarvell@gmail.com'
+      subject: 'Knock knock...'
       body: "Who's there?"
     
     myMsg.send (err) ->

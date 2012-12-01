@@ -1,0 +1,21 @@
+extends ../../layout
+
+block content
+  
+  .container.row.main
+    include ../../admin-menu
+    
+    h3 Delete Page?
+    
+    p Are you sure you wish to delete: 
+      em
+        u #{page.header}
+    
+    form.form-horizontal(action="/admin/pages/delete/#{page.page_id}", method="post")
+      input(type="hidden", name="_method", value="delete")
+      
+      div.control-group
+        div.controls
+          input.btn.btn-danger(type="submit", value="Delete")
+          | &nbsp;
+          a.btn(href="/admin/pages") Cancel

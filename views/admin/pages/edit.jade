@@ -1,0 +1,38 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+   include ../../admin-menu
+   h1 Edit Page
+   .admin-actions
+    ul
+     li
+      a(href="/admin/pages")
+       img(src='/images/manage.png')
+       | &nbsp;
+       | Manage Pages
+   .details
+    h2 Page Details
+    hr
+    form.details-form(action="/admin/pages/edit/#{page.page_id}",method="post")
+     input(type="hidden",name="_method",value="put")
+     include ../../flashify
+     .inputs
+      label.control-label(for="inputTitle") Page URL
+      input#inputUrl(type="text",name="url",placeholder="/url",value="#{page.url}")
+     .inputs
+      label.control-label(for="inputTitle") Page Title
+      input#inputTitle(type="text",name="header",placeholder="Page Title",value="#{page.header}")
+     .inputs 
+      label.control-label(for="inputContent") Content
+      textarea#inputContent(name="content",placeholder="Page Content",rows="30",cols="100")
+          = page.content.replace(/<br \/>/g,"\r\n")
+     .inputs
+      select(name="enabled")
+       option(value="1") Enabled
+       option(value="0") Disabled
+     .submit
+      input.button(type="submit",value="Update Page")
+      a.left-button(href="/admin/pages/") Cancel
