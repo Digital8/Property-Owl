@@ -14,7 +14,7 @@ exports.all = (callback) ->
     async.forEach results, (result, callback) ->
       models.advertiser.find result.advertiser_id, (error, results) ->
         console.dir arguments
-        result.advertiser = results.pop()
+        result.advertiser = if results.length is 0 then '' else results.pop()
         console.dir result
         do callback
     , (error) ->
@@ -36,6 +36,5 @@ exports.countActive = (callback) ->
   db.query "SELECT COUNT(*) FROM #{table} WHERE NOW() BETWEEN start AND stop", (error, result) ->
     callback null, result[0]['COUNT(*)']
 
-exports.random = (callback) ->
-  db.query "SELECT * FROM #{table} ORDER BY RAND()", (error, results) ->
-    callback null, results.pop()
+exports.random = (url, pos, callback) ->
+  db.query "SELECT * FROM #{table} AS adv INNER JOIN #{db.prefix}pages AS P ON adv.page_id = P.page_id INNER JOIN #{db.prefix}adspaces AS adsp ON adv.adspace_id = adsp.adspace_id WHERE P.url LIKE ? AND adsp.name = ? ORDER BY RAND() ", [url, pos], callback

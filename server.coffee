@@ -45,20 +45,34 @@ app.configure ->
       {key: 'my-nest', href: '#', label: 'My Nest'}
     ]
     
-    models.advertisement.random (err, ad) ->
-      res.locals.ad = if ad? then ad.image_id else ''
-      
-      if req.session.user_id?
-        models.user.getUserById req.session.user_id, (err, results) ->
-          if err then throw err
-          
-          if results.length > 0
-            res.locals.objUser = new classes.user results.pop()
+
+    url = '/' + req.url.split('/')[1] + '%'
+    if url is '/%' then url = '/'
+
+    console.log url
+
+    models.advertisement.random url, 'top', (err, adspaceTop) ->
+      models.advertisement.random url, 'upper tower', (err, adUpperTower) ->
+        models.advertisement.random url, 'lower tower', (err, adLowerTower) ->
+          models.advertisement.random url, 'upper box', (err, adUpperBox) ->
+            models.advertisement.random url, 'lower box', (err, adLowerBox) ->
+            res.locals.adspaceTop = if adspaceTop? then adspaceTop else ''
+            res.locals.adUpperTower = if adUpperTower? then adUpperTower else ''
+            res.locals.adLowerTower = if adLowerTower? then adLowerTower else ''
+            res.locals.adUpperBox = if adUpperBox? then adUpperBox else ''
+            res.locals.adLowerBox  = if adLowerBox? then adLowerBox else ''
             
-            done()
-      
-      else
-        done()
+            if req.session.user_id?
+              models.user.getUserById req.session.user_id, (err, results) ->
+                if err then throw err
+                
+                if results.length > 0
+                  res.locals.objUser = new classes.user results.pop()
+                  
+                  done()
+            
+            else
+              done()
   
   app.use app.router
   
