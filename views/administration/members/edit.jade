@@ -13,10 +13,6 @@ block content
        img(src='/images/manage.png')
        | &nbsp;
        | Manage Members
-     li.disabled
-      img(src='/images/add.png')
-      | &nbsp;
-      | Add New Member
    .grid-header.form-header
     ol.six
      li.active
@@ -42,10 +38,10 @@ block content
       .inputs
        label.required(for='first_name') Full Name
        - if (values.first_name == undefined) values.first_name = ''
-        input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.first_name}",class="half")
+        input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.first_name}",class="half-field")
         | &nbsp;
        - if (values.last_name == undefined) values.last_name = ''
-        input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}",class="half")
+        input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}",class="half-field")
       .inputs
        label(for='company') Company
        - if (values.company == undefined) values.company = ''
@@ -69,9 +65,9 @@ block content
         input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
       .inputs
        label.required(for='password') Password
-       - if (values.email == undefined) values.email = ''
-        input#password(type="password",placeholder="Password",name="password",class="half")
-        input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword",class="half")
+       input#password(type="password",name="password",class="half-field",placeholder="Password")
+       | &nbsp;
+       input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword",class="half-field")
         br
         p.note Password will not be changed if left blank
       .inputs
@@ -87,12 +83,13 @@ block content
        - if (values.postcode == undefined) values.postcode = ''
         input#postcode(type="text",name="postcode",placeholder="Postcode",value="")
       br
+      //- TODO fix checkbox not updating fields
       .inputs
-       input(type='checkbox', name='newsletterSubscription', value='newsletter_subscription')
-       |  Subscribed to newsletter
+        input(type="checkbox", name="subscribed_newsletter", value="1", checked=((values.subscribed_newsletter==1) ? true : false))
+        |  Subscribed to newsletter
       .inputs
-       input(type='checkbox', name='propertySubscription', value='property_subscription')
-       |  Subscribed to property alerts
+        input(type="checkbox", name="subscribed_alerts", value="1", checked=((values.subscribed_alerts==1) ? true : false))
+        |  Subscribed to property alerts
      .inputs
      .submit
       input.button(type='submit', value='Update User')

@@ -35,6 +35,34 @@ $(function(){
            }
        });
 	});
+	
+	// more information list
+	var infoHeight = 0;
+	
+	$(".more-info h2").on("click", function(){ 
+	  console.log('sdfsdf');
+		var infoitems = $(this).closest(".more-info"),
+			infoList = $("ul", infoitems);
+		
+		if (infoHeight <= 0){
+			infoList.hide().css("height","auto");
+			infoHeight = infoList.height();
+			infoList.css("height","0").show();
+		}
+		else {
+			infoHeight = 0;
+		}
+		
+		infoList.animate({
+            height: infoHeight
+       }, 150, function(){
+           infoitems.toggleClass("display");
+           
+           if (infoHeight > 0){
+               infoList.css("height","auto");
+           }
+       });
+	});
 
 });
 

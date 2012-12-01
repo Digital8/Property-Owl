@@ -23,19 +23,19 @@
 }
 
 .font-family {
-	font-family: "proxima-nova-soft", "Arial Rounded MT Bold", Arial, sans-serif;
+  font-family: "proxima-nova-soft", "Arial Rounded MT Bold", Arial, sans-serif;
 }
 .light {
-	font-weight: 100;
+  font-weight: 100;
 }
 .regular {
-	font-weight: 300;
+  font-weight: 300;
 }
 .semibold {
-	font-weight: 400;
+  font-weight: 400;
 }
 .bold {
-	font-weight: 700;
+  font-weight: 700;
 }
 
 /* @end */
@@ -55,7 +55,7 @@
 /* @group body styles */
 
 html, body {
-	height: 100%;
+  height: 100%;
 }
 body {
     background: #FFF url(../images/bg.gif) no-repeat center top fixed;
@@ -83,10 +83,10 @@ body {
                 .column(3, 0);
                 padding-left: 20px;
                 padding-right: 20px;
-            	display: block;
-            	float: left;
-            	z-index: 1;
-            	margin-bottom: -4.3em;
+              display: block;
+              float: left;
+              z-index: 1;
+              margin-bottom: -4.3em;
             }
             &#admin-logo-box {
                 .column(2,0);
@@ -137,107 +137,107 @@ body {
         
         ul,
         li {
-        	margin: 0;
-        	padding: 0;
-        	list-style: none;
+          margin: 0;
+          padding: 0;
+          list-style: none;
         }
         
         li {
-        	float: left;
-        	.transition(all, 0.05s);
-        	
-        	+ li {
-            	&:before {
-                	content: '●';
-                	color: #7dd3ff;
-                	font-size: 0.55em;
-                	.inline-block;
-                	margin: 0 0.5em;
-                	.text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
-                	vertical-align: middle;
-            	}
-        	}
-        	
-        	a {
-        		color: #7dd3ff;
-        		.bold;
-        		text-decoration: none;
-        		font-size: 1em;
-        		.transition(all, 0.05s);
+          float: left;
+          .transition(all, 0.05s);
+          
+          + li {
+              &:before {
+                  content: '●';
+                  color: #7dd3ff;
+                  font-size: 0.55em;
+                  .inline-block;
+                  margin: 0 0.5em;
+                  .text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
+                  vertical-align: middle;
+              }
+          }
+          
+          a {
+            color: #7dd3ff;
+            .bold;
+            text-decoration: none;
+            font-size: 1em;
+            .transition(all, 0.05s);
             .text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
-          	.inline-block;
-          	padding: 0.4em 0.3em;
-          	vertical-align: middle;
-            	
-          	&.active {
-          	    color: #FFF;
-              	background: #0a2d4a;
-              	.rounded(0.188em);
-              	.box-shadow(~"inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25)");
-          	}
-          	
-          	&:hover {
-          	    color: #FFFFFF;
-          	}
-        	}
-        	
-        	ul {
-        	    .rounded(0.313em);
-//        	    border: solid 1px #7a7a7a;
-        	}
-        	
-        	ul, li {
-        	    list-style-type: none;
-        	}
-        	
-        	li {
-//        	    background: #b3b3b3;
-        	    .rounded-top-right(0.313em);
-        	    
-        	    +li {
-        	        .rounded-top-right(0);        	        
-//        	        border-top: solid 1px #7a7a7a;
-        	        
-    	        	&:before {
-    	            	content: none;
-	            	}
-        	    }
-        	    
-        	    a {
-        	        color: @color-accent;
-        	        width: 100%;
-        	        .text-shadow(~"0px 0px 0px rgba(0,0,0,0)");
-        	    }
-        	}
-        	
-        	
-        	
-        	
-        	ul {
-        		background: #DDD;
-        		.rounded(5px);
-        		width: 20em;
-        		left: 0;
-        		padding: 0.5em 0;
-        		
-        		li {
-        			display: block;
-        			float: none;
-        			width: 100%;
-        			
-        			a {
-        				display: block;
-        				padding: 0.4em 1em;
-        				text-decoration: none;
-        				.text-shadow(~"none");
-        				
-        				&:hover {
-        					background: #CCC;
-        					color: #000;
-        				}
-        			}
-        		}
-        	}
+            .inline-block;
+            padding: 0.4em 0.3em;
+            vertical-align: middle;
+              
+            &.active {
+                color: #FFF;
+                background: #0a2d4a;
+                .rounded(0.188em);
+                .box-shadow(~"inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25)");
+            }
+            
+            &:hover {
+                color: #FFFFFF;
+            }
+          }
+          
+          ul {
+              .rounded(0.313em);
+//              border: solid 1px #7a7a7a;
+          }
+          
+          ul, li {
+              list-style-type: none;
+          }
+          
+          li {
+//              background: #b3b3b3;
+              .rounded-top-right(0.313em);
+              
+              +li {
+                  .rounded-top-right(0);                  
+//                  border-top: solid 1px #7a7a7a;
+                  
+                &:before {
+                    content: none;
+                }
+              }
+              
+              a {
+                  color: @color-accent;
+                  width: 100%;
+                  .text-shadow(~"0px 0px 0px rgba(0,0,0,0)");
+              }
+          }
+          
+          
+          
+          
+          ul {
+            background: #DDD;
+            .rounded(5px);
+            width: 20em;
+            left: 0;
+            padding: 0.5em 0;
+            
+            li {
+              display: block;
+              float: none;
+              width: 100%;
+              
+              a {
+                display: block;
+                padding: 0.4em 1em;
+                text-decoration: none;
+                .text-shadow(~"none");
+                
+                &:hover {
+                  background: #CCC;
+                  color: #000;
+                }
+              }
+            }
+          }
         }
     }
     
@@ -259,36 +259,36 @@ body {
         
         ul,
         li {
-        	margin: 0;
-        	padding: 0;
-        	list-style: none;
+          margin: 0;
+          padding: 0;
+          list-style: none;
         }
         
         li {
-        	float: left;
-    	    margin-right: 3px;
-    	    line-height: 1.875em;
-    	    padding: 5px;
-        	
-        	&:after {
-    	    	content: '>';
-        	}
-        	
-        	a {
-        	    .regular;
-        	    color: #3895dd;
-        	    padding: 5px;
-        	    text-decoration: none;
-        	}
-        	
-        	&.disabled {  
-        	    color: #9a9a9a;
-        	    padding: 5px 1.250em;
-        	    
-        	    &:after {
-        	        content: '';
-        	    }
-        	}
+          float: left;
+          margin-right: 3px;
+          line-height: 1.875em;
+          padding: 5px;
+          
+          &:after {
+            content: '>';
+          }
+          
+          a {
+              .regular;
+              color: #3895dd;
+              padding: 5px;
+              text-decoration: none;
+          }
+          
+          &.disabled {  
+              color: #9a9a9a;
+              padding: 5px 1.250em;
+              
+              &:after {
+                  content: '';
+              }
+          }
         }
     }
 }
@@ -298,92 +298,92 @@ body {
 }
 
 #admin-menu {
-	display: block;
-	background: #003a66;
-	border: 1px solid #01385d;
-	.box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.3)");
-	.rounded(0.313em);
-	.clearfix;
-	padding: @padding-small;
-	
-	> ul,
-	> ul > li {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-	
-	
+  display: block;
+  background: #003a66;
+  border: 1px solid #01385d;
+  .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.3)");
+  .rounded(0.313em);
+  .clearfix;
+  padding: @padding-small;
+  
+  > ul,
+  > ul > li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  
   .sf-menu li:hover ul,
   .sf-menu li.sfHover ul {
-  	top:			2em !important; /* match top ul list item height */
+    top:      2em !important; /* match top ul list item height */
   }
-	
-	> ul {
-		> li {
-			float: left;
-			color: #7DD3FF;
-			.text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
-			margin-left: 2em;
-			
-			+ li {
-				list-style: disc;
-			}
-			
-			> a {
-				text-decoration: none;
-				.bold;
-				color: #7DD3FF;
-				.text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
-				padding: 0.313em;
-				
-				&:hover {
-					color: #FFF;
-				}
-				
-				&.active {
-    	    color: #FFF;
-        	background: #0a2d4a;
-        	.rounded(0.188em);
-        	.box-shadow(~"inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25)");
-  	    }
-			}
-			
-			ul,
-			li {
-				margin: 0;
-				padding: 0;
-				list-style: none;
-			}
-			
-			ul {
-				background: #DDD;
-				.rounded(5px);
-				width: 20em;
-				left: 0;
-				padding: 0.5em 0;
-				
-				li {
-					display: block;
-					float: none;
-					width: 100%;
-					
-					a {
-						display: block;
-						.bold;
-						padding: 0.4em 1em;
-						text-decoration: none;
-						.text-shadow(~"none");
-						
-						&:hover {
-							background: #CCC;
-							color: #000;
-						}
-					}
-				}
-			}
-		}
-	}
+  
+  > ul {
+    > li {
+      float: left;
+      color: #7DD3FF;
+      .text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
+      margin-left: 2em;
+      
+      + li {
+        list-style: disc;
+      }
+      
+      > a {
+        text-decoration: none;
+        .bold;
+        color: #7DD3FF;
+        .text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
+        padding: 0.313em;
+        
+        &:hover {
+          color: #FFF;
+        }
+        
+        &.active {
+          color: #FFF;
+          background: #0a2d4a;
+          .rounded(0.188em);
+          .box-shadow(~"inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25)");
+        }
+      }
+      
+      ul,
+      li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      
+      ul {
+        background: #DDD;
+        .rounded(5px);
+        width: 20em;
+        left: 0;
+        padding: 0.5em 0;
+        
+        li {
+          display: block;
+          float: none;
+          width: 100%;
+          
+          a {
+            display: block;
+            .bold;
+            padding: 0.4em 1em;
+            text-decoration: none;
+            .text-shadow(~"none");
+            
+            &:hover {
+              background: #CCC;
+              color: #000;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .best-deal {
@@ -875,23 +875,6 @@ body {
                 text-decoration: none;
             }
             
-            .slider-box {
-                 background: #0c3559;
-                 height: 29.6em;
-                 .rounded(0.313em);
-                 padding: @padding-small;
-                 color: #FFFFFF;
-                 position: relative;
-                
-                .slider {
-                    img {
-                        .rounded(0.313em);
-                        border: solid 1px #061b2d;
-                        width: 62.438em;
-                    }
-                }
-             }
-            
             .property-info {
             
                 table.barn-lots {
@@ -998,7 +981,6 @@ body {
                             }
                         }
                         &.other-features {
-                        
                         }
                     }
                 }
@@ -1035,60 +1017,66 @@ body {
                     }
                     
                     .deal {
-      			            border: solid 1px #051726;
-      			            .rounded(0.250em);
-      			            .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
-      			            background: #0b63a8;
-      			            margin-bottom: @padding-small;
-      			            color: #FFF;
-			            
-      			            h2 {
-      			                padding: 0.1em @padding-small;
-      			                margin: 0;
-      			                background: #0a5b9a;
-      			                color: #FFF;
-      			                .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");
-      			                cursor: pointer;
-			                
-      			                img {
-      			                    &.arrow {
-      			                        float: right;
-      			                        margin-top: 5px;
-      			                    }
-      			                }
-      			            }
-			            
-      			            ul {
-      			            	height: 0;
-      			            	overflow: hidden;
-      			            }
-			            
-      			            &.display {
-      			            	ul {
-      			            		height: auto;
-      			            	}
-      			            }
-			            
-      			            ul, li {
-      			                margin: 0;
-      			                padding: 0;
-      			                list-style-type: none;
-      			            }
-			            
-      			            li {
-      			                .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");
-      			                border-top: solid 1px #084c81;
-      			                .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
-      			                padding: @padding-small;
-			                
-      			            	&:before {
-      			                	content: url(../images/deal-arrow.png);
-      			                	.inline-block;
-      			                	margin: 0 0.5em;
-      			                	vertical-align: middle;
-      			                }
-      			            }
-      			        }
+                        border: solid 1px #051726;
+                         .rounded(0.250em);
+                         .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+                         background: #0b63a8;
+                         margin-bottom: @padding-small;
+                         color: #FFF;
+                         
+                         &.display {
+                             h2 {
+                                 background-image: url(../images/blue-arrow-up.png);
+                             }
+                             
+                               ul {
+                                   height: auto;
+                               }
+                         }
+                   
+                         h2 {
+                             padding: 0.1em @padding-small;
+                             margin: 0;
+                             background: #0a5b9a url(../images/blue-arrow-down.png) no-repeat 95% center;
+                             color: #FFF;
+                             .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");
+                             cursor: pointer;
+                       
+                             img {
+                                 display: none;
+                                 
+                                 &.arrow {
+                                     float: right;
+                                     margin-top: 5px;
+                                 }
+                             }
+                         }
+                   
+                         ul {
+                             height: 0;
+                             overflow: hidden;
+                         }
+                   
+                         ul, li {
+                             margin: 0;
+                             padding: 0;
+                             list-style-type: none;
+                         }
+                   
+                         li {
+                             .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");
+                             border-top: solid 1px #084c81;
+                             .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+                             padding: @padding-small;
+                       
+                             &:before {
+                                 content: url(../images/deal-arrow.png);
+                                 .inline-block;
+                                 margin: 0 0.5em;
+                                 vertical-align: middle;
+                             }
+                         }
+                     }
                     
                     .time-left {
                         padding: 0.15em @padding-small;
@@ -1116,6 +1104,81 @@ body {
                         .rounded(0.250em);
                         border: solid 1px #b5b5b5;
                         .rounded(0.250em);
+                    }
+                          
+                    .more-info {
+                      border: solid 1px #b2b2b2;
+                      .rounded(0.250em);
+                      .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+                      background: #D5D5D5;
+                      margin: 1.875em 0 @padding-small 0;
+                      color: #555;
+                  
+                      p {
+                        font-weight: normal;
+                        font-size: 0.9em;
+                        margin-left: @padding-small;
+                      }
+                      
+                      &.display {
+                          h2 {
+                            background-image: url(../images/grey-arrow-up.png);
+                          }
+
+                          ul {
+                            height: auto;
+                          }
+                      }
+
+                      h2 {
+                          padding: 0.1em @padding-small;
+                          margin: 0;
+                          background: #b3b3b3 url(../images/grey-arrow-down.png) no-repeat 95% center;
+                          .text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
+                          color: #FFF;
+                          font-size: 1.1em;
+                          line-height: 1.9em;
+                          cursor: pointer;
+    
+                          img {
+                              display: none;
+                              
+                              &.arrow {
+                                  float: right;
+                                  margin-top: 5px;
+                              }
+                          }
+                      }
+
+                      ul {
+                        height: 0;
+                        overflow: hidden;
+                      }
+
+                      ul, li {
+                          margin: 0;
+                          padding: 0;
+                          list-style-type: none;
+                      }
+
+                      li {
+                          border-top: solid 1px #b2b2b2;
+                          .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+                          padding: @padding-small;
+                    
+                        &:before {
+                            content: url(../images/more-info-arrow.png);
+                            .inline-block;
+                            margin: 0 0.5em;
+                            vertical-align: middle;
+                        }
+                    
+                        a {
+                          color:#0085C6;
+                          font-size: 0.9em;
+                          font-weight:normal;
+                        }
+                      }
                     }
                     
                     > a {
@@ -1421,38 +1484,38 @@ body {
         
         ul,
         li {
-        	margin: 0;
-        	padding: 0;
-        	list-style: none;
+          margin: 0;
+          padding: 0;
+          list-style: none;
         }
         
         li {
-        	float: left;
-        	background: #e8e8e8;
-        	margin-right: @padding-small;
-        	.box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.1)");
-        	border: solid 1px #a4a4a4;
-        	.rounded(0.313em);
-        	
-        	a {
-        	    display: block;
-        	    font-weight: bold;
-        	    /* fallback image */
-        	    background-image: url(../images/admin-actions-bg.png);
-        	    background-repeat: repeat-x;
-        	    background-size: cover;
-        	    .gradient(#d4d4d4,#c0c0c0);
-        	    text-decoration: none;
-        	    padding: @padding-small;
-        	}
-        	
-        	a:hover {
-            	background: #e8e8e8;
-        	}
-        	
-        	&.disabled {
-        	    padding: @padding-small;
-        	}
+          float: left;
+          background: #e8e8e8;
+          margin-right: @padding-small;
+          .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.1)");
+          border: solid 1px #a4a4a4;
+          .rounded(0.313em);
+          
+          a {
+              display: block;
+              font-weight: bold;
+              /* fallback image */
+              background-image: url(../images/admin-actions-bg.png);
+              background-repeat: repeat-x;
+              background-size: cover;
+              .gradient(#d4d4d4,#c0c0c0);
+              text-decoration: none;
+              padding: @padding-small;
+          }
+          
+          a:hover {
+              background: #e8e8e8;
+          }
+          
+          &.disabled {
+              padding: @padding-small;
+          }
         }
     }
     
@@ -1511,7 +1574,7 @@ body {
                 content: url(../images/ol5.png);
             }
             div.ol-6:before{
-            	content: url(../images/ol6.png);
+              content: url(../images/ol6.png);
             }
             div.ol-1-active:before {
                 content: url(../images/ol1-active.png);
@@ -1529,9 +1592,9 @@ body {
             div.ol-5-active:before {
                 content: url(../images/ol5-active.png);
             }
-			div.ol-6-active:before {
-			    content: url(../images/ol6-active.png);
-			}
+      div.ol-6-active:before {
+          content: url(../images/ol6-active.png);
+      }
         }
         
         li {
@@ -1718,57 +1781,57 @@ body {
             
             ul.pager {
                 float: right;
-            	margin: 5px 0;
-            	padding: 0;
-            	list-style: none;
-            	
+              margin: 5px 0;
+              padding: 0;
+              list-style: none;
+              
                 li {
-                	float: left;
-                		margin: 0;
-                		padding: 0;
-                		list-style: none;
-            	    padding: 8px 5px;
-            	    border: solid 1px #004400;
-            	    .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
-            	    .rounded(2px);
-            	    background: url(../images/pager-bg.png) repeat-x center center;
-            	    background-size: cover;
-            	    .gradient(#407eaf, #326288);
-            	    margin-right: 3px;
-                	
-                	a {
-                	    .regular;
-                	    .text-shadow(~"0px -1px 0px rgba(0,0,0,100)");
-                	    padding: 5px @padding-small;
-                	    color: #fff;
-                	    text-decoration: none;
-                	    text-transform: uppercase;
-                	}
-                	
-                	&.disabled {
-                	    /* fallback image */
-                	    background: url(../images/foot-bg.png) repeat-x center center;
-                	    background-repeat: repeat-x;
-                	    background-size: cover;
-                	    .gradient(#a9a9a9, #8a8a8a);
-            	        border: solid 1px #565656;
-                	    
-                	    a {
-                    	    color: #fff;
-                    	    cursor: default;
-                	    }
-                	}
-                	
-                	&.selected {
-                	    
-                	    a {
-                	        background: #0d375b;
-                	        .rounded(2px);
-                	        .box-shadow(~"inset 0px 1px 0px rgba(0,0,0,0.25)");
-                	    }
-                	}
-            	}
-        	}
+                  float: left;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                  padding: 8px 5px;
+                  border: solid 1px #004400;
+                  .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+                  .rounded(2px);
+                  background: url(../images/pager-bg.png) repeat-x center center;
+                  background-size: cover;
+                  .gradient(#407eaf, #326288);
+                  margin-right: 3px;
+                  
+                  a {
+                      .regular;
+                      .text-shadow(~"0px -1px 0px rgba(0,0,0,100)");
+                      padding: 5px @padding-small;
+                      color: #fff;
+                      text-decoration: none;
+                      text-transform: uppercase;
+                  }
+                  
+                  &.disabled {
+                      /* fallback image */
+                      background: url(../images/foot-bg.png) repeat-x center center;
+                      background-repeat: repeat-x;
+                      background-size: cover;
+                      .gradient(#a9a9a9, #8a8a8a);
+                      border: solid 1px #565656;
+                      
+                      a {
+                          color: #fff;
+                          cursor: default;
+                      }
+                  }
+                  
+                  &.selected {
+                      
+                      a {
+                          background: #0d375b;
+                          .rounded(2px);
+                          .box-shadow(~"inset 0px 1px 0px rgba(0,0,0,0.25)");
+                      }
+                  }
+              }
+          }
         }
     }
     //end admin-grid-view
@@ -1999,9 +2062,9 @@ body {
         
         a {
             font-family: Arial, sans-serif;
-        	color: #7dd3ff;
-        	font-size: 0.8em;
-        	line-height: 2em;
+          color: #7dd3ff;
+          font-size: 0.8em;
+          line-height: 2em;
         }
     }
 }
@@ -2056,136 +2119,136 @@ a, a:visited {
 
 .login-overlay,
 .register-overlay {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 99999;
-	background: rgba(0,0,0,0.85);
-	
-	.modal {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 36.125em;
-		height: 30.5625em;
-		margin: 30.5625em / 2 * -1 0 0 36.125em / 2 * -1;
-		padding: 175px 55px 0;
-		background: url(../images/register-form-bg.png) no-repeat center center;
-		background-size: 100% auto;
-		
-		.close-login,
-		.close-register {
-			display: block;
-			position: absolute;
-			top: 8em;
-			right: 8.75em;
-			width: 1.125em;
-			height: 1.125em;
-		}
-		
-		.modal-title {
-			text-align: center;
-			color: #FFF;
-			font-size: 1.8em;
-			margin: 0 0 0.5em;
-			.text-shadow(~"0px -1px 0px rgba(0,0,0,0.3)");
-		}
-		
-		.modal-content {
-			input {
-				padding: 0 0.5em;
-				line-height: 2.2em;
-				height: 2.2em;
-				border: 1px solid #005b86 !important;
-				.box-shadow(~"inset 0px 1px 0px rgba(255,255,255,1), inset 0px 3px 5px rgba(0,0,0,0.05), 0px 1px 0px rgba(255,255,255,0.2) !important");
-				
-				&.half {
-					display: block;
-					float: left;
-					width: 48%;
-					margin: 0 2% 2% 0;
-				}
-			}
-			
-			.button {
-				.inline-block;
-				text-decoration: none;
-				background: #009300;
-				.box-shadow(~"inset 0px -50px 30px -30px rgba(0,87,0,0.5), inset 0px 1px 0px rgba(255,255,255,0.2) !important");
-				border: 1px solid #00375a !important;
-				color: #FFF;
-				.text-shadow(~"0px -1px 0px rgba(0,0,0,0.3)");
-				.rounded(4px);
-				height: 2.4em;
-				line-height: 2.4em;
-				padding: 0 0.5em;
-				text-align: center;
-				text-transform: uppercase;
-				.transition(all, 0.15s);
-				
-				&:hover {
-					background: #009300 + #222;
-				}
-				
-				&.right {
-					width: 40%;
-					margin-right: 3em;
-				}
-			}
-			
-			.submit-buttons {
-				.clearfix;
-				
-				.terms-checkbox {
-					float: left;
-					color: #75cfff;
-					font-size: 12px;
-					font-weight: normal;
-					width: 35%;
-					white-space: nowrap;
-					margin-left: 3em;
-					
-					input,
-					label {
-						.inline-block;
-						vertical-align: middle;
-					}
-					
-					label {
-						white-space: normal;
-						padding-left: 10px;
-						margin: 0;
-					}
-					
-					a {
-						color: #75cfff;
-						text-decoration: underline;
-					}
-				}
-			}
-			
-			hr {
-				clear: both;
-				margin: 10px 7em 10px 4em;
-				border-top: 1px solid #267ab6;
-			}
-			
-			.center {
-				text-align: center;
-				font-size: 12px;
-				color: #75cfff;
-				
-				.button {
-					margin-top: 0.2em;
-					line-height: 2em;
-					height: 2em;
-				}
-			}
-		}
-	}
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: rgba(0,0,0,0.85);
+  
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 36.125em;
+    height: 30.5625em;
+    margin: 30.5625em / 2 * -1 0 0 36.125em / 2 * -1;
+    padding: 175px 55px 0;
+    background: url(../images/register-form-bg.png) no-repeat center center;
+    background-size: 100% auto;
+    
+    .close-login,
+    .close-register {
+      display: block;
+      position: absolute;
+      top: 8em;
+      right: 8.75em;
+      width: 1.125em;
+      height: 1.125em;
+    }
+    
+    .modal-title {
+      text-align: center;
+      color: #FFF;
+      font-size: 1.8em;
+      margin: 0 0 0.5em;
+      .text-shadow(~"0px -1px 0px rgba(0,0,0,0.3)");
+    }
+    
+    .modal-content {
+      input {
+        padding: 0 0.5em;
+        line-height: 2.2em;
+        height: 2.2em;
+        border: 1px solid #005b86 !important;
+        .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,1), inset 0px 3px 5px rgba(0,0,0,0.05), 0px 1px 0px rgba(255,255,255,0.2) !important");
+        
+        &.half {
+          display: block;
+          float: left;
+          width: 48%;
+          margin: 0 2% 2% 0;
+        }
+      }
+      
+      .button {
+        .inline-block;
+        text-decoration: none;
+        background: #009300;
+        .box-shadow(~"inset 0px -50px 30px -30px rgba(0,87,0,0.5), inset 0px 1px 0px rgba(255,255,255,0.2) !important");
+        border: 1px solid #00375a !important;
+        color: #FFF;
+        .text-shadow(~"0px -1px 0px rgba(0,0,0,0.3)");
+        .rounded(4px);
+        height: 2.4em;
+        line-height: 2.4em;
+        padding: 0 0.5em;
+        text-align: center;
+        text-transform: uppercase;
+        .transition(all, 0.15s);
+        
+        &:hover {
+          background: #009300 + #222;
+        }
+        
+        &.right {
+          width: 40%;
+          margin-right: 3em;
+        }
+      }
+      
+      .submit-buttons {
+        .clearfix;
+        
+        .terms-checkbox {
+          float: left;
+          color: #75cfff;
+          font-size: 12px;
+          font-weight: normal;
+          width: 35%;
+          white-space: nowrap;
+          margin-left: 3em;
+          
+          input,
+          label {
+            .inline-block;
+            vertical-align: middle;
+          }
+          
+          label {
+            white-space: normal;
+            padding-left: 10px;
+            margin: 0;
+          }
+          
+          a {
+            color: #75cfff;
+            text-decoration: underline;
+          }
+        }
+      }
+      
+      hr {
+        clear: both;
+        margin: 10px 7em 10px 4em;
+        border-top: 1px solid #267ab6;
+      }
+      
+      .center {
+        text-align: center;
+        font-size: 12px;
+        color: #75cfff;
+        
+        .button {
+          margin-top: 0.2em;
+          line-height: 2em;
+          height: 2em;
+        }
+      }
+    }
+  }
 }
 
 /* @end */
@@ -2193,105 +2256,105 @@ a, a:visited {
 /* @group modal */
 
 .modal-overlay {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 99999;
-	background: rgba(30,100,181,0.8);
-	
-	.modal {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 50em;
-		height: 25em;
-		margin: -12.5em 0 0 -25em;
-		background: #FFF;
-		.rounded(6px);
-		.box-shadow(~"0px 3px 5px rgba(0,0,0,0.5)");
-		padding: 5em 2.5em 2.5em;
-		
-		&.small {
-			width: 40em;
-			height: 15em;
-			margin: -7.5em 0 0 -20em;
-		}
-		
-		&.large {
-			width: 50em;
-			height: 35em;
-			margin: -17.5em 0 0 -25em;
-		}
-		
-		.close-modal {
-			position: absolute;
-			top: 1.2em;
-			right: 1.2em;
-			width: 1.3em;
-			height: 1.3em;
-			.opacity(0.2);
-			.transition(all, 0.15s);
-			
-			img {
-				display: block;
-			}
-			
-			&:hover {
-				.opacity(1);
-			}
-		}
-		
-		.modal-title {
-			position: absolute;
-			top: 1.2em;
-			margin: 0;
-		}
-		
-		&.warning,
-		&.error,
-		&.success,
-		&.info {
-			h1 {
-				padding-left: 1.5em;
-				background-repeat: no-repeat;
-				background-size: auto 100%;
-				background-position: left center;
-			}
-		}
-		
-		&.warning h1 {
-			background-image: url(../images/icon-warning.png);
-			color: #e6b000;
-			.text-shadow(~"0px 1px 0px " darken(#e6b000, 10%));
-		}
-		
-		&.error h1 {
-			background-image: url(../images/icon-error.png);
-			color: #cd4101;
-			.text-shadow(~"0px 1px 0px " darken(#cd4101, 10%));
-		}
-		
-		&.success h1 {
-			background-image: url(../images/icon-success.png);
-			color: #60ba00;
-			.text-shadow(~"0px 1px 0px " darken(#60ba00, 10%));
-		}
-		
-		&.info h1 {
-			background-image: url(../images/icon-info.png);
-			color: #0085C6;
-			.text-shadow(~"0px 1px 0px " darken(#0085C6, 10%));
-		}
-		
-		.modal-content {
-			width: 100%;
-			height: 100%;
-			overflow-y: auto;
-		}
-	}
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: rgba(30,100,181,0.8);
+  
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50em;
+    height: 25em;
+    margin: -12.5em 0 0 -25em;
+    background: #FFF;
+    .rounded(6px);
+    .box-shadow(~"0px 3px 5px rgba(0,0,0,0.5)");
+    padding: 5em 2.5em 2.5em;
+    
+    &.small {
+      width: 40em;
+      height: 15em;
+      margin: -7.5em 0 0 -20em;
+    }
+    
+    &.large {
+      width: 50em;
+      height: 35em;
+      margin: -17.5em 0 0 -25em;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 1.2em;
+      right: 1.2em;
+      width: 1.3em;
+      height: 1.3em;
+      .opacity(0.2);
+      .transition(all, 0.15s);
+      
+      img {
+        display: block;
+      }
+      
+      &:hover {
+        .opacity(1);
+      }
+    }
+    
+    .modal-title {
+      position: absolute;
+      top: 1.2em;
+      margin: 0;
+    }
+    
+    &.warning,
+    &.error,
+    &.success,
+    &.info {
+      h1 {
+        padding-left: 1.5em;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        background-position: left center;
+      }
+    }
+    
+    &.warning h1 {
+      background-image: url(../images/icon-warning.png);
+      color: #e6b000;
+      .text-shadow(~"0px 1px 0px " darken(#e6b000, 10%));
+    }
+    
+    &.error h1 {
+      background-image: url(../images/icon-error.png);
+      color: #cd4101;
+      .text-shadow(~"0px 1px 0px " darken(#cd4101, 10%));
+    }
+    
+    &.success h1 {
+      background-image: url(../images/icon-success.png);
+      color: #60ba00;
+      .text-shadow(~"0px 1px 0px " darken(#60ba00, 10%));
+    }
+    
+    &.info h1 {
+      background-image: url(../images/icon-info.png);
+      color: #0085C6;
+      .text-shadow(~"0px 1px 0px " darken(#0085C6, 10%));
+    }
+    
+    .modal-content {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
 }
 
 /* flash alerts */
@@ -2350,167 +2413,1095 @@ a, a:visited {
     cursor: pointer;
 }
 
+/*
+Evo Slider Pro v2.0.0 - jQuery slideshow and content slider plugin
+http://evoslider.com
+
+Copyright 2012, Fikri Rakala
+*/  
+ 
+/*  _______________________________________
+
+	01 SLIDER
+    _______________________________________  */
+	
+/* Container / frame surrounding the slider */
+.evoslider
+{
+	overflow: auto;
+}
+
+.evoslider .slideWrapper
+{
+	position: relative;
+}
+
+.evoslider dl
+{
+	position :relative ;
+    width : 100%;
+    list-style :none ;
+    overflow: hidden ;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
 
 /*
- * jQuery FlexSlider v2.0
- * http://www.woothemes.com/flexslider/
- *
- * Copyright 2012 WooThemes
- * Free to use under the GPLv2 license.
- * http://www.gnu.org/licenses/gpl-2.0.html
- *
- * Contributing author: Tyler Smith (@mbmufffin)
- */
+Title bar.
+*/ 
+.evoslider dt
+{
+	position: absolute;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
 
+/* The hover state of the title bar */ 
+.evoslider dt:hover
+{
+	cursor :pointer ;
+}
+
+/* The active state of the title bar */
+.evoslider dt.active
+{
+	cursor :default;
+}
+
+.evoslider dt .ieFix 
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.evoslider dt .ieFix .box
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: Gray;
+	opacity: 0; 
+	filter: alpha(opacity=0);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+/* 
+The slide content area
+*/
+.evoslider dd 
+{
+	position: absolute;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+    overflow: hidden;
+}
+
+
+/*  _______________________________________
+
+	02 TOGGLE ICON/INDEX
+    _______________________________________  */
+
+/* 
+The toggle icon of title bar
+*/
+.evoslider dt .toggle_icon
+{
+	position: absolute;
+}
+
+
+/*  _______________________________________
+
+	03 CONTROL NAVIGATION (BULLETS, THUMBNAILS, ROTATOR)
+    _______________________________________  */
+
+/* The container of the control if set to outside */
+.evoslider .outer_control
+{
+	position: relative;
+	overflow: hidden;	
+}
+
+/* Control navigation container */
+.evoslider .controlNav 
+{
+	position :absolute ;
+}
+
+.evoslider .control_wrapper 
+{
+	position: relative;
+}
+
+/* Control list */
+.evoslider .controlNav ul 
+{
+	position: relative;
+	list-style: none;
+}
+
+/* The bullets control */
+.evoslider .controlNav li.bullets 
+{
+	position :relative;
+	float: left ;
+	cursor: pointer ;
+}
+
+/* The hover state of the bullets control */
+.evoslider .controlNav li.bullets:hover
+{
+	cursor: pointer;
+}
+
+/* The active state of the bullets control */
+.evoslider .controlNav li.bullets.active 
+{
+	cursor : default ;
+}
+
+/* Thumbnails carousel */
+.evoslider .controlNav li.thumbnails 
+{
+	position :relative;
+	float: left ;
+	cursor: pointer ;
+}
+
+.evoslider .controlNav li.thumbnails img 
+{
+	width: 100%;
+	height: 100%;
+}
+
+/* The hover state of the thumbnail item */
+.evoslider .controlNav li.thumbnails:hover
+{
+	cursor: pointer;
+}
+
+/* The active state of the thumbnail */
+.evoslider .controlNav li.thumbnails.active 
+{
+	cursor : default ;
+}
+
+/* Overlay effect */
+.evoslider .controlNav li.thumbnails .overlay 
+{
+	position: absolute ;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Rotator list navigation */
+.evoslider .controlNav li.rotator 
+{
+	position :relative;
+	float: left ;
+	cursor: pointer ;
+	overflow: hidden;
+}
+
+/* Rotator list thumbnails */
+.evoslider .controlNav li.rotator img 
+{
+	position: relative;
+	display:inline-block;
+}
+
+.evoslider .controlNav li.rotator p
+{
+	position: relative;
+}
+
+/* The hover state of the rotator list */
+.evoslider .controlNav li.rotator:hover
+{
+	cursor: pointer;
+}
+
+/* The active state of the rotator list */
+.evoslider .controlNav li.rotator.active 
+{
+	cursor: default ;
+}
+
+
+/*  _______________________________________
+
+	04 PLAY/PAUSE BUTTON
+    _______________________________________  */
+
+/* Play button container */
+.evoslider .control_autoplay
+{
+	position:absolute;
+}
+
+/* Pause button */
+.evoslider .pause_button 
+{
+	position: absolute ;
+	display:block ;
+	top: 0;
+	left: 0;
+    cursor: pointer;
+}
+
+/* Play button */
+.evoslider .play_button 
+{
+	position: absolute ;
+	display: block;
+	top: 0;
+	left: 0;
+    cursor: pointer ;
+}
+
+/*  _______________________________________
+
+	05 CONTENT
+    _______________________________________  */
+
+/* Image container */
+.evoslider .evoImage 
+{
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+
+.evoslider .evoImage a
+{
+	position: relative;
+}
+
+/* Video container */
+.evoslider .evoVideo 
+{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+
+/* Embed object container */
+evoslider .evoEmbed 
+{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+
+
+/*  _______________________________________
+
+	06 TEXT DESCRIPTION
+    _______________________________________  */
+
+/* Overlay text */
+.evoslider .evoText.overlay 
+{
+	position: absolute;
+}
+
+/* Partial left */
+.evoslider .evoText.partialleft 
+{
+	position: relative;
+	float: left;
+}
+
+/* Partial right */
+.evoslider .evoText.partialright 
+{
+	position: relative;
+	float: left;
+}
+
+/* Outer text */
+.evoslider .outerText 
+{
+	position: relative;
+}
+
+.evoslider .outerText ul 
+{
+	position: relative;
+	list-style: none;
+	width: 100%;
+	height: 100%;
+}
+
+.evoslider .outerText ul li 
+{
+	position: absolute;
+	display: none;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+/*
+Evo Slider Pro v2.1.0 - jQuery slideshow and content slider plugin
+http://evoslider.com
+
+Copyright 2012, Fikri Rakala
+http://codecanyon.net/user/evoslider
+CodeCanyon Regular License
+
+Skin Name: Galleriffic
+*/ 
+
+/*
+TABLE OF CONTENTS
+
+01 SLIDER
+02 TOGGLE ICON/INDEX
+03 DIRECTION NAVIGATION
+04 CONTROL NAVIGATION (BULLETS, THUMBNAILS, ROTATOR)
+05 PLAY/PAUSE BUTTON
+06 CONTENT
+07 TEXT DESCRIPTION
+*/
  
-/* Browser Resets */
-.flex-container a:active,
-.flexslider a:active,
-.flex-container a:focus,
-.flexslider a:focus  {outline: none;}
-.slides,
-.flex-control-nav,
-.flex-direction-nav {margin: 0; padding: 0; list-style: none;} 
+ 
+/*  _______________________________________
 
-/* FlexSlider Necessary Styles
-*********************************/ 
-.flexslider {margin: 0; padding: 0;}
-.flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
-.flexslider .slides img {width: 100%; display: block;}
-.flex-pauseplay span {text-transform: capitalize;}
-
-/* Clearfix for the .slides element */
-.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;} 
-html[xmlns] .slides {display: block;} 
-* html .slides {height: 1%;}
-
-/* No JavaScript Fallback */
-/* If you are not using another script, such as Modernizr, make sure you
- * include js that eliminates this class on page load */
-.no-js .slides > li:first-child {display: block;}
-
-
-/* FlexSlider Default Theme
-*********************************/
-.flexslider {margin: 0; background: #fff; position: relative; box-shadow: 0 1px 4px rgba(0,0,0,.2); -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2); -moz-box-shadow: 0 1px 4px rgba(0,0,0,.2); -o-box-shadow: 0 1px 4px rgba(0,0,0,.2); zoom: 1;}
-.flex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; transition: all 1s ease;}
-.loading .flex-viewport {max-height: 300px;}
-.flexslider .slides {zoom: 1;}
-
-#carousel {
-    border: solid 2px #FFF;
-    .rounded-bottom-left(0.313em);
-    .rounded-bottom-right(0.313em);
-    
-    img {
-    
-    height: 5em;
-    width: 10em;
-    }
-}
-.carousel li {margin-right: 5px}
-
-
-/* Direction Nav */
-.flex-direction-nav {*height: 0;}
-.flex-direction-nav a {width: 1.875em; height: 1.875em; margin: -1.250em 0 0; display: block; background: url(images/bg_direction_nav.png) no-repeat 0 0; position: absolute; top: 50%; z-index: 10; cursor: pointer; text-indent: -9999px; opacity: 0; -webkit-transition: all .3s ease;}
-.flex-direction-nav .flex-next {background-position: 100% 0; right: -36px; }
-.flex-direction-nav .flex-prev {left: -36px;}
-.flexslider:hover .flex-next {opacity: 0.8; right: 5px;}
-.flexslider:hover .flex-prev {opacity: 0.8; left: 5px;}
-.flexslider:hover .flex-next:hover, .flexslider:hover .flex-prev:hover {opacity: 1;}
-.flex-direction-nav .flex-disabled {opacity: .3!important; filter:alpha(opacity=30); cursor: default;}
-
-/* Control Nav */
-.flex-control-nav {width: 100%; position: absolute; bottom: -40px; text-align: center;}
-.flex-control-nav li {margin: 0 6px; display: inline-block; zoom: 1; *display: inline;}
-.flex-control-paging li a {width: 11px; height: 11px; display: block; background: #666; background: rgba(0,0,0,0.5); cursor: pointer; text-indent: -9999px; -webkit-border-radius: 1.250em; -moz-border-radius: 1.250em; -o-border-radius: 1.250em; border-radius: 1.250em; box-shadow: inset 0 0 3px rgba(0,0,0,0.3);}
-.flex-control-paging li a:hover { background: #333; background: rgba(0,0,0,0.7); }
-.flex-control-paging li a.flex-active { background: #000; background: rgba(0,0,0,0.9); cursor: default; }
-
-.flex-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
-.flex-control-thumbs li {width: 25%; float: left; margin: 0;}
-.flex-control-thumbs img {width: 100%; display: block; opacity: .7; cursor: pointer;}
-.flex-control-thumbs img:hover {opacity: 1;}
-.flex-control-thumbs .flex-active {opacity: 1; cursor: default;}
-
-@media screen and (max-width: 860px) {
-  .flex-direction-nav .flex-prev {opacity: 1; left: 0;}
-  .flex-direction-nav .flex-next {opacity: 1; right: 0;}
+	01 SLIDER
+    _______________________________________  */
+	
+/* Container / frame surrounding the slider */
+.evoslider.galleriffic
+{
+	position: relative;
+	width :960px; /* set width via option */
+	height :360px; /* set height via option */
+    margin: 0 auto;
+	border: 5px solid #f8f8f8;
+	padding: 5px;
+	padding-bottom: 60px;
+	background :#f8f8f8;
+	overflow : visible ;
+	
+	/* shadow */
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#4e4e4e, direction=120, strength=5)";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Color=#4e4e4e, direction=120, strength=5);  
 }
 
+/* Content preloader */
+.evoslider.galleriffic .contentLoader
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 99;
+	background: #000 url("../images/spinner.gif") no-repeat center;
+}
 
-/* @end */
+/* You can set up the border of the dl element here  */
+.evoslider.galleriffic dl
+{
+	border: 0;
+	overflow: visible;
+	height: 19.125em !important;
+}
+
+/*
+Slider title bar.
+
+The title bar are rotated, so you will need to swap your directions.
+To change the width of the title bar, you will need to modify the height property.
+You will also need to make sure that any background imagery used is rotated horizontally.
+
+To give unique custom appearance for each title, you can give a unique class for each title, for example:
+	.evoslider dt.slide_1
+	.evoslider dt.slide_2
+	.evoslider dt.slide_3
+	etc...
+*/ 
+.evoslider.galleriffic dt
+{
+	height : 45px;
+    color :#4e4e4e;
+    font-family :Arial , Verdana;
+    font-size: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing :1px;
+	line-height: 40px;
+	text-align : left;
+	padding-left: 70px;
+    background: #4e4e4e url('../images/title_bar.png') no-repeat;
+    
+    /* text shadow */
+	text-shadow: -1px 1px 1px #9f9f9f;
+}
+
+/* The hover state of the title bar */ 
+.evoslider.galleriffic dt:hover
+{
+	cursor :pointer ;
+	color: #4e4e4e;
+}
+
+/* The active state of the title bar */
+.evoslider.galleriffic dt.active
+{
+	color: #4e4e4e;
+	background: #4e4e4e url('../images/title_bar.png') no-repeat;
+	cursor :default;
+}
+
+/* 
+The slide content area
+
+The width and height will automatically be defined by the plugin.
+*/
+.evoslider.galleriffic dd 
+{
+	background: #fff;
+	overflow: visible;
+}
+
+
+/*  _______________________________________
+
+	02 TOGGLE ICON/INDEX
+    _______________________________________  */
+
+/* 
+The toggle icon of title bar.
+
+You can specify the position of the icon by setting its left and top position.
+You can set the toggle icon for the default, hover, and active state via the background property.
+To display index, set the showToggleIndex plugin option to true.
+*/
+.evoslider.galleriffic dt .toggle_icon
+{
+	left : 5px;
+	top: 0;
+	width: 40px;
+	height: 40px;
+	font-family: Arial, Verdana ;
+    font-size: 18px;
+	font-weight: bold;
+	color :#4e4e4e;
+	text-align: center ;
+	
+	/* text shadow*/
+	text-shadow: 0 1px 1px #9f9f9f;	
+}
+
+/* Toggle icon position for ie8+  */
+.evoslider.galleriffic dt .toggle_icon.ie 
+{
+	left: 0;
+	top: auto;
+	bottom: 5px;
+}
+
+/* The hover state of the toggle icon */ 
+.evoslider.galleriffic dt:hover .toggle_icon
+{
+	color: #4e4e4e;
+}
+
+/* The active state of the toggle icon */
+ 
+.evoslider.galleriffic dt.active .toggle_icon
+{
+	color : #4e4e4e;
+}
+
+
+/*  _______________________________________
+
+	03 DIRECTION NAVIGATION
+    _______________________________________  */
+
+/* The arrow next */
+.evoslider.galleriffic .arrow_next 
+{
+	border-style: none;
+	border-color: inherit;
+	border-width: 0;
+	position :absolute;
+		right : 10px;
+		top : 150px;
+		width : 35px;
+		height : 34px;
+	background : url('../images/arrows.png') no-repeat -35px 0;
+		cursor : pointer;
+		margin :0;
+		padding :0;
+		text-decoration: none;
+}
+
+/* The hover state of the arrow next */
+.evoslider.galleriffic .arrow_next:hover
+{
+	cursor: pointer;
+}
+
+/*
+The state of the arrow next on the last item 
+when the loop option is set to false. 
+*/
+.evoslider.galleriffic .arrow_next.last
+{
+	cursor: default ; 
+}
+
+/* The arrow prev */
+.evoslider.galleriffic .arrow_prev 
+{
+	border-style: none;
+	border-color: inherit;
+	border-width: medium;
+	position :absolute;
+		left: 10px;
+		top: 150px;
+		width: 35px;
+		height: 34px;
+	background : url('../images/arrows.png') no-repeat 0 0;
+		cursor :pointer;
+		margin :0;
+		padding :0;
+		text-decoration: none;
+}
+
+/* The hover state of the arrow prev */
+.evoslider.galleriffic .arrow_prev:hover 
+{
+	cursor: pointer;
+}
+
+/* 
+The state of the arrow prev on the first item,
+when the loop option is set to false. 
+*/
+.evoslider.galleriffic .arrow_prev.first
+{
+	cursor :default ;
+}
+
+
+/*  _______________________________________
+
+	04 CONTROL NAVIGATION (BULLETS, THUMBNAILS, ROTATOR)
+    _______________________________________  */
+
+/* The container of the control if set to outside */
+.evoslider.galleriffic .outer_control
+{
+	margin: 0 !important;
+	padding: 0;
+	border: 0;
+	background: #dfdfdf;
+}
+
+/* Control navigation container */
+.evoslider.galleriffic .controlNav 
+{
+	left : 10px;
+	bottom : 10px;
+	margin :0;
+	border : 0;
+}
+
+.evoslider.galleriffic .control_wrapper 
+{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+/* Control list */
+.evoslider.galleriffic .controlNav ul 
+{
+	overflow: visible;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+/* The bullets control */
+.evoslider.galleriffic .controlNav li.bullets 
+{
+	width : 20px;
+	height : 20px;
+	margin : 5px;
+	padding :0;
+	border :none;
+	background : #eee;
+	overflow: visible;
+	font-size: 12px;
+	text-align: center;
+	line-height: 20px;
+	color: #4e4e4e;
+}
+
+/* Bullet last item */
+.evoslider.galleriffic .controlNav li.bullets.last 
+{
+}
+
+/* The hover state of the bullets control */
+.evoslider.galleriffic .controlNav li.bullets:hover
+{
+	background: #4e4e4e;
+	color: #fafafa;
+}
+
+/* The active state of the bullets control */
+.evoslider.galleriffic .controlNav li.bullets.active 
+{
+	background: #4e4e4e;
+	color: #fafafa;
+}
+
+/* Thumbnails control */
+.evoslider.galleriffic .controlNav li.thumbnails 
+{
+	width : 113px;
+	height : 72px;
+	margin : 5px;
+	margin-bottom: 0;
+	padding :0;
+	border :none;
+	background : #eee;
+	overflow: visible;
+}
+
+/* Thumbnail last item */
+.evoslider.galleriffic .controlNav li.thumbnails.last 
+{
+	margin-bottom: 5px;
+}
+
+/* The hover state of the thumbnail item */
+.evoslider.galleriffic .controlNav li.thumbnails:hover
+{
+	background: #4e4e4e;
+}
+
+/* The active state of the thumbnail */
+.evoslider.galleriffic .controlNav li.thumbnails.active 
+{
+	background: #4e4e4e;
+}
+
+/* Overlay effect */
+.evoslider.galleriffic .controlNav li.thumbnails .overlay 
+{
+	background-color: #000;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+
+/* The hover state of the overlay effect */
+.evoslider.galleriffic .controlNav li.thumbnails:hover .overlay
+{
+	opacity: 0;
+	filter: alpha(opacity=0);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+/* The active state of the overlay effect */
+.evoslider.galleriffic .controlNav li.thumbnails.active .overlay 
+{
+	opacity: 0;
+	filter: alpha(opacity=0);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+
+/* Rotator list navigation */
+.evoslider.galleriffic .controlNav li.rotator 
+{
+	width : 200px;
+	height : 85px;
+	margin : 0;
+	margin-bottom: 2px;
+	padding: 5px 10px;
+	border :none;
+	background : #eee;
+	font-size: 12px;
+	text-align: center;
+	line-height: 20px;
+}
+
+/* Rotator last item */
+.evoslider.galleriffic .controlNav li.rotator.last 
+{
+	margin-bottom: 0;
+}
+
+/* Rotator list thumbnails */
+.evoslider.galleriffic .controlNav li.rotator img 
+{
+	width: 60px;
+	height: 60px;
+	float: left;
+	margin: 10px;
+}
+
+/* Rotator title */
+.evoslider.galleriffic .controlNav li.rotator p
+{
+	margin-top: 5px;
+	text-align: left;
+}
+
+.evoslider.galleriffic .controlNav li.rotator p span.title
+{
+	display: block;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+.evoslider.galleriffic .controlNav li.rotator p span.date
+{
+	display: block;
+	color: #db7030;
+	font-size: 11px;
+}
+
+/* The hover state of the rotator list */
+.evoslider.galleriffic .controlNav li.rotator:hover
+{
+	cursor: pointer;
+}
+
+/* The active state of the rotator list */
+.evoslider.galleriffic .controlNav li.rotator.active 
+{
+	cursor : default ;
+}
+
+.evoslider.galleriffic .controlNav li.rotator.active span.title
+{
+	color: #db7030;
+}
+
+.evoslider.galleriffic .controlNav li.rotator.active span.date
+{
+}
+
+
+/*  _______________________________________
+
+	05 PLAY/PAUSE BUTTON
+    _______________________________________  */
+
+/* Play button container */
+.evoslider.galleriffic .control_autoplay
+{
+	top: 10px;
+	right: 10px;
+	width: 22px;
+	height: 22px;
+	background: #fafafa;
+	border: solid 1px #d9d9d9;
+}
+
+/* Play button position on accordion mode */
+.evoslider.galleriffic dd .control_autoplay
+{
+	top: 5px;
+	right: 5px;
+}
+
+/* Pause button */
+.evoslider.galleriffic .pause_button 
+{
+    width: 22px;
+    height: 22px;
+    background: url('../images/play.png') no-repeat -22px 0;
+    cursor: pointer;
+}
+
+/* Play button */
+.evoslider.galleriffic .play_button 
+{
+    width: 22px;
+    height: 22px;
+    background: url('../images/play.png') no-repeat 0 0 ;
+    cursor: pointer;
+}
+
+
+/*  _______________________________________
+
+	06 CONTENT
+    _______________________________________  */
+
+/* Image container */
+.evoslider.galleriffic .evoImage 
+{
+	background: #000 url("../images/spinner.gif") no-repeat center;
+}
+
+.evoslider.galleriffic .evoImage .videoOverlay
+{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: url("../images/video.png") no-repeat center;
+	cursor: pointer;
+}
+
+/* Video container */
+.evoslider.galleriffic .evoVideo 
+{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #000 url("../images/spinner.gif") no-repeat center;
+}
+
+/* Embed object container */
+evoslider.galleriffic .evoEmbed 
+{
+	background-color: #000;
+}
+
+evoslider.galleriffic dd .evoEmbed img
+{
+	max-width: 100%;
+	height: 100%;
+}
+
+
+/*  _______________________________________
+
+	07 TEXT DESCRIPTION
+    _______________________________________  */
+
+/* Overlay text */
+.evoslider.galleriffic .evoText.overlay 
+{
+	left: 0px;
+	bottom: -55px;
+	padding: 0px;
+	width: 938px;
+	text-align: center;
+}
+
+.evoslider.galleriffic .evoText.overlay h3 {
+	padding-bottom: 5px;
+	color: #4e4e4e;
+	margin-bottom: 0;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.evoslider.galleriffic .evoText.overlay p {
+	color: #4e4e4e;
+	font-size: 12px;
+}
+
+/* Partial left */
+.evoslider.galleriffic .evoText.partialleft 
+{
+	width: 250px;
+	background-color: #FAFAFA;
+	padding: 20px;
+}
+
+.evoslider.galleriffic .evoText.partialleft h3 {
+	font-size: 14px;
+	padding-bottom: 5px;
+	margin-bottom: 0;
+	font-weight: bold;
+	color: #4e4e4e;
+}
+
+.evoslider.galleriffic .evoText.partialleft p {
+	padding-bottom: 0px;
+	padding-top: 5px;
+	color: #4e4e4e;
+}
+
+/* Partial right */
+.evoslider.galleriffic .evoText.partialright 
+{
+	width: 250px;
+	background-color: #FAFAFA;
+	padding: 20px;
+}
+
+.evoslider.galleriffic .evoText.partialright h3 {
+	font-size: 14px;
+	padding-bottom: 5px;
+	margin-bottom: 0;
+	font-weight: bold;
+	color: #4e4e4e;
+}
+
+.evoslider.galleriffic .evoText.partialright p {
+	padding-bottom: 0px;
+	padding-top: 5px;
+	color: #4e4e4e;
+}
+
+/* Outer text */
+.evoslider.galleriffic .outerText 
+{
+	width: 250px;
+	background-color: #FAFAFA;
+	padding: 20px;
+}
+
+.evoslider.galleriffic .outerText h3 {
+	font-size: 16px;
+	padding-bottom: 5px;
+	margin-bottom: 0;
+	font-weight: bold;
+	color: #4e4e4e;
+}
+
+.evoslider.galleriffic .outerText p {
+	padding-bottom: 0px;
+	padding-top: 5px;
+	color: #4e4e4e;
+}
+
+
+
+
+
+.evoslider {
+	width: 100% !important;
+	height: 326px !important;
+//	padding: 0 !important;
+	border-color: #0C3559 !important;
+	background: #0C3559 !important;
+	.rounded(5px);
+	
+	> dl {
+		width: 680px !important;
+		
+		dd {
+			width: 100% !important;
+			
+			img {
+				width: 100% !important;
+				height: auto !important;
+				margin: 0 !important;
+			}
+		}
+	}
+	
+	.outer_control {
+		background: #FFF !important;
+	}
+	
+	.arrow_prev,
+	.arrow_next {
+		z-index: 99999;
+		top: 130px !important;
+	}
+}
 
 /*Superfish menu */
 /*** ESSENTIAL STYLES ***/
 .sf-menu ul {
-	position:		absolute;
-	top:			-999em;
-	width:			10em; /* left offset of submenus need to match (see below) */
+  position:   absolute;
+  top:      -999em;
+  width:      10em; /* left offset of submenus need to match (see below) */
 }
 .sf-menu ul li {
-	width:			8em;
+  width:      8em;
 }
 .sf-menu li:hover {
-	visibility:		inherit; /* fixes IE7 'sticky bug' */
+  visibility:   inherit; /* fixes IE7 'sticky bug' */
 }
 .sf-menu li {
-	float:			left;
-	position:		relative;
+  float:      left;
+  position:   relative;
 }
 .sf-menu a {
-	display:		block;
-	position:		relative;
+  display:    block;
+  position:   relative;
 }
 .sf-menu li:hover ul,
 .sf-menu li.sfHover ul {
-	left:			17px;
-	top:			2.3em; /* match top ul list item height */
-	z-index:		99;
+  left:     17px;
+  top:      2.3em; /* match top ul list item height */
+  z-index:    99;
 }
 ul.sf-menu li:hover li ul,
 ul.sf-menu li.sfHover li ul {
-	top:			-999em;
+  top:      -999em;
 }
 ul.sf-menu li li:hover ul,
 ul.sf-menu li li.sfHover ul {
-	left:			10em; /* match ul width */
-	top:			0;
+  left:     10em; /* match ul width */
+  top:      0;
 }
 ul.sf-menu li li:hover li ul,
 ul.sf-menu li li.sfHover li ul {
-	top:			-999em;
+  top:      -999em;
 }
 ul.sf-menu li li li:hover ul,
 ul.sf-menu li li li.sfHover ul {
-	left:			10em; /* match ul width */
-	top:			0;
+  left:     10em; /* match ul width */
+  top:      0;
 }
 
 /*** DEMO SKIN ***/
 .sf-menu {
-	float:			left;
-	margin-bottom:	1em;
+  float:      left;
+  margin-bottom:  1em;
 }
 /*** arrows **/
 .sf-menu a.sf-with-ul {
-	padding-right: 	2.25em;
-	min-width:		1px; /* trigger IE7 hasLayout so spans position accurately */
+  padding-right:  2.25em;
+  min-width:    1px; /* trigger IE7 hasLayout so spans position accurately */
 }
 .sf-sub-indicator {
-	position:		absolute;
-	display:		block;
-	right:			.75em;
-	top:			1.05em; /* IE6 only */
-	width:			@padding-small;
-	height:			@padding-small;
-	text-indent: 	-999em;
-	overflow:		hidden;
+  position:   absolute;
+  display:    block;
+  right:      .75em;
+  top:      1.05em; /* IE6 only */
+  width:      @padding-small;
+  height:     @padding-small;
+  text-indent:  -999em;
+  overflow:   hidden;
 }
 a > .sf-sub-indicator {  /* give all except IE6 the correct values */
-	top:			.8em;
-	background-position: 0 -100px; /* use translucent arrow for modern browsers*/
+  top:      .8em;
+  background-position: 0 -100px; /* use translucent arrow for modern browsers*/
 }
 /* apply hovers to modern browsers */
 a:focus > .sf-sub-indicator,
@@ -2518,7 +3509,7 @@ a:hover > .sf-sub-indicator,
 a:active > .sf-sub-indicator,
 li:hover > a > .sf-sub-indicator,
 li.sfHover > a > .sf-sub-indicator {
-	background-position: -@padding-small -100px; /* arrow hovers for modern browsers*/
+  background-position: -@padding-small -100px; /* arrow hovers for modern browsers*/
 }
 
 /* point right for anchors in subs */
@@ -2530,7 +3521,7 @@ li.sfHover > a > .sf-sub-indicator {
 .sf-menu ul a:active > .sf-sub-indicator,
 .sf-menu ul li:hover > a > .sf-sub-indicator,
 .sf-menu ul li.sfHover > a > .sf-sub-indicator {
-	background-position: -@padding-small 0; /* arrow hovers for modern browsers*/
+  background-position: -@padding-small 0; /* arrow hovers for modern browsers*/
 }
 /* @end */
 

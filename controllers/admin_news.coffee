@@ -8,11 +8,11 @@ exports.index = (req,res) ->
   models.news.getAllNews (err, results) ->
     if err then throw err
     
-    res.render 'administration/news/index', news: results
+    res.render 'administration/news/index', news: results, menu: 'content'
 
 exports.view = (req,res) ->
 
-exports.add = (req,res) -> res.render 'administration/news/add'
+exports.add = (req,res) -> res.render 'administration/news/add', menu: 'content'
 
 exports.create = (req,res) ->
   req.body.id = res.locals.objUser.id
@@ -34,7 +34,7 @@ exports.edit = (req,res) ->
       
       res.redirect '/administration/news'
     else
-      res.render 'administration/news/edit', news: results.pop() or {}
+      res.render 'administration/news/edit', news: results.pop() or {}, menu: 'content'
 
 exports.update = (req, res) ->
   req.body.title ?= ''
@@ -59,7 +59,7 @@ exports.delete = (req, res) ->
       res.redirect '/administration/news'
     
     else
-      res.render 'administration/news/delete', news: results.pop() or {}
+      res.render 'administration/news/delete', news: results.pop() or {}, menu: 'content'
 
 exports.destroy = (req,res) ->
   models.news.delete req.params.id, (err, results) ->
