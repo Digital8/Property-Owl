@@ -19,6 +19,8 @@ module.exports = (app) ->
   app.get '/sign-out', controllers.signout.index
   app.get '/sign-up', controllers.signup.index
   app.post '/sign-up', controllers.signup.create
+
+  app.get '/adclick/:id', controllers.adclick.index
   
   app.get '/contact', controllers.contact.index
   app.post '/contact', controllers.contact.create
@@ -135,6 +137,8 @@ module.exports = (app) ->
   app.post '/administration/properties/add', (authorize acl.admin), controllers.admin_properties.create
   app.get '/administration/properties/edit/:id', (authorize acl.admin), controllers.admin_properties.edit
   app.put '/administration/properties/add', (authorize acl.admin), controllers.admin_properties.update
+
+  app.get '/administration/reports', (authorize acl.admin), controllers.admin_reports.index
   
   # ajax
   app.post '/ajax/login', controllers.ajax.login
@@ -144,5 +148,7 @@ module.exports = (app) ->
   app.del '/ajax/deleteDeal', authenticate, (authorize acl.admin), controllers.ajax.delDeal
   app.put '/ajax/updateHero', authenticate, (authorize acl.admin), controllers.ajax.updateHero
   app.del '/ajax/deleteMedia', authenticate, (authorize acl.admin), controllers.ajax.deleteMedia
-  
+  app.get '/ajax/addRegistration', authenticate, controllers.ajax.addRegistration
+  app.get '/ajax/delRegistration', authenticate, controllers.ajax.delRegistration
+
   app.all '*', controllers.pages.index

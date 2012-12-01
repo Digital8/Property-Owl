@@ -34,8 +34,17 @@
       h2 The Barn
       img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
       h3 Group Deals
-  
-  img#ad-box1.ad-box(src='/images/ad-box.jpg', alt='Box Advert')
-  img#ad-box2.ad-box(src='/images/ad-box.jpg', alt='Box Advert')
-  
+  - var i = 0, max = 1;
+  each ad in adUpperBox 
+    - i++
+    include adverts/tower
+    - if (i == max)
+      break
+
+  each ad in adLowerBox 
+    - i++
+    include adverts/tower
+    - if (i == max)
+      break
+
   include search

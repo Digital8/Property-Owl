@@ -8,12 +8,12 @@ exports.index = (req,res) ->
   models.page.all (error, results) ->
     if error then throw error
     
-    res.render 'administration/pages/index', pages: results or {}
+    res.render 'administration/pages/index', pages: results or {}, menu: 'content'
 
 exports.view = (req,res) ->
 
 exports.add = (req,res) ->
-  res.render 'administration/pages/add'
+  res.render 'administration/pages/add', menu: 'content'
   
 exports.create = (req, res) ->
   req.body.url ?= ''
@@ -58,7 +58,7 @@ exports.edit = (req,res) ->
       res.redirect 'back'
     
     else
-      res.render 'administration/pages/edit', page: results.pop()
+      res.render 'administration/pages/edit', page: results.pop(), menu: 'content'
   
 exports.update = (req,res) ->
   models.page.find req.params.id, (err, results) ->
@@ -85,7 +85,7 @@ exports.delete = (req, res) ->
       res.redirect '/administration/pages'
     
     else
-      res.render 'administration/pages/delete', page: results.pop() or {}
+      res.render 'administration/pages/delete', page: results.pop() or {}, menu: 'content'
 
 exports.destroy = (req, res) ->
   models.page.delete req.params.id, (err, results) ->
