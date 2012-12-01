@@ -1,6 +1,8 @@
 fs = require 'fs'
 
 module.exports = (app, {models, controllers, helpers}) ->
+  console.start 'import'
+  
   fs.readdirSync('./models').forEach (module) ->
     return if module[0] is '.'
     console.log "✓ [model] #{module}" if app.argv.verbose
@@ -26,3 +28,5 @@ module.exports = (app, {models, controllers, helpers}) ->
     return if module[0] is '.'
     console.log "✓ [helpers] #{module}" if app.argv.verbose
     helpers[module.split('.')[0]] = require "./lib/helpers/#{module}"
+  
+  console.stop 'import'

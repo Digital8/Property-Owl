@@ -8,7 +8,7 @@ html.no-js(lang='en')
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0')
     
-    link(rel='icon', href='favicon.ico', type='image/x-icon')
+    link(rel='icon', href='/favicon.ico', type='image/x-icon')
     
     // styles
     link(rel="stylesheet/less", href="/less/styles.less")
@@ -117,13 +117,13 @@ html.no-js(lang='en')
             ul.sf-menu
                 li
                   - var c = (menu == 'aus-best-deal') ? 'active' : ''
-                  a(href='/best-deal',class="#{c}") Australia's Best Deal
+                  a(href='/owls/top',class="#{c}") Australia's Best Deal
                 li
                   - var c = (menu == 'best-state-deals') ? 'active' : ''
-                  a(href='/deals/state',class="#{c}") Best State Deals
+                  a(href='/owls/hot',class="#{c}") Best State Deals
                 li
                   - var c = (menu == 'owl-deals') ? 'active' : ''
-                  a(href='/owl-deals',class="#{c}") Owl Deals
+                  a(href='/owls/locate',class="#{c}") Owl Deals
                 li
                   - var c = (menu == 'wise-owl') ? 'active' : ''
                   a(href='/news',class="#{c}") Wise Owl

@@ -1,89 +1,108 @@
 extends ../../layout
 
 block content
-  //
-    main content
   .container.row.main
-   include ../../admin-menu
-   h1 Add Member
-   .admin-actions
-    ul
-     li
-      a(href="/admin/members")
-       img(src='/images/manage.png')
-       | &nbsp;
-       | Manage Members
-   .grid-header.form-header
-    ol.six
-     li.active
-      .ol-1-active
-      | Details
-
-   .details
-    h2 User Details
-    hr
-    form.details-form(action="/admin/members/add",method="post")
-     include ../../flashify
-     .left
-      .inputs
-       label(for='group') User Type
-       select(name="group")
-        - each group in groups
-         option(value="#{group.account_type_id}")= group.name
-      .inputs
-       label.required(for='fname') Full Name
-       - if (values.fname == undefined) values.fname = ''
-        input#fname(type="text",name="fname",value="",class="half-field", placeholder="First Name")
-        | &nbsp;
-       - if (values.lname == undefined) values.lname = ''
-        input#lname(type="text",name="lname",value="",class="half-field", placeholder="Last Name")
-      .inputs
-       label(for='company') Company
-       - if (values.company == undefined) values.company = ''
-        input#company(type="text",name="company",value="")
-      .inputs
-       label.required(for='phone') Phone
-       - if (values.phone == undefined) values.phone = ''
-        input#phone(type="text",name="phone",value="")
-      .inputs
-       label(for='workPhone') Work Phone
-       - if (values.workPhone == undefined) values.workPhone = ''
-        input#workPhone(type="text",name="workPhone",value="")
-      .inputs
-       label(for='mobile') Mobile
-       - if (values.mobile == undefined) values.mobile = ''
-        input#mobile(type="text",name="mobile",value="")
-     .right
-      .inputs
-       label.required(for='email') Email
-       - if (values.email == undefined) values.email = ''
-        input#email(type="text",value="")
-      .inputs
-       label.required(for='password') Password
-       - if (values.password == undefined) values.password = ''
-        input#password(type="password",name="password",class="half-field",placeholder="Password")
-        | &nbsp;
-        input#confirmPassword(type="password",name="confirmPassword",class="half-field",placeholder="Confirm Password")
-      .inputs
-       label.required(for='address') Address
-       - if (values.address == undefined) values.address = ''
-        input#address(type="text",name="address",value="")
-      .inputs
-       label.required(for='suburb') Suburb
-       - if (values.suburb == undefined) values.suburb = ''
-        input#suburb(type="text",name="suburb",value="")
-      .inputs
-       label.required(for='postcode') Postcode
-       - if (values.postcode == undefined) values.postcode = ''
-        input#postcode(type="text",name="postcode",value="")
-      br
-      .inputs
-       input(type='checkbox', name='newsletterSubscription', value='newsletterSubscription')
-       |  Subscribed to newsletter
-      .inputs
-       input(type='checkbox', name='propertySubscription', value='propertySubscription')
-       |  Subscribed to property alerts
-     .inputs
-     .submit
-      input.button(type='submit', value='Create User')
-      a.left-button(href="/admin/members") Cancel
+    include ../../admin-menu
+    
+    h1 Add Member
+    
+    .admin-actions
+      ul
+        li
+          a(href="/admin/members")
+            img(src='/images/manage.png')
+            | &nbsp;
+            | Manage Members
+    
+    .grid-header.form-header
+      ol.six
+        li.active
+          .ol-1-active
+          | Details
+    
+    .details
+      h2 User Details
+      
+      hr
+      
+      form.details-form(action="/admin/members/add",method="post")
+        include ../../flashify
+        .left
+          .inputs
+            label(for='group') User Type
+            select(name="group")
+              - each group in groups
+                option(value="#{group.account_type_id}")= group.name
+          
+          .inputs
+            label.required(for='fname') Full Name
+            - if (values.fname == undefined) values.fname = ''
+              input#fname(type="text",name="fname",value="",class="half-field", placeholder="First Name")
+              | &nbsp;
+            - if (values.lname == undefined) values.lname = ''
+              input#lname(type="text",name="lname",value="",class="half-field", placeholder="Last Name")
+          
+          .inputs
+            label(for='company') Company
+            - if (values.company == undefined) values.company = ''
+              input#company(type="text", name="company", value="")
+          
+          .inputs
+            label.required(for='phone') Phone
+            - if (values.phone == undefined) values.phone = ''
+              input#phone(type="text", name="phone", value="")
+          
+          .inputs
+            label(for='workPhone') Work Phone
+            - if (values.workPhone == undefined) values.workPhone = ''
+              input#workPhone(type="text",name="workPhone",value="")
+          
+          .inputs
+            label(for='mobile') Mobile
+            - if (values.mobile == undefined) values.mobile = ''
+              input#mobile(type="text", name="mobile", value="")
+          
+          right
+          
+          .inputs
+            label.required(for='email') Email
+            - if (values.email == undefined) values.email = ''
+              input#email(type="text",value="")
+          
+          .inputs
+            label.required(for='password') Password
+            - if (values.password == undefined) values.password = ''
+              input#password(type="password",name="password",class="half-field",placeholder="Password")
+              | &nbsp;
+              input#confirmPassword(type="password",name="confirmPassword",class="half-field",placeholder="Confirm Password")
+          
+          .inputs
+            label.required(for='address') Address
+            - if (values.address == undefined) values.address = ''
+              input#address(type="text",name="address",value="")
+          
+          .inputs
+            label.required(for='suburb') Suburb
+            - if (values.suburb == undefined) values.suburb = ''
+              input#suburb(type="text",name="suburb",value="")
+          
+          .inputs
+            label.required(for='postcode') Postcode
+            
+            - if (values.postcode == undefined) values.postcode = ''
+              input#postcode(type="text",name="postcode",value="")
+          
+          br
+          
+          .inputs
+            input(type='checkbox', name='newsletterSubscription', value='newsletterSubscription')
+            |  Subscribed to newsletter
+          .inputs
+            input(type='checkbox', name='propertySubscription', value='propertySubscription')
+            |  Subscribed to property alerts
+        
+        .inputs
+        
+        .submit
+          input.button(type='submit', value='Create User')
+          a.left-button(href="/admin/members") Cancel 

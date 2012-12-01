@@ -1,0 +1,41 @@
+.listing-summary
+   
+  .header
+    .listing-price
+      $ #{owl.price}
+    
+    h2 #{owl.address}, #{owl.suburb} #{owl.state.toUpperCase()}
+
+  .listing-body
+    
+    .listing-thumb
+      a(href='/properties/view/#{owl.owl_id}')
+        img.thumb(src='/images/owl-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+    .listing-details
+      .features
+        span.owl-type
+          strong= owl.type
+        span
+          img(src='/images/bed-icon.png', alt='3 Bedroom')
+          strong= owl.bedrooms
+          |  Bedrooms
+        span
+          img(src='/images/bath-icon.png', alt='2 Bathroom')
+          strong= owl.bathrooms
+          |  Bathrooms
+        span
+          img(src='/images/car-icon.png', alt='2 Car Spaces')
+          strong= owl.cars
+          |  Car Spaces
+      
+      .summary
+        h3= owl.title
+        p= owl.description
+      
+      .listing-links
+        a.savebuttons.save-button(href='#', data-owl="#{owl.owl_id}")
+          img#save-icon(src='/images/plus-icon.png', alt='Save this owl')
+          |  Save
+        a.details-button(href='/properties/view/#{owl.owl_id}')
+          img#info-icon(src='/images/info-icon.png', alt='View owl details')
+          |  Details

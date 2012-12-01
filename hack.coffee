@@ -1,8 +1,10 @@
-# repl = require 'repl'
-
 optimist = require 'optimist'
 
 module.exports = (app) ->
+  module.exports.augmentApp app
+  module.exports.augmentConsole()
+
+module.exports.augmentApp = (app) ->
   app.argv = optimist
     .alias('verbose', 'v')
     .alias('fake', 'f')
@@ -33,6 +35,65 @@ module.exports = (app) ->
     app.delete = (path, middleware...) ->
       console.log "[route] [delete] #{path}"
       app._delete arguments...
+
+ticks = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+
+spark = (values, seperator = '') ->
+  max = Math.max values...
+  min = Math.min values...
+  
+  steps = values.map (tick) ->
+    index = Math.round (tick - min) / max * (ticks.length - 1)
+    ticks[index]
+  
+  steps.join seperator
+
+module.exports.augmentConsole = ->
+  console.times = {}
+  
+  console.durations = {}
+  
+  console.start = (name) ->
+    @times[name] = Date.now()
+  
+  console.stop = (name) ->
+    diff = Date.now() - @times[name]
+    @durations[name] ?= []
+    @durations[name].push diff
+    # @log diff + 'ms ' + name
+    diff
+  
+  console.report = ->
+    console.log ''
+    
+    taskCount = (Object.keys console.durations).length
+    
+    do ->
+      times = []
+      
+      for task, time of console.durations
+        times.push time
+      
+      console.log spark times, ' '
+    
+    do ->
+      legend = []
+      
+      for j in [0...taskCount]
+        legend.push j
+      
+      console.log legend.join ' '
+    
+    console.log ''
+    
+    do ->
+      i = 0
+      
+      for task, time of console.durations
+        console.log "[#{i}] #{task} #{time}"
+        i++
+    
+    console.log ''
   
   # repl.start
   #   prompt: '> '

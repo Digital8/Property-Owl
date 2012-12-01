@@ -1,14 +1,17 @@
 extends ../../layout
 
 block content
- //
-   main content
  .container.row.main
     include ../../admin-menu
+    
     h1 Barn Deals - Add Property
+    
     include ../../flashify
+    
     h3 #{barn.address}, #{barn.suburb}, #{barn.postcode}
+    
     hr
+    
     - each property in properties
       li
         a(href="/admin/barn/add/#{barn.property_id}?pid=#{property.property_id}")= property.address

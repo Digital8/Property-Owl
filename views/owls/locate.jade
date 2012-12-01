@@ -1,14 +1,11 @@
 extends ../layout
+
 style(type='text/css')
   dl.image_map {display:block; width:401px; height:341px; background:url(../images/map-large.png); position:relative; margin:2px auto 2px auto;}
+
 block content
-  //
-    main content
   .container.row.main
     include ../left_nav
-   
-    //
-      center-col
     
     #center-col
       h1 Welcome to Owl Deals
@@ -32,12 +29,5 @@ block content
       p Your interest in a selected property deal is forwarded to the Seller who can answer any questions you may have and guide you through the purchasing process.
       p If you see the ‘View the Barn Deal’ icon on any of the Owl Deal listings then click on the icon and you may see an even better deal waiting, should you and others wish to secure a limited number of similar properties.
       p Not really in the market to buy a new property, but know of someone who is?  Click on the ‘Refer a Friend’ tab in the left hand column and forward the property details to selected friends and family who you know may have an interest in buying a property.  If that friend or family member subscribes to Property Owl and they purchase a property, then you will be rewarded with a $1000.00 nest egg.  The more people that you refer that subscribe and buy – then the more you earn.
-        //
-          end center-col
-    //
-      right-col
-    #right-col
-      img#ad-tower1.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
-      img#ad-tower2.ad-tower(src='images/ad-tower.jpg', alt='Tower Advert')
-        //
-          end right-col
+    
+    include ../right_nav

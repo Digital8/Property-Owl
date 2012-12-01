@@ -5,12 +5,12 @@ nav#admin-menu
       a(href='/admin',class="#{c}") Dashboard
     li
       - var c = (menu == 'property-deals') ? 'active' : ''
-      a(href='/admin/properties',class="#{c}") Property Deals
+      a(href='/admin/owls',class="#{c}") Deals
       ul
         li
-          a(href='/admin/properties') Owl Deal Listings
+          a(href='/admin/owls') Owl Deals
         li
-          a(href='/admin/barn') Barn Deal Listings
+          a(href='/admin/barns') Barn Deals
     li
       - var c = (menu == 'advertising') ? 'active' : ''
       a(href='/admin/advertisements',class="#{c}") Advertising

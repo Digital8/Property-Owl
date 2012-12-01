@@ -1,0 +1,21 @@
+.listing-summary
+  .header
+    h2 #{barn.address}, #{barn.suburb}, #{barn.postcode}
+  
+  .listing-body
+    .listing-thumb
+      img.thumb(src='/images/barn-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+    
+    .listing-details
+      .summary
+        h3= barn.title
+        p= barn.description
+      
+      .listing-links
+        a.save-button(href='#')
+          img#save-icon(src='/images/plus-icon.png', alt='Save this barn listing')
+          |  Save
+        
+        a.details-button(href='/barn/deals/#{barn.barn_id}')
+          img#info-icon(src='/images/info-icon.png', alt='View barn deal')
+          |  Details

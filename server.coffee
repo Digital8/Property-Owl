@@ -1,3 +1,8 @@
+hack = require './hack'
+hack.augmentConsole()
+
+console.start 'boot'
+
 express = require 'express'
 expressValidator = require 'express-validator'
 flashify = require 'flashify'
@@ -12,10 +17,10 @@ classes = user: load.class 'user'
 
 app = express()
 
-(require './hack') app
+hack.augmentApp app
 
 app.configure ->
-  console.time 'configure'
+  console.start 'configure'
   
   app.set 'views', "#{__dirname}/views"
   app.set 'view engine', 'jade'
@@ -29,7 +34,7 @@ app.configure ->
   app.use flashify
   app.use express.static "#{__dirname}/public"
   
-  app.use (req,res,done) ->
+  app.use (req, res, done) ->
     res.locals.session  = req.session
     res.locals.globals = config.globals
     res.locals.modules = config.modules ? {} # If modules exist, allow views to check its status
@@ -40,8 +45,8 @@ app.configure ->
       req.session.user_id = 1
     
     res.locals.navigation = [
-      {key: 'aus-best-deal', href: '/best-deal', label: "Australia's Best Deal"}
-      {key: 'best-state-deal', href: '/deals/state/qld', label: 'Best State Deal'}
+      {key: 'aus-best-deal', href: '/owls/top', label: "Australia's Best Deal"}
+      {key: 'best-state-deal', href: '/owls/state/qld', label: 'Best State Deal'}
       {key: 'owl-deals', href: '#', label: 'Owl Deals'}
       {key: 'wise-owl', href: '#', label: 'Wise Owl'}
       {key: 'products', href: '#', label: 'Products & Services'}
@@ -52,7 +57,13 @@ app.configure ->
     if url is '/%' then url = '/'
 
     console.log url
-
+    
+    console.start 'ads'
+    
+    adsLoaded = ->
+      console.stop 'ads'
+      done()
+    
     models.advertisement.random url, 'top', (err, adspaceTop) ->
       models.advertisement.random url, 'upper tower', (err, adUpperTower) ->
         models.advertisement.random url, 'lower tower', (err, adLowerTower) ->
@@ -71,14 +82,14 @@ app.configure ->
                 if results.length > 0
                   res.locals.objUser = new classes.user results.pop()
                   
-                  done()
+                  adsLoaded()
             
             else
-              done()
+              adsLoaded()
   
   app.use app.router
   
-  console.timeEnd 'configure'
+  console.stop 'configure'
 
 server = app.listen config.port
 
@@ -87,3 +98,7 @@ server = app.listen config.port
 (require './routes') app
 
 console.log "Server started on port #{config.port}"
+
+console.stop 'boot'
+
+console.report()
