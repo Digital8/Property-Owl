@@ -6,7 +6,7 @@ exports.all = (callback) ->
   db.query "SELECT * FROM #{table}", callback
 
 exports.findByUrl = (url, callback) ->
-  db.query "SELECT * FROM #{table} WHERE url = ?", [url], callback
+  db.query "SELECT * FROM #{table} WHERE url = ? AND static = 1", [url], callback
 
 exports.find = (id, callback) ->
   db.query "SELECT * FROM #{table} WHERE page_id = ?", [id], callback
@@ -19,3 +19,6 @@ exports.update = (page, callback) ->
 
 exports.delete = (id, callback) ->
   db.query "DELETE FROM #{table} WHERE page_id = ?", [id], callback
+
+exports.findByDynamicUrl = (url, callback) ->
+  db.query "SELECT * FROM #{table} WHERE url = ? AND static = 0", [url], callback
