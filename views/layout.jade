@@ -155,7 +155,7 @@ html.no-js(lang='en')
                       a(href="/sign-up") Sign Up
     block content
     footer#footer.row
-      div
+      div.quarter-col
         h4 Company
         ul
           li
@@ -164,7 +164,7 @@ html.no-js(lang='en')
             a(href='/privacy') Privacy Policy
           li
             a(href='/about') About Us
-      div
+      div.quarter-col
         h4 What is Property Owl?
         ul
           li
@@ -173,14 +173,14 @@ html.no-js(lang='en')
             a(href='/') Home Page
           li
             a(href='/faq') FAQs
-      .social
+      .social.quarter-col
         h4 Follow Us
         ul
           li
             a(href='#') Facebook
           li
             a(href='#') Twitter
-      div
+      div.quarter-col
         h4 Partnerships
         ul
           li
@@ -189,7 +189,10 @@ html.no-js(lang='en')
             a(href='/contact') Agent Enquiries
           li
             a(href='/contact') Advertising Enquiries
-            
+      div.bottom
+          span.attributed Powered by 
+            a(href="http://www.digital8.com.au",target="_blank") Digital8
+          | &copy; Copyright 2012 Property Owl
 script(type='text/javascript')
     var mySlider = $("#mySlider").evoSlider({
       mode: "slider",

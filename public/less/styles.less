@@ -2044,8 +2044,29 @@ body {
     color: #FFFFFF;
     
     > div {
-        .column(3, 1.250em);
-        padding-top: 0.313em;
+        &.quarter-col {
+          .column(3, 1.250em);
+          padding-top: 0.313em;
+        }
+        
+        &.bottom {
+          background: #013c64;
+          clear:both;
+          padding: @padding-small 1.250em;
+          color: #b9d0e2;
+          font-size: 0.7em;
+          font-weight: normal;
+          font-family: Arial, sans-serif;
+          
+          span.attributed {
+            float:right;
+          }
+          
+          a {
+            color: #FFF;
+            text-decoration: none;
+          }
+        }
     }
     
     h4 {
