@@ -1,24 +1,22 @@
-repl = require 'repl'
-
-argv = (require 'optimist').alias('verbose', 'v').alias('hack', 'h').argv
-
 express = require 'express'
 expressValidator = require 'express-validator'
 flashify = require 'flashify'
 
-system = require './system'
-
-helpers = {}
+{load, config} = system = require './system'
 
 models =
-  user: system.load.model 'user'
-  advertisement: system.load.model 'advertisement'
+  user: load.model 'user'
+  advertisement: load.model 'advertisement'
 
-classes = user: system.load.class 'user'
+classes = user: load.class 'user'
 
 app = express()
 
+(require './hack') app
+
 app.configure ->
+  console.time 'configure'
+  
   app.set 'views', "#{__dirname}/views"
   app.set 'view engine', 'jade'
   
@@ -26,20 +24,19 @@ app.configure ->
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use expressValidator
-  app.use express.cookieParser('secretsecret')
+  app.use express.cookieParser 'secretsecret'
   app.use express.session()
   app.use flashify
   app.use express.static "#{__dirname}/public"
   
   app.use (req,res,done) ->
-    
     res.locals.session  = req.session
-    res.locals.globals = system.config.globals
-    res.locals.modules = system.config.modules ? {} # If modules exist, allow views to check its status
+    res.locals.globals = config.globals
+    res.locals.modules = config.modules ? {} # If modules exist, allow views to check its status
     res.locals.objUser = new classes.user [] # Empty user object
     res.locals.menu = {}
     
-    if argv.hack?
+    if app.argv.hack
       req.session.user_id = 1
     
     res.locals.navigation = [
@@ -81,14 +78,12 @@ app.configure ->
   
   app.use app.router
   
-server = app.listen system.config.port
+  console.timeEnd 'configure'
+
+server = app.listen config.port
+
+(require './import') app, system
 
 (require './routes') app
 
-console.log "Server started on port #{system.config.port}"
-
-repl.start
-  prompt: '> '
-  input: process.stdin
-  output: process.stdout
-  global: on
+console.log "Server started on port #{config.port}"
