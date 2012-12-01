@@ -3,8 +3,11 @@ extends ../../layout
 block content
   legend
     h3 Add Property
+  
   form.form-horizontal(action="/developers/properties/add",method="post")
+    
     include ../../flashify
+    
     div.control-group  
       label.control-label(for="inputTitle") Title:
       div.controls
@@ -29,6 +32,7 @@ block content
         select(name="state")
           - each state in states
             option(value="#{state.c}")= state.n
+    
     div.control-group  
       label.control-label(for="inputTitle") Price:
       div.controls
@@ -55,7 +59,7 @@ block content
           - for(i=1; i<6; i++)
             option(value="#{i}")= i
     
-            
+    
     div.form-actions
      input.btn.btn-primary(type="submit",value="List Property")
      | &nbsp;

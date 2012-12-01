@@ -17,7 +17,7 @@ exports.index = (req, res) ->
   models.advertisement.all (error, results) ->
     throw error if error
     
-    res.render 'administration/advertisements/index', advertisements: results
+    res.render 'administration/advertisements/index', advertisements: results, menu: 'advertising'
 
 exports.add = (req, res) ->
   
@@ -28,12 +28,11 @@ exports.add = (req, res) ->
   , (error, results) ->
     throw error if error
     
-    console.dir results
-    
     res.render 'administration/advertisements/add',
       adspaces: results.adspace
       pages: results.page
       advertisers: results.advertiser
+      menu: 'advertising'
 
 exports.create = (req, res) ->
   fs.readFile req.files.image.path, (error, data) ->
@@ -60,6 +59,7 @@ exports.create = (req, res) ->
         
         models.advertisement.create req.body, (err, results) ->
           throw err if err
+          
           res.redirect '/administration/advertisements'
 
 exports.edit = (req, res) ->
@@ -76,6 +76,7 @@ exports.edit = (req, res) ->
       pages: results.page
       advertisers: results.advertiser
       advertisement: results.advertisement
+      menu: 'advertising'
 
 exports.update = (req, res) ->
   req.body.id = req.params.id
@@ -101,9 +102,11 @@ exports.update = (req, res) ->
       models.advertisement.update req.body, (err, results) ->
         if err
           req.flash 'error', 'an error occured updating the advertisement'
+          
           res.redirect 'back'
         else
           req.flash 'success', 'advertisement updated'
+          
           res.redirect '/administration/advertisements'
   
   if req.files.image
@@ -121,6 +124,7 @@ exports.delete = (req, res) ->
   models.advertisement.find req.params.id, (err, results) ->
     if results.length is 0
       req.flash 'error', "Uh Oh, that advertisement doesn't exist."
+      
       res.redirect '/administration/advertisements'
     else
       res.render 'administration/advertisements/delete', advertisement: results.pop() or {}

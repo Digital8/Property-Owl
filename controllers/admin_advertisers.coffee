@@ -1,7 +1,6 @@
 system = require '../system'
 
-models =
-  advertiser: system.load.model 'advertiser'
+models = advertiser: system.load.model 'advertiser'
 
 helpers = {}
 
@@ -9,10 +8,10 @@ exports.index = (req, res) ->
   models.advertiser.all (error, results) ->
     throw error if error
     
-    res.render 'administration/advertisers/index', advertisers: results
+    res.render 'administration/advertisers/index', advertisers: results, menu: 'advertising'
 
 exports.add = (req, res) ->
-  res.render 'administration/advertisers/add'
+  res.render 'administration/advertisers/add', menu: 'advertising'
 
 exports.create = (req, res) ->
   # req.assert('email', 'Invalid Email Address').isEmail()
@@ -38,11 +37,12 @@ exports.create = (req, res) ->
     
     models.advertiser.create advertiser, (error, results) ->
       if error
-        # res.render 'errors/404'
         req.flash 'error', error.message
+        
         res.redirect 'back'
       else
         req.flash 'success', 'Great Success!'
+        
         res.redirect '/administration/advertisers'
 
 exports.edit = (req, res) ->
@@ -58,7 +58,7 @@ exports.edit = (req, res) ->
         for key, value of advertiser
           unless value then advertiser[key] = ''
         
-        res.render 'administration/advertisers/edit', advertiser: advertiser
+        res.render 'administration/advertisers/edit', advertiser: advertiser, menu: 'advertising'
 
 exports.update = (req, res) ->
   req.body.id = req.params.id

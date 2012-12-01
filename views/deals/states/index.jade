@@ -1,11 +1,67 @@
 extends ../../layout
 
 block content
-  legend
-    h3 Best State Deals
-  p Select State Please
-  - var states = [ {c: 'qld',n: 'Queensland'}, {c: 'nsw',n: 'New South Wales'}, {c: 'act',n: 'A.C.T'},{c: 'vic',n: 'Victoria'},{c: 'sa',n: 'South Australia'},{c: 'wa',n: 'Western Australia'},{c: 'nt',n: 'Northen Territory'},{c: 'tas',n: 'Tasmania'}]
-  ul
-    - each state in states
-      li
-        a(href="/deals/state/#{state.c}")= state.n
+  
+  .container.row.main
+    
+    include ../../left_nav
+    
+    #center-col
+      h1 Best State Deals
+      - if (properties.length == 0)
+         p There are no current property deals for #{state.toUpperCase()} right now but keep an eye out because we are always listing new deals. 
+       - else
+         - var i = 0; // Just a hack for PoC
+         - each property in properties
+          - i++
+          
+          .listing-summary
+            .header
+              .listing-price
+                $ #{property.price}
+              h2 #{property.address}, #{property.suburb} #{property.state.toUpperCase()}
+            
+            .listing-body
+              
+              .listing-thumb
+                a(href='/properties/view/#{property.property_id}')
+                  img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+                  //
+                    show if top listing
+                  - if (i == 1)
+                    img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
+              .listing-details
+                .features
+                  span.property-type
+                    strong= property.type
+                  span
+                    img(src='/images/bed-icon.png', alt='3 Bedroom')
+                    strong= property.bedrooms
+                    |  Bedrooms
+                  span
+                    img(src='/images/bath-icon.png', alt='2 Bathroom')
+                    strong= property.bathrooms
+                    |  Bathrooms
+                  span
+                    img(src='/images/car-icon.png', alt='2 Car Spaces')
+                    strong= property.cars
+                    |  Car Spaces
+                
+                .summary
+                  h3= property.title
+                  p= property.description
+                
+                .listing-links
+                  
+                  a.savebuttons.save-button(href='#', data-property="#{property.property_id}")
+                    img#save-icon(src='/images/plus-icon.png', alt='Save this property')
+                    |  Save
+                  
+                  a.details-button(href='/properties/view/#{property.property_id}')
+                    img#info-icon(src='/images/info-icon.png', alt='View property details')
+                    |  Details
+    
+    #right-col
+      img#ad-tower1.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
+      img#ad-tower2.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
+  

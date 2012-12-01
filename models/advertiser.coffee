@@ -1,4 +1,4 @@
-db = require('../system').db
+{db} = require '../system'
 
 table = "#{db.prefix}advertisers"
 

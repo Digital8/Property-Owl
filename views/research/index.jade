@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+  .container.row.main
+    include ../left_nav
+   
+    #center-col
+      h1 Research
+      h3 Innovation in delivering Australia's best property deals
+      - if (news.length == 0)
+        p There are no research articles for now. Please check back soon. 
+      - else
+        - each post in news
+          .listing-summary
+            .header
+              h2= post.title
+            
+            .listing-body
+              .listing-thumb
+                a.details-button(href="/research/#{post.news_id}")
+                  img.thumb(src='/images/news-thumb.jpg', alt='')
+              .listing-details
+                
+                .summary
+                  p= post.posted_at
+                  p= post.content
+                
+                .listing-links
+                  a.details-button(href="/research/#{post.news_id}")
+                    img#info-icon(src='/images/info-icon.png', alt='View details')
+                    |  Details
+    
+    #right-col
+      img#ad-tower1.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
+      img#ad-tower2.ad-tower(src='/images/ad-tower.jpg', alt='Tower Advert')
+    
+    script
+      $('small.timeago').timeago();

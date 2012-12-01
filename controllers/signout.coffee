@@ -1,19 +1,8 @@
-###
- * Sign Out Controller
- *
- * Controller Template
- *
- * @package   Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
 system = require '../system'
 
-models =
-  user: system.load.model('user')
+models = user: system.load.model 'user'
 
-helpers = 
-  hash: system.load.helper('hash')
+helpers = hash: system.load.helper 'hash'
  
 exports.index = (req,res) ->
   delete req.session.user_id

@@ -1,14 +1,5 @@
-###
- * File Uploader
- *
- * Allows uploading of files to a specified directory
- *
- * @package   Digital8
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
- 
 fs = require 'fs'
+
 uuid = require 'node-uuid'
 
 module.exports = class fileUploader

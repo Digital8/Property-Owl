@@ -5,18 +5,14 @@ block content
    main content
  .container.row.main
      include ../../admin-menu
-     h1 Property Listings
+     h1 Owl Deal Listings
      .admin-actions
        ul
-         li.disabled
-           img(src='/images/manage.png')
-           | &nbsp;
-           | Manage Properties
          li
            a(href='/administration/properties/add')
              img(src='/images/add.png')
              | &nbsp;
-             | Add New Property
+             | Add New Deal
        // .grid-summary 1 - 4 of 24
      .grid-header
        form#search-form
@@ -53,7 +49,7 @@ block content
          tr
            td ID
            td Listed On
-           td Developer
+           td Address
            td State
            td Status
            td Deal Value
@@ -65,9 +61,13 @@ block content
            td= property.property_id
            - var listed = new Date(property.created_at)
            td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
-           td Developer Name
+           td= property.address
            td= property.state.toUpperCase()
-           td Current
+           td
+             if (property.approved == 1)
+              | Approved
+             else
+              | Pending
            td 20 %
            td 134
            td.actions

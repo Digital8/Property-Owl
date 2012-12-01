@@ -6,17 +6,20 @@ block content
  .container.row.main
      include ../../admin-menu
      h1
-       | Add New Project 
+       | Add New Deal 
        span.secondary - Images
      .admin-actions
        ul
-         li
-           a(href='#')
-             img(src='/images/manage.png')
-             | Manage Projects
-         li.disabled
-           img(src='/images/add.png')
-           | Add New Project
+          li
+            a(href='/administration/properties')
+              img(src='/images/manage.png') 
+              | &nbsp;
+              | Manage Owl Deals
+          li
+            a(href='/administration/barn')
+              img(src='/images/manage.png') 
+              | &nbsp;
+              | Manage Barn Deals
      .grid-header.form-header
        ol.six
          li.active
@@ -53,7 +56,7 @@ block content
                 p
                   input(type="file",name="file")
                   input.button(type="submit",name="cmdAddImage", value="Upload Image")
-        form.details-form
+        form.details-form(action="/administration/properties/add?step=4",method="post")
          .right
            .inputs
              table.admin-gridview
@@ -82,7 +85,7 @@ block content
          .inputs  
          .submit
            a.left-button(href="/administration/properties/add?step=3") Previous Step
-           input.button(type='submit', value='Next Step')
+           a.button(href="/administration/properties/add?step=5") Next Step
      //
        end details
    //

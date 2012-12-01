@@ -12,9 +12,9 @@
 sendgrid = new SendGrid 'digital8', '1lovedDMDN'
 fs = require 'fs'
 
-module.exports = (template, subject, objUser, objProperty) ->
+module.exports = (template, subject, objUser, secondary, callback) ->
 
-  fs.readFile "../emails/#{template}.html", 'utf-8', (err, data) ->
+  fs.readFile __dirname + "/../emails/#{template}.html", 'utf-8', (err, data) ->
     if err?
       console.log 'Error:', err
       throw err
@@ -27,14 +27,16 @@ module.exports = (template, subject, objUser, objProperty) ->
         html: data
 
       switch template
-        when 'barn-deal-enquiry', 'barn-deal-registration-developer'
+        when 'barn-deal-enquiry', 'barn-deal-registration-developer', 'barn-deal-registration', 'expression-of-interest', 'withdraw-interest', 'signup-confirmation', 'service-enquiry', 'service-enquiry-confirmation', 'property-recommendations', 'property-enquiry-confirmation', 'owl-deal-registration-developer', 'owl-deal-registration', 'barn-deal-enquiry', 'new-listing', 'listing-confirmation'
           email.setCategory 'Property Owl'
           email.addSubVal '{{first_name}}', objUser.firstName
-          email.addSubVal '{{address}}', objProperty.address
-        
-
-      sendgrid.send email, (success, message) ->
-        if success
-          console.log 'email sent to', email.to
-        else
-          console.log message
+          email.addSubVal '{{last_name}}', objUser.lastName
+          email.addSubVal '{{email}}', objUser.email
+          email.addSubVal '{{address}}', secondary.address
+          email.addSubVal '{{phone}}', objUser.phone
+          email.addSubVal '{{title}}', secondary.title
+          email.addSubVal '{{description}}', secondary.description
+        when 'news'
+          email.addSubVal '{{title}}', secondary.title
+		  
+      sendgrid.send email, callback

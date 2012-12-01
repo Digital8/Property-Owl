@@ -1,13 +1,5 @@
-###
- * Developer Properties Controller
- *
- * Controller For adding/editing properties
- * 
- * @package   Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
 system = require '../system'
+
 async = require 'async'
 
 models =
@@ -35,7 +27,7 @@ exports.create = (req,res) ->
     i++
     cb()
   
-  # Check that there are no existing deals for this property already
+  # TODO Check that there are no existing deals for this property already
   # models.deals.getDealByPropertyId req.body.property
   
   async.map req.body.feature, addDealFeatures, (err, results) ->

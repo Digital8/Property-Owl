@@ -6,7 +6,13 @@ block content
   .container.row.main
     include ../../admin-menu
     h1 Supplier Categories
-    include navigation
+    .admin-actions
+      ul
+        li
+          a(href='/administration/services/categories/add')
+            img(src='/images/add.png')
+            | &nbsp;
+            | Add New Category
     table.admin-gridview
       thead
         tr

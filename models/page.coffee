@@ -1,14 +1,4 @@
-###
- * Custom Pages Model
- *
- * Handles all queries and actions to the database for the custom pages
- *
- * @package   Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
-
-db = require('../system').db
+{db} = require '../system'
 
 table = "#{db.prefix}pages"
 
@@ -16,7 +6,7 @@ exports.all = (callback) ->
   db.query "SELECT * FROM #{table}", callback
 
 exports.findByUrl = (url, callback) ->
-  db.query "SELECT * FROM #{table} WHERE url = ?", [url], callback
+  db.query "SELECT * FROM #{table} WHERE url = ? AND static = 1", [url], callback
 
 exports.find = (id, callback) ->
   db.query "SELECT * FROM #{table} WHERE page_id = ?", [id], callback
@@ -29,3 +19,6 @@ exports.update = (page, callback) ->
 
 exports.delete = (id, callback) ->
   db.query "DELETE FROM #{table} WHERE page_id = ?", [id], callback
+
+exports.findByDynamicUrl = (url, callback) ->
+  db.query "SELECT * FROM #{table} WHERE url = ? AND static = 0", [url], callback

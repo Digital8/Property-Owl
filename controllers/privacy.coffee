@@ -1,13 +1,3 @@
-###
- * Sign Up Controller
- *
- * Controller for homepage of website
- *
- * @package   Property Owl
- * @author    Brendan Scarvell <brendan@digital8.com.au>
- * @copyright Copyright (c) 2012 - Current
- ###
-
 system = require '../system'
 
 helpers = {}

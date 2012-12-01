@@ -420,6 +420,7 @@ body {
 #header {
   margin: 0.625em auto;
   zoom: 1;
+  height: 10.875em;
 }
 #header:before,
 #header:after {
@@ -433,6 +434,7 @@ body {
   zoom: 1;
   position: relative;
   margin: 0 0 -4.3em 0;
+  margin: 0;
 }
 #header > div#top-header:before,
 #header > div#top-header:after {
@@ -450,6 +452,7 @@ body {
   display: block;
   float: left;
   z-index: 1;
+  margin-bottom: -4.3em;
 }
 #header > div > div#admin-logo-box {
   width: 16.6666666%;
@@ -779,7 +782,7 @@ body {
   -webkit-border-radius: 0.313em;
   border-radius: 0.313em;
   zoom: 1;
-  padding: .938em;
+  padding: 0.625em;
 }
 #admin-menu:before,
 #admin-menu:after {
@@ -795,6 +798,12 @@ body {
   padding: 0;
   list-style: none;
 }
+#admin-menu .sf-menu li:hover ul,
+#admin-menu .sf-menu li.sfHover ul {
+  top: 2em !important;
+  /* match top ul list item height */
+
+}
 #admin-menu > ul > li {
   float: left;
   color: #7DD3FF;
@@ -809,10 +818,32 @@ body {
   font-weight: 700;
   color: #7DD3FF;
   text-shadow: 0px -1px 0px rgba(0,0,0,0.5);
-  padding: 0 !important;
+  padding: 0.313em;
 }
 #admin-menu > ul > li > a:hover {
   color: #FFF;
+}
+#admin-menu > ul > li > a.active {
+  color: #FFF;
+  background: #0a2d4a;
+  -webkit-border-top-left-radius: 0.188em;
+  -moz-border-radius-topleft: 0.188em;
+  border-top-left-radius: 0.188em;
+  -webkit-border-top-right-radius: 0.188em;
+  -moz-border-radius-topright: 0.188em;
+  border-top-right-radius: 0.188em;
+  -webkit-border-bottom-left-radius: 0.188em;
+  -moz-border-radius-bottomleft: 0.188em;
+  border-bottom-left-radius: 0.188em;
+  -webkit-border-bottom-right-radius: 0.188em;
+  -moz-border-radius-bottomright: 0.188em;
+  border-bottom-right-radius: 0.188em;
+  -moz-border-radius: 0.188em;
+  -webkit-border-radius: 0.188em;
+  border-radius: 0.188em;
+  box-shadow: inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25);
+  -moz-box-shadow: inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25);
+  -webkit-box-shadow: inset 0px 2px 3px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.25);
 }
 #admin-menu > ul > li ul,
 #admin-menu > ul > li li {
@@ -931,9 +962,9 @@ body {
   padding-bottom: 0.2em;
   line-height: 0.6;
   background: #c51212;
-  box-shadow: 0px 0px 0.625em 0.625em #c51212;
-  -moz-box-shadow: 0px 0px 0.625em 0.625em #c51212;
-  -webkit-box-shadow: 0px 0px 0.625em 0.625em #c51212;
+  box-shadow: 0px 0px @padding-small @padding-small #c51212;
+  -moz-box-shadow: 0px 0px @padding-small @padding-small #c51212;
+  -webkit-box-shadow: 0px 0px @padding-small @padding-small #c51212;
 }
 .best-deal > div.home-deal-stats .home-timer #timer > div .label {
   display: block;
@@ -1594,7 +1625,8 @@ body {
 .main > div#wide-center-col {
   float: left;
   width: 83.333333%;
-  padding: 5px;
+  padding: 0;
+  padding-left: 0.313em;
   padding-bottom: 6.250em;
 }
 .main > div#wide-center-col #back-button {
@@ -1610,7 +1642,7 @@ body {
 }
 .main > div#wide-center-col .slider-box {
   background: #0c3559;
-  height: 30em;
+  height: 29.6em;
   -webkit-border-top-left-radius: 0.313em;
   -moz-border-radius-topleft: 0.313em;
   border-top-left-radius: 0.313em;
@@ -1834,12 +1866,19 @@ body {
   border-radius: 0.313em;
 }
 .main > div#wide-center-col .property-info #left > div.general-features > div.file-row > div.file {
-  background: #fcfcfc;
+  background: #ededed;
   text-align: center;
+  min-height: 12.5em;
+  margin-bottom: 0.313em;
 }
 .main > div#wide-center-col .property-info #left > div.general-features > div.file-row > div.file span {
   display: block;
   color: #a4a4a4;
+}
+.main > div#wide-center-col .property-info #left > div.general-features > div.file-row > div.file a {
+  text-decoration: none;
+  color: #0085C6;
+  font-size: 0.8em;
 }
 .main > div#wide-center-col .property-info #right {
   float: left;
@@ -1935,10 +1974,18 @@ body {
   background: #0a5b9a;
   color: #FFF;
   text-shadow: 0px -1px 0px rgba(0,0,0,1);
+  cursor: pointer;
 }
 .main > div#wide-center-col .property-info #right .deal h2 img.arrow {
   float: right;
   margin-top: 5px;
+}
+.main > div#wide-center-col .property-info #right .deal ul {
+  height: 0;
+  overflow: hidden;
+}
+.main > div#wide-center-col .property-info #right .deal.display ul {
+  height: auto;
 }
 .main > div#wide-center-col .property-info #right .deal ul,
 .main > div#wide-center-col .property-info #right .deal li {
@@ -3270,7 +3317,8 @@ body {
   -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
   background: #ffffff url(../images/input-bg.png) repeat-x top center;
 }
-.main .details-form input.half-field {
+.main .details-form input.half-field,
+.main .details-form select.half-field {
   width: 49.5% !important;
   display: inline;
 }
@@ -4179,7 +4227,7 @@ html[xmlns] .slides {
 .sf-menu li:hover ul,
 .sf-menu li.sfHover ul {
   left: 17px;
-  top: 1.75em;
+  top: 2.3em;
   /* match top ul list item height */
 
   z-index: 99;
@@ -4283,12 +4331,14 @@ li.sfHover > a > .sf-sub-indicator {
   }
   #header > div#top-header {
     margin: 0 0 -2.188em 0;
+    margin: 0;
   }
   #header > div > div#logo-box {
     float: left;
     width: 24.9999999%;
     padding: 0;
     padding: 0 20px;
+    margin-bottom: -2.188em;
   }
   #header > div > div#banner-box {
     float: left;
@@ -4388,6 +4438,7 @@ li.sfHover > a > .sf-sub-indicator {
   }
   #header > div#top-header {
     margin: 0 0 1em 0;
+    margin: 0;
   }
   #header > div > div#logo-box {
     margin: 2em 0 0 0;
@@ -4395,6 +4446,8 @@ li.sfHover > a > .sf-sub-indicator {
     float: left;
     width: 41.6666665%;
     padding: 0;
+    margin-bottom: 0;
+    margin-top: 1em;
   }
   #header > div > div#banner-box {
     float: none;

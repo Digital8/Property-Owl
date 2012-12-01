@@ -6,11 +6,13 @@ block content
  .container.row.main
    include ../../admin-menu
    h1 Edit Page
-   .grid-header.form-header
-    ol.six
-     li.active
-      .ol-1-active
-      | Details
+   .admin-actions
+    ul
+     li
+      a(href="/administration/pages")
+       img(src='/images/manage.png')
+       | &nbsp;
+       | Manage Pages
    .details
     h2 Page Details
     hr
