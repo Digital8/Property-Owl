@@ -67,6 +67,36 @@ exports.register = (req, res) ->
             text: user.fname + ',\n\nThanks for signing up, your account has been created!\n\n\nThe Property Owl Team'
           , 'Property Owl Sign-Up'
           res.send status: 200
+          
+          
+exports.securedeal = (req, res) ->
+  req.assert('e', 'Invalid Email Address').isEmail()
+  req.assert('m', 'Phone Number is invalid').is(/^[\+0-9][ 0-9]*[0-9]$/).len(8,16)
+  req.assert('f', 'First name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
+  req.assert('l', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
+  req.assert('c', 'Comment cannot be empty').notEmpty()
+  console.log(req.body)
+
+  errors = req.validationErrors(true)
+
+  if errors is false then errors = {}
+
+  if Object.keys(errors)?.length > 0
+    res.send status: 400, errors: errors
+
+  else
+    mailer
+      to: req.body.e
+      from: 'mailer@propertyowl.com.au'
+      fromname: 'Property Owl'
+      subject: 'Property Owl Account Created'
+      text: req.body.f + """,
+      
+      Thanks for signing up, your account has been created!
+      The Property Owl Team
+      """
+    , 'Property Owl Sign-Up'
+    res.send status: 200
 
 exports.savedeal = (req, res) ->
   req.assert('id', 'Property ID Not Numeric').isInt()

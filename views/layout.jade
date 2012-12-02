@@ -43,7 +43,7 @@ html.no-js(lang='en')
   body
 
     .modal-overlay.overlay#generic-modal
-      .modal.main.error
+      .modal.main
         a.close-modal(href='#')
           img(src='/images/modal-close.png', alt='Close')
         h1.modal-title#generic-modal-title Modal title!
@@ -60,7 +60,7 @@ html.no-js(lang='en')
     .register-overlay.overlay
       .modal.main.success
         a.close-register(href='#')
-          img(src='/images/modal-close.png', alt='Close')
+          img(src='/images/modal-close-white.png', alt='Close')
         h1.modal-title Register to see more!
         .modal-content.details-form
           input.half.register-first-name(type='text', placeholder='First Name')
@@ -81,6 +81,20 @@ html.no-js(lang='en')
             | Already registered?
             br
             a.button.show-login(href='#') Click here!
+    .secure-deal-overlay.overlay
+      .modal.main.success
+        a.close-secure-deal(href='#')
+          img(src='/images/modal-close-white.png', alt='Close')
+        h1.modal-title Secure the Deal Now!
+        .modal-content.details-form
+          input.half.secure-deal-first-name(type='text', placeholder='First Name', value="#{objUser.firstName}")
+          input.half.secure-deal-last-name(type='text', placeholder='Last Name', value="#{objUser.lastName}")
+          input.half.secure-deal-email(type='text', placeholder='Email Address', value="#{objUser.email}")
+          input.half.secure-deal-phone(type='text', placeholder='Phone Number', value="#{objUser.mobile}")
+          textarea.full.secure-deal-comment(placeholder='Please leave a comment for the developer', style="width:98%;")
+          .submit-buttons
+            input.button.right.secure-deal-button(type='submit', value='Secure Deal Now', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;")
+
     .login-overlay.overlay
       .modal.main.success
           a.close-login(href='#')
