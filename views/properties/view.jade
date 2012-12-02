@@ -82,7 +82,7 @@ block content
             h3 General Features
             ul
               - if(property.price)
-                li Price: 
+                li Price:
                   strong= '$' + property.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               - if(property.property_type)
                 li Property Type: 
