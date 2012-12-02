@@ -25,12 +25,12 @@ app.configure ->
   app.set 'views', "#{__dirname}/views"
   app.set 'view engine', 'jade'
   
-  app.use express.logger 'dev'
+  #app.use express.logger 'dev'
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use expressValidator
-  app.use express.cookieParser 'secretsecret'
-  app.use express.session()
+  app.use express.cookieParser 'secretsnake'
+  app.use express.session 'monkeyjuice'
   app.use flashify
   app.use express.static "#{__dirname}/public"
   
@@ -75,14 +75,15 @@ app.configure ->
             res.locals.adUpperBox = if adUpperBox? then adUpperBox else ''
             res.locals.adLowerBox  = if adLowerBox? then adLowerBox else ''
             
-            if req.session.user_id?
-              models.user.getUserById req.session.user_id, (err, results) ->
+            if req.session.user_id? or req.cookies.pouser?
+              user_id = req.session.user_id or req.cookies.pouser
+              models.user.getUserById user_id, (err, results) ->
                 if err then throw err
                 
                 if results.length > 0
                   res.locals.objUser = new classes.user results.pop()
                   
-                  adsLoaded()
+                adsLoaded()
             
             else
               adsLoaded()

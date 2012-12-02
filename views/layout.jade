@@ -39,12 +39,12 @@ html.no-js(lang='en')
   
   body
 
-    .modal-overlay.overlay
-      .modal.main.success
+    .modal-overlay.overlay#generic-modal
+      .modal.main.error
         a.close-modal(href='#')
           img(src='/images/modal-close.png', alt='Close')
-        h1.modal-title Modal title!
-        .modal-content.details-form
+        h1.modal-title#generic-modal-title Modal title!
+        .modal-content.details-form#generic-modal-content
           label Test input
           input(type='text', value='test')
           label Test textarea
@@ -60,19 +60,19 @@ html.no-js(lang='en')
           img(src='/images/modal-close.png', alt='Close')
         h1.modal-title Register to see more!
         .modal-content.details-form
-          input.half(type='text', placeholder='First Name')
-          input.half(type='text', placeholder='Last Name')
-          input.half(type='text', placeholder='Email Address')
-          input.half(type='text', placeholder='Postcode')
-          input.half(type='text', placeholder='Password')
-          input.half(type='text', placeholder='Confirm Password')
+          input.half.register-first-name(type='text', placeholder='First Name')
+          input.half.register-last-name(type='text', placeholder='Last Name')
+          input.half.register-email(type='text', placeholder='Email Address')
+          input.half.register-postcode(type='text', placeholder='Postcode')
+          input.half.register-password(type='password', placeholder='Password')
+          input.half.register-password2(type='password', placeholder='Confirm Password')
           .submit-buttons
-            input.button.right(type='submit', value='Create Account')
+            input.button.right.register-button(type='submit', value='Create Account')
             .terms-checkbox
               input#terms(type='checkbox')
               label(for='terms')
                 | I agree to the Property Own
-                a(href='#') Terms & Conditions
+                a(href='/terms',target="_blank") Terms & Conditions
           hr
           .center
             | Already registered?
@@ -93,7 +93,7 @@ html.no-js(lang='en')
               input.button.right.login-button(type='submit', value='Login')
               .terms-checkbox(style='text-align: right;')
                 input#remember(type='checkbox')
-                label(for='terms') Remember Me
+                label(for='remember') Remember Me
             hr
             .center
               | Don't have an account?
