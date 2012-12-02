@@ -20,13 +20,13 @@ block content
       
       hr
       
-      form.details-form(action='/owls', method='post')
+      form.details-form.fake(action='/owls', method='post')
         
         include ../../flashify
         
         include inputs
         
-        include image_inputs
+        //- include image_inputs
         
         .submit
           input.button(type='submit', value='Edit Owl')

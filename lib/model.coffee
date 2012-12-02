@@ -17,7 +17,7 @@ module.exports = class Model
     @id = this[@constructor.table.key]
   
   hydrate: (callback) ->
-    console.log 'constructor', @constructor
+    # console.log 'constructor', @constructor
     
     for key, field of @constructor.table.columns
       continue if this[key]?

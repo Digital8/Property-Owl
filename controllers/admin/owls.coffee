@@ -1,3 +1,8 @@
+fs = require 'fs'
+
+async = require 'async'
+uuid = require 'node-uuid'
+
 system = require '../../system'
 
 Owl = system.models.owl
@@ -18,7 +23,9 @@ exports.add = (req, res) ->
 exports.create = (req, res) ->
   Owl.create req.body, (error, owl) ->
     console.log 'create', arguments
-    res.redirect "/owls/#{owl.id}"
+    
+    owl.upload req, ->
+      res.redirect "/owls/#{owl.id}"
 
 exports.delete = (req, res) ->
   Owl.get req.params.id, (error, owl) ->

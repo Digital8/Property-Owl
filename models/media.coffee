@@ -1,4 +1,7 @@
+fs = require 'fs'
+
 async = require 'async'
+uuid = require 'node-uuid'
 
 Model = require '../lib/model'
 Table = require '../lib/table'
@@ -13,8 +16,11 @@ module.exports = class Media extends Model
   # @belongsTo Model, as: 'owner'
   # @blongsTo Model, as: 'entity'
   
+  @field 'owner_id'
+  @field 'entity_id'
   @field 'filename'
-  @field 'description'
+  
+  # @field 'description'
   # @field 'image'
   # @field 'hero'
   
@@ -24,11 +30,53 @@ module.exports = class Media extends Model
   hydrate: (callback) ->
     super callback
   
+  @upload = (args, callback) =>
+    # hash.filename = uuid()
+    
+    # @create
+    
+    # file = req.files[key]
+    # file.id = uuid()
+    
+    id = uuid()
+    
+    console.log 'uploading...', file
+    
+    {file, entity_id, owner_id} = args
+    
+    fs.readFile file.path, (error, data) =>
+      path = "#{system.bucket}/#{id}"
+      
+      fs.writeFile path, data, (error) =>
+        @create
+          entity_id: entity_id
+          owner_id: owner_id
+          filename: id
+        , callback
+  
+  # @create = (hash, callback) =>
+  #   console.log arguments
+  #   super
+  
   # deals: (callback) ->
   #   @db.query "SELECT * FROM deals WHERE #{@table.key} = ?", [@id], (error) ->
   #     return callback error if error
   
   #     callback null
+  
+  # @make = =>
+  #   file = req.files[key]
+  #   file.id = uuid()
+    
+  #   console.log 'uploading...', file
+    
+  #   fs.readFile file.path, (error, data) ->
+  #     req.body.medias[] = file 
+      
+  #     path = "#{system.bucket}/#{req.body.image_id}"
+      
+  #     fs.writeFile path, data, (error) ->
+  #       callback null
   
   @for = (model, callback) =>
     @all (error, callback) ->

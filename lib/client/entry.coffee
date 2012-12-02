@@ -3,7 +3,7 @@ moment = require 'moment'
 _ = require 'underscore'
 
 $ ->
-  forms = ($ '.details-form')
+  forms = ($ '.fake')
   
   for form in forms
     $button = $ '<button>fake</button>'
