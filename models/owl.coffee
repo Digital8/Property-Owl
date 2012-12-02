@@ -53,6 +53,25 @@ module.exports = class Owl extends Model
       
       callback null
   
+  upload: (req, callback) ->
+    if req.files? and (Object.keys req.files).length
+      async.forEach (Object.keys req.files), (key, callback) =>
+        file = req.files[key]
+        
+        Media.upload
+          entity_id: @id
+          owner_id: req.session.user_id
+          file: file
+        , (error, media) ->
+          callback error, media
+      
+      , callback
+    
+    else
+      console.log 'no uploads'
+      
+      callback()
+  
   @state = (state, callback) ->
     console.log state
     

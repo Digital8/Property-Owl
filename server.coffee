@@ -67,8 +67,8 @@ app.configure ->
     res.locals.menu = {}
     res.locals.data = system.data
     
-    if app.argv.hack
-      req.session.user_id = 1
+    # if app.argv.hack
+    #   req.session.user_id = 1
     
     res.locals.navigation = [
       {key: 'aus-best-deal', href: '/owls/top', label: "Australia's Best Deal"}
