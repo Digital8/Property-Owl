@@ -22,7 +22,7 @@ module.exports = class Owl extends Model
       callback null, models
   
   @get = (id, callback) ->
-    @db.query "SELECT * FROM #{@table.name} WHERE barn_id = ?", [id], (error, rows) ->
+    @db.query "SELECT * FROM owls WHERE owl_id = ?", [id], (error, rows) ->
       return callback error if error
       
       callback null, new Owl rows[0]
