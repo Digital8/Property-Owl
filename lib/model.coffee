@@ -1,24 +1,22 @@
 {db} = require '../system'
 
-class Table
-  constructor: (args = {}) ->
-    @name = args.name
-
 module.exports = class Model
-  @table = new Table
+  @db = db
   
   constructor: (args = {}) ->
-    console.log args
+    for key, value of args
+      @[key] = value
+    
+    @id = this[@constructor.table.key]
   
   @all = (callback) ->
-    db.query "SELECT * FROM #{@table.name}", (error, rows) ->
+    @db.query "SELECT * FROM #{@table.name}", (error, rows) =>
       return callback error if error
       
       models = []
       
       for row in rows
-        model = new @ row
-        models.push model
+        models.push (new this row)
       
       callback null, models
 

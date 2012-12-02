@@ -1,33 +1,37 @@
 Model = require '../lib/model'
+Table = require '../lib/table'
 
 module.exports = class Owl extends Model
-  @table.name = 'owls'
+  @table = new Table
+    name: 'owls'
+    key: 'owl_id'
   
   constructor: (args = {}) ->
-    for key, value of args
-      @[key] = value
-    
     super
   
   deals: (callback) ->
-    
+    @db.query "SELECT * FROM deals WHERE owl_id = ?", [@id], (error) ->
+      return callback error if error
+      
+      callback null
+  
   @delete = (id, callback) ->
     @db.query "DELETE FROM #{@table.name} WHERE owl_id = ?", [id], (error) ->
       return callback error if error
       
       callback null
   
-  @all = (callback) ->
-    @db.query "SELECT * FROM #{@table.name}", (error, rows) ->
-      return callback error if error
+  # @all = (callback) ->
+  #   @db.query "SELECT * FROM #{@table.name}", (error, rows) ->
+  #     return callback error if error
       
-      models = []
+  #     models = []
       
-      for row in rows
-        model = new Owl row
-        models.push model
+  #     for row in rows
+  #       model = new Owl row
+  #       models.push model
       
-      callback null, models
+  #     callback null, models
   
   @get = (id, callback) ->
     @db.query "SELECT * FROM owls WHERE owl_id = ?", [id], (error, rows) ->
@@ -71,16 +75,3 @@ module.exports = class Owl extends Model
       return callback error if error
       
       callback null, new Owl rows[0]
-        
-        # owls.push new @constructor row
-      
-      # console.log owls
-    
-    # @all (error, owls) ->
-    #   return callback error if error
-      
-    #   return callback new Error 'no owls' unless owls.length
-      
-    #   owl = owls.pop()
-      
-    #   callback null, owl
