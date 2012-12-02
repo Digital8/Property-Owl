@@ -17,8 +17,6 @@ classes = user: load.class 'user'
 
 app = express()
 
-(require './browserifyafication.coffee') app
-
 hack.augmentApp app
 hack.augmentDB app, system
 
@@ -98,6 +96,8 @@ app.configure ->
 server = app.listen config.port
 
 (require './import') app, system
+
+(require './browserifyafication.coffee') app
 
 (require './routes') app
 
