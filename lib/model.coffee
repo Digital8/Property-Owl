@@ -5,6 +5,11 @@ async = require 'async'
 module.exports = class Model
   @db = db
   
+  @field = (key, args = {}) ->
+    @fields ?= {}
+    
+    @fields[key] = args
+  
   constructor: (args = {}) ->
     for key, value of args
       @[key] = value
@@ -12,14 +17,41 @@ module.exports = class Model
     @id = this[@constructor.table.key]
   
   hydrate: (callback) ->
+    console.log 'constructor', @constructor
+    
     for key, field of @constructor.table.columns
-      unless this[key]? then this[key] = ''
+      continue if this[key]?
+      
+      if /int\(\d+\)/.test field.Type
+        this[key] = 0
+      else
+        this[key] = ''
     
     callback null, this
   
   @new = (callback) ->
     model = new this
     model.hydrate callback
+  
+  @create = (map, callback) ->
+    model = new this map
+    
+    hash = {}
+    
+    for key, field of @fields
+      hash[key] = model[key]
+    
+    hash.created_at = 'NOW()'
+    hash.updated_at = 'NOW()'
+    
+    model.hydrate (error, model) =>
+      @db.query "INSERT INTO #{@table.name} SET ?", hash, (error, result) =>
+        id = result.insertId
+        
+        model.id = id
+        model[@table.key] = id
+        
+        callback error, model
   
   @all = (callback) ->
     @db.query "SELECT * FROM #{@table.name}", (error, rows) =>

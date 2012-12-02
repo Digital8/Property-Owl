@@ -1,3 +1,4 @@
+_ = require 'underscore'
 optimist = require 'optimist'
 
 module.exports = (app, system) ->
@@ -12,7 +13,7 @@ module.exports.augmentDB = (app, system) ->
     
     db._query = db.query
     db.query = ->
-      console.log arguments[0], arguments[1]
+      console.log (_.filter arguments, (argument) -> typeof argument isnt 'function')...
       db._query arguments...
 
 module.exports.augmentApp = (app) ->

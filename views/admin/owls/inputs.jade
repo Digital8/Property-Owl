@@ -5,8 +5,8 @@
     input#title(type='text', name='title', value='#{owl.title}')
   
   .inputs
-    label(for='type') Type
-    select#type(type='text', name='type')
+    label(for='development_type_id') Type
+    select#development_type_id(type='text', name='development_type_id')
       option
       - for type in data.developmentTypes
         option(value='#{type.id}')= type.name
@@ -19,6 +19,16 @@
     label(for='description') Description
       textarea#description(name='description')
         = owl.description
+  
+  hr
+  
+  .inputs
+    label(for='internal_area') Internal Area
+    input#internal_area(type='number', name='internal_area', value='#{owl.internal_area}', min='0', max='100000000')
+
+  .inputs
+    label(for='external_area') External Area
+    input#external_area(type='number', name='external_area', value='#{owl.external_area}', min='0', max='100000000')
   
   hr
   

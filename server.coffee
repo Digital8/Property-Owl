@@ -1,3 +1,5 @@
+require 'colors'
+
 hack = require './hack'
 hack.augmentConsole()
 
@@ -76,11 +78,11 @@ app.configure ->
       {key: 'products', href: '#', label: 'Products & Services'}
       {key: 'my-nest', href: '#', label: 'My Nest'}
     ]
-
+    
     url = '/' + req.url.split('/')[1] + '%'
     if url is '/%' then url = '/'
-
-    console.log url
+    
+    console.log url.green
     
     console.start 'ads'
     

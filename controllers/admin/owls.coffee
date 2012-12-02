@@ -15,6 +15,11 @@ exports.add = (req, res) ->
   Owl.new (error, owl) ->
     res.render 'admin/owls/add', owl: owl
 
+exports.create = (req, res) ->
+  Owl.create req.body, (error, owl) ->
+    console.log 'create', arguments
+    res.redirect "/owls/#{owl.id}"
+
 exports.delete = (req, res) ->
   Owl.get req.params.id, (error, owl) ->
     res.render 'admin/owls/delete', owl: owl
