@@ -1,5 +1,6 @@
 faker = require 'Faker'
 moment = require 'moment'
+_ = require 'underscore'
 
 $ ->
   forms = ($ '.details-form')
@@ -44,3 +45,17 @@ $ ->
           field.val value
     
     $button.prependTo form
+
+$ ->
+  geoURL = (q, sensor = no) ->
+    "http://maps.googleapis.com/maps/api/geocode/json?address=#{q}&sensor=#{sensor}"
+  
+  for geo in ($ '[data-geo]')
+    $geo = $ geo
+    
+    $geo.keydown (event) ->
+      query = $geo.val()
+      
+      url = geoURL query
+      
+      $.get url, () -> console.log arguments
