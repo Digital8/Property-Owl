@@ -51,7 +51,7 @@ $(function(){
 	var infoHeight = 0;
 	
 	$(".more-info h2").on("click", function(){ 
-	  console.log('sdfsdf');
+	  //console.log('sdfsdf');
 		var infoitems = $(this).closest(".more-info"),
 			infoList = $("ul", infoitems);
 		
@@ -118,6 +118,15 @@ $(function(){
 		event.preventDefault();
 		loginModal.hide();
 		registerModal.fadeToggle(150);
+		return false;
+	});
+	
+	// show register form
+	var secureDealModal = $(".secure-deal-overlay");
+	
+	$(".show-secure-deal, .close-secure-deal").on("click", function(event){
+		event.preventDefault();
+		secureDealModal.fadeToggle(150);
 		return false;
 	});
 	
@@ -220,9 +229,10 @@ $(function(){
 	      window.location.replace('/');
 	    }
 	    else {
-	      console.log('fix this plz');
+	      //console.log('fix this plz');
 	      var errors = Object.keys(d.errors);
   	    
+  	    $("#generic-modal, #generic-modal .modal.main").removeClass('success').addClass('error');
 	      $('#generic-modal-title').html('Please fix the following');
 	      $('#generic-modal-content').html('<br /><ul>');
 	      for(i=0; i<errors.length;i++)
@@ -241,6 +251,54 @@ $(function(){
 	$(".register-first-name, .register-last-name, .register-email, .register-postcode, .register-password, .register-password2").on("keypress", function(event){
 	  if(event.keyCode == 13){
 	    $(".register-button").click();
+	  }
+	});
+	
+	// Secure Deal
+	$(".secure-deal-button").on("click", function(event){
+	  var firstName = $(".secure-deal-first-name").val();
+	  var lastName = $(".secure-deal-last-name").val();
+	  var email = $(".secure-deal-email").val();
+	  var mobile = $(".secure-deal-phone").val();
+	  var comment = $(".secure-deal-comment").val();
+	  
+	  $.ajax({
+	    url: '/ajax/securedeal',
+	    type: 'post',
+	    data: 'e=' + email + '&m=' + mobile + '&f=' + firstName + '&l=' + lastName + '&c=' + comment
+	  }).done(function(d){
+	    if (d.status == 200) {
+	      //showPayment();
+	      //success();
+	      //window.location.replace('/');
+	      secureDealModal.fadeToggle(150);
+	      $("#generic-modal, #generic-modal .modal.main").removeClass('error').addClass('success')
+	      $('#generic-modal-title').html('Thanks for registering!');
+	      $('#generic-modal-content').html('<br /><br /><center>You should recieve an email shortly</center>');
+	      $('#generic-modal').fadeToggle(150);
+	    }
+	    else {
+	      var errors = Object.keys(d.errors);
+  	    
+  	    $("#generic-modal, #generic-modal .modal.main").removeClass('success').addClass('error')
+	      $('#generic-modal-title').html('Please fix the following');
+	      $('#generic-modal-content').html('<br /><ul>');
+	      for(i=0; i<errors.length;i++)
+	      {
+	         $('#generic-modal-content').append('<li><b>' + d.errors[errors[i]].msg + '</b></li>');
+	      }
+        $('#generic-modal-content').append('</ul>');
+        
+	      $('#generic-modal').fadeToggle(150);
+	      //modalCallback = function(){console.log('penis')};
+	    }
+	  });
+	  return false;
+	});
+	
+	$(".secure-deal-first-name, .secure-deal-last-name, .secure-deal-email, .secure-deal-phone, .secure-deal-comment").on("keypress", function(event){
+	  if(event.keyCode == 13){
+	    $(".secure-deal-button").click();
 	  }
 	});
 	
@@ -296,7 +354,7 @@ $(function(){
       method: 'GET',
       data: 'id='+id+'&type='+type
     }).done(function(d){
-      console.log(d);
+      //console.log(d);
       if(d.status == 200) alert('You have registered for this property')
   	});
   });	
