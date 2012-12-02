@@ -33,6 +33,7 @@ app.configure ->
     res.locals.globals = system.config.globals
     res.locals.modules = system.config.modules ? {} # If modules exist, allow views to check its status
     res.locals.objUser = new classes.user [] # Empty user object
+    res.locals.req = req
     res.locals.menu = {}
     req.session.user_id = 1
     

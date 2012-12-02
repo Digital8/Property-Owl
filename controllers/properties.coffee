@@ -18,7 +18,7 @@ exports.view = (req,res) ->
       models.deals.getDealsByPropertyId req.params.id, (err, deals) ->
         models.media.getMediaByPropertyId req.params.id, (err, files) ->
           models.media.getImagesByPropertyId req.params.id, (err, images) ->
-            res.render 'properties/view', property: results.pop(), deals: deals or {}, files: files or {} , images: images or {}
+            res.render 'properties/view', property: results.pop(), deals: deals or {}, files: files or {} , images: images or {}, exclusive: yes
   
 exports.add = (req,res) ->
 

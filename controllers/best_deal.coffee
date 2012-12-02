@@ -17,7 +17,7 @@ exports.index = (req,res) ->
       models.deals.getDealsByPropertyId property.property_id, (err, deals) ->
         models.media.getMediaByPropertyId property.property_id, (err, files) ->
           models.media.getImagesByPropertyId property.property_id, (err, images) ->
-            res.render 'deals/best_deal', menu: 'aus-best-deal', property: property, deals: deals or {}, files: files or {} , images: images or {}
+            res.render 'deals/best_deal', menu: 'aus-best-deal', property: property, deals: deals or {}, files: files or {} , images: images or {}, exclusive: yes
 
 exports.view = (req,res) ->
 

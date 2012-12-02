@@ -29,7 +29,7 @@ exports.view = (req,res) ->
           models.media.getMediaByPropertyId req.params.id, (err, files) ->
             models.media.getImagesByPropertyId req.params.id, (err, images) ->
               models.lots.getLotsByPropertyId req.params.id, (err,lots) ->
-                res.render 'barn_deals/view', property: property, deals: deals or {}, files: files or {}, images: images or {}, lots: lots or {}
+                res.render 'barn_deals/view', property: property, deals: deals or {}, files: files or {}, images: images or {}, lots: lots or {}, exclusive: yes
 
 # GET
 exports.add = (req,res) ->
