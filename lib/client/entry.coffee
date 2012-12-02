@@ -5,19 +5,19 @@ $ ->
   forms = ($ '.details-form')
   
   for form in forms
-    button = $ '<button>fake</button>'
-    button.click (event) ->
+    $button = $ '<button>fake</button>'
+    
+    $button.click (event) ->
       event.preventDefault()
       
-      console.log 'cicks'
-      
-      fields = ($ form).find 'input'
+      fields = ($ form).find 'input, textarea, select'
       
       map =
-        'title': -> faker.Lorem.sentence()
+        'title': -> faker.Company.catchPhrase()
         'description': -> faker.Lorem.paragraphs()
-        'title': -> faker.Lorem.sentence()
-        'title': -> faker.Lorem.sentence()
+        'address': -> faker.Address.streetAddress()
+        'suburb': -> faker.Address.city()
+        'postcode': -> faker.Helpers.replaceSymbolWithNumber '####'
       
       for field in fields
         field = $ field
@@ -27,11 +27,20 @@ $ ->
         
         continue if type is 'submit'
         
-        value = ''
+        if field.is 'select'
+          $options = field.find 'option'
+          random = ~~(Math.random() * $options.length)
+          random = Math.max 1, random # skip the first option
+          $options.eq(random).prop 'selected', true
         
-        if map[name]
-          value = do map[name]
-        
-        field.val value
+        else
+          value = ''
+          
+          if map[name]
+            value = do map[name]
+          
+          console.log "setting #{name} to #{value}"
+          
+          field.val value
     
-    button.prependTo form
+    $button.prependTo form
