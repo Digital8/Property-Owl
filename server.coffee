@@ -40,6 +40,7 @@ app.configure ->
     res.locals.globals = config.globals
     res.locals.modules = config.modules ? {} # If modules exist, allow views to check its status
     res.locals.objUser = new classes.user [] # Empty user object
+    res.locals.req = req
     res.locals.menu = {}
     
     if app.argv.hack

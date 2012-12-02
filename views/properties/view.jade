@@ -19,37 +19,7 @@ block content
     #deal_id(style="display:none")
       | #{property.property_id}
     #left-col
-      .deal-stats
-        .timer
-          #timer
-            #day-timer
-              span.label Days
-              span#day-timer-days.value
-            #hour-timer
-              span.label Hours
-              span#day-timer-hours.value
-            #minute-timer
-              span.label Mins
-              span#day-timer-mins.value
-          #map
-            img#map-image(src='/images/map.png', usemap='#australia', alt='Click on a State of Australia')
-            map(name='australia')
-              area#map-wa(shape='polygon', coords='65,25,65,100,17,116,3,62,57,19', href='/owls/state/wa')
-              area#map-nt(shape='polygon', coords='65,25,65,69,103,69,103,35,91,24,94,13,75,10', href='/owls/state/nt')
-              area#map-qld(shape='polygon', coords='103,68,103,34,111,39,119,10,159,82,116,82,116,68', href='/owls/state/qld')
-              area#map-sa(shape='polygon', coords='116,68,65,68,65,100,116,129', href='/owls/state/sa')
-              area#map-nsw(shape='polygon', coords='116,82,159,82,145,126,116,104', href='/owls/state/nsw')
-              area#map-vic(shape='polygon', coords='116,104,145,126,137,131,110,128,116,129', href='/owls/state/vic')
-              area#map-act(shape='square', coords='155,110,185,110,185,120,155,120', href='/owls/state/act')
-              area#map-tas(shape='square', coords='120,140,170,140,170,155,120,155', href='/owls/state/tas')
-        .counter
-          span.label Number of Enquiries
-          span.value 1,345
-      .barn-box
-        a(href="/barn-deals")
-          h2 The Barn
-          img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
-          h3 Group Deals
+      include ../left_nav
       .share
         ul
           li
@@ -71,8 +41,12 @@ block content
       .enquiry
         h2 Enquire About This Deal
         form#input-form
+          label(for='propertyName') Name
+          input#propertyName(type='text',disabled,value=objUser.firstName+' '+objUser.lastName)
+          label(for='propertyEmail') Email:
+          input#propertyEmail(type='text',disabled,value=objUser.email)
           label(for='propertyPhone') Phone
-          input#propertyPhone(type='text')
+          input#propertyPhone(type='text',value=objUser.phone)
           label(for='propertyContactMethod') Contact Method
           select#propertyContactMethod
             option Phone
@@ -156,9 +130,15 @@ block content
                   li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
           .secure-deal
             a.secure-button.register(href='#',data-id="#{property.property_id}", data-type="property") Secure the Deal!
+              span.sub (expression of interest)
           iframe#google-map(width='100%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913&output=embed')
           br
           a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913', target="_blank") View Larger Map
+          
+          if(property.barn_id)
+            .barn-link
+              a(href="/barn/deals/#{property.barn_id}") View Barn Deal
+                img#barn-image(src='/images/barn-link.png', alt='View Barn Deal')
           
           .more-info
             h2 
