@@ -23,8 +23,3 @@ module.exports = class Model
       callback null, models
 
 Model.db = db
-
-db._query = db.query
-db.query = ->
-  console.log arguments[0], arguments[1]
-  db._query arguments...

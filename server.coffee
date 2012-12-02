@@ -18,6 +18,7 @@ classes = user: load.class 'user'
 app = express()
 
 hack.augmentApp app
+hack.augmentDB app, system
 
 app.configure ->
   console.start 'configure'
