@@ -1,0 +1,53 @@
+extends ../../layout
+
+block content
+ //
+   main content
+ .container.row.main
+     include ../../admin-menu
+     h1 Reports
+      span.secondary  - Advertising Click Throughs
+     include reportsMenu
+     .grid-header
+       form#search-form
+         input#propertySearch(type='text')
+         | &nbsp;
+         input.button(type='submit', value='Go')
+         | &nbsp;
+         input.button(type='submit', value='Reset')
+         .divider
+         select#propertyState
+           option State
+           option ACT
+           option NSW
+           option NT
+           option QLD
+           option SA
+           option TAS
+           option VIC
+           option WA
+         | &nbsp;
+         select#propertyStatus
+           option Status
+           option Pending
+           option Pre-release
+           option Current
+           option Ended
+     table.admin-gridview
+       thead
+         tr
+           td ID
+           td Started On
+           td Advertiser
+           td Ad
+           td Click Throughs
+       tbody
+        - each advert in adverts
+          tr
+           td= advert.advertisement_id
+           - var listed = new Date(advert.created_at)
+           td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+           td= advert.advertiser
+           td= advert.ad
+           td= advert.clickthroughs
+   

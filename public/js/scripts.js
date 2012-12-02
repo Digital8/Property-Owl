@@ -7,6 +7,17 @@ $(window).load(function() {
 	
 });
 
+$(document).ready(function(){
+  	$("div.clickable").click(
+	function()
+	{
+	    window.location = $(this).attr("url");
+	    return false;
+	});
+	
+	
+});
+	
 $(function(){
 	
 	// reveal deal list
