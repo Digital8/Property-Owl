@@ -16,8 +16,23 @@ module.exports = class Model
       models = []
       
       for row in rows
-        models.push (new this row)
+        model = new this row
+        models.push model
       
       callback null, models
+  
+  @delete = (id, callback) ->
+    @db.query "DELETE FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error) =>
+      return callback error if error
+      
+      callback null
+  
+  @get = (id, callback) ->
+    @db.query "SELECT * FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error, rows) =>
+      return callback error if error
+      
+      model = new this rows[0]
+      
+      callback null, model
 
 Model.db = db

@@ -149,13 +149,14 @@ block content
               h2
                 | Reveal the Deal
                 img.arrow(src='/images/blue-arrow-icon-down.png', alt='Reveal the Deal')
-              - if (owl.deals.length == 0)
+              - if (!owl.deals.length)
                 ul
                   li No deals have been listed
               - else
                 ul
-                  - each deal in deals
-                    li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
+                  - each deal in owl.deals
+                    - if (deal)
+                      li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
             .secure-deal
               a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.property_id}", data-type="property") Secure the Deal!
           

@@ -10,34 +10,10 @@ module.exports = class Owl extends Model
     super
   
   deals: (callback) ->
-    @db.query "SELECT * FROM deals WHERE owl_id = ?", [@id], (error) ->
+    @db.query "SELECT * FROM deals WHERE #{@table.key} = ?", [@id], (error) ->
       return callback error if error
       
       callback null
-  
-  @delete = (id, callback) ->
-    @db.query "DELETE FROM #{@table.name} WHERE owl_id = ?", [id], (error) ->
-      return callback error if error
-      
-      callback null
-  
-  # @all = (callback) ->
-  #   @db.query "SELECT * FROM #{@table.name}", (error, rows) ->
-  #     return callback error if error
-      
-  #     models = []
-      
-  #     for row in rows
-  #       model = new Owl row
-  #       models.push model
-      
-  #     callback null, models
-  
-  @get = (id, callback) ->
-    @db.query "SELECT * FROM owls WHERE owl_id = ?", [id], (error, rows) ->
-      return callback error if error
-      
-      callback null, new Owl rows[0]
   
   @state = (state, callback) ->
     console.log state
