@@ -1,0 +1,18 @@
+tr
+  td= barn.barn_id
+  td= barn.created_at
+  td= barn.developer
+  td= barn.state
+  td Current
+  td 4
+  td= "#{Math.round(Math.random() * 1000))"
+  
+  td.actions
+    a(href="/admin/owls/#{barn.barn_id}/edit")
+      img(src='/images/edit.png', alt='Edit')
+      | Edit
+  
+  td.actions
+    a(href="/admin/owls/#{barn.property_id}/delete")
+      img(src='/images/delete.png', alt='Delete')
+      | Delete

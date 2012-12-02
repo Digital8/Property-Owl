@@ -1,0 +1,20 @@
+extends ../../layout
+
+block content
+ .container.row.main
+    include ../../admin-menu
+    
+    p Delete
+    
+    #center-col
+      include ../../owls/summary
+    
+    h3 Are you sure?
+    
+    form(action="/admin/owls/#{owl.owl_id}", method='post')
+      input(type='hidden', name='_method', value='delete')
+      
+      p
+        input(type='submit', value='Yes, delete')
+        | &nbsp; 
+        a(href='#'') Cancel

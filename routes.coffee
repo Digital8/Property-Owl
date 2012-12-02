@@ -126,9 +126,11 @@ module.exports = (app) ->
   # owls
   app.get '/admin/owls', (authorize acl.admin), controllers.admin.owls.index
   app.get '/admin/owls/add', (authorize acl.admin), controllers.admin.owls.add
-  app.post '/admin/owls/add', (authorize acl.admin), controllers.admin.owls.create
-  app.get '/admin/owls/edit/:id', (authorize acl.admin), controllers.admin.owls.edit
-  app.put '/admin/owls/add', (authorize acl.admin), controllers.admin.owls.update
+  app.post '/admin/owls', (authorize acl.admin), controllers.admin.owls.create
+  app.get '/admin/owls/:id/edit', (authorize acl.admin), controllers.admin.owls.edit
+  app.put '/admin/owls/:id', (authorize acl.admin), controllers.admin.owls.update
+  app.get '/admin/owls/:id/delete', (authorize acl.admin), controllers.admin.owls.delete
+  app.del '/admin/owls/:id', (authorize acl.admin), controllers.admin.owls.destroy
   
   # barn
   app.get '/admin/barns', (authorize acl.admin), controllers.admin.barns.index

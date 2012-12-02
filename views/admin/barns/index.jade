@@ -5,21 +5,15 @@ block content
   .container.row.main
     include ../../admin-menu
     
-    h1 Barn Deal Listings
+    h1 Barns
     
     include ../../flashify
     
-    .admin-actions
-      ul
-        li
-          a(href='/admin/barns/add')
-            img(src='/images/add.png')
-            | &nbsp;
-            | Add New Deal
-        // .grid-summary 1 - 4 of 24
+    include actions
     
     - if (!(locals.barns && barns.length))
       p No barn deals have been created yet.
+    
     - else
       .grid-header
         //- form#search-form
@@ -63,24 +57,12 @@ block content
               td Lots
               td Registrations
               td(colspan='2') Actions
+          
           tbody
            - each barn in barns
-             tr
-              td= barn.barn_id
-              td= barn.created_at
-              td= barn.developer
-              td= barn.state
-              td Current
-              td 4
-              td 134
-              td.actions
-                a(href="/admin/properties/edit/#{barn.property_id}")
-                  img(src='/images/edit.png', alt='Edit')
-                  | Edit
-              td.actions
-                a(href="/admin/properties/delete/#{barn.property_id}")
-                  img(src='/images/delete.png', alt='Delete')
-                  | Delete
+             
+             include summary
+          
           tfoot
             tr
               td(colspan='12')

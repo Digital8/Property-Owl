@@ -9,6 +9,12 @@ module.exports = class Owl extends Model
     
     super
   
+  @delete = (id, callback) ->
+    @db.query "DELETE FROM #{@table.name} WHERE owl_id = ?", [id], (error) ->
+      return callback error if error
+      
+      callback null
+  
   @all = (callback) ->
     @db.query "SELECT * FROM #{@table.name}", (error, rows) ->
       return callback error if error

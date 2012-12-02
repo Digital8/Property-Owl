@@ -7,13 +7,8 @@ block content
       
       h1 Owl Deals
       
-      .admin-actions
-        ul
-          li
-            a(href='/admin/properties/add')
-              img(src='/images/add.png')
-              | &nbsp;
-              | Add New Deal
+      include actions
+        
         // .grid-summary 1 - 4 of 24
       
       .grid-header
@@ -60,31 +55,7 @@ block content
             td(colspan='3') Actions
         tbody
          - each owl in owls
-           tr
-            td= owl.owl_id
-            - var listed = new Date(owl.created_at)
-            td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
-            td= owl.address
-            td= owl.state.toUpperCase()
-            td
-              if (owl.approved == 1)
-               | Approved
-              else
-               | Pending
-            td 20 %
-            td 134
-            td.actions
-              a(href='/properties/view/#{owl.owl_id}', alt='view owl', target="_blank")
-                img(src='/images/view.png', alt='View')
-                | View
-            td.actions
-              a(href='/admin/properties/edit/#{owl.owl_id}', alt='edit owl')
-                img(src='/images/edit.png', alt='Edit')
-                | Edit
-            td.actions
-              a(href='#', alt='delete owl')
-                img(src='/images/delete.png', alt='Delete')
-                | Delete
+           include summary
         tfoot
           tr
             td(colspan='11')
