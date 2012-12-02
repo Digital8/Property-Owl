@@ -336,9 +336,14 @@ $(function(){
   	  newDealTime = newDealTime.hours(24*7);
 	  }
 
+  	var minutes = newDealTime.diff(timeNow, 'minutes') % 60;
+  	if (minutes < 10) minutes = '0' + minutes;
   	
-  	$("#day-timer-mins").html(newDealTime.diff(timeNow, 'minutes') % 60);
-  	$("#day-timer-hours").html(newDealTime.diff(timeNow, 'hours') % 24);
+  	var hours = newDealTime.diff(timeNow, 'hours') % 24;
+  	if (hours < 10) hours = '0' + hours;
+  	
+  	$("#day-timer-mins").html(minutes);
+  	$("#day-timer-hours").html(hours);
   	$("#day-timer-days").html(newDealTime.diff(timeNow, 'days'));  	
   }
   
