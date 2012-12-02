@@ -7,7 +7,8 @@ module.exports = (app) ->
   
   # auth
   app.all '/login', controllers.login.index
-  app.get '/sign-out', controllers.signout.index
+  app.get '/sign-out', controllers.misc.logout
+  app.get '/logout', controllers.misc.logout
   app.get '/sign-up', controllers.signup.index
   app.post '/sign-up', controllers.signup.create
   
