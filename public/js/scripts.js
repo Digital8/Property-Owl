@@ -159,7 +159,7 @@ $(function(){
 	});
 	
   /*$(".secure-button").on("click", function(){
-    $('body').append('<div class="quick-view-modal" id="register" onclick="javascript: window.location=\'/owls/top\';" style=""><div class="modal"><a href="#" class="modal-close"></a></div></div>');
+    $('body').append('<div class="quick-view-modal" id="register" onclick="javascript: window.location=\'/best-deal\';" style=""><div class="modal"><a href="#" class="modal-close"></a></div></div>');
   });*/
   
   // Login

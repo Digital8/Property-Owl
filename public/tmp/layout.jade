@@ -47,10 +47,10 @@ head
             ul.sf-menu
                 li
                   - var c = (menu == 'aus-best-deal') ? 'active' : ''
-                  a(href='/hoot',class="#{c}") Australia's Best Deal
+                  a(href='/best-deal',class="#{c}") Australia's Best Deal
                 li
                   - var c = (menu == 'best-state-deal') ? 'active' : ''
-                  a(href='/owls/state/qld',class="#{c}") Best State Deal
+                  a(href='/deals/state/qld',class="#{c}") Best State Deal
                 li
                   - var c = (menu == 'owl-deals') ? 'active' : ''
                   a(href='/owl-deals',class="#{c}") Owl Deals
@@ -75,7 +75,7 @@ head
                         a(href='/contact') Contact Us
                       - if( objUser.isAdmin())
                         li
-                          a(href="/admin") admin
+                          a(href="/administration") Administration
                       li
                         a(href='#') Refer A Friend
                       li

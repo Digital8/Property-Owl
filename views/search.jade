@@ -1,6 +1,9 @@
 .find-deals
   h2 Find Deals
   form#input-form(action="/search",method="get")
+    img(src='/images/search-map-icon.png', alt='Suburb')
+    label(for='propertySuburb') Suburb
+    input#propertySuburb(type='text')
     img(src='/images/search-map-icon.png', alt='State / Territory')
     label(for='propertyState') State / Territory
     select#propertyState(name="state")
