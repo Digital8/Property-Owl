@@ -1,8 +1,19 @@
 optimist = require 'optimist'
 
-module.exports = (app) ->
+module.exports = (app, system) ->
   module.exports.augmentApp app
   module.exports.augmentConsole()
+  # module.exports.augmentDB app, system
+
+module.exports.augmentDB = (app, system) ->
+  if app.argv.verbose
+    
+    {db} = system
+    
+    db._query = db.query
+    db.query = ->
+      console.log arguments[0], arguments[1]
+      db._query arguments...
 
 module.exports.augmentApp = (app) ->
   app.argv = optimist

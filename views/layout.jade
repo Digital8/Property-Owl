@@ -32,10 +32,13 @@ html.no-js(lang='en')
     
     script(src='/js/scripts.js')
     
-    script(src='/raphael/raphael.js')
-    script(src='/js/map.js')
+    script(src='/js/raphael.js')
+    script(src='/js/g.raphael.js')
+    script(src='/js/g.line.js')
     
     script(src='/js/dropdowns.js')
+    
+    script(src='/bundle.js')
   
   body
 
@@ -141,7 +144,7 @@ html.no-js(lang='en')
                     ul
                       - if( objUser.isAdmin())
                         li
-                          a(href="/admin") admin
+                          a(href="/admin") Administration
                       li
                         a(href='/account') My Account
                       li
@@ -193,8 +196,8 @@ html.no-js(lang='en')
           li
             a(href='/contact') Advertising Enquiries
       div.bottom
-          span.attributed Powered by 
-            a(href="http://www.digital8.com.au",target="_blank") Digital8
+          span.attributed Website by 
+            a(href="http://www.digital8.com.au",target="_blank") D8
           | &copy; Copyright 2012 Property Owl
 script(type='text/javascript')
     var mySlider = $("#mySlider").evoSlider({

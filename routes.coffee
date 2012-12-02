@@ -138,6 +138,15 @@ module.exports = (app) ->
   app.get '/admin/barns/delete/:barn_id/:property_id', (authorize acl.admin), controllers.admin.barns.delete
   app.del '/admin/barns/delete/:barn_id/:property_id', (authorize acl.admin), controllers.admin.barns.destroy
   
+  # reports
+  app.get '/admin/reports', (authorize acl.admin), controllers.admin.reports.index
+  app.get '/admin/reports/dealListings', (authorize acl.admin), controllers.admin.reports.dealListings
+  app.get '/admin/reports/websiteRegistrations', (authorize acl.admin), controllers.admin.reports.websiteRegistrations
+  app.get '/admin/reports/propertySearches', (authorize acl.admin), controllers.admin.reports.propertySearches
+  app.get '/admin/reports/dealRegistrations', (authorize acl.admin), controllers.admin.reports.dealRegistrations
+  app.get '/admin/reports/servicesEnquiries', (authorize acl.admin), controllers.admin.reports.servicesEnquiries
+  app.get '/admin/reports/advertisingClicks', (authorize acl.admin), controllers.admin.reports.advertisingClicks
+  
   # # properties
   # app.get '/admin/properties', (authorize acl.admin), controllers.admin.properties.index
   # app.get '/admin/properties/add', (authorize acl.admin), controllers.admin.properties.add

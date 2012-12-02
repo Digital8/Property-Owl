@@ -33,7 +33,7 @@ block content
         span.label Number of Enquiries
         span.value 1,345
     
-    .deal-summary(style="background-image: url('/images/hero-image.jpg');")
+    .deal-summary.clickable(style="background-image: url('/images/hero-image.jpg');",url="owls/top")
       .home-hero-caption
         img#house-icon(src='/images/house-icon.png', alt="Australia's Best Property Deal")
         h2= "Australia's Best Property Deal"
@@ -48,11 +48,6 @@ block content
   .container.row.main
     
     #left-col
-      .barn-box
-        a(href="/barn-deals")
-          h2 The Barn
-          img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
-          h3 Group Deals
       
       include left_nav
     

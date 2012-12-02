@@ -18,6 +18,7 @@ classes = user: load.class 'user'
 app = express()
 
 hack.augmentApp app
+hack.augmentDB app, system
 
 app.configure ->
   console.start 'configure'
@@ -39,6 +40,7 @@ app.configure ->
     res.locals.globals = config.globals
     res.locals.modules = config.modules ? {} # If modules exist, allow views to check its status
     res.locals.objUser = new classes.user [] # Empty user object
+    res.locals.req = req
     res.locals.menu = {}
     
     if app.argv.hack
@@ -95,6 +97,8 @@ app.configure ->
 server = app.listen config.port
 
 (require './import') app, system
+
+(require './browserifyafication.coffee') app
 
 (require './routes') app
 
