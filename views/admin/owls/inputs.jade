@@ -5,6 +5,13 @@
     input#title(type='text', name='title', value='#{owl.title}')
   
   .inputs
+    label(for='type') Type
+    select#type(type='text', name='type')
+      option
+      - for type in data.developmentTypes
+        option(value='#{type.id}')= type.name
+  
+  .inputs
     label(for='price') Price
     input#price(type='number', name='price', value='#{owl.price}', min='0', max='100000000')
   
@@ -13,14 +20,37 @@
       textarea#description(name='description')
         = owl.description
   
+  hr
+  
   .inputs
-    label(for='features') Features
+    label(for='features') Internal Features
     select(name='features')
+      option
       option(value='foo') foo
       option(value='bar') bar
       option(value='zip') zip
       option(value='zap') zap
-      
+  
+  .inputs
+    label(for='features') External Features
+    select(name='features')
+      option
+      option(value='foo') foo
+      option(value='bar') bar
+      option(value='zip') zip
+      option(value='zap') zap
+  
+  .inputs
+    label(for='features') Other Features
+    select(name='features')
+      option
+      option(value='foo') foo
+      option(value='bar') bar
+      option(value='zip') zip
+      option(value='zap') zap
+  
+  hr
+  
   .inputs
     label(for='bedrooms') Bedrooms
     input#bedrooms(type='number', name='bedrooms', value='#{owl.bedrooms}', min='0')
@@ -38,6 +68,8 @@
   .inputs(data-geo='master')
     label(for='title') Geo
     input(type='text', value='')
+  
+  hr
 
   .inputs
     label(for='title') Address
@@ -54,7 +86,7 @@
   .inputs
     label(for='state') State
     select#state(name='state')
-      option(value='')
+      option
       option(value='act') ACT
       option(value='nsw') NSW
       option(value='nt') NT

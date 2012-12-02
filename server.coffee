@@ -3,6 +3,7 @@ hack.augmentConsole()
 
 console.start 'boot'
 
+async = require 'async'
 express = require 'express'
 expressValidator = require 'express-validator'
 flashify = require 'flashify'
@@ -36,12 +37,33 @@ app.configure ->
   app.use express.static "#{__dirname}/public"
   
   app.use (req, res, done) ->
+    schemas = []
+    for key, model of system.models when model instanceof Function
+      schemas.push model
+    
+    async.forEach schemas, (schema, callback) ->
+      system.db.query "SHOW COLUMNS FROM #{schema.table.name}", (error, rows) ->
+        for field in rows
+          schema.table.columns[field.Field] = field
+        callback()
+    , (error) -> done()
+  
+  app.use (req, res, done) ->
+    DevelopmentType = system.models.development_type
+    
+    DevelopmentType.all (error, developmentTypes) ->
+      system.data ?= {}
+      system.data.developmentTypes = developmentTypes
+      done()
+  
+  app.use (req, res, done) ->
     res.locals.session  = req.session
     res.locals.globals = config.globals
     res.locals.modules = config.modules ? {} # If modules exist, allow views to check its status
     res.locals.objUser = new classes.user [] # Empty user object
     res.locals.req = req
     res.locals.menu = {}
+    res.locals.data = system.data
     
     if app.argv.hack
       req.session.user_id = 1

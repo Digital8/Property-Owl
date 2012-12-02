@@ -1,3 +1,5 @@
+async = require 'async'
+
 {db} = require '../system'
 
 module.exports = class Model
@@ -9,6 +11,16 @@ module.exports = class Model
     
     @id = this[@constructor.table.key]
   
+  hydrate: (callback) ->
+    for key, field of @constructor.table.columns
+      unless this[key]? then this[key] = ''
+    
+    callback null, this
+  
+  @new = (callback) ->
+    model = new this
+    model.hydrate callback
+  
   @all = (callback) ->
     @db.query "SELECT * FROM #{@table.name}", (error, rows) =>
       return callback error if error
@@ -19,7 +31,11 @@ module.exports = class Model
         model = new this row
         models.push model
       
-      callback null, models
+      async.forEach models, (model, callback) ->
+        model.hydrate ->
+          callback()
+      , (error) ->
+        callback null, models
   
   @delete = (id, callback) ->
     @db.query "DELETE FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error) =>
@@ -33,6 +49,6 @@ module.exports = class Model
       
       model = new this rows[0]
       
-      callback null, model
+      model.hydrate callback
 
 Model.db = db

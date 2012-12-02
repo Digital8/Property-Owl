@@ -33,3 +33,6 @@ exports.load = load =
   
   helper: (helper) ->
     require "./lib/helpers/#{helper}"
+
+exports.Model = require './lib/model'
+exports.Table = require './lib/table'

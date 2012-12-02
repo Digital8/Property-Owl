@@ -8,10 +8,12 @@ exports.index = (req, res) ->
 
 exports.edit = (req, res) ->
   Owl.get req.params.id, (error, owl) ->
+    console.log owl
     res.render 'admin/owls/edit', owl: owl
 
 exports.add = (req, res) ->
-  res.render 'admin/owls/add'
+  Owl.new (error, owl) ->
+    res.render 'admin/owls/add', owl: owl
 
 exports.delete = (req, res) ->
   Owl.get req.params.id, (error, owl) ->

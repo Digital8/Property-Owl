@@ -1,6 +1,8 @@
 Model = require '../lib/model'
 Table = require '../lib/table'
 
+system = require '../system'
+
 module.exports = class Owl extends Model
   @table = new Table
     name: 'owls'
@@ -8,6 +10,13 @@ module.exports = class Owl extends Model
   
   constructor: (args = {}) ->
     super
+  
+  hydrate: (callback) ->
+    DevelopmentType = system.models.development_type
+    
+    DevelopmentType.get @development_type_id, (error, developmentType) =>
+      @type = developmentType
+      super callback
   
   deals: (callback) ->
     @db.query "SELECT * FROM deals WHERE #{@table.key} = ?", [@id], (error) ->
