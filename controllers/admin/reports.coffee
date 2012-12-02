@@ -2,7 +2,11 @@ async = require 'async'
 
 system = require '../../system'
 
-models = {}
+models =
+  users: system.load.model 'user'
+  services: system.load.model 'services'
+  advertisers: system.load.model 'advertiser'
+  properties: system.load.model 'properties'
 
 helpers = {}
 
@@ -10,19 +14,61 @@ exports.index = (req,res) ->
   res.render 'admin/reports/index', menu: 'reports'
 
 exports.dealListings = (req,res) ->
-  res.render 'admin/reports/dealListings', menu: 'reports'
+  listings = [
+    'created_at':'01/10/2012'
+    'developer':'Developer 1'
+    'status':'current'
+    'owl_deal_count':'12'
+    'barn_deal_count':'14'
+  ]
+  
+  models.users.getUsersByGroup 2, (err, developers) ->
+  
+    res.render 'admin/reports/dealListings', listings: listings or {}, developers: developers or {}, menu: 'reports'
 
 exports.websiteRegistrations = (req,res) ->
-  res.render 'admin/reports/websiteRegistrations', menu: 'reports'
+  registrations = [
+    'created_at':'01/10/2012'
+    'state':'QLD'
+    'count':'241'
+  ]
+  
+  res.render 'admin/reports/websiteRegistrations', registrations: registrations or {}, menu: 'reports'
 
 exports.propertySearches = (req,res) ->
-  res.render 'admin/reports/propertySearches', menu: 'reports'
+  searches = [
+    'date':'01/10/2012'
+    'state':'QLD'
+    'property_type':'Apartment'
+    'deal_type':'Owl Deal'
+    'stage':'Completed'
+    'price':'$300,000 - $400,000'
+    'search_count':'427'
+  ]
+  models.properties.getPropertyTypes (err, propertyTypes) ->
+  
+    res.render 'admin/reports/propertySearches', searches: searches or {}, propertyTypes: propertyTypes or {}, menu: 'reports'
 
 exports.dealRegistrations = (req,res) ->
-  res.render 'admin/reports/dealRegistrations', menu: 'reports'
+  registrations = [
+    'date':'01/10/2012'
+    'user_name':'John Doe'
+    'status':'Interested'
+    'owl_deal_count':'34'
+    'barn_deal_count':'34'
+  ]
+  models.users.getUsersByGroup 1, (err, members) ->
+    res.render 'admin/reports/dealRegistrations', registrations: registrations or {}, members: members or {}, menu: 'reports'
 
 exports.servicesEnquiries = (req,res) ->
-  res.render 'admin/reports/servicesEnquiries', menu: 'reports'
+  enquiries = [
+    'date':'01/10/2012'
+    'supplier':'Company 1'
+    'enquiry_count':'24'
+  ]
+  models.services.getAllServices (err, suppliers) ->
+  
+    res.render 'admin/reports/servicesEnquiries', enquiries: enquiries or {}, suppliers: suppliers or {}, menu: 'reports'
 
 exports.advertisingClicks = (req,res) ->
   adverts = [
@@ -32,5 +78,5 @@ exports.advertisingClicks = (req,res) ->
     'ad':'ad 282'
     'clickthroughs':'34'
   ]
-    
-  res.render 'admin/reports/advertisingClicks', adverts: adverts or {}, menu: 'reports'
+  models.advertisers.all (err, advertisers) ->
+    res.render 'admin/reports/advertisingClicks', adverts: adverts or {}, advertisers: advertisers or {}, menu: 'reports'

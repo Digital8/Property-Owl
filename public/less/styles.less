@@ -1287,6 +1287,12 @@ body {
                 .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
             }
             
+            .sort-form {
+                text-align: right;
+                clear: both;
+                margin-bottom: @padding-small;
+            }
+            
             .listing-summary {
                 background: #f5f5f5;
                 .clearfix;
@@ -2185,7 +2191,7 @@ a, a:visited {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 99999;
+  z-index: 9999;
   background: rgba(0,0,0,0.85);
   
   .modal {
@@ -2323,15 +2329,15 @@ a, a:visited {
   right: 0;
   bottom: 0;
   z-index: 99999;
-  background: rgba(30,100,181,0.8);
+  background: rgba(181,30,30,0.8);
   
   .modal {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50em;
-    height: 25em;
-    margin: -12.5em 0 0 -25em;
+    width: 40em;
+    height: 20em;
+    margin: -10em 0 0 -20em;
     background: #FFF;
     .rounded(6px);
     .box-shadow(~"0px 3px 5px rgba(0,0,0,0.5)");
@@ -2383,6 +2389,10 @@ a, a:visited {
         background-size: auto 100%;
         background-position: left center;
       }
+    }
+    
+    &.error {
+      color: #CC0505;
     }
     
     &.warning h1 {

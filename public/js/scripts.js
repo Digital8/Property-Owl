@@ -95,9 +95,19 @@ $(function(){
 	  return false;
 	});
 	
+	$(".terms-checkbox").on("click", function(event){
+	  event.stopPropagation();
+	})
+	
 	$(".overlay").on("click", function(event){
 	  event.preventDefault();
 	  $(this).fadeToggle(150);
+	  /*if($(this).hasClass('modal-overlay')){
+	    if(typeof(modalCallback)=='function'){
+	      modalCallback();
+	      modalCallback = null;
+	    }
+	  }*/
 	  return false;
 	});
 	
@@ -106,7 +116,7 @@ $(function(){
 	
 	$(".show-register, .close-register").on("click", function(event){
 		event.preventDefault();
-		loginModal.hide(50);
+		loginModal.hide();
 		registerModal.fadeToggle(150);
 		return false;
 	});
@@ -116,17 +126,21 @@ $(function(){
 	
 	$(".show-login, .close-login").on("click", function(event){
 		event.preventDefault();
-		registerModal.hide(50);
+		registerModal.hide();
 		loginModal.fadeToggle(150);
 		return false;
 	});
 	
 	// show modal
 	var modal = $(".modal-overlay");
-	
+	//var modalCallback = null;
 	$(".show-modal, .close-modal").on("click", function(event){
 	  event.preventDefault();
 		modal.fadeToggle(150);
+		/*if(typeof(modalCallback)=="function"){
+		  modalCallback();
+		  modalCallback = null;
+		}*/
 		return false;
 	});
 
@@ -178,12 +192,57 @@ $(function(){
 	  $.ajax({
 	    url: '/ajax/login',
 	    type: 'post',
-	    data: 'e=' + email + '&p=' + pass
+	    data: 'e=' + email + '&p=' + pass + '&r=' + $("#remember").attr('checked')
 	  }).done(function(d){
 	    callback(d.status == 200);
 	  });
 	  //return false;
 	}
+	
+	// Sign up
+	$(".register-button").on("click", function(event){
+	  var firstName = $(".register-first-name").val();
+	  var lastName = $(".register-last-name").val();
+	  var email = $(".register-email").val();
+	  var postcode = $(".register-postcode").val();
+	  var password = $(".register-password").val();
+	  var password2 = $(".register-password2").val();
+	  var terms = $("#terms").attr("checked");
+	  
+	  $.ajax({
+	    url: '/ajax/register',
+	    type: 'post',
+	    data: 'e=' + email + '&p=' + password + '&p2=' + password2 + '&f=' + firstName + '&l=' + lastName + '&c=' + postcode + '&t=' + terms
+	  }).done(function(d){
+	    if (d.status == 200) {
+	      //showPayment();
+	      //success();
+	      window.location.replace('/');
+	    }
+	    else {
+	      console.log('fix this plz');
+	      var errors = Object.keys(d.errors);
+  	    
+	      $('#generic-modal-title').html('Please fix the following');
+	      $('#generic-modal-content').html('<br /><ul>');
+	      for(i=0; i<errors.length;i++)
+	      {
+	         $('#generic-modal-content').append('<li><b>' + d.errors[errors[i]].msg + '</b></li>');
+	      }
+        $('#generic-modal-content').append('</ul>');
+        
+	      $('#generic-modal').fadeToggle(150);
+	      //modalCallback = function(){console.log('penis')};
+	    }
+	  });
+	  return false;
+	});
+	
+	$(".register-first-name, .register-last-name, .register-email, .register-postcode, .register-password, .register-password2").on("keypress", function(event){
+	  if(event.keyCode == 13){
+	    $(".register-button").click();
+	  }
+	});
 	
 	$(".login-button").on("click", function(event){
 	  event.preventDefault();
@@ -202,6 +261,12 @@ $(function(){
 	  });
 	  
 	  return false;
+	});
+	
+	$(".login-email, .login-password").on("keypress", function(event){
+	  if(event.keyCode == 13){
+	    $(".login-button").click();
+	  }
 	});
 	
 	updateTimer = function(){

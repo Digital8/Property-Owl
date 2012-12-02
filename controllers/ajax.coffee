@@ -1,4 +1,5 @@
 system = require '../system'
+mailer = require '../lib/helpers/email'
 
 models =
   user: system.load.model 'user'
@@ -15,10 +16,57 @@ exports.login = (req, res) ->
     if results.length >= 1
       results = results.pop()
       req.session.user_id = results.user_id
+      if req.body.r?
+        if req.body.r.toLowerCase() == 'checked'
+          res.cookie 'pouser', results.user_id, maxAge: 604800000
       res.send status: 200
     
     else
       res.send status: 401
+
+exports.register = (req, res) ->
+  req.assert('e', 'Invalid Email Address').isEmail()
+  req.assert('p', 'Password must be at least 6 characters').len(6)
+  req.assert('f', 'First name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
+  req.assert('l', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
+  req.assert('p', 'Passwords do not match').isIn [req.body.p2]
+  req.assert('t', 'Please accept the terms and conditions').isIn ['checked', 'Checked']
+  req.assert('c', 'Postcode is invalid').len(4,5).isInt()
+  console.log(req.body)
+
+  errors = req.validationErrors(true)
+
+  models.user.getUserByEmail req.body.e, (err, email) ->
+    #if email.length > 0 then req.flash('error','Email address is already in use')
+    if errors is false then errors = {}
+    if email.length > 0 then errors.inUse = msg: 'Email is already in use'
+
+    if Object.keys(errors)?.length > 0
+      res.send status: 400, errors: errors
+      
+    else
+      user = req.body
+      user.password = helpers.hash user.p
+      user.group = 1
+      user.email = user.e
+      user.fname = user.f
+      user.lname = user.l
+        
+      models.user.createUser user, (err, results) ->
+        if err
+          console.log err
+          res.send status: 500
+        else
+          req.session.user_id = results.insertId
+          res.cookie 'user', results.insertId, maxAge: 604800000
+          mailer
+            to: user.email
+            from: 'mailer@propertyowl.com.au'
+            fromname: 'Property Owl'
+            subject: 'Property Owl Account Created'
+            text: user.fname + ',\n\nThanks for signing up, your account has been created!\n\n\nThe Property Owl Team'
+          , 'Property Owl Sign-Up'
+          res.send status: 200
 
 exports.savedeal = (req, res) ->
   req.assert('id', 'Property ID Not Numeric').isInt()
