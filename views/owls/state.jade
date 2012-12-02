@@ -8,6 +8,12 @@ block content
     
     #center-col
       h1 Owl Deals for #{state.toUpperCase()}
+      form.sort-form
+        label(for="sortby") Sort by
+        | &nbsp;
+        select#sortby
+          option Date Listed
+          option Best Deal Value
       - if (locals.owls && owls.length)
         - each owl in owls
           include summary

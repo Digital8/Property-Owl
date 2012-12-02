@@ -9,6 +9,9 @@ module.exports = class Owl extends Model
     
     super
   
+  deals: (callback) ->
+    
+  
   @all = (callback) ->
     @db.query "SELECT * FROM #{@table.name}", (error, rows) ->
       return callback error if error
@@ -30,7 +33,7 @@ module.exports = class Owl extends Model
   @state = (state, callback) ->
     console.log state
     
-    @db.query "SELECT * FROM #{@table.name} WHERE state = ?", [state], (error, rows) ->
+    @db.query "SELECT * FROM #{@table.name} WHERE state = ? ORDER BY created_at ASC", [state], (error, rows) ->
       return callback error if error
       
       models = []

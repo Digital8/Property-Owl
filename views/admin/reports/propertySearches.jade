@@ -40,6 +40,21 @@ block content
           option TAS
           option VIC
           option WA
+        | &nbsp;
+        select#propertyType
+         option Property Type
+          - each propertyType in propertyTypes
+            option(value=propertyType.property_type_id) #{propertyType.type}
+        | &nbsp;
+        select#dealType
+          option Deal Type
+          option Owl Deal
+          option Barn Deal
+        | &nbsp;
+        select#developmentStage
+          option Development Stage
+          option Off The Plan
+          option Completed
     table.admin-gridview
       thead
         tr

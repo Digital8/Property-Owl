@@ -15,23 +15,25 @@ block content
         | &nbsp;
         input.button(type='submit', value='Reset')
         .divider
-        select#propertyState
-          option State
-          option ACT
-          option NSW
-          option NT
-          option QLD
-          option SA
-          option TAS
-          option VIC
-          option WA
+        select#propertyMonth
+          option Month
+          option January
+          option February
+          option March
+          option April
+          option May
+          option June
+          option July
+          option August
+          option September
+          option October
+          option November
+          option December
         | &nbsp;
-        select#propertyStatus
-          option Status
-          option Pending
-          option Pre-release
-          option Current
-          option Ended
+        select#supplier
+          option Supplier
+          - each supplier in suppliers
+            option(value=supplier.service_id) #{supplier.company}
     table.admin-gridview
       thead
         tr
