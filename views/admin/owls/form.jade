@@ -7,60 +7,7 @@
     
     include ../../flashify
     
-    .left
-      
-      .inputs
-        label(for='title') Title
-        input#title(type='text', name='title', value='')
-      
-      .inputs
-        label(for='price') Price
-        input#price(type='number', name='price', value='')
-      
-      .inputs
-        label(for='description') Description
-          textarea#description(name='description')
-      
-      .inputs
-        label(for='features') Features
-        select(name='features')
-          option(value='foo') foo
-          option(value='bar') bar
-          option(value='zip') zip
-          option(value='zap') zap
-    
-    .right
-      
-      .inputs(data-geo='master')
-        label(for='title') Geo
-        input(type='text', value='')
-    
-      .inputs
-        label(for='title') Address
-        input#address(type='text', name='address', value='')
-      
-      .inputs
-        label(for='suburb') Suburb
-        input#suburb(type='text', name='suburb', value='')
-      
-      .inputs
-        label(for='postcode') Postcode
-        input#postcode(type='text', name='postcode', value='')
-      
-      .inputs
-        label(for='state') State
-        select#state(name='state')
-          option(value='')
-          option(value='act') ACT
-          option(value='nsw') NSW
-          option(value='nt') NT
-          option(value='qld') QLD
-          option(value='sa') SA
-          option(value='tas') TAS
-          option(value='vic') VIC
-          option(value='wa') WA
-    
-    .inputs
+    include inputs
     
     .submit
       input.button(type='submit', value='Create Owl')

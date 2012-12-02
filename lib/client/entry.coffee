@@ -34,6 +34,12 @@ $ ->
           random = Math.max 1, random # skip the first option
           $options.eq(random).prop 'selected', true
         
+        else if (field.is 'input') and (field.attr 'type') is 'number'
+          min = if (field.attr 'min')? then (field.attr 'min') else 0
+          max = if (field.attr 'max')? then (field.attr 'max') else 5
+          
+          field.val _.random min, max
+        
         else
           value = ''
           

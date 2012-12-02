@@ -15,4 +15,17 @@ block content
           .ol-1-active
           | Details
     
-    include form
+    .details
+      h2 Owl Details
+      
+      hr
+      
+      form.details-form(action='/owls', method='post')
+        
+        include ../../flashify
+        
+        include inputs
+        
+        .submit
+          input.button(type='submit', value='Create Owl')
+          a.left-button(href='/admin/owls') Cancel

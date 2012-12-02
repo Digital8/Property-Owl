@@ -1,0 +1,67 @@
+.left
+  
+  .inputs
+    label(for='title') Title
+    input#title(type='text', name='title', value='#{owl.title}')
+  
+  .inputs
+    label(for='price') Price
+    input#price(type='number', name='price', value='#{owl.price}', min='0', max='100000000')
+  
+  .inputs
+    label(for='description') Description
+      textarea#description(name='description')
+        = owl.description
+  
+  .inputs
+    label(for='features') Features
+    select(name='features')
+      option(value='foo') foo
+      option(value='bar') bar
+      option(value='zip') zip
+      option(value='zap') zap
+      
+  .inputs
+    label(for='bedrooms') Bedrooms
+    input#bedrooms(type='number', name='bedrooms', value='#{owl.bedrooms}', min='0')
+    
+  .inputs
+    label(for='bathrooms') Bathrooms
+    input#bathrooms(type='number', name='bathrooms', value='#{owl.bathrooms}', min='0')
+    
+  .inputs
+    label(for='cars') Cars
+    input#cars(type='number', name='cars', value='#{owl.cars}', min='0')
+
+.right
+  
+  .inputs(data-geo='master')
+    label(for='title') Geo
+    input(type='text', value='')
+
+  .inputs
+    label(for='title') Address
+    input#address(type='text', name='address', value='#{owl.address}')
+  
+  .inputs
+    label(for='suburb') Suburb
+    input#suburb(type='text', name='suburb', value='#{owl.suburb}')
+  
+  .inputs
+    label(for='postcode') Postcode
+    input#postcode(type='text', name='postcode', value='#{owl.postcode}')
+  
+  .inputs
+    label(for='state') State
+    select#state(name='state')
+      option(value='')
+      option(value='act') ACT
+      option(value='nsw') NSW
+      option(value='nt') NT
+      option(value='qld') QLD
+      option(value='sa') SA
+      option(value='tas') TAS
+      option(value='vic') VIC
+      option(value='wa') WA
+
+.inputs
