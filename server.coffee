@@ -17,6 +17,8 @@ classes = user: load.class 'user'
 
 app = express()
 
+(require './browserifyafication.coffee') app
+
 hack.augmentApp app
 hack.augmentDB app, system
 
