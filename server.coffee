@@ -100,6 +100,8 @@ server = app.listen config.port
 
 (require './browserifyafication.coffee') app
 
+(require './geocode') app
+
 (require './routes') app
 
 console.log "Server started on port #{config.port}"

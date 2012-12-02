@@ -14,6 +14,10 @@
         input#title(type='text', name='title', value='')
       
       .inputs
+        label(for='price') Price
+        input#price(type='number', name='price', value='')
+      
+      .inputs
         label(for='description') Description
           textarea#description(name='description')
       
@@ -45,7 +49,7 @@
       
       .inputs
         label(for='state') State
-        select(name='state')
+        select#state(name='state')
           option(value='')
           option(value='act') ACT
           option(value='nsw') NSW
