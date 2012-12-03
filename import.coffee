@@ -7,8 +7,8 @@ module.exports = (app, {models, controllers, helpers}) ->
   files.sort
 
   for file in files
-    return if file is '.'
-    console.log "✓ [model] #{module}" if app.argv.verbose
+    return if file[0] is '.'
+    console.log "✓ [model] #{file}" if app.argv.verbose
     models[file.split('.')[0]] = require "./models/#{file}"
 
   fs.readdirSync('./controllers').forEach (module) ->
