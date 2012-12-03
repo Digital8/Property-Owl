@@ -1,8 +1,10 @@
 faker = require 'Faker'
 moment = require 'moment'
 _ = require 'underscore'
+window.commas = commas = require '../helpers/commas'
 
 $ ->
+
   forms = ($ '.fake')
   
   for form in forms

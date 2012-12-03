@@ -167,7 +167,15 @@ block content
                     li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
               - else
                 ul
+<<<<<<< HEAD
+                  //- p= JSON.stringify(owl.deals)
+                  - each deal in owl.deals
+                    - if (deal)
+                      //- li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
+                      li= '$' + deal.value.toString() + ' ' + deal.description
+=======
                   li No deals have been listed
+>>>>>>> 357089c40552e629b62888ac4c91bf0fb07640f1
             .secure-deal
               a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.property_id}", data-type="property") Secure the Deal!
           
