@@ -77,4 +77,4 @@ exports.removeBarnDeal = (property_id, callback) ->
   db.query "UPDATE #{db.prefix}properties SET deal_of = 0 WHERE property_id = ?", [property_id], callback
 
 exports.search = (v, callback) ->
-  db.query "SELECT P.* FROM owls AS P INNER JOIN development_types AS PT WHERE state LIKE ? AND PT.name LIKE ? AND price >= ? AND price <= ? AND bathrooms >= ? AND cars >= ? AND development_stage LIKE ? GROUP BY P.owl_id", [v.state, v.pType, v.minPrice, v.maxPrice, v.bathrooms, v.cars, v.devStage], callback
+  db.query "SELECT P.* FROM owls AS P INNER JOIN development_types AS PT WHERE state LIKE ? AND PT.name LIKE ? AND price >= ? AND price <= ? AND bathrooms >= ? AND cars >= ? AND development_stage LIKE ? AND suburb LIKE ? GROUP BY P.owl_id", [v.state, v.pType, v.minPrice, v.maxPrice, v.bathrooms, v.cars, v.devStage, v.suburb], callback

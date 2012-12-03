@@ -13,6 +13,7 @@ exports.index = (req,res) ->
   if req.query.bathrooms is 'any' then req.query.bathrooms = 0
   if req.query.cars is 'any' then req.query.cars = 0
   if req.query.devStage is 'any' then req.query.devStage = '%'
+  if req.query.suburb is '' then req.query.suburb = '%' else req.query.suburb += '%'
     
   models.properties.search req.query, (err, results) ->
     if err then throw err
