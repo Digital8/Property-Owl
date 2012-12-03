@@ -15,7 +15,14 @@ exports.top = (req, res) ->
 
 exports.hot = (req, res) ->
   Owl.all (error, owls) ->
-    res.render 'owls/list', owls: owls
+    maxPages = Math.round(owls.length / 10)
+    
+    if not req.query.page? then offset = 0 else offset = (parseInt(req.query.page) - 1) * 10
+    if owls.length > 10
+      # remove off the front so we don't display the first results if we're browsing pages
+      owls.shift() for i in [0...offset]
+
+    res.render 'owls/list', owls: owls, maxPages: maxPages, currentPage: req.query.page
 
 exports.byState = (req, res) ->
   {state} = req.params

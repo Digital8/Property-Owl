@@ -9,9 +9,13 @@ block content
     #center-col
       h1 Best State Deals
       - if (locals.owls)
+        - var i = 0
         - each owl in owls
-          include summary
+          if i < 10
+            include summary
+          - i++
       - else
         p There are no current property deals for #{state.toUpperCase()} right now but keep an eye out because we are always listing new deals. 
-    
+
+      include ../pagination
     include ../right_nav

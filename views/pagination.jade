@@ -1,0 +1,15 @@
+- if (maxPages >= currentPage && currentPage > -1)
+  ul.pager(style="display:inline;list-style-type:none;")
+    - var p_count = 0;
+    - if (currentPage > 1)
+        li
+          a(href="?page=#{parseInt(currentPage) - 1}") Prev
+
+    - while (p_count < maxPages)
+      - p_count++
+      li.disabled
+        a(href='?page='+p_count)= p_count
+
+     - if (currentPage < maxPages)
+      li
+        a(href="?page=#{parseInt(currentPage) + 1}") Next
