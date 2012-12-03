@@ -50,37 +50,37 @@ block content
     //-     a(href="/barn-deals")
     //-       h2 The Barn
     //-       img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
-    //-       h3 Group Deals
-    //-   .share
-    //-     ul
-    //-       li
-    //-         a(href='#', onclick='javascript:window.print()')
-    //-           img(src='/images/share-print-icon.png', alt='Print')
-    //-           | Print Deal
-    //-       li.savebuttons(data-property="#{owl.property_id}")
-    //-         img(src='/images/share-save-icon.png', alt='Save')
-    //-         | Save Deal
-    //-       li
-    //-         img(src='/images/share-refer-icon.png', alt='Refer')
-    //-         | Refer A Friend
-    //-       li
-    //-         .fb-like(data-href='http://www.propertyowl.com.au/properties/view/#{owl.property_id}', data-send='false', data-layout='button_count', data-width='125', data-show-faces='false')
-    //-       li
-    //-         a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/properties/view/#{owl.property_id}') Tweet
-    //-         script
-    //-           !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-    //-   .enquiry
-    //-     h2 Enquire About This Deal
-    //-     form#input-form
-    //-       label(for='propertyPhone') Phone
-    //-       input#propertyPhone(type='text')
-    //-       label(for='propertyContactMethod') Contact Method
-    //-       select#propertyContactMethod
-    //-         option Phone
-    //-         option Email
-    //-       label(for='propertyComments') Comments
-    //-       textarea#propertyComments(rows='5')
-    //-       input.button(type='submit', value='Submit')
+    //-       h3 Group Deals      //- 
+          //- .share
+          //-      ul
+          //-        li
+          //-          a(href='#', onclick='javascript:window.print()')
+          //-            img(src='/images/share-print-icon.png', alt='Print')
+          //-            | Print Deal
+          //-        li.savebuttons(data-property="#{owl.property_id}")
+          //-          img(src='/images/share-save-icon.png', alt='Save')
+          //-          | Save Deal
+          //-        li
+          //-          img(src='/images/share-refer-icon.png', alt='Refer')
+          //-          | Refer A Friend
+          //-        li
+          //-          .fb-like(data-href='http://www.propertyowl.com.au/properties/view/#{owl.property_id}', data-send='false', data-layout='button_count', data-width='125', data-show-faces='false')
+          //-        li
+          //-          a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/properties/view/#{owl.property_id}') Tweet
+          //-          script
+          //-            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+          //-    .enquiry
+          //-      h2 Enquire About This Deal
+          //-      form#input-form
+          //-        label(for='propertyPhone') Phone
+          //-        input#propertyPhone(type='text')
+          //-        label(for='propertyContactMethod') Contact Method
+          //-        select#propertyContactMethod
+          //-          option Phone
+          //-          option Email
+          //-        label(for='propertyComments') Comments
+          //-        textarea#propertyComments(rows='5')
+          //-        input.button(type='submit', value='Submit')
     
     #wide-center-col
       - if (owl.images)
@@ -172,12 +172,18 @@ block content
               - else
                 ul
                   li No deals have been listed
+                  
             .secure-deal
-              a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.property_id}", data-type="property") Secure the Deal!
+              a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.property_id}", data-type="property") Express Your Interest!
           
+            - if(owl.barn_id)
+              .barn-link
+                a(href="/barn/deals/#{owl.barn_id}") View Barn Deal
+                  img#barn-image(src='/images/barn-link.png', alt='View Barn Deal')
           iframe#google-map(width='100%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=#{owl.address + ' ' + owl.suburb + ' ' + owl.state + ' ' + owl.postcode}z=14&output=embed')
           br
           a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=#{owl.address + ' ' + owl.suburb + ' ' + owl.state + ' ' + owl.postcode}&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913', target="_blank") View Larger Map
+          
           
           // - if (owl.files)
           .more-info
