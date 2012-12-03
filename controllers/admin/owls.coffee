@@ -13,7 +13,6 @@ exports.index = (req, res) ->
 
 exports.edit = (req, res) ->
   Owl.get req.params.id, (error, owl) ->
-    console.log owl
     res.render 'admin/owls/edit', owl: owl
 
 exports.add = (req, res) ->
@@ -26,6 +25,13 @@ exports.create = (req, res) ->
     
     owl.upload req, ->
       res.redirect "/owls/#{owl.id}"
+
+exports.update = (req, res) ->
+  Owl.update req.params.id, req.body, (error, owl) ->
+    console.log 'update', arguments
+    
+    owl.upload req, ->
+      res.redirect "/admin/owls"
 
 exports.delete = (req, res) ->
   Owl.get req.params.id, (error, owl) ->

@@ -5,12 +5,17 @@
       strong= '$' + owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     
     h2 #{owl.address}, #{owl.suburb} #{owl.state.toUpperCase()}
-
+  
   .listing-body
     
     .listing-thumb
-      a(href='/properties/view/#{owl.owl_id}')
-        img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+      a(href='/owls/#{owl.owl_id}')
+        - if (owl.images && owl.images.length)
+          - (owl.image = owl.images.pop())
+          img.thumb(src='/uploads/#{owl.image.filename}', alt='76 Orchard Terrace, St Lucia')
+        - else
+          img.thumb(src='/images/owl-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+    
     .listing-details
       .features
         span.owl-type
