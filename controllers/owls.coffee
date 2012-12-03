@@ -22,7 +22,7 @@ exports.hot = (req, res) ->
       # remove off the front so we don't display the first results if we're browsing pages
       owls.shift() for i in [0...offset]
 
-    res.render 'owls/list', owls: owls, maxPages: maxPages, currentPage: req.query.page
+    res.render 'owls/list', owls: owls, maxPages: maxPages, currentPage: req.query.page or 1
 
 exports.byState = (req, res) ->
   {state} = req.params
