@@ -18,7 +18,7 @@ block content
   .container.row.main
     #deal_id(style='display:none')
       | #{owl.owl_id}
-    
+    include ../left_nav
     //- #left-col
     //-   .deal-stats
     //-     .timer
@@ -86,23 +86,34 @@ block content
       - if (owl.images)
         #mySlider.evoslider.galleriffic
           dl
-            dt slide one
-            //- dd(data-src='/uploads/#{image.filename}', data-thumb='/images/slide1-thumb.jpg')
-            dd(data-src='/uploads/slider2.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-            dt slide two
-            dd(data-src='/uploads/slider3.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-            dt slide three
-            dd(data-src='/uploads/slider4.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-            dt slide four
-            dd(data-src='/uploads/slider5.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-            dt slide five
-            dd(data-src='/uploads/slider1.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+            - var i = 0
+            - each image in owl.images
+              - i++
+              dt "slide #{i}"
+              dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
+            
+            //- dt slide one
+            //- //- dd(data-src='/uploads/#{image.filename}', data-thumb='/images/slide1-thumb.jpg')
+            //- dd(data-src='/uploads/slider2.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+            //- dt slide two
+            //- dd(data-src='/uploads/slider3.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+            //- dt slide three
+            //- dd(data-src='/uploads/slider4.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+            //- dt slide four
+            //- dd(data-src='/uploads/slider5.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+            //- dt slide five
+            //- dd(data-src='/uploads/slider1.jpg', data-thumb='/uploads/slide1-thumb.jpg')
       
       .property-info
         #left
-          h1 Australia's Best Property Deal
+          if(typeof(bestdeal) != 'undefined' && bestdeal)
+            h1 Australia's Best Property Deal
+          else
+            h1= owl.title
           | #{owl.address}, #{owl.suburb}, #{owl.state.toUpperCase()} #{owl.postcode}
           h2 Property Details
+          if(typeof(bestdeal) != 'undefined' && bestdeal)
+            strong= owl.title
           p= owl.description
           .general-features
             h3 General Features
@@ -149,31 +160,31 @@ block content
               h2
                 | Reveal the Deal
                 img.arrow(src='/images/blue-arrow-icon-down.png', alt='Reveal the Deal')
-              - if (!owl.deals.length)
+              - if (owl.deals.length)
                 ul
-                  li No deals have been listed
+                - each deal in owl.deals
+                  - if (deal)
+                    li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
               - else
                 ul
-                  - each deal in owl.deals
-                    - if (deal)
-                      li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
+                  li No deals have been listed
             .secure-deal
               a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.property_id}", data-type="property") Secure the Deal!
           
-          iframe#google-map(width='100%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913&output=embed')
+          iframe#google-map(width='100%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=#{owl.address + ' ' + owl.suburb + ' ' + owl.state + ' ' + owl.postcode}z=14&output=embed')
           br
-          a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913', target="_blank") View Larger Map
+          a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=#{owl.address + ' ' + owl.suburb + ' ' + owl.state + ' ' + owl.postcode}&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913', target="_blank") View Larger Map
           
-          - if (owl.files)
-            .more-info
-              h2 
-                | More Information
-                img.arrow(src='/images/grey-arrow-icon-down.png', alt='More Information')
-              - if (owl.files)
-                ul
-                - each file in files
-                  li
-                    a(href="/uploads/#{file.filename}") #{file.description}
-              - else
-                ul
-                  li No files have been uploaded
+          // - if (owl.files)
+          .more-info
+            h2 
+              | More Information
+              img.arrow(src='/images/grey-arrow-icon-down.png', alt='More Information')
+            - if (owl.files)
+              ul
+              - each file in files
+                li
+                  a(href="/uploads/#{file.filename}") #{file.description}
+            - else
+              ul
+                li No files have been uploaded

@@ -5,37 +5,34 @@ uuid = require 'node-uuid'
 
 system = require '../../system'
 
-Owl = system.models.owl
+Barn = system.models.barn
 
 exports.index = (req, res) ->
-  Owl.all (error, owls) ->
-    res.render 'admin/owls/index', owls: owls
+  Barn.all (error, barns) ->
+    res.render 'admin/barns/index', barns: barns
 
 exports.edit = (req, res) ->
-  Owl.get req.params.id, (error, owl) ->
-    console.log owl
-    res.render 'admin/owls/edit', owl: owl
+  Barn.get req.params.id, (error, owl) ->
+    res.render 'admin/barns/edit', barn: barn
 
 exports.add = (req, res) ->
-  Owl.new (error, owl) ->
-    res.render 'admin/owls/add', owl: owl
+  Barn.new (error, barn) ->
+    res.render 'admin/barns/add', barn: barn
 
-exports.create = (req, res) ->
-  Owl.create req.body, (error, owl) ->
-    console.log 'create', arguments
-    
-    owl.upload req, ->
-      res.redirect "/owls/#{owl.id}"
+# exports.create = (req, res) ->
+#   Barn.create req.body, (error, owl) ->
+#     owl.upload req, ->
+#       res.redirect "/barns/#{owl.id}"
 
 exports.delete = (req, res) ->
-  Owl.get req.params.id, (error, owl) ->
-    res.render 'admin/owls/delete', owl: owl
+  Barn.get req.params.id, (error, barn) ->
+    res.render 'admin/barns/delete', barn: barn
 
 exports.destroy = (req, res) ->
-  Owl.delete req.params.id, (error) ->
-    req.flash 'success', 'owl deleted'
+  Barn.delete req.params.id, (error) ->
+    req.flash 'success', 'barn deleted'
     
-    res.redirect '/admin/owls'
+    res.redirect '/admin/barns'
 
 # system = require '../../system'
 

@@ -42,9 +42,18 @@ module.exports = class Owl extends Model
       
       media: (callback) =>
         Media.all (error, medias) =>
-          @images = _.filter medias, (media) -> media.entity_id = @id
+          console.log medias
+          # console.log 'medias', medias
+          
+          @images = []
+          
+          # @images = _.filter medias, (media) => media.entity_id = @id
+          
+          for media in medias
+            @images.push media if media.entity_id is @id
           
           callback()
+    
     , (error) => super callback
   
   deals: (callback) ->
@@ -110,4 +119,8 @@ module.exports = class Owl extends Model
     """, (error, rows) ->
       return callback error if error
       
-      callback null, new Owl rows[0]
+      owl = new Owl rows[0]
+      
+      owl.hydrate ->
+        
+        callback null, owl
