@@ -1,7 +1,6 @@
 system = require '../system'
 
 Owl = system.models.owl
-console.log Owl
 
 exports.index = (req, res) ->
   Owl.all (error, owls) ->
