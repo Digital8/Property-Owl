@@ -10,7 +10,7 @@
     
     .listing-thumb
       a(href='/properties/view/#{owl.owl_id}')
-        img.thumb(src='/images/owl-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+        img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
     .listing-details
       .features
         span.owl-type
@@ -30,7 +30,7 @@
       
       .summary
         h3= owl.title
-        p= owl.description
+        p= owl.description.substr(0,200) + '...'
       
       .listing-links
         a.savebuttons.save-button(href='#', data-owl="#{owl.owl_id}")
