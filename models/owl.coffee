@@ -7,9 +7,9 @@ Table = require '../lib/table'
 system = require '../system'
 
 Media = system.models.media
-console.log Media
 Deal = system.models.deal
-console.log Deal
+
+console.log system.media
 
 module.exports = class Owl extends Model
   @table = new Table
