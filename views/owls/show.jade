@@ -111,6 +111,9 @@ block content
           else
             h1= owl.title
           | #{owl.address}, #{owl.suburb}, #{owl.state.toUpperCase()} #{owl.postcode}
+          span.price-highlight $
+            span.price= owl.price
+          hr.light
           h2 Property Details
           if(typeof(bestdeal) != 'undefined' && bestdeal)
             strong= owl.title
