@@ -6,6 +6,13 @@ module.exports = class Barn extends Model
     name: 'barns'
     key: 'barn_id'
   
+  @field 'title'
+  @field 'address'
+  @field 'suburb'
+  @field 'postcode'
+  @field 'state'
+  @field 'description'
+  
   constructor: (args = {}) ->
     super
   

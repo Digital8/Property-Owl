@@ -6,6 +6,12 @@ exports.index = (req, res) ->
   Barn.all (error, barns) ->
     res.render 'barns/index', barns: barns
 
+exports.show = (req, res) ->
+  {id} = req.params
+  
+  Barn.get id, (error, barn) ->
+    res.render 'barns/show', barn: barn
+
 # exports.locate = (req, res) ->
 #   res.render 'owls/locate'
 

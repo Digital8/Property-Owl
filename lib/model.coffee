@@ -63,12 +63,16 @@ module.exports = class Model
     
     model.hydrate (error, model) =>
       @db.query "INSERT INTO #{@table.name} SET ?", hash, (error, result) =>
+        console.log arguments
+        
+        if error then return callback error
+        
         id = result.insertId
         
         model.id = id
         model[@table.key] = id
         
-        callback error, model
+        callback null, model
   
   @all = (callback) ->
     @db.query "SELECT * FROM #{@table.name}", (error, rows) =>

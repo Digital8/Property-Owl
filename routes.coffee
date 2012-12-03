@@ -137,7 +137,7 @@ module.exports = (app) ->
   app.get '/admin/barns', (authorize acl.admin), controllers.admin.barns.index
   app.get '/admin/barns/edit/:id', (authorize acl.admin), controllers.admin.barns.edit
   app.get '/admin/barns/add', (authorize acl.admin), controllers.admin.barns.add
-  app.post '/admin/barns/add', (authorize acl.admin), controllers.admin.barns.create
+  app.post '/admin/barns', (authorize acl.admin), controllers.admin.barns.create
   app.get '/admin/barns/delete/:barn_id/:property_id', (authorize acl.admin), controllers.admin.barns.delete
   app.del '/admin/barns/delete/:barn_id/:property_id', (authorize acl.admin), controllers.admin.barns.destroy
   

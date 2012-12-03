@@ -19,10 +19,11 @@ exports.add = (req, res) ->
   Barn.new (error, barn) ->
     res.render 'admin/barns/add', barn: barn
 
-# exports.create = (req, res) ->
-#   Barn.create req.body, (error, owl) ->
-#     owl.upload req, ->
-#       res.redirect "/barns/#{owl.id}"
+exports.create = (req, res) ->
+  console.log 'creating barn'
+  Barn.create req.body, (error, barn) ->
+    # barn.upload req, ->
+    res.redirect "/barns/#{barn.id}"
 
 exports.delete = (req, res) ->
   Barn.get req.params.id, (error, barn) ->
