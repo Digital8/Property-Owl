@@ -14,5 +14,7 @@ module.exports = (acl) ->
       next()
     else
       #res.render 'errors/404'
-      req.flash('notice','You must be logged in to do this')
-      res.render 'user/login', redirect: req.url or '/'
+      if req.url.indexOf('?login=1') is -1 
+        res.redirect req.url + '?login=1'
+      else
+        res.render 'user/login', redirect: req.url or '/', modal: true

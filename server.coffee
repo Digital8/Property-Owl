@@ -105,6 +105,9 @@ app.configure ->
       
       if req.session.user_id? or req.cookies.pouser?
         user_id = req.session.user_id or req.cookies.pouser
+        ###
+        # todo: add secure cookie checking here
+        ###
         models.user.getUserById user_id, (err, results) ->
           if err then throw err
           
