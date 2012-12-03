@@ -29,6 +29,23 @@ module.exports = class Model
     
     callback null, this
   
+  save: (callback) ->
+    map = {}
+    
+    for key, field in @constructor.fields
+      map[key] = @[key]
+    
+    # db.query "UPDATE #{@constructor.table.name} SET ?", map, callback
+    callback()
+  
+  @update = (id, hash, callback) ->
+    @get id, (error, owl) ->
+      for key, field of @fields
+        owl[key] = hash[key]
+      
+      owl.save (error) ->
+        callback error, owl
+  
   @new = (callback) ->
     model = new this
     model.hydrate callback
