@@ -1,4 +1,5 @@
-//- - for image in owl.images
+- each image in owl.images
+  img(src='/uploads/#{image.filename}', width='128', height='128')
 
 .inputs
   label.required(for='image') Image
