@@ -26,5 +26,9 @@ block content
            input.button(type="submit",value="login")
            - var redirect_url = (typeof(redirect) !== "undefined") ? redirect : '/'
            input(type="hidden",name="redirect",value="#{redirect_url}")
-    
+    - if (modal)
+      script
+        $(document).ready(function(){
+          $(".login-overlay").show();
+        });
     include ../right_nav
