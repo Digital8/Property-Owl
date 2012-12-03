@@ -6,7 +6,6 @@ Table = require '../lib/table'
 
 system = require '../system'
 
-Media = system.models.media
 Deal = system.models.deal
 
 console.log system.models
@@ -44,6 +43,9 @@ module.exports = class Owl extends Model
           callback()
       
       media: (callback) =>
+        console.log system.models
+        
+        Media = system.models.media
         Media.all (error, medias) =>
           console.log medias
           # console.log 'medias', medias

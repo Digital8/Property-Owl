@@ -1,3 +1,5 @@
+uuid = require 'node-uuid'
+
 async = require 'async'
 
 {db} = require '../system'
@@ -75,6 +77,8 @@ module.exports = class Model
         callback null, model
   
   @all = (callback) ->
+    console.log uuid(), @name
+
     @db.query "SELECT * FROM #{@table.name}", (error, rows) =>
       return callback error if error
       
