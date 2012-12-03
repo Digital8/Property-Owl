@@ -9,6 +9,7 @@ $ ->
   
   for form in forms
     $button = $ '<button>fake</button>'
+    $button.css 'opacity', 0.05
     
     $button.click (event) ->
       event.preventDefault()
