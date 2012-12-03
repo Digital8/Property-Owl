@@ -3,10 +3,13 @@ fs = require 'fs'
 module.exports = (app, {models, controllers, helpers}) ->
   console.start 'import'
   
-  fs.readdirSync('./models').forEach (module) ->
-    return if module[0] is '.'
+  files = fs.readdirSync('./models')
+  files.sort
+
+  for file in files
+    return if file is '.'
     console.log "✓ [model] #{module}" if app.argv.verbose
-    models[module.split('.')[0]] = require "./models/#{module}"
+    models[file.split('.')[0]] = require "./models/#{file}"
 
   fs.readdirSync('./controllers').forEach (module) ->
     return if module[0] is '.'
