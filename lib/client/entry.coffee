@@ -5,6 +5,10 @@ window.commas = commas = require '../helpers/commas'
 
 $ ->
 
+  $('body').on 'keypress', (event) ->
+    if (event.keyCode == 6) and event.ctrlKey
+      console.log 'fake that shit'
+
   forms = ($ '.fake')
   
   for form in forms
