@@ -60,23 +60,23 @@ app.configure ->
   
   app.use (req, res, done) ->
     res.locals.session  = req.session
-    res.locals.globals = config.globals
-    res.locals.modules = config.modules ? {} # If modules exist, allow views to check its status
-    res.locals.objUser = new classes.user [] # Empty user object
-    res.locals.req = req
-    res.locals.menu = {}
-    res.locals.data = system.data
+    res.locals.globals  = config.globals
+    res.locals.modules  = config.modules ? {} # If modules exist, allow views to check its status
+    res.locals.objUser  = new classes.user [] # Empty user object
+    res.locals.req      = req
+    res.locals.menu     = {}
+    res.locals.data     = system.data
     
-    if app.argv.hack
-      req.session.user_id = 1
+    #nicks dirty dirty hack
+    #if app.argv.hack then req.session.user_id = 1
     
     res.locals.navigation = [
-      {key: 'aus-best-deal', href: '/owls/top', label: "Australia's Best Deal"}
-      {key: 'best-state-deal', href: '/owls/state/qld', label: 'Best State Deal'}
-      {key: 'owl-deals', href: '#', label: 'Owl Deals'}
-      {key: 'wise-owl', href: '#', label: 'Wise Owl'}
-      {key: 'products', href: '#', label: 'Products & Services'}
-      {key: 'my-nest', href: '#', label: 'My Nest'}
+      {key: 'aus-best-deal',    href: '/owls/top',        label: "Australia's Best Deal"}
+      {key: 'best-state-deal',  href: '/owls/state/qld',  label: 'Best State Deal'}
+      {key: 'owl-deals',        href: '#',                label: 'Owl Deals'}
+      {key: 'wise-owl',         href: '#',                label: 'Wise Owl'}
+      {key: 'products',         href: '#',                label: 'Products & Services'}
+      {key: 'my-nest',          href: '#',                label: 'My Nest'}
     ]
     
     url = '/' + req.url.split('/')[1] + '%'
@@ -91,17 +91,17 @@ app.configure ->
       done()
     
     async.parallel
-      top       : (callback) -> models.advertisement.random url, 'top', (err, result) -> callback err, result
+      top       : (callback) -> models.advertisement.random url, 'top',         (err, result) -> callback err, result
       upperTower: (callback) -> models.advertisement.random url, 'upper tower', (err, result) -> callback err, result
       lowerTower: (callback) -> models.advertisement.random url, 'lower tower', (err, result) -> callback err, result
-      upperBox  : (callback) -> models.advertisement.random url, 'upper box', (err, result) -> callback err, result
-      lowerBox  : (callback) -> models.advertisement.random url, 'lower box', (err, result) -> callback err, result
+      upperBox  : (callback) -> models.advertisement.random url, 'upper box',   (err, result) -> callback err, result
+      lowerBox  : (callback) -> models.advertisement.random url, 'lower box',   (err, result) -> callback err, result
     , (err, results) ->
-      res.locals.adspaceTop = if results.top? then results.top else ''
-      res.locals.adUpperTower = if results.upperTower? then results.upperTower else ''
-      res.locals.adLowerTower = if results.lowerTower? then results.lowerTower else ''
-      res.locals.adUpperBox = if results.upperBox? then results.upperBox else ''
-      res.locals.adLowerBox  = if results.lowerBox? then results.lowerBox else ''
+      res.locals.adspaceTop   = if results.top?         then results.top        else ''
+      res.locals.adUpperTower = if results.upperTower?  then results.upperTower else ''
+      res.locals.adLowerTower = if results.lowerTower?  then results.lowerTower else ''
+      res.locals.adUpperBox   = if results.upperBox?    then results.upperBox   else ''
+      res.locals.adLowerBox   = if results.lowerBox?    then results.lowerBox   else ''
       
       if req.session.user_id? or req.cookies.pouser?
         user_id = req.session.user_id or req.cookies.pouser
@@ -115,31 +115,6 @@ app.configure ->
       
       else
         adsLoaded()
-    
-    # models.advertisement.random url, 'top', (err, adspaceTop) ->
-    #   models.advertisement.random url, 'upper tower', (err, adUpperTower) ->
-    #     models.advertisement.random url, 'lower tower', (err, adLowerTower) ->
-    #       models.advertisement.random url, 'upper box', (err, adUpperBox) ->
-    #         models.advertisement.random url, 'lower box', (err, adLowerBox) ->
-    #         res.locals.adspaceTop = if adspaceTop? then adspaceTop else ''
-    #         res.locals.adUpperTower = if adUpperTower? then adUpperTower else ''
-    #         res.locals.adLowerTower = if adLowerTower? then adLowerTower else ''
-    #         res.locals.adUpperBox = if adUpperBox? then adUpperBox else ''
-    #         res.locals.adLowerBox  = if adLowerBox? then adLowerBox else ''
-    #         
-    #         if req.session.user_id? or req.cookies.pouser?
-    #           #console.log '*** Cookie', req.cookies.pouser
-    #           user_id = req.session.user_id or req.cookies.pouser
-    #           models.user.getUserById user_id, (err, results) ->
-    #             if err then throw err
-    #             
-    #             if results.length > 0
-    #               res.locals.objUser = new classes.user results.pop()
-    #               
-    #             adsLoaded()
-    #         
-    #         else
-    #           adsLoaded()
   
   app.use app.router
   
