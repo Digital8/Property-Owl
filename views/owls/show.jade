@@ -160,14 +160,14 @@ block content
               h2
                 | Reveal the Deal
                 img.arrow(src='/images/blue-arrow-icon-down.png', alt='Reveal the Deal')
-              - if (!owl.deals.length)
+              - if (owl.deals.length)
                 ul
-                  li No deals have been listed
+                - each deal in owl.deals
+                  - if (deal)
+                    li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
               - else
                 ul
-                  - each deal in owl.deals
-                    - if (deal)
-                      li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
+                  li No deals have been listed
             .secure-deal
               a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.property_id}", data-type="property") Secure the Deal!
           
@@ -175,16 +175,16 @@ block content
           br
           a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=#{owl.address + ' ' + owl.suburb + ' ' + owl.state + ' ' + owl.postcode}&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913', target="_blank") View Larger Map
           
-          - if (owl.files)
-            .more-info
-              h2 
-                | More Information
-                img.arrow(src='/images/grey-arrow-icon-down.png', alt='More Information')
-              - if (owl.files)
-                ul
-                - each file in files
-                  li
-                    a(href="/uploads/#{file.filename}") #{file.description}
-              - else
-                ul
-                  li No files have been uploaded
+          // - if (owl.files)
+          .more-info
+            h2 
+              | More Information
+              img.arrow(src='/images/grey-arrow-icon-down.png', alt='More Information')
+            - if (owl.files)
+              ul
+              - each file in files
+                li
+                  a(href="/uploads/#{file.filename}") #{file.description}
+            - else
+              ul
+                li No files have been uploaded
