@@ -102,6 +102,7 @@ app.configure ->
             res.locals.adLowerBox  = if adLowerBox? then adLowerBox else ''
             
             if req.session.user_id? or req.cookies.pouser?
+              #console.log '*** Cookie', req.cookies.pouser
               user_id = req.session.user_id or req.cookies.pouser
               models.user.getUserById user_id, (err, results) ->
                 if err then throw err
