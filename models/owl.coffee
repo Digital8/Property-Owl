@@ -9,7 +9,7 @@ system = require '../system'
 Media = system.models.media
 Deal = system.models.deal
 
-module.exports = class owl extends Model
+module.exports = class Owl extends Model
   @table = new Table
     name: 'owls'
     key: 'owl_id'
