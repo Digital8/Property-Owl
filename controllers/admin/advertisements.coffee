@@ -34,7 +34,7 @@ exports.add = (req, res) ->
 
 exports.create = (req, res) ->
   fs.readFile req.files.image.path, (error, data) ->
-    req.body.image_id = uuid()
+    req.body.image_id = uuid() + '.png'
     
     path = "#{system.bucket}/#{req.body.image_id}"
     
@@ -109,7 +109,7 @@ exports.update = (req, res) ->
   
   if req.files.image
     fs.readFile req.files.image.path, (error, data) ->
-      req.body.image_id = uuid()
+      req.body.image_id = uuid() + '.png'
       
       path = "#{system.bucket}/#{req.body.image_id}"
       

@@ -27,7 +27,7 @@ module.exports = class Media extends Model
     super callback
   
   @upload = (args, callback) =>
-    id = uuid()
+    id = uuid() + '.png'
     
     console.log 'uploading...', file
     
