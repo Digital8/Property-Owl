@@ -90,30 +90,56 @@ app.configure ->
       console.stop 'ads'
       done()
     
-    models.advertisement.random url, 'top', (err, adspaceTop) ->
-      models.advertisement.random url, 'upper tower', (err, adUpperTower) ->
-        models.advertisement.random url, 'lower tower', (err, adLowerTower) ->
-          models.advertisement.random url, 'upper box', (err, adUpperBox) ->
-            models.advertisement.random url, 'lower box', (err, adLowerBox) ->
-            res.locals.adspaceTop = if adspaceTop? then adspaceTop else ''
-            res.locals.adUpperTower = if adUpperTower? then adUpperTower else ''
-            res.locals.adLowerTower = if adLowerTower? then adLowerTower else ''
-            res.locals.adUpperBox = if adUpperBox? then adUpperBox else ''
-            res.locals.adLowerBox  = if adLowerBox? then adLowerBox else ''
+    async.parallel
+      top       : (callback) -> models.advertisement.random url, 'top', (err, result) -> callback err, result
+      upperTower: (callback) -> models.advertisement.random url, 'upper tower', (err, result) -> callback err, result
+      lowerTower: (callback) -> models.advertisement.random url, 'lower tower', (err, result) -> callback err, result
+      upperBox  : (callback) -> models.advertisement.random url, 'upper box', (err, result) -> callback err, result
+      lowerBox  : (callback) -> models.advertisement.random url, 'lower box', (err, result) -> callback err, result
+    , (err, results) ->
+      res.locals.adspaceTop = if results.top? then results.top else ''
+      res.locals.adUpperTower = if results.upperTower? then results.upperTower else ''
+      res.locals.adLowerTower = if results.lowerTower? then results.lowerTower else ''
+      res.locals.adUpperBox = if results.upperBox? then results.upperBox else ''
+      res.locals.adLowerBox  = if results.lowerBox? then results.lowerBox else ''
+      
+      if req.session.user_id? or req.cookies.pouser?
+        user_id = req.session.user_id or req.cookies.pouser
+        models.user.getUserById user_id, (err, results) ->
+          if err then throw err
+          
+          if results.length > 0
+            res.locals.objUser = new classes.user results.pop()
             
-            if req.session.user_id? or req.cookies.pouser?
-              #console.log '*** Cookie', req.cookies.pouser
-              user_id = req.session.user_id or req.cookies.pouser
-              models.user.getUserById user_id, (err, results) ->
-                if err then throw err
-                
-                if results.length > 0
-                  res.locals.objUser = new classes.user results.pop()
-                  
-                adsLoaded()
-            
-            else
-              adsLoaded()
+          adsLoaded()
+      
+      else
+        adsLoaded()
+    
+    # models.advertisement.random url, 'top', (err, adspaceTop) ->
+    #   models.advertisement.random url, 'upper tower', (err, adUpperTower) ->
+    #     models.advertisement.random url, 'lower tower', (err, adLowerTower) ->
+    #       models.advertisement.random url, 'upper box', (err, adUpperBox) ->
+    #         models.advertisement.random url, 'lower box', (err, adLowerBox) ->
+    #         res.locals.adspaceTop = if adspaceTop? then adspaceTop else ''
+    #         res.locals.adUpperTower = if adUpperTower? then adUpperTower else ''
+    #         res.locals.adLowerTower = if adLowerTower? then adLowerTower else ''
+    #         res.locals.adUpperBox = if adUpperBox? then adUpperBox else ''
+    #         res.locals.adLowerBox  = if adLowerBox? then adLowerBox else ''
+    #         
+    #         if req.session.user_id? or req.cookies.pouser?
+    #           #console.log '*** Cookie', req.cookies.pouser
+    #           user_id = req.session.user_id or req.cookies.pouser
+    #           models.user.getUserById user_id, (err, results) ->
+    #             if err then throw err
+    #             
+    #             if results.length > 0
+    #               res.locals.objUser = new classes.user results.pop()
+    #               
+    #             adsLoaded()
+    #         
+    #         else
+    #           adsLoaded()
   
   app.use app.router
   
