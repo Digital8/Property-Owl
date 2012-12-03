@@ -4,7 +4,7 @@ module.exports = (app, {models, controllers, helpers}) ->
   console.start 'import'
   
   fs.readdirSync('./models').forEach (module) ->
-    if module[0] not '.'
+    return if module[0] is '.'
     console.log "✓ [model] #{module}" #if app.argv.verbose
     models[module.split('.')[0]] = require "./models/#{module}"
 
