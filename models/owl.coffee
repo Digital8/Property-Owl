@@ -7,6 +7,7 @@ Table = require '../lib/table'
 system = require '../system'
 
 Media = system.models.media
+Deal = system.models.deal
 
 module.exports = class Owl extends Model
   @table = new Table
@@ -51,6 +52,20 @@ module.exports = class Owl extends Model
           
           for media in medias
             @images.push media if media.entity_id is @id
+          
+          callback()
+      
+      deals: (callback) =>
+        Deal.all (error, deals) =>
+          console.log deals
+          # console.log 'medias', medias
+          
+          @deals = []
+          
+          # @images = _.filter medias, (media) => media.entity_id = @id
+          
+          for deal in deals
+            @deals.push deal if deal.owl_id is @id
           
           callback()
     
