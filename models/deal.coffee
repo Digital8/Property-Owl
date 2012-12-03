@@ -16,6 +16,10 @@ module.exports = class Deal extends Model
   # @belongsTo Model, as: 'owner'
   # @blongsTo Model, as: 'entity'
   
+  @field 'value'
+  @field 'description'
+  @field 'deal_type_id'
+  
   # @field 'owner_id'
   # @field 'entity_id'
   # @field 'filename'

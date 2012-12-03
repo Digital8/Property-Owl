@@ -7,14 +7,14 @@
     thead
       tr
         td Type
-        td Name
+        td Description
         td Value
     tbody
       - if (owl.deals && owl.deals.length)
         - each deal in owl.deals
           tr
             td
-              select.type(type='text', name='type')
+              select.type(type='text', name='type', data-index='#{deal.id}')
                 option(value='stamp_duty') Stamp Duty
                 option(value='furniture_package') Furniture Package
                 option(value='blinds') Blinds
@@ -22,9 +22,9 @@
                 option(value='entertainment_system') Entertainment System
                 option(value='other') Other
             td
-              input.name(type='text', name='name', placeholder='default')
+              input.name(type='text', name='name', placeholder='default', value='#{deal.description}')
             td
-              input#value(type='number', name='value', value='0')
+              input#value(type='number', name='value', value='#{deal.value}')
     tfooter
       tr
         td(colspan='3')

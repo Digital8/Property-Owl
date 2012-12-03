@@ -165,9 +165,11 @@ block content
                   li No deals have been listed
               - else
                 ul
+                  //- p= JSON.stringify(owl.deals)
                   - each deal in owl.deals
                     - if (deal)
-                      li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
+                      //- li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
+                      li= '$' + deal.value.toString() + ' ' + deal.description
             .secure-deal
               a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.property_id}", data-type="property") Secure the Deal!
           
