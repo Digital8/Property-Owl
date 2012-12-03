@@ -5,13 +5,11 @@
       strong= '$' + owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     
     h2 #{owl.address}, #{owl.suburb} #{owl.state.toUpperCase()}
-
+  
   .listing-body
     
-    //- p= JSON.stringify(owl)
-    
     .listing-thumb
-      a(href='/properties/view/#{owl.owl_id}')
+      a(href='/owls/#{owl.owl_id}')
         - if (owl.images && owl.images.length)
           - (owl.image = owl.images.pop())
           img.thumb(src='/uploads/#{owl.image.filename}', alt='76 Orchard Terrace, St Lucia')

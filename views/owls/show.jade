@@ -89,7 +89,7 @@ block content
             - var i = 0
             - each image in owl.images
               - i++
-              dt slide 
+              dt "slide #{i}"
               dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
             
             //- dt slide one
@@ -166,9 +166,9 @@ block content
             .secure-deal
               a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.property_id}", data-type="property") Secure the Deal!
           
-          iframe#google-map(width='100%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913&output=embed')
+          iframe#google-map(width='100%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=#{owl.address + ' ' + owl.suburb + ' ' + owl.state + ' ' + owl.postcode}z=14&output=embed')
           br
-          a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=76+Orchard+Terrace,+St+Lucia,+QLD&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913', target="_blank") View Larger Map
+          a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=#{owl.address + ' ' + owl.suburb + ' ' + owl.state + ' ' + owl.postcode}&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913', target="_blank") View Larger Map
           
           - if (owl.files)
             .more-info

@@ -1,0 +1,24 @@
+//- .inputs
+//-   label.required(for='image') Deal
+//-     input#image(type='text', name="image")
+
+.inputs
+  table.admin-gridview
+    thead
+      tr
+        td Type
+        td Name
+        td Value
+    tbody
+      td
+        select.type(type='text', name='type')
+          option(value='stamp_duty') Stamp Duty
+          option(value='furniture_package') Furniture Package
+          option(value='blinds') Blinds
+          option(value='rental_garantee') Rental Guarantee
+          option(value='entertainment_system') Entertainment System
+          option(value='other') Other
+      td
+        input.name(type='text', name='name', placeholder='default')
+      td
+        input#value(type='number', name='value')
