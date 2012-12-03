@@ -4,7 +4,7 @@ module.exports = (app, {models, controllers, helpers}) ->
   console.start 'import'
   
   files = fs.readdirSync('./models')
-  files.sort
+  files.sort()
 
   for file in files
     return if file[0] is '.'
