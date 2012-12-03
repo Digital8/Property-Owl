@@ -20,7 +20,8 @@ block content
           .listing-summary
             .header
               .listing-price
-                $ #{property.price}
+                | $ 
+                span.price #{property.price}
               h2 #{property.address}, #{property.suburb}
             .listing-body
               .listing-thumb
@@ -47,7 +48,7 @@ block content
                     |  Car Spaces
                 .summary
                   h3= property.title
-                  p= property.description
+                  p= property.description.substr(0,200) + '...'
                 .listing-links
                   a.savebuttons.save-button(href='#', data-property="#{property.property_id}")
                     img#save-icon(src='/images/plus-icon.png', alt='Save this property')
