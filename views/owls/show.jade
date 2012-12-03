@@ -106,9 +106,14 @@ block content
       
       .property-info
         #left
-          h1 Australia's Best Property Deal
+          if(typeof(bestdeal) != 'undefined' && bestdeal)
+            h1 Australia's Best Property Deal
+          else
+            h1= owl.title
           | #{owl.address}, #{owl.suburb}, #{owl.state.toUpperCase()} #{owl.postcode}
           h2 Property Details
+          if(typeof(bestdeal) != 'undefined' && bestdeal)
+            strong= owl.title
           p= owl.description
           .general-features
             h3 General Features
