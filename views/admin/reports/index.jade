@@ -1,9 +1,14 @@
 extends ../../layout
 
 block content
- //
-   main content
- .container.row.main
-   include ../../admin-menu
-   h1 Reports
-   include reportsMenu
+  .container.row.main
+    include ../../admin-menu
+    
+    h1 Reports
+      span.secondary  - Deal Registrations
+    
+    script
+      window.barns = !{JSON.stringify(barns)};
+      window.owls = !{JSON.stringify(owls)};
+    
+    .registration_graph
