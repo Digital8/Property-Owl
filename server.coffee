@@ -54,6 +54,11 @@ app.configure ->
     , (error) -> done()
   
   app.use (req, res, done) ->
+    system.db.query "SELECT COUNT(*) AS count FROM po_users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH)", (error, rows) ->
+      app.locals.signupsThisMonth = rows.pop().count
+      done()
+  
+  app.use (req, res, done) ->
     DevelopmentType = system.models.development_type
     
     DevelopmentType.all (error, developmentTypes) ->

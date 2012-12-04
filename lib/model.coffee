@@ -20,6 +20,8 @@ module.exports = class Model
   @field = (key, args = {}) ->
     @fields ?= {}
     
+    args.cardinality ?= Infinity
+    
     @fields[key] = args
   
   ###
