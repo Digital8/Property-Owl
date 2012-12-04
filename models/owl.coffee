@@ -8,8 +8,6 @@ system = require '../system'
 
 Deal = system.models.deal
 
-# console.log system.models
-
 module.exports = class Owl extends Model
   @table = new Table
     name: 'owls'
@@ -27,7 +25,6 @@ module.exports = class Owl extends Model
   @field 'cars'
   @field 'internal_area'
   @field 'external_area'
-  # @field 'feature_image'
   
   constructor: (args = {}) ->
     super
