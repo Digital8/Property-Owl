@@ -33,7 +33,7 @@ module.exports = class Owl extends Model
     super
   
   hydrate: (callback) ->
-    async.parallel
+    async.series
       developmentType: (callback) =>
         DevelopmentType = system.models.development_type
         
@@ -72,6 +72,13 @@ module.exports = class Owl extends Model
             @deals.push deal if deal.owl_id is @id
           
           callback()
+      
+      registrations: (callback) =>
+        
+        # add the registrations to @ here
+        console.log @deals
+        
+        callback()
     
     , (error) => super callback
   
