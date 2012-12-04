@@ -1,3 +1,8 @@
+###
+middleware for browserify
+- since substack decided to take it out
+###
+
 CoffeeScript = require 'coffee-script'
 
 browserify = require 'browserify'
