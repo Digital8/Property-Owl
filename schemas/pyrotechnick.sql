@@ -476,6 +476,33 @@ INSERT INTO `po_pages` VALUES (1,'/about','About Property Owl','<p>Propertyowl.c
 UNLOCK TABLES;
 
 --
+-- Table structure for table `po_registrations`
+--
+
+DROP TABLE IF EXISTS `po_registrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `po_registrations` (
+  `registration_id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `resource_id` mediumint(9) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `registered_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`registration_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `po_registrations`
+--
+
+LOCK TABLES `po_registrations` WRITE;
+/*!40000 ALTER TABLE `po_registrations` DISABLE KEYS */;
+INSERT INTO `po_registrations` VALUES (1,1,'property',1,'2012-11-30 04:52:49'),(4,2,'property',1,'2012-11-30 04:57:53'),(5,0,'property',1,'2012-12-04 13:09:27');
+/*!40000 ALTER TABLE `po_registrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `po_saveddeals`
 --
 
@@ -586,7 +613,7 @@ CREATE TABLE `po_users` (
   `subscribed_newsletter` tinyint(4) NOT NULL DEFAULT '0',
   `subscribed_alerts` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -595,7 +622,7 @@ CREATE TABLE `po_users` (
 
 LOCK TABLES `po_users` WRITE;
 /*!40000 ALTER TABLE `po_users` DISABLE KEYS */;
-INSERT INTO `po_users` VALUES (1,'Brendan','Scarvell','bscarvell@gmail.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'Digital8','3288 2222','3288 1111','0412 345 678','123 asdf street!','Redbank Plainz','','',0,0),(2,'Test','Developer','foo@bar.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',2,'','','','','','','','',1,1);
+INSERT INTO `po_users` VALUES (1,'Brendan','Scarvell','bscarvell@gmail.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'Digital8','3288 2222','3288 1111','0412 345 678','123 asdf street!','Redbank Plainz','','',0,0),(2,'Test','Developer','foo@bar.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',2,'','','','','','','','',1,1),(3,'Nicholas','Kinsey','pyro@feisty.io','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'feisty','','','','','','','',0,0);
 /*!40000 ALTER TABLE `po_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -608,4 +635,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-03 12:11:56
+-- Dump completed on 2012-12-04 23:39:04
