@@ -91,25 +91,45 @@ module.exports = class Owl extends Model
   upload: (req, callback) ->
     console.log 'filez', req.files
     
-    if req.files? and (Object.keys req.files).length
-      async.forEach (Object.keys req.files), (key, callback) =>
-        file = req.files[key]
-        
-        if file.size <= 0 then return callback null
-        
-        Media.upload
-          entity_id: @id
-          owner_id: req.session.user_id
-          file: file
-        , (error, media) ->
-          callback error, media
+    async.series
+      removeDeals: (callback) =>
+        @db.query "DELETE FROM deals WHERE owl_id = ?", @id, callback
       
-      , callback
+      addDeals: (callback) =>
+        values = req.body.value.pop()
+        names = req.body.name.pop()
+        types = req.body.type.pop()
+        
+        deals = []
+        
+        for index in [0...types.length]
+          deals.push
+            type: types[index]
+            name: names[index]
+            value: values[index]
+        
+        console.log deals
     
-    else
-      console.log 'no uploads'
+    , (error) ->
+      if req.files? and (Object.keys req.files).length
+        async.forEach (Object.keys req.files), (key, callback) =>
+          file = req.files[key]
+          
+          if file.size <= 0 then return callback null
+          
+          Media.upload
+            entity_id: @id
+            owner_id: req.session.user_id
+            file: file
+          , (error, media) ->
+            callback error, media
+        
+        , callback
       
-      callback()
+      else
+        console.log 'no uploads'
+        
+        callback()
   
   @state = (state, callback) ->
     console.log state
