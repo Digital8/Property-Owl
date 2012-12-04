@@ -33,23 +33,6 @@ block content
             a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/barns#{barn.barn_id}') Tweet
             script
               !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-      
-      .enquiry
-        h2 Enquire About This Deal
-        form#input-form
-          label(for='propertyName') Name
-          input#propertyName(type='text',disabled,value=objUser.firstName+' '+objUser.lastName)
-          label(for='propertyEmail') Email:
-          input#propertyEmail(type='text',disabled,value=objUser.email)
-          label(for='propertyPhone') Phone
-          input#propertyPhone(type='text',value=objUser.phone)
-          label(for='propertyContactMethod') Contact Method
-          select#propertyContactMethod
-            option Phone
-            option Email
-          label(for='propertyComments') Comments
-          textarea#propertyComments(rows='5')
-          input.button(type='submit', value='Submit')
     
     #wide-center-col
       //- image slider
@@ -118,18 +101,8 @@ block content
             h3 Other Features
             p= barn.other_features
         #right
-          
-          .deal
-            //- h2
-            //-   | Reveal the Deal
-            //-   img.arrow(src='/images/blue-arrow-icon.png', alt='Reveal the Deal')
-            //- - if (locals.deals.length == 0)
-            //-   li No deals have been listed
-            //- - else
-            //-   ul
-            //-     - each deal in locals.deals
-            //-       li= deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
-          
+          .secure-deal
+            a.show-secure-deal.secure-button.register(href='#',data-id="#{barn.id}", data-type="barn") Express Your Interest!
           .time-left
             p
               | Time left

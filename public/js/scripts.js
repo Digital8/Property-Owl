@@ -377,7 +377,7 @@ $(function(){
       data: 'id='+id+'&type='+type
     }).done(function(d){
       //console.log(d);
-      if(d.status == 200) alert('You have registered for this property')
+      //if(d.status == 200) alert('You have registered for this property')
   	});
   });	
 });

@@ -1,6 +1,7 @@
 async = require 'async'
 
 system = require '../../system'
+db = system.db
 
 models =
   users: system.load.model 'user'
@@ -11,7 +12,9 @@ models =
 helpers = {}
 
 exports.index = (req,res) ->
-  res.render 'admin/reports/index', menu: 'reports'
+  db.query "SELECT CONCAT(YEAR(registered_at),'-',MONTH(registered_at),'-01') AS 'date', Count(*) as 'count' FROM po_registrations WHERE type = ? GROUP BY YEAR(registered_at), MONTH(registered_at)", ['barn'], (err, barns) ->
+    db.query "SELECT CONCAT(YEAR(registered_at),'-',MONTH(registered_at),'-01') AS 'date', Count(*) as 'count' FROM po_registrations WHERE type = ? GROUP BY YEAR(registered_at), MONTH(registered_at)", ['owl'], (err, owls) ->
+      res.render 'admin/reports/index', barns: barns or {}, owls: owls or {}, menu: 'reports'
 
 exports.dealListings = (req,res) ->
   listings = [
