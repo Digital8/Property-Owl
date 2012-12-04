@@ -27,6 +27,8 @@ module.exports = class Owl extends Model
   @field 'internal_area'
   @field 'external_area'
   
+  @field 'development_type_id'
+  
   constructor: (args = {}) ->
     super
   
@@ -41,7 +43,7 @@ module.exports = class Owl extends Model
           callback()
       
       media: (callback) =>
-        console.log system.models
+        # console.log system.models
         
         Media = system.models.media
         Media.all (error, medias) =>

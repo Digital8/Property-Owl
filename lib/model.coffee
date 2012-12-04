@@ -59,23 +59,34 @@ module.exports = class Model
   save: (callback) ->
     map = {}
     
-    for key, field in @constructor.fields
+    console.log @constructor.fields
+    
+    for key, field of @constructor.fields
       map[key] = @[key]
     
-    # db.query "UPDATE #{@constructor.table.name} SET ?", map, callback
-    callback()
+    db.query "UPDATE #{@constructor.table.name} SET ? WHERE #{@constructor.table.key} = ?", [map, @id], =>
+      console.log arguments
+      do callback
+    
+    # console.log 'mapz', map
+    
+    # callback()
   
   ###
   Model::update
   - commits/persists dirty fields (changes) to the underlying row/record
   ###
   @update = (id, hash, callback) ->
-    @get id, (error, owl) ->
-      for key, field of @fields
-        owl[key] = hash[key]
+    console.log '[update]', 'hash', hash
+    
+    @get id, (error, model) ->
+      console.log '[update]', 'fields', model.constructor.fields
       
-      owl.save (error) ->
-        callback error, owl
+      for key, field of model.constructor.fields
+        model[key] = hash[key]
+      
+      model.save (error) ->
+        callback error, model
   
   ###
   Model.new
