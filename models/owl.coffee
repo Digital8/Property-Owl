@@ -104,7 +104,7 @@ module.exports = class Owl extends Model
     
     async.series
       removeDeals: (callback) =>
-        @db.query "DELETE FROM deals WHERE owl_id = ?", @id, callback
+        @constructor.db.query "DELETE FROM deals WHERE owl_id = ?", @id, callback
       
       addDeals: (callback) =>
         values = req.body.value.pop()
@@ -115,11 +115,19 @@ module.exports = class Owl extends Model
         
         for index in [0...types.length]
           deals.push
-            type: types[index]
-            name: names[index]
+            owl_id: @id
+            deal_type_id: types[index]
+            description: names[index]
             value: values[index]
+            created_by: req.session.user_id
+        
+        deals.pop()
         
         console.log deals
+        
+        async.forEach deals, (deal, callback) =>
+          @constructor.db.query "INSERT INTO deals SET ?", deal, callback
+        , callback
     
     , (error) ->
       if req.files? and (Object.keys req.files).length
