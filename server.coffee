@@ -1,3 +1,6 @@
+https = require 'https'
+fs = require 'fs'
+
 require 'colors'
 
 hack = require './hack'
@@ -135,7 +138,7 @@ app.configure ->
   
   console.stop 'configure'
 
-server = app.listen config.port
+# server = app.listen config.port
 
 (require './import') app, system
 
@@ -145,8 +148,19 @@ server = app.listen config.port
 
 (require './routes') app
 
-console.log "Server started on port #{config.port}"
+server = https.createServer
+  # key: fs.readFileSync('./ssl/www.propertyowl.com.au.key')
+  # cert: fs.readFileSync('./ssl/cert')
+  # passphrase: 'Synchr0n9z8'
+  # pfx: fs.readFileSync('./ssl/cert.pfx')
+  # passphrase: 'Synchr0n9z8'
+  key: fs.readFileSync('./ssl/localhost.key')
+  cert: fs.readFileSync('./ssl/localhost.crt')
+, app
 
-console.stop 'boot'
-
-console.report()
+server.listen 443, ->
+  console.log "Server started on port #{config.port}"
+  
+  console.stop 'boot'
+  
+  console.report()

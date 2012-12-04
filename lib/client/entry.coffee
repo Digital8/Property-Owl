@@ -3,6 +3,8 @@ moment = require 'moment'
 _ = require 'underscore'
 window.commas = commas = require '../helpers/commas'
 
+require './reports'
+
 $ ->
 
   $('body').on 'keypress', (event) ->
