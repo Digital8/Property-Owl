@@ -8,7 +8,7 @@ system = require '../system'
 
 Deal = system.models.deal
 
-console.log system.models
+# console.log system.models
 
 module.exports = class Owl extends Model
   @table = new Table
@@ -47,7 +47,7 @@ module.exports = class Owl extends Model
         
         Media = system.models.media
         Media.all (error, medias) =>
-          console.log medias
+          # console.log medias
           # console.log 'medias', medias
           
           @images = []
@@ -61,7 +61,7 @@ module.exports = class Owl extends Model
       
       deals: (callback) =>
         Deal.all (error, deals) =>
-          console.log deals
+          # console.log deals
           # console.log 'medias', medias
           
           @deals = []
