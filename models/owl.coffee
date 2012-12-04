@@ -129,7 +129,7 @@ module.exports = class Owl extends Model
           @constructor.db.query "INSERT INTO deals SET ?", deal, callback
         , callback
     
-    , (error) ->
+    , (error) =>
       if req.files? and (Object.keys req.files).length
         async.forEach (Object.keys req.files), (key, callback) =>
           file = req.files[key]
