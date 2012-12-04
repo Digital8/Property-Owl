@@ -162,7 +162,8 @@ module.exports = (app) ->
   #####
   app.post '/ajax/login', controllers.ajax.login
   app.post '/ajax/register', controllers.ajax.register
-  app.post '/ajax/securedeal', controllers.ajax.securedeal
+  app.post '/ajax/securedeal', authenticate, controllers.ajax.securedeal
+  app.post '/ajax/referfriend', authenticate, controllers.ajax.referfriend
   app.post '/ajax/savedeal', authenticate, (authorize acl.admin), controllers.ajax.savedeal
   app.post '/ajax/removedeal', authenticate, (authorize acl.admin), controllers.ajax.removedeal
   app.post '/ajax/addDeal', authenticate, (authorize acl.admin), controllers.ajax.addDeal

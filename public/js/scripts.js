@@ -121,12 +121,21 @@ $(function(){
 		return false;
 	});
 	
-	// show register form
+	// show secure deal form
 	var secureDealModal = $(".secure-deal-overlay");
 	
 	$(".show-secure-deal, .close-secure-deal").on("click", function(event){
 		event.preventDefault();
 		secureDealModal.fadeToggle(150);
+		return false;
+	});
+	
+	// show refer friend form
+	var referFriendModal = $(".refer-friend-overlay");
+	
+	$(".show-refer-friend, .close-refer-friend").on("click", function(event){
+		event.preventDefault();
+		referFriendModal.fadeToggle(150);
 		return false;
 	});
 	
@@ -299,6 +308,55 @@ $(function(){
 	$(".secure-deal-first-name, .secure-deal-last-name, .secure-deal-email, .secure-deal-phone, .secure-deal-comment").on("keypress", function(event){
 	  if(event.keyCode == 13){
 	    $(".secure-deal-button").click();
+	  }
+	});
+	
+	
+	// Refer Friend
+	$(".refer-friend-button").on("click", function(event){
+	  var firstName = $(".refer-friend-first-name").val();
+	  var lastName = $(".refer-friend-last-name").val();
+	  var email = $(".refer-friend-email").val();
+	  var mobile = $(".refer-friend-phone").val();
+	  var comment = $(".refer-friend-comment").val();
+	  
+	  $.ajax({
+	    url: '/ajax/referfriend',
+	    type: 'post',
+	    data: 'e=' + email + '&m=' + mobile + '&f=' + firstName + '&l=' + lastName + '&c=' + comment
+	  }).done(function(d){
+	    if (d.status == 200) {
+	      //showPayment();
+	      //success();
+	      //window.location.replace('/');
+	      referFriendModal.fadeToggle(150);
+	      $("#generic-modal, #generic-modal .modal.main").removeClass('error').addClass('success')
+	      $('#generic-modal-title').html('Thanks for referring a friend!');
+	      $('#generic-modal-content').html('<br /><br /><center>Your friend should recieve an email shortly</center>');
+	      $('#generic-modal').fadeToggle(150);
+	    }
+	    else {
+	      var errors = Object.keys(d.errors);
+  	    
+  	    $("#generic-modal, #generic-modal .modal.main").removeClass('success').addClass('error')
+	      $('#generic-modal-title').html('Please fix the following');
+	      $('#generic-modal-content').html('<br /><ul>');
+	      for(i=0; i<errors.length;i++)
+	      {
+	         $('#generic-modal-content').append('<li><b>' + d.errors[errors[i]].msg + '</b></li>');
+	      }
+        $('#generic-modal-content').append('</ul>');
+        
+	      $('#generic-modal').fadeToggle(150);
+	      //modalCallback = function(){console.log('penis')};
+	    }
+	  });
+	  return false;
+	});
+	
+	$(".refer-friend-first-name, .refer-friend-last-name, .refer-friend-email, .refer-friend-phone, .refer-friend-comment").on("keypress", function(event){
+	  if(event.keyCode == 13){
+	    $(".refer-friend-button").click();
 	  }
 	});
 	

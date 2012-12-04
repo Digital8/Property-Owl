@@ -99,6 +99,21 @@ html.no-js(lang='en')
           .submit-buttons
             input.button.right.secure-deal-button(type='submit', value='Submit', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;")
 
+    .refer-friend-overlay.overlay
+      .modal.main.success
+        a.close-refer-friend(href='#')
+          img(src='/images/modal-close-white.png', alt='Close')
+        h1.modal-title Refer a Friend!
+        .modal-content.details-form
+          input.half.refer-friend-first-name(type='text', placeholder='First Name')
+          input.half.refer-friend-last-name(type='text', placeholder='Last Name')
+          input.half.refer-friend-email(type='text', placeholder='Email Address')
+          input.half.refer-friend-phone(type='text', placeholder='Phone Number')
+          textarea.full.refer-friend-comment(placeholder='Send your friend a message', style="width:98%;")
+          .submit-buttons
+            input.button.right.refer-friend-button(type='submit', value='Submit', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;")
+
+
     .login-overlay.overlay
       .modal.main.success
           a.close-login(href='#')
