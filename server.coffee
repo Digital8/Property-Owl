@@ -127,6 +127,7 @@ app.configure ->
 
             if req.cookies.pouser?
               if results.password == req.cookies.popwd
+                req.session.user_id = user_id
                 res.locals.objUser = new classes.user results
               else
                 # GO AWAY HAX0R
