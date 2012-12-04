@@ -326,29 +326,46 @@ $(function(){
 	    $(".login-button").click();
 	  }
 	});
-	
-	updateTimer = function(){
-	  var timeNow = moment.utc();
-	  var newDealTime = moment.utc().startOf('day').day(3).hours(2);
-	  var diff = newDealTime.diff(timeNow, 'seconds');
-	
-  	if (diff < 0) {
-  	  newDealTime = newDealTime.hours(24*7);
-	  }
 
-  	var minutes = newDealTime.diff(timeNow, 'minutes') % 60;
-  	if (minutes < 10) minutes = '0' + minutes;
+	var event = new Date();
+	var addDay = 0;
+	if (event.getHours() >= 12 ) addDay = 1;
+
+	event = new Date(event.getFullYear(), event.getMonth(), (event.getDate() + addDay), 12);
+	$('#timer').countdown({
+		until: event,
+		format: 'dHM',
+		layout: '<div id="day-timer"><span class="label">Days</span><span id="day-timer-days" class="value">{dn}</span></div>' +
+						'<div id="day-timer"><span class="label">Hours</span><span id="day-timer-hours" class="value">{hn}</span></div>' +
+						'<div id="day-timer"><span class="label">Minutes</span><span id="day-timer-seconds" class="value">{mn}</span></div>',
+		expiryUrl: '/'
+	});
+
+	//$('#year').text(event.getFullYear());
+	
+	// updateTimer = function(){
+	//   var timeNow = moment.utc();
+	//   var newDealTime = moment.utc().startOf('day').day(3).hours(2);
+	//   var diff = newDealTime.diff(timeNow, 'seconds');
+	
+ //  	if (diff < 0) {
+ //  	  newDealTime = newDealTime.hours(24*7);
+	//   }
+
+ //  	var minutes = newDealTime.diff(timeNow, 'minutes') % 60;
+ //  	if (minutes < 10) minutes = '0' + minutes;
   	
-  	var hours = newDealTime.diff(timeNow, 'hours') % 24;
-  	if (hours < 10) hours = '0' + hours;
+ //  	var hours = newDealTime.diff(timeNow, 'hours') % 24;
   	
-  	$("#day-timer-mins").html(minutes);
-  	$("#day-timer-hours").html(hours);
-  	$("#day-timer-days").html(newDealTime.diff(timeNow, 'days'));  	
-  }
+ //  	if (hours < 10) hours = '0' + hours;
+  	
+ //  	$("#day-timer-mins").html(minutes);
+ //  	$("#day-timer-hours").html(hours);
+ //  	$("#day-timer-days").html(newDealTime.diff(timeNow, 'days'));  	
+ //  }
   
-  updateTimer();
-  setInterval(updateTimer, 5000);
+ //  updateTimer();
+ //  setInterval(updateTimer, 5000);
   
   $('.register').click(function(){
   	var type = $(this).data('type');
