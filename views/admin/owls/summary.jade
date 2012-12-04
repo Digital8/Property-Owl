@@ -14,11 +14,9 @@ tr
     else
      | Pending
   
-  - var value = Math.round(Math.random() * 100)
-  td #{value} %
+  td #{owl.value} %
   
-  - var registrations = Math.round(Math.random() * 1000)
-  td= registrations
+  td #{owl.registrations}
   
   td.actions
     a(href='/owls/#{owl.owl_id}', alt='view owl')
