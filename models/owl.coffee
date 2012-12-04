@@ -73,12 +73,23 @@ module.exports = class Owl extends Model
           
           callback()
       
-      registrations: (callback) =>
-        
-        # add the registrations to @ here
-        console.log @deals
-        
+      value: (callback) =>
+        @value = 0
+
+        for deal in @deals
+          @value += deal.value
+          
+        if @value > 0
+          @value = Math.floor(100 * @value / @price)
+          
         callback()
+        
+        
+      registrations: (callback) =>
+        system.db.query "SELECT Count(*) as registrations FROM po_registrations where type = 'owl' and resource_id = ?", [@id], (err, results) =>
+          @registrations = results.pop().registrations
+        
+          callback()
     
     , (error) => super callback
   
