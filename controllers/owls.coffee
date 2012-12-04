@@ -1,5 +1,5 @@
 system = require '../system'
-
+async = require 'async'
 Owl = system.models.owl
 
 exports.index = (req, res) ->
@@ -14,15 +14,12 @@ exports.top = (req, res) ->
     res.render 'owls/show', owl: owl, bestdeal: true
 
 exports.hot = (req, res) ->
-  Owl.all (error, owls) ->
-    maxPages = Math.round(owls.length / 10)
-    
-    if not req.query.page? then offset = 0 else offset = (parseInt(req.query.page) - 1) * 10
-    if owls.length > 10
-      # remove off the front so we don't display the first results if we're browsing pages
-      owls.shift() for i in [0...offset]
 
-    res.render 'owls/list', owls: owls, maxPages: maxPages, currentPage: req.query.page or 1
+  async.map ['qld', 'nsw', 'vic', 'sa', 'wa', 'nt', 'tas', 'act'], (state, callback) ->
+    Owl.topstate state, (error, owl) ->
+      callback null, owl
+  , (err, owls) ->
+    res.render 'owls/list', owls: owls, maxPages: 1, currentPage: 1
 
 exports.byState = (req, res) ->
   {state} = req.params

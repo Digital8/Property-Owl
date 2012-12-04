@@ -165,3 +165,30 @@ module.exports = class Owl extends Model
       owl.hydrate ->
         
         callback null, owl
+        
+  @topstate = (state, callback) ->
+    @db.query """
+    SELECT
+      *,
+      discount / price AS ratio
+      FROM (
+        SELECT
+        *,
+        (
+          SELECT SUM(value)
+           FROM deals
+           WHERE owl_id = OWLS.owl_id
+        ) AS discount
+    FROM owls AS OWLS
+    WHERE state = ? AND approved
+    HAVING discount) AS TEMP
+    ORDER BY ratio DESC
+    LIMIT 1
+    """, [state], (error, rows) ->
+      return callback error if error
+
+      owl = new Owl rows[0]
+
+      owl.hydrate ->
+
+        callback null, owl
