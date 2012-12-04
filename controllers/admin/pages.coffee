@@ -18,6 +18,7 @@ exports.create = (req, res) ->
   req.body.header ?= ''
   req.body.content ?= ''
   req.body.enabled ?= 1
+  req.body.static ?= 1
   
   req.assert('url', 'Please enter a URL for page').len(1, 100).notEmpty()
   req.assert('header', 'Page title is empty').len(1, 100).notEmpty()
@@ -28,9 +29,7 @@ exports.create = (req, res) ->
   
   if errors
     keys = Object.keys errors
-    
     req.flash('error', errors[key].msg) for key in keys
-    
     res.redirect 'back'
   
   else
@@ -42,9 +41,7 @@ exports.create = (req, res) ->
       else
         models.page.create req.body, (err, results) ->
           if err then throw err
-          
           req.flash 'success', 'Page created'
-          
           res.redirect '/admin/pages'
 
 exports.edit = (req,res) ->

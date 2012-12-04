@@ -33,6 +33,10 @@ block content
       select(name="enabled")
        option(value="1") Enabled
        option(value="0") Disabled
+     .inputs
+       select(name="static")
+         option(value="1",selected=true) Static
+         option(value="0") Dynamic (used for adverts)
      .submit
       input.button(type="submit",value="Update Page")
       a.left-button(href="/admin/pages/") Cancel
