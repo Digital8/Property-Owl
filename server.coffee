@@ -112,7 +112,19 @@ app.configure ->
           if err then throw err
           
           if results.length > 0
-            res.locals.objUser = new classes.user results.pop()
+            results =  results.pop();
+
+            if req.cookies.pouser?
+              if results.password == req.cookies.popwd
+                res.locals.objUser = new classes.user results
+              else
+                # GO AWAY HAX0R
+                delete req.session.user_id
+                res.clearCookie 'pouser'
+                res.clearCookie 'popwd'
+                res.redirect '/'
+            else
+              res.locals.objUser = new classes.user results
             
           adsLoaded()
       

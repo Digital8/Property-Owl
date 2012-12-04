@@ -19,6 +19,7 @@ exports.login = (req, res) ->
       if req.body.r?
         if req.body.r.toLowerCase() == 'checked'
           res.cookie 'pouser', results.user_id, maxAge: 604800000
+          res.cookie 'popwd', results.password, maxAge: 604800000
       res.send status: 200
     
     else
@@ -32,7 +33,6 @@ exports.register = (req, res) ->
   req.assert('p', 'Passwords do not match').isIn [req.body.p2]
   req.assert('t', 'Please accept the terms and conditions').isIn ['checked', 'Checked']
   req.assert('c', 'Postcode is invalid').len(4,5).isInt()
-  console.log(req.body)
 
   errors = req.validationErrors(true)
 
