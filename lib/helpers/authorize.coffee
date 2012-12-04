@@ -10,11 +10,11 @@
 
 module.exports = (acl) ->
   (req,res,next) ->
-    if res.locals.objUser.level is acl or res.locals.objUser.isAdmin()
+    if (res.locals.objUser.level == acl) or res.locals.objUser.isAdmin()
       next()
     else
       #res.render 'errors/404'
       if req.url.indexOf('?login=1') is -1 
         res.redirect req.url + '?login=1'
       else
-        res.render 'user/login', redirect: req.url or '/', modal: true
+        if not res.locals.objUser.isAuthed() then res.render 'user/login', redirect: req.url or '/', modal: true

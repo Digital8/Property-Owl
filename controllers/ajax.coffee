@@ -173,7 +173,12 @@ exports.addRegistration = (req, res) ->
       if results.length is 0
         models.registrations.add req.query, (err, results) ->
           if err then console.log err
-          res.send status: 200 if results.affectedRows is 1
+          if results.affectedRows is 1
+            res.send status: 200
+          else
+            res.send status: 400
+      else
+        res.send status: 400
 
 exports.delRegistration = (req, res) ->
   req.query.id ?= ''
