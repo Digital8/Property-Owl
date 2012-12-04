@@ -33,7 +33,7 @@
           //- td Value
       tbody
         - if (barn.owls && barn.owls.length)
-          - each deal in barn.owls
+          - each owl in barn.owls
             tr
               td
                 select.type(type='text', name='type', data-index='#{deal.id}')

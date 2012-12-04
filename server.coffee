@@ -62,6 +62,14 @@ app.configure ->
       done()
   
   app.use (req, res, done) ->
+    DealType = system.models.deal_type
+    
+    DealType.all (error, dealTypes) ->
+      system.data ?= {}
+      system.data.dealTypes = dealTypes
+      done()
+  
+  app.use (req, res, done) ->
     res.locals.session  = req.session
     res.locals.globals  = config.globals
     res.locals.modules  = config.modules ? {} # If modules exist, allow views to check its status

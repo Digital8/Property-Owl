@@ -4,6 +4,7 @@ _ = require 'underscore'
 window.commas = commas = require '../helpers/commas'
 
 require './reports'
+require './admin'
 
 $ ->
 

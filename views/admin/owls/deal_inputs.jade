@@ -3,29 +3,22 @@
 //-     input#image(type='text', name="image")
 
 .inputs
-  table.admin-gridview
+  table.admin-gridview.deals
     thead
       tr
         td Type
         td Description
         td Value
-    tbody
+    tbody.body
       - if (owl.deals && owl.deals.length)
         - each deal in owl.deals
-          tr
-            td
-              select.type(type='text', name='type', data-index='#{deal.id}')
-                option(value='stamp_duty') Stamp Duty
-                option(value='furniture_package') Furniture Package
-                option(value='blinds') Blinds
-                option(value='rental_garantee') Rental Guarantee
-                option(value='entertainment_system') Entertainment System
-                option(value='other') Other
-            td
-              input.name(type='text', name='name', placeholder='default', value='#{deal.description}')
-            td
-              input#value(type='number', name='value', value='#{deal.value}')
-    tfooter
+          include deal_input
+    tfooter.footer
       tr
         td(colspan='3')
-          p add deal +
+          a.add(href='#') add deal +
+
+table.template(style='display: none;')
+  tbody
+    - if (!locals.deal) { locals.deal = {}; }
+    include deal_input

@@ -28,7 +28,16 @@ module.exports = class Deal extends Model
     super
   
   hydrate: (callback) ->
-    super callback
+    async.parallel
+      developmentType: (callback) =>
+        DealType = system.models.deal_type
+        
+        DealType.get @deal_type_id, (error, dealType) =>
+          @type = dealType
+          
+          callback()
+    , (error) =>
+      super callback
   
   # @upload = (args, callback) =>
   #   id = uuid()

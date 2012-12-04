@@ -31,7 +31,7 @@ exports.update = (req, res) ->
     console.log 'update', arguments
     
     owl.upload req, ->
-      res.redirect "/admin/owls"
+      res.redirect '/admin/owls'
 
 exports.delete = (req, res) ->
   Owl.get req.params.id, (error, owl) ->

@@ -7,6 +7,7 @@ Table = require '../lib/table'
 system = require '../system'
 
 Deal = system.models.deal
+Media = system.models.media
 
 module.exports = class Owl extends Model
   @table = new Table
@@ -79,9 +80,13 @@ module.exports = class Owl extends Model
       callback null
   
   upload: (req, callback) ->
+    console.log 'filez', req.files
+    
     if req.files? and (Object.keys req.files).length
       async.forEach (Object.keys req.files), (key, callback) =>
         file = req.files[key]
+        
+        if file.size <= 0 then return callback null
         
         Media.upload
           entity_id: @id

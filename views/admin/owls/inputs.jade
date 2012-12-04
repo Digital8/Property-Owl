@@ -9,7 +9,7 @@
     select#development_type_id(type='text', name='development_type_id')
       option
       - for type in data.developmentTypes
-        option(value='#{type.id}')= type.name
+        option(value='#{type.id}', selected=owl.development_type_id == type.id)= type.name
   
   .inputs
     label(for='price') Price
@@ -97,14 +97,8 @@
     label(for='state') State
     select#state(name='state')
       option
-      option(value='act') ACT
-      option(value='nsw') NSW
-      option(value='nt') NT
-      option(value='qld') QLD
-      option(value='sa') SA
-      option(value='tas') TAS
-      option(value='vic') VIC
-      option(value='wa') WA
+      - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
+        option(value='#{state}', selected=state == owl.state) #{state.toUpperCase()}
   
   include image_inputs
   
