@@ -36,7 +36,8 @@
       h2 The Barn
       img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
       h3 Group Deals
-  - if(req.url!='/owls/top' && req.url!='/owls/')        
+  
+  - if(req.url!='/owls/top' && req.url!='/owls/')
     - var i = 0, max = 1;
     each ad in adUpperBox 
       - i++
@@ -68,19 +69,19 @@
            a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/properties/view/#{owl.property_id}') Tweet
            script
              !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-      
-      //- TODO what's happening with this tabbing?
-      .enquiry
-         h2 Enquire About This Deal
-         form#input-form
-           label(for='propertyPhone') Phone
-           input#propertyPhone(type='text')
-           label(for='propertyContactMethod') Contact Method
-           select#propertyContactMethod
-             option Phone
-             option Email
-           label(for='propertyComments') Comments
-           textarea#propertyComments(rows='5')
-           input.button(type='submit', value='Submit')
     - else
       include search
+  
+  - if(locals.enquire)
+    .enquiry
+       h2 Enquire About This Deal
+       form#input-form
+         label(for='propertyPhone') Phone
+         input#propertyPhone(type='text')
+         label(for='propertyContactMethod') Contact Method
+         select#propertyContactMethod
+           option Phone
+           option Email
+         label(for='propertyComments') Comments
+         textarea#propertyComments(rows='5')
+         input.button(type='submit', value='Submit')

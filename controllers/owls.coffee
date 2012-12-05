@@ -11,7 +11,7 @@ exports.locate = (req, res) ->
 
 exports.top = (req, res) ->
   Owl.top (error, owl) ->
-    res.render 'owls/show', owl: owl, bestdeal: true
+    res.render 'owls/show', owl: owl, bestdeal: true, enquire: on
 
 exports.hot = (req, res) ->
 
@@ -32,4 +32,4 @@ exports.show = (req, res) ->
   {id} = req.params
   
   Owl.get id, (error, owl) ->
-    res.render 'owls/show', owl: owl
+    res.render 'owls/show', owl: owl, enquire: on
