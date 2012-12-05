@@ -26,7 +26,7 @@ module.exports = class Owl extends Model
   @field 'cars'
   @field 'internal_area'
   @field 'external_area'
-  @field 'approved'
+  # @field 'approved'
   # ,
   #   default: 0
   #   parse: ->
