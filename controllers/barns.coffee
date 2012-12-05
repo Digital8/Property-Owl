@@ -10,7 +10,7 @@ exports.show = (req, res) ->
   {id} = req.params
   
   Barn.get id, (error, barn) ->
-    res.render 'barns/show', barn: barn
+    res.render 'barns/show', barn: barn, enquire: on
 
 # exports.locate = (req, res) ->
 #   res.render 'owls/locate'
