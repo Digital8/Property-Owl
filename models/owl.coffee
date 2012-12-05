@@ -26,6 +26,10 @@ module.exports = class Owl extends Model
   @field 'cars'
   @field 'internal_area'
   @field 'external_area'
+  @field 'approved'
+  # ,
+  #   default: 0
+  #   parse: ->
   
   @field 'development_type_id'
   
@@ -112,6 +116,8 @@ module.exports = class Owl extends Model
         types = req.body.type.pop()
         
         deals = []
+        
+        return callback() unless types
         
         for index in [0...types.length]
           deals.push
