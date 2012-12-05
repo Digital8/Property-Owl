@@ -45,7 +45,8 @@ block content
         
         .inputs
           label(for='page') Page
-            select(name="page", class="select2", data-placeholder="Choose a page")
+            //- make this optional [TODO] [@pyro]
+            select(name="page", class="select3", data-placeholder="Choose a page")
               option(value="")
               - each page in pages
                 option(value="#{page.page_id}", selected=advertisement.page_id == page.page_id)= page.header

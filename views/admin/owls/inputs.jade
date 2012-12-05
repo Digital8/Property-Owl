@@ -75,6 +75,12 @@
 
 .right
   
+  .inputs
+    label(for='title') Approved
+      input.big_checkbox(name='approved', type='checkbox', checked=owl.approved)
+  
+  hr
+  
   .inputs(data-geo='master')
     label(for='title') Geo
     input(type='text', value='')

@@ -26,6 +26,10 @@ module.exports = class Owl extends Model
   @field 'cars'
   @field 'internal_area'
   @field 'external_area'
+  @field 'approved'
+  # ,
+  #   default: 0
+  #   parse: ->
   
   @field 'development_type_id'
   
@@ -102,25 +106,55 @@ module.exports = class Owl extends Model
   upload: (req, callback) ->
     console.log 'filez', req.files
     
-    if req.files? and (Object.keys req.files).length
-      async.forEach (Object.keys req.files), (key, callback) =>
-        file = req.files[key]
-        
-        if file.size <= 0 then return callback null
-        
-        Media.upload
-          entity_id: @id
-          owner_id: req.session.user_id
-          file: file
-        , (error, media) ->
-          callback error, media
+    async.series
+      removeDeals: (callback) =>
+        @constructor.db.query "DELETE FROM deals WHERE owl_id = ?", @id, callback
       
-      , callback
+      addDeals: (callback) =>
+        values = req.body.value.pop()
+        names = req.body.name.pop()
+        types = req.body.type.pop()
+        
+        deals = []
+        
+        return callback() unless types
+        
+        for index in [0...types.length]
+          deals.push
+            owl_id: @id
+            deal_type_id: types[index]
+            description: names[index]
+            value: values[index]
+            created_by: req.session.user_id
+        
+        deals.pop()
+        
+        console.log deals
+        
+        async.forEach deals, (deal, callback) =>
+          @constructor.db.query "INSERT INTO deals SET ?", deal, callback
+        , callback
     
-    else
-      console.log 'no uploads'
+    , (error) =>
+      if req.files? and (Object.keys req.files).length
+        async.forEach (Object.keys req.files), (key, callback) =>
+          file = req.files[key]
+          
+          if file.size <= 0 then return callback null
+          
+          Media.upload
+            entity_id: @id
+            owner_id: req.session.user_id
+            file: file
+          , (error, media) ->
+            callback error, media
+        
+        , callback
       
-      callback()
+      else
+        console.log 'no uploads'
+        
+        callback()
   
   @state = (state, callback) ->
     console.log state

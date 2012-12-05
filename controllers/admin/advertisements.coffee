@@ -1,4 +1,5 @@
 fs = require 'fs'
+util = require 'util'
 
 async = require 'async'
 uuid = require 'node-uuid'
@@ -12,10 +13,13 @@ models =
   page: system.load.model 'page'
 
 exports.index = (req, res) ->
-  models.advertisement.all (error, results) ->
-    throw error if error
-    
-    res.render 'admin/advertisements/index', advertisements: results, menu: 'advertising'
+  async.series
+    pages: (callback) ->
+      models.page.all callback
+    ads: (callback) ->
+      models.advertisement.all callback
+  , (error, results) ->
+    res.render 'admin/advertisements/index', advertisements: results.ads, menu: 'advertising', pages: results.pages
 
 exports.add = (req, res) ->
   

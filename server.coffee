@@ -54,6 +54,11 @@ app.configure ->
     , (error) -> done()
   
   app.use (req, res, done) ->
+    system.db.query "SELECT COUNT(*) AS count FROM po_users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH)", (error, rows) ->
+      app.locals.signupsThisMonth = rows.pop().count
+      done()
+  
+  app.use (req, res, done) ->
     DevelopmentType = system.models.development_type
     
     DevelopmentType.all (error, developmentTypes) ->
@@ -147,8 +152,6 @@ app.configure ->
   
   console.stop 'configure'
 
-# server = app.listen config.port
-
 (require './import') app, system
 
 (require './browserifyafication.coffee') app
@@ -158,13 +161,9 @@ app.configure ->
 (require './routes') app
 
 server = https.createServer
-  # key: fs.readFileSync('./ssl/www.propertyowl.com.au.key')
-  # cert: fs.readFileSync('./ssl/cert')
-  # passphrase: 'Synchr0n9z8'
-  # pfx: fs.readFileSync('./ssl/cert.pfx')
-  # passphrase: 'Synchr0n9z8'
-  key: fs.readFileSync('./ssl/localhost.key')
-  cert: fs.readFileSync('./ssl/localhost.crt')
+  key: fs.readFileSync(config.key)
+  cert: fs.readFileSync(config.cert)
+  passphrase: config.passphrase
 , app
 
 server.listen 443, ->
