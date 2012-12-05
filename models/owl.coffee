@@ -31,6 +31,10 @@ module.exports = class Owl extends Model
   #   default: 0
   #   parse: ->
   
+  @field 'indoor_features'
+  @field 'outdoor_features'
+  @field 'other_features'
+  
   @field 'development_type_id'
   
   constructor: (args = {}) ->
@@ -94,6 +98,20 @@ module.exports = class Owl extends Model
           @registrations = results.pop().registrations
         
           callback()
+      
+      features: (callback) =>
+        expose = (type) =>
+          @["#{type}Features"] = []
+          # if @["#{type}_features"] and @["#{type}_features"].length
+          # return unless @["#{type}_features"].length
+          if @["#{type}_features"]?
+            @["#{type}Features"] = @["#{type}_features"].split '\n'
+        
+        expose 'outdoor'
+        expose 'indoor'
+        expose 'other'
+        
+        callback()
     
     , (error) => super callback
   

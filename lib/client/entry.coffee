@@ -129,3 +129,6 @@ $ ->
       ul.empty()
       
       throttled arguments...
+
+$ ->
+  ($ 'textarea').autosize()

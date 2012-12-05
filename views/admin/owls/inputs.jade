@@ -33,31 +33,16 @@
   hr
   
   .inputs
-    label(for='features') Internal Features
-    select(name='features')
-      option
-      option(value='foo') foo
-      option(value='bar') bar
-      option(value='zip') zip
-      option(value='zap') zap
+    label(for='indoor_features') Indoor Features
+    textarea(name='indoor_features')= owl.indoor_features
   
   .inputs
-    label(for='features') External Features
-    select(name='features')
-      option
-      option(value='foo') foo
-      option(value='bar') bar
-      option(value='zip') zip
-      option(value='zap') zap
+    label(for='outdoor_features') Outdoor Features
+    textarea(name='outdoor_features')= owl.outdoor_features
   
   .inputs
-    label(for='features') Other Features
-    select(name='features')
-      option
-      option(value='foo') foo
-      option(value='bar') bar
-      option(value='zip') zip
-      option(value='zap') zap
+    label(for='other_features') Other Features
+    textarea(name='other_features')= owl.other_features
   
   hr
   

@@ -87,14 +87,27 @@ block content
               - if(owl.internal_area && owl.external_area)
                 li Total Area: 
                   strong #{parseFloat(owl.external_area) + parseFloat(owl.internal_area)} sq. m
-            h3 Indoor Features
-            p= owl.indoor_features
+            
+            - if (owl.indoorFeatures.length)
+              h3 Indoor Features
+              ul
+              - each feature in owl.indoorFeatures
+                li= feature
+              //- p= owl.indoor_features
           
           .other-features
-            h3 Outdoor Features
-            p= owl.outdoor_features
-            h3 Other Features
-            p= owl.other_features
+            
+            - if (owl.outdoorFeatures.length)
+              h3 Outdoor Features
+              ul
+              - each feature in owl.outdoorFeatures
+                li= feature
+            
+            - if (owl.otherFeatures.length)
+              h3 Other Features
+              ul
+              - each feature in owl.otherFeatures
+                li= feature
         
         #right
           - if (owl.deals)
