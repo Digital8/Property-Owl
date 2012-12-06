@@ -1,4 +1,5 @@
 https = require 'https'
+http = require 'http'
 fs = require 'fs'
 
 require 'colors'
@@ -166,9 +167,18 @@ server = https.createServer
   passphrase: config.passphrase
 , app
 
-server.listen 443, ->
+server.listen config.https.port, ->
   console.log "Server started on port #{config.port}"
   
   console.stop 'boot'
   
   console.report()
+
+insecureApp = express()
+
+insecureApp.get '*', (req, res) ->
+  console.log req
+  res.redirect "https://#{req.headers.host}#{req.url}"
+
+insecureServer = http.createServer insecureApp
+insecureServer.listen config.http.port
