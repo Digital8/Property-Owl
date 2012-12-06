@@ -20,4 +20,12 @@ module.exports =
     developer: 2
     admin: 3
   
-  port: 3005
+  http:
+    port: 80
+  
+  https:
+    port: 443
+  
+  key: './ssl/localhost.key'
+  cert: './ssl/localhost.crt'
+  passphrase: 'l3tm3in'
