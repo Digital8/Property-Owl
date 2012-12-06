@@ -162,8 +162,8 @@ app.configure ->
 (require './routes') app
 
 server = https.createServer
-  key: fs.readFileSync(config.key)
-  cert: fs.readFileSync(config.cert)
+  key: fs.readFileSync(config.ssl.key)
+  cert: fs.readFileSync(config.ssl.cert)
   passphrase: config.passphrase
 , app
 

@@ -26,6 +26,7 @@ module.exports =
   https:
     port: 443
   
-  key: './ssl/localhost.key'
-  cert: './ssl/localhost.crt'
-  passphrase: 'l3tm3in'
+  ssl:
+    key: './ssl/localhost.key'
+    cert: './ssl/localhost.crt'
+    passphrase: ''
