@@ -3,6 +3,7 @@ system = require '../system'
 models = news: system.load.model 'news'
 
 exports.index = (req,res) ->
+  console.log 'NEWS123'
   models.news.getAllNews (err, results) ->
     if err then throw err
     res.render 'news/index', news: results or {}, menu: 'wise-owl'

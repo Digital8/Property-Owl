@@ -24,163 +24,167 @@ module.exports = (app) ->
   
   app.get '/products', authenticate, controllers.products.index
   
-  owl = (path, middleware...) ->
+  owl = (method, path, middleware...) ->
     app.get "/owls#{path}", authenticate, middleware...
   
-  owl '/:id(\\d+)', controllers.owls.show
-  owl '', controllers.owls.index
-  owl '/top', controllers.owls.top
-  owl '/hot', controllers.owls.hot
-  owl '/locate', controllers.owls.locate
-  owl '/state/:state', controllers.owls.byState
+  owl 'get', '', controllers.owls.index
+  owl 'get', '/:id(\\d+)', controllers.owls.show
+  owl 'get', '/top', controllers.owls.top
+  owl 'get', '/hot', controllers.owls.hot
+  owl 'get', '/locate', controllers.owls.locate
+  owl 'get', '/state/:state', controllers.owls.byState
   
-  # owls
-  # app.get '/owls/top', authenticate, controllers.owls.top
-  # app.get '/owls/hot', authenticate, controllers.owls.hot
-  # app.get '/owls/locate', authenticate, controllers.owls.locate
-  # app.get '/owls', authenticate, controllers.owls.index
-  # app.get '/owls/state/:state', authenticate, controllers.owls.byState
-  # app.get '/owls/:id', authenticate, controllers.owls.show
+  barn = (method, path, middleware...) ->
+    app[method] "/barns#{path}", authenticate, middleware...
   
-  # barns
-  app.get '/barns', authenticate, controllers.barns.index
-  app.get '/barns/:id', authenticate, controllers.barns.show
+  barn 'get', '', controllers.barns.index
+  barn 'get', "/:id(\\d+)", controllers.barns.show
   
-  #####
-  # developer
-  #####
-  app.get '/developer/properties', (authorize acl.developer), (authorize acl.admin), controllers.dev.properties.index
-  app.get '/developer/properties/add', (authorize acl.developer), (authorize acl.admin), controllers.dev.properties.add
-  app.post '/developer/properties/add', (authorize acl.developer), (authorize acl.admin), controllers.dev.properties.create
+  developer = (method, path, middleware...) ->
+    app[method] "/developer#{path}", (authorize acl.developer), (authorize acl.admin), middleware...
   
-  app.get '/developer/deals', (authorize acl.developer), (authorize acl.admin), controllers.dev.deals.index
-  app.get '/developer/deals/add', (authorize acl.developer), (authorize acl.admin), controllers.dev.deals.add
-  app.post '/developer/deals/add', (authorize acl.developer), (authorize acl.admin), controllers.dev.deals.create
+  developer 'get', '/properties', controllers.dev.properties.index
+  developer 'get', '/properties/add', controllers.dev.properties.add
+  developer 'get', '/properties/add', controllers.dev.properties.create
   
-  # news
-  app.get '/news', authenticate, controllers.news.index
-  app.get '/news/:id', authenticate, controllers.news.view
+  developer 'get', '/deals', controllers.dev.deals.index
+  developer 'get', '/deals/add', controllers.dev.deals.add
+  developer 'get', '/deals/add', controllers.dev.deals.create
   
-  # research
-  app.get '/research', authenticate, controllers.research.index
-  app.get '/research/:id', authenticate, controllers.research.view
+  news = (method, path, middleware...) ->
+    app[method] "/news#{path}", middleware...
   
-  # search
-  app.get '/search', authenticate, controllers.search.index
+  news 'get', '', controllers.news.index
+  news 'get', '/:id(\\d+)', controllers.news.view
   
-  #####
-  # admin
-  #####
-  app.get '/admin', (authorize acl.admin), controllers.admin.index.index
+  research = (method, path, middleware...) ->
+    app[method] "/research#{path}", authenticate, middleware...
   
-  # advertising
-  app.get '/admin/advertising', (authorize acl.admin), controllers.admin.advertising.index
+  research 'get', '', controllers.research.index
+  research  'get', '/:id(\\d+)', controllers.research.view
   
-  # advertisers
-  app.get '/admin/advertisers', (authorize acl.admin), controllers.admin.advertisers.index
-  app.post '/admin/advertisers/add', (authorize acl.admin), controllers.admin.advertisers.create
-  app.get '/admin/advertisers/add', (authorize acl.admin), controllers.admin.advertisers.add
-  app.get '/admin/advertisers/edit/:id', (authorize acl.admin), controllers.admin.advertisers.edit
-  app.put '/admin/advertisers/edit/:id', (authorize acl.admin), controllers.admin.advertisers.update
-  app.get '/admin/advertisers/delete/:id', (authorize acl.admin), controllers.admin.advertisers.delete
-  app.delete '/admin/advertisers/delete/:id', (authorize acl.admin), controllers.admin.advertisers.destroy
+  ### search ###
+  search = (method, path, middleware...) ->
+    app[method] "/search#{path}", authenticate, middleware...
   
-  # advertisements
-  app.get '/admin/advertisements', (authorize acl.admin), controllers.admin.advertisements.index
-  app.post '/admin/advertisements/add', (authorize acl.admin), controllers.admin.advertisements.create
-  app.get '/admin/advertisements/add', (authorize acl.admin), controllers.admin.advertisements.add
-  app.get '/admin/advertisements/edit/:id', (authorize acl.admin), controllers.admin.advertisements.edit
-  app.put '/admin/advertisements/edit/:id', (authorize acl.admin), controllers.admin.advertisements.update
-  app.get '/admin/advertisements/delete/:id', (authorize acl.admin), controllers.admin.advertisements.delete
-  app.delete '/admin/advertisements/delete/:id', (authorize acl.admin), controllers.admin.advertisements.destroy
+  search 'get', '', controllers.search.index
   
-  # news
-  app.get '/admin/news', (authorize acl.admin), controllers.admin.news.index
-  app.post '/admin/news/add', (authorize acl.admin), controllers.admin.news.create
-  app.get '/admin/news/add', (authorize acl.admin), controllers.admin.news.add
-  app.get '/admin/news/edit/:id', (authorize acl.admin), controllers.admin.news.edit
-  app.put '/admin/news/edit/:id', (authorize acl.admin), controllers.admin.news.update
-  app.get '/admin/news/delete/:id', (authorize acl.admin), controllers.admin.news.delete
-  app.delete '/admin/news/delete/:id', (authorize acl.admin), controllers.admin.news.destroy
+  ### admin ###
+  admin = (method, path, middleware...) ->
+    app[method] "/admin#{path}", (authorize acl.admin), middleware...
   
-  # members
-  app.get '/admin/members', (authorize acl.admin), controllers.admin.members.index
-  app.get '/admin/members/add', (authorize acl.admin), controllers.admin.members.add
-  app.post '/admin/members/add', (authorize acl.admin), controllers.admin.members.create
-  app.get '/admin/members/edit/:id', (authorize acl.admin), controllers.admin.members.edit
-  app.put '/admin/members/edit/:id', (authorize acl.admin), controllers.admin.members.update
+  admin 'get', '', controllers.admin.index.index
   
-  # pages
-  app.get '/admin/pages', (authorize acl.admin), controllers.admin.pages.index
-  app.get '/admin/pages/add', (authorize acl.admin), controllers.admin.pages.add
-  app.get '/admin/pages/edit/:id', (authorize acl.admin), controllers.admin.pages.edit
-  app.put '/admin/pages/edit/:id', (authorize acl.admin), controllers.admin.pages.update
-  app.get '/admin/pages/delete/:id', (authorize acl.admin), controllers.admin.pages.delete
-  app.post '/admin/pages/add', (authorize acl.admin), controllers.admin.pages.create
-  app.delete '/admin/pages/delete/:id', (authorize acl.admin), controllers.admin.pages.destroy
+  # admin/advertising
+  admin 'get', '/advertising', controllers.admin.advertising.index
   
-  app.get '/admin/services', (authorize acl.admin), controllers.admin.services.index
-  app.get '/admin/services/add', (authorize acl.admin), controllers.admin.services.add
-  app.get '/admin/services/edit/:id', (authorize acl.admin), controllers.admin.services.edit
-  app.put '/admin/services/edit/:id', (authorize acl.admin), controllers.admin.services.update
-  app.get '/admin/services/delete/:id', (authorize acl.admin), controllers.admin.services.delete
-  app.post '/admin/services/add', (authorize acl.admin), controllers.admin.services.create
+  # admin/advertisers
+  admin 'get', '/advertisers', controllers.admin.advertisers.index
+  admin 'post', '/advertisers/add', controllers.admin.advertisers.create
+  admin 'get', '/admin/advertisers/add', controllers.admin.advertisers.add
+  admin 'get', '/admin/advertisers/edit/:id(\\d+)', controllers.admin.advertisers.edit
+  admin 'put', '/admin/advertisers/edit/:id(\\d+)', controllers.admin.advertisers.update
+  admin 'get', '/admin/advertisers/delete/:id(\\d+)', controllers.admin.advertisers.delete
+  admin 'delete', '/admin/advertisers/delete/:id(\\d+)', controllers.admin.advertisers.destroy
   
-  # TODO
-  app.get '/admin/services/categories', (authorize acl.admin), controllers.admin.services.viewCategories
-  app.get '/admin/services/categories/add', (authorize acl.admin), controllers.admin.services.addCategory
-  app.post '/admin/services/categories/add', (authorize acl.admin), controllers.admin.services.createCategory
-  app.get '/admin/services/categories/edit/:id', (authorize acl.admin), controllers.admin.services.editCategory
-  app.put '/admin/services/categories/edit/:id', (authorize acl.admin), controllers.admin.services.updateCategory
-  app.get '/admin/services/categories/delete/:id', (authorize acl.admin), controllers.admin.services.deleteCategory
+  # admin/advertisements
+  admin 'get', '/advertisements', controllers.admin.advertisements.index
+  admin 'post', '/advertisements/add', controllers.admin.advertisements.create
+  admin 'get', '/advertisements/add', controllers.admin.advertisements.add
+  admin 'get', '/advertisements/edit/:id(\\d+)', controllers.admin.advertisements.edit
+  admin 'put', '/advertisements/edit/:id(\\d+)', controllers.admin.advertisements.update
+  admin 'get', '/advertisements/delete/:id(\\d+)', controllers.admin.advertisements.delete
+  admin 'delete', '/advertisements/delete/:id(\\d+)', controllers.admin.advertisements.destroy
   
-  # owls
-  app.get '/admin/owls', (authorize acl.admin), controllers.admin.owls.index
-  app.get '/admin/owls/add', (authorize acl.admin), controllers.admin.owls.add
-  app.post '/admin/owls', (authorize acl.admin), controllers.admin.owls.create
-  app.get '/admin/owls/:id/edit', (authorize acl.admin), controllers.admin.owls.edit
-  app.put '/admin/owls/:id', (authorize acl.admin), controllers.admin.owls.update
-  app.get '/admin/owls/:id/delete', (authorize acl.admin), controllers.admin.owls.delete
-  app.del '/admin/owls/:id', (authorize acl.admin), controllers.admin.owls.destroy
+  # admin/news
+  admin 'get', '/news', controllers.admin.news.index
+  admin 'post', '/news/add', controllers.admin.news.create
+  admin 'get', '/news/add', controllers.admin.news.add
+  admin 'get', '/news/edit/:id(\\d+)', controllers.admin.news.edit
+  admin 'put', '/news/edit/:id(\\d+)', controllers.admin.news.update
+  admin 'get', '/news/delete/:id(\\d+)', controllers.admin.news.delete
+  admin 'delete', '/news/delete/:id(\\d+)', controllers.admin.news.destroy
   
-  # barn
-  app.get '/admin/barns', (authorize acl.admin), controllers.admin.barns.index
-  app.get '/admin/barns/edit/:id', (authorize acl.admin), controllers.admin.barns.edit
-  app.get '/admin/barns/add', (authorize acl.admin), controllers.admin.barns.add
-  app.post '/admin/barns', (authorize acl.admin), controllers.admin.barns.create
-  app.get '/admin/barns/delete/:barn_id/:property_id', (authorize acl.admin), controllers.admin.barns.delete
-  app.del '/admin/barns/delete/:barn_id/:property_id', (authorize acl.admin), controllers.admin.barns.destroy
+  # admin/members
+  admin 'get', '/members', controllers.admin.members.index
+  admin 'get', '/members/add', controllers.admin.members.add
+  admin 'post', '/members/add', controllers.admin.members.create
+  admin 'get', '/members/edit/:id(\\d+)', controllers.admin.members.edit
+  admin 'put', '/members/edit/:id(\\d+)', controllers.admin.members.update
   
-  # reports
-  app.get '/admin/reports', (authorize acl.admin), controllers.admin.reports.index
-  app.get '/admin/reports/dealListings', (authorize acl.admin), controllers.admin.reports.dealListings
-  app.get '/admin/reports/websiteRegistrations', (authorize acl.admin), controllers.admin.reports.websiteRegistrations
-  app.get '/admin/reports/propertySearches', (authorize acl.admin), controllers.admin.reports.propertySearches
-  app.get '/admin/reports/dealRegistrations', (authorize acl.admin), controllers.admin.reports.dealRegistrations
-  app.get '/admin/reports/servicesEnquiries', (authorize acl.admin), controllers.admin.reports.servicesEnquiries
-  app.get '/admin/reports/advertisingClicks', (authorize acl.admin), controllers.admin.reports.advertisingClicks
+  # admin/pages
+  admin 'get', '/pages', controllers.admin.pages.index
+  admin 'get', '/pages/add', controllers.admin.pages.add
+  admin 'get', '/pages/edit/:id(\\d+)', controllers.admin.pages.edit
+  admin 'put', '/pages/edit/:id(\\d+)', controllers.admin.pages.update
+  admin 'get', '/pages/delete/:id(\\d+)', controllers.admin.pages.delete
+  admin 'post', '/pages/add', controllers.admin.pages.create
+  admin 'delete', '/pages/delete/:id(\\d+)', controllers.admin.pages.destroy
   
-  # # properties
-  # app.get '/admin/properties', (authorize acl.admin), controllers.admin.properties.index
-  # app.get '/admin/properties/add', (authorize acl.admin), controllers.admin.properties.add
-  # app.post '/admin/properties/add', (authorize acl.admin), controllers.admin.properties.create
-  # app.get '/admin/properties/edit/:id', (authorize acl.admin), controllers.admin.properties.edit
-  # app.put '/admin/properties/add', (authorize acl.admin), controllers.admin.properties.update
+  admin 'get', '/services', controllers.admin.services.index
+  admin 'get', '/services/add', controllers.admin.services.add
+  admin 'get', '/services/edit/:id(\\d+)', controllers.admin.services.edit
+  admin 'put', '/services/edit/:id(\\d+)', controllers.admin.services.update
+  admin 'get', '/services/delete/:id(\\d+)', controllers.admin.services.delete
+  admin 'post', '/services/add', controllers.admin.services.create
   
-  #####
-  # ajax
-  #####
-  app.post '/ajax/login', controllers.ajax.login
-  app.post '/ajax/register', controllers.ajax.register
-  app.post '/ajax/securedeal', authenticate, controllers.ajax.securedeal
-  app.post '/ajax/referfriend', authenticate, controllers.ajax.referfriend
-  app.post '/ajax/savedeal', authenticate, (authorize acl.admin), controllers.ajax.savedeal
-  app.post '/ajax/removedeal', authenticate, (authorize acl.admin), controllers.ajax.removedeal
-  app.post '/ajax/addDeal', authenticate, (authorize acl.admin), controllers.ajax.addDeal
-  app.del '/ajax/deleteDeal', authenticate, (authorize acl.admin), controllers.ajax.delDeal
-  app.put '/ajax/updateHero', authenticate, (authorize acl.admin), controllers.ajax.updateHero
-  app.del '/ajax/deleteMedia', authenticate, (authorize acl.admin), controllers.ajax.deleteMedia
-  app.get '/ajax/addRegistration', authenticate, controllers.ajax.addRegistration
-  app.get '/ajax/delRegistration', authenticate, controllers.ajax.delRegistration
-
+  # admin/services/categories
+  admin 'get', '/services/categories', controllers.admin.services.viewCategories
+  admin 'get', '/services/categories/add', controllers.admin.services.addCategory
+  admin 'post', '/services/categories/add', controllers.admin.services.createCategory
+  admin 'get', '/services/categories/edit/:id(\\d+)', controllers.admin.services.editCategory
+  admin 'put', '/services/categories/edit/:id(\\d+)', controllers.admin.services.updateCategory
+  admin 'get', '/services/categories/delete/:id(\\d+)', controllers.admin.services.deleteCategory
+  
+  # admin/owls
+  admin 'get', '/owls', controllers.admin.owls.index
+  admin 'get', '/owls/add', controllers.admin.owls.add
+  admin 'post', '/owls', controllers.admin.owls.create
+  admin 'get', '/owls/:id(\\d+)/edit', controllers.admin.owls.edit
+  admin 'put', '/owls/:id(\\d+)', controllers.admin.owls.update
+  admin 'get', '/owls/:id(\\d+)/delete', controllers.admin.owls.delete
+  admin 'del', '/owls/:id(\\d+)', controllers.admin.owls.destroy
+  
+  # admin/barn
+  admin 'get', '/barns', controllers.admin.barns.index
+  admin 'get', '/barns/edit/:id(\\d+)', controllers.admin.barns.edit
+  admin 'get', '/barns/add', controllers.admin.barns.add
+  admin 'post', '/barns', controllers.admin.barns.create
+  admin 'get', '/barns/delete/:barn_id(\\d+)/:property_id(\\d+)', controllers.admin.barns.delete
+  admin 'del', '/barns/delete/:barn_id(\\d+)/:property_id(\\d+)', controllers.admin.barns.destroy
+  
+  # admin/reports
+  admin 'get', '/reports', controllers.admin.reports.index
+  admin 'get', '/reports/dealListings', controllers.admin.reports.dealListings
+  admin 'get', '/reports/websiteRegistrations', controllers.admin.reports.websiteRegistrations
+  admin 'get', '/reports/propertySearches', controllers.admin.reports.propertySearches
+  admin 'get', '/reports/dealRegistrations', controllers.admin.reports.dealRegistrations
+  admin 'get', '/reports/servicesEnquiries', controllers.admin.reports.servicesEnquiries
+  admin 'get', '/reports/advertisingClicks', controllers.admin.reports.advertisingClicks
+  
+  ### ajax ###
+  ajax = (method, path, middleware...) ->
+    app[method] "/ajax#{path}", middleware...
+  
+  ajax 'post', '/login', controllers.ajax.login
+  ajax 'post', '/register', controllers.ajax.register
+  
+  authedAjax = (method, path, middleware...) ->
+    app[method] "/ajax#{path}", authenticate, middleware...
+  
+  authedAjax 'post', '/securedeal', controllers.ajax.securedeal
+  authedAjax 'post', '/referfriend', controllers.ajax.referfriend
+  authedAjax 'get', '/addRegistration', controllers.ajax.addRegistration
+  authedAjax 'get', '/delRegistration', controllers.ajax.delRegistration
+  
+  adminAjax = (method, path, middleware...) ->
+    app[method] "/ajax#{path}", authenticate, (authorize acl.admin), middleware...
+  
+  adminAjax 'post', '/savedeal', controllers.ajax.savedeal
+  adminAjax 'post', '/removedeal', controllers.ajax.removedeal
+  adminAjax 'post', '/addDeal', controllers.ajax.addDeal
+  adminAjax 'del', '/deleteDeal', controllers.ajax.delDeal
+  adminAjax 'put', '/updateHero', controllers.ajax.updateHero
+  adminAjax 'del', '/deleteMedia', controllers.ajax.deleteMedia
+  
   app.all '*', controllers.pages.index

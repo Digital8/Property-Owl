@@ -28,6 +28,9 @@ hack.augmentApp app
 hack.augmentDB app, system
 
 app.configure ->
+  
+ 
+app.configure ->
   console.start 'configure'
   
   app.set 'views', "#{__dirname}/views"
@@ -56,6 +59,7 @@ app.configure ->
   
   app.use (req, res, done) ->
     system.db.query "SELECT COUNT(*) AS count FROM po_users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH)", (error, rows) ->
+      return done() unless rows?.length
       app.locals.signupsThisMonth = rows.pop().count
       done()
   
