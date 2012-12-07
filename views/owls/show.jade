@@ -51,7 +51,7 @@ block content
             h1= owl.title
           span.price-highlight $
             span.price= owl.price
-          | #{owl.address}, #{owl.suburb}, #{owl.state.toUpperCase()} #{owl.postcode}
+          | #{owl.fullAddress()}
           hr.light
           h2 Property Details
           if(typeof(bestdeal) != 'undefined' && bestdeal)

@@ -115,6 +115,9 @@ module.exports = class Owl extends Model
     
     , (error) => super callback
   
+  fullAddress: ->
+    "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
+  
   deals: (callback) ->
     @db.query "SELECT * FROM deals WHERE #{@table.key} = ?", [@id], (error) ->
       return callback error if error

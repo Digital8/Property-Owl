@@ -395,7 +395,7 @@ $(function(){
 		format: 'dHM',
 		layout: '<div id="day-timer"><span class="label">Days</span><span id="day-timer-days" class="value">{dn}</span></div>' +
 						'<div id="day-timer"><span class="label">Hours</span><span id="day-timer-hours" class="value">{hn}</span></div>' +
-						'<div id="day-timer"><span class="label">Minutes</span><span id="day-timer-seconds" class="value">{mn}</span></div>',
+						'<div id="day-timer"><span class="label">Mins</span><span id="day-timer-seconds" class="value">{mn}</span></div>',
 		expiryUrl: '/'
 	});
 
