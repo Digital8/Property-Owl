@@ -24,13 +24,23 @@ module.exports = (app) ->
   
   app.get '/products', authenticate, controllers.products.index
   
+  owl = (path, middleware...) ->
+    app.get "/owls#{path}", authenticate, middleware...
+  
+  owl '/:id(\\d+)', controllers.owls.show
+  owl '', controllers.owls.index
+  owl '/top', controllers.owls.top
+  owl '/hot', controllers.owls.hot
+  owl '/locate', controllers.owls.locate
+  owl '/state/:state', controllers.owls.byState
+  
   # owls
-  app.get '/owls/top', authenticate, controllers.owls.top
-  app.get '/owls/hot', authenticate, controllers.owls.hot
-  app.get '/owls/locate', authenticate, controllers.owls.locate
-  app.get '/owls', authenticate, controllers.owls.index
-  app.get '/owls/state/:state', authenticate, controllers.owls.byState
-  app.get '/owls/:id', authenticate, controllers.owls.show
+  # app.get '/owls/top', authenticate, controllers.owls.top
+  # app.get '/owls/hot', authenticate, controllers.owls.hot
+  # app.get '/owls/locate', authenticate, controllers.owls.locate
+  # app.get '/owls', authenticate, controllers.owls.index
+  # app.get '/owls/state/:state', authenticate, controllers.owls.byState
+  # app.get '/owls/:id', authenticate, controllers.owls.show
   
   # barns
   app.get '/barns', authenticate, controllers.barns.index
