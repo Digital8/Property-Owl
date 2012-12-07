@@ -76,12 +76,16 @@
     .enquiry
        h2 Enquire About This Deal
        form#input-form
-         label(for='propertyPhone') Phone
-         input#propertyPhone(type='text')
-         label(for='propertyContactMethod') Contact Method
-         select#propertyContactMethod
+          label(for='propertyName') Name
+          input#propertyName(type='text',disabled,value=objUser.firstName+' '+objUser.lastName)
+          label(for='propertyEmail') Email:
+          input#propertyEmail(type='text',disabled,value=objUser.email)
+          label(for='propertyPhone') Phone
+          input#propertyPhone(type='text')
+          label(for='propertyContactMethod') Contact Method
+          select#propertyContactMethod
            option Phone
            option Email
-         label(for='propertyComments') Comments
-         textarea#propertyComments(rows='5')
-         input.button(type='submit', value='Submit')
+          label(for='propertyComments') Comments
+          textarea#propertyComments(rows='5')
+          input.button(type='submit', value='Submit')
