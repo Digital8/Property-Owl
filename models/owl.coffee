@@ -177,6 +177,21 @@ module.exports = class Owl extends Model
         
         callback()
   
+  @inBarn = (barnId, callback) ->
+    @db.query "SELECT * FROM #{@table.name} WHERE barn_id = ?", [barnId], (error, rows) =>
+      return callback error if error
+      
+      models = []
+      
+      for row in rows
+        model = new Owl row
+        models.push model
+      
+      async.forEach models, (model, callback) =>
+        model.hydrate callback
+      , (error) ->
+        callback null, models
+  
   @state = (state, callback) ->
     console.log state
     

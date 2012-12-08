@@ -12,7 +12,9 @@ exports.index = (req, res) ->
     res.render 'admin/barns/index', barns: barns
 
 exports.edit = (req, res) ->
-  Barn.get req.params.id, (error, owl) ->
+  Barn.get req.params.id, (error, barn) ->
+    console.log barn
+    
     res.render 'admin/barns/edit', barn: barn
 
 exports.add = (req, res) ->
@@ -34,14 +36,3 @@ exports.destroy = (req, res) ->
     req.flash 'success', 'barn deleted'
     
     res.redirect '/admin/barns'
-
-# system = require '../../system'
-
-# Barn = system.models.barn
-
-# exports.index = (req, res) ->
-#   Barn.all (error, barns) ->
-#     res.render 'admin/barns/index', barns: barns
-
-# exports.add = (req, res) ->
-#   res.render 'admin/barns/add'

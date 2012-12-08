@@ -147,11 +147,11 @@ module.exports = (app) ->
   
   # admin/barn
   admin 'get', '/barns', controllers.admin.barns.index
-  admin 'get', '/barns/edit/:id(\\d+)', controllers.admin.barns.edit
   admin 'get', '/barns/add', controllers.admin.barns.add
   admin 'post', '/barns', controllers.admin.barns.create
-  admin 'get', '/barns/delete/:barn_id(\\d+)/:property_id(\\d+)', controllers.admin.barns.delete
-  admin 'del', '/barns/delete/:barn_id(\\d+)/:property_id(\\d+)', controllers.admin.barns.destroy
+  admin 'get', '/barns/:id(\\d+)/edit', controllers.admin.barns.edit
+  admin 'get', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.delete
+  admin 'del', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.destroy
   
   # admin/reports
   admin 'get', '/reports', controllers.admin.reports.index

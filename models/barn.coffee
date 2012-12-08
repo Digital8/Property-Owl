@@ -1,5 +1,9 @@
+async = require 'async'
+
 Model = require '../lib/model'
 Table = require '../lib/table'
+
+system = require '../system'
 
 module.exports = class Barn extends Model
   @table = new Table
@@ -12,9 +16,29 @@ module.exports = class Barn extends Model
   @field 'postcode'
   @field 'state'
   @field 'description'
+  @field 'listed_by'
   
   constructor: (args = {}) ->
     super
+  
+  hydrate: (callback) ->
+    async.parallel
+      owls: (callback) =>
+        Owl = system.models.owl
+        
+        Owl.inBarn @id, (error, owls) =>
+          @owls = owls
+          callback error
+      
+      user: (callback) =>
+        system.db.query "SELECT * FROM po_users WHERE user_id = ?", [@listed_by], (error, rows) =>
+          console.log 'FUCK', rows
+          return callback 'no owner' unless rows?.length
+          @user = rows.pop()
+          do callback
+    , (error) =>
+      @user ?= {}
+      callback error
   
   # @all = (callback) ->
   #   @db.query "SELECT * FROM barns", (error, rows) ->
