@@ -1,3 +1,5 @@
+_ = require 'underscore'
+
 system = require '../system'
 async = require 'async'
 Owl = system.models.owl
@@ -14,12 +16,22 @@ exports.top = (req, res) ->
     res.render 'owls/show', owl: owl, bestdeal: true, enquire: on
 
 exports.hot = (req, res) ->
-
   async.map ['qld', 'nsw', 'vic', 'sa', 'wa', 'nt', 'tas', 'act'], (state, callback) ->
     Owl.topstate state, (error, owl) ->
       callback null, owl
   , (err, owls) ->
-    res.render 'owls/list', owls: owls, maxPages: 1, currentPage: 1
+    for owl in owls
+      console.log owl.id, owl.value
+    
+    sortedOwls = _.sortBy owls, 'value'
+    sortedOwls.reverse()
+    
+    # console.log owls
+    
+    for owl in sortedOwls
+      console.log owl.id, owl.value
+    
+    res.render 'owls/list', owls: sortedOwls, maxPages: 1, currentPage: 1
 
 exports.byState = (req, res) ->
   {state} = req.params
