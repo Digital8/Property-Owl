@@ -49,10 +49,10 @@ block content
              a(href='http://maps.google.com/?q=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode, target='_blank')
                img(src='http://maps.googleapis.com/maps/api/staticmap?sensor=false&center=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode + '&zoom=7&size=192x128')
            td.actions
-             a(href='/admin/advertisers/edit/#{advertiser.advertiser_id}', alt='edit')
+             a(href='/admin/advertisers/#{advertiser.advertiser_id}/edit', alt='edit')
                img(src='/images/edit.png', alt='edit')
                | Edit
            td.actions
-             a(href='/admin/advertisers/delete/#{advertiser.advertiser_id}', alt='delete')
+             a(href='/admin/advertisers/#{advertiser.advertiser_id}/delete', alt='delete')
                img(src='/images/delete.png', alt='delete')
                | Delete

@@ -25,7 +25,7 @@ block content
       
       hr
       
-      form.details-form(action="/admin/members/add",method="post")
+      form.details-form.fake(action="/admin/members/add",method="post")
         include ../../flashify
         .left
           .inputs
@@ -67,7 +67,7 @@ block content
           .inputs
             label.required(for='email') Email
             - if (values.email == undefined) values.email = ''
-              input#email(type="text",value="")
+              input#email(type="text", value="", name="email")
           
           .inputs
             label.required(for='password') Password

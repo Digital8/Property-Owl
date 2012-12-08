@@ -19,7 +19,7 @@ exports.add = (req,res) ->
     res.render 'admin/members/add', values: req.session.signup or {}, groups: groups or {}, menu: 'members'
 
 exports.create = (req,res) ->
-  req.assert('email', 'Invalid Email Address').isEmail()
+  req.assert('email', 'Invalid Email').isEmail()
   req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
   req.assert('confirmPassword', 'Password does not match').isIn [req.body.password]
   req.assert('fname', 'First name is invalid').isAlpha().len(2,20).notEmpty()
@@ -45,8 +45,8 @@ exports.create = (req,res) ->
        user.group ?= 1
        
        models.user.createUser user, (err, results) ->
-         req.flash('success','You are successful')
-         res.redirect 'back'
+         req.flash 'success', 'User created!'
+         res.redirect 'admin/members'
 
 exports.edit = (req,res) ->
   models.user.getUserById req.params.id, (err, results) ->

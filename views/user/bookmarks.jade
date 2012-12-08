@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+  
+  .container.row.main
+    include ../left_nav
+    
+    #center-col
+        h1 My Account
+        
+        .tabs.account
+          ul.menu
+            li: a(href="/account") My details
+            li Property Preferences
+            li.active: a(href="/saved") Saved Properties
+            li Deal Registrations
+          
+          .tabs-content
+            .padding
+              table.admin-gridview
+                thead
+                  tr
+                    td Title
+                    td Deal Type
+                    td Deal Status
+                    td Date Listed
+                    td Actions
+                tbody
+                  - if (properties.length == 0)
+                     h4 No property deals have been saved yet
+                   - else
+                     
+                     - each property in properties
+                      - i++
+                          //
+                            listing          
+                          tr
+                            td
+                              a(href="/properties/view/#{property.property_id}")= property.title
+                            td
+                              strong= property.deal_type
+                            td Current
+                            - var created = new Date(property.created_at);
+                            td #{created.getDay()}/#{created.getMonth()}/#{created.getFullYear()}
+                            td
+                              a.removebuttons(href='#', data-property="#{property.property_id}")
+                                img(src='images/delete.png')
+                                | Remove
+    
+    include ../right_nav

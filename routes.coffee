@@ -81,11 +81,11 @@ module.exports = (app) ->
   # admin/advertisers
   admin 'get', '/advertisers', controllers.admin.advertisers.index
   admin 'post', '/advertisers/add', controllers.admin.advertisers.create
-  admin 'get', '/admin/advertisers/add', controllers.admin.advertisers.add
-  admin 'get', '/admin/advertisers/edit/:id(\\d+)', controllers.admin.advertisers.edit
-  admin 'put', '/admin/advertisers/edit/:id(\\d+)', controllers.admin.advertisers.update
-  admin 'get', '/admin/advertisers/delete/:id(\\d+)', controllers.admin.advertisers.delete
-  admin 'delete', '/admin/advertisers/delete/:id(\\d+)', controllers.admin.advertisers.destroy
+  admin 'get', '/advertisers/add', controllers.admin.advertisers.add
+  admin 'get', '/advertisers/:id(\\d+)/edit', controllers.admin.advertisers.edit
+  admin 'put', '/advertisers/:id(\\d+)/edit', controllers.admin.advertisers.update
+  admin 'get', '/advertisers/:id(\\d+)/delete', controllers.admin.advertisers.delete
+  admin 'delete', '/advertisers/:id(\\d+)/delete', controllers.admin.advertisers.destroy
   
   # admin/advertisements
   admin 'get', '/advertisements', controllers.admin.advertisements.index
@@ -107,19 +107,22 @@ module.exports = (app) ->
   
   # admin/members
   admin 'get', '/members', controllers.admin.members.index
+  admin 'post', '/members', controllers.admin.members.create
+  admin 'put', '/members/:id(\\d+)', controllers.admin.members.update
+  admin 'delete', '/members/:id(\\d+)', controllers.admin.pages.destroy
+  admin 'get', '/members/:id(\\d+)/edit', controllers.admin.members.edit
   admin 'get', '/members/add', controllers.admin.members.add
-  admin 'post', '/members/add', controllers.admin.members.create
-  admin 'get', '/members/edit/:id(\\d+)', controllers.admin.members.edit
-  admin 'put', '/members/edit/:id(\\d+)', controllers.admin.members.update
+  admin 'get', '/members/:id(\\d+)/delete', controllers.admin.pages.delete
+  
   
   # admin/pages
   admin 'get', '/pages', controllers.admin.pages.index
+  admin 'post', '/pages', controllers.admin.pages.create
+  admin 'put', '/pages/:id(\\d+)', controllers.admin.pages.update
+  admin 'delete', '/pages/:id(\\d+)', controllers.admin.pages.destroy
   admin 'get', '/pages/add', controllers.admin.pages.add
-  admin 'get', '/pages/edit/:id(\\d+)', controllers.admin.pages.edit
-  admin 'put', '/pages/edit/:id(\\d+)', controllers.admin.pages.update
-  admin 'get', '/pages/delete/:id(\\d+)', controllers.admin.pages.delete
-  admin 'post', '/pages/add', controllers.admin.pages.create
-  admin 'delete', '/pages/delete/:id(\\d+)', controllers.admin.pages.destroy
+  admin 'get', '/pages/:id(\\d+)/edit', controllers.admin.pages.edit
+  admin 'get', '/pages/:id(\\d+)/delete', controllers.admin.pages.delete
   
   admin 'get', '/services', controllers.admin.services.index
   admin 'get', '/services/add', controllers.admin.services.add

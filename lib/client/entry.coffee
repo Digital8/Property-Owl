@@ -29,6 +29,15 @@ $ ->
         'address': -> faker.Address.streetAddress()
         'suburb': -> faker.Address.city()
         'postcode': -> faker.Helpers.replaceSymbolWithNumber '####'
+        'fname': -> faker.Name.firstName()
+        'lname': -> faker.Name.lastName()
+        'email': -> faker.Internet.email()
+        'phone': -> faker.Helpers.replaceSymbolWithNumber '(##) #### ####'
+        'workPhone': -> faker.Helpers.replaceSymbolWithNumber '(##) #### ####'
+        'mobile': -> faker.Helpers.replaceSymbolWithNumber '#### ### ###'
+        'company': -> faker.Company.companyName()
+        'password': -> 'password'
+        'confirmPassword': -> 'password'
       
       for field in fields
         field = $ field
