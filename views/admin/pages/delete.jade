@@ -8,14 +8,14 @@ block content
     
     h3 Delete Page?
     
-    p Are you sure you wish to delete: 
+    p Are you sure you wish to delete:
       em: u #{page.header}
     
-    form.form-horizontal(action="/admin/pages/#{page.page_id}", method="post")
-      input(type="hidden", name="_method", value="delete")
+    form.form-horizontal(action="/admin/pages/#{page.page_id}", method='post')
+      input(type='hidden', name='_method', value='delete')
       
       div.control-group
         div.controls
-          input.btn.btn-danger(type="submit", value="Delete")
+          input.btn.btn-danger(type='submit', value='Delete')
           | &nbsp;
-          a.btn(href="/admin/pages") Cancel
+          a.btn(href='/admin/pages') Cancel
