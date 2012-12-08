@@ -1,43 +1,35 @@
 extends layout
 
 block content
-  //
-    main content
+  
   .container.row.main
+    
     include left_nav
-    //
-      center-col
+    
     #center-col
-      h1 Welcome to Products and Services
+      h1 Products and Services
+      
       p At Property Owl we love working with the below businesses.
-      p Search through the different categories for the product or service you are seeking. Click on the Enquire Now tab, complete the required fields, then click on Submit and you will receive information on their advertised deals.
-      p Cannot find a product or service that suits your needs? Advise us of your property needs and we will find the business or businesses who are willing to provide a great deal to Property Owl subscribers.
-      h3 Property Owl &#45; Innovation in delivering Australia&#39;s Best Property Deals
-      - if (services.length == 0)
+      //- p Search through the different categories for the product or service you are seeking. Click on the Enquire Now tab, complete the required fields, then click on Submit and you will receive information on their advertised deals.
+      
+      p Can't find a product or service that suits your needs? Advise us of your property needs and we will find the business or businesses who are willing to provide a great deal to Property Owl subscribers.
+      
+      //- h3 Property Owl &#45; Innovation in delivering Australia&#39;s Best Property Deals
+      
+      - if (!services.length)
         p No services have been listed on Property Owl
+      
       - else
         - each service in services
-          //
-            listing
           .listing-summary
-            .header
-              h2= service.company
+            .header: h2= service.company
+            
             .listing-body
-              .listing-thumb
-                img.thumb(src='/images/services-thumb.jpg')
+              .listing-thumb: img.thumb(src='/images/services-thumb.jpg')
+              
               .listing-details
-                .summary
-                  p= service.description
-                .listing-links
-                  a.enquire-button(href='#') Enquire
-          //
-            end listing
-
-      //
-        end center-col
-    //
-      right-col
-    include right_nav
+                .summary: p= service.description
+                
+                .listing-links: a.enquire-button(href='#') Enquire
     
-    //
-      end right-col
+    include right_nav

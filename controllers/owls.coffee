@@ -26,8 +26,6 @@ exports.hot = (req, res) ->
     sortedOwls = _.sortBy owls, 'value'
     sortedOwls.reverse()
     
-    # console.log owls
-    
     for owl in sortedOwls
       console.log owl.id, owl.value
     

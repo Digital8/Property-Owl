@@ -165,14 +165,15 @@ html.no-js(lang='en')
                 li
                   - var c = (menu == 'wise-owl') ? 'active' : ''
                   a(href='/news',class="#{c}") Wise Owl
-                  ul
-                    li
-                      a(href='/news') News Updates
-                    li
-                      a(href='/research') Research
+                  //- ul
+                  //-   li
+                  //-     a(href='/news') News Updates
+                  //-   li
+                  //-     a(href='/research') Research
                 li
                   - var c = (menu == 'products') ? 'active' : ''
-                  a(href='/products',class="#{c}") Products & Services
+                  a(href='/affiliates', class="#{c}") Products & Services
+                
                 - if (objUser.isAuthed())
                   li
                     a(href='/account') My Nest

@@ -22,7 +22,7 @@ module.exports = (app) ->
   
   app.get '/saved', authenticate, controllers.saveddeals.index
   
-  app.get '/products', authenticate, controllers.products.index
+  app.get '/affiliates', authenticate, controllers.affiliates.index
   
   owl = (method, path, middleware...) ->
     app.get "/owls#{path}", authenticate, middleware...
@@ -114,7 +114,6 @@ module.exports = (app) ->
   admin 'get', '/members/add', controllers.admin.members.add
   admin 'get', '/members/:id(\\d+)/delete', controllers.admin.pages.delete
   
-  
   # admin/pages
   admin 'get', '/pages', controllers.admin.pages.index
   admin 'post', '/pages', controllers.admin.pages.create
@@ -138,6 +137,9 @@ module.exports = (app) ->
   admin 'get', '/services/categories/edit/:id(\\d+)', controllers.admin.services.editCategory
   admin 'put', '/services/categories/edit/:id(\\d+)', controllers.admin.services.updateCategory
   admin 'get', '/services/categories/delete/:id(\\d+)', controllers.admin.services.deleteCategory
+  
+  # admin/advertising
+  admin 'get', '/deals', controllers.admin.deals.index
   
   # admin/owls
   admin 'get', '/owls', controllers.admin.owls.index
