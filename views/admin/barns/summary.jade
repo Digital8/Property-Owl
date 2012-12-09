@@ -1,8 +1,8 @@
 tr
   td= barn.barn_id
-  td= barn.created_at
+  td= moment(barn.created_at).format('LLL')
   td= barn.user.first_name + ' ' + barn.user.last_name
-  td= barn.state.toUpperCase()
+  td= barn.fullAddress()
   td Current
   td= barn.owls.length
   td 0

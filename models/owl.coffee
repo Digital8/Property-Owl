@@ -115,6 +115,13 @@ module.exports = class Owl extends Model
     
     , (error) => super callback
   
+  heroImageURL: ->
+    unless @images? and @images.length then return '/images/hero-image.jpg'
+    
+    hero = @images.pop()
+    
+    return "/uploads/#{hero.filename}"
+  
   fullAddress: ->
     "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
   
@@ -256,14 +263,13 @@ module.exports = class Owl extends Model
     LIMIT 1
     """, [state], (error, rows) ->
       return callback error if error
-
+      
       owl = new Owl rows[0]
-
+      
       owl.hydrate ->
-
         callback null, owl
-        
-  @pendingowls = (callback) ->
+  
+  @pending = (callback) ->
     @db.query "SELECT * FROM owls WHERE approved = false", (error, rows) =>
       return callback error if error
       

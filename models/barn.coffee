@@ -40,20 +40,10 @@ module.exports = class Barn extends Model
       @user ?= {}
       callback error, this
   
-  # @all = (callback) ->
-  #   @db.query "SELECT * FROM barns", (error, rows) ->
-  #   # @db.query "SELECT * FROM #{@table.name}", (error, rows) ->
-  #     return callback error if error
-      
-  #     models = []
-      
-  #     for row in rows
-  #       model = new Barn row
-  #       models.push model
-      
-  #     callback null, models
-          
-  @pendingbarns = (callback) ->
+  fullAddress: ->
+    "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
+  
+  @pending = (callback) ->
     @db.query "SELECT * FROM barns WHERE approved = false", (error, rows) =>
       return callback error if error
       

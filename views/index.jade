@@ -16,29 +16,17 @@ block content
             span#day-timer-mins.value
         
         #map
-          // script
-          //   drawMap();
-          //- img#map-image(src='/images/map.png', usemap='#australia', alt='Click on a State of Australia')
-          //- map(name='australia')
-          //-   area#map-wa(shape='polygon', coords='65,25,65,100,17,116,3,62,57,19', href='/owls/state/wa')
-          //-   area#map-nt(shape='polygon', coords='65,25,65,69,103,69,103,35,91,24,94,13,75,10', href='/owls/state/nt')
-          //-   area#map-qld(shape='polygon', coords='103,68,103,34,111,39,119,10,159,82,116,82,116,68', href='/owls/state/qld')
-          //-   area#map-sa(shape='polygon', coords='116,68,65,68,65,100,116,129', href='/owls/state/sa')
-          //-   area#map-nsw(shape='polygon', coords='116,82,159,82,145,126,116,104', href='/owls/state/nsw')
-          //-   area#map-vic(shape='polygon', coords='116,104,145,126,137,131,110,128,116,129', href='/owls/state/vic')
-          //-   area#map-act(shape='square', coords='155,110,185,110,185,120,155,120', href='/owls/state/act')
-          //-   area#map-tas(shape='square', coords='120,140,170,140,170,155,120,155', href='/owls/state/tas')
       
       .home-counter
         span.label Number of Enquiries
-        span.value 1,345
+        span.value= owl.registrations
     
-    .deal-summary.clickable(style="background-image: url('/images/hero-image.jpg');",url="owls/top")
+    .deal-summary.clickable(style="background-image: url('#{owl.heroImageURL()}');", url='owls/top')
       .home-hero-caption
-        img#house-icon(src='/images/house-icon.png', alt="Australia's Best Property Deal")
-        h2= "Australia's Best Property Deal"
+        img#house-icon(src='/images/house-icon.png', alt=owl.title)
+        h2= owl.title
         p
-          | Developer pays Stamp Duty, Window Coverings and 1 Year rental Guarantee.
+          = _s.prune(owl.description, 150)
           a(href='#', alt="Find out more about Australia's best property deal") Find out more
       
       a.secure-button(href='/owls/top')
@@ -52,43 +40,9 @@ block content
       include left_nav
     
     #home-center-col
-      h1 Welcome to Property Owl!
-      p
-        | Property Owl offers the best deals on new residential properties Australia wide, with new deals uploaded to the website every Wednesday at 12 midday!
-      p
-        | The Property Owl website provides for the best possible deals on selected new properties across the Australian real estate market.  Properties listed on Property Owl must include a minimum value deal to advertise on the website.  It is important to note that these deals are not available through the Seller direct.
-      p So how does it work?
-      p
-        | New deals are uploaded to the Property Owl website on a weekly basis via the 
-        span.emphasis 'Owl Deals' 
-        | tab.  All properties represented on the website are then assessed by the Property Owl system where the best 'value for money' deal for each state across Australia is accessed via the 
-        span.emphasis 'Best State Deal' 
-        | tab.   Once the best value for money deals have been selected for each state, the Property Owl system then assesses and selects the best deal nationally and is accessed via the 
-        span.emphasis 'Australia's Best Property Deal' 
-        | tab.
-      p
-        | The 'value for money' deals (based on percentage value) calculated and selected by the Property Owl system are legitimate deals.  Sellers cannot secure the 'The Best State' and 'Australia's Best Property Deal' positions on the website through paid advertising.  In order to secure these positions the Sellers must put forward their best deal - Simple.
-      p
-        | You must be quick in securing these deals in 'Best State Deal' and 'Australia's Best Property Deal' as they are for a 7 day period, unless sold sooner.  The timer on the left hand side of the web page indicates how much time remains before the deal finishes.
-      p
-        | If you like any of the deals represented then simply click on the 
-        span(style='color: #009300;')
-          strong green 
-        span.emphasis 'Secure the Deal' 
-        | tab where you will be prompted to complete the relevant enquiry form.  Once completed it is then forwarded to the Sellers representative who will contact you in relation to the next step of the purchasing process.
-      p
-        | If you are interested in obtaining an even better deal, then swoop on a selected property within 
-        span.emphasis 'The Barn' 
-        | .  In 'The Barn' Sellers list a number of similar new properties in the one location and offer further deals to groups of individuals who collectively take up the offer within the required time.
-      p
-        | Not currently in the market to purchase a property yourself?  Refer a friend who then registers with and subsequently purchases a property through Property Owl and you will be rewarded with a $1000.00 nest egg for your referral.
-      p So what are you waiting for - Swoop in today!
-      p
-        span.emphasis Property Owl – Innovation in delivering Australia's Best Property Deals.
+      
+      include welcome
     
     include right_nav
   
-  <script src="/js/wwv_client.js" type="text/javascript"></script>
-  <script src="/js/swfobject.js" type="text/javascript"></script>
-  script(type='text/javascript')
-    try { attachWebWalkVideo('262'); } catch (err) {}
+  include creep

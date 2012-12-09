@@ -27,8 +27,7 @@ app = express()
 hack.augmentApp app
 hack.augmentDB app, system
 
-app.configure ->
-  
+# app.configure ->
  
 app.configure ->
   console.start 'configure'
@@ -36,7 +35,7 @@ app.configure ->
   app.set 'views', "#{__dirname}/views"
   app.set 'view engine', 'jade'
   
-  #app.use express.logger 'dev'
+  app.use express.logger 'dev'
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use expressValidator
@@ -88,9 +87,9 @@ app.configure ->
     res.locals.menu     = {}
     res.locals.data     = system.data
     res.locals._s       = require 'underscore.string'
+    res.locals.moment = require 'moment'
     
-    if app.argv.hack
-      req.session.user_id = 1
+    if app.argv.hack then req.session.user_id = 1
     
     res.locals.navigation = [
       {key: 'aus-best-deal',    href: '/owls/top',        label: "Australia's Best Deal"}
@@ -108,10 +107,6 @@ app.configure ->
     
     console.start 'ads'
     
-    adsLoaded = ->
-      console.stop 'ads'
-      done()
-    
     async.parallel
       top       : (callback) -> models.advertisement.random url, 'top',         (err, result) -> callback err, result
       upperTower: (callback) -> models.advertisement.random url, 'upper tower', (err, result) -> callback err, result
@@ -125,34 +120,36 @@ app.configure ->
       res.locals.adUpperBox   = if results.upperBox?    then results.upperBox   else ''
       res.locals.adLowerBox   = if results.lowerBox?    then results.lowerBox   else ''
       
-      if req.session.user_id? or req.cookies.pouser?
-        user_id = req.session.user_id or req.cookies.pouser
-        ###
-        # todo: add secure cookie checking here
-        ###
-        models.user.getUserById user_id, (err, results) ->
-          if err then throw err
-          
-          if results.length > 0
-            results =  results.pop();
-
-            if req.cookies.pouser?
-              if results.password == req.cookies.popwd
-                req.session.user_id = user_id
-                res.locals.objUser = new classes.user results
-              else
-                # GO AWAY HAX0R
-                delete req.session.user_id
-                res.clearCookie 'pouser'
-                res.clearCookie 'popwd'
-                res.redirect '/'
-            else
-              res.locals.objUser = new classes.user results
-            
-          adsLoaded()
+      console.stop 'ads'
+      do done
+  
+  app.use (req, res, done) ->
+    if req.session.user_id? or req.cookies.pouser?
+      user_id = req.session.user_id or req.cookies.pouser
       
-      else
-        adsLoaded()
+      models.user.getUserById user_id, (err, results) ->
+        if err then throw err
+        
+        if results.length > 0
+          results =  results.pop();
+          
+          if req.cookies.pouser?
+            if results.password == req.cookies.popwd
+              req.session.user_id = user_id
+              res.locals.objUser = new classes.user results
+            else
+              # GO AWAY HAX0R
+              delete req.session.user_id
+              res.clearCookie 'pouser'
+              res.clearCookie 'popwd'
+              res.redirect '/'
+          else
+            res.locals.objUser = new classes.user results
+          
+        do done
+    
+    else
+      do done
   
   app.use app.router
   
