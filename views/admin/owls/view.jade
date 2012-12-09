@@ -1,0 +1,255 @@
+extends ../../layout
+
+block content
+  .container.row.main
+    
+    include ../menu
+    
+    h1 Owl Deal Details
+    
+    include actions
+    
+    .grid-header
+      form#search-form
+          label #{owl.title}
+          .button-actions
+            input.button(type='submit', value='Change Status')
+            | &nbsp;
+            a.button.delete(href='/admin/owls/#{owl.owl_id}/delete', alt='delete owl deal') Delete
+    .details
+      .left
+        .inputs
+          table.admin-details
+            tr
+              td Property ID
+              td 123
+            tr
+              td Listed by
+              td Developer name
+            tr
+              td Listed on
+              td 12/06/2012
+            tr
+              td Status
+              td Current
+            tr
+              td Time left
+              td 3 days: 2 hours: 15 seconds
+            tr
+              td Property Type
+              td Apartment
+            tr
+              td Development Stage
+              td Completed
+            tr
+              td Price
+              td $500,000
+            tr
+              td Title
+              td Property Title
+            tr
+              td Location
+              td Address line 1 Suburb State Post Code
+            tr
+              td Number of Bedrooms
+              td 2
+            tr
+              td Number of Bathrooms
+              td 2
+            tr
+              td Number of Carspaces
+              td 1
+            tr
+              td Total Area
+              td 50 sq. m
+            tr
+              td Indoor Features
+              td Air conditioning
+            tr
+              td Outdoor Features
+              td Inground swimming pool
+            tr
+              td Other Features
+              td Close to shops and transport
+            tr
+              td Registrations
+              td 259
+      .right
+        .inputs
+          h2 Owl Deal Details
+          table.admin-gridview
+            thead
+              tr
+                td Attribute
+                td Value
+                td Actions
+            tbody
+              tr
+                td Stamp Duty
+                td $5,000
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png')
+                    | Remove
+              tr
+                td Furniture Package
+                td $10,000
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png')
+                    | Remove
+          table.admin-summary
+            tbody
+              tr
+                td.label Total Dollar Value
+                td(colspan='2') $15,000
+              tr
+                td.label Total Percentage Value
+                td(colspan='2') 20%
+        .inputs.padding-top
+          .grid-summary 1 - 4 of 24
+          h2 Registrations
+          table.admin-gridview
+            thead
+              tr
+                td Full Name
+                td Date
+                td Actions
+            tbody
+              tr
+                td Ben Smith
+                td 12/06/2012
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png', alt='Delete')
+                    | Delete
+              tr
+                td Ben Smith
+                td 12/06/2012
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png', alt='Delete')
+                    | Delete
+              tr
+                td Ben Smith
+                td 12/06/2012
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png', alt='Delete')
+                    | Delete
+            tfoot
+              tr
+                td(colspan='3')
+                  ul.pager
+                    li.disabled
+                      a(href='#') Prev
+                    li.selected
+                      a(href='#') 1
+                    li
+                      a(href='#') 2
+                    li
+                      a(href='#') 3
+                    li
+                      a(href='#') 4
+                    li
+                      a(href='#') Next
+        //
+          inputs
+      //
+        right
+      .inputs
+        h3 Description
+        hr
+        p
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
+      .left
+        h2 Files
+        .inputs
+          table.admin-gridview
+            thead
+              tr
+                td File Title
+                td File Name
+                td Size
+                td Actions
+            tbody
+              tr
+                td Floor Plan
+                td floorplan.pdf
+                td 200KB
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png')
+                    | Remove
+              tr
+                td Appraisal
+                td appraisal.pdf
+                td 200KB
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png')
+                    | Remove
+              tr
+                td Virtual Tour
+                td virtualtour.mov
+                td 300KB
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png')
+                    | Remove
+      //
+        left
+      .right
+        h2 Images
+        .inputs
+          table.admin-gridview
+            thead
+              tr
+                td Thumb
+                td File Name
+                td Order
+                td Hero
+                td Size
+                td Actions
+            tbody
+              tr
+                td
+                  img(src='images/thumb.gif')
+                td Image 1
+                td.order
+                  img(src='images/order-arrow.png')
+                td
+                  input(type='radio', checked='checked')
+                td 200KB
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png')
+                    | Remove
+              tr
+                td
+                  img(src='images/thumb.gif')
+                td Image 2
+                td.order
+                  img(src='images/order-arrow.png')
+                td
+                  input(type='radio')
+                td 200KB
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png')
+                    | Remove
+              tr
+                td
+                  img(src='images/thumb.gif')
+                td Image 3
+                td.order
+                  img(src='images/order-arrow.png')
+                td
+                  input(type='radio')
+                td 200KB
+                td.actions
+                  a(href='#')
+                    img(src='images/delete.png')
+                    | Remove
+      //
+        right

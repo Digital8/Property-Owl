@@ -43,7 +43,7 @@
       
       .summary
         h3= owl.title
-        p= owl.description.substr(0,150) + '...'
+        p= _s.prune(owl.description,150)
       
       .listing-links
         a.savebuttons.save-button(href='#', data-owl="#{owl.owl_id}")

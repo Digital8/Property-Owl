@@ -136,17 +136,18 @@ module.exports = (app) ->
   # admin/owls
   admin 'get', '/owls', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.owls.index
   admin 'get', '/owls/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.owls.add
+  admin 'get', '/owls/:id(\\d+)/view', ((req, res, next) -> res.locals.action = 'view' ; next()), controllers.admin.owls.view
   admin 'post', '/owls', controllers.admin.owls.create
-  admin 'get', '/owls/:id(\\d+)/edit', controllers.admin.owls.edit
+  admin 'get', '/owls/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.owls.edit
   admin 'put', '/owls/:id(\\d+)', controllers.admin.owls.update
   admin 'get', '/owls/:id(\\d+)/delete', controllers.admin.owls.delete
   admin 'del', '/owls/:id(\\d+)', controllers.admin.owls.destroy
   
   # admin/barn
-  admin 'get', '/barns', controllers.admin.barns.index
-  admin 'get', '/barns/add', controllers.admin.barns.add
+  admin 'get', '/barns', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.barns.index
+  admin 'get', '/barns/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.barns.add
   admin 'post', '/barns', controllers.admin.barns.create
-  admin 'get', '/barns/:id(\\d+)/edit', controllers.admin.barns.edit
+  admin 'get', '/barns/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.barns.edit
   # admin 'get', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.delete
   # admin 'del', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.destroy
   
