@@ -26,8 +26,8 @@ app = express()
 
 hack.augmentApp app
 hack.augmentDB app, system
-
-# app.configure ->
+  
+bundle = (require './browserifyafication.coffee') app
  
 app.configure ->
   console.start 'configure'
@@ -42,6 +42,7 @@ app.configure ->
   app.use express.cookieParser 'secretsnake'
   app.use express.session 'monkeyjuice'
   app.use flashify
+  app.use bundle
   app.use express.static "#{__dirname}/public"
   
   app.use (req, res, done) ->
@@ -156,8 +157,6 @@ app.configure ->
   console.stop 'configure'
 
 (require './import') app, system
-
-(require './browserifyafication.coffee') app
 
 (require './geocode') app
 

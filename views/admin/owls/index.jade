@@ -45,14 +45,14 @@ block content
       table.admin-gridview
         thead
           tr
-            td ID
-            td Listed On
-            td Address
-            td State
-            td Status
-            td Deal Value
-            td Registrations
-            td(colspan='3') Actions
+            td(style='text-align: center;') ID
+            td(style='text-align: center;') Listed On
+            td(style='text-align: center;') Address
+            td(style='text-align: center;') State
+            td(style='text-align: center;') Status
+            td(style='text-align: center;') Deal Value
+            td(style='text-align: center;') Registrations
+            td(style='text-align: center;', colspan='3') Actions
         tbody
          - each owl in owls
            include summary
