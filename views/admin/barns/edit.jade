@@ -19,44 +19,14 @@ block content
       
       hr
       
-      form.details-form(action='/barns', method='post')
+      form.details-form(action='/admin/barns', method='post')
+        
+        input(type='hidden', name='_method', value='put')
         
         include ../../flashify
         
-        .left
-          
-          .inputs
-            label(for='title') Title
-            input#title(type='text', name='title', value='')
-          
-          .inputs
-            label(for='description') Description
-              textarea#description(name='description')
-          
-          .inputs
-            label(for='features') Features
-            select(name='features')
-              option(value='foo') foo
-              option(value='bar') bar
-              option(value='zip') zip
-              option(value='zap') zap
-        
-        .right
-        
-          .inputs
-            label(for='title') Address
-            input#address(type='text', name='address', value='')
-          
-          .inputs
-            label(for='suburb') Suburb
-            input#suburb(type='text', name='suburb', value='')
-          
-          .inputs
-            label(for='postcode') Postcode
-            input#postcode(type='text', name='postcode', value='')
-        
-        .inputs
-        
+        include inputs
+
         .submit
           input.button(type='submit', value='Create Barn')
           a.left-button(href="/admin/barns") Cancel

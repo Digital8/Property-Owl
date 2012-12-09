@@ -170,8 +170,10 @@ module.exports = class Model
     @db.query "SELECT * FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error, rows) =>
       return callback error if error
       
+      console.log 'found barn', rows[0]
       model = new this rows[0]
       
+      console.log 'hydrating barn'
       model.hydrate callback
 
 Model.db = db

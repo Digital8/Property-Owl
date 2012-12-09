@@ -1,0 +1,25 @@
+//- .inputs
+//-   label.required(for='image') Deal
+//-     input#image(type='text', name="image")
+
+.inputs
+  label.required() Deals
+  table.admin-gridview.deals
+    thead
+      tr
+        td Type
+        td Description
+        td Value
+    tbody.body
+      - if (barn.deals && barn.deals.length)
+        - each deal in barn.deals
+          include deal_input
+    tfooter.footer
+      tr
+        td(colspan='3')
+          a.add(href='#') add deal +
+
+table.template(style='display: none;')
+  tbody
+    - if (!locals.deal) { locals.deal = {}; }
+    include deal_input
