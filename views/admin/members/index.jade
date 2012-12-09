@@ -63,7 +63,7 @@ block content
          td= user.email
          td= user.account_type
          td.actions
-           a(href="/admin/members/edit/#{user.user_id}")
+           a(href="/admin/members/#{user.user_id}/edit")
              img(src='/images/edit.png', alt='Edit')
              | Edit
          td.actions
