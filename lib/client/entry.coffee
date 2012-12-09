@@ -9,7 +9,8 @@ require './admin'
 makeMap = require './map'
 
 $ ->
-  makeMap 1
+  makeMap 'map', 1
+  makeMap 'big-map', 1, 500, 350
   
   $('body').on 'keypress', (event) ->
     if (event.keyCode == 6) and event.ctrlKey
