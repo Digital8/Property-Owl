@@ -1,0 +1,14 @@
+.admin-actions
+  ul
+    if(action != 'add')
+      li
+        a(href='/admin/advertisers/add')
+          img(src='/images/add.png')
+          | &nbsp;
+          | Add Advertiser
+    if(action != 'index')
+      li
+        a(href="/admin/advertisers")
+          img(src='/images/manage.png')
+          | &nbsp;
+          | Manage Advertisers

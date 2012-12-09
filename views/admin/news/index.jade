@@ -33,7 +33,7 @@ block content
        td= post.title
        td= post.posted_at
        td.actions
-        a(href="/admin/news/edit/#{post.news_id}")
+        a(href="/admin/news/#{post.news_id}/edit")
          img(src='/images/edit.png', alt='Edit')
          | Edit
        td.actions

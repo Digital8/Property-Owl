@@ -8,12 +8,7 @@ block content
     
     h1 Edit Advertisement: #{advertisement.description}
     
-    .admin-actions
-      ul
-       li
-         a(href="/admin/advertisements")
-           img(src='/images/manage.png')
-           | Manage
+    include actions
     
     .grid-header.form-header
       ol.six
