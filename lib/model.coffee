@@ -163,7 +163,7 @@ module.exports = class Model
   ###
   Model::get
   - fetches a row from the underlying datasource
-  - instantiates 
+  - instantiates
   - needs alot of work [TODO] [@pyro]
   ###
   @get = (id, callback) ->
@@ -173,5 +173,19 @@ module.exports = class Model
       model = new this rows[0]
       
       model.hydrate callback
+  
+  ###
+  Model::dry
+  - fetches a row from the underlying datasource
+  - does not hydrate (no associations)
+  - needs alot of work [TODO] [@pyro]
+  ###
+  @dry = (id, callback) ->
+    @db.query "SELECT * FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error, rows) =>
+      return callback error if error
+      
+      model = new this rows[0]
+      
+      callback null, model
 
 Model.db = db

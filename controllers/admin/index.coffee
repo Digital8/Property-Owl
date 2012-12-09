@@ -7,11 +7,16 @@ models =
   advertisement: system.load.model 'advertisement'
   properties: system.load.model 'properties'
 
+Owl = system.models.owl
+Barn = system.models.barn
+
 exports.index = (req,res) ->
-  models.properties.getPendingProperties (err, properties) ->
-    models.properties.getPendingBarnDeals (err, projects) ->
-      models.advertisement.countActive (err, results) ->
-        res.render 'admin/index', activeAdvertisementCount: results, properties: properties or {}, projects: projects or {}, menu: 'dashboard'
+  async.parallel
+    owls: (callback) -> Owl.pending callback
+    barns: (callback) -> Barn.pending callback
+    activeAdvertisementCount: (callback) -> models.advertisement.countActive callback
+  , (error, {owls, barns, activeAdvertisementCount}) ->
+    res.render 'admin/index', activeAdvertisementCount: activeAdvertisementCount, owls: owls or {}, barns: barns or {}, menu: 'dashboard'
 
 exports.view = (req,res) ->
 

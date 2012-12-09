@@ -8,13 +8,7 @@ block content
     
     h1 Members
     
-    .admin-actions
-      ul
-        li
-          a(href="/admin/members/add")
-            img(src='/images/add.png')
-            | &nbsp;
-            | Add New Member
+    include actions
     
     .grid-header
       form#search-form
@@ -58,28 +52,32 @@ block content
       
       tbody
       - each user in users
-       tr
-         td #{user.first_name} #{user.last_name}
-         td= user.email
-         td= user.account_type
-         td.actions
-           a(href="/admin/members/edit/#{user.user_id}")
-             img(src='/images/edit.png', alt='Edit')
-             | Edit
-         td.actions
-           a(href="/admin/members/delete/#{user.user_id}")
-             img(src='/images/delete.png', alt='Delete')
-             | Delete
-      
-      tfoot
         tr
-          td(colspan='5')
-            ul.pager
-             //- li.disabled
-             //-  a(href='#') Prev
-             //- li.selected
-             //-  a(href='#') 1
-             //- li
-             //-  a(href='#') 2
-             //- li
-             //-  a(href='#') Next 
+          td #{user.first_name} #{user.last_name}
+          
+          td= user.email
+          
+          td= user.account_type
+          
+          td.actions
+            a(href="/admin/members/#{user.user_id}/edit")
+              img(src='/images/edit.png', alt='Edit')
+              | Edit
+          
+          td.actions
+            a(href="/admin/members/#{user.user_id}/delete")
+              img(src='/images/delete.png', alt='Delete')
+              | Delete
+      
+      //- tfoot
+      //-   tr
+      //-     td(colspan='5')
+      //-       ul.pager
+      //-        //- li.disabled
+      //-        //-  a(href='#') Prev
+      //-        //- li.selected
+      //-        //-  a(href='#') 1
+      //-        //- li
+      //-        //-  a(href='#') 2
+      //-        //- li
+      //-        //-  a(href='#') Next 

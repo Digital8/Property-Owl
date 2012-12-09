@@ -1,32 +1,29 @@
 extends ../../layout
 
 block content
+  
   .container.row.main
-    include ../../admin-menu
+    
+    include ../menu
     
     h1 Add Member
     
-    .admin-actions
-      ul
-        li
-          a(href="/admin/members")
-            img(src='/images/manage.png')
-            | &nbsp;
-            | Manage Members
+    include actions
     
     .grid-header.form-header
-      ol.six
-        li.active
-          .ol-1-active
-          | Details
+      //- ol.six
+      //-   li.active
+      //-     .ol-1-active
+      //-     | Details
     
     .details
       h2 User Details
       
       hr
       
-      form.details-form.fake(action="/admin/members/add",method="post")
+      form.details-form.fake(action='/admin/members/add', method='post')
         include ../../flashify
+        
         .left
           .inputs
             label(for='group') User Type

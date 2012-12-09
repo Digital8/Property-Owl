@@ -17,17 +17,10 @@ exports.top = (req, res) ->
 
 exports.hot = (req, res) ->
   async.map ['qld', 'nsw', 'vic', 'sa', 'wa', 'nt', 'tas', 'act'], (state, callback) ->
-    Owl.topstate state, (error, owl) ->
-      callback null, owl
-  , (err, owls) ->
-    for owl in owls
-      console.log owl.id, owl.value
-    
+    Owl.topstate state, callback
+  , (error, owls) ->
     sortedOwls = _.sortBy owls, 'value'
     sortedOwls.reverse()
-    
-    for owl in sortedOwls
-      console.log owl.id, owl.value
     
     res.render 'owls/list', owls: sortedOwls, maxPages: 1, currentPage: 1
 

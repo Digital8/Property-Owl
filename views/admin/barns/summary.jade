@@ -1,18 +1,18 @@
 tr
   td= barn.barn_id
-  td= barn.created_at
+  td= moment(barn.created_at).format('LLL')
   td= barn.user.first_name + ' ' + barn.user.last_name
-  td= barn.state.toUpperCase()
+  td= barn.fullAddress()
   td Current
   td= barn.owls.length
   td 0
   
   td.actions
-    a(href="/admin/barns/#{barn.id}/edit")
+    a(href="/admin/barns/#{barn.id}/edit", alt='Edit Barn Deal')
       img(src='/images/edit.png', alt='Edit')
       | Edit
   
   td.actions
-    a(href="/admin/owls/#{barn.id}/delete")
+    a(href='/admin/barns/#{barn.barn_id}/delete', alt='Delete Barn Deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete

@@ -100,6 +100,8 @@ exports.update = (req,res) ->
             # todo: Update the users group
             req.flash 'success', 'Your details have successfully been updated'
           
-          res.redirect 'back'
+          res.redirect '/admin/members'
 
-exports.destroy = (req,res) ->
+exports.delete = (req, res) ->
+
+exports.destroy = (req, res) ->

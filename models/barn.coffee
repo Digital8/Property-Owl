@@ -32,23 +32,28 @@ module.exports = class Barn extends Model
       
       user: (callback) =>
         system.db.query "SELECT * FROM po_users WHERE user_id = ?", [@listed_by], (error, rows) =>
-          console.log 'FUCK', rows
+          # console.log 'FUCK', rows
           return callback 'no owner' unless rows?.length
           @user = rows.pop()
           do callback
     , (error) =>
       @user ?= {}
-      callback error
+      callback error, this
   
-  # @all = (callback) ->
-  #   @db.query "SELECT * FROM barns", (error, rows) ->
-  #   # @db.query "SELECT * FROM #{@table.name}", (error, rows) ->
-  #     return callback error if error
+  fullAddress: ->
+    "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
+  
+  @pending = (callback) ->
+    @db.query "SELECT * FROM barns WHERE approved = false", (error, rows) =>
+      return callback error if error
       
-  #     models = []
+      models = []
       
-  #     for row in rows
-  #       model = new Barn row
-  #       models.push model
+      for row in rows
+        model = new Barn row
+        models.push model
       
-  #     callback null, models
+      async.forEach models, (model, callback) =>
+        model.hydrate callback
+      , (error) ->
+        callback null, models

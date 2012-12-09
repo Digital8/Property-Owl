@@ -5,10 +5,17 @@ window.commas = commas = require '../helpers/commas'
 
 require './reports'
 require './admin'
-require './map'
+
+makeMap = require './map'
+
+makeTimer = require './timer'
 
 $ ->
-
+  makeMap 'map'
+  makeMap 'big-map', width: 500, height: 350, stroke: '#0c6cb7', hover: '#DE1515'
+  
+  makeTimer()
+  
   $('body').on 'keypress', (event) ->
     if (event.keyCode == 6) and event.ctrlKey
       console.log 'fake that shit'

@@ -10,19 +10,14 @@
         td Type
         td Description
         td Value
-        td Delete
     tbody.body
-      - if (owl.deals && owl.deals.length)
-        - each deal in owl.deals
+      - if (barn.deals && barn.deals.length)
+        - each deal in barn.deals
           include deal_input
     tfooter.footer
       tr
-        td(colspan='4')
-          //- a.add(href='#', style="text-align: center;") add deal +
-          a.add(href='#', style="text-align: center;")
-            img(src='/images/add.png')
-            | &nbsp;
-            | Add Deal
+        td(colspan='3')
+          a.add(href='#') add deal +
 
 table.template(style='display: none;')
   tbody

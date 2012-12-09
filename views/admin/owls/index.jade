@@ -11,48 +11,50 @@ block content
         
         // .grid-summary 1 - 4 of 24
       
-      .grid-header
-        //- form#search-form
-        //-   input#propertySearch(type='text')
-        //-   | &nbsp;
-        //-   input.button(type='submit', value='Go')
-        //-   | &nbsp;
-        //-   input.button(type='submit', value='Reset')
-        //-   .divider
-        //-   select#propertyDeveloper
-        //-     option Developer
-        //-     - each developer in developers
-        //-      option(value=developer.user_id) #{developer.first_name} #{developer.last_name}
-        //-   | &nbsp;
-        //-   select#propertyState
-        //-     option State
-        //-     option ACT
-        //-     option NSW
-        //-     option NT
-        //-     option QLD
-        //-     option SA
-        //-     option TAS
-        //-     option VIC
-        //-     option WA
-        //-   | &nbsp;
-        //-   select#propertyStatus
-        //-     option Status
-        //-     option Pending
-        //-     option Pre-release
-        //-     option Current
-        //-     option Ended
+      //- .grid-header
+      //-   //- form#search-form
+      //-   //-   input#propertySearch(type='text')
+      //-   //-   | &nbsp;
+      //-   //-   input.button(type='submit', value='Go')
+      //-   //-   | &nbsp;
+      //-   //-   input.button(type='submit', value='Reset')
+      //-   //-   .divider
+      //-   //-   select#propertyDeveloper
+      //-   //-     option Developer
+      //-   //-     - each developer in developers
+      //-   //-      option(value=developer.user_id) #{developer.first_name} #{developer.last_name}
+      //-   //-   | &nbsp;
+      //-   //-   select#propertyState
+      //-   //-     option State
+      //-   //-     option ACT
+      //-   //-     option NSW
+      //-   //-     option NT
+      //-   //-     option QLD
+      //-   //-     option SA
+      //-   //-     option TAS
+      //-   //-     option VIC
+      //-   //-     option WA
+      //-   //-   | &nbsp;
+      //-   //-   select#propertyStatus
+      //-   //-     option Status
+      //-   //-     option Pending
+      //-   //-     option Pre-release
+      //-   //-     option Current
+      //-   //-     option Ended
+      
+      .grid-header.form-header
       
       table.admin-gridview
         thead
           tr
-            td ID
-            td Listed On
-            td Address
-            td State
-            td Status
-            td Deal Value
-            td Registrations
-            td(colspan='3') Actions
+            td(style='text-align: center;') ID
+            td(style='text-align: center;') Listed On
+            td(style='text-align: center;') Address
+            td(style='text-align: center;') State
+            td(style='text-align: center;') Status
+            td(style='text-align: center;') Deal Value
+            td(style='text-align: center;') Registrations
+            td(style='text-align: center;', colspan='3') Actions
         tbody
          - each owl in owls
            include summary

@@ -7,13 +7,16 @@ CoffeeScript = require 'coffee-script'
 
 browserify = require 'browserify'
 
-module.exports = (app) ->
+module.exports = ->
   bundle = browserify
     debug: on
     watch: on
-    cache: on
+    cache: off
   
   bundle.addEntry "#{__dirname}/lib/client/entry.coffee"
   
-  app.get '/bundle.js', (req, res) ->
-    res.send bundle.bundle()
+  return (req, res, next) ->
+    if req.url is '/bundle.js'
+      res.send bundle.bundle()
+    else
+      next()

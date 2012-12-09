@@ -461,6 +461,7 @@ body {
                     height: 11.438em;
                     .rounded-bottom-right(0.313em);
                     .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+                    text-align: center;
                     
                     #map-image {
                         margin-left: 1.5em;
@@ -1306,6 +1307,19 @@ body {
                 .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
             }
             
+            #big-map {
+              text-align: center;
+              /* fallback image */
+              background-image: url(../images/menu-bg.png);
+              background-repeat: repeat-x;
+              background-size: cover;
+              padding: 20px;
+              border: solid 1px #061b2d;
+              .gradient(@color-accent, #09518a);
+              .rounded(0.313em);
+              .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+            }
+            
             .sort-form {
                 text-align: right;
                 clear: both;
@@ -1466,6 +1480,11 @@ body {
                                 
                                 img {
                                     margin-bottom: 0.15em;
+                                }
+                                
+                                &.admin-button {
+                                    .rounded-top-left(0.250em);
+                                    color: #CC6600;
                                 }
                                 
                                 &.save-button {
@@ -1760,6 +1779,7 @@ body {
             .delete {
                 background: url(../images/delete-button-bg.png) repeat-x center center;
                 .gradient(#af4a4a, #883939); 
+                padding: 6px;
             }
         }
         
@@ -1770,9 +1790,9 @@ body {
         }
     }
     
-    .form-header {
-        padding: 0 !important;
-    }
+    // .form-header {
+    //     padding: 0 !important;
+    // }
     
     table.admin-gridview {
         border: solid 1px #a4a4a4;           
@@ -1821,6 +1841,15 @@ body {
                         margin: 0;
                         padding: 0;
                     }
+                }
+                
+                img.small-advert {
+                  height: 25%;
+                  width: auto;
+                }
+                img.small-advert {
+                  height: auto;
+                  width: 25%;
                 }
             }
         }

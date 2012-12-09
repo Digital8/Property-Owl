@@ -1,0 +1,11 @@
+tr
+  td
+    if(image.filename)
+      img(src='/uploads/#{image.filename}', width='128', height='128', data-json=JSON.stringify(image))
+    //- else
+    //-   input(type='file', name='image[]', value='')
+  td
+    input(type='radio', name='feature_image', checked=owl.feature_image == image.id, value=image.id)
+  
+  td
+    input(type='checkbox', name='image[delete][]', value=image.id)

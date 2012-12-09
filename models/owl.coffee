@@ -14,6 +14,8 @@ module.exports = class Owl extends Model
     name: 'owls'
     key: 'owl_id'
   
+  @field 'barn_id'
+  
   @field 'title'
   @field 'address'
   @field 'suburb'
@@ -36,6 +38,8 @@ module.exports = class Owl extends Model
   @field 'other_features'
   
   @field 'development_type_id'
+  
+  @field 'feature_image'
   
   constructor: (args = {}) ->
     super
@@ -112,8 +116,33 @@ module.exports = class Owl extends Model
         expose 'other'
         
         callback()
+      
+      barns: (callback) =>
+        return do callback unless @barn_id?
+        
+        Barn = system.models.barn
+        
+        Barn.dry @barn_id, (error, barn) =>
+          @barn = barn
+          do callback
     
     , (error) => super callback
+  
+  heroImageURL: ->
+    unless @images? and @images.length then return '/images/placeholder.png'
+    
+    console.log @title
+    
+    # find the hero
+    hero = _.find @images, (image) =>
+      return Number(image.id) is Number(@feature_image)
+    
+    # console.log owl: @, hero: hero
+    
+    # default to latest image
+    hero ?= @images.pop()
+    
+    return "/uploads/#{hero.filename}"
   
   fullAddress: ->
     "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
@@ -125,7 +154,7 @@ module.exports = class Owl extends Model
       callback null
   
   upload: (req, callback) ->
-    console.log 'filez', req.files
+    console.log 'filez', req
     
     async.series
       removeDeals: (callback) =>
@@ -256,9 +285,23 @@ module.exports = class Owl extends Model
     LIMIT 1
     """, [state], (error, rows) ->
       return callback error if error
-
+      
       owl = new Owl rows[0]
-
+      
       owl.hydrate ->
-
         callback null, owl
+  
+  @pending = (callback) ->
+    @db.query "SELECT * FROM owls WHERE approved = false", (error, rows) =>
+      return callback error if error
+      
+      models = []
+      
+      for row in rows
+        model = new Owl row
+        models.push model
+      
+      async.forEach models, (model, callback) =>
+        model.hydrate callback
+      , (error) ->
+        callback null, models

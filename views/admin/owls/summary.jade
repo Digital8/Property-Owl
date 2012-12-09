@@ -1,34 +1,34 @@
 tr
-  td= owl.owl_id
+  td(style='text-align: center;')= owl.owl_id
   
   - var listed = new Date(owl.created_at)
-  td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+  td(style='text-align: center;') #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
   
   td= owl.address
   
-  td= owl.state.toUpperCase()
+  td(style='text-align: center;')= owl.state.toUpperCase()
   
-  td
+  td(style='text-align: center;')
     if (owl.approved)
      | Approved
     else
      | Pending
   
-  td #{owl.value} %
+  td(style='text-align: right;') #{owl.value} %
   
-  td #{owl.registrations}
+  td(style='text-align: right;') #{owl.registrations}
+  
+  //- td.actions
+  //-   a(href='/admin/owls/#{owl.owl_id}/view', alt='view owl deal')
+  //-     img(src='/images/view.png', alt='View')
+  //-     | View
   
   td.actions
-    a(href='/owls/#{owl.owl_id}', alt='view owl')
-      img(src='/images/view.png', alt='View')
-      | View
-  
-  td.actions
-    a(href='/admin/owls/#{owl.owl_id}/edit', alt='edit owl')
+    a(href='/admin/owls/#{owl.owl_id}/edit', alt='edit owl deal')
       img(src='/images/edit.png', alt='Edit')
       | Edit
   
   td.actions
-    a(href='/admin/owls/#{owl.owl_id}/delete', alt='delete owl')
+    a(href='/admin/owls/#{owl.owl_id}/delete', alt='delete owl deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete

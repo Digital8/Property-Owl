@@ -1,96 +1,109 @@
 extends ../../layout
 
 block content
-  //
-    main content
+  
   .container.row.main
-   include ../../admin-menu
-   h1 Edit Member: #{values.first_name} #{values.last_name}
-   .admin-actions
-    ul
-     li
-      a(href="/admin/members")
-       img(src='/images/manage.png')
-       | &nbsp;
-       | Manage Members
-   .grid-header.form-header
-    ol.six
-     li.active
-      .ol-1-active
-      | Details
-        
+    
+    include ../menu
+    
+    h1 Edit Member: #{values.first_name} #{values.last_name}
+    
+    include actions
 
-   .details
-    h2 User Details
-    hr
-    form.details-form(action="/admin/members/edit/#{values.user_id}",method="post")
-     include ../../flashify
-     input(type="hidden",name="_method",value="put")
-     .left
-      .inputs
-       label(for='group') User Type
-       select(name="group")
-        - each group in groups
-          - if (group.account_type_id == values.account_type_id)
-           option(value="#{group.account_type_id}",selected)= group.name
-          else
-           option(value="#{group.account_type_id}")= group.name
-      .inputs
-       label.required(for='first_name') Full Name
-       - if (values.first_name == undefined) values.first_name = ''
-        input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.first_name}",class="half-field")
-        | &nbsp;
-       - if (values.last_name == undefined) values.last_name = ''
-        input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}",class="half-field")
-      .inputs
-       label(for='company') Company
-       - if (values.company == undefined) values.company = ''
-        input#company(type="text",placeholder="Company",name="company",value="#{values.company}")
-      .inputs
-       label.required(for='phone') Phone
-       - if (values.phone == undefined) values.phone = ''
-        input#phone(type="text",placeholder="Phone",name="phone",value="#{values.phone}")
-      .inputs
-       label(for='workPhone') Work Phone
-       - if (values.work_phone == undefined) values.work_phone = ''
-        input#work_phone(type="text",placeholder="Work Phone",name="work_phone",value="#{values.work_phone}")
-      .inputs
-       label(for='mobile') Mobile
-       - if (values.mobile == undefined) values.mobile = ''
-        input#mobile(type="text",placeholder="Mobile",name="mobile",value="#{values.mobile}")
-     .right
-      .inputs
-       label.required(for='email') Email
-       - if (values.email == undefined) values.email = ''
-        input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
-      .inputs
-       label.required(for='password') Password
-       input#password(type="password",name="password",class="half-field",placeholder="Password")
-       | &nbsp;
-       input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword",class="half-field")
-        br
-        p.note Password will not be changed if left blank
-      .inputs
-       label.required(for='address') Address
-       - if (values.address == undefined) values.address = ''
-        input#address(type="text",placeholder="Address",name="address",value="#{values.address}")
-      .inputs
-       label.required(for='suburb') Suburb
-       - if (values.suburb == undefined) values.suburb = ''
-        input#suburb(type="text",placeholder="Suburb",name="suburb",value="#{values.suburb}")
-      .inputs
-       label.required(for='postcode') Postcode
-       - if (values.postcode == undefined) values.postcode = ''
-        input#postcode(type="text",name="postcode",placeholder="Postcode",value="")
-      br
-      //- TODO fix checkbox not updating fields
-      .inputs
-        input(type="checkbox", name="subscribed_newsletter", value="1", checked=((values.subscribed_newsletter==1) ? true : false))
-        |  Subscribed to newsletter
-      .inputs
-        input(type="checkbox", name="subscribed_alerts", value="1", checked=((values.subscribed_alerts==1) ? true : false))
-        |  Subscribed to property alerts
-     .inputs
-     .submit
-      input.button(type='submit', value='Update User')
-      a.left-button(href="/admin/members") Cancel
+    .grid-header.form-header
+      //- ol.six
+      //-  li.active
+      //-   .ol-1-active
+      //-   | Details
+
+    .details
+      h2 User Details
+      
+      hr
+      form.details-form(action="/admin/members/#{values.user_id}", method='post')
+        
+        include ../../flashify
+        
+        input(type="hidden",name="_method",value="put")
+        
+        .left
+           .inputs
+             label(for='group') User Type
+             select(name="group")
+               - each group in groups
+                 option(value="#{group.account_type_id}", selected=group.account_type_id == values.account_type_id)= group.name
+          
+          .inputs
+            label.required(for='first_name') Full Name
+            - if (values.first_name == undefined) values.first_name = ''
+              input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.first_name}",class="half-field")
+              | &nbsp;
+            - if (values.last_name == undefined) values.last_name = ''
+              input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}",class="half-field")
+          
+          .inputs
+            label(for='company') Company
+            - if (values.company == undefined) values.company = ''
+              input#company(type="text",placeholder="Company",name="company",value="#{values.company}")
+          
+          .inputs
+            label.required(for='phone') Phone
+            - if (values.phone == undefined) values.phone = ''
+              input#phone(type="text",placeholder="Phone",name="phone",value="#{values.phone}")
+          
+          .inputs
+            label(for='workPhone') Work Phone
+            - if (values.work_phone == undefined) values.work_phone = ''
+              input#work_phone(type="text",placeholder="Work Phone",name="work_phone",value="#{values.work_phone}")
+          
+          .inputs
+            label(for='mobile') Mobile
+            - if (values.mobile == undefined) values.mobile = ''
+             input#mobile(type="text",placeholder="Mobile",name="mobile",value="#{values.mobile}")
+        
+        .right
+          
+          .inputs
+           label.required(for='email') Email
+           - if (values.email == undefined) values.email = ''
+            input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
+          
+          .inputs
+           label.required(for='password') Password
+           input#password(type="password",name="password",class="half-field",placeholder="Password")
+           | &nbsp;
+           input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword",class="half-field")
+            br
+            p.note Password will not be changed if left blank
+          
+          .inputs
+           label.required(for='address') Address
+           - if (values.address == undefined) values.address = ''
+            input#address(type="text",placeholder="Address",name="address",value="#{values.address}")
+          
+          .inputs
+           label.required(for='suburb') Suburb
+           - if (values.suburb == undefined) values.suburb = ''
+            input#suburb(type="text",placeholder="Suburb",name="suburb",value="#{values.suburb}")
+          
+          .inputs
+           label.required(for='postcode') Postcode
+           - if (values.postcode == undefined) values.postcode = ''
+            input#postcode(type="text",name="postcode",placeholder="Postcode",value="")
+          
+          br
+          
+          //- TODO fix checkbox not updating fields
+          .inputs
+            input(type="checkbox", name="subscribed_newsletter", value="1", checked=((values.subscribed_newsletter==1) ? true : false))
+            |  Subscribed to newsletter
+          
+          .inputs
+            input(type="checkbox", name="subscribed_alerts", value="1", checked=((values.subscribed_alerts==1) ? true : false))
+            |  Subscribed to property alerts
+        
+        .inputs
+        
+        .submit
+         input.button(type='submit', value='Update User')
+         a.left-button(href="/admin/members") Cancel
