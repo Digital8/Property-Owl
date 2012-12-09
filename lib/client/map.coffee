@@ -1,5 +1,10 @@
-module.exports = (selector, scale = 1, width = 210, height = 185) ->
-  R = Raphael selector, width, height
+module.exports = (selector, options = {}) ->
+  options.scale ?= 1
+  options.width ?= 210
+  options.height ?= 185
+  options.color ?= '#FFF'
+  
+  R = Raphael selector, options.width, options.height
   
   R.setViewBox 0, 0, 280, 270, yes
   
