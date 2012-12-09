@@ -2,7 +2,7 @@ extends ../../layout
 
 block content
  .container.row.main
-    include ../../admin-menu
+    include ../menu
     
     h1 Barn Deals
     
@@ -12,8 +12,9 @@ block content
     
     h3 Are you sure you want to delete this from the barn deal?
     
-    form(action="/admin/barn/delete/#{barn.property_id}/#{property.property_id}", method="post")
-      input(type="hidden",name="_method",value="delete")
+    form(action="/admin/barn/#{barn.barn_id}/owls/#{property.property_id}", method='post')
+      input(type='hidden', name='_method', value='delete')
+      
       p
         input(type="submit", value="Yes, delete")
         | &nbsp; 

@@ -1,9 +1,12 @@
+_ = require 'underscore'
+
 system = require '../system'
 
 Barn = system.models.barn
 
 exports.index = (req, res) ->
   Barn.all (error, barns) ->
+    barns = _.sortBy barns, 'created_at'
     res.render 'barns/index', barns: barns
 
 exports.show = (req, res) ->

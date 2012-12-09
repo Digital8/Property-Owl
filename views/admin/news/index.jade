@@ -4,17 +4,14 @@ block content
  //
    main content
  .container.row.main
-    include ../../admin-menu
+    include ../menu
+    
     h1 News Articles
+    
     include ../../flashify
-    .admin-actions
-     ul
-      li
-       a(href="/admin/news/add")
-        img(src='/images/add.png')
-        | &nbsp;
-        | Add New Article
-     //.grid-summary 1 - 4 of 24
+    
+    include actions
+    
     .grid-header
      form#search-form
       input#memberSearch(type='text')

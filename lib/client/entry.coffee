@@ -5,6 +5,7 @@ window.commas = commas = require '../helpers/commas'
 
 require './reports'
 require './admin'
+require './map'
 
 $ ->
 

@@ -3,6 +3,7 @@ nav#admin-menu
     li
       - var c = (menu == 'dashboard') ? 'active' : ''
       a(href='/admin', class="#{c}") Dashboard
+    
     li
       - var c = (menu == 'property-deals') ? 'active' : ''
       a(href='/admin/deals', class="#{c}") Deals
@@ -11,6 +12,7 @@ nav#admin-menu
           a(href='/admin/owls') Owl Deals
         li
           a(href='/admin/barns') Barn Deals
+    
     li
       - var c = (menu == 'advertising') ? 'active' : ''
       a(href='/admin/advertisements', class="#{c}") Advertising
@@ -19,25 +21,23 @@ nav#admin-menu
           a(href='/admin/advertisements') Advertisements
         li
           a(href='/admin/advertisers') Advertisers
+    
     li
       - var c = (menu == 'products-service-suppliers') ? 'active' : ''
-      a(href='/admin/services', class="#{c}") Products & Service Suppliers
-      ul
-        li
-          a(href='/admin/services') Suppliers
-        li
-          a(href='/admin/services/categories') Categories
+      a(href='/admin/affiliates', class="#{c}") Affiliates
+    
     li
-      - var c = (menu == 'content') ? 'active' : ''
-      a(href='/admin/pages', class="#{c}") Content
-      ul
-        li
-          a(href='/admin/news') News & Research
-        li
-          a(href='/admin/pages') Pages
+      - var c = (menu == 'news') ? 'active' : ''
+      a(href='/admin/news', class="#{c}") News
+    
+    li
+      - var c = (menu == 'pages') ? 'active' : ''
+      a(href='/admin/pages', class="#{c}") Pages
+    
     li
       - var c = (menu == 'reports') ? 'active' : ''
       a(href='/admin/reports', class="#{c}") Reports
+    
     li  
       - var c = (menu == 'members') ? 'active' : ''
       a(href='/admin/members', class="#{c}") Members
