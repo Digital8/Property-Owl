@@ -1,0 +1,8 @@
+tr
+  td
+    if(image.filename)
+      img(src='/uploads/#{image.filename}', width='128', height='128')
+    else
+      input(type='file', name='image[]', value='')
+  td
+    input(type='radio', name='hero')
