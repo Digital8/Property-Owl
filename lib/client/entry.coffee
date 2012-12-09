@@ -10,7 +10,7 @@ makeMap = require './map'
 
 $ ->
   makeMap 'map'
-  makeMap 'big-map', width: 500, height: 350
+  makeMap 'big-map', width: 500, height: 350, stroke: '#0c6cb7', hover: '#DE1515'
   
   $('body').on 'keypress', (event) ->
     if (event.keyCode == 6) and event.ctrlKey

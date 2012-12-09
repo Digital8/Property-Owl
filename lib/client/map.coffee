@@ -1,17 +1,21 @@
 module.exports = (selector, options = {}) ->
+  $map = $ "##{selector}"
+  
   options.scale ?= 1
   options.width ?= 210
   options.height ?= 185
-  options.color ?= '#FFF'
+  options.fill ?= '#FFF'
+  options.stroke ?= '#DE1515'
+  options.hover ?= '#0A5B9A'
   
   R = Raphael selector, options.width, options.height
   
   R.setViewBox 0, 0, 280, 270, yes
   
   attr =
-    fill: '#FFF'
+    fill: options.fill
     "stroke-width": 0.33
-    "stroke": '#DE1515'
+    "stroke": options.stroke
     'pointer-events': 'none'
   
   aus = {}
@@ -33,7 +37,7 @@ module.exports = (selector, options = {}) ->
   current = null
   
   for state of aus
-    aus[state].color = '#0A5B9A' # Raphael.getColor()
+    aus[state].color = options.hover # Raphael.getColor()
     
     ((st, state) ->
       st[0].style.cursor = "pointer"
@@ -72,12 +76,12 @@ module.exports = (selector, options = {}) ->
       # st[0].onmouseover() if state is "nsw"
     ) aus[state], state
   
-  R.text(70, 115, 'WA').attr(fill: '#E01A00', title: 'WA')
-  R.text(145, 85, 'NT').attr(fill: '#E01A00', title: 'NT')
-  R.text(155, 145, 'SA').attr(fill: '#E01A00', title: 'SA')
-  R.text(230, 100, 'QLD').attr(fill: '#E01A00', title: 'QLD')
-  R.text(230, 165, 'NSW').attr(fill: '#E01A00', title: 'NSW')
-  R.text(215, 200, 'VIC').attr(fill: '#E01A00', title: 'VIC')
+  R.text(70, 115, 'WA').attr(fill: options.stroke, title: 'WA')
+  R.text(145, 85, 'NT').attr(fill: options.stroke, title: 'NT')
+  R.text(155, 145, 'SA').attr(fill: options.stroke, title: 'SA')
+  R.text(230, 100, 'QLD').attr(fill: options.stroke, title: 'QLD')
+  R.text(230, 165, 'NSW').attr(fill: options.stroke, title: 'NSW')
+  R.text(215, 200, 'VIC').attr(fill: options.stroke, title: 'VIC')
   R.text(200, 245, 'TAS').attr(fill: '#FFF', title: 'TAS')
   R.text(280, 185, 'ACT').attr(fill: '#FFF', title: 'ACT')
   
@@ -85,7 +89,7 @@ module.exports = (selector, options = {}) ->
   
   R.path('M12.981,9.073V6.817l-12.106,6.99l12.106,6.99v-2.422c3.285-0.002,9.052,0.28,9.052,2.269c0,2.78-6.023,4.263-6.023,4.263v2.132c0,0,13.53,0.463,13.53-9.823C29.54,9.134,17.952,8.831,12.981,9.073z').attr(fill: '#FFF', 'stroke-width': 0).transform('t130,180r100')
   
-  for element in ($ '#map text')
+  for element in $map.find('text')
     $element = $ element
     state = $element.parent().attr 'title'
     return unless state?
