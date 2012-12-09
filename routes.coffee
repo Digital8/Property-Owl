@@ -167,6 +167,8 @@ module.exports = (app) ->
   ajax 'post', '/login', controllers.ajax.login
   ajax 'post', '/register', controllers.ajax.register
   
+  ajax 'get', '/epoch', controllers.ajax.epoch
+  
   authedAjax = (method, path, middleware...) ->
     app[method] "/ajax#{path}", authenticate, middleware...
   
