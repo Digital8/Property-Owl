@@ -15,7 +15,7 @@ exports.create = (page, callback) ->
   db.query "INSERT INTO #{table}(url, header, content, enabled, static, page_created_at) VALUES(?,?,?,?, ?, NOW())", [page.url, page.header, page.content, page.enabled, page.static], callback
 
 exports.update = (page, callback) ->
-  db.query "UPDATE #{table} SET url = ?, header = ?, content = ?, enabled = ? WHERE page_id = ?", [page.url, page.header, page.content, page.enabled, page.id], callback
+  db.query "UPDATE #{table} SET url = ?, header = ?, content = ?, enabled = ?, static = ? WHERE page_id = ?", [page.url, page.header, page.content, page.enabled, page.static, page.id], callback
 
 exports.delete = (id, callback) ->
   db.query "DELETE FROM #{table} WHERE page_id = ?", [id], callback
