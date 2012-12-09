@@ -109,10 +109,10 @@ module.exports = (app) ->
   admin 'get', '/members', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.members.index
   admin 'post', '/members', controllers.admin.members.create
   admin 'put', '/members/:id(\\d+)', controllers.admin.members.update
-  admin 'delete', '/members/:id(\\d+)', controllers.admin.pages.destroy
+  admin 'delete', '/members/:id(\\d+)', controllers.admin.members.destroy
   admin 'get', '/members/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.members.edit
   admin 'get', '/members/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.members.add
-  admin 'get', '/members/:id(\\d+)/delete', controllers.admin.pages.delete
+  admin 'get', '/members/:id(\\d+)/delete', controllers.admin.members.delete
   
   # admin/pages
   admin 'get', '/pages', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.pages.index

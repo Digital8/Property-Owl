@@ -13,7 +13,7 @@
   
   .inputs
     label(for='price') Price
-    input#price(type='number', name='price', value='#{owl.price}', min='0', max='100000000')
+    input#price(type='number', name='price', value='#{owl.price}', min='0', max='100000000', pattern='^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$')
   
   .inputs
     label(for='description') Description

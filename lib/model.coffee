@@ -163,17 +163,15 @@ module.exports = class Model
   ###
   Model::get
   - fetches a row from the underlying datasource
-  - instantiates 
+  - instantiates
   - needs alot of work [TODO] [@pyro]
   ###
   @get = (id, callback) ->
     @db.query "SELECT * FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error, rows) =>
       return callback error if error
       
-      console.log 'found barn', rows[0]
       model = new this rows[0]
       
-      console.log 'hydrating barn'
       model.hydrate callback
 
 Model.db = db

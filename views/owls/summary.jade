@@ -11,13 +11,11 @@
     
     .listing-thumb
       a(href='/owls/#{owl.owl_id}')
-        - if (owl.images && owl.images.length)
-          - (owl.image = owl.images.pop())
-          img.thumb(src='/uploads/#{owl.image.filename}', alt='#{owl.fullAddress()}')
-        - else
-          img.thumb(src='/images/placeholder.png', alt='#{owl.fullAddress()}')
+        img.thumb(src=owl.heroImageURL(), alt='#{owl.fullAddress()}')
+        
         //- TODO show if top listing
         //- img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
+    
     .listing-details
       .features
         span.owl-type
@@ -52,3 +50,7 @@
         a.details-button(href='/owls/#{owl.owl_id}')
           img#info-icon(src='/images/info-icon.png', alt='View owl details')
           |  Details
+        - if (objUser.isAdmin())
+          a.admin-button(href='/admin/owls/#{owl.owl_id}/edit')
+            img#admin-icon(src='/images/view.png', alt='View owl details')
+            |  Admin

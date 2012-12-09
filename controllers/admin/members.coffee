@@ -102,4 +102,6 @@ exports.update = (req,res) ->
           
           res.redirect '/admin/members'
 
-exports.destroy = (req,res) ->
+exports.delete = (req, res) ->
+
+exports.destroy = (req, res) ->

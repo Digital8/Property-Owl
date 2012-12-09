@@ -37,6 +37,8 @@ module.exports = class Owl extends Model
   
   @field 'development_type_id'
   
+  @field 'feature_image'
+  
   constructor: (args = {}) ->
     super
   
@@ -116,9 +118,18 @@ module.exports = class Owl extends Model
     , (error) => super callback
   
   heroImageURL: ->
-    unless @images? and @images.length then return '/images/hero-image.jpg'
+    unless @images? and @images.length then return '/images/placeholder.png'
     
-    hero = @images.pop()
+    console.log @title
+    
+    # find the hero
+    hero = _.find @images, (image) =>
+      return Number(image.id) is Number(@feature_image)
+    
+    # console.log owl: @, hero: hero
+    
+    # default to latest image
+    hero ?= @images.pop()
     
     return "/uploads/#{hero.filename}"
   
@@ -132,7 +143,7 @@ module.exports = class Owl extends Model
       callback null
   
   upload: (req, callback) ->
-    console.log 'filez', req.files
+    console.log 'filez', req
     
     async.series
       removeDeals: (callback) =>

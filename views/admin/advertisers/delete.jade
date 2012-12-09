@@ -1,7 +1,9 @@
 extends ../../layout
 
 block content
+  
   .container.row.main
+    
     include ../../left_nav
     
     #center-col
@@ -10,11 +12,12 @@ block content
       p Are you sure you wish to delete:
         em
           u #{advertiser.name}
-      form.form-horizontal(action="/admin/advertisers/delete/#{advertiser.advertiser_id}", method="post")
-        input(type="hidden", name="_method", value="delete")
+      
+      form.form-horizontal(action="/admin/advertisers/delete/#{advertiser.advertiser_id}", method='post')
+        input(type='hidden', name='_method', value='delete')
         
         div.control-group
           div.controls
-            input.btn.btn-danger(type="submit", value="Delete")
+            input.btn.btn-danger(type='submit', value='Delete')
             | &nbsp;
-            a.btn(href="/admin/advertisers") Cancel
+            a.btn(href='/admin/advertisers') Cancel
