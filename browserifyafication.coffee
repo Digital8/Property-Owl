@@ -11,7 +11,7 @@ module.exports = (app) ->
   bundle = browserify
     debug: on
     watch: on
-    cache: on
+    cache: off
   
   bundle.addEntry "#{__dirname}/lib/client/entry.coffee"
   
