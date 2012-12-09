@@ -5,10 +5,12 @@ window.commas = commas = require '../helpers/commas'
 
 require './reports'
 require './admin'
-require './map'
+
+makeMap = require './map'
 
 $ ->
-
+  makeMap 1
+  
   $('body').on 'keypress', (event) ->
     if (event.keyCode == 6) and event.ctrlKey
       console.log 'fake that shit'

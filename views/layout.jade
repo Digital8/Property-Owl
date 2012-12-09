@@ -153,11 +153,12 @@ html.no-js(lang='en')
         
           #logo-box
             a#logo(href='/'): img(src='/images/logo.png')
-            - var i = 0
-            each ad in adspaceTop
-              - i++
-              include adverts/horizontal.jade
-              - if (i == 1) break;
+
+          - var i = 0
+          each ad in adspaceTop
+            - i++
+            include adverts/horizontal.jade
+            - if (i == 1) break;
         
         nav#menu
             ul.sf-menu
