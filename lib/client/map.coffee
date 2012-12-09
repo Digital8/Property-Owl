@@ -33,6 +33,8 @@ $ ->
     ((st, state) ->
       st[0].style.cursor = "pointer"
       
+      st[0].onclick = -> window.location = "#{window.location.protocol}//#{window.location.hostname}/owls/state/#{state}"
+      
       st[0].onmouseover = ->
         current and aus[current].animate(
           fill: "#FFF"
@@ -44,7 +46,7 @@ $ ->
           # stroke: "#ccc"
         , 500
         
-        st.toFront()
+        # st.toFront()
         
         R.safari()
         
@@ -58,9 +60,20 @@ $ ->
           # stroke: "#666"
         , 500
         
-        st.toFront()
+        # st.toFront()
         
         R.safari()
       
-      st[0].onmouseover() if state is "nsw"
+      # st[0].onmouseover() if state is "nsw"
     ) aus[state], state
+  
+  R.text(50, 80, 'WA').attr(fill: '#E01A00', 'pointer-events': 'none')
+  R.text(100, 60, 'NT').attr(fill: '#E01A00', 'pointer-events': 'none')
+  R.text(110, 100, 'SA').attr(fill: '#E01A00', 'pointer-events': 'none')
+  R.text(160, 70, 'QLD').attr(fill: '#E01A00', 'pointer-events': 'none')
+  R.text(160, 115, 'NSW').attr(fill: '#E01A00', 'pointer-events': 'none')
+  R.text(150, 140, 'VIC').attr(fill: '#E01A00', 'pointer-events': 'none')
+  R.text(140, 170, 'TAS').attr(fill: '#FFF')
+  R.text(195, 130, 'ACT').attr(fill: '#FFF')
+  
+  R.text(75, 140, 'SELECT\nA STATE').attr(fill: '#FFF')
