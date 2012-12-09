@@ -100,10 +100,10 @@ module.exports = (app) ->
   admin 'get', '/news', controllers.admin.news.index
   admin 'post', '/news/add', controllers.admin.news.create
   admin 'get', '/news/add', controllers.admin.news.add
-  admin 'get', '/news/edit/:id(\\d+)', controllers.admin.news.edit
-  admin 'put', '/news/edit/:id(\\d+)', controllers.admin.news.update
-  admin 'get', '/news/delete/:id(\\d+)', controllers.admin.news.delete
-  admin 'delete', '/news/delete/:id(\\d+)', controllers.admin.news.destroy
+  admin 'get', '/news/:id(\\d+)/edit', controllers.admin.news.edit
+  admin 'put', '/news/:id(\\d+)', controllers.admin.news.update
+  admin 'get', '/news/:id(\\d+)/delete', controllers.admin.news.delete
+  admin 'delete', '/news/:id(\\d+)', controllers.admin.news.destroy
   
   # admin/members
   admin 'get', '/members', controllers.admin.members.index
@@ -123,20 +123,12 @@ module.exports = (app) ->
   admin 'get', '/pages/:id(\\d+)/edit', controllers.admin.pages.edit
   admin 'get', '/pages/:id(\\d+)/delete', controllers.admin.pages.delete
   
-  admin 'get', '/services', controllers.admin.services.index
-  admin 'get', '/services/add', controllers.admin.services.add
-  admin 'get', '/services/edit/:id(\\d+)', controllers.admin.services.edit
-  admin 'put', '/services/edit/:id(\\d+)', controllers.admin.services.update
-  admin 'get', '/services/delete/:id(\\d+)', controllers.admin.services.delete
-  admin 'post', '/services/add', controllers.admin.services.create
-  
-  # admin/services/categories
-  admin 'get', '/services/categories', controllers.admin.services.viewCategories
-  admin 'get', '/services/categories/add', controllers.admin.services.addCategory
-  admin 'post', '/services/categories/add', controllers.admin.services.createCategory
-  admin 'get', '/services/categories/edit/:id(\\d+)', controllers.admin.services.editCategory
-  admin 'put', '/services/categories/edit/:id(\\d+)', controllers.admin.services.updateCategory
-  admin 'get', '/services/categories/delete/:id(\\d+)', controllers.admin.services.deleteCategory
+  # admin 'get', '/services', controllers.admin.services.index
+  # admin 'get', '/services/add', controllers.admin.services.add
+  # admin 'get', '/services/edit/:id(\\d+)', controllers.admin.services.edit
+  # admin 'put', '/services/edit/:id(\\d+)', controllers.admin.services.update
+  # admin 'get', '/services/delete/:id(\\d+)', controllers.admin.services.delete
+  # admin 'post', '/services/add', controllers.admin.services.create
   
   # admin/advertising
   admin 'get', '/deals', controllers.admin.deals.index
@@ -155,8 +147,8 @@ module.exports = (app) ->
   admin 'get', '/barns/add', controllers.admin.barns.add
   admin 'post', '/barns', controllers.admin.barns.create
   admin 'get', '/barns/:id(\\d+)/edit', controllers.admin.barns.edit
-  admin 'get', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.delete
-  admin 'del', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.destroy
+  # admin 'get', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.delete
+  # admin 'del', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.destroy
   
   # admin/reports
   admin 'get', '/reports', controllers.admin.reports.index
