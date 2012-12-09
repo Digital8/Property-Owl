@@ -6,20 +6,23 @@ uuid = require 'node-uuid'
 system = require '../../system'
 
 Barn = system.models.barn
+User = system.models.user
 
 exports.index = (req, res) ->
   Barn.all (error, barns) ->
-    res.render 'admin/barns/index', barns: barns
+      res.render 'admin/barns/index', barns: barns
 
 exports.edit = (req, res) ->
   Barn.get req.params.id, (error, barn) ->
-    console.log barn
+    User.getUsersByGroup 2, (error, developers) ->
+      console.log 'got', arguments
     
-    res.render 'admin/barns/edit', barn: barn
+      res.render 'admin/barns/edit', barn: barn, developers: developers
 
 exports.add = (req, res) ->
   Barn.new (error, barn) ->
-    res.render 'admin/barns/add', barn: barn
+    User.getUsersByGroup 2, (error, developers) ->
+      res.render 'admin/barns/add', barn: barn, developers: developers
 
 exports.create = (req, res) ->
   console.log 'creating barn'

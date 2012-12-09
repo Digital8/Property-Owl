@@ -1,117 +1,38 @@
-- if (!locals.barn) {locals.barn = {}}
-
 .left
   
+  .inputs
+    label(for='listed_by') Listed By 
+    select#listed_by(name='listed_by')
+      option
+      - each developer in developers
+        option(value='#{barn.listed_by}', selected=barn.listed_by == barn.listed_by) #{developer.first_name} #{developer.last_name}
+
   .inputs
     label(for='title') Title
     input#title(type='text', name='title', value='#{barn.title}')
   
-  //- .inputs
-  //-   label(for='development_type_id') Type
-  //-   select#development_type_id(type='text', name='development_type_id')
-  //-     option
-  //-     - for type in data.developmentTypes
-  //-       option(value='#{type.id}')= type.name
-  
-  //- .inputs
-  //-   label(for='price') Price
-  //-   input#price(type='number', name='price', value='#{barn.price}', min='0', max='100000000')
-  
   .inputs
     label(for='description') Description
-      textarea#description(name='description')
+      textarea#description(name='description',rows='7')
         = barn.description
   
-  hr
+  .inputs
+    label(for='indoor_features') Indoor Features
+    textarea(name='indoor_features')= barn.indoor_features
   
   .inputs
-    table.admin-gridview
-      thead
-        tr
-          td Owls
-          //- td Description
-          //- td Value
-      tbody
-        - if (barn.owls && barn.owls.length)
-          - each owl in barn.owls
-            tr
-              td
-                select.type(type='text', name='type', data-index='#{deal.id}')
-                  option(value='stamp_duty') Stamp Duty
-                  option(value='furniture_package') Furniture Package
-                  option(value='blinds') Blinds
-                  option(value='rental_garantee') Rental Guarantee
-                  option(value='entertainment_system') Entertainment System
-                  option(value='other') Other
-              td
-                input.name(type='text', name='name', placeholder='default', value='#{deal.description}')
-              td
-                input#value(type='number', name='value', value='#{deal.value}')
-      tfooter
-        tr
-          td(colspan='3')
-            p add owl +
+    label(for='outdoor_features') Outdoor Features
+    textarea(name='outdoor_features')= barn.outdoor_features
   
-  //- hr
-  
-  //- .inputs
-  //-   label(for='internal_area') Internal Area (m²)
-  //-   input#internal_area(type='number', name='internal_area', value='#{barn.internal_area}', min='0', max='100000000')
-
-  //- .inputs
-  //-   label(for='external_area') External Area (m²)
-  //-   input#external_area(type='number', name='external_area', value='#{barn.external_area}', min='0', max='100000000')
-  
-  //- hr
-  
-  //- .inputs
-  //-   label(for='features') Internal Features
-  //-   select(name='features')
-  //-     option
-  //-     option(value='foo') foo
-  //-     option(value='bar') bar
-  //-     option(value='zip') zip
-  //-     option(value='zap') zap
-  
-  //- .inputs
-  //-   label(for='features') External Features
-  //-   select(name='features')
-  //-     option
-  //-     option(value='foo') foo
-  //-     option(value='bar') bar
-  //-     option(value='zip') zip
-  //-     option(value='zap') zap
-  
-  //- .inputs
-  //-   label(for='features') Other Features
-  //-   select(name='features')
-  //-     option
-  //-     option(value='foo') foo
-  //-     option(value='bar') bar
-  //-     option(value='zip') zip
-  //-     option(value='zap') zap
-  
-  //- hr
-  
-  //- .inputs
-  //-   label(for='bedrooms') Bedrooms
-  //-   input#bedrooms(type='number', name='bedrooms', value='#{barn.bedrooms}', min='0')
-    
-  //- .inputs
-  //-   label(for='bathrooms') Bathrooms
-  //-   input#bathrooms(type='number', name='bathrooms', value='#{barn.bathrooms}', min='0')
-    
-  //- .inputs
-  //-   label(for='cars') Cars
-  //-   input#cars(type='number', name='cars', value='#{barn.cars}', min='0')
+  .inputs
+    label(for='other_features') Other Features
+    textarea(name='other_features')= barn.other_features
 
 .right
-  
-  .inputs(data-geo='master')
-    label(for='title') Geo
-    input(type='text', value='')
-  
-  hr
+
+  .inputs
+    label(for='title') Approved
+      input.big_checkbox(name='approved', type='checkbox', checked=barn.approved)
 
   .inputs
     label(for='title') Address
@@ -124,20 +45,36 @@
   .inputs
     label(for='postcode') Postcode
     input#postcode(type='text', name='postcode', value='#{barn.postcode}')
-  
+
   .inputs
     label(for='state') State
     select#state(name='state')
       option
-      option(value='act') ACT
-      option(value='nsw') NSW
-      option(value='nt') NT
-      option(value='qld') QLD
-      option(value='sa') SA
-      option(value='tas') TAS
-      option(value='vic') VIC
-      option(value='wa') WA
-  
+      - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
+        option(value='#{state}', selected=state == barn.state) #{state.toUpperCase()}
+
   include image_inputs
 
+  hr
+  
+  include deal_inputs
+
 .inputs
+
+.inputs
+  label() Properties
+  - var owls = barn.owls
+  table.admin-gridview
+    thead
+      tr
+        td ID
+        td Listed On
+        td Address
+        td State
+        td Status
+        td Deal Value
+        td Registrations
+        td(colspan='3') Actions
+    tbody
+     - each owl in owls
+       include ../owls/summary

@@ -1,0 +1,10 @@
+tr
+  td
+    select.type(type='text', name='type[]', data-index='#{deal.id}')
+      option
+      - each dealType in data.dealTypes
+        option(value='#{dealType.id}', selected=deal.deal_type_id == dealType.id)= dealType.name
+  td
+    input.name(type='text', name='name[]', placeholder='default', value='#{deal.description}')
+  td
+    input#value(type='number', name='value[]', value='#{deal.value}')
