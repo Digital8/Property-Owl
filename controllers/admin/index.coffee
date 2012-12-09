@@ -7,11 +7,14 @@ models =
   advertisement: system.load.model 'advertisement'
   properties: system.load.model 'properties'
 
+Owl = system.models.owl
+Barn = system.models.barn
+
 exports.index = (req,res) ->
-  models.properties.getPendingProperties (err, properties) ->
-    models.properties.getPendingBarnDeals (err, projects) ->
+  Owl.pendingowls (error, owls) ->
+    Barn.pendingbarns (error, barns) ->
       models.advertisement.countActive (err, results) ->
-        res.render 'admin/index', activeAdvertisementCount: results, properties: properties or {}, projects: projects or {}, menu: 'dashboard'
+        res.render 'admin/index', activeAdvertisementCount: results, owls: owls or {}, barns: barns or {}, menu: 'dashboard'
 
 exports.view = (req,res) ->
 
