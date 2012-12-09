@@ -1,5 +1,5 @@
 $ ->
-  R = Raphael 'map', 300, 300
+  R = Raphael 'map', 200, 185
 
   attr =
     fill: "#FFF"
