@@ -87,6 +87,7 @@ app.configure ->
     res.locals.req      = req
     res.locals.menu     = {}
     res.locals.data     = system.data
+    res.locals._s       = require 'underscore.string'
     
     if app.argv.hack
       req.session.user_id = 1

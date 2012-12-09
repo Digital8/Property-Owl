@@ -18,17 +18,17 @@ tr
   
   td #{owl.registrations}
   
-  td.actions
-    a(href='/owls/#{owl.owl_id}', alt='view owl')
-      img(src='/images/view.png', alt='View')
-      | View
+  //- td.actions
+  //-   a(href='/admin/owls/#{owl.owl_id}/view', alt='view owl deal')
+  //-     img(src='/images/view.png', alt='View')
+  //-     | View
   
   td.actions
-    a(href='/admin/owls/#{owl.owl_id}/edit', alt='edit owl')
+    a(href='/admin/owls/#{owl.owl_id}/edit', alt='edit owl deal')
       img(src='/images/edit.png', alt='Edit')
       | Edit
   
   td.actions
-    a(href='/admin/owls/#{owl.owl_id}/delete', alt='delete owl')
+    a(href='/admin/owls/#{owl.owl_id}/delete', alt='delete owl deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete

@@ -6,13 +6,7 @@ block content
    
    h1 Advertisements
    
-   .admin-actions
-     ul
-       li
-         a(href='/admin/advertisements/add')
-           img(src='/images/add.png')
-           | &nbsp;
-           | Add New Advertisement
+   include actions
    
    table.admin-gridview
      thead
@@ -40,7 +34,10 @@ block content
            td= advertisement.page
            //- td= advertisement.space
            td
-             img(src='/uploads/' + advertisement.image_id)
+            if(advertisement.adspace_id==1)
+              img(src='/uploads/' + advertisement.image_id)
+            else
+              img.small-advert(src='/uploads/' + advertisement.image_id)
            td= advertisement.hyperlink
            //- td= advertisement.duration
            td= advertisement.visible

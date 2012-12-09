@@ -262,3 +262,18 @@ module.exports = class Owl extends Model
       owl.hydrate ->
 
         callback null, owl
+        
+  @pendingowls = (callback) ->
+    @db.query "SELECT * FROM owls WHERE approved = false", (error, rows) =>
+      return callback error if error
+      
+      models = []
+      
+      for row in rows
+        model = new Owl row
+        models.push model
+      
+      async.forEach models, (model, callback) =>
+        model.hydrate callback
+      , (error) ->
+        callback null, models

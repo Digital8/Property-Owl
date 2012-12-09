@@ -1,12 +1,14 @@
 .admin-actions
   ul
-    li
-      a(href='/admin/news/add')
-       img(src='/images/add.png')
-       | &nbsp;
-       | Add News Article
-    li
-      a(href='/admin/news')
-        img(src='/images/manage.png')
-        | &nbsp;
-        | Manage News Articles
+    if(action != 'add')
+      li
+        a(href='/admin/news/add')
+         img(src='/images/add.png')
+         | &nbsp;
+         | Add News Article
+    if(action != 'index')
+      li
+        a(href='/admin/news')
+          img(src='/images/manage.png')
+          | &nbsp;
+          | Manage News Articles

@@ -52,3 +52,18 @@ module.exports = class Barn extends Model
   #       models.push model
       
   #     callback null, models
+          
+  @pendingbarns = (callback) ->
+    @db.query "SELECT * FROM barns WHERE approved = false", (error, rows) =>
+      return callback error if error
+      
+      models = []
+      
+      for row in rows
+        model = new Barn row
+        models.push model
+      
+      async.forEach models, (model, callback) =>
+        model.hydrate callback
+      , (error) ->
+        callback null, models

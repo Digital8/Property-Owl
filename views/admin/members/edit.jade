@@ -6,21 +6,16 @@ block content
   .container.row.main
     include ../menu
     h1 Edit Member: #{values.first_name} #{values.last_name}
-    .admin-actions
-      ul
-        li
-          a(href="/admin/members")
-           img(src='/images/manage.png')
-           | &nbsp;
-           | Manage Members
-     .grid-header.form-header
+    include actions
+
+    .grid-header.form-header
       ol.six
        li.active
         .ol-1-active
         | Details
-        
 
-     .details
+
+    .details
       h2 User Details
       hr
       form.details-form(action="/admin/members/#{values.user_id}",method="post")

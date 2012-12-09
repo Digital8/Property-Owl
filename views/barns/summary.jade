@@ -10,7 +10,7 @@
     .listing-details
       .summary
         h3= barn.title
-        p= barn.description
+        p= _s.prune(barn.description,250)
       
       .listing-links
         a.save-button(href='#')
