@@ -1,5 +1,5 @@
 #left-col
-  - if(req.url!='/')
+  - if (req.url != '/')
     .deal-stats
       .timer
       
@@ -27,9 +27,10 @@
           //-   area#map-act(shape='square', coords='155,110,185,110,185,120,155,120', href='/owls/state/act')
           //-   area#map-tas(shape='square', coords='120,140,170,140,170,155,120,155', href='/owls/state/tas')
       
-      .counter
-        span.label Number of Enquiries
-        span.value 1,345
+      - if (locals.owl)
+        .counter
+          span.label Number of Enquiries
+          span.value= owl.registrations
   
   .barn-box
     a(href='/barns')
@@ -50,7 +51,8 @@
       include adverts/tower
       if (i == max)
         break
-    - if (typeof(owl) != 'undefined')
+    
+    - if (locals.owl && locals.area != 'index')
       .share
        ul
          li
@@ -69,7 +71,8 @@
            a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/owls/#{owl.id}') Tweet
            script
              !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-    - else
+    
+    - if (!locals.owl || (locals.area && locals.area == 'index'))
       include search
   
   - if(locals.enquire)

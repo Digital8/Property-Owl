@@ -14,6 +14,8 @@ module.exports = class Owl extends Model
     name: 'owls'
     key: 'owl_id'
   
+  @field 'barn_id'
+  
   @field 'title'
   @field 'address'
   @field 'suburb'
@@ -114,6 +116,15 @@ module.exports = class Owl extends Model
         expose 'other'
         
         callback()
+      
+      barns: (callback) =>
+        return do callback unless @barn_id?
+        
+        Barn = system.models.barn
+        
+        Barn.dry @barn_id, (error, barn) =>
+          @barn = barn
+          do callback
     
     , (error) => super callback
   

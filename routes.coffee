@@ -2,8 +2,13 @@
 
 {authenticate, authorize} = helpers
 
+area = (key = 'master') ->
+  return (req, res, next) ->
+    res.locals.area = key
+    do next
+
 module.exports = (app) ->
-  app.get '/', controllers.index.index
+  app.get '/', (area 'index'), controllers.index.index
   
   # auth
   #app.all '/login', controllers.login.index
@@ -168,6 +173,8 @@ module.exports = (app) ->
   ajax 'post', '/register', controllers.ajax.register
   
   ajax 'get', '/epoch', controllers.ajax.epoch
+  
+  ajax 'get', '/search', controllers.ajax.search
   
   authedAjax = (method, path, middleware...) ->
     app[method] "/ajax#{path}", authenticate, middleware...

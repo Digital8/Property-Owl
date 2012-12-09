@@ -128,7 +128,7 @@ block content
             .secure-deal
               a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.id}", data-type="owl") Express Your Interest!
           
-            - if(owl.barn_id)
+            - if(owl.barn)
               .barn-link
                 a(href="/barn/deals/#{owl.barn_id}") View Barn Deal
                   img#barn-image(src='/images/barn-link.png', alt='View Barn Deal')

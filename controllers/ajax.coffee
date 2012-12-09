@@ -99,7 +99,7 @@ exports.securedeal = (req, res) ->
       """
     , 'Property Owl Sign-Up'
     res.send status: 200
-    
+
 exports.referfriend = (req, res) ->
   req.assert('e', 'Invalid Email Address').isEmail()
   req.assert('m', 'Phone Number is invalid').is(/^[\+0-9][ 0-9]*[0-9]$/).len(8,16)
@@ -129,55 +129,55 @@ exports.referfriend = (req, res) ->
     res.send status: 200
 
 
-exports.savedeal = (req, res) ->
-  req.assert('id', 'Property ID Not Numeric').isInt()
+# exports.savedeal = (req, res) ->
+#   req.assert('id', 'Property ID Not Numeric').isInt()
   
-  errors = req.validationErrors true
+#   errors = req.validationErrors true
 
-  if errors
-    res.send status: false
-  else
-    models.saveddeals.checkDeal req.body.id, res.locals.objUser.id, (err, results) ->
-      if results.length is 0
-        models.saveddeals.saveDeal req.body.id, res.locals.objUser.id, (err, results) ->
-          if err?
-            res.send status: false
-          else
-            res.send status: true
-      else
-        res.send status: true
+#   if errors
+#     res.send status: false
+#   else
+#     models.saveddeals.checkDeal req.body.id, res.locals.objUser.id, (err, results) ->
+#       if results.length is 0
+#         models.saveddeals.saveDeal req.body.id, res.locals.objUser.id, (err, results) ->
+#           if err?
+#             res.send status: false
+#           else
+#             res.send status: true
+#       else
+#         res.send status: true
 
-exports.removedeal = (req, res) ->
-  req.assert('id', 'Property ID Not Numeric').isInt()
+# exports.removedeal = (req, res) ->
+#   req.assert('id', 'Property ID Not Numeric').isInt()
   
-  errors = req.validationErrors true
+#   errors = req.validationErrors true
   
-  if errors
-    res.send status: false
-  else
-    models.saveddeals.removeSavedDeal req.body.id, res.locals.objUser.id, (err, results) ->
-      if err?
-        res.send status: false
-      else
-        res.send status:true
+#   if errors
+#     res.send status: false
+#   else
+#     models.saveddeals.removeSavedDeal req.body.id, res.locals.objUser.id, (err, results) ->
+#       if err?
+#         res.send status: false
+#       else
+#         res.send status:true
 
-exports.addDeal = (req, res) ->
-  req.body.property_id ?= req.body.pid
-  req.body.created_by = res.locals.objUser.id
+# exports.addDeal = (req, res) ->
+#   req.body.property_id ?= req.body.pid
+#   req.body.created_by = res.locals.objUser.id
   
-  models.deals.addDeal req.body, (err, results) ->
-    if err then throw err
+#   models.deals.addDeal req.body, (err, results) ->
+#     if err then throw err
     
-    res.send results
+#     res.send results
 
-exports.delDeal = (req, res) ->
-  models.deals.getDealById req.body.id, (err, results) ->
-    if err then throw err
+# exports.delDeal = (req, res) ->
+#   models.deals.getDealById req.body.id, (err, results) ->
+#     if err then throw err
     
-    if results.length is 1 then results = results.pop()
+#     if results.length is 1 then results = results.pop()
     
-    models.deals.deleteDealById req.body.id, (err) ->
-      res.send results
+#     models.deals.deleteDealById req.body.id, (err) ->
+#       res.send results
 
 exports.updateHero = (req, res) ->
   models.media.clearHero req.body.pid, (err) ->
@@ -230,3 +230,6 @@ exports.epoch = (req, res) ->
     epoch.add 'weeks', 1
   
   res.send epoch.toDate()
+
+exports.search = (req, res) ->
+  console.log req
