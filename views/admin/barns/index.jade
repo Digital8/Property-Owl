@@ -5,7 +5,7 @@ block content
   .container.row.main
     include ../menu
     
-    h1 Barns
+    h1 Barn Deals
     
     include ../../flashify
     
@@ -46,36 +46,36 @@ block content
         //-     option Current
         //-     option Ended
         
-        table.admin-gridview
-          thead
-            tr
-              td ID
-              td Listed On
-              td Developer
-              td State
-              td Status
-              td Lots
-              td Registrations
-              td(colspan='2') Actions
-          
-          tbody
-           - each barn in barns
-             
-             include summary
-          
-          tfoot
-            tr
-              td(colspan='12')
-                ul.pager
-                  li.disabled
-                    a(href='#') Prev
-                  li.selected
-                    a(href='#') 1
-                  li
-                    a(href='#') 2
-                  li
-                    a(href='#') 3
-                  li
-                    a(href='#') 4
-                  li
-                    a(href='#') Next
+      table.admin-gridview
+        thead
+          tr
+            td ID
+            td Listed On
+            td Developer
+            td State
+            td Status
+            td Lots
+            td Registrations
+            td(colspan='2') Actions
+        
+        tbody
+         - each barn in barns
+           
+           include summary
+        
+        tfoot
+          tr
+            td(colspan='9')
+              ul.pager
+                li.disabled
+                  a(href='#') Prev
+                li.selected
+                  a(href='#') 1
+                li
+                  a(href='#') 2
+                li
+                  a(href='#') 3
+                li
+                  a(href='#') 4
+                li
+                  a(href='#') Next
