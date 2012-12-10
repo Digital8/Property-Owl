@@ -43,6 +43,7 @@ module.exports = (template, subject, objUser, secondary, callback) ->
           email.addSubVal '{{BarnDealTitle}}', secondary.BarnDealTitle
           email.addSubVal '{{BarnDealAddress}}', secondary.BarnDealAddress
           email.addSubVal '{{BarnDealDescription}}', secondary.BarnDealDescription
+          email.addSubVal '{{dealLink}}', secondary.dealLink
         when 'news'
           email.addSubVal '{{title}}', secondary.title
 		  
