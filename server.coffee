@@ -169,7 +169,7 @@ server = https.createServer
 , app
 
 server.listen config.https.port, ->
-  console.log "Server started on port #{config.port}"
+  console.log "Server started on port #{config.https.port}"
   
   console.stop 'boot'
   
@@ -179,7 +179,8 @@ insecureApp = express()
 
 insecureApp.get '*', (req, res) ->
   console.log req
-  res.redirect "https://#{req.headers.host}#{req.url}"
+  res.redirect "https://#{req.headers.host.split(':')[0]}#{req.url}"
 
 insecureServer = http.createServer insecureApp
-insecureServer.listen config.http.port
+insecureServer.listen config.http.port, ->
+  console.log "Bouncer started on port #{config.http.port}"
