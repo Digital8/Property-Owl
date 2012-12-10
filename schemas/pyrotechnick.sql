@@ -18,6 +18,41 @@ USE `po`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `affiliates`
+--
+
+DROP TABLE IF EXISTS `affiliates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `affiliates` (
+  `affiliate_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `company` varchar(100) NOT NULL,
+  `logo` varchar(100) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `address` text NOT NULL,
+  `suburb` varchar(100) NOT NULL,
+  `state` varchar(10) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `postcode` varchar(20) NOT NULL,
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  `description` varchar(100) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `service_created_at` datetime NOT NULL,
+  PRIMARY KEY (`affiliate_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `affiliates`
+--
+
+LOCK TABLES `affiliates` WRITE;
+/*!40000 ALTER TABLE `affiliates` DISABLE KEYS */;
+INSERT INTO `affiliates` VALUES (1,'testaroo','','','','Ipswich','act','','',1,'this is a test service','','2012-11-06 10:27:16'),(2,'testing 2..','','','','blacktown','act','','',1,'this is another test service','','2012-11-06 10:27:16');
+/*!40000 ALTER TABLE `affiliates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `barns`
 --
 
@@ -50,8 +85,33 @@ CREATE TABLE `barns` (
 
 LOCK TABLES `barns` WRITE;
 /*!40000 ALTER TABLE `barns` DISABLE KEYS */;
-INSERT INTO `barns` VALUES (1,'Enterprise-wide zero defect architecture','65316 Herzog Dale','Christopheland','4768','sa','ipsa ipsum fugiat amet pariatur omnis dignissimos in\r\namet qui autem\r\nmolestiae corporis nesciunt qui cupiditate nihil laudantium necessitatibus aspernatur\r\nvoluptatem dolores delectus reprehenderit voluptatum ut praesentium aut\r\n \r\n	dolor delectus a quis suscipit molestiae rerum\r\ndolore molestias nulla quis omnis est sit velit\r\nvelit quo quia aut voluptatem tempora sunt\r\nprovident qui ipsa non\r\nut similique fuga aut dolorem et\r\n \r\n	numquam eaque aut tenetur aliquid sunt quia ut officiis\r\nexpedita et aut\r\nmagnam provident veritatis rem est\r\nrepellendus ea quibusdam illo reprehenderit\r\n \r\n	laboriosam consequatur nulla exercitationem id architecto distinctio\r\nrerum illo nisi pariatur inventore libero quis fuga maxime\r\net cupiditate ea qui placeat rem odit\r\nnatus nesciunt commodi error sit ea alias adipisci aut\r\nquas rerum velit aspernatur dolorum minus maxime',NULL,NULL,NULL,'',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00');
+INSERT INTO `barns` VALUES (1,'Emirates House','167 Eagle St','Brisbane','4000','qld','Buy the whole fucking building cunts!','Air-conditioning','Parking','River','',2,0,'2012-12-10 00:58:32','2012-12-10 00:58:32');
 /*!40000 ALTER TABLE `barns` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bookmarks`
+--
+
+DROP TABLE IF EXISTS `bookmarks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bookmarks` (
+  `bookmark_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `owner_id` mediumint(8) unsigned NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `resource_id` mediumint(8) unsigned NOT NULL,
+  PRIMARY KEY (`bookmark_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bookmarks`
+--
+
+LOCK TABLES `bookmarks` WRITE;
+/*!40000 ALTER TABLE `bookmarks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bookmarks` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -117,12 +177,13 @@ DROP TABLE IF EXISTS `deals`;
 CREATE TABLE `deals` (
   `deal_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(100) DEFAULT NULL,
-  `owl_id` mediumint(8) unsigned NOT NULL,
+  `entity_id` mediumint(8) unsigned NOT NULL,
   `created_by` mediumint(8) unsigned NOT NULL,
   `value` int(11) NOT NULL DEFAULT '0',
   `deal_type_id` int(11) DEFAULT '6',
+  `type` varchar(45) NOT NULL,
   PRIMARY KEY (`deal_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=125 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +192,7 @@ CREATE TABLE `deals` (
 
 LOCK TABLES `deals` WRITE;
 /*!40000 ALTER TABLE `deals` DISABLE KEYS */;
-INSERT INTO `deals` VALUES (60,'Care-taking Service',10,3,250,6),(49,'stamp duty',17,1,20000,6),(15,'5% off the list price when 5 are sold',2,1,30000,6),(54,'helicopter pad',43,3,50000,5),(52,'stamp duty',45,1,10000,1),(43,'Outdoor Setting',42,3,3333,2),(42,'Stereo + Projector',42,3,12000,5),(44,'',42,3,10000,1),(55,'automatisch',43,3,4000,3),(50,'stamp',17,1,30000,5),(53,'furniture package',45,1,30028,2),(59,'u',10,3,10000,1),(73,'u',47,3,149996,1),(69,'u',48,1,10000,1),(66,'Horse',49,1,12000,6),(68,'u',50,1,11000,4),(72,'Car',51,3,10000,6),(71,'Outdoor Setting',52,1,12000,2);
+INSERT INTO `deals` VALUES (60,'Care-taking Service',10,3,250,6,'owl'),(49,'stamp duty',17,1,20000,6,'owl'),(15,'5% off the list price when 5 are sold',2,1,30000,6,'owl'),(54,'helicopter pad',43,3,50000,5,'owl'),(52,'stamp duty',45,1,10000,1,'owl'),(124,'Outdoor Setting',42,3,10000,5,'owl'),(123,'Stereo + Projector',42,3,3333,1,'owl'),(55,'automatisch',43,3,4000,3,'owl'),(50,'stamp',17,1,30000,5,'owl'),(53,'furniture package',45,1,30028,2,'owl'),(59,'u',10,3,10000,1,'owl'),(73,'u',47,3,149996,1,'owl'),(69,'u',48,1,10000,1,'owl'),(66,'Horse',49,1,12000,6,'owl'),(68,'u',50,1,11000,4,'owl'),(72,'Car',51,3,10000,6,'owl'),(71,'Outdoor Setting',52,1,12000,2,'owl'),(122,'undefined',42,3,12000,2,'owl');
 /*!40000 ALTER TABLE `deals` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,11 +258,11 @@ CREATE TABLE `medias` (
   `filename` varchar(100) NOT NULL,
   `description` varchar(100) NOT NULL,
   `image` tinyint(1) NOT NULL DEFAULT '0',
-  `hero` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `type` varchar(45) NOT NULL,
   PRIMARY KEY (`media_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +271,7 @@ CREATE TABLE `medias` (
 
 LOCK TABLES `medias` WRITE;
 /*!40000 ALTER TABLE `medias` DISABLE KEYS */;
-INSERT INTO `medias` VALUES (11,9,1,'8ad19750-2945-11e2-b4bc-5f66e9f836b9.jpg','',1,1,'2012-11-23 22:04:42','0000-00-00 00:00:00'),(12,9,1,'ea037e10-3394-11e2-bad3-cd982acbcfc3.JPG','photo.JPG',0,0,'2012-11-21 04:35:44','0000-00-00 00:00:00'),(13,9,1,'d77d3cf0-3460-11e2-a1c1-75b0dcd6ca17.png','profile-pic.png',1,0,'2012-11-23 22:04:42','0000-00-00 00:00:00'),(15,0,0,'','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(16,39,1,'9dd4f0a7-a795-45eb-a73b-1f282f176b8a','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(17,40,1,'c3e2da67-9fdb-40e4-a339-9476b259b358','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(18,1,1,'cd60ef61-d7f3-4ebf-b5c6-1242a446cacf','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(43,47,1,'478fa72e-8f81-47c2-9f06-aed2f838d264.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(35,41,1,'95f0b8c5-8a27-41ad-9327-f00952e25dc1.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(34,41,1,'2a982199-e169-4448-a173-08c9af18e99f.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(37,43,1,'11b6f252-3980-43a2-be1d-b552707860c3.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(38,43,1,'016606b4-2a4a-45b8-84f3-6c3be03d7753.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(39,17,1,'29618948-4930-48e1-ab49-93c4d5828b30.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(44,47,1,'6cc63577-4b85-428c-83aa-c188475ebfd0.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(41,45,1,'956a1eb2-5255-447b-8045-e65c7f78cbb6.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(42,10,3,'9e6af5b5-c433-4ae5-b0bf-ac19bf27578c.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(45,48,1,'c5712252-bb79-4271-8031-1acb262dd837.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(46,48,1,'f9ed5f01-d840-4cf8-9cb1-232ee80ac9fb.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(47,49,1,'119726e9-3f93-4258-9887-d00823d0cf79.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(48,49,1,'dc087e9e-7a81-4b8e-b169-d7e394beb122.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(49,50,1,'e9a7b1ab-c81c-4b65-a20f-29a023a32cdb.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(50,50,1,'09d5cc5a-78af-4752-a2b4-9e8948678295.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(51,52,1,'af9cbf30-8fd7-4264-93c8-ef04a663c4bc.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(52,51,3,'814c997c-9ae8-4571-bded-f71deac485bd.png','',0,0,'0000-00-00 00:00:00','0000-00-00 00:00:00');
+INSERT INTO `medias` VALUES (11,9,1,'8ad19750-2945-11e2-b4bc-5f66e9f836b9.jpg','',1,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(12,9,1,'ea037e10-3394-11e2-bad3-cd982acbcfc3.JPG','photo.JPG',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(13,9,1,'d77d3cf0-3460-11e2-a1c1-75b0dcd6ca17.png','profile-pic.png',1,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(15,0,0,'','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(16,39,1,'9dd4f0a7-a795-45eb-a73b-1f282f176b8a','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(17,40,1,'c3e2da67-9fdb-40e4-a339-9476b259b358','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(18,1,1,'cd60ef61-d7f3-4ebf-b5c6-1242a446cacf','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(43,47,1,'478fa72e-8f81-47c2-9f06-aed2f838d264.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(35,41,1,'95f0b8c5-8a27-41ad-9327-f00952e25dc1.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(34,41,1,'2a982199-e169-4448-a173-08c9af18e99f.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(37,43,1,'11b6f252-3980-43a2-be1d-b552707860c3.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(38,43,1,'016606b4-2a4a-45b8-84f3-6c3be03d7753.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(39,17,1,'29618948-4930-48e1-ab49-93c4d5828b30.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(44,47,1,'6cc63577-4b85-428c-83aa-c188475ebfd0.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(41,45,1,'956a1eb2-5255-447b-8045-e65c7f78cbb6.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(42,10,3,'9e6af5b5-c433-4ae5-b0bf-ac19bf27578c.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(45,48,1,'c5712252-bb79-4271-8031-1acb262dd837.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(46,48,1,'f9ed5f01-d840-4cf8-9cb1-232ee80ac9fb.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(47,49,1,'119726e9-3f93-4258-9887-d00823d0cf79.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(48,49,1,'dc087e9e-7a81-4b8e-b169-d7e394beb122.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(49,50,1,'e9a7b1ab-c81c-4b65-a20f-29a023a32cdb.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(50,50,1,'09d5cc5a-78af-4752-a2b4-9e8948678295.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(51,52,1,'af9cbf30-8fd7-4264-93c8-ef04a663c4bc.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(52,51,3,'814c997c-9ae8-4571-bded-f71deac485bd.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(53,42,3,'8fee6ccc-ac0b-4b30-88b4-4039f380db6a.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(54,42,3,'e2c65f13-1ec6-4fc3-b6d6-09111651d6e9.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl');
 /*!40000 ALTER TABLE `medias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +320,7 @@ CREATE TABLE `owls` (
 
 LOCK TABLES `owls` WRITE;
 /*!40000 ALTER TABLE `owls` DISABLE KEYS */;
-INSERT INTO `owls` VALUES (42,'Rose Cottage','117 Lansdowne Way','Chuwar','4306','qld','A nice house in the suburbs of far Western Brisbane.',1,789000,6,2,5,'',NULL,218,5130,NULL,NULL,NULL,NULL,'',NULL,1,1,NULL,'2012-10-08 19:49:47','0000-00-00 00:00:00'),(10,'Fit for a King!','12 Karen Court','Redbank Plains','1442','qld','Reside in style with this fantastic property in suburban Redbank Plans, Queensland.',1,900000,4,2,2,'completed',NULL,120,220,NULL,NULL,NULL,NULL,'',NULL,2,1,NULL,'2012-12-05 06:37:23','0000-00-00 00:00:00'),(17,'Dont buy it','12 Bell Street','Ipswich','2134','qld','Dont buy this place.',1,493100,11,22,33,'otp',NULL,111,222,NULL,NULL,NULL,NULL,'',NULL,2,1,NULL,'2012-12-05 06:37:23','0000-00-00 00:00:00'),(47,'MODERN AND STYLISH AND DESIRABLE','15 Kent St','Deakin','2600','act','Exciting near new two storey terrace home in a discreet group of 5 in the highly sought after suburb of Deakin. ',1,980000,3,2,2,'',NULL,140,100,NULL,'','','Air conditioning\r\nAlarm System\r\nBalcony / Deck\r\nBroadband internet access\r\nBuilt in wardrobes\r\nDishwasher\r\nDouble glazed windows\r\nFloorboards\r\nFully fenced\r\nGarden / Courtyard\r\nInternal Laundry\r\nNorth Facing\r\nPets allowed\r\nSecure Parking\r\nWall / ceiling i','',NULL,0,1,NULL,'2012-12-05 18:30:39','0000-00-00 00:00:00'),(48,'OMG - This is an Awesome Waterfront Property!','32 Rosevears Dr','Lanena','7275','tas','For the buyers serious about boating and lifestyle I have 2046m2 of low maintenance property which allows time on the boat!\r\n\r\nEnjoying a HIGH WATER TITLE and an excellent quality jetty and floating pontoon, brick boathouse with winch, this property is the real deal!\r\n\r\nQuality solid brick house is spacious and complete in itself upstairs and enjoys awesome river views and sunshine then downstairs there is the easy possibility of making it all self contained, may suit a family with elders?\r\n\r\nThere is a separate, heated indoor pool for exercise and a triple garage big enough to take boat and caravan! Everything is in such excellent order the owners can lock up and go for 3-4 months at a time - how good is that?',1,899000,4,3,3,'',NULL,1000,2047,NULL,'','','High Water Title\r\nQuality Boat Shed\r\nJetty & Floating Pontoon\r\nHuge Rumpus Room','',NULL,0,1,NULL,'2012-12-06 00:26:20','0000-00-00 00:00:00'),(49,'Magnificence At Its Best','64 McMinns Dr','McMinns Lagoon','0822','nt','With absolute water frontage to McMinns Lagoon Wildlife Reserve and set amongst 6 magnificent acres of fertile and exotic Northern Territory land, this eco friendly, architecturally designed, nature lovers paradise is offered for sale. Don\'t miss this opportunity to purchase your piece of paradise in this highly sought after exclusive location! This boutique property is one of the Northern Territory\'s finest examples of a luxury rural lifestyle within 30 minutes of the Darwin CBD. Enjoy all the benefits of an iconic Territorian lifestyle just 7 minutes from the new Coolalinga shopping and regional centre. Incorporating Coles, Kmart, supporting speciality shops and entertaining facilities are due to commence construction only months away.\r\nMcMinns Lagoon is a highly sought after rural location and this property, being one of only 6 on the lagoon, is its epicentre. Nestled at one end of the kidney shaped Lagoon the property enjoys views across the far side of the Lagoon greatly enhancing the amenity and privacy of the property',8,2300000,5,2,3,'',NULL,300,2500,NULL,'Built-In Wardrobes\r\nFormal Lounge\r\nSeparate Dining','Garden\r\nSecure Parking','Close to Shops','',NULL,0,1,NULL,'2012-12-06 00:34:26','0000-00-00 00:00:00'),(50,'House & Land Packages returning 12.2% pa!!!','61 Dampier Terrace','Derby','6728','wa','The Derby property market has undergone significant changes; development and growth over the last five years have continued to defy critics, with expansions from government departments and the influx of resource based projects expected in the near future, NOW is the time to capitalise on the upward swing of this market!',6,635000,4,2,2,'',NULL,682,3570,NULL,'Air Conditioning\r\nWater Closets','Patio','','',NULL,0,1,NULL,'2012-12-06 00:39:55','0000-00-00 00:00:00'),(51,'MODERN ARCHITECTURALLY DESIGNED TOWNHOUSES, APARTMENTS & UNITS','18-24 Winona St','Findon','5023','sa','Choose from a vibrant mix of modern apartments and townhouses.\r\n\r\nSelect a design that meets your needs with up to 12 options available from courtyards to level 2 apartments serviced by lifts.\r\n\r\nAdaptable floorplans all designed with lifestyle in mind, stepless entrance points, overwidth doorways and easy access bathrooms, secure entry and intercom. Bright kitchens adjacent to open plan living areas flowing out to generous balconies or courtyards blending home and community. All apartments have secure under cover parking with auto roller doors.\r\n\r\nThese brand new apartments boast secure entry with intercoms, a six star energy rating and electric boosted solar hot water services.\r\n\r\nEmbrace a new lifestyle with low maintenance living, a better way to enjoy all the benefits of this fabulous suburb with over 50 specialty shops and services\r\nat your doorstep. Less than 6 kms to the beach and a short trip to the city.\r\n\r\nTake advantage of the new $8,500 housing construction grant available to any purchaser and up to $23,500 assistance for first home owners.',4,279950,2,1,1,'',NULL,0,0,NULL,'','','','',NULL,0,1,NULL,'2012-12-06 00:43:59','0000-00-00 00:00:00'),(52,'Stunning north facing apartment','380 Bay St','Brighton','3186','vic','The 380degrees development is the residential masterpiece by RotheLowman Architects',4,995000,2,2,2,'',NULL,58,19,NULL,'','','Study','',NULL,0,1,NULL,'2012-12-06 00:47:45','0000-00-00 00:00:00'),(43,'Suite 1 Level 7 Emirates House','167 Eagle St','Brisbane','4000','qld','prestige city views',4,450000,12,4,6,'',NULL,4000,10000,NULL,NULL,NULL,NULL,'',NULL,0,1,NULL,'2012-12-05 08:23:10','0000-00-00 00:00:00'),(45,'Luxurious terrace home','16 Pottinger St','Dawes Point','2000','nsw','Few residences can create such an immediate impression of quality, space and sophisticated family living.',1,3200000,3,3,2,'',NULL,109,200,NULL,NULL,NULL,NULL,'',NULL,0,1,NULL,'2012-12-05 09:55:27','0000-00-00 00:00:00');
+INSERT INTO `owls` VALUES (42,'Rose Cottage','117 Lansdowne Way','Chuwar','4306','qld','A nice house in the suburbs of far Western Brisbane.',1,789000,6,2,5,'',NULL,218,5130,NULL,'Split-level, open-planned layout\r\nFireplace','Salt-water Swimming Pool\r\nPagola','Short walk to shops\r\nChicken Coop','54',1,1,1,NULL,'2012-10-08 19:49:47','0000-00-00 00:00:00'),(10,'Fit for a King!','12 Karen Court','Redbank Plains','1442','qld','Reside in style with this fantastic property in suburban Redbank Plans, Queensland.',1,900000,4,2,2,'completed',NULL,120,220,NULL,NULL,NULL,NULL,'',NULL,2,1,NULL,'2012-12-05 06:37:23','0000-00-00 00:00:00'),(17,'Dont buy it','12 Bell Street','Ipswich','2134','qld','Dont buy this place.',1,493100,11,22,33,'otp',NULL,111,222,NULL,NULL,NULL,NULL,'',1,2,1,NULL,'2012-12-05 06:37:23','0000-00-00 00:00:00'),(47,'MODERN AND STYLISH AND DESIRABLE','15 Kent St','Deakin','2600','act','Exciting near new two storey terrace home in a discreet group of 5 in the highly sought after suburb of Deakin. ',1,980000,3,2,2,'',NULL,140,100,NULL,'','','Air conditioning\r\nAlarm System\r\nBalcony / Deck\r\nBroadband internet access\r\nBuilt in wardrobes\r\nDishwasher\r\nDouble glazed windows\r\nFloorboards\r\nFully fenced\r\nGarden / Courtyard\r\nInternal Laundry\r\nNorth Facing\r\nPets allowed\r\nSecure Parking\r\nWall / ceiling i','',NULL,0,1,NULL,'2012-12-05 18:30:39','0000-00-00 00:00:00'),(48,'OMG - This is an Awesome Waterfront Property!','32 Rosevears Dr','Lanena','7275','tas','For the buyers serious about boating and lifestyle I have 2046m2 of low maintenance property which allows time on the boat!\r\n\r\nEnjoying a HIGH WATER TITLE and an excellent quality jetty and floating pontoon, brick boathouse with winch, this property is the real deal!\r\n\r\nQuality solid brick house is spacious and complete in itself upstairs and enjoys awesome river views and sunshine then downstairs there is the easy possibility of making it all self contained, may suit a family with elders?\r\n\r\nThere is a separate, heated indoor pool for exercise and a triple garage big enough to take boat and caravan! Everything is in such excellent order the owners can lock up and go for 3-4 months at a time - how good is that?',1,899000,4,3,3,'',NULL,1000,2047,NULL,'','','High Water Title\r\nQuality Boat Shed\r\nJetty & Floating Pontoon\r\nHuge Rumpus Room','',NULL,0,1,NULL,'2012-12-06 00:26:20','0000-00-00 00:00:00'),(49,'Magnificence At Its Best','64 McMinns Dr','McMinns Lagoon','0822','nt','With absolute water frontage to McMinns Lagoon Wildlife Reserve and set amongst 6 magnificent acres of fertile and exotic Northern Territory land, this eco friendly, architecturally designed, nature lovers paradise is offered for sale. Don\'t miss this opportunity to purchase your piece of paradise in this highly sought after exclusive location! This boutique property is one of the Northern Territory\'s finest examples of a luxury rural lifestyle within 30 minutes of the Darwin CBD. Enjoy all the benefits of an iconic Territorian lifestyle just 7 minutes from the new Coolalinga shopping and regional centre. Incorporating Coles, Kmart, supporting speciality shops and entertaining facilities are due to commence construction only months away.\r\nMcMinns Lagoon is a highly sought after rural location and this property, being one of only 6 on the lagoon, is its epicentre. Nestled at one end of the kidney shaped Lagoon the property enjoys views across the far side of the Lagoon greatly enhancing the amenity and privacy of the property',8,2300000,5,2,3,'',NULL,300,2500,NULL,'Built-In Wardrobes\r\nFormal Lounge\r\nSeparate Dining','Garden\r\nSecure Parking','Close to Shops','',NULL,0,1,NULL,'2012-12-06 00:34:26','0000-00-00 00:00:00'),(50,'House & Land Packages returning 12.2% pa!!!','61 Dampier Terrace','Derby','6728','wa','The Derby property market has undergone significant changes; development and growth over the last five years have continued to defy critics, with expansions from government departments and the influx of resource based projects expected in the near future, NOW is the time to capitalise on the upward swing of this market!',6,635000,4,2,2,'',NULL,682,3570,NULL,'Air Conditioning\r\nWater Closets','Patio','','',NULL,0,1,NULL,'2012-12-06 00:39:55','0000-00-00 00:00:00'),(51,'MODERN ARCHITECTURALLY DESIGNED TOWNHOUSES, APARTMENTS & UNITS','18-24 Winona St','Findon','5023','sa','Choose from a vibrant mix of modern apartments and townhouses.\r\n\r\nSelect a design that meets your needs with up to 12 options available from courtyards to level 2 apartments serviced by lifts.\r\n\r\nAdaptable floorplans all designed with lifestyle in mind, stepless entrance points, overwidth doorways and easy access bathrooms, secure entry and intercom. Bright kitchens adjacent to open plan living areas flowing out to generous balconies or courtyards blending home and community. All apartments have secure under cover parking with auto roller doors.\r\n\r\nThese brand new apartments boast secure entry with intercoms, a six star energy rating and electric boosted solar hot water services.\r\n\r\nEmbrace a new lifestyle with low maintenance living, a better way to enjoy all the benefits of this fabulous suburb with over 50 specialty shops and services\r\nat your doorstep. Less than 6 kms to the beach and a short trip to the city.\r\n\r\nTake advantage of the new $8,500 housing construction grant available to any purchaser and up to $23,500 assistance for first home owners.',4,279950,2,1,1,'',NULL,0,0,NULL,'','','','',NULL,0,1,NULL,'2012-12-06 00:43:59','0000-00-00 00:00:00'),(52,'Stunning north facing apartment','380 Bay St','Brighton','3186','vic','The 380degrees development is the residential masterpiece by RotheLowman Architects',4,995000,2,2,2,'',NULL,58,19,NULL,'','','Study','',NULL,0,1,NULL,'2012-12-06 00:47:45','0000-00-00 00:00:00'),(43,'Suite 1 Level 7 Emirates House','167 Eagle St','Brisbane','4000','qld','prestige city views',4,450000,12,4,6,'',NULL,4000,10000,NULL,NULL,NULL,NULL,'',NULL,0,1,NULL,'2012-12-05 08:23:10','0000-00-00 00:00:00'),(45,'Luxurious terrace home','16 Pottinger St','Dawes Point','2000','nsw','Few residences can create such an immediate impression of quality, space and sophisticated family living.',1,3200000,3,3,2,'',NULL,109,200,NULL,NULL,NULL,NULL,'',NULL,0,1,NULL,'2012-12-05 09:55:27','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `owls` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -304,32 +365,6 @@ LOCK TABLES `po_account_types` WRITE;
 /*!40000 ALTER TABLE `po_account_types` DISABLE KEYS */;
 INSERT INTO `po_account_types` VALUES (1,'Potential Buyer',''),(2,'Property Developer',''),(3,'Administrator','');
 /*!40000 ALTER TABLE `po_account_types` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `po_admin_pages`
---
-
-DROP TABLE IF EXISTS `po_admin_pages`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `po_admin_pages` (
-  `admin_page_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `url` varchar(100) NOT NULL,
-  `enabled` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`admin_page_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `po_admin_pages`
---
-
-LOCK TABLES `po_admin_pages` WRITE;
-/*!40000 ALTER TABLE `po_admin_pages` DISABLE KEYS */;
-INSERT INTO `po_admin_pages` VALUES (1,'News','news',1),(2,'Members','members',1),(3,'Services','services',1),(4,'Custom Pages','pages',1),(5,'Properties','properties',1),(7,'Reports','reports',1);
-/*!40000 ALTER TABLE `po_admin_pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -423,31 +458,6 @@ INSERT INTO `po_advertisers` VALUES (18,'INC','Australia\'s largest retail adver
 UNLOCK TABLES;
 
 --
--- Table structure for table `po_bookmarks`
---
-
-DROP TABLE IF EXISTS `po_bookmarks`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `po_bookmarks` (
-  `bookmark_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `owner_id` mediumint(8) unsigned NOT NULL,
-  `type` varchar(50) NOT NULL,
-  `resource_id` mediumint(8) unsigned NOT NULL,
-  PRIMARY KEY (`bookmark_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `po_bookmarks`
---
-
-LOCK TABLES `po_bookmarks` WRITE;
-/*!40000 ALTER TABLE `po_bookmarks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `po_bookmarks` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `po_news`
 --
 
@@ -532,92 +542,6 @@ INSERT INTO `po_registrations` VALUES (1,1,'property',1,'2012-11-30 04:52:49'),(
 UNLOCK TABLES;
 
 --
--- Table structure for table `po_saveddeals`
---
-
-DROP TABLE IF EXISTS `po_saveddeals`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `po_saveddeals` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `deal_id` mediumint(8) unsigned NOT NULL,
-  `user_id` mediumint(8) unsigned NOT NULL,
-  `enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `po_saveddeals`
---
-
-LOCK TABLES `po_saveddeals` WRITE;
-/*!40000 ALTER TABLE `po_saveddeals` DISABLE KEYS */;
-INSERT INTO `po_saveddeals` VALUES (1,9,1,0),(2,9,1,1),(3,17,1,0);
-/*!40000 ALTER TABLE `po_saveddeals` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `po_service_categories`
---
-
-DROP TABLE IF EXISTS `po_service_categories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `po_service_categories` (
-  `category_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `category` varchar(100) NOT NULL,
-  PRIMARY KEY (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `po_service_categories`
---
-
-LOCK TABLES `po_service_categories` WRITE;
-/*!40000 ALTER TABLE `po_service_categories` DISABLE KEYS */;
-INSERT INTO `po_service_categories` VALUES (1,'Interior Design'),(2,'Exterior Designers'),(3,'Digital Media');
-/*!40000 ALTER TABLE `po_service_categories` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `po_services`
---
-
-DROP TABLE IF EXISTS `po_services`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `po_services` (
-  `service_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `category_id` mediumint(9) NOT NULL,
-  `company` varchar(100) NOT NULL,
-  `logo` varchar(100) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  `address` text NOT NULL,
-  `suburb` varchar(100) NOT NULL,
-  `state` varchar(10) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `postcode` varchar(20) NOT NULL,
-  `visible` tinyint(1) NOT NULL DEFAULT '1',
-  `description` varchar(100) NOT NULL,
-  `image` varchar(100) NOT NULL,
-  `service_created_at` datetime NOT NULL,
-  PRIMARY KEY (`service_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `po_services`
---
-
-LOCK TABLES `po_services` WRITE;
-/*!40000 ALTER TABLE `po_services` DISABLE KEYS */;
-INSERT INTO `po_services` VALUES (1,2,'testaroo','','','','Ipswich','act','','',1,'this is a test service','','2012-11-06 10:27:16'),(2,1,'testing 2..','','','','blacktown','act','','',1,'this is another test service','','2012-11-06 10:27:16');
-/*!40000 ALTER TABLE `po_services` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `po_users`
 --
 
@@ -665,4 +589,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-09 11:12:28
+-- Dump completed on 2012-12-10 11:03:40
