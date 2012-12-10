@@ -169,7 +169,7 @@ server = https.createServer
 , app
 
 server.listen config.https.port, ->
-  console.log "Server started on port #{config.port}"
+  console.log "Server started on port #{config.https.port}"
   
   console.stop 'boot'
   
