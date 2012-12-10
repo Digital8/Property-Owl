@@ -1,6 +1,18 @@
 moment = require 'moment'
 
-module.exports = () ->
+module.exports = ->
   now = Date.now()
   
-  # epoch = 
+  $.get '/ajax/epoch', (timestamp) ->
+    epoch = moment timestamp
+    
+    console.log epoch
+    
+    console.log epoch.duration.days()
+    
+    # delta =
+    #   days: epoch.diff now, 'days'
+    #   hours: epoch.diff now, 'hours'
+    #   minutes: epoch.diff now, 'minutes'
+    
+    # console.log delta
