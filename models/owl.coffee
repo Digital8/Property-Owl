@@ -55,47 +55,27 @@ module.exports = class Owl extends Model
           callback()
       
       media: (callback) =>
-        # console.log system.models
-        
         Media = system.models.media
-        Media.all (error, medias) =>
-          # console.log medias
-          # console.log 'medias', medias
-          
-          @images = []
-          
-          # @images = _.filter medias, (media) => media.entity_id = @id
-          
-          for media in medias
-            @images.push media if media.entity_id is @id
-          
-          callback()
+        Media.for this, (error, medias) =>
+          console.log 'MEDIAS', medias
+          @images = medias
+          callback error
       
       deals: (callback) =>
-        Deal.all (error, deals) =>
-          # console.log deals
-          # console.log 'medias', medias
-          
-          @deals = []
-          
-          # @images = _.filter medias, (media) => media.entity_id = @id
-          
-          for deal in deals
-            @deals.push deal if deal.owl_id is @id
-          
-          callback()
+        Deal.for this, (error, deals) =>
+          @deals = deals
+          callback error
       
       value: (callback) =>
         @value = 0
-
+        
         for deal in @deals
           @value += deal.value
           
         if @value > 0
           @value = Math.floor(100 * @value / @price)
-          
-        callback()
         
+        callback()
         
       registrations: (callback) =>
         system.db.query "SELECT Count(*) as registrations FROM po_registrations where type = 'owl' and resource_id = ?", [@id], (err, results) =>
@@ -158,7 +138,7 @@ module.exports = class Owl extends Model
     
     async.series
       removeDeals: (callback) =>
-        @constructor.db.query "DELETE FROM deals WHERE owl_id = ?", @id, callback
+        @constructor.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'owl'", @id, callback
       
       addDeals: (callback) =>
         values = req.body.value.pop()
@@ -171,11 +151,12 @@ module.exports = class Owl extends Model
         
         for index in [0...types.length]
           deals.push
-            owl_id: @id
+            entity_id: @id
             deal_type_id: types[index]
             description: names[index]
             value: values[index]
             created_by: req.session.user_id
+            type: 'owl'
         
         deals.pop()
         
@@ -196,6 +177,7 @@ module.exports = class Owl extends Model
             entity_id: @id
             owner_id: req.session.user_id
             file: file
+            type: 'owl'
           , (error, media) ->
             callback error, media
         

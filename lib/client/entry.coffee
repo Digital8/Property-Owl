@@ -4,15 +4,22 @@ _ = require 'underscore'
 window.commas = commas = require '../helpers/commas'
 
 require './reports'
+
 require './admin'
 
 makeMap = require './map'
 
 makeTimer = require './timer'
 
+barns = require './barns'
+
 $ ->
-  makeMap 'map'
-  makeMap 'big-map', width: 500, height: 350, stroke: '#0c6cb7', hover: '#DE1515'
+  do barns
+  
+  if ($ "#map").length
+    makeMap 'map'
+  if ($ "#big-map").length
+    makeMap 'big-map', width: 500, height: 350, stroke: '#0c6cb7', hover: '#DE1515'
   
   makeTimer()
   

@@ -5,7 +5,7 @@
     select#listed_by(name='listed_by')
       option
       - each developer in developers
-        option(value='#{barn.listed_by}', selected=barn.listed_by == barn.listed_by) #{developer.first_name} #{developer.last_name}
+        option(value='#{developer.user_id}', selected=developer.user_id == barn.listed_by) #{developer.first_name} #{developer.last_name}
 
   .inputs
     label(for='title') Title
@@ -61,9 +61,11 @@
 
 .inputs
 
-.inputs
-  label() Properties
+.inputs.owl-matrix
+  label Properties
+  
   - var owls = barn.owls
+  
   table.admin-gridview
     thead
       tr

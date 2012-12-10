@@ -41,14 +41,14 @@ module.exports = class Deal extends Model
   
   # @upload = (args, callback) =>
   #   id = uuid()
-    
+  
   #   console.log 'uploading...', file
-    
+  
   #   {file, entity_id, owner_id} = args
-    
+  
   #   fs.readFile file.path, (error, data) =>
   #     path = "#{system.bucket}/#{id}"
-      
+  
   #     fs.writeFile path, data, (error) =>
   #       @create
   #         entity_id: entity_id
@@ -59,3 +59,17 @@ module.exports = class Deal extends Model
   # @for = (model, callback) =>
   #   @all (error, callback) ->
   #     console.log 'media', arguments
+  
+  @for = (model, callback) =>
+    type = model.constructor.name.toLowerCase()
+    
+    system.db.query "SELECT * FROM deals WHERE entity_id = ? AND type = '#{type}'", [model.id], (error, rows) =>
+      return callback error if error?
+      
+      models = []
+      
+      for row in rows
+        model = new this row
+        models.push model
+      
+      callback null, models

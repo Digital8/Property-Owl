@@ -31,7 +31,7 @@ module.exports = class Media extends Model
     
     console.log 'uploading...', file
     
-    {file, entity_id, owner_id} = args
+    {file, entity_id, owner_id, type} = args
     
     fs.readFile file.path, (error, data) =>
       path = "#{system.bucket}/#{id}"
@@ -41,8 +41,19 @@ module.exports = class Media extends Model
           entity_id: entity_id
           owner_id: owner_id
           filename: id
+          type: type
         , callback
   
   @for = (model, callback) =>
-    @all (error, callback) ->
-      console.log 'media', arguments
+    type = model.constructor.name.toLowerCase()
+    
+    system.db.query "SELECT * FROM medias WHERE entity_id = ? AND type = '#{type}'", [model.id], (error, rows) =>
+      return callback error if error?
+      
+      models = []
+      
+      for row in rows
+        model = new this row
+        models.push model
+      
+      callback null, models
