@@ -20,7 +20,7 @@ block content
       
       hr
       
-      form.details-form(action='/admin/barns', method='post')
+      form.details-form(action="/admin/barns/#{barn.id}", method='post')
         
         input(type='hidden', name='_method', value='put')
         

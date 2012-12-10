@@ -39,3 +39,10 @@ exports.destroy = (req, res) ->
     req.flash 'success', 'barn deleted'
     
     res.redirect '/admin/barns'
+
+exports.update = (req, res) ->
+  Barn.update req.params.id, req.body, (error, barn) ->
+    console.log 'update', arguments
+    
+    barn.upload req, ->
+      res.redirect '/admin/barns'

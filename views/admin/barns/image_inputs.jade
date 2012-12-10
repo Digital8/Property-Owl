@@ -1,25 +1,24 @@
 .inputs
-  label.required() Images
+  label.required Images
 
 .inputs
-    input#image(type='file', name='image')
 
 .inputs
+  
   table.admin-gridview.images
     thead
       tr
         td Thumb
         td Hero Image
+        td Delete?
+    
     tbody.body
       - if (barn.images && barn.images.length)
         - each image in barn.images
           include image_input
+    
     tfooter.footer
       tr
-        td(colspan='2')
-          a.add(href='#') add image +
-
-table.imgTemplate(style='display: none;')
-  tbody
-    - if (!locals.image) { locals.image = {}; }
-    include image_input
+        td(colspan='3')
+          label Upload
+          input#image(type='file', name='image', multiple)

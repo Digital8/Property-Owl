@@ -24,16 +24,18 @@ exports.create = (req,res) ->
   req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
 
   models.user.getUserByEmail req.body.email, (err, email) ->
-    if email.length > 0 then req.flash('error','Email address is already in use')
-    errors = req.validationErrors(true)
+    if email.length > 0 then req.flash 'error', 'Email address is already in use'
+    
+    errors = req.validationErrors true
+    
     if errors
       keys = Object.keys(errors)
-    
+      
       for key in keys
         req.flash('error', errors[key].msg)
-    
+      
       req.session.signup = req.body
-
+      
       res.redirect 'back'
     else
       user = req.body
@@ -42,6 +44,7 @@ exports.create = (req,res) ->
     
       models.user.createUser user, (err, results) ->
         req.flash('success','You are successful')
+        
         res.redirect 'back'
 
 exports.edit = (req,res) ->

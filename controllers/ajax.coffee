@@ -232,4 +232,12 @@ exports.epoch = (req, res) ->
   res.send epoch.toDate()
 
 exports.search = (req, res) ->
-  console.log req
+  console.log req.query
+  
+  {address, suburb} = req.query
+  
+  system.db.query "SELECT * FROM owls WHERE address SOUNDS LIKE ? AND suburb SOUNDS LIKE ?", [address, suburb], (error, rows) ->
+    
+    console.log rows
+    
+    res.send []
