@@ -167,22 +167,6 @@ $(function(){
     var findDeals = $(this).closest(".find-deals");
     findDeals.toggleClass("display");
   });
-
-  $(".savebuttons").on("click", function(){
-	  $.ajax({
-	    url: '/ajax/savedeal',
-	    type: 'post',
-	    data: 'id=' + $(this).data('property')
-	  }).done(function(d){
-	    if (d.status == true) {
-	      alert('Property Saved!');
-	    }
-	    else {
-	      alert('uh oh! spaghettio!');
-	    }
-	  });
-	  return false;
-	});
 	
 	$(".removebuttons").on("click", function(){
 	  var that = this;

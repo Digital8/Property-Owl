@@ -143,6 +143,18 @@ exports.referfriend = (req, res) ->
     , 'Property Owl Referral'
     res.send status: 200
 
+exports.bookmark = (req, res) ->
+  {type, id} = req.body
+  
+  user = res.locals.objUser
+  
+  row =
+    entity_id: id
+    type: type
+    owner_id: user.id
+  
+  system.db.query "INSERT INTO bookmarks SET ?", row, ->
+    res.send status: 200
 
 # exports.savedeal = (req, res) ->
 #   req.assert('id', 'Property ID Not Numeric').isInt()

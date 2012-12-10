@@ -85,7 +85,7 @@ CREATE TABLE `barns` (
 
 LOCK TABLES `barns` WRITE;
 /*!40000 ALTER TABLE `barns` DISABLE KEYS */;
-INSERT INTO `barns` VALUES (1,'Emirates House','167 Eagle St','Brisbane','4000','qld','Buy the whole fucking building cunts!','Air-conditioning','Parking','River','',2,0,'2012-12-10 00:58:32','2012-12-10 00:58:32');
+INSERT INTO `barns` VALUES (1,'Emirates House','167 Eagle St','Brisbane','4000','qld','woops','Air-conditioning','Parking','River','',2,0,'2012-12-10 00:58:32','2012-12-10 00:58:32');
 /*!40000 ALTER TABLE `barns` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,9 +100,9 @@ CREATE TABLE `bookmarks` (
   `bookmark_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `owner_id` mediumint(8) unsigned NOT NULL,
   `type` varchar(50) NOT NULL,
-  `resource_id` mediumint(8) unsigned NOT NULL,
+  `entity_id` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY (`bookmark_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,6 +111,7 @@ CREATE TABLE `bookmarks` (
 
 LOCK TABLES `bookmarks` WRITE;
 /*!40000 ALTER TABLE `bookmarks` DISABLE KEYS */;
+INSERT INTO `bookmarks` VALUES (1,3,'owl',47),(2,3,'owl',47);
 /*!40000 ALTER TABLE `bookmarks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -597,4 +598,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-10 11:03:40
+-- Dump completed on 2012-12-10 15:24:00

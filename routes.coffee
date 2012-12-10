@@ -180,6 +180,9 @@ module.exports = (app) ->
   authedAjax = (method, path, middleware...) ->
     app[method] "/ajax#{path}", authenticate, middleware...
   
+  authedAjax 'post', '/bookmark', controllers.ajax.bookmark
+  authedAjax 'post', '/unbookmark', controllers.ajax.unbookmark
+  
   authedAjax 'post', '/securedeal', controllers.ajax.securedeal
   authedAjax 'post', '/referfriend', controllers.ajax.referfriend
   authedAjax 'get', '/addRegistration', controllers.ajax.addRegistration
@@ -188,8 +191,6 @@ module.exports = (app) ->
   adminAjax = (method, path, middleware...) ->
     app[method] "/ajax#{path}", authenticate, (authorize acl.admin), middleware...
   
-  adminAjax 'post', '/savedeal', controllers.ajax.savedeal
-  adminAjax 'post', '/removedeal', controllers.ajax.removedeal
   adminAjax 'post', '/addDeal', controllers.ajax.addDeal
   adminAjax 'del', '/deleteDeal', controllers.ajax.delDeal
   adminAjax 'put', '/updateHero', controllers.ajax.updateHero
