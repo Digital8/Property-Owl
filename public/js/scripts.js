@@ -239,6 +239,7 @@ $(function(){
 	    }
 	    else {
 	      //console.log('fix this plz');
+	      console.log(d);
 	      var errors = Object.keys(d.errors);
   	    
   	    $("#generic-modal, #generic-modal .modal.main").removeClass('success').addClass('error');

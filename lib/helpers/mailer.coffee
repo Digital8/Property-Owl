@@ -14,7 +14,7 @@ fs = require 'fs'
 
 module.exports = (template, subject, objUser, secondary, callback) ->
 
-  fs.readFile __dirname + "/../emails/#{template}.html", 'utf-8', (err, data) ->
+  fs.readFile __dirname + "/../../public/emails/#{template}.html", 'utf-8', (err, data) ->
     if err?
       console.log 'Error:', err
       throw err
@@ -29,13 +29,20 @@ module.exports = (template, subject, objUser, secondary, callback) ->
       switch template
         when 'barn-deal-enquiry', 'barn-deal-registration-developer', 'barn-deal-registration', 'expression-of-interest', 'withdraw-interest', 'signup-confirmation', 'service-enquiry', 'service-enquiry-confirmation', 'property-recommendations', 'property-enquiry-confirmation', 'owl-deal-registration-developer', 'owl-deal-registration', 'barn-deal-enquiry', 'new-listing', 'listing-confirmation'
           email.setCategory 'Property Owl'
-          email.addSubVal '{{first_name}}', objUser.firstName
-          email.addSubVal '{{last_name}}', objUser.lastName
+          email.addSubVal '{{contact_name}}', secondary.contact_name
+          email.addSubVal '{{firstname}}', objUser.firstName
+          email.addSubVal '{{lastname}}', objUser.lastName
           email.addSubVal '{{email}}', objUser.email
           email.addSubVal '{{address}}', secondary.address
           email.addSubVal '{{phone}}', objUser.phone
           email.addSubVal '{{title}}', secondary.title
           email.addSubVal '{{description}}', secondary.description
+          email.addSubVal '{{comments}}', secondary.description
+          email.addSubVal '{{barn_id}}', secondary.barn_id
+          email.addSubVal '{{contact_method}}', secondary.contact_method
+          email.addSubVal '{{BarnDealTitle}}', secondary.BarnDealTitle
+          email.addSubVal '{{BarnDealAddress}}', secondary.BarnDealAddress
+          email.addSubVal '{{BarnDealDescription}}', secondary.BarnDealDescription
         when 'news'
           email.addSubVal '{{title}}', secondary.title
 		  

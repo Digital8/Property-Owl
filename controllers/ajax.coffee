@@ -10,7 +10,9 @@ models =
   media: system.load.model 'media'
   registrations: system.load.model 'registrations'
 
-helpers = hash: system.load.helper 'hash'
+helpers = 
+  hash: system.load.helper 'hash'
+  mailer: system.load.helper 'mailer'
 
 exports.login = (req, res) ->
   models.user.login req.body.e, helpers.hash(req.body.p), (err, results) ->
@@ -61,14 +63,21 @@ exports.register = (req, res) ->
         else
           req.session.user_id = results.insertId
           res.cookie 'user', results.insertId, maxAge: 604800000
-          mailer
-            to: user.email
-            from: 'mailer@propertyowl.com.au'
-            fromname: 'Property Owl'
-            subject: 'Property Owl Account Created'
-            text: user.fname + ',\n\nThanks for signing up, your account has been created!\n\n\nThe Property Owl Team'
-          , 'Property Owl Sign-Up'
-          res.send status: 200
+
+          template = 'signup-confirmation'
+
+          user =
+            firstName: req.body.f
+            email: req.body.e
+
+          secondary = {}
+
+
+          system.helpers.mailer template,'Registration Confirmation', user, secondary, (results) ->
+            if results is true 
+              res.send status: 200, errors: {}
+            else
+              res.send status: 400, errors: {msg: 'unable to send email'}
           
           
 exports.securedeal = (req, res) ->
@@ -87,18 +96,24 @@ exports.securedeal = (req, res) ->
     res.send status: 400, errors: errors
 
   else
-    mailer
-      to: req.body.e
-      from: 'mailer@propertyowl.com.au'
-      fromname: 'Property Owl'
-      subject: 'Property Owl Account Created'
-      text: req.body.f + """,
-      
-      Thanks for signing up, your account has been created!
-      The Property Owl Team
-      """
-    , 'Property Owl Sign-Up'
-    res.send status: 200
+    template = 'barn-deal-registration'
+
+    user =
+      firstName: res.locals.objUser.firstName
+      email: res.locals.objUser.email
+
+    secondary =
+      barndealLink: ''
+      BarnDealTitle: ''
+      BarnDealAddress: ''
+      BarnDealDescription: ''
+
+
+    system.helpers.mailer template,'Barn Deal Registration', user, secondary, (results) ->
+      if results is true 
+        res.send status: 200, errors: {}
+      else
+        res.send status: 400, errors: {msg: 'unable to send email'}
 
 exports.referfriend = (req, res) ->
   req.assert('e', 'Invalid Email Address').isEmail()
@@ -199,13 +214,15 @@ exports.addRegistration = (req, res) ->
   if req.query.id is '' or req.query.type is ''
     res.send status: 400
   else
-    # Check if we have already registered
+    # Check if we have already registered    
     models.registrations.checkIfRegistered req.query, (err, results) ->
       if results.length is 0
         models.registrations.add req.query, (err, results) ->
           if err then console.log err
           if results.affectedRows is 1
+
             res.send status: 200
+
           else
             res.send status: 400
       else
