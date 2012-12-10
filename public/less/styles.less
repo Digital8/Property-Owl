@@ -462,35 +462,12 @@ body {
                     .rounded-bottom-right(0.313em);
                     .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
                     text-align: center;
+                    zoom: 1;
                     
-                    #map-image {
-                        margin-left: 1.5em;
-                        margin-right: 1.5em;
-                        margin-top: @padding-small;
-                    }
-                    
-                    #canvas {
-                        height: 11.438em;
-                        margin: 0;
-                        position: absolute;
-                        width: 600px;
-                        z-index: 1;
-                    }
-                    #paper {
-                        height: 11.438em;
-                        left: 0;
-                        position: absolute;
-                        top: 0;
-                        width: 300px;
-                    }
-                    #nsw, #vic, #wa, #sa, #nt, #qld, #tas {
-                        display: none;
-                        height: 400px;
-                        overflow: auto;
-                        position: absolute;
-                        right: 0;
-                        top: 0;
-                        width: 300px;
+                    svg {
+                        margin-left: 0.6em;
+                        margin-right: 1.7em;
+                        margin-top: 0.15em;
                     }
                 }
                 
@@ -688,12 +665,13 @@ body {
                         background-repeat: repeat-x;
                         background-size: cover;
                         .gradient(#e21515, #c81212);
-                        height: 11.438em;
+                        height: 15.25em;
                         .rounded-bottom-right(0.313em);
                         .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+                        zoom: 0.7;
                         
-                        #map-image {
-                            margin-top: @padding-small;
+                        svg{
+                            margin-top: 2em;
                         }
                     }
                     

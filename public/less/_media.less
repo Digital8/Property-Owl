@@ -77,8 +77,11 @@
                     }
                     
                     #map {
-                        #map-image {
-                            margin: @padding-small 0 0 0;
+                        height: 16.3em;
+                        zoom: 0.7;
+
+                        svg {
+                            margin: 0.15em 1em 0 0;
                         }
                     }
                 }
@@ -133,7 +136,12 @@
                         }
                         
                         #map {
-                        height: 8.5em;
+                          height: 24em;
+                          zoom:0.45;
+
+                          svg {
+                            padding-left:@padding-small;
+                          }
                         }
                     }
                 }
@@ -156,6 +164,10 @@
             }
             
             &#center-col {
+
+                #big-map {
+                  zoom: 0.8;
+                }
                 .listing-summary {
                     .listing-body {
                         .listing-details {
@@ -357,12 +369,12 @@
                     }
                     
                     #map {
-                        height: 13.5em;
+                        height: 15em;
                         .rounded(0.313em);
+                        zoom: 1;
                         
-                        #map-image {
-                            margin-left: 5em;
-                            margin-right: 5em;
+                        svg {
+                            margin: 1em 0;
                         }
                     }
                     
@@ -440,9 +452,10 @@
                                 
                     .timer {
                         #map {
-                        height: 14em;
+                        height: 16em;
+                        zoom:1;
                         
-                            img {
+                            svg {
                                 margin-left: 4.063em;
                             }
                         }
@@ -454,7 +467,11 @@
                 .no-column(0);
                 padding-left: 1.875em;
                 display: table-header-group;
-                
+
+                #big-map {
+                  zoom: 0.5;
+                }
+
                 .listing-summary {
                                     
                     .listing-body {
