@@ -14,6 +14,8 @@ makeTimer = require './timer'
 barns = require './barns'
 
 $ ->
+  require './bookmarks'
+  
   do barns
   
   if ($ "#map").length

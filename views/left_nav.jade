@@ -59,14 +59,18 @@
            a(href='#', onclick='javascript:window.print()')
              img(src='/images/share-print-icon.png', alt='Print')
              | Print Deal
-         li.savebuttons(data-property="#{owl.property_id}")
+         
+         li.bookmark(data-deal-id="#{owl.id}", data-deal-type='owl')
            img(src='/images/share-save-icon.png', alt='Save')
            | Save Deal
+         
          li.show-refer-friend
            img(src='/images/share-refer-icon.png', alt='Refer')
            | Refer A Friend
+         
          li
            .fb-like(data-href='http://www.propertyowl.com.au/owls/#{owl.id}', data-send='false', data-layout='button_count', data-width='125', data-show-faces='false')
+         
          li
            a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/owls/#{owl.id}') Tweet
            script
