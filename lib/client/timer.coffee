@@ -4,11 +4,13 @@ module.exports = ->
   now = Date.now()
   
   $.get '/ajax/epoch', (timestamp) ->
-    epoch = moment timestamp
+    # epoch = moment timestamp
     
-    console.log epoch
+    # console.log epoch
     
-    console.log epoch.duration.days()
+    # diff = 
+    
+    # console.log epoch.duration().days()
     
     # delta =
     #   days: epoch.diff now, 'days'
