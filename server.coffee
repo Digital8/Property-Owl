@@ -182,4 +182,5 @@ insecureApp.get '*', (req, res) ->
   res.redirect "https://#{req.headers.host}#{req.url}"
 
 insecureServer = http.createServer insecureApp
-insecureServer.listen config.http.port
+insecureServer.listen config.http.port, ->
+  console.log "Bouncer started on port #{config.http.port}"
