@@ -514,7 +514,7 @@ CREATE TABLE `po_registrations` (
   `user_id` int(11) NOT NULL,
   `registered_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`registration_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -523,7 +523,7 @@ CREATE TABLE `po_registrations` (
 
 LOCK TABLES `po_registrations` WRITE;
 /*!40000 ALTER TABLE `po_registrations` DISABLE KEYS */;
-INSERT INTO `po_registrations` VALUES (1,1,'property',1,'2012-11-30 04:52:49'),(4,2,'property',1,'2012-11-30 04:57:53'),(5,0,'property',1,'2012-12-04 13:09:27'),(6,41,'owl',1,'2012-12-04 20:16:17'),(7,43,'owl',1,'2012-12-04 22:23:20'),(8,43,'owl',7,'2012-12-05 04:59:01'),(9,10,'owl',7,'2012-12-05 06:27:10'),(10,42,'owl',7,'2012-12-05 09:40:08'),(11,1,'barn',7,'2012-12-05 10:10:43'),(12,47,'owl',7,'2012-12-05 13:29:59'),(13,48,'owl',7,'2012-12-05 13:30:55');
+INSERT INTO `po_registrations` VALUES (1,1,'property',1,'2012-11-30 04:52:49'),(4,2,'property',1,'2012-11-30 04:57:53'),(5,0,'property',1,'2012-12-04 13:09:27'),(6,41,'owl',1,'2012-12-04 20:16:17'),(7,43,'owl',1,'2012-12-04 22:23:20'),(8,43,'owl',7,'2012-12-05 04:59:01'),(9,10,'owl',7,'2012-12-05 06:27:10'),(10,42,'owl',7,'2012-12-05 09:40:08'),(11,1,'barn',7,'2012-12-05 10:10:43'),(12,47,'owl',7,'2012-12-05 13:29:59'),(13,48,'owl',7,'2012-12-05 13:30:55'),(14,43,'owl',8,'2012-12-09 06:58:02'),(15,2,'barn',7,'2012-12-09 08:34:47');
 /*!40000 ALTER TABLE `po_registrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -661,4 +661,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-08 17:36:35
+-- Dump completed on 2012-12-10 11:06:46

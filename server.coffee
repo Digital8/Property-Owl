@@ -165,7 +165,7 @@ app.configure ->
 server = https.createServer
   key: fs.readFileSync(config.ssl.key)
   cert: fs.readFileSync(config.ssl.cert)
-  passphrase: config.passphrase
+  passphrase: config.ssl.passphrase
 , app
 
 server.listen config.https.port, ->
