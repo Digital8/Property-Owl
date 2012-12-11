@@ -42,7 +42,7 @@ module.exports = (selector, options = {}) ->
     ((st, state) ->
       st[0].style.cursor = "pointer"
       
-      st[0].onclick = -> window.location = "#{window.location.protocol}//#{window.location.hostname}/owls/state/#{state}"
+      st[0].onclick = -> window.location = "/owls/state/#{state}"
       
       st[0].onmouseover = ->
         current and aus[current].animate(
