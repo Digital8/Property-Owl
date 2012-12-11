@@ -62,7 +62,15 @@ app.configure ->
       return done() unless rows?.length
       app.locals.signupsThisMonth = rows.pop().count
       done()
-  
+
+  app.use (req, res, done) ->
+    AffiliateCategory = system.models.affiliate_category
+    
+    AffiliateCategory.all (error, affiliateCategories) ->
+      system.data ?= {}
+      system.data.affiliateCategories = affiliateCategories
+      done()
+
   app.use (req, res, done) ->
     DevelopmentType = system.models.development_type
     

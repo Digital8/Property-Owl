@@ -1,0 +1,46 @@
+.left
+  .inputs
+    label.required(for='affiliate_category_id') Category *
+    select#affiliate_category_id(name="affiliate_category_id")
+      - for category in data.affiliateCategories
+        option(value='#{category.id}', selected=affiliate.affiliate_category_id == category.id)= category.name
+  .inputs
+    label.required(for='affiliateCompanyName') Company Name *
+    input#affiliateCompanyName(type='text',name="company",value='#{affiliate.company}')
+  .inputs
+    label.file-upload(for='affiliateLogo')
+      | Logo Image *
+      span.note (max file size 4MB)
+    input#affiliateLogotype='file', name='logo', value='')
+    p.success Uploaded file: image.png (30kb)
+  .inputs
+    label.required(for='supplerEmail') Email Address *
+    input#supplerEmail(type='text',name="email")
+  .inputs
+    label
+      input(type='checkbox', checked='checked',name="visible",value="1")
+      | &nbsp;Visible
+.right
+  .inputs
+    label.required(for='affiliatePhone') Phone *
+    input#affiliatePhone(type='text',name="phone",value='#{affiliate.phone}')
+  .inputs
+    label.required(for='affiliateAddressLine1') Address Line 1 *
+    input#affiliateAddressLine1(type='text',name="address",value='#{affiliate.address}')
+  .inputs
+    label.required(for='affiliateSuburb') Suburb
+    input#affiliateSuburb(type='text',name="suburb",value='#{affiliate.suburb}')
+  .inputs
+    label(for='state') State
+    select#state(name='state')
+      option
+      - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
+        option(value='#{state}', selected=state == affiliate.state) #{state.toUpperCase()}
+  .inputs
+    label.required(for='propertyPostcode') Postcode
+    input#propertyPostcode(type='text',name="postcode",value='#{affiliate.postcode}')
+.inputs  
+.inputs
+  label(for='affiliateServiceDescription') Description
+  textarea#affiliateServiceDescription(rows='5',name="description")
+    = affiliate.description

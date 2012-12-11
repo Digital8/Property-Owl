@@ -5,7 +5,7 @@ db = system.db
 
 models =
   users: system.load.model 'user'
-  services: system.load.model 'services'
+  services: system.load.model 'affiliate'
   advertisers: system.load.model 'advertiser'
   properties: system.load.model 'properties'
 

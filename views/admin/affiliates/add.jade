@@ -1,73 +1,31 @@
 extends ../../layout
 
 block content
-  //
-    main content
   .container.row.main
-    include ../../admin-menu
-    h1 Add New Supplier
-    .admin-actions
-      ul
-        li
-          a(href="/admin/services/")
-            img(src='/images/manage.png')
-            | &nbsp;
-            | Manage Suppliers
+    
+    include ../menu
+    
+    h1 Add Affiliate
+    
+    include actions
+    
+    .grid-header.form-header
+      ol.six
+        li.active
+          .ol-1-active
+          | Details
+    
     .details
-      h2 Supplier Details
+      h2 Affiliate Details
+      
       hr
-      form.details-form(action="/admin/services/add",method="post")
-        .left
-          .inputs
-            label.required(for='supplierCategory') Category *
-            select#supplierCategory(name="category")
-              - each c in categories
-                option(value="#{c.category_id}")= c.category
-          .inputs
-            label.required(for='supplierCompanyName') Company Name *
-            input#supplierCompanyName(type='text',name="company")
-          .inputs
-            label.file-upload(for='supplierLogo')
-              | Logo Image *
-              span.note (max file size 4MB)
-            input#supplierLogo(type='file',name="logo")
-            p.success Uploaded file: image.png (30kb)
-          .inputs
-            label.required(for='supplerEmail') Email Address *
-            input#supplerEmail(type='text',name="email")
-          .inputs
-            label
-              input(type='checkbox', checked='checked',name="visible",value="1")
-              | &nbsp;Visible
-        .right
-          .inputs
-            label.required(for='supplierPhone') Phone *
-            input#supplierPhone(type='text',name="phone")
-          .inputs
-            label.required(for='supplierAddressLine1') Address Line 1 *
-            input#supplierAddressLine1(type='text',name="address")
-          .inputs
-            label.required(for='supplierSuburb') Suburb
-            input#supplierSuburb(type='text',name="suburb")
-          .inputs
-            label(for='propertyState') State / Territory
-            select#propertyState(name="state")
-              option(value="act") ACT
-              option(value="nsw") NSW
-              option(value="nt") NT
-              option(value="qld") QLD
-              option(value="sa") SA
-              option(value="tas") TAS
-              option(value="vic") VIC
-              option(value="wa") WA
-          .inputs
-            label.required(for='propertyPostcode') Postcode
-            input#propertyPostcode(type='text',name="postcode")
-        .inputs  
-        .inputs
-          label(for='supplierServiceDescription') Description of Service
-          textarea#supplierServiceDescription(rows='5',name="description")
+      
+      form.details-form(action='/admin/affiliates/add',method='post', enctype='multipart/form-data')
+        
+        include ../../flashify
+        
+        include inputs
+        
         .submit
-          input.button(type='submit', value='Save')
-  //
-    end main content
+          input.button(type='submit', value='Create Affiliate')
+          a.left-button(href='/admin/affiliates') Cancel

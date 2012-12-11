@@ -6,18 +6,18 @@ block content
     main content
   .container.row.main
     include ../../admin-menu
-    h1 Add Supplier Category
+    h1 Add Affiliate Category
     .admin-actions
       ul
         li
-          a(href='/admin/services/categories')
+          a(href='/admin/affiliates/categories')
             img(src='/images/manage.png')
             | &nbsp;
             | Manage Categories
     .details
       h2 Category Details
       hr
-      form#search-form.details-form(action="/admin/services/categories/add",method="post")
+      form#search-form.details-form(action="/admin/affiliates/categories/add",method="post")
         .inputs
           label(for="categoryName") Category Name
           input#categoryName(type="text",name="category")
