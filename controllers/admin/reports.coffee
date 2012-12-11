@@ -5,6 +5,7 @@ db = system.db
 
 models =
   users: system.load.model 'user'
+  services: system.load.model 'services'
   advertisers: system.load.model 'advertiser'
 
 helpers = {}

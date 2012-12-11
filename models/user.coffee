@@ -35,3 +35,6 @@ exports.updatePermissions = (user_id, permissions,callback) ->
 
 exports.updateAvatar = (user_id, fileName, callback) ->
   db.query "UPDATE #{db.prefix}users SET photo = ? WHERE user_id = ?", [fileName, user_id], callback
+
+exports.getSubscribers = (callback) ->
+  db.query "SELECT * FROM #{db.prefix}users WHERE subscribed_newsletter = 1", callback

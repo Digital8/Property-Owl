@@ -1,9 +1,12 @@
-system = require '../system'
+_ = require 'underscore'
 
-# exports.index = (req,res) ->
-#   models.services.getAllServices (err, results) ->
-#     if err then throw err
-#     res.render 'products', menu: 'products', services: results or {}
+system = require '../system'
+async = require 'async'
+Affiliate = system.models.affiliate
+
+exports.index = (req, res) ->
+  Affiliate.all (error, affiliates) ->
+    res.render 'affiliates', affiliates: affiliates
 
 exports.view = (req,res) ->
 

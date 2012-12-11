@@ -101,6 +101,15 @@ module.exports = (app) ->
   admin 'get', '/advertisements/delete/:id(\\d+)', controllers.admin.advertisements.delete
   admin 'delete', '/advertisements/delete/:id(\\d+)', controllers.admin.advertisements.destroy
   
+  # admin/affiliates
+  admin 'get', '/affiliates', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.affiliates.index
+  admin 'post', '/affiliates/add', controllers.admin.affiliates.create
+  admin 'get', '/affiliates/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.affiliates.add
+  admin 'get', '/affiliates/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.affiliates.edit
+  admin 'put', '/affiliates/:id(\\d+)', controllers.admin.affiliates.update
+  admin 'get', '/affiliates/:id(\\d+)/delete', controllers.admin.affiliates.delete
+  admin 'delete', '/affiliates/:id(\\d+)', controllers.admin.affiliates.destroy
+
   # admin/news
   admin 'get', '/news', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.news.index
   admin 'post', '/news/add', controllers.admin.news.create
@@ -127,13 +136,6 @@ module.exports = (app) ->
   admin 'get', '/pages/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.pages.add
   admin 'get', '/pages/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.pages.edit
   admin 'get', '/pages/:id(\\d+)/delete', controllers.admin.pages.delete
-  
-  # admin 'get', '/services', controllers.admin.services.index
-  # admin 'get', '/services/add', controllers.admin.services.add
-  # admin 'get', '/services/edit/:id(\\d+)', controllers.admin.services.edit
-  # admin 'put', '/services/edit/:id(\\d+)', controllers.admin.services.update
-  # admin 'get', '/services/delete/:id(\\d+)', controllers.admin.services.delete
-  # admin 'post', '/services/add', controllers.admin.services.create
   
   # admin/advertising
   admin 'get', '/deals', controllers.admin.deals.index

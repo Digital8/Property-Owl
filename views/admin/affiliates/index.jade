@@ -5,53 +5,17 @@ block content
   .container.row.main
     include ../menu
     
-    h1 Product & Service Suppliers
+    h1 Affiliates
     
     .admin-actions
        ul
          li
-           a(href='/admin/services/add')
+           a(href='/admin/affiliates/add')
              img(src='/images/add.png')
              | &nbsp;
-             | Add New Supplier
+             | Add Affiliate
     
-    .grid-header
-      form#search-form
-        input#propertySearch(type='text')
-        
-        | &nbsp;
-        
-        input.button(type='submit', value='Go')
-        
-        | &nbsp;
-        
-        input.button(type='submit', value='Reset')
-        
-        .divider
-        
-        | &nbsp;
-        
-        select#supplierState
-          option State
-          option ACT
-          option NSW
-          option NT
-          option QLD
-          option SA
-          option TAS
-          option VIC
-          option WA        
-        
-        | &nbsp;
-        
-        select#supplierCategory
-          option Category
-          option Interior Design
-          option Building
-          option Furnishings
-          option Building
-          option Legal Services
-    
+    .grid-header.form-header
     table.admin-gridview
       thead
         tr
@@ -64,24 +28,20 @@ block content
           td(colspan='3') Actions
       
       tbody
-       - each service in services
+       - each affiliate in affiliates
           tr
-            td= service.company
-            td= service.category
-            td= service.suburb
-            td= service.state.toUpperCase()
+            td= affiliate.company
+            td= affiliate.category.name
+            td= affiliate.suburb
+            td= affiliate.state.toUpperCase()
             td Yes
             td 65
             td.actions
-              a(href='/products/#{service.service_id}', alt='view property', target="_blank")
-                img(src='/images/view.png', alt='View')
-                | View
-            td.actions
-              a(href='/admin/services/edit/#{service.service_id}', alt='edit property')
+              a(href='/admin/affiliates/#{affiliate.affiliate_id}/edit', alt='edit property')
                 img(src='/images/edit.png', alt='Edit')
                 | Edit
             td.actions
-              a(href='/admin/services/delete/#{service.service_id}', alt='delete property')
+              a(href='/admin/affiliates/delete/#{affiliate.affiliate_id}', alt='delete property')
                 img(src='/images/delete.png', alt='Delete')
                 | Delete
       

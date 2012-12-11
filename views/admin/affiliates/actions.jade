@@ -1,0 +1,14 @@
+.admin-actions
+  ul
+    if(action != 'add')
+      li
+        a(href='/admin/affiliates/add')
+         img(src='/images/add.png')
+         | &nbsp;
+         | Add Affiliate
+    if(action != 'index')
+      li
+        a(href='/admin/affiliates')
+          img(src='/images/manage.png')
+          | &nbsp;
+          | Manage Affiliates

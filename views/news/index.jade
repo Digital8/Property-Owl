@@ -26,7 +26,7 @@ block content
               .listing-details
                 .summary
                   p= post.posted_at
-                  p= post.content
+                  p= _s.prune(post.content, 200)
                 
                 .listing-links
                   a.details-button(href="/news/#{post.news_id}")

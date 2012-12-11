@@ -61,13 +61,10 @@ module.exports = class Model
   save: (callback) ->
     map = {}
     
-    console.log @constructor.fields
-    
     for key, field of @constructor.fields
       map[key] = @[key]
     
     db.query "UPDATE #{@constructor.table.name} SET ? WHERE #{@constructor.table.key} = ?", [map, @id], =>
-      console.log arguments
       do callback
     
     # console.log 'mapz', map
@@ -79,10 +76,8 @@ module.exports = class Model
   - commits/persists dirty fields (changes) to the underlying row/record
   ###
   @update = (id, hash, callback) ->
-    console.log '[update]', 'hash', hash
     
     @get id, (error, model) ->
-      console.log '[update]', 'fields', model.constructor.fields
       
       for key, field of model.constructor.fields
         model[key] = hash[key]

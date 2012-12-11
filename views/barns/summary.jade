@@ -5,7 +5,7 @@
   .listing-body
     .listing-thumb
       a(href='/barns/#{barn.barn_id}')
-        img.thumb(src='/images/barn-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
+        img.thumb(src=barn.heroImageURL(), alt='#{barn.fullAddress()}')
     
     .listing-details
       .summary

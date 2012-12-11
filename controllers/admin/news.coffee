@@ -1,8 +1,12 @@
 system = require '../../system'
+async = require 'async'
 
-models = news: system.load.model 'news'
 
-helpers = {}
+models = 
+  news: system.load.model 'news'
+  user: system.load.model 'user'
+
+helpers = mailer: system.load.mailer
 
 exports.index = (req,res) ->
   models.news.getAllNews (err, results) ->
@@ -24,8 +28,29 @@ exports.create = (req,res) ->
       res.redirect 'back'
     else
       req.flash 'success','News post submitted'
-      
-      res.redirect '/admin/news'
+      # Email everyone
+      sendEmail = (user, callback) ->
+        template = 'news'
+
+        user =
+          firstName: user.first_name
+          email: user.email
+
+        secondary =
+          title: req.body.title
+          summary: req.body.content
+          link: '/news/#{results.insertId}'
+
+
+        system.helpers.mailer template,'Newsletter', user, secondary, (results) ->
+          callback()
+
+      # Get news subscribers
+      models.user.getSubscribers (err, users) ->
+        # Email each user
+        async.map users, sendEmail, (err, results) ->
+
+          res.redirect '/admin/news'
 
 exports.edit = (req,res) ->
   models.news.getNewsById req.params.id, (err, results) ->
