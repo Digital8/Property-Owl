@@ -16,6 +16,13 @@ module.exports = (req, res) ->
   unless now.valueOf() < epoch.valueOf()
     epoch.add 'weeks', 1
   
-  res.send
+  response =
     now: now.valueOf()
     epoch: epoch.valueOf()
+  
+  if req.query.test?
+    response.debug =
+      now: now.toDate()
+      epoch: epoch.toDate()
+  
+  res.send response
