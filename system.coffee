@@ -1,7 +1,3 @@
-fs = require 'fs'
-
-mysql = require 'mysql'
-
 config = require './config'
 
 exports.acl = acl = config.acl
@@ -12,15 +8,7 @@ exports.models = models = {}
 
 exports.controllers = controllers = dev: {}, admin: {}
 
-exports.db = mysql.createConnection
-  host: config.database.host
-  user: config.database.user
-  password: config.database.password
-  database: config.database.name
-
 exports.config = config
-
-exports.db.prefix = config.database.prefix
 
 exports.bucket = "#{__dirname}/public/uploads"
 

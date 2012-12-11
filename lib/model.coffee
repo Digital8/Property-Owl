@@ -2,8 +2,6 @@ uuid = require 'node-uuid'
 
 async = require 'async'
 
-{db} = require '../system'
-
 ###
 Model
 - represents a table statically i.e. `Model.foo` or `Model.bar`
@@ -11,8 +9,6 @@ Model
 - inspired by ActiveRecord/DataMapper/Mongoid
 ###
 module.exports = class Model
-  @db = db
-  
   ###
   Model.field
   - used statically inside models to define columns/attributes in their schemas
@@ -64,7 +60,7 @@ module.exports = class Model
     for key, field of @constructor.fields
       map[key] = @[key]
     
-    db.query "UPDATE #{@constructor.table.name} SET ? WHERE #{@constructor.table.key} = ?", [map, @id], =>
+    @constructor.db.query "UPDATE #{@constructor.table.name} SET ? WHERE #{@constructor.table.key} = ?", [map, @id], =>
       do callback
     
     # console.log 'mapz', map
@@ -178,5 +174,3 @@ module.exports = class Model
       model = new this rows[0]
       
       callback null, model
-
-Model.db = db

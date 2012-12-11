@@ -1,6 +1,6 @@
 {db} = require '../system'
 
-table = "#{db.prefix}pages"
+table = "po_pages"
 
 exports.all = (callback) ->
   db.query "SELECT * FROM #{table}", callback

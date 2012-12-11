@@ -1,7 +1,7 @@
 {db} = require '../system'
 
 exports.getAdminPagesByAccess = (rights, callback) ->
-  db.query "SELECT * FROM #{db.prefix}admin WHERE PAC IN ('" + rights.join("','") + "')", callback
+  db.query "SELECT * FROM po_admin WHERE PAC IN ('" + rights.join("','") + "')", callback
 
 exports.getAdminPages = (callback) ->
-  db.query "SELECT * FROM #{db.prefix}admin_pages", callback
+  db.query "SELECT * FROM po_admin_pages", callback
