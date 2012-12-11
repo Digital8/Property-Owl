@@ -10,6 +10,8 @@ area = (key = 'master') ->
 module.exports = (app) ->
   app.get '/', (area 'index'), controllers.index.index
   
+  app.get '/epoch', controllers.epoch
+  
   # auth
   #app.all '/login', controllers.login.index
   app.get '/sign-out', controllers.misc.logout
@@ -168,8 +170,6 @@ module.exports = (app) ->
   
   ajax 'post', '/login', controllers.ajax.login
   ajax 'post', '/register', controllers.ajax.register
-  
-  ajax 'get', '/epoch', controllers.ajax.epoch
   
   ajax 'get', '/search', controllers.ajax.search
   

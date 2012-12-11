@@ -1,5 +1,3 @@
-moment = require 'moment'
-
 system = require '../system'
 mailer = require '../lib/helpers/email'
 
@@ -231,19 +229,6 @@ exports.delRegistration = (req, res) ->
   
   models.registrations.delete req.query, (err, results) ->
     if err then res.send status: 400 else res.send status: 200
-
-exports.epoch = (req, res) ->
-  now = moment()
-  
-  epoch = moment()
-  epoch.day 3
-  epoch.startOf 'day'
-  epoch.hours 12
-  
-  unless now.valueOf() < epoch.valueOf()
-    epoch.add 'weeks', 1
-  
-  res.send epoch.toDate()
 
 exports.search = (req, res) ->
   console.log req.query
