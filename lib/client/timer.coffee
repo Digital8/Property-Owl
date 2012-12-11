@@ -21,6 +21,6 @@ module.exports = ->
   
   # wait until next minute, then update every minute after
   link = ->
-    setInterval update, 1000
+    setInterval update, 1000 * 60
   
   setTimeout link, (60 - (new Date).getSeconds()) * 1000
