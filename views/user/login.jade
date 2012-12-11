@@ -1,4 +1,5 @@
 extends ../layout
+
 block content
   
   .container.row.main
@@ -6,15 +7,21 @@ block content
     include ../left_nav
     
     #center-col
+      
       h1 Login
+      
       .details
+        
         form.details-form(action="/login",method="post")
+        
          include ../flashify
          
          .left
+           
            .inputs
              label(for='email') Email
              input#email(type="text",name="email",placeholder="Email",value="bscarvell@gmail.com")
+           
            .inputs
              label(for='password') Password
              input#password(type="password",name="password",placeholder="Password",value="")
@@ -23,9 +30,13 @@ block content
          
          .submit
            a.left-button(href="/sign-up") Sign Up
+           
            input.button(type="submit",value="login")
+           
            - var redirect_url = (typeof(redirect) !== "undefined") ? redirect : '/'
+           
            input(type="hidden",name="redirect",value="#{redirect_url}")
+    
     - if (modal)
       script
         $(document).ready(function(){

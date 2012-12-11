@@ -5,8 +5,6 @@ mailer = require '../lib/helpers/email'
 
 models =
   user: system.load.model 'user'
-  saveddeals: system.load.model 'saveddeals'
-  deals: system.load.model 'deals'
   media: system.load.model 'media'
   registrations: system.load.model 'registrations'
 

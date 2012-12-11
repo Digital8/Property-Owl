@@ -1,11 +1,9 @@
 system = require '../system'
-  
-models = services: system.load.model 'services'
 
-exports.index = (req,res) ->
-  models.services.getAllServices (err, results) ->
-    if err then throw err
-    res.render 'products', menu: 'products', services: results or {}
+# exports.index = (req,res) ->
+#   models.services.getAllServices (err, results) ->
+#     if err then throw err
+#     res.render 'products', menu: 'products', services: results or {}
 
 exports.view = (req,res) ->
 

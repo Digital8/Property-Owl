@@ -188,32 +188,24 @@ module.exports = class Owl extends Model
         
         callback()
   
-  @inBarn = (barnId, callback) ->
+  @inBarn = (barnId, callback) =>
     @db.query "SELECT * FROM #{@table.name} WHERE barn_id = ?", [barnId], (error, rows) =>
       return callback error if error
       
-      models = []
-      
-      for row in rows
-        model = new Owl row
-        models.push model
+      models = (new this row for row in rows)
       
       async.forEach models, (model, callback) =>
         model.hydrate callback
       , (error) ->
         callback null, models
   
-  @state = (state, callback) ->
+  @state = (state, callback) =>
     console.log state
     
     @db.query "SELECT * FROM #{@table.name} WHERE state = ? ORDER BY created_at ASC", [state], (error, rows) =>
       return callback error if error
       
-      models = []
-      
-      for row in rows
-        model = new Owl row
-        models.push model
+      models = (new this row for row in rows)
       
       async.forEach models, (model, callback) =>
         model.hydrate callback
@@ -277,11 +269,7 @@ module.exports = class Owl extends Model
     @db.query "SELECT * FROM owls WHERE approved = false", (error, rows) =>
       return callback error if error
       
-      models = []
-      
-      for row in rows
-        model = new Owl row
-        models.push model
+      models = (new this row for row in rows)
       
       async.forEach models, (model, callback) =>
         model.hydrate callback

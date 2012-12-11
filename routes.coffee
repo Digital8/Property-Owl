@@ -25,7 +25,7 @@ module.exports = (app) ->
   app.get '/account', authenticate, controllers.account.index
   app.post '/account', authenticate, controllers.account.update
   
-  app.get '/saved', authenticate, controllers.saveddeals.index
+  app.get '/bookmarks', authenticate, controllers.bookmarks.index
   
   app.get '/affiliates', authenticate, controllers.affiliates.index
   
@@ -45,16 +45,16 @@ module.exports = (app) ->
   barn 'get', '', controllers.barns.index
   barn 'get', "/:id(\\d+)", controllers.barns.show
   
-  developer = (method, path, middleware...) ->
-    app[method] "/developer#{path}", (authorize acl.developer), (authorize acl.admin), middleware...
+  # developer = (method, path, middleware...) ->
+  #   app[method] "/developer#{path}", (authorize acl.developer), (authorize acl.admin), middleware...
   
-  developer 'get', '/properties', controllers.dev.properties.index
-  developer 'get', '/properties/add', controllers.dev.properties.add
-  developer 'get', '/properties/add', controllers.dev.properties.create
+  # developer 'get', '/properties', controllers.dev.properties.index
+  # developer 'get', '/properties/add', controllers.dev.properties.add
+  # developer 'get', '/properties/add', controllers.dev.properties.create
   
-  developer 'get', '/deals', controllers.dev.deals.index
-  developer 'get', '/deals/add', controllers.dev.deals.add
-  developer 'get', '/deals/add', controllers.dev.deals.create
+  # developer 'get', '/deals', controllers.dev.deals.index
+  # developer 'get', '/deals/add', controllers.dev.deals.add
+  # developer 'get', '/deals/add', controllers.dev.deals.create
   
   news = (method, path, middleware...) ->
     app[method] "/news#{path}", middleware...

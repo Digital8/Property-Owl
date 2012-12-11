@@ -114,11 +114,7 @@ module.exports = class Barn extends Model
     @db.query "SELECT * FROM barns WHERE approved = false", (error, rows) =>
       return callback error if error
       
-      models = []
-      
-      for row in rows
-        model = new Barn row
-        models.push model
+      models = (new this row for row in rows)
       
       async.forEach models, (model, callback) =>
         model.hydrate callback

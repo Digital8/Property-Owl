@@ -1,0 +1,38 @@
+ul.sf-menu
+  li
+    - var c = (menu == 'aus-best-deal') ? 'active' : ''
+    a(href='/owls/top',class="#{c}") Australia's Best Deal
+  
+  li
+    - var c = (menu == 'best-state-deals') ? 'active' : ''
+    a(href='/owls/hot',class="#{c}") Best State Deals
+  
+  li
+    - var c = (menu == 'owl-deals') ? 'active' : ''
+    a(href='/owls/locate',class="#{c}") Owl Deals
+  
+  li
+    - var c = (menu == 'wise-owl') ? 'active' : ''
+    a(href='/news',class="#{c}") Wise Owl
+    ul
+      li: a(href='/news') News Updates
+      li: a(href='/research') Research
+  
+  li
+    - var c = (menu == 'products') ? 'active' : ''
+    a(href='/affiliates', class="#{c}") Products & Services
+  
+  - if (objUser.isAuthed())
+    li
+      a(href='/account') My Nest
+      ul
+        - if( objUser.isAdmin())
+          li: a(href="/admin") Administration
+        
+        li: a(href='/account') My Account
+        li: a(href='/bookmarks') Saved Deals
+        li: a(href='/contact') Contact Us
+        li: a(href='/sign-out') Sign Out
+  - else
+    li: a.show-login(href="/login") Login
+    //- li: a(href="/sign-up") Sign Up

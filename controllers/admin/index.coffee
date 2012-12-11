@@ -3,9 +3,7 @@ async = require 'async'
 system = require '../../system'
 
 models =
-  admin: system.load.model 'admin'
   advertisement: system.load.model 'advertisement'
-  properties: system.load.model 'properties'
 
 Owl = system.models.owl
 Barn = system.models.barn

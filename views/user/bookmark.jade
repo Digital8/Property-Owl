@@ -1,0 +1,9 @@
+tr
+  td: a(href="/#{bookmark.type}s/#{bookmark.entity_id}")= bookmark.deal.title
+  td: strong= bookmark.type
+  //- td: Current
+  td= moment(bookmark.created_at).format('LLL')
+  td
+    a.removebuttons(href='#', data-bookmark-id="#{bookmark.id}")
+      img(src='images/delete.png')
+      | Remove

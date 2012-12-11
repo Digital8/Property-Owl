@@ -50,10 +50,6 @@ module.exports = class Media extends Model
     system.db.query "SELECT * FROM medias WHERE entity_id = ? AND type = '#{type}'", [model.id], (error, rows) =>
       return callback error if error?
       
-      models = []
-      
-      for row in rows
-        model = new this row
-        models.push model
+      models = (new this row for row in rows)
       
       callback null, models

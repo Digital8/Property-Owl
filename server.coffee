@@ -146,6 +146,8 @@ app.configure ->
               res.redirect '/'
           else
             res.locals.objUser = new classes.user results
+        
+        req.user = res.locals.objUser
           
         do done
     
