@@ -55,6 +55,14 @@
         }
     }
     
+    .no-csstransforms {
+    	.best-deal > div .home-timer #map svg {
+        	left: -4px;
+        	top: 18px;
+        	zoom: 0.7;
+    	}
+    }
+    
     .best-deal {
         
         > div {
@@ -77,11 +85,20 @@
                     }
                     
                     #map {
-                        height: 16.3em;
-                        zoom: 0.7;
-
+                        #map-image {
+                            margin: @padding-small 0 0 0;
+                        }
+                        
                         svg {
-                            margin: 0.15em 1em 0 0;
+                        	position: relative;
+                        	left: -32px;
+                        	top: -15px;
+                        	
+                        	transform: scale(0.7);
+                        	-ms-transform: scale(0.7); /* IE 9 */
+                        	-webkit-transform: scale(0.7); /* Safari and Chrome */
+                        	-o-transform: scale(0.7); /* Opera */
+                        	-moz-transform: scale(0.7); /* Firefox */
                         }
                     }
                 }
@@ -136,12 +153,7 @@
                         }
                         
                         #map {
-                          height: 24em;
-                          zoom:0.45;
-
-                          svg {
-                            padding-left:@padding-small;
-                          }
+                        height: 8.5em;
                         }
                     }
                 }
@@ -340,6 +352,14 @@
         }
     }
     
+    .no-csstransforms {
+    	.best-deal > div .home-timer #map svg {
+	    	left: -4px;
+	    	top: 7px;
+	    	zoom: 0.9;
+    	}
+    }
+    
     .best-deal {
         height: 42em;
         position: relative;
@@ -369,12 +389,24 @@
                     }
                     
                     #map {
-                        height: 15em;
+                        height: 13.5em;
                         .rounded(0.313em);
-                        zoom: 1;
+                        
+                        #map-image {
+                            margin-left: 5em;
+                            margin-right: 5em;
+                        }
                         
                         svg {
-                            margin: 1em 0;
+                        	position: relative;
+                        	left: -4px;
+                        	top: -4px;
+                        	
+                        	transform: scale(0.9);
+                        	-ms-transform: scale(0.9); /* IE 9 */
+                        	-webkit-transform: scale(0.9); /* Safari and Chrome */
+                        	-o-transform: scale(0.9); /* Opera */
+                        	-moz-transform: scale(0.9); /* Firefox */
                         }
                     }
                     
@@ -452,10 +484,9 @@
                                 
                     .timer {
                         #map {
-                        height: 16em;
-                        zoom:1;
+                        height: 14em;
                         
-                            svg {
+                            img {
                                 margin-left: 4.063em;
                             }
                         }
