@@ -6,6 +6,5 @@ geoURL = (q, sensor = no) ->
 module.exports = (app) ->
   app.post '/geocode', (req, res) ->
     request (geoURL req.body.query), (error, response, body) ->
-      console.log arguments
       
       res.send body

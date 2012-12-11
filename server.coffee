@@ -129,7 +129,6 @@ app.configure ->
       res.locals.adUpperBox   = if results.upperBox?    then results.upperBox   else ''
       res.locals.adLowerBox   = if results.lowerBox?    then results.lowerBox   else ''
       
-      console.stop 'ads'
       do done
   
   app.use (req, res, done) ->
@@ -186,9 +185,9 @@ server.listen config.https.port, ->
 insecureApp = express()
 
 insecureApp.get '*', (req, res) ->
-  console.log req
+  #console.log req
   res.redirect "https://#{req.headers.host.split(':')[0]}#{req.url}"
 
 insecureServer = http.createServer insecureApp
 insecureServer.listen config.http.port, ->
-  console.log "Bouncer started on port #{config.http.port}"
+  #console.log "Bouncer started on port #{config.http.port}"

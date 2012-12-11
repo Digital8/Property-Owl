@@ -57,7 +57,6 @@ module.exports = class Owl extends Model
       media: (callback) =>
         Media = system.models.media
         Media.for this, (error, medias) =>
-          console.log 'MEDIAS', medias
           @images = medias
           callback error
       
@@ -111,8 +110,6 @@ module.exports = class Owl extends Model
   heroImageURL: ->
     unless @images? and @images.length then return '/images/placeholder.png'
     
-    console.log @title
-    
     # find the hero
     hero = _.find @images, (image) =>
       return Number(image.id) is Number(@feature_image)
@@ -134,7 +131,6 @@ module.exports = class Owl extends Model
       callback null
   
   upload: (req, callback) ->
-    console.log 'filez', req
     
     async.series
       removeDeals: (callback) =>
@@ -160,7 +156,6 @@ module.exports = class Owl extends Model
         
         deals.pop()
         
-        console.log deals
         
         async.forEach deals, (deal, callback) =>
           @constructor.db.query "INSERT INTO deals SET ?", deal, callback
@@ -184,7 +179,6 @@ module.exports = class Owl extends Model
         , callback
       
       else
-        console.log 'no uploads'
         
         callback()
   
@@ -204,7 +198,7 @@ module.exports = class Owl extends Model
         callback null, models
   
   @state = (state, callback) ->
-    console.log state
+    
     
     @db.query "SELECT * FROM #{@table.name} WHERE state = ? ORDER BY created_at ASC", [state], (error, rows) =>
       return callback error if error

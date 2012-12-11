@@ -28,7 +28,6 @@ exports.byState = (req, res) ->
   {state} = req.params
   
   Owl.state state, (error, owls) ->
-    console.log owls
     res.render 'owls/state', owls: owls, state: state
 
 exports.show = (req, res) ->

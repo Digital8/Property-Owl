@@ -45,6 +45,8 @@ module.exports = (template, subject, objUser, secondary, callback) ->
           email.addSubVal '{{BarnDealDescription}}', secondary.BarnDealDescription
           email.addSubVal '{{dealLink}}', secondary.dealLink
         when 'news'
-          email.addSubVal '{{title}}', secondary.title
+          email.addSubVal '{{NewsTitle}}', secondary.title
+          email.addSubVal '{{NewsSummary}}', secondary.summary
+          email.addSubVal '{{NewsLink}}', secondary.link
 		  
       sendgrid.send email, callback
