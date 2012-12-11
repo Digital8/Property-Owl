@@ -4,7 +4,6 @@ module.exports = ->
     return (Math.floor (Math.random() * range)) + min
   
   increment = ->
-    debugger
     value = ($ '.home-counter .value').text()
     number = Number value
     next = number += random 0, 3

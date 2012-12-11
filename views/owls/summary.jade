@@ -41,7 +41,11 @@
       
       .summary
         h3= owl.title
+        
         p= _s.prune(owl.description, 150)
+        
+        - if (objUser.isAdmin())
+          h2.admin-only #{owl.value} %
       
       .listing-links
         a.savebuttons.save-button(href='#', data-owl="#{owl.owl_id}")
