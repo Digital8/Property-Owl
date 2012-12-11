@@ -23,14 +23,19 @@ module.exports = (app) ->
   app.post '/contact', controllers.contact.create
   
   app.get '/account', authenticate, controllers.account.index
-  app.post '/account', authenticate, controllers.account.update
+  app.put '/account', authenticate, controllers.account.update
   
-  app.get '/bookmarks', authenticate, controllers.bookmarks.index
+  bookmark = (method, path, middleware...) ->
+    app[method] "/bookmarks#{path}", authenticate, middleware...
+  
+  bookmark 'get', '', controllers.bookmarks.index
+  bookmark 'post', '', controllers.bookmarks.create
+  bookmark 'del', '/:id(\\d+)', controllers.bookmarks.destroy
   
   app.get '/affiliates', authenticate, controllers.affiliates.index
   
   owl = (method, path, middleware...) ->
-    app.get "/owls#{path}", authenticate, middleware...
+    app[method] "/owls#{path}", authenticate, middleware...
   
   owl 'get', '', controllers.owls.index
   owl 'get', '/:id(\\d+)', controllers.owls.show
@@ -45,17 +50,6 @@ module.exports = (app) ->
   barn 'get', '', controllers.barns.index
   barn 'get', "/:id(\\d+)", controllers.barns.show
   
-  # developer = (method, path, middleware...) ->
-  #   app[method] "/developer#{path}", (authorize acl.developer), (authorize acl.admin), middleware...
-  
-  # developer 'get', '/properties', controllers.dev.properties.index
-  # developer 'get', '/properties/add', controllers.dev.properties.add
-  # developer 'get', '/properties/add', controllers.dev.properties.create
-  
-  # developer 'get', '/deals', controllers.dev.deals.index
-  # developer 'get', '/deals/add', controllers.dev.deals.add
-  # developer 'get', '/deals/add', controllers.dev.deals.create
-  
   news = (method, path, middleware...) ->
     app[method] "/news#{path}", middleware...
   
@@ -66,7 +60,7 @@ module.exports = (app) ->
     app[method] "/research#{path}", authenticate, middleware...
   
   research 'get', '', controllers.research.index
-  research  'get', '/:id(\\d+)', controllers.research.view
+  research 'get', '/:id(\\d+)', controllers.research.view
   
   ### search ###
   search = (method, path, middleware...) ->
@@ -181,9 +175,6 @@ module.exports = (app) ->
   
   authedAjax = (method, path, middleware...) ->
     app[method] "/ajax#{path}", authenticate, middleware...
-  
-  authedAjax 'post', '/bookmark', controllers.ajax.bookmark
-  authedAjax 'post', '/unbookmark', controllers.ajax.unbookmark
   
   authedAjax 'post', '/securedeal', controllers.ajax.securedeal
   authedAjax 'post', '/referfriend', controllers.ajax.referfriend

@@ -14,6 +14,8 @@ makeTimer = require './timer'
 barns = require './barns'
 
 $ ->
+  (require './shim') $
+  
   require './bookmarks'
   
   do barns

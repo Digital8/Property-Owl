@@ -8,6 +8,7 @@ system = require '../system'
 
 Deal = system.models.deal
 Media = system.models.media
+Bookmark = system.models.bookmark
 
 module.exports = class Owl extends Model
   @table = new Table
@@ -106,6 +107,14 @@ module.exports = class Owl extends Model
           do callback
     
     , (error) => super callback
+  
+  hydrateForUser: (user, callback) ->
+    Bookmark.forUserAndDeal user, this, (error, bookmark) =>
+      return callback error if error?
+      
+      @bookmark = bookmark
+      
+      do callback
   
   heroImageURL: ->
     unless @images? and @images.length then return '/images/placeholder.png'

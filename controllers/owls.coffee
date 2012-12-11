@@ -13,7 +13,7 @@ exports.locate = (req, res) ->
 
 exports.top = (req, res) ->
   Owl.top (error, owl) ->
-    res.render 'owls/show', owl: owl, bestdeal: true, enquire: on
+    res.render 'owls/show', owl: owl, bestdeal: true, enquire: on, share: on
 
 exports.hot = (req, res) ->
   async.map ['qld', 'nsw', 'vic', 'sa', 'wa', 'nt', 'tas', 'act'], (state, callback) ->
@@ -34,4 +34,5 @@ exports.show = (req, res) ->
   {id} = req.params
   
   Owl.get id, (error, owl) ->
-    res.render 'owls/show', owl: owl, enquire: on
+    owl.hydrateForUser req.user, (error) ->
+      res.render 'owls/show', owl: owl, enquire: on

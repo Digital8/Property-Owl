@@ -4,15 +4,22 @@
       a(href='#', onclick='javascript:window.print()')
         img(src='/images/share-print-icon.png', alt='Print')
         | Print Deal
-    li
+    
+    li.add-bookmark(data-deal-id="#{owl.id}", data-deal-type='owl')
       img(src='/images/share-save-icon.png', alt='Save')
-      | Save Deal
-    li
+      - if (owl.bookmark)
+        | Saved
+      - else
+        | Save Deal
+    
+    li.show-refer-friend
       img(src='/images/share-refer-icon.png', alt='Refer')
       | Refer A Friend
+    
     li
-      .fb-like(data-href='http://www.propertyowl.com.au/barns#{barn.barn_id}', data-send='false', data-layout='button_count', data-width='125', data-show-faces='false')
+      .fb-like(data-href='http://www.propertyowl.com.au/owls/#{owl.id}', data-send='false', data-layout='button_count', data-width='125', data-show-faces='false')
+    
     li
-      a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/barns#{barn.barn_id}') Tweet
+      a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/owls/#{owl.id}') Tweet
       script
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

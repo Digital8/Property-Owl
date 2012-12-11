@@ -20,6 +20,8 @@ block content
             
             form(action="/account",method="post")
               
+              input(type='hidden', name='_method', value='put')
+              
               include ../flashify
               
               table.admin-gridview.no-head

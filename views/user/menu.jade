@@ -1,5 +1,5 @@
 ul.menu
-  li: a(href="/account") Settings
-  li: a(href="/bookmarks") Saved Deals
+  li(class=(req.url == '/account') ? "active" : ""): a(href="/account") Settings
+  li(class=(req.url == '/bookmarks') ? "active" : ""): a(href="/bookmarks") Saved Deals
   //- li: a(href="/bookmarks") Registrations
   //- li: a(href="/bookmarks") Preferences

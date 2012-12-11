@@ -49,14 +49,21 @@ block content
             h1 Australia's Best Property Deal
           else
             h1= owl.title
+          
           span.price-highlight $
             span.price= owl.price
+          
           | #{owl.fullAddress()}
+          
           hr.light
+          
           h2 Property Details
+          
           if(typeof(bestdeal) != 'undefined' && bestdeal)
             strong= owl.title
+          
           p= owl.description
+          
           .general-features
             h3 General Features
             ul
@@ -88,7 +95,7 @@ block content
                 li Total Area: 
                   strong #{parseFloat(owl.external_area) + parseFloat(owl.internal_area)} sq. m
             
-            - if (owl.indoorFeatures.length)
+            - if (owl.indoorFeatures.length > 0)
               h3 Indoor Features
               ul
               - each feature in owl.indoorFeatures
@@ -97,13 +104,13 @@ block content
           
           .other-features
             
-            - if (owl.outdoorFeatures.length)
+            - if (owl.outdoorFeatures.length > 0)
               h3 Outdoor Features
               ul
               - each feature in owl.outdoorFeatures
                 li= feature
             
-            - if (owl.otherFeatures.length)
+            - if (owl.otherFeatures.length > 0)
               h3 Other Features
               ul
               - each feature in owl.otherFeatures

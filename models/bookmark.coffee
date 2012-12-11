@@ -45,6 +45,18 @@ module.exports = class Bookmark extends Model
       , (error) ->
         callback null, models
   
+  @forUserAndDeal = (user, deal, callback) =>
+    type = deal.constructor.name.toLowerCase()
+    
+    system.db.query "SELECT * FROM #{@table.name} WHERE entity_id = ? AND type = ? AND user_id = ? LIMIT 1", [deal.id, type, user.id], (error, rows) =>
+      return callback error if error?
+      
+      return callback null, null unless rows?.length
+      
+      model = new this rows[0]
+      
+      model.hydrate callback
+  
   # @for = (model, callback) =>
   #   type = model.constructor.name.toLowerCase()
     
