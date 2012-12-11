@@ -51,7 +51,23 @@ module.exports = class Barn extends Model
     , (error) =>
       @user ?= {}
       callback error, this
-  
+      
+  heroImageURL: ->
+    unless @images? and @images.length then return '/images/placeholder.png'
+    
+    console.log @title
+    
+    # find the hero
+    hero = _.find @images, (image) =>
+      return Number(image.id) is Number(@feature_image)
+    
+    # console.log owl: @, hero: hero
+    
+    # default to latest image
+    hero ?= @images.pop()
+    
+    return "/uploads/#{hero.filename}"
+
   fullAddress: ->
     "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
   
