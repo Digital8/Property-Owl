@@ -15,6 +15,9 @@ module.exports = ->
       ($ '#day-timer-days').text days
       ($ '#day-timer-hours').text hours
       ($ '#day-timer-mins').text minutes
+      
+      for timer in ($ '.time')
+        ($ timer).text "#{days}:#{hours}:#{minutes}"
   
   # initial update
   do update
