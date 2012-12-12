@@ -4,8 +4,7 @@
     .listing-price
       strong= '$' + owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     
-    h2
-      a(href='/owls/#{owl.owl_id}') #{owl.fullAddress()}
+    h2: a(href='/owls/#{owl.id}')= owl.fullAddress()
   
   .listing-body
     
