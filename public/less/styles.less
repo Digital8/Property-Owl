@@ -580,6 +580,14 @@ body {
     }
 }
 
+.no-csstransforms {
+	.main > div#left-col .deal-stats .timer #map svg {
+    	left: 4px !important;
+    	top: 32px !important;
+    	zoom: 0.7;
+	}
+}
+
 .main {
     margin: 0 auto 0 auto;
         
@@ -665,13 +673,18 @@ body {
                         background-repeat: repeat-x;
                         background-size: cover;
                         .gradient(#e21515, #c81212);
-                        height: 15.25em;
+                        height: 11.45em;
                         .rounded-bottom-right(0.313em);
                         .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
-                        zoom: 0.7;
                         
                         svg{
-                            margin-top: 2em;
+                            left: -28px !important;
+                            
+                            transform: scale(0.7);
+                            -ms-transform: scale(0.7); /* IE 9 */
+                            -webkit-transform: scale(0.7); /* Safari and Chrome */
+                            -o-transform: scale(0.7); /* Opera */
+                            -moz-transform: scale(0.7); /* Firefox */
                         }
                     }
                     
@@ -2213,8 +2226,17 @@ a, a:visited {
 }
 
 .emphasis {
-    font-weight: bold;
-    color: #0085c6;
+  color: #0085c6;
+}
+.emphasis, .emphasis-2, .emphasis-3 {
+  font-weight: bold;
+}
+.emphasis-2, .emphasis-3 {
+  color: #ff0000;
+  .font-family;
+}
+.emphasis-2 {
+  font-size:1.2em;
 }
 
 /* @group register modal */
