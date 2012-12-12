@@ -60,7 +60,7 @@ app.configure ->
     app.use express.session 'monkeyjuice'
     app.use flashify
     app.use bundle
-    app.use express.static "#{__dirname}/public"
+    app.use express.static "#{__dirname}/public", maxAge: 1024
     
     app.use (req, res, done) ->
       schemas = []
