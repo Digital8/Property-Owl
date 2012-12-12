@@ -19,7 +19,7 @@ block content
         .listing-thumb
           img.thumb(src='/images/news-thumb.jpg', alt='')
       
-      p= post.content
+      div !{post.content.replace(/\n/g, '<p />')}
     
     include ../right_nav
     
