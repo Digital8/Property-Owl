@@ -51,8 +51,10 @@ block content
           dd(data-src='/uploads/slider1.jpg', data-thumb='/uploads/slide1-thumb.jpg')
       
       .property-info
-        - if (barn.lots && barn.lots.length)
+      
+        - if (barn.owls && barn.owls.length)
           table.barn-lots
+          
             thead
               td Lot
               td Bed
@@ -65,26 +67,25 @@ block content
               td List Price
               td Floor Plan
               td Register
-            - var i = 0;
-            - each lot in lots
-              - i++
-              tbody
-                td= i
-                td= lot.bedrooms
-                td= lot.bathrooms
-                td= lot.carspaces
-                td= lot.level
-                td #{lot.interior_size} sq.m
-                td #{lot.exterior_size} sq.m
-                td= lot.aspect
-                td= lot.price
-                td
-                  - if (lot.floor_plan.length == 0)
-                    em Not Available
-                  - else
-                    a(href='#') Download
-                td
-                  a.barn-register(href='#', alt='Register') Register
+            
+            tbody
+              - each owl in barn.owls
+                tr
+                  td O#{owl.id}
+                  td= owl.bedrooms
+                  td= owl.bathrooms
+                  td= owl.carspaces
+                  td= owl.level
+                  td #{owl.internal_area} sq.m
+                  td #{owl.external_area} sq.m
+                  td= owl.aspect
+                  td $ #{owl.price}
+                  td
+                  td
+                    a.barn-register(href='#', alt='Register') Register
+      
+      .property-info
+        
         #left
           p #{barn.address}, #{barn.suburb}, #{barn.state.toUpperCase()} #{barn.postcode}
           h2= barn.title
@@ -96,10 +97,11 @@ block content
             p= barn.indoor_features
             h3 Outdoor Features
             p= barn.outdoor_features
-
+          
           .other-features
             h3 Other Features
             p= barn.other_features
+        
         #right
           .secure-deal
             a.show-secure-deal.secure-button.register(href='#',data-id="#{barn.id}", data-type="barn") Express Your Interest!
