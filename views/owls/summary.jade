@@ -44,17 +44,23 @@
         
         p= _s.prune(owl.description, 150)
         
-        - if (objUser.isAdmin())
-          h2.admin-only #{owl.value} %
+        - if (objUser.isHacker())
+          h5.hacker Deal Value | #{owl.value} %
+          pre.hacker(style='font-size: 8px;')
+            | Deals
+            | #{JSON.stringify(owl.deals)}
       
       .listing-links
-        a.savebuttons.save-button(href='#', data-owl="#{owl.owl_id}")
+        
+        a.savebuttons.save-button(href='#', data-owl="#{owl.id}")
           img#save-icon(src='/images/plus-icon.png', alt='Save this owl')
           |  Save
-        a.details-button(href='/owls/#{owl.owl_id}')
+        
+        a.details-button(href='/owls/#{owl.id}')
           img#info-icon(src='/images/info-icon.png', alt='View owl details')
           |  Details
-        - if (objUser.isAdmin())
-          a.admin-button(href='/admin/owls/#{owl.owl_id}/edit')
+        
+        - if (objUser.isHacker())
+          a.admin-button(href='/admin/owls/#{owl.id}/edit')
             img#admin-icon(src='/images/view.png', alt='View owl details')
             |  Admin

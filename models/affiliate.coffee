@@ -11,6 +11,7 @@ module.exports = class Affiliate extends Model
     name: 'affiliates'
     key: 'affiliate_id'
   
+  @field 'name'
   @field 'company'
   @field 'logo'
   @field 'phone'
@@ -39,7 +40,9 @@ module.exports = class Affiliate extends Model
           callback()
     
     , (error) => super callback
-
+  
+  upload: (req, callback) ->
+    do callback
   
   @published = (callback) ->
     @db.query "SELECT * FROM affiliates WHERE visible", (error, rows) =>

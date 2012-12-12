@@ -28,7 +28,7 @@ CREATE TABLE `affiliate_categories` (
   `affiliate_category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`affiliate_category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +37,7 @@ CREATE TABLE `affiliate_categories` (
 
 LOCK TABLES `affiliate_categories` WRITE;
 /*!40000 ALTER TABLE `affiliate_categories` DISABLE KEYS */;
+INSERT INTO `affiliate_categories` VALUES (1,'Interior Decorating'),(2,'Building and Construction'),(3,'Landscaping');
 /*!40000 ALTER TABLE `affiliate_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,8 +61,9 @@ CREATE TABLE `affiliates` (
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   `description` varchar(100) NOT NULL,
   `image` varchar(100) NOT NULL,
-  `service_created_at` datetime NOT NULL,
   `affiliate_category_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `created_at` datetime NOT NULL,
   PRIMARY KEY (`affiliate_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -72,7 +74,7 @@ CREATE TABLE `affiliates` (
 
 LOCK TABLES `affiliates` WRITE;
 /*!40000 ALTER TABLE `affiliates` DISABLE KEYS */;
-INSERT INTO `affiliates` VALUES (1,'testaroo','','','','Ipswich','act','','',1,'this is a test service','','2012-11-06 10:27:16',0),(2,'testing 2..','','','','blacktown','act','','',1,'this is another test service','','2012-11-06 10:27:16',0);
+INSERT INTO `affiliates` VALUES (1,'Backenders','','0400 111 333','1 Queen Street','Brisbane','qld','test@test.test','4000',1,'We\'ve got you covered from behind!','',3,'','0000-00-00 00:00:00'),(2,'Inside Jobs','','0400 111 333','1 Wickham Terrace','Fortitude Valley','qld','test@test.test','4000',1,'this is another test service','',1,'','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `affiliates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -602,7 +604,7 @@ CREATE TABLE `po_users` (
 
 LOCK TABLES `po_users` WRITE;
 /*!40000 ALTER TABLE `po_users` DISABLE KEYS */;
-INSERT INTO `po_users` VALUES (1,'Brendan','Scarvell','bscarvell@gmail.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'Digital8','3288 2222','3288 1111','0412 345 678','123 asdf street!','Redbank Plainz','','',0,0,'2012-10-05 09:00:01'),(2,'Test','Developer','foo@bar.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',2,'','','','','','','','',1,1,'2012-12-05 09:00:01'),(3,'Nicholas','Kinsey','pyro@feisty.io','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'feisty','','','','','','','',0,0,'2012-11-29 09:00:01'),(5,'Steve','Jobs','steve@apple.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'','','','','','','','',0,0,'2012-12-05 08:53:36'),(6,'Robyn','Simpson','robyn@marketsmartly.com','f09e0c1931a31bdaed0f1620107e7c304b0de9d4cca399253584bca2dfb239c7',3,'','','','','','','','',0,0,'2012-12-05 14:07:15'),(7,'Chris','Rutherford','chris@propertyowl.com.au','43aec9225b767d1bf5f2a07f939f882c1428fa47d2c9b57cfe880586b87806a7',3,'','','','0414924551','','','','',0,0,'2012-12-05 15:37:44'),(8,'Rob','Hunt','rob@propertyowl.com.au','f230a0f847872926d99fcd9ecfbcf6632bc4aebe7d51174ad05192e267af85f0',3,'Property Owl Pty Ltd','0412741211','0412741211','0412741211','2, 19 Daniells Street','Carina','','4152',1,1,'2012-12-06 13:53:26'),(9,'Alice','Ledner','Cole_Stanton@marcus.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',2,'','','','','','','','',0,0,'2012-12-08 18:21:34'),(10,'Kaylin','Olson','Ernie_Schmitt@maurine.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'','','','','','','','',0,0,'2012-12-08 18:22:12'),(11,'Test','Buyer','buyer@propertyowl.com.au','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',1,'','','','','','','','',0,0,'2012-12-09 10:59:00');
+INSERT INTO `po_users` VALUES (1,'Brendan','Scarvell','bscarvell@gmail.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'Digital8','3288 2222','3288 1111','0412 345 678','123 asdf street!','Redbank Plainz','','',0,0,'2012-10-05 09:00:01'),(2,'Test','Developer','foo@bar.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',2,'','','','','','','','',1,1,'2012-12-05 09:00:01'),(3,'Nicholas','Kinsey','pyro@feisty.io','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'Digital8','','','','','','','',0,0,'2012-11-29 09:00:01'),(5,'Steve','Jobs','steve@apple.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'','','','','','','','',0,0,'2012-12-05 08:53:36'),(6,'Robyn','Simpson','robyn@marketsmartly.com','f09e0c1931a31bdaed0f1620107e7c304b0de9d4cca399253584bca2dfb239c7',3,'','','','','','','','',0,0,'2012-12-05 14:07:15'),(7,'Chris','Rutherford','chris@propertyowl.com.au','43aec9225b767d1bf5f2a07f939f882c1428fa47d2c9b57cfe880586b87806a7',3,'','','','0414924551','','','','',0,0,'2012-12-05 15:37:44'),(8,'Rob','Hunt','rob@propertyowl.com.au','f230a0f847872926d99fcd9ecfbcf6632bc4aebe7d51174ad05192e267af85f0',3,'Property Owl Pty Ltd','0412741211','0412741211','0412741211','2, 19 Daniells Street','Carina','','4152',1,1,'2012-12-06 13:53:26'),(9,'Alice','Ledner','Cole_Stanton@marcus.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',2,'','','','','','','','',0,0,'2012-12-08 18:21:34'),(10,'Kaylin','Olson','Ernie_Schmitt@maurine.com','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',3,'','','','','','','','',0,0,'2012-12-08 18:22:12'),(11,'Test','Buyer','buyer@propertyowl.com.au','7e18d77120b0458d02e9756642c4365df93e263da7b738e6c1aa75d72c5daf73',1,'','','','','','','','',0,0,'2012-12-09 10:59:00');
 /*!40000 ALTER TABLE `po_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -615,4 +617,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-12  4:23:57
+-- Dump completed on 2012-12-12 10:26:03

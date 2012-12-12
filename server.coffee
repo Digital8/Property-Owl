@@ -25,8 +25,7 @@ classes = user: load.class 'user'
 app = express()
 
 hack.augmentApp app
-hack.augmentDB app, system
-  
+
 bundle = (require './browserifyafication.coffee') app
 
 app.configure ->
@@ -42,6 +41,8 @@ app.configure ->
       
       models.advertisement.db = connection
       models.user.db = connection
+      
+      hack.augmentDB app, connection
       
       connection.connect callback
   
@@ -113,6 +114,7 @@ app.configure ->
       res.locals.data     = system.data
       res.locals._s       = require 'underscore.string'
       res.locals.moment = require 'moment'
+      res.locals.util = require 'util'
       
       if app.argv.hack then req.session.user_id = 1
       
@@ -187,6 +189,12 @@ app.configure ->
     
     (require './routes') app
     
+    started = (key) ->
+      started.keys ?= {}
+      started[key] = yes
+      if started.http and started.https
+        do require './banner'
+    
     server = https.createServer
       key: fs.readFileSync(config.ssl.key)
       cert: fs.readFileSync(config.ssl.cert)
@@ -199,6 +207,8 @@ app.configure ->
       console.stop 'boot'
       
       console.report()
+      
+      started 'https'
     
     insecureApp = express()
     
@@ -208,3 +218,4 @@ app.configure ->
     insecureServer = http.createServer insecureApp
     insecureServer.listen config.http.port, ->
       console.log "Bouncer started on port #{config.http.port}"
+      started 'http'

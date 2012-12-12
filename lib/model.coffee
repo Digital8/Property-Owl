@@ -60,8 +60,7 @@ module.exports = class Model
     for key, field of @constructor.fields
       map[key] = @[key]
     
-    @constructor.db.query "UPDATE #{@constructor.table.name} SET ? WHERE #{@constructor.table.key} = ?", [map, @id], =>
-      do callback
+    @constructor.db.query "UPDATE #{@constructor.table.name} SET ? WHERE #{@constructor.table.key} = ?", [map, @id], callback
     
     # console.log 'mapz', map
     

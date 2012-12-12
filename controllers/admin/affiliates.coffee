@@ -6,6 +6,7 @@ uuid = require 'node-uuid'
 system = require '../../system'
 
 Affiliate = system.models.affiliate
+AffiliateCategories = system.models.affiliate_category
 
 exports.index = (req, res) ->
   Affiliate.all (error, affiliates) ->
@@ -14,14 +15,20 @@ exports.index = (req, res) ->
 exports.view = (req, res) ->
   Affiliate.get req.params.id, (error, affiliate) ->
     res.render 'admin/affiliates/view', affiliate: affiliate
-    
+
 exports.edit = (req, res) ->
-  Affiliate.get req.params.id, (error, affiliate) ->
-    res.render 'admin/affiliates/edit', affiliate: affiliate
+  async.parallel
+    affiliate: (callback) -> Affiliate.get req.params.id, callback
+    affiliateCategories: (callback) -> AffiliateCategories.all callback
+  , (error, {affiliate, affiliateCategories}) ->
+    res.render 'admin/affiliates/edit', affiliate: affiliate, affiliateCategories: affiliateCategories
 
 exports.add = (req, res) ->
-  Affiliate.new (error, affiliate) ->
-    res.render 'admin/affiliates/add', affiliate: affiliate
+  async.parallel
+    affiliate: (callback) -> Affiliate.new callback
+    affiliateCategories: (callback) -> AffiliateCategories.all callback
+  , (error, {affiliate, affiliateCategories}) ->
+    res.render 'admin/affiliates/add', affiliate: affiliate, affiliateCategories: affiliateCategories
 
 exports.create = (req, res) ->
   Affiliate.create req.body, (error, affiliate) ->

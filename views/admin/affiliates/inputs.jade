@@ -2,11 +2,12 @@
   .inputs
     label.required(for='affiliate_category_id') Category *
     select#affiliate_category_id(name="affiliate_category_id")
-      - for category in data.affiliateCategories
+      option
+      - each category in affiliateCategories
         option(value='#{category.id}', selected=affiliate.affiliate_category_id == category.id)= category.name
   .inputs
     label.required(for='affiliateCompanyName') Company Name *
-    input#affiliateCompanyName(type='text',name="company",value='#{affiliate.company}')
+    input#affiliateCompanyName(type='text',name="company",value=affiliate.company)
   .inputs
     label.file-upload(for='affiliateLogo')
       | Logo Image *
@@ -15,7 +16,7 @@
     p.success Uploaded file: image.png (30kb)
   .inputs
     label.required(for='supplerEmail') Email Address *
-    input#supplerEmail(type='text',name="email")
+    input#supplerEmail(type='text',name="email",value=affiliate.email)
   .inputs
     label
       input(type='checkbox', checked='checked',name="visible",value="1")

@@ -6,17 +6,16 @@ module.exports = (app, system) ->
   module.exports.augmentConsole()
   # module.exports.augmentDB app, system
 
-module.exports.augmentDB = (app, system) ->
+module.exports.augmentDB = (app, db) ->
   if app.argv.verbose
-    
-    {db} = system
-    
     db._query = db.query
     db.query = ->
       console.log (_.filter arguments, (argument) -> typeof argument isnt 'function')...
       db._query arguments...
 
 module.exports.augmentApp = (app) ->
+  global.app = app
+  
   app.argv = optimist
     .alias('verbose', 'v')
     .alias('fake', 'f')

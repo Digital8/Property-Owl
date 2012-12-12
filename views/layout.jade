@@ -47,7 +47,15 @@ html.no-js(lang='en')
     script(src='/bundle.js')
   
   body
-
+    - if (objUser.isHacker())
+      .hacker
+        include admin/menu
+      style
+        .hacker { background: #BADA55; }
+        .hacker #admin-menu { background: #BADA55; }
+        .hacker #admin-menu > ul > li { color: #D95477; text-shadow: none; }
+        .hacker #admin-menu > ul > li > a { color: #D95477; text-shadow: none; }
+    
     .modal-overlay.overlay#generic-modal
       .modal.main
         a.close-modal(href='#')
@@ -225,3 +233,7 @@ script(type='text/javascript')
           $(this).text(window.commas($(this).text()));
         });
       });
+
+// - if (objUser.isHacker())
+//   script
+//     window.hack = #{util.inspect(locals, null, 3)};
