@@ -57,9 +57,15 @@
     
     .no-csstransforms {
     	.best-deal > div .home-timer #map svg {
-        	left: -4px;
-        	top: 18px;
+        	left: -4px !important;
+        	top: 18px !important;
         	zoom: 0.7;
+    	}
+    	
+    	.main > div#left-col .deal-stats .timer #map svg {
+    		left: -9px !important;
+    		top: -302px !important;
+    		zoom: 0.5;
     	}
     }
     
@@ -91,8 +97,8 @@
                         
                         svg {
                         	position: relative;
-                        	left: -32px;
-                        	top: -15px;
+                        	left: -40px !important;
+                        	top: -15px !important;
                         	
                         	transform: scale(0.7);
                         	-ms-transform: scale(0.7); /* IE 9 */
@@ -153,7 +159,19 @@
                         }
                         
                         #map {
-                        height: 8.5em;
+	                        height: 8.5em;
+	                        
+	                        svg {
+	                        	position: relative;
+	                        	left: -59px !important;
+	                        	top: -35px !important;
+	                        	
+	                        	transform: scale(0.45);
+	                        	-ms-transform: scale(0.45); /* IE 9 */
+	                        	-webkit-transform: scale(0.45); /* Safari and Chrome */
+	                        	-o-transform: scale(0.45); /* Opera */
+	                        	-moz-transform: scale(0.45); /* Firefox */
+	                        }
                         }
                     }
                 }
@@ -354,9 +372,15 @@
     
     .no-csstransforms {
     	.best-deal > div .home-timer #map svg {
-	    	left: -4px;
-	    	top: 7px;
+	    	left: -4px !important;
+	    	top: 7px !important;
 	    	zoom: 0.9;
+    	}
+    	
+    	.main > div#left-col .deal-stats .timer #map svg {
+    		left: 60px !important;
+    		top: -15px !important;
+    		zoom: 0.9;
     	}
     }
     
@@ -399,8 +423,8 @@
                         
                         svg {
                         	position: relative;
-                        	left: -4px;
-                        	top: -4px;
+                        	left: -4px !important;
+                        	top: -4px !important;
                         	
                         	transform: scale(0.9);
                         	-ms-transform: scale(0.9); /* IE 9 */
@@ -488,6 +512,18 @@
                         
                             img {
                                 margin-left: 4.063em;
+                            }
+                            
+                            svg {
+                            	position: relative;
+                            	left: 40px !important;
+                            	top: 0px !important;
+                            	
+                            	transform: scale(0.9);
+                            	-ms-transform: scale(0.9); /* IE 9 */
+                            	-webkit-transform: scale(0.9); /* Safari and Chrome */
+                            	-o-transform: scale(0.9); /* Opera */
+                            	-moz-transform: scale(0.9); /* Firefox */
                             }
                         }
                     }
