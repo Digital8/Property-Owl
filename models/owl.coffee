@@ -40,7 +40,7 @@ module.exports = class Owl extends Model
   
   @field 'development_type_id'
   
-  @field 'feature_image'
+  #@field 'feature_image'
   
   constructor: (args = {}) ->
     super
