@@ -10,7 +10,7 @@ module.exports.augmentDB = (app, db) ->
   if app.argv.verbose
     db._query = db.query
     db.query = (query, args...) ->
-      unless query.match /po_advertisements/g
+      unless query.match /po_advertisements/g or query.match /account_type/g
         console.log (_.filter arguments, (argument) -> typeof argument isnt 'function')...
       db._query arguments...
 

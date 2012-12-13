@@ -12,7 +12,6 @@ module.exports = class Affiliate extends Model
     key: 'affiliate_id'
   
   @field 'name'
-  @field 'company'
   @field 'logo'
   @field 'phone'
   @field 'address'
