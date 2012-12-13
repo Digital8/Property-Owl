@@ -172,39 +172,7 @@ html.no-js(lang='en')
     
     block content
     
-    footer#footer.row
-      div.quarter-col
-        h4 Company
-        ul
-          li: a(href='/terms-and-conditions') Terms and Conditions
-          li: a(href='/privacy') Privacy Policy
-          li: a(href='/about') About Us
-      
-      div.quarter-col
-        h4 What is Property Owl?
-        ul
-          li: a(href='/why-the-owl') Why the Owl?
-          li: a(href='/') Home Page
-          li: a(href='/faq') FAQs
-      
-      .social.quarter-col
-        h4 Follow Us
-        
-        ul
-          //- li: a(href='#') Facebook
-          li: a(href='https://twitter.com/PropertyOwlNest') Twitter
-      
-      div.quarter-col
-        h4 Partnerships
-        ul
-          li: a(href='/contact') Developer Enquiries
-          li: a(href='/contact') Agent Enquiries
-          li: a(href='/contact') Advertising Enquiries
-      
-      div.bottom
-          span.attributed Website by 
-            a(href="http://www.digital8.com.au",target="_blank") D8
-          | &copy; Copyright 2012 Property Owl
+    include footer
 
 script(type='text/javascript')
     var mySlider = $("#mySlider").evoSlider({
