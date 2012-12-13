@@ -14,7 +14,7 @@ exports.index = (req,res) ->
     barns: (callback) -> Barn.pending callback
     activeAdvertisementCount: (callback) -> models.advertisement.countActive callback
   , (error, {owls, barns, activeAdvertisementCount}) ->
-    res.render 'admin/index', activeAdvertisementCount: activeAdvertisementCount, owls: owls or {}, barns: barns or {}, menu: 'dashboard'
+    res.render 'admin/index', activeAdvertisementCount: activeAdvertisementCount, owls: owls or {}, barns: barns or {}
 
 exports.view = (req,res) ->
 

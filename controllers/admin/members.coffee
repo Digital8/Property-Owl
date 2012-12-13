@@ -8,7 +8,7 @@ exports.index = (req,res) ->
   models.user.getAllUsers (err, results) ->
     if err then throw err
     
-    res.render 'admin/members/index', users: results, menu: 'members'
+    res.render 'admin/members/index', users: results
 
 exports.view = (req,res) ->
 
@@ -16,7 +16,7 @@ exports.add = (req,res) ->
   models.user.getAllGroups (err, groups) ->
     if err then throw err
     
-    res.render 'admin/members/add', values: req.session.signup or {}, groups: groups or {}, menu: 'members'
+    res.render 'admin/members/add', values: req.session.signup or {}, groups: groups or {}
 
 exports.create = (req,res) ->
   req.assert('email', 'Invalid Email').isEmail()
@@ -55,7 +55,7 @@ exports.edit = (req,res) ->
       res.redirect 'back'
     else
       models.user.getAllGroups (err, groups) ->
-        res.render 'admin/members/edit', values: results.pop(), groups: groups, menu: 'members'
+        res.render 'admin/members/edit', values: results.pop(), groups: groups
 
 exports.update = (req,res) ->
   req.body.email ?= ''

@@ -42,7 +42,6 @@ exports.add = (req, res) ->
       adspaces: results.adspace
       pages: results.page
       advertisers: results.advertiser
-      menu: 'advertising'
 
 exports.create = (req, res) ->
   fs.readFile req.files.image.path, (error, data) ->
@@ -86,7 +85,6 @@ exports.edit = (req, res) ->
       pages: results.page
       advertisers: results.advertiser
       advertisement: results.advertisement
-      menu: 'advertising'
 
 exports.update = (req, res) ->
   req.body.id = req.params.id

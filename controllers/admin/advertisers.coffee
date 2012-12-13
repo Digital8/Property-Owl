@@ -6,10 +6,10 @@ exports.index = (req, res) ->
   models.advertiser.all (error, results) ->
     throw error if error
     
-    res.render 'admin/advertisers/index', advertisers: results, menu: 'advertising'
+    res.render 'admin/advertisers/index', advertisers: results
 
 exports.add = (req, res) ->
-  res.render 'admin/advertisers/add', menu: 'advertising'
+  res.render 'admin/advertisers/add'
 
 exports.create = (req, res) ->
   # req.assert('email', 'Invalid Email Address').isEmail()
@@ -56,7 +56,7 @@ exports.edit = (req, res) ->
         for key, value of advertiser
           unless value then advertiser[key] = ''
         
-        res.render 'admin/advertisers/edit', advertiser: advertiser, menu: 'advertising'
+        res.render 'admin/advertisers/edit', advertiser: advertiser
 
 exports.update = (req, res) ->
   req.body.id = req.params.id
