@@ -11,3 +11,6 @@ exports.add = (vals, callback) ->
 
 exports.delete = (vals, callback) ->
   db.query "DELETE FROM po_registrations WHERE registration_id = ? and user_id = ?",[vals.id, vals.user_id], callback
+
+exports.findByUser = (user_id, callback) ->
+  db.query "SELECT * FROM #{db.prefix}registrations WHERE user_id = ?", [user_id], callback

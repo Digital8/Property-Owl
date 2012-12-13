@@ -41,8 +41,8 @@ exports.create = (req, res) ->
 
     system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
       if results is true 
-        owl.upload req, ->
-          res.redirect "/owls/#{owl.id}"
+        #owl.upload req, ->
+        res.redirect "/owls/#{owl.id}"
       else
         res.redirect "/owls/#{owl.id}"
 
