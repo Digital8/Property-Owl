@@ -38,6 +38,7 @@ app.configure ->
         user: config.database.user
         password: config.database.password
         database: config.database.name
+        # debug: on
       
       models.advertisement.db = connection
       models.user.db = connection
@@ -47,6 +48,8 @@ app.configure ->
       connection.connect callback
   
   , (error) ->
+    if error? then console.log error ; process.exit()
+    
     console.start 'configure'
     
     app.set 'views', "#{__dirname}/views"
