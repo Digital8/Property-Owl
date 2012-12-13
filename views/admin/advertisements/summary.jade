@@ -29,11 +29,11 @@ tr
   td= advertisement.visible
   
   td.actions
-    a(href='/admin/advertisements/edit/#{advertisement.advertisement_id}', alt='edit')
+    a(href="/admin/advertisements/#{advertisement.advertisement_id}/edit", alt='edit')
       img(src='/images/edit.png', alt='edit')
       | Edit
   
   td.actions
-    a(href='/admin/advertisements/delete/#{advertisement.advertisement_id}', alt='delete')
+    a(href="/admin/advertisements/#{advertisement.advertisement_id}/delete", alt='delete')
       img(src='/images/delete.png', alt='delete')
       | Delete

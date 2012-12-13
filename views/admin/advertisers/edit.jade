@@ -11,61 +11,19 @@ block content
     include actions
     
     .grid-header.form-header
-      //- ol.six
-      //-   li.active
-      //-     .ol-1-active
-      //-     | Details
     
     .details
       h2 Advertiser Details
       
       hr
       
-      form.details-form(action='', method='post')
+      form.details-form(action='/admin/advertisers/#{advertiser.advertiser_id}', method='post')
         
         include ../../flashify
         
         input(type='hidden', name='_method', value='put')
         
-        .left
-          .inputs
-            label.required(for='name') Name
-            input#name(type='text', name='name', placeholder='Name', value=advertiser.name)
-          
-          .inputs
-            label(for='description') Description
-            input#description(type='text', placeholder='Description', name='description', value=advertiser.description)
-          
-          .inputs
-            label.required(for='contactee') Contactee
-            input#contactee(type='text', placeholder='Contactee', name='contactee', value=advertiser.contactee)
-        
-        .right
-          .inputs
-            label.required(for='email') Email
-            input#email(type='email', name='email', placeholder='Email', value=advertiser.email)
-          
-          .inputs
-            label.required(for='phone') Phone
-            input#phone(type='tel', placeholder='Phone', name='phone', value=advertiser.phone)
-          
-          .inputs
-            label.required(for='address') Address
-            input#address(type='text', placeholder='Address', name='address', value=advertiser.address)
-         
-          .inputs
-            label.required(for='suburb') Suburb
-            input#suburb(type='text', placeholder='Suburb', name='suburb', value=advertiser.suburb)
-         
-          .inputs
-            label.required(for='postcode') Postcode
-            input#postcode(type='text', name='postcode', placeholder='Postcode', value=advertiser.postcode)
-          
-          .inputs
-            label.required(for='state') State
-            input#state(type='text', name='state', placeholder='State', value=advertiser.state)
-        
-        .inputs
+        include inputs
         
         .submit
           input.button(type='submit', value='Update')

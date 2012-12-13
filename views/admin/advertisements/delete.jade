@@ -1,10 +1,13 @@
 extends ../../layout
 
 block content
+  
   .container.row.main
+    
     include ../../left_nav
     
     #center-col
+      
       h3 Delete Advertisement?
       
       p Are you sure you wish to delete:
@@ -27,11 +30,14 @@ block content
         
           include summary
       
-      form.form-horizontal(action="/admin/advertisements/delete/#{advertisement.advertisement_id}", method="post")
-        input(type="hidden", name="_method", value="delete")
+      form.form-horizontal(action="/admin/advertisements/#{advertisement.advertisement_id}", method='post')
+        
+        input(type='hidden', name='_method', value='delete')
         
         div.control-group
+          
           div.controls
-            input.btn.btn-danger(type="submit", value="Delete")
+            
+            input.btn.btn-danger(type='submit', value='Delete')
             | &nbsp;
-            a.btn(href="/admin/advertisements") Cancel
+            a.btn(href='/admin/advertisements') Cancel

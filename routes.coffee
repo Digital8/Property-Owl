@@ -83,25 +83,25 @@ module.exports = (app) ->
   
   # admin/advertisers
   admin 'get', '/advertisers', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.advertisers.index
-  admin 'post', '/advertisers/add', controllers.admin.advertisers.create
+  admin 'post', '/advertisers', controllers.admin.advertisers.create
   admin 'get', '/advertisers/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.advertisers.add
   admin 'get', '/advertisers/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.advertisers.edit
-  admin 'put', '/advertisers/:id(\\d+)/edit', controllers.admin.advertisers.update
+  admin 'put', '/advertisers/:id(\\d+)', controllers.admin.advertisers.update
   admin 'get', '/advertisers/:id(\\d+)/delete', controllers.admin.advertisers.delete
-  admin 'delete', '/advertisers/:id(\\d+)/delete', controllers.admin.advertisers.destroy
+  admin 'delete', '/advertisers/:id(\\d+)', controllers.admin.advertisers.destroy
   
   # admin/advertisements
   admin 'get', '/advertisements', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.advertisements.index
-  admin 'post', '/advertisements/add', controllers.admin.advertisements.create
+  admin 'post', '/advertisements', controllers.admin.advertisements.create
   admin 'get', '/advertisements/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.advertisements.add
-  admin 'get', '/advertisements/edit/:id(\\d+)', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.advertisements.edit
-  admin 'put', '/advertisements/edit/:id(\\d+)', controllers.admin.advertisements.update
-  admin 'get', '/advertisements/delete/:id(\\d+)', controllers.admin.advertisements.delete
-  admin 'delete', '/advertisements/delete/:id(\\d+)', controllers.admin.advertisements.destroy
+  admin 'get', '/advertisements/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.advertisements.edit
+  admin 'put', '/advertisements/:id(\\d+)', controllers.admin.advertisements.update
+  admin 'get', '/advertisements/:id(\\d+)/delete', controllers.admin.advertisements.delete
+  admin 'delete', '/advertisements/:id(\\d+)', controllers.admin.advertisements.destroy
   
   # admin/affiliates
   admin 'get', '/affiliates', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.affiliates.index
-  admin 'post', '/affiliates/add', controllers.admin.affiliates.create
+  admin 'post', '/affiliates', controllers.admin.affiliates.create
   admin 'get', '/affiliates/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.affiliates.add
   admin 'get', '/affiliates/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.affiliates.edit
   admin 'put', '/affiliates/:id(\\d+)', controllers.admin.affiliates.update
