@@ -50,8 +50,7 @@ DROP TABLE IF EXISTS `affiliates`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `affiliates` (
   `affiliate_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `company` varchar(100) NOT NULL,
-  `logo` varchar(100) NOT NULL,
+  `logo` varchar(100) DEFAULT NULL,
   `phone` varchar(15) NOT NULL,
   `address` text NOT NULL,
   `suburb` varchar(100) NOT NULL,
@@ -64,8 +63,9 @@ CREATE TABLE `affiliates` (
   `affiliate_category_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`affiliate_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `affiliates` (
 
 LOCK TABLES `affiliates` WRITE;
 /*!40000 ALTER TABLE `affiliates` DISABLE KEYS */;
-INSERT INTO `affiliates` VALUES (1,'Backenders','','0400 111 333','1 Queen Street','Brisbane','qld','test@test.test','4000',1,'We\'ve got you covered from behind!','',3,'','0000-00-00 00:00:00'),(2,'Inside Jobs','','0400 111 333','1 Wickham Terrace','Fortitude Valley','qld','test@test.test','4000',1,'this is another test service','',1,'','0000-00-00 00:00:00');
+INSERT INTO `affiliates` VALUES (1,'','0400 111 333','1 Queen Street','Brisbane','qld','test@test.test','4000',1,'We\'ve got you covered from behind!','',3,'','0000-00-00 00:00:00','0000-00-00 00:00:00'),(2,'','0400 111 333','1 Wickham Terrace','Fortitude Valley','qld','test@test.test','4000',1,'this is another test service','',1,'','0000-00-00 00:00:00','0000-00-00 00:00:00'),(4,NULL,'','','','','','',1,'','',0,'Nick','2012-12-13 22:58:06','2012-12-13 22:58:06');
 /*!40000 ALTER TABLE `affiliates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -619,4 +619,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-13 22:09:30
+-- Dump completed on 2012-12-14  9:29:07
