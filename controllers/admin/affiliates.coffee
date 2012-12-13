@@ -35,16 +35,16 @@ exports.create = (req, res) ->
     console.log 'create', arguments
     
     template = 'listing-confirmation'
-
+    
     user =
       contactName: res.locals.objUser.firstName
       email: res.locals.objUser.email
-
+    
     secondary = 
       dealLink: '/admin/affiliates/#{affiliate.insertId}/edit'
-
+    
     system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
-      if results is true 
+      if results is true
         affiliate.upload req, ->
           res.redirect "/affiliates/#{affiliate.id}"
       else
