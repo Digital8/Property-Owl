@@ -41,7 +41,6 @@ exports.create = (req,res) ->
           summary: req.body.content
           link: '/news/#{results.insertId}'
 
-
         system.helpers.mailer template,'Newsletter', user, secondary, (results) ->
           callback()
 

@@ -21,6 +21,8 @@ module.exports = (app) ->
   
   app.get '/adclick/:id', controllers.adclick.index
   
+  app.get '/registrations', authenticate, controllers.account.registrations
+
   app.get '/contact', controllers.contact.index
   app.post '/contact', controllers.contact.create
   

@@ -65,3 +65,6 @@ exports.update = (req,res) ->
             res.redirect 'back'
 
 exports.destroy = (req,res) ->
+
+exports.registrations = (req, res) ->
+  res.render 'user/registrations'
