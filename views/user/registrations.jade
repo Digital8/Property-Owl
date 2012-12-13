@@ -20,13 +20,45 @@ block content
             table.admin-gridview
               thead
                 tr
-                  td Title
+                  td Resource ID
                   td Deal Type
-                  //- td Deal Status
-                  td Date Listed
                   td Actions
               
               tbody
-                h4 You haven't registered to any property.
+                - if (registrations.length == 0)
+                  h4 You haven't registered to any property.
+                - else
+                  each registration in registrations 
+                    tr
+                      td= registration.resource_id
+                      td
+                        case (registration.type)
+                          when 'owl'
+                            a(href="/owls/#{registration.resource_id}") Owl Deal
+
+                          default 
+                            p 'unknown'
+                      td
+                        a.reg-delete(href="#", data-id="#{registration.registration_id}") Delete
     
     include ../right_nav
+
+  script
+    $(document).ready(function(){
+      $(".reg-delete").click(function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        if (confirm('Are you sure you want to remove this?'))
+        {
+          $.ajax({
+            url: '/ajax/delRegistration',
+            method: 'get',
+            data: 'id='+id
+          }).done(function(d){
+            if (d.status == '200'){
+              $(this).parent().parent().fadeOut();
+            }
+          });
+        }
+      });
+    });

@@ -2,7 +2,9 @@ system = require '../system'
 
 helpers = hash: system.load.helper 'hash'
 
-models = user: system.load.model 'user'
+models = 
+  user: system.load.model 'user'
+  registrations: system.load.model 'registrations'
 
 exports.index = (req,res) -> res.render 'user/settings'
 
@@ -67,4 +69,6 @@ exports.update = (req,res) ->
 exports.destroy = (req,res) ->
 
 exports.registrations = (req, res) ->
-  res.render 'user/registrations'
+  models.registrations.findByUser res.locals.objUser.id, (err, results) ->
+    if err then console.log err
+    res.render 'user/registrations', registrations: results or {}
