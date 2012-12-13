@@ -105,10 +105,10 @@ module.exports = (app) ->
   admin 'put', '/affiliates/:id(\\d+)', controllers.admin.affiliates.update
   admin 'get', '/affiliates/:id(\\d+)/delete', controllers.admin.affiliates.delete
   admin 'delete', '/affiliates/:id(\\d+)', controllers.admin.affiliates.destroy
-
+  
   # admin/news
   admin 'get', '/news', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.news.index
-  admin 'post', '/news/add', controllers.admin.news.create
+  admin 'post', '/news', controllers.admin.news.create
   admin 'get', '/news/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.news.add
   admin 'get', '/news/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.news.edit
   admin 'put', '/news/:id(\\d+)', controllers.admin.news.update

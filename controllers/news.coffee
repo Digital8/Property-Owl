@@ -1,17 +1,18 @@
 system = require '../system'
 
-models = news: system.load.model 'news'
+News = system.models.news
 
 exports.index = (req,res) ->
-  models.news.getAllNews (err, results) ->
-    if err then throw err
-    res.render 'news/index', news: results or {}, menu: 'wise-owl'
+  News.all (error, news) ->
+    throw error if error
     
+    res.render 'news/index', news: news
+
 exports.view = (req,res) ->
-  models.news.getNewsById req.params.id, (err, results) ->
-    if err then throw err
+  News.get req.params.id, (error, news) ->
+    throw error if error
     
-    res.render 'news/view', post: results.pop() or {}, menu: 'wise-owl'
+    res.render 'news/view', post: news
 
 exports.add = (req,res) ->
 

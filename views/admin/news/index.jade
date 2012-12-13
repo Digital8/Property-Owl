@@ -13,12 +13,6 @@ block content
     include actions
     
     .grid-header
-      //- form#search-form
-      //-   input#memberSearch(type='text')
-      //-   | &nbsp;
-      //-   input.button(type='submit', value='Go')
-      //-   | &nbsp;
-      //-   input.button(type='submit', value='Reset')
     
     table.admin-gridview
      thead
@@ -30,22 +24,7 @@ block content
      
      tbody
      - each post in news
-      tr
-        td= post.news_type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
-        
-        td= post.title
-        
-        td= moment(post.posted_at).format('LLL')
-        
-        td.actions
-          a(href="/admin/news/#{post.news_id}/edit")
-            img(src='/images/edit.png', alt='Edit')
-            | Edit
-        
-        td.actions
-          a(href="/admin/news/delete/#{post.news_id}")
-            img(src='/images/delete.png', alt='Delete')
-            | Delete
+      include summary
      
      tfoot
        tr

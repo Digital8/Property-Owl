@@ -1,41 +1,29 @@
 extends ../../layout
 
 block content
+  
   .container.row.main
+  
     include ../menu
     
     h1 Edit Article
     
     .grid-header.form-header
-      ol.six
-        li.active
-          .ol-1-active
-          | Details
     
     .details
+      
       h2 News Details
       
       hr
       
-      form.details-form(action="/admin/news/edit/#{news.news_id}", method="post")
-        input(type="hidden", name="_method", value="put")
+      form.details-form(action="/admin/news/#{post.id}", method='post')
+        
+        input(type='hidden', name='_method', value='put')
         
         include ../../flashify
-        .inputs
-          label.required(for='newsType') Article Type
-          select#newsType.half-field(name="news_type")
-            - if (news.news_type == undefined) news.news_type = ''
-            option(value="news",selected= (news.news_type.toLowerCase() == 'news') ? true :false) News
-            option(value="research",selected= (news.news_type.toLowerCase() == 'research') ? true :false) Research
-                 
-        .inputs
-          label.control-label(for="inputTitle") Title
-          input#inputTitle(type="text", name="title", value="#{news.title}")
         
-        .inputs 
-          label.control-label(for="inputContent") Content
-          textarea#inputContent.span8(name="content", rows="10")= news.content
+        include inputs
         
         .submit
-          input.button(type="submit", value="Update News")
-          a.left-button(href="/admin/news") Cancel
+          input.button(type='submit', value='Update News')
+          a.left-button(href='/admin/news') Cancel

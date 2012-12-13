@@ -1,0 +1,16 @@
+tr
+  td= post.type
+  
+  td= post.title
+  
+  td= moment(post.created_at).format('LLL')
+  
+  td.actions
+    a(href="/admin/news/#{post.id}/edit")
+      img(src='/images/edit.png', alt='Edit')
+      | Edit
+  
+  td.actions
+    a(href="/admin/news/#{post.id}/delete")
+      img(src='/images/delete.png', alt='Delete')
+      | Delete
