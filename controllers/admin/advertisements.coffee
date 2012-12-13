@@ -3,6 +3,7 @@ util = require 'util'
 
 async = require 'async'
 uuid = require 'node-uuid'
+_ = require 'underscore'
 
 system = require '../../system'
 
@@ -19,7 +20,14 @@ exports.index = (req, res) ->
     ads: (callback) ->
       models.advertisement.all callback
   , (error, results) ->
-    res.render 'admin/advertisements/index', advertisements: results.ads, menu: 'advertising', pages: results.pages
+    
+    results.pages = results.pages[0] # TODO WTF? [@pyro]
+    
+    async.map results.ads, (ad, callback) ->
+      ad.page = _.find results.pages, (page) -> return page.page_id == ad.page_id
+      do callback
+    , (error) ->
+      res.render 'admin/advertisements/index', advertisements: results.ads, pages: results.pages
 
 exports.add = (req, res) ->
   
@@ -82,9 +90,8 @@ exports.edit = (req, res) ->
 
 exports.update = (req, res) ->
   req.body.id = req.params.id
-  req.body.page_id = req.body.page
-  req.body.advertiser_id = req.body.advertiser
-  req.body.adspace_id = req.body.adspace
+  
+  console.log req.body
   
   afterUpload = ->
     req.assert('description', 'Please enter a description').notEmpty()
@@ -102,6 +109,8 @@ exports.update = (req, res) ->
     
     else
       models.advertisement.update req.body, (err, results) ->
+        console.log arguments
+        
         if err
           req.flash 'error', 'an error occured updating the advertisement'
           
@@ -111,7 +120,9 @@ exports.update = (req, res) ->
           
           res.redirect '/admin/advertisements'
   
-  if req.files.image
+  if req.files?.image?.size
+    console.log 'req.files.image', req.files.image
+    
     fs.readFile req.files.image.path, (error, data) ->
       req.body.image_id = uuid() + '.png'
       

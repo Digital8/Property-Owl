@@ -115,6 +115,7 @@ app.configure ->
       res.locals._s       = require 'underscore.string'
       res.locals.moment = require 'moment'
       res.locals.util = require 'util'
+      res.locals._ = require 'underscore'
       
       if app.argv.hack then req.session.user_id = 1
       
