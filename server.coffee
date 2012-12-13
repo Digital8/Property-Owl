@@ -180,6 +180,11 @@ app.configure ->
       else
         do done
     
+    # ?sort= middleware
+    app.use (req, res, next) ->
+      res.locals.sort = req.query.sort or null
+      do next
+    
     app.use app.router
     
     console.stop 'configure'

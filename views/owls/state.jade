@@ -11,9 +11,9 @@ block content
       form.sort-form
         label(for="sortby") Sort by
         | &nbsp;
-        select#sortby
-          option Date Listed
-          option Best Deal Value
+        select#sortby(onchange="location = this.options[this.selectedIndex].value;")
+          option(value='/owls/state/#{state}?sort=time', selected=sort == 'time') Date Listed
+          option(value='/owls/state/#{state}?sort=deal', selected=sort == 'deal') Best Deal Value
       - if (locals.owls && owls.length)
         - each owl in owls
           include summary

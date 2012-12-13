@@ -1,0 +1,5 @@
+h5.hacker Date | #{owl.created_at}
+h5.hacker Deal Value | #{owl.value} %
+pre.hacker(style='font-size: 8px;')
+  | Deals
+  | #{JSON.stringify(owl.deals, null, '  ')}
