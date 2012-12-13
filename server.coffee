@@ -115,6 +115,7 @@ app.configure ->
       res.locals._s       = require 'underscore.string'
       res.locals.moment = require 'moment'
       res.locals.util = require 'util'
+      res.locals._ = require 'underscore'
       
       if app.argv.hack then req.session.user_id = 1
       
@@ -178,6 +179,11 @@ app.configure ->
       
       else
         do done
+    
+    # ?sort= middleware
+    app.use (req, res, next) ->
+      res.locals.sort = req.query.sort or null
+      do next
     
     app.use app.router
     

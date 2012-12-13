@@ -13,9 +13,9 @@ exports.all = (callback) =>
       Advertiser = require './advertiser'
       
       Advertiser.find result.advertiser_id, (error, results) =>
-        console.dir arguments
+        # console.dir arguments
         result.advertiser = if results.length is 0 then '' else results.pop()
-        console.dir result
+        # console.dir result
         do callback
     , (error) =>
       callback error, results
@@ -24,7 +24,20 @@ exports.create = (ad, callback) =>
   @db.query """INSERT INTO #{table} (description, page_id, advertiser_id, adspace_id, image_id, hyperlink, visible, start, stop) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)""", [ad.description, ad.page_id, ad.advertiser_id, ad.adspace_id, ad.image_id, ad.hyperlink, ad.visible, ad.start, ad.stop], callback
 
 exports.update = (ad, callback) =>
-  @db.query "UPDATE #{table} SET description = ?, page_id = ?, advertiser_id = ?, adspace_id = ?, image_id = ?, hyperlink = ?, visible = ?, start = ?, stop = ? WHERE advertisement_id = ?", [ad.description, ad.page_id, ad.advertiser_id, ad.adspace_id, ad.image_id, ad.hyperlink, ad.visible, ad.start, ad.stop, ad.id], callback
+  map =
+    description: ad.description
+    page_id: ad.page_id
+    advertiser_id: ad.advertiser_id
+    adspace_id: ad.adspace_id
+    image_id: ad.image_id
+    hyperlink: ad.hyperlink
+    visible: ad.visible
+    start: new Date
+    stop: new Date
+    updated_at: new Date
+    created_at: new Date
+  
+  @db.query "UPDATE #{table} SET ? WHERE advertisement_id = ?", [map, ad.id], callback
 
 exports.find = (id, callback) =>
   @db.query "SELECT * FROM #{table} WHERE advertisement_id = ?", [id], callback

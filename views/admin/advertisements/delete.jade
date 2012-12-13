@@ -8,8 +8,25 @@ block content
       h3 Delete Advertisement?
       
       p Are you sure you wish to delete:
-        em
-          u #{advertisement.name}
+      
+      table.admin-gridview
+        thead
+          tr
+            td ID
+            td Description
+            td Advertiser
+            td Page
+            //- td Space
+            td Image
+            td Hyperlink
+            //- td Duration
+            td Visible
+            td(colspan='2') Actions
+        
+        tbody
+        
+          include summary
+      
       form.form-horizontal(action="/admin/advertisements/delete/#{advertisement.advertisement_id}", method="post")
         input(type="hidden", name="_method", value="delete")
         

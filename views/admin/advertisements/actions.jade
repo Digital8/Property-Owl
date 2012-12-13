@@ -1,11 +1,13 @@
 .admin-actions
   ul
+    
     if(action != 'add')
       li
         a(href='/admin/advertisements/add')
           img(src='/images/add.png')
           | &nbsp;
           | Add Advertisement
+    
     if(action != 'index')
       li
         a(href="/admin/advertisements")

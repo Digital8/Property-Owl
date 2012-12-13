@@ -78,7 +78,7 @@ exports.register = (req, res) ->
           
 exports.securedeal = (req, res) ->
   req.assert('e', 'Invalid Email Address').isEmail()
-  #req.assert('m', 'Phone Number is invalid').is(/^[\+0-9][ 0-9]*[0-9]$/).len(8,16)
+  req.assert('m', 'Phone Number is invalid').is(/^[\+0-9][ 0-9]*[0-9]$/).len(8,16)
   req.assert('f', 'First name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
   req.assert('l', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
   req.assert('c', 'Comment cannot be empty').notEmpty()

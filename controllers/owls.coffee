@@ -28,6 +28,15 @@ exports.byState = (req, res) ->
   {state} = req.params
   
   Owl.state state, (error, owls) ->
+    
+    if req.query.sort?
+      switch req.query.sort
+        when 'deal'
+          owls = _.sortBy owls, 'value'
+          owls.reverse()
+        when 'time'
+          owls = _.sortBy owls, 'created_at'
+    
     res.render 'owls/state', owls: owls, state: state
 
 exports.show = (req, res) ->

@@ -6,7 +6,7 @@ Affiliate = system.models.affiliate
 
 exports.index = (req, res) ->
   Affiliate.all (error, affiliates) ->
-    res.render 'affiliates', affiliates: affiliates
+    res.render 'affiliates/index', affiliates: affiliates
 
 exports.view = (req,res) ->
 

@@ -42,12 +42,6 @@
         h3= owl.title
         
         p= _s.prune(owl.description, 150)
-        
-        - if (objUser.isHacker())
-          h5.hacker Deal Value | #{owl.value} %
-          pre.hacker(style='font-size: 8px;')
-            | Deals
-            | #{JSON.stringify(owl.deals)}
       
       .listing-links
         
@@ -63,3 +57,6 @@
           a.admin-button(href='/admin/owls/#{owl.id}/edit')
             img#admin-icon(src='/images/view.png', alt='View owl details')
             |  Admin
+    
+  - if (objUser.isHacker())
+    include hack
