@@ -6,7 +6,7 @@ exports.index = (req,res) ->
   models.page.all (error, results) ->
     if error then throw error
     
-    res.render 'admin/pages/index', pages: results or {}, menu: 'content'
+    res.render 'admin/pages/index', pages: results or {}
 
 exports.view = (req,res) ->
 
@@ -53,7 +53,7 @@ exports.edit = (req,res) ->
       res.redirect 'back'
     
     else
-      res.render 'admin/pages/edit', page: results.pop(), menu: 'content'
+      res.render 'admin/pages/edit', page: results.pop()
   
 exports.update = (req,res) ->
   models.page.find req.params.id, (err, results) ->
@@ -80,7 +80,7 @@ exports.delete = (req, res) ->
       res.redirect '/admin/pages'
     
     else
-      res.render 'admin/pages/delete', page: results.pop() or {}, menu: 'content'
+      res.render 'admin/pages/delete', page: results.pop() or {}
 
 exports.destroy = (req, res) ->
   models.page.delete req.params.id, (err, results) ->

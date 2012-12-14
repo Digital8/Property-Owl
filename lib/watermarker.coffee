@@ -2,7 +2,9 @@ fs = require 'fs'
 
 {Image} = Canvas = require 'canvas'
 
-module.exports = (path, watermarkPath = "#{__dirname}/../public/images/watermark.png") ->
+watermarkPath = "#{__dirname}/../public/images/watermark.png"
+
+module.exports = (path, callback) ->
   watermarkImage = new Image
   
   watermarkImage.onload = ->
@@ -19,9 +21,16 @@ module.exports = (path, watermarkPath = "#{__dirname}/../public/images/watermark
       
       ctx.drawImage watermarkImage, image.width - watermarkImage.width, image.height - watermarkImage.height, watermarkImage.width, watermarkImage.height
       
-      canvas.toBuffer (error, buffer) ->
-        fs.writeFile "#{__dirname}/test.png", buffer, ->
-          console.log 'done'
+      # canvas.toBuffer (error, buffer) ->
+      #   fs.writeFile "#{__dirname}/test.png", buffer, ->
+      #     console.log 'done'
+      
+      console.log 'bleg'
+      
+      callback null, canvas.createJPEGStream
+        quality: 75
+      
+      # console.log 'stream', canvas.createJPEGStream()
     
     image.src = path
   

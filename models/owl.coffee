@@ -1,4 +1,5 @@
 _ = require 'underscore'
+_s = require 'underscore.string'
 async = require 'async'
 
 Model = require '../lib/model'
@@ -43,6 +44,8 @@ module.exports = class Owl extends Model
   #@field 'feature_image'
   
   constructor: (args = {}) ->
+    Object.defineProperty this, 'code', get: => _s.pad @id.toString(), 5, '0'
+    
     super
   
   hydrate: (callback) ->

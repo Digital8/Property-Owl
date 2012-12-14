@@ -5,7 +5,7 @@ system = require '../system'
 # exports.index = (req,res) ->
 #   models.services.getAllServices (err, results) ->
 #     if err then throw err
-#     res.render 'products', menu: 'products', services: results or {}
+#     res.render 'products', services: results or {}
 
 exports.view = (req,res) ->
 

@@ -8,7 +8,7 @@ exports.index = (req,res) ->
   models.user.getAllUsers (err, results) ->
     if err then throw err
     
-    res.render 'admin/members/index', users: results, menu: 'members'
+    res.render 'admin/members/index', users: results
 
 exports.view = (req,res) ->
 
@@ -59,7 +59,7 @@ exports.edit = (req,res) ->
       res.redirect 'back'
     else
       models.user.getAllGroups (err, groups) ->
-        res.render 'admin/members/edit', values: results.pop(), groups: groups, menu: 'members'
+        res.render 'admin/members/edit', values: results.pop(), groups: groups
 
 exports.update = (req,res) ->
   req.body.email ?= ''
