@@ -7,11 +7,11 @@
   
   .inputs
     label.required(for='first_name') Full Name
-    - if (values.first_name == undefined) values.first_name = ''
-      input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.first_name}",class="half-field")
+    - if (values.fname == undefined) values.fname = ''
+      input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.fname}",class="half-field")
       | &nbsp;
-    - if (values.last_name == undefined) values.last_name = ''
-      input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.last_name}",class="half-field")
+    - if (values.lname == undefined) values.lname = ''
+      input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.lname}",class="half-field")
   
   .inputs
     label(for='company') Company

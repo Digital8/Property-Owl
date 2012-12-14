@@ -13,12 +13,16 @@ exports.index = (req,res) ->
 exports.view = (req,res) ->
 
 exports.add = (req,res) ->
+  values = req.session.signup or {}
+  delete req.session.signup
+  
   models.user.getAllGroups (err, groups) ->
     if err then throw err
     
-    res.render 'admin/members/add', values: req.session.signup or {}, groups: groups or {}, menu: 'members'
+    res.render 'admin/members/add', values:  values, groups: groups or {}, menu: 'members'
 
 exports.create = (req,res) ->
+  req.session.signup  = req.body
   req.assert('email', 'Invalid Email').isEmail()
   req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
   req.assert('confirmPassword', 'Password does not match').isIn [req.body.password]

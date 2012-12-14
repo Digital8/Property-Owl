@@ -37,7 +37,7 @@ block content
                             a(href="/owls/#{registration.resource_id}") Owl Deal
 
                           default 
-                            p 'unknown'
+                            p= registration.type
                       td
                         a.reg-delete(href="#", data-id="#{registration.registration_id}") Delete
     
