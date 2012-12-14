@@ -53,8 +53,9 @@ block content
       .property-info
       
         - if (barn.owls && barn.owls.length)
-          table.barn-lots
           
+          table.barn-lots
+            
             thead
               td Lot
               td Bed
@@ -71,7 +72,7 @@ block content
             tbody
               - each owl in barn.owls
                 tr
-                  td O#{owl.id}
+                  td #{barn.code}#{owl.alpha}
                   td= owl.bedrooms
                   td= owl.bathrooms
                   td= owl.carspaces

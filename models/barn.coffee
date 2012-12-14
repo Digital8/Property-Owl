@@ -1,4 +1,5 @@
 async = require 'async'
+_s = require 'underscore.string'
 
 Model = require '../lib/model'
 Table = require '../lib/table'
@@ -25,6 +26,8 @@ module.exports = class Barn extends Model
   @field 'listed_by'
   
   constructor: (args = {}) ->
+    Object.defineProperty this, 'code', get: => _s.pad @id.toString(), 5, '0'
+    
     super
   
   hydrate: (callback) ->
@@ -34,6 +37,11 @@ module.exports = class Barn extends Model
         
         Owl.inBarn @id, (error, owls) =>
           @owls = owls
+          
+          for owl, index in @owls
+            owl.index = index
+            owl.alpha = 'ABCDE'[index]
+          
           callback error
       
       deals: (callback) =>
