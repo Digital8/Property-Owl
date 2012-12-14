@@ -7,6 +7,7 @@ module.exports = (selector, options = {}) ->
   options.fill ?= '#FFF'
   options.stroke ?= '#DE1515'
   options.hover ?= '#0A5B9A'
+  options.highlight ?= '#1A6BAA'
   
   R = Raphael selector, options.width, options.height
   
@@ -36,6 +37,9 @@ module.exports = (selector, options = {}) ->
   
   current = null
   
+  if window.state?
+    aus[window.state].attr fill: options.highlight
+  
   for state of aus
     aus[state].color = options.hover # Raphael.getColor()
     
@@ -45,10 +49,11 @@ module.exports = (selector, options = {}) ->
       st[0].onclick = -> window.location = "/owls/state/#{state}"
       
       st[0].onmouseover = ->
-        current and aus[current].animate(
-          fill: "#FFF"
-          # stroke: "#666"
-        , 250) # and (document.getElementById(current).style.display = "")
+        unless state is window.state
+          current and aus[current].animate(
+            fill: "#FFF"
+            # stroke: "#666"
+          , 250) # and (document.getElementById(current).style.display = "")
         
         st.animate
           fill: st.color
@@ -63,15 +68,16 @@ module.exports = (selector, options = {}) ->
         
         current = state
       
-      st[0].onmouseout = ->
-        st.animate
-          fill: "#FFF"
-          # stroke: "#666"
-        , 250
-        
-        # st.toFront()
-        
-        R.safari()
+      unless state is window.state
+        st[0].onmouseout = ->
+          st.animate
+            fill: "#FFF"
+            # stroke: "#666"
+          , 250
+          
+          # st.toFront()
+          
+          R.safari()
       
       # st[0].onmouseover() if state is "nsw"
     ) aus[state], state

@@ -21,3 +21,6 @@ block content
         p There are no current property deals for #{state.toUpperCase()} right now but keep an eye out because we are always listing new deals. 
     
     include ../right_nav
+  
+  script
+    window.state = !{JSON.stringify(state)};
