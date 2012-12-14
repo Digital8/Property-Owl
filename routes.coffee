@@ -10,7 +10,11 @@ area = (key = 'master') ->
 module.exports = (app) ->
   app.get '/', (area 'index'), controllers.index.index
   
+  # epoch
   app.get '/epoch', controllers.epoch
+  
+  # clicks
+  app.post '/clicks', controllers.clicks.create
   
   # auth
   #app.all '/login', controllers.login.index

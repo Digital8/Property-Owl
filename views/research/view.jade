@@ -1,13 +1,11 @@
 extends ../layout
 
 block content
-  //
-    main content
+  
   .container.row.main
+    
     include ../left_nav
    
-    //
-      center-col
     #center-col
       h1 Research
       a(href="/research") View All Research
@@ -17,18 +15,5 @@ block content
         .listing-thumb
           img.thumb(src='/images/news-thumb.jpg', alt='')
       p= post.content
-      //
-        end listing
-    //
-      end center-col
-    //
-      right-col
-    include ../right_nav
     
-    //
-      end right-col
-  //
-    end main content
-
-    script
-      $('small.timeago').timeago();
+    include ../right_nav
