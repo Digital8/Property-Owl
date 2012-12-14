@@ -9,7 +9,7 @@ exports.index = (req, res) ->
     res.render 'admin/advertisers/index', advertisers: results
 
 exports.add = (req, res) ->
-  res.render 'admin/advertisers/add'
+  res.render 'admin/advertisers/add', advertiser: {visible: yes}
 
 exports.create = (req, res) ->
   # req.assert('email', 'Invalid Email Address').isEmail()
@@ -32,6 +32,7 @@ exports.create = (req, res) ->
   
   else # no errors
     advertiser = req.body
+    advertiser.visible ?= yes
     
     models.advertiser.create advertiser, (error, results) ->
       if error
