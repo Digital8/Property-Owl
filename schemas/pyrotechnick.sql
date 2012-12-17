@@ -151,15 +151,17 @@ DROP TABLE IF EXISTS `clicks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `clicks` (
   `click_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `advertisement_id` mediumint(8) unsigned NOT NULL,
+  `resource_id` mediumint(8) NOT NULL,
   `ip_address` varchar(25) NOT NULL,
   `referer` text NOT NULL,
   `user_agent` text NOT NULL,
-  `user_id` mediumint(8) unsigned NOT NULL,
+  `user_id` mediumint(8) NOT NULL,
   `req` mediumtext NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `type` varchar(45) NOT NULL,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`click_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,6 +170,7 @@ CREATE TABLE `clicks` (
 
 LOCK TABLES `clicks` WRITE;
 /*!40000 ALTER TABLE `clicks` DISABLE KEYS */;
+INSERT INTO `clicks` VALUES (8,4,'','','',1,'','2012-12-14 05:07:52','affiliate','2012-12-14 15:07:52');
 /*!40000 ALTER TABLE `clicks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +214,7 @@ CREATE TABLE `deals` (
   `deal_type_id` int(11) DEFAULT '6',
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`deal_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=131 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,7 +223,7 @@ CREATE TABLE `deals` (
 
 LOCK TABLES `deals` WRITE;
 /*!40000 ALTER TABLE `deals` DISABLE KEYS */;
-INSERT INTO `deals` VALUES (60,'Care-taking Service',10,3,250,6,'owl'),(49,'stamp duty',17,1,20000,6,'owl'),(15,'5% off the list price when 5 are sold',2,1,30000,6,'owl'),(54,'helicopter pad',43,3,50000,5,'owl'),(52,'stamp duty',45,1,10000,1,'owl'),(126,'Stereo + Projector',42,3,3333,1,'owl'),(55,'automatisch',43,3,4000,3,'owl'),(50,'stamp',17,1,30000,5,'owl'),(53,'furniture package',45,1,30028,2,'owl'),(59,'u',10,3,10000,1,'owl'),(73,'u',47,3,149996,1,'owl'),(69,'u',48,1,10000,1,'owl'),(66,'Horse',49,1,12000,6,'owl'),(68,'u',50,1,11000,4,'owl'),(72,'Car',51,3,10000,6,'owl'),(71,'Outdoor Setting',52,1,12000,2,'owl'),(125,'Outdoor Setting',42,3,10000,5,'owl'),(127,'undefined',42,3,12000,2,'owl');
+INSERT INTO `deals` VALUES (60,'Care-taking Service',10,3,250,6,'owl'),(49,'stamp duty',17,1,20000,6,'owl'),(15,'5% off the list price when 5 are sold',2,1,30000,6,'owl'),(54,'helicopter pad',43,3,50000,5,'owl'),(52,'stamp duty',45,1,10000,1,'owl'),(130,'undefined',42,1,12000,2,'owl'),(55,'automatisch',43,3,4000,3,'owl'),(50,'stamp',17,1,30000,5,'owl'),(53,'furniture package',45,1,30028,2,'owl'),(59,'u',10,3,10000,1,'owl'),(73,'u',47,3,149996,1,'owl'),(69,'u',48,1,10000,1,'owl'),(66,'Horse',49,1,12000,6,'owl'),(68,'u',50,1,11000,4,'owl'),(72,'Car',51,3,10000,6,'owl'),(71,'Outdoor Setting',52,1,12000,2,'owl'),(129,'Outdoor Setting',42,1,10000,5,'owl'),(128,'Stereo + Projector',42,1,3333,1,'owl');
 /*!40000 ALTER TABLE `deals` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,7 +293,7 @@ CREATE TABLE `medias` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`media_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,7 +302,7 @@ CREATE TABLE `medias` (
 
 LOCK TABLES `medias` WRITE;
 /*!40000 ALTER TABLE `medias` DISABLE KEYS */;
-INSERT INTO `medias` VALUES (11,9,1,'8ad19750-2945-11e2-b4bc-5f66e9f836b9.jpg','',1,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(12,9,1,'ea037e10-3394-11e2-bad3-cd982acbcfc3.JPG','photo.JPG',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(13,9,1,'d77d3cf0-3460-11e2-a1c1-75b0dcd6ca17.png','profile-pic.png',1,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(15,0,0,'','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(16,39,1,'9dd4f0a7-a795-45eb-a73b-1f282f176b8a','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(17,40,1,'c3e2da67-9fdb-40e4-a339-9476b259b358','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(18,1,1,'cd60ef61-d7f3-4ebf-b5c6-1242a446cacf','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(43,47,1,'478fa72e-8f81-47c2-9f06-aed2f838d264.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(35,41,1,'95f0b8c5-8a27-41ad-9327-f00952e25dc1.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(34,41,1,'2a982199-e169-4448-a173-08c9af18e99f.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(37,43,1,'11b6f252-3980-43a2-be1d-b552707860c3.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(38,43,1,'016606b4-2a4a-45b8-84f3-6c3be03d7753.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(39,17,1,'29618948-4930-48e1-ab49-93c4d5828b30.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(44,47,1,'6cc63577-4b85-428c-83aa-c188475ebfd0.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(41,45,1,'956a1eb2-5255-447b-8045-e65c7f78cbb6.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(42,10,3,'9e6af5b5-c433-4ae5-b0bf-ac19bf27578c.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(45,48,1,'c5712252-bb79-4271-8031-1acb262dd837.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(46,48,1,'f9ed5f01-d840-4cf8-9cb1-232ee80ac9fb.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(47,49,1,'119726e9-3f93-4258-9887-d00823d0cf79.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(48,49,1,'dc087e9e-7a81-4b8e-b169-d7e394beb122.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(49,50,1,'e9a7b1ab-c81c-4b65-a20f-29a023a32cdb.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(50,50,1,'09d5cc5a-78af-4752-a2b4-9e8948678295.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(51,52,1,'af9cbf30-8fd7-4264-93c8-ef04a663c4bc.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(52,51,3,'814c997c-9ae8-4571-bded-f71deac485bd.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(53,42,3,'8fee6ccc-ac0b-4b30-88b4-4039f380db6a.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(54,42,3,'e2c65f13-1ec6-4fc3-b6d6-09111651d6e9.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl');
+INSERT INTO `medias` VALUES (11,9,1,'8ad19750-2945-11e2-b4bc-5f66e9f836b9.jpg','',1,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(12,9,1,'ea037e10-3394-11e2-bad3-cd982acbcfc3.JPG','photo.JPG',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(13,9,1,'d77d3cf0-3460-11e2-a1c1-75b0dcd6ca17.png','profile-pic.png',1,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(15,0,0,'','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(16,39,1,'9dd4f0a7-a795-45eb-a73b-1f282f176b8a','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(17,40,1,'c3e2da67-9fdb-40e4-a339-9476b259b358','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(18,1,1,'cd60ef61-d7f3-4ebf-b5c6-1242a446cacf','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(43,47,1,'478fa72e-8f81-47c2-9f06-aed2f838d264.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(35,41,1,'95f0b8c5-8a27-41ad-9327-f00952e25dc1.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(34,41,1,'2a982199-e169-4448-a173-08c9af18e99f.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(37,43,1,'11b6f252-3980-43a2-be1d-b552707860c3.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(38,43,1,'016606b4-2a4a-45b8-84f3-6c3be03d7753.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(39,17,1,'29618948-4930-48e1-ab49-93c4d5828b30.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(44,47,1,'6cc63577-4b85-428c-83aa-c188475ebfd0.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(41,45,1,'956a1eb2-5255-447b-8045-e65c7f78cbb6.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(42,10,3,'9e6af5b5-c433-4ae5-b0bf-ac19bf27578c.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(45,48,1,'c5712252-bb79-4271-8031-1acb262dd837.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(46,48,1,'f9ed5f01-d840-4cf8-9cb1-232ee80ac9fb.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(47,49,1,'119726e9-3f93-4258-9887-d00823d0cf79.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(48,49,1,'dc087e9e-7a81-4b8e-b169-d7e394beb122.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(49,50,1,'e9a7b1ab-c81c-4b65-a20f-29a023a32cdb.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(50,50,1,'09d5cc5a-78af-4752-a2b4-9e8948678295.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(51,52,1,'af9cbf30-8fd7-4264-93c8-ef04a663c4bc.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(52,51,3,'814c997c-9ae8-4571-bded-f71deac485bd.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(53,42,3,'8fee6ccc-ac0b-4b30-88b4-4039f380db6a.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(54,42,3,'e2c65f13-1ec6-4fc3-b6d6-09111651d6e9.png','',0,'2012-12-09 23:54:15','0000-00-00 00:00:00','owl'),(55,42,1,'0a450b13-5dd4-4a7f-a444-c7f97b175e34.png','',0,'2012-12-14 03:47:49','2012-12-14 03:47:49','');
 /*!40000 ALTER TABLE `medias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -469,7 +472,7 @@ CREATE TABLE `po_advertisements` (
   `stop` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`advertisement_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -502,7 +505,7 @@ CREATE TABLE `po_advertisers` (
   `postcode` varchar(100) NOT NULL,
   `advertiser_created_at` datetime NOT NULL,
   PRIMARY KEY (`advertiser_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -619,4 +622,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-14  9:29:07
+-- Dump completed on 2012-12-17 15:09:12
