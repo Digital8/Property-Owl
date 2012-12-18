@@ -9,6 +9,6 @@ tr.media(data-id=image.id, data-type=image.type, data-entity-id=owl.id)
   
   td
     //- input(type='checkbox', name='image[delete][]', value=image.id)
-    a(href='/admin/owls/#{owl.id}/delete', alt='delete owl deal')
+    a.delete(href='/admin/owls/#{owl.id}/delete', alt='delete owl deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete

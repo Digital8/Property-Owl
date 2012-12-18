@@ -1,9 +1,12 @@
-medias = $ '.media'
-
-for media in medias
-  $media = media
+module.exports = ->
+  medias = $ '.media'
   
-  do (media, $media) ->
-    $media.find('.delete').click ->
-      $.delete "/medias/#{$media.data 'id'}", ->
-        console.log arguments
+  for media in medias
+    $media = $ media
+    
+    do (media, $media) ->
+      $media.find('.delete').click (event) ->
+        event.preventDefault()
+        
+        $.delete "/medias/#{$media.data 'id'}", ->
+          console.log arguments
