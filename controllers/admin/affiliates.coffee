@@ -32,23 +32,25 @@ exports.add = (req, res) ->
 
 exports.create = (req, res) ->
   Affiliate.create req.body, (error, affiliate) ->
-    console.log 'create', arguments
-    
-    template = 'listing-confirmation'
-    
-    user =
-      contactName: res.locals.objUser.firstName
-      email: res.locals.objUser.email
-    
-    secondary = 
-      dealLink: '/admin/affiliates/#{affiliate.insertId}/edit'
-    
-    system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
-      if results is true
-        affiliate.upload req, ->
+
+    affiliate.upload req, ->
+      console.log 'create', arguments
+      
+      template = 'listing-confirmation'
+      
+      user =
+        contactName: res.locals.objUser.firstName
+        email: res.locals.objUser.email
+      
+      secondary = 
+        dealLink: '/admin/affiliates/#{affiliate.insertId}/edit'
+      
+      system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
+        if results is true
+          affiliate.upload req, ->
+            res.redirect "/affiliates/#{affiliate.id}"
+        else
           res.redirect "/affiliates/#{affiliate.id}"
-      else
-        res.redirect "/affiliates/#{affiliate.id}"
 
 exports.update = (req, res) ->
   Affiliate.update req.params.id, req.body, (error, affiliate) ->
