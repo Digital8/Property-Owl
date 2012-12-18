@@ -32,13 +32,13 @@ exports.create = (req, res) ->
       res.redirect 'back'
       
       return
-
+    
     else
       render =  ->
         req.flash 'success', 'News post submitted'
         res.redirect '/admin/news'
-
-      News.upload req, ->
+      
+      post.upload req, ->
         do render
       
     

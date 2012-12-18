@@ -24,7 +24,7 @@ module.exports = class News extends Model
   hydrate: (callback) ->
     super callback
   
-  @upload: (req, callback) ->
+  upload: (req, callback) ->
    if req.files? and (Object.keys req.files).length
      async.forEach (Object.keys req.files), (key, callback) =>
        file = req.files[key]
