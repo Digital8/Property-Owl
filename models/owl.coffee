@@ -142,6 +142,10 @@ module.exports = class Owl extends Model
       
       callback null
   
+
+  @search: (v, callback) ->
+    @db.query "SELECT P.* FROM owls AS P INNER JOIN development_types AS PT WHERE state LIKE ? AND PT.name LIKE ? AND price >= ? AND price <= ? AND bathrooms >= ? AND cars >= ? AND development_stage LIKE ? AND suburb LIKE ? GROUP BY P.owl_id", [v.state, v.pType, v.minPrice, v.maxPrice, v.bathrooms, v.cars, v.devStage, v.suburb], callback
+
   upload: (req, callback) ->
     
     async.series

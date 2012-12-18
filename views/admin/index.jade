@@ -3,71 +3,20 @@ extends ../layout
 block content
   .container.row.main
   
-    include menu
-    
-    h1 Admin Dashboard
-    
-    #dashboard-left-col
-      .grid-header
-        h2 Pending Owl Deal Listings
-        // .grid-summary 1 - 4 of 24
-      
-      - if (owls.length == 0)
-        table.admin-gridview
-         thead
-           tr 
-             td(colspan='6')
-              | There are no pending owl deals. 
-      - else
-        table.admin-gridview
-         thead
-           tr
-             td ID
-             td Listed On
-             td Title
-             td(colspan='3') Actions
-          tbody
-          - each owl in owls
-            tr
-             td= owl.id
-             - var listed = new Date(owl.created_at)
-             td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
-             td= owl.title
-             td.actions
-               a(href='/admin/owls/#{owl.id}/edit', alt='edit owl deal')
-                 img(src='/images/edit.png', alt='Edit')
-                 | Edit
-              td.actions
-                a(href='#')
-                  img(src='images/approve.png', alt='View')
-                  | Approve
-          tfoot
-            tr
-              td(colspan='6')
-                a.button(href="/admin/owls") Manage All Owl Deals
-                //- ul.pager
-                //-   li
-                //-     a(href='#') Prev
-                //-   li.selected
-                //-     a(href='#') 1
-                //-   li
-                //-     a(href='#') 2
-                //-   li
-                //-     a(href='#') 3
-                //-   li
-                //-     a(href='#') 4
-                //-   li
-                //-     a(href='#') Next
-          //- TODO paging for all front and admin list views and gridviews
-      .grid-header
-        h2 Pending Barn Deal Listings
+    include menu    
+    if (objUser.isAdmin())
+      h1 Admin Dashboard
+      #dashboard-left-col
+        .grid-header
+          h2 Pending Owl Deal Listings
+          // .grid-summary 1 - 4 of 24
         
-        - if (barns.length == 0)
+        - if (owls.length == 0)
           table.admin-gridview
            thead
              tr 
                td(colspan='6')
-                | There are no pending barn deals. 
+                | There are no pending owl deals. 
         - else
           table.admin-gridview
            thead
@@ -77,96 +26,153 @@ block content
                td Title
                td(colspan='3') Actions
             tbody
-            - each barn in barns
+            - each owl in owls
               tr
-               td= barn.id
-               - var listed = new Date(barn.created_at)
+               td= owl.id
+               - var listed = new Date(owl.created_at)
                td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
-               td= barn.title
+               td= owl.title
                td.actions
-                 a(href='/admin/barns/#{barn.id}/edit', alt='edit barn deal')
+                 a(href='/admin/owls/#{owl.id}/edit', alt='edit owl deal')
                    img(src='/images/edit.png', alt='Edit')
                    | Edit
                 td.actions
                   a(href='#')
                     img(src='images/approve.png', alt='View')
                     | Approve
+            tfoot
+              tr
+                td(colspan='6')
+                  a.button(href="/admin/owls") Manage All Owl Deals
+                  //- ul.pager
+                  //-   li
+                  //-     a(href='#') Prev
+                  //-   li.selected
+                  //-     a(href='#') 1
+                  //-   li
+                  //-     a(href='#') 2
+                  //-   li
+                  //-     a(href='#') 3
+                  //-   li
+                  //-     a(href='#') 4
+                  //-   li
+                  //-     a(href='#') Next
+            //- TODO paging for all front and admin list views and gridviews
         
-           tfoot
-            tr
-             td(colspan='5')
-              a.button(href="/admin/barns") Manage All Barn Deals
-              //- ul.pager
-              //-  li
-              //-   a(href='#') Prev
-              //-  li.selected
-              //-   a(href='#') 1
-              //-  li
-              //-   a(href='#') 2
-              //-  li
-              //-   a(href='#') 3
-              //-  li
-              //-   a(href='#') 4
-              //-  li
-              //-   a(href='#') Next
-    
-    #dashboard-right-col
-      .grid-header
-        h2 This Month
+        .grid-header
+          h2 Pending Barn Deal Listings
+          
+          - if (barns.length == 0)
+            table.admin-gridview
+             thead
+               tr 
+                 td(colspan='6')
+                  | There are no pending barn deals. 
+          - else
+            table.admin-gridview
+             thead
+               tr
+                 td ID
+                 td Listed On
+                 td Title
+                 td(colspan='3') Actions
+              tbody
+              - each barn in barns
+                tr
+                 td= barn.id
+                 - var listed = new Date(barn.created_at)
+                 td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+                 td= barn.title
+                 td.actions
+                   a(href='/admin/barns/#{barn.id}/edit', alt='edit barn deal')
+                     img(src='/images/edit.png', alt='Edit')
+                     | Edit
+                  td.actions
+                    a(href='#')
+                      img(src='images/approve.png', alt='View')
+                      | Approve
+          
+             tfoot
+              tr
+               td(colspan='5')
+                a.button(href="/admin/barns") Manage All Barn Deals
+                //- ul.pager
+                //-  li
+                //-   a(href='#') Prev
+                //-  li.selected
+                //-   a(href='#') 1
+                //-  li
+                //-   a(href='#') 2
+                //-  li
+                //-   a(href='#') 3
+                //-  li
+                //-   a(href='#') 4
+                //-  li
+                //-   a(href='#') Next
       
-      table.admin-gridview
-       tbody
-        tr
-         td
-          img(src='images/grey-arrow.png')
-          | Website Signups
-         td= signupsThisMonth
+      #dashboard-right-col
+        .grid-header
+          h2 This Month
         
-        tr
-         td
-          img(src='images/grey-arrow.png')
-          | Expressions of Interest
-         td 135
+        table.admin-gridview
+         tbody
+          tr
+           td
+            img(src='images/grey-arrow.png')
+            | Website Signups
+           td= signupsThisMonth
+          
+          tr
+           td
+            img(src='images/grey-arrow.png')
+            | Expressions of Interest
+           td 135
 
-        //- tr
-        //-  td
-        //-   img(src='images/grey-arrow.png')
-        //-   | Deal Registrations
-        //-  td 135
-        //- tr
-        //-  td
-        //-   img(src='images/grey-arrow.png')
-        //-   | Shared Deal Registrations
-        //-  td 135
-       
-       //- tfoot
-       //-   tr
-       //-     td(colspan='4')
-       //-       a.button(href='#') View More Statistics
-      
-      .grid-header
-        h2 Advertising
-      
-      table.admin-gridview
-        tbody
-          tr
-            td Ads currently in rotation
-            td= activeAdvertisementCount
-        tfoot
-          tr
-            td(colspan='4')
-              a.button(href='/admin/advertisements') Manage Ads
-      
-      .grid-header
-        h2 Product and Service Suppliers
-      
-      table.admin-gridview
-        tbody
-          tr
-            td Suppliers currently in rotation
-            td 36
+          //- tr
+          //-  td
+          //-   img(src='images/grey-arrow.png')
+          //-   | Deal Registrations
+          //-  td 135
+          //- tr
+          //-  td
+          //-   img(src='images/grey-arrow.png')
+          //-   | Shared Deal Registrations
+          //-  td 135
+         
+         //- tfoot
+         //-   tr
+         //-     td(colspan='4')
+         //-       a.button(href='#') View More Statistics
         
-        tfoot
-          tr
-            td(colspan='4')
-              a.button(href="/admin/services") Manage Suppliers
+        .grid-header
+          h2 Advertising
+        
+        table.admin-gridview
+          tbody
+            tr
+              td Ads currently in rotation
+              td= activeAdvertisementCount
+          tfoot
+            tr
+              td(colspan='4')
+                a.button(href='/admin/advertisements') Manage Ads
+        
+        .grid-header
+          h2 Product and Service Suppliers
+        
+        table.admin-gridview
+          tbody
+            tr
+              td Suppliers currently in rotation
+              td 36
+          
+          tfoot
+            tr
+              td(colspan='4')
+                a.button(href="/admin/services") Manage Suppliers
+    - else
+      h1 Developer Dashboard
+      h3
+        ul
+          li: a(href="/admin/owls") Owl Deals
+          li: a(href="/admin/barns") Barn Deals

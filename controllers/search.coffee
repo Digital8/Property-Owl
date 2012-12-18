@@ -1,5 +1,8 @@
 system = require '../system'
 
+models =
+  owl: system.load.model('owl')
+
 exports.index = (req,res) ->
   if req.query.state is 'all' then req.query.state = '%'
   if req.query.pType is 'all' then req.query.pType = '%'
@@ -13,7 +16,7 @@ exports.index = (req,res) ->
   if req.query.devStage is 'any' then req.query.devStage = '%'
   if req.query.suburb is '' then req.query.suburb = '%' else req.query.suburb += '%'
     
-  models.properties.search req.query, (err, results) ->
+  models.owl.search req.query, (err, results) ->
     if err then throw err
     res.render 'searchResults', search: results or {}
   

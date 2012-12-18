@@ -26,7 +26,7 @@ ul.sf-menu
     li
       a(href='/account') My Nest
       ul
-        - if( objUser.isAdmin())
+        - if( objUser.isAdmin() || objUser.isDeveloper())
           li: a(href="/admin") Administration
         
         li: a(href='/account') My Account
