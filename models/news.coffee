@@ -24,8 +24,8 @@ module.exports = class News extends Model
   hydrate: (callback) ->
     Media.for this, (error, medias) =>
       console.log medias
-      @images = medias
-      callback error
+      @images = medias
+      super callback
   
   upload: (req, callback) ->
    if req.files? and (Object.keys req.files).length
