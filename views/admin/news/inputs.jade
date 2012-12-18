@@ -1,12 +1,16 @@
 .inputs
   label.required(for='newsType') Article Type
   select#newsType.half-field(name='type')
-    - each type in ['news', 'research']
-      option(value=type, selected=post.type == type)= type
+    - each type in ['News', 'Research']
+      option(value=type.toLowerCase(), selected=post.type == type)= type
 
 .inputs
   label.control-label(for="inputTitle") Title
   input#inputTitle(type='text', name='title', value=post.title)
+
+.inputs
+  label.control-label(for="inputTitle") Image
+  input#inputImage(type='file', name='image')
 
 .inputs 
   label.control-label(for="inputContent") Content

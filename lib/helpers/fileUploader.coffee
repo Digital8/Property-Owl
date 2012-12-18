@@ -39,4 +39,4 @@ class fileUploader
         if err
           @error err
         else
-          callback uploadFile
+          callback err, newFileName

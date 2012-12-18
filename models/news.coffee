@@ -6,6 +6,8 @@ Table = require '../lib/table'
 
 system = require '../system'
 
+Media = system.models.media
+
 module.exports = class News extends Model
   @table = new Table
     name: 'news'
@@ -22,20 +24,19 @@ module.exports = class News extends Model
   hydrate: (callback) ->
     super callback
   
-  upload: (req, callback) ->
-    do callback
-  
-  # @published = (callback) ->
-  #   @db.query "SELECT * FROM affiliates WHERE visible", (error, rows) =>
-  #     return callback error if error
-      
-  #     models = []
-      
-  #     for row in rows
-  #       model = new Affiliate row
-  #       models.push model
-      
-  #     async.forEach models, (model, callback) =>
-  #       model.hydrate callback
-  #     , (error) ->
-  #       callback null, models
+  @upload: (req, callback) ->
+   if req.files? and (Object.keys req.files).length
+     async.forEach (Object.keys req.files), (key, callback) =>
+       file = req.files[key]
+       
+       if file.size <= 0 then return callback null
+       
+       Media.upload
+         entity_id: @id
+         owner_id: req.session.user_id
+         file: file
+         type: 'news'
+       , (error, media) ->
+         callback error, media
+     
+     , callback

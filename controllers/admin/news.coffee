@@ -2,7 +2,9 @@ system = require '../../system'
 
 async = require 'async'
 
-helpers = mailer: system.load.mailer
+helpers = 
+  mailer: system.load.mailer
+  uploader: system.load.helper('fileUploader')
 
 News = system.models.news
 
@@ -30,10 +32,15 @@ exports.create = (req, res) ->
       res.redirect 'back'
       
       return
-    
-    req.flash 'success', 'News post submitted'
-    
-    res.redirect '/admin/news'
+
+    else
+      render =  ->
+        req.flash 'success', 'News post submitted'
+        res.redirect '/admin/news'
+
+      News.upload req, ->
+        do render
+      
     
     #   # Email everyone
     #   sendEmail = (user, callback) ->
