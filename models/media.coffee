@@ -19,6 +19,7 @@ module.exports = class Media extends Model
   @field 'owner_id'
   @field 'entity_id'
   @field 'filename'
+  @field 'type'
   
   constructor: (args = {}) ->
     super

@@ -16,6 +16,8 @@ barns = require './barns'
 $ ->
   (require './shim') $
   
+  do require './media'
+  
   do require './affiliates'
   
   do require './live'

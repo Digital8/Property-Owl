@@ -144,7 +144,7 @@ module.exports = class Model
     @db.query "DELETE FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error) =>
       return callback error if error
       
-      callback null
+      callback arguments...
   
   ###
   Model::get
