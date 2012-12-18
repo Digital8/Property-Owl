@@ -25,6 +25,7 @@ module.exports = class News extends Model
     Media.for this, (error, medias) =>
       console.log medias
       @images = medias
+      console.log @images
       super callback
   
   upload: (req, callback) ->
@@ -43,3 +44,8 @@ module.exports = class News extends Model
          callback error, media
      
      , callback
+  imageURL: ->
+    if @images.length
+      return @images.pop().filename
+    else
+      return '/placeholder.png' # or whatever it is
