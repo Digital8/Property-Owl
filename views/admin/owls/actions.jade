@@ -1,11 +1,13 @@
 .admin-actions
   ul
+    
     if(action != 'add')
       li
         a(href='/admin/owls/add')
          img(src='/images/add.png')
          | &nbsp;
          | Add Owl Deal
+    
     if(action != 'index')
       li
         a(href='/admin/owls')

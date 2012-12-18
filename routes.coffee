@@ -33,6 +33,13 @@ module.exports = (app) ->
   app.get '/account', authenticate, controllers.account.index
   app.put '/account', authenticate, controllers.account.update
   
+  media = (method, path, middleware...) ->
+    app[method] "/medias#{path}", authenticate, middleware...
+  
+  # media 'get', '', controllers.bookmarks.index
+  # media 'post', '', controllers.medias.create
+  media 'del', '/:id(\\d+)', controllers.medias.destroy
+  
   bookmark = (method, path, middleware...) ->
     app[method] "/bookmarks#{path}", authenticate, middleware...
   
@@ -193,6 +200,6 @@ module.exports = (app) ->
   adminAjax 'post', '/addDeal', controllers.ajax.addDeal
   adminAjax 'del', '/deleteDeal', controllers.ajax.delDeal
   adminAjax 'put', '/updateHero', controllers.ajax.updateHero
-  adminAjax 'del', '/deleteMedia', controllers.ajax.deleteMedia
+  # adminAjax 'del', '/deleteMedia', controllers.ajax.deleteMedia
   
   app.all '*', controllers.pages.index
