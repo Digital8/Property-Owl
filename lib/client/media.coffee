@@ -8,5 +8,8 @@ module.exports = ->
       $media.find('.delete').click (event) ->
         event.preventDefault()
         
-        $.delete "/medias/#{$media.data 'id'}", ->
-          console.log arguments
+        $.delete "/medias/#{$media.data 'id'}", (response, status, jqXHR) ->
+          if jqXHR.status is 200
+            do $media.remove
+          else
+            alert "uh oh! spaghettio!"
