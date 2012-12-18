@@ -6,6 +6,8 @@ Table = require '../lib/table'
 
 system = require '../system'
 
+Media = system.models.media
+
 module.exports = class Affiliate extends Model
   @table = new Table
     name: 'affiliates'
@@ -37,12 +39,40 @@ module.exports = class Affiliate extends Model
           @category = affiliateCategory
           
           callback()
+
+      media: (callback) =>
+        Media = system.models.media
+        Media.for this, (error, medias) =>
+          @images = medias
+          console.log @images
+          callback error
     
     , (error) => super callback
   
   upload: (req, callback) ->
-    do callback
-  
+    return callback null unless req.files? and (Object.keys req.files).length
+    
+    async.forEach (Object.keys req.files), (key, callback) =>
+      file = req.files[key]
+      
+      if file.size <= 0 then return callback null
+      
+      Media.upload
+        entity_id: @id
+        owner_id: req.session.user_id
+        file: file
+        type: 'affiliate'
+      , (error, media) ->
+        callback error, media
+    
+    , callback
+    
+  imageURL: ->
+    if @images.length
+      return '/uploads/' + @images.pop().filename
+    else
+      return '/images/services-thumb.jpg' # or whatever it is
+
   @published = (callback) ->
     @db.query "SELECT * FROM affiliates WHERE visible", (error, rows) =>
       return callback error if error

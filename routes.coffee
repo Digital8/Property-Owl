@@ -115,7 +115,7 @@ module.exports = (app) ->
   
   # admin/affiliates
   admin 'get', '/affiliates', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.affiliates.index
-  admin 'post', '/affiliates', controllers.admin.affiliates.create
+  admin 'post', '/affiliates/add', controllers.admin.affiliates.create
   admin 'get', '/affiliates/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.affiliates.add
   admin 'get', '/affiliates/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.affiliates.edit
   admin 'put', '/affiliates/:id(\\d+)', controllers.admin.affiliates.update

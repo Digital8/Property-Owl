@@ -85,10 +85,10 @@ exports.update = (req, res) ->
       res.redirect 'back'
       
       return
-    
-    req.flash 'success', 'news entry updated'
-    
-    res.redirect '/admin/news'
+    else
+      post.upload req, ->
+        req.flash 'success', 'news entry updated'
+        res.redirect '/admin/news'
 
 exports.delete = (req, res) ->
   News.get req.params.id, (error, post) ->

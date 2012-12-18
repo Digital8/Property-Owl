@@ -5,6 +5,7 @@
       option
       - each category in affiliateCategories
         option(value='#{category.id}', selected=affiliate.affiliate_category_id == category.id)= category.name
+    
   .inputs
     label.required(for='affiliateCompanyName') Company Name *
     input#affiliateCompanyName(type='text',name="name",value=affiliate.name)
@@ -12,7 +13,7 @@
     label.file-upload(for='affiliateLogo')
       | Logo Image *
       span.note (max file size 4MB)
-    input#affiliateLogotype='file', name='logo', value='')
+    input#affiliateLogo(type='file', name='logo', value='')
     p.success Uploaded file: image.png (30kb)
   .inputs
     label.required(for='supplerEmail') Email Address *

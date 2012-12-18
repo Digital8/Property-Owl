@@ -8,12 +8,14 @@
     .listing-thumb
       
       a.details-button(href="/news/#{post.news_id}")
-        img.thumb(src='/images/news-thumb.jpg', alt='')
+        - if (post.images[0])
+          img.thumb(src='/uploads/#{post.imageURL()}', alt='')
+        - else
+          img.thumb(src='/images/news-thumb.jpg', alt='')
     
     .listing-details
       
       .summary
-        p= post.images
         p= post.posted_at
         p= _s.prune(post.content, 200)
       

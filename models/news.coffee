@@ -25,21 +25,29 @@ module.exports = class News extends Model
     Media.for this, (error, medias) =>
       console.log medias
       @images = medias
+      console.log @images
       super callback
   
   upload: (req, callback) ->
-   if req.files? and (Object.keys req.files).length
-     async.forEach (Object.keys req.files), (key, callback) =>
-       file = req.files[key]
-       
-       if file.size <= 0 then return callback null
-       
-       Media.upload
-         entity_id: @id
-         owner_id: req.session.user_id
-         file: file
-         type: 'news'
-       , (error, media) ->
-         callback error, media
-     
-     , callback
+    return callback null unless req.files? and (Object.keys req.files).length
+    
+    async.forEach (Object.keys req.files), (key, callback) =>
+      file = req.files[key]
+      
+      if file.size <= 0 then return callback null
+      
+      Media.upload
+        entity_id: @id
+        owner_id: req.session.user_id
+        file: file
+        type: 'news'
+      , (error, media) ->
+        callback error, media
+    
+    , callback
+  
+  imageURL: ->
+    if @images.length
+      return @images.pop().filename
+    else
+      return '/placeholder.png' # or whatever it is
