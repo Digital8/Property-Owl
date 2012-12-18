@@ -14,6 +14,7 @@ async = require 'async'
 express = require 'express'
 expressValidator = require 'express-validator'
 flashify = require 'flashify'
+prettyjson = require 'prettyjson'
 
 {load, config} = system = require './system'
 
@@ -149,7 +150,14 @@ app.configure ->
       url = '/' + req.url.split('/')[1] + '%'
       if url is '/%' then url = '/'
       
-      console.log url.green
+      if app.argv.verbose
+        console.log 'req.url', (prettyjson.render req.url)
+        
+        console.log 'req.body'
+        console.log prettyjson.render req.body
+        
+        console.log 'req.files'
+        console.log prettyjson.render req.files
       
       console.start 'ads'
       

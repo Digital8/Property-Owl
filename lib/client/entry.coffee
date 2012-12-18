@@ -9,10 +9,6 @@ require './admin'
 
 makeMap = require './map'
 
-makeTimer = require './timer'
-
-barns = require './barns'
-
 $ ->
   (require './shim') $
   
@@ -24,14 +20,16 @@ $ ->
   
   require './bookmarks'
   
-  do barns
+  do require './barns'
+  
+  do require './owls'
   
   if ($ "#map").length
     makeMap 'map'
   if ($ "#big-map").length
     makeMap 'big-map', width: 500, height: 350, stroke: '#0c6cb7', hover: '#DE1515'
   
-  makeTimer()
+  do require './timer'
   
   $('body').on 'keypress', (event) ->
     if (event.keyCode == 6) and event.ctrlKey

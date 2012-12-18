@@ -178,25 +178,24 @@ module.exports = class Owl extends Model
         , callback
     
     , (error) =>
-      if req.files? and (Object.keys req.files).length
-        async.forEach (Object.keys req.files), (key, callback) =>
-          file = req.files[key]
+      return callback() unless req.files?
+      
+      for key, files of req.files
+        files = [].concat files
+        
+        async.forEach files, (file, callback) =>
+          console.log 'file', file
           
-          if file.size <= 0 then return callback null
+          return do callback unless file.size
           
           Media.upload
             entity_id: @id
-            owner_id: req.session.user_id
+            owner_id: req.user.id
             file: file
             type: 'owl'
-          , (error, media) ->
-            callback error, media
+          , callback
         
         , callback
-      
-      else
-        
-        callback()
   
   @inBarn = (barnId, callback) =>
     @db.query "SELECT * FROM #{@table.name} WHERE barn_id = ?", [barnId], (error, rows) =>
