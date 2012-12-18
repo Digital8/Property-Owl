@@ -12,8 +12,8 @@ module.exports = class News extends Model
   @table = new Table
     name: 'news'
     key: 'news_id'
-  
   @field 'title'
+  
   @field 'content'
   @field 'created_at'
   @field 'type'
@@ -45,7 +45,11 @@ module.exports = class News extends Model
         callback error, media
     
     , callback
-  
+
+  @findByType: (type, callback) ->
+    system.db.query "SELECT * FROM #{@table.name} WHERE type = ?", [type], (error, rows) ->
+      callback(error, rows)
+
   imageURL: ->
     if @images.length
       return @images.pop().filename

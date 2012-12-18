@@ -1,9 +1,9 @@
 system = require '../system'
 
-models = news: system.load.model 'news'
+models = news: system.models.news
 
 exports.index = (req,res) ->
-  models.news.getAllNewsByType 'research', (err, results) ->
+  models.news.findByType 'research', (err, results) ->
     if err then throw err
     res.render 'research/index', news: results or {}
 
