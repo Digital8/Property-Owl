@@ -9,10 +9,12 @@ module.exports = (app, system) ->
 module.exports.augmentDB = (app, db) ->
   if app.argv.verbose
     db._query = db.query
-    db.query = (query, args...) ->
+    db.query = (query, args..., callback) ->
       unless query.match /po_advertisements/g or query.match /account_type/g
         console.log (_.filter arguments, (argument) -> typeof argument isnt 'function')...
-      db._query arguments...
+      db._query query, args..., (error, args...) ->
+        console.log 'ERROR', error.red if error?
+        callback error, args...
 
 module.exports.augmentApp = (app) ->
   global.app = app
