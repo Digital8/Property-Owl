@@ -30,6 +30,7 @@ module.exports = (template, subject, objUser, secondary, callback) ->
         when 'barn-deal-enquiry', 'barn-deal-registration-developer', 'barn-deal-registration', 'expression-of-interest', 'withdraw-interest', 'signup-confirmation', 'service-enquiry', 'service-enquiry-confirmation', 'property-recommendations', 'property-enquiry-confirmation', 'owl-deal-registration-developer', 'owl-deal-registration', 'barn-deal-enquiry', 'new-listing', 'listing-confirmation'
           email.setCategory 'Property Owl'
           email.addSubVal '{{contact_name}}', secondary.contact_name
+          email.addSubVal '{{contactName}}', secondary.contactName
           email.addSubVal '{{firstname}}', objUser.firstName
           email.addSubVal '{{lastname}}', objUser.lastName
           email.addSubVal '{{email}}', objUser.email

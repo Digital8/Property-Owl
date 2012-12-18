@@ -28,7 +28,6 @@ exports.add = (req, res) ->
 
 exports.create = (req, res) ->
   Owl.create req.body, (error, owl) ->
-    console.log 'create', arguments
     
     template = 'listing-confirmation'
 
@@ -37,6 +36,7 @@ exports.create = (req, res) ->
       email: res.locals.objUser.email
 
     secondary = 
+      contactName: res.locals.objUser.firstName
       dealLink: '/admin/owls/#{owl.insertId}/edit'
 
     system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
