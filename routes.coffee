@@ -78,7 +78,7 @@ module.exports = (app) ->
   
   ### admin ###
   admin = (method, path, middleware...) ->
-    if (path.indexOf('/owls') != -1 or path.indexOf('/barn') != -1)
+    if (path.indexOf('/owls') != -1 or path.indexOf('/barn') != -1 or path.indexOf('') != -1)
       app[method] "/admin#{path}", (authorize acl.developer), middleware...
     else
       app[method] "/admin#{path}", (authorize acl.admin), middleware...

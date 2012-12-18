@@ -12,32 +12,32 @@ nav#admin-menu
           a(href='/admin/owls') Owl Deals
         li
           a(href='/admin/barns') Barn Deals
-    
-    li
-      - var c = (menu == 'advertising') ? 'active' : ''
-      a(href='/admin/advertisements', class="#{c}") Advertising
-      ul
-        li
-          a(href='/admin/advertisements') Advertisements
-        li
-          a(href='/admin/advertisers') Advertisers
-    
-    li
-      - var c = (menu == 'products-service-suppliers') ? 'active' : ''
-      a(href='/admin/affiliates', class="#{c}") Affiliates
-    
-    li
-      - var c = (menu == 'news') ? 'active' : ''
-      a(href='/admin/news', class="#{c}") News
-    
-    li
-      - var c = (menu == 'pages') ? 'active' : ''
-      a(href='/admin/pages', class="#{c}") Pages
-    
-    li
-      - var c = (menu == 'reports') ? 'active' : ''
-      a(href='/admin/reports', class="#{c}") Reports
-    
-    li  
-      - var c = (menu == 'members') ? 'active' : ''
-      a(href='/admin/members', class="#{c}") Members
+    - if (objUser.isAdmin())
+      li
+        - var c = (menu == 'advertising') ? 'active' : ''
+        a(href='/admin/advertisements', class="#{c}") Advertising
+        ul
+          li
+            a(href='/admin/advertisements') Advertisements
+          li
+            a(href='/admin/advertisers') Advertisers
+      
+      li
+        - var c = (menu == 'products-service-suppliers') ? 'active' : ''
+        a(href='/admin/affiliates', class="#{c}") Affiliates
+      
+      li
+        - var c = (menu == 'news') ? 'active' : ''
+        a(href='/admin/news', class="#{c}") News
+      
+      li
+        - var c = (menu == 'pages') ? 'active' : ''
+        a(href='/admin/pages', class="#{c}") Pages
+      
+      li
+        - var c = (menu == 'reports') ? 'active' : ''
+        a(href='/admin/reports', class="#{c}") Reports
+      
+      li  
+        - var c = (menu == 'members') ? 'active' : ''
+        a(href='/admin/members', class="#{c}") Members
