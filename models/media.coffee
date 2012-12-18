@@ -25,6 +25,7 @@ module.exports = class Media extends Model
     super
   
   hydrate: (callback) ->
+
     super callback
   
   @upload = (args, callback) =>

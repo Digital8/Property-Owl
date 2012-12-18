@@ -13,6 +13,7 @@
     .listing-details
       
       .summary
+        p= post.images
         p= post.posted_at
         p= _s.prune(post.content, 200)
       
