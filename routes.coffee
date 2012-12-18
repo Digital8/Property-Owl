@@ -78,7 +78,10 @@ module.exports = (app) ->
   
   ### admin ###
   admin = (method, path, middleware...) ->
-    app[method] "/admin#{path}", (authorize acl.admin), middleware...
+    if (path.indexOf('/owls') != -1 or path.indexOf('/barn') != -1)
+      app[method] "/admin#{path}", (authorize acl.developer), middleware...
+    else
+      app[method] "/admin#{path}", (authorize acl.admin), middleware...
   
   admin 'get', '', controllers.admin.index.index
   
@@ -146,7 +149,7 @@ module.exports = (app) ->
   admin 'get', '/owls', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.owls.index
   admin 'get', '/owls/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.owls.add
   admin 'get', '/owls/:id(\\d+)/view', ((req, res, next) -> res.locals.action = 'view' ; next()), controllers.admin.owls.view
-  admin 'post', '/owls', controllers.admin.owls.create
+  admin 'post', '/owls', (authorize acl.developers), controllers.admin.owls.create
   admin 'get', '/owls/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.owls.edit
   admin 'put', '/owls/:id(\\d+)', controllers.admin.owls.update
   admin 'get', '/owls/:id(\\d+)/delete', controllers.admin.owls.delete

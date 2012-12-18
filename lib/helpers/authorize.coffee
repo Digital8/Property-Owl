@@ -17,4 +17,7 @@ module.exports = (acl) ->
       if req.url.indexOf('?login=1') is -1 
         res.redirect req.url + '?login=1'
       else
-        if not res.locals.objUser.isAuthed() then res.render 'user/login', redirect: req.url or '/', modal: true
+        if not res.locals.objUser.isAuthed() 
+          res.render 'user/login', redirect: req.url or '/', modal: true
+        else
+          res.render 'errors/404'
