@@ -4,7 +4,10 @@ tr
   td= barn.user.first_name + ' ' + barn.user.last_name
   td= barn.fullAddress()
   td Current
-  td= barn.owls.length
+  - if (typeof(barn.owls) != 'undefined')
+    td= barn.owls.length
+  - else
+    td 0
   td 0
   
   td.actions

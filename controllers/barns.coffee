@@ -15,26 +15,19 @@ exports.show = (req, res) ->
   Barn.get id, (error, barn) ->
     res.render 'barns/show', barn: barn, enquire: on
 
-# exports.locate = (req, res) ->
-#   res.render 'owls/locate'
+# exports.owls = {}
 
-# exports.top = (req, res) ->
-#   Owl.top (error, owl) ->
-#     res.render 'owls/show', owl: owl
-
-# exports.hot = (req, res) ->
-#   Owl.all (error, owls) ->
-#     res.render 'owls/list', owls: owls
-
-# exports.byState = (req, res) ->
-#   {state} = req.params
+exports.nest = (req, res) ->
+  barnId = req.params.id
+  owlId = req.body.id
   
-#   Owl.state state, (error, owls) ->
-#     console.log owls
-#     res.render 'owls/state', owls: owls, state: state
+  system.db.query "UPDATE owls SET barn_id = ? WHERE owl_id = ?", [barnId, owlId], (error, results) ->
+    res.send [error, results]
 
-# exports.show = (req, res) ->
-#   {id} = req.params
+exports.unnest = (req, res) ->
+  {barn_id, owl_id} = req.params
   
-#   Owl.get id, (error, owl) ->
-#     res.render 'owls/show', owl: owl
+  system.db.query "UPDATE owls SET barn_id = NULL WHERE owl_id = ?", [owl_id], (error, results) ->
+    res.send [error, results]
+  
+  # res.send null
