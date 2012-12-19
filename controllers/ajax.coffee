@@ -1,3 +1,5 @@
+async = require 'async'
+
 system = require '../system'
 mailer = require '../lib/helpers/email'
 
@@ -5,6 +7,7 @@ models =
   user: system.load.model 'user'
   media: system.load.model 'media'
   registrations: system.load.model 'registrations'
+  # owl: system.load.model 'owl'
 
 helpers = 
   hash: system.load.helper 'hash'
@@ -237,7 +240,7 @@ exports.search = (req, res) ->
   
   system.db.query "SELECT * FROM owls WHERE address SOUNDS LIKE ? AND suburb SOUNDS LIKE ?", [address, suburb], (error, rows) ->
     
-    console.log rows
+    # console.log rows
     
     res.send []
 
