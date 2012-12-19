@@ -186,7 +186,7 @@ module.exports = (app) ->
   
   ajax 'post', '/login', controllers.ajax.login
   ajax 'post', '/register', controllers.ajax.register
-  
+  ajax 'post', '/enquiry', controllers.ajax.enquiry
   ajax 'get', '/search', controllers.ajax.search
   
   authedAjax = (method, path, middleware...) ->

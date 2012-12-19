@@ -14,7 +14,7 @@ $ ->
   
   do require './media'
   
-  do require './affiliates'
+  # do require './affiliates'
   
   do require './live'
   
