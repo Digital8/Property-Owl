@@ -117,8 +117,6 @@ block content
               - if (owl.deals.length)
                 ul
                   - each deal in owl.deals
-                    - if (deal)
-                      //- li= '$' + deal.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' ' + deal.type.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
                     li.price= '$' + deal.value.toString() + ' ' + deal.description
               - else
                 ul
@@ -142,7 +140,7 @@ block content
           .more-info
             h2 
               | More Information
-              img.arrow(src='/images/grey-arrow-icon-down.png', alt='More Information')
+              img.arrow(src='/images/blue-arrow-icon-down.png', alt='More Information')
             - if (owl.files)
               ul
               - each file in files
