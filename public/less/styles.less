@@ -1159,9 +1159,9 @@ body {
                       border: solid 1px #b2b2b2;
                       .rounded(0.250em);
                       .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
-                      background: #D5D5D5;
+                      background: #0b63a8;
                       margin: @padding-small 0;
-                      color: #555;
+                      color: #FFF;
                   
                       p {
                         font-weight: normal;
@@ -1171,7 +1171,7 @@ body {
                       
                       &.display {
                           h2 {
-                            background-image: url(../images/grey-arrow-up.png);
+                            background-image: url(../images/blue-arrow-up.png);
                           }
 
                           ul {
@@ -1182,7 +1182,7 @@ body {
                       h2 {
                           padding: 0.1em @padding-small;
                           margin: 0;
-                          background: #b3b3b3 url(../images/grey-arrow-down.png) no-repeat 95% center;
+                          background: #0a5b9a url(../images/blue-arrow-down.png) no-repeat 95% center;
                           .text-shadow(~"0px -1px 0px rgba(0,0,0,0.5)");
                           color: #FFF;
                           font-size: 1.1em;
@@ -1211,12 +1211,13 @@ body {
                       }
 
                       li {
-                          border-top: solid 1px #b2b2b2;
+                          .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");
+                          border-top: solid 1px #084c81;
                           .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
                           padding: @padding-small;
-                    
+                          
                         &:before {
-                            content: url(../images/more-info-arrow.png);
+                            content: url(../images/deal-arrow.png);
                             .inline-block;
                             margin: 0 0.5em;
                             vertical-align: middle;
