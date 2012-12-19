@@ -59,7 +59,11 @@ exports.edit = (req,res) ->
       res.redirect 'back'
     else
       models.user.getAllGroups (err, groups) ->
-        res.render 'admin/members/edit', values: results.pop(), groups: groups
+        member = results.pop()
+        member.fname ?= member.first_name
+        member.lname ?= member.last_name
+        
+        res.render 'admin/members/edit', values: member, groups: groups
 
 exports.update = (req,res) ->
   req.body.email ?= ''
