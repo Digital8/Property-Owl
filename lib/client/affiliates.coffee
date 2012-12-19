@@ -1,23 +1,23 @@
-module.exports = ->
-  for thing in ($ '.listing-summary.affiliate')
+# module.exports = ->
+#   for thing in ($ '.listing-summary.affiliate')
     
-    $thing = $ thing
+#     $thing = $ thing
     
-    id = $thing.data 'id'
+#     id = $thing.data 'id'
     
-    do ($thing) ->
+#     do ($thing) ->
       
-      for button in $thing.find('.enquire-button')
+#       for button in $thing.find('.enquire-button')
         
-        $button = $ button
+#         $button = $ button
         
-        do ($button) ->
+#         do ($button) ->
           
-          $button.click (event) ->
+#           $button.click (event) ->
             
-            event.preventDefault()
+#             event.preventDefault()
             
-            $.post '/clicks',
-              resource_id: id
-              type: 'affiliate'
-            , -> console.log 'posted', arguments
+#             $.post '/clicks',
+#               resource_id: id
+#               type: 'affiliate'
+#             , -> console.log 'posted', arguments

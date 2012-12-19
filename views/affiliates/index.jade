@@ -26,3 +26,41 @@ block content
         p No services have been listed on Property Owl
     
     include ../right_nav
+
+    .modal-overlay.overlay.modal-enquiry#generic-modal
+      .modal.main
+        a.close-modal(href='#')
+          img(src='/images/modal-close.png', alt='Close')
+        h1.modal-title#generic-modal-title Enquire
+        .modal-content.details-form#generic-modal-content
+          label Enquiry
+          textarea#enquiry
+          br
+          br
+          button#sendEnquiry Send
+
+    script
+      $(document).ready(function(){
+        $('.enquire-button').on('click', function(e){
+          
+          e.preventDefault();
+          $('.modal-enquiry').fadeToggle();
+
+          var id = $(this).data('id');
+          
+
+
+          $('#sendEnquiry').on('click', function(){
+            var enquiry = $('#enquiry').val();
+
+            $.ajax({
+              url: '/ajax/enquiry',
+              type: 'post',
+              data: 'aid='+id+'&enquiry='+enquiry
+            }).done(function(d){
+              console.log(d);
+              $('.modal-enquiry').fadeToggle();
+            });
+          });
+        });
+      });

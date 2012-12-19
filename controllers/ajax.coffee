@@ -240,3 +240,29 @@ exports.search = (req, res) ->
     console.log rows
     
     res.send []
+
+exports.enquiry = (req, res) ->
+  system.db.query "SELECT * FROM affiliates WHERE affiliate_id = ?", [req.body.aid], (err, affiliate) ->
+    if err or affiliate.length is 0
+      res.send status: 500, error: 'Invalid product'
+    else
+      template = 'service-enquiry'
+
+      user =
+        firstName: res.locals.objUser.firstName
+        email: affiliate[0].email
+        lastName: res.locals.objUser.lastName
+        phone: res.locals.objUser.phone
+
+      secondary =
+        contactName: affiliate[0].name
+        description: req.body.enquiry
+        contact_method: 'email'
+        enquiryEmail: res.locals.objUser.email
+
+      system.helpers.mailer template,'New Enquiry', user, secondary, (results) ->
+        system.db.query  "INSERT INTO enquiries (user_id, affiliate_id, enquiry) VALUES (?,?,?)", [res.locals.objUser.id, req.body.aid, req.body.enquiry], (err, rows) ->
+          if err 
+            res.send status: 500, error: err
+          else 
+            res.send status: 200
