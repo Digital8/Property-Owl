@@ -239,10 +239,14 @@ exports.search = (req, res) ->
   {address, suburb} = req.query
   
   system.db.query "SELECT * FROM owls WHERE address SOUNDS LIKE ? AND suburb SOUNDS LIKE ?", [address, suburb], (error, rows) ->
+    Owl = system.models.owl
     
-    # console.log rows
+    models = ((new Owl row) for row in rows)
     
-    res.send []
+    async.forEach models, (model, callback) =>
+      model.hydrate callback
+    , (error) ->
+      res.send [null, models]
 
 exports.enquiry = (req, res) ->
   system.db.query "SELECT * FROM affiliates WHERE affiliate_id = ?", [req.body.aid], (err, affiliate) ->

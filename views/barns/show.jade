@@ -36,19 +36,29 @@ block content
     
     #wide-center-col
       //- image slider
-      #mySlider.evoslider.galleriffic
-        dl
-          dt slide one
-          //- dd(data-src='/uploads/#{image.filename}', data-thumb='/images/slide1-thumb.jpg')
-          dd(data-src='/uploads/slider2.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-          dt slide two
-          dd(data-src='/uploads/slider3.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-          dt slide three
-          dd(data-src='/uploads/slider4.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-          dt slide four
-          dd(data-src='/uploads/slider5.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-          dt slide five
-          dd(data-src='/uploads/slider1.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+      // #mySlider.evoslider.galleriffic
+      //   dl
+      //     dt slide one
+      //     //- dd(data-src='/uploads/#{image.filename}', data-thumb='/images/slide1-thumb.jpg')
+      //     dd(data-src='/uploads/slider2.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+      //     dt slide two
+      //     dd(data-src='/uploads/slider3.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+      //     dt slide three
+      //     dd(data-src='/uploads/slider4.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+      //     dt slide four
+      //     dd(data-src='/uploads/slider5.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+      //     dt slide five
+      //     dd(data-src='/uploads/slider1.jpg', data-thumb='/uploads/slide1-thumb.jpg')
+      
+      - locals.owli = barn.owls[0]
+      - if (owli.images && owli.images.length)
+        #mySlider.evoslider.galleriffic
+          dl
+            - var i = 0
+            - each image in owli.images
+              - i++
+              dt "slide #{i}"
+              dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
       
       .property-info
       

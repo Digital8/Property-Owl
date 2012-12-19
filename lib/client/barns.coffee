@@ -69,7 +69,7 @@ module.exports = ->
           $.post "/admin/barns/#{barnId}/owls", {id: owl.id},
             # (-> console.log arguments)
             row = makeListRow owl
-            row.appendTo $('.owl-matrix tbody')
+            row.appendTo $('.owl-matrix.nested tbody')
   
   $address.bind 'change keydown', ->
     update()
