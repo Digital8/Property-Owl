@@ -273,3 +273,24 @@ exports.enquiry = (req, res) ->
             res.send status: 500, error: err
           else 
             res.send status: 200
+
+
+exports.enquireDeal = (req, res) ->
+  template = 'owl-deal-enquiry'
+  user =
+    firstName: req.body.name
+    email: req.body.email
+    phone: res.locals.objUser.phone
+
+  secondary =
+    contactName: '[change me]'
+    description: req.body.comments
+    contact_method: req.body.contactMethod
+    enquiryEmail: req.body.email
+
+  system.helpers.mailer template,'New Enquiry', user, secondary, (results) ->
+    #system.db.query  "INSERT INTO enquiries (user_id, affiliate_id, enquiry) VALUES (?,?,?)", [res.locals.objUser.id, req.body.aid, req.body.enquiry], (err, rows) ->
+    if err 
+      res.send status: 500, error: err
+    else 
+      res.send status: 200

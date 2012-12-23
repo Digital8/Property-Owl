@@ -65,11 +65,38 @@
           label(for='propertyPhone') Phone
           input#propertyPhone(type='text')
           label(for='propertyContactMethod') Contact Method
+          input#propertyId(type="hidden",name="id",value="#{owl.id}")
+          input#propertyDeal(type="hidden",name="deal",value="owl")
           select#propertyContactMethod
-           option Phone
-           option Email
+           option(value="phone") Phone
+           option(value="email") Email
           label(for='propertyComments') Comments
           textarea#propertyComments(rows='5')
-          input.button(type='submit', value='Submit')
+          input.enquire.button(type='submit', value='Submit')
+
+    script
+      $(document).ready(function(){
+        $('.enquire').on('click',function(d){
+          d.preventDefault();
+          // Get values
+          var name = $("#propertyName").val();
+          var id = $("#propertyId").val();
+          var deal = $("#propertyDeal").val();
+          var email = $("#propertyEmail").val();
+          var phone = $("#propertyPhone").val();
+          var contactMethod = $("#propertyContactMethod").val();
+          var comments = $("#propertyComments").val();
+
+          $.ajax({
+            url: '/ajax/enquireDeal',
+            type: 'post',
+            data: 'name='+ name +'&email='+email+'&phone='+phone+'&contactMethod='+contactMethod+'&comments='+comments+'&id='+id+'&deal='+deal
+          }).done(function(d){
+            console.log(d);
+          });
+
+        });
+      });
+
   - if (!locals.owl || (locals.area && locals.area == 'index'))
     include search
