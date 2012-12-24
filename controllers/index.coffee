@@ -11,10 +11,13 @@ exports.index = (req,res) ->
     owl: (callback) -> Owl.top callback
     page: (callback) -> Page.findByUrl '/', callback
   , (error, {owl, page}) ->
-    page = page.shift().shift()
-    fn = jade.compile page.content
-    home = do fn
-    res.render 'index', owl: owl, home: home
+    try
+      page = page.shift().shift()
+      fn = jade.compile page.content
+      home = do fn
+      res.render 'index', owl: owl, home: home
+    catch e
+      res.render '404'
 
 exports.view = (req,res) ->
 
