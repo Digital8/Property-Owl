@@ -204,9 +204,9 @@ module.exports = (app) ->
   adminAjax = (method, path, middleware...) ->
     app[method] "/ajax#{path}", authenticate, (authorize acl.admin), middleware...
   
-  adminAjax 'post', '/addDeal', controllers.ajax.addDeal
-  adminAjax 'del', '/deleteDeal', controllers.ajax.delDeal
-  adminAjax 'put', '/updateHero', controllers.ajax.updateHero
+  # adminAjax 'post', '/addDeal', controllers.ajax.addDeal
+  # adminAjax 'del', '/deleteDeal', controllers.ajax.delDeal
+  # adminAjax 'put', '/updateHero', controllers.ajax.updateHero
   # adminAjax 'del', '/deleteMedia', controllers.ajax.deleteMedia
   
   app.all '*', controllers.pages.index
