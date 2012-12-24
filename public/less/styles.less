@@ -1347,9 +1347,13 @@ body {
                       :hover {
                         text-decoration: underline;
                       }
+
+                    .listing-title {
+                      width: 23em;
+                    }
                     
                     .listing-price {
-                        width: 8.750em;
+                        width: 8em;
                         text-align: right;
                         float: right;
                         position: relative;
@@ -1363,6 +1367,26 @@ body {
                         background: url(../images/listing-price-bg.png) repeat-x center center;
                         background-size: cover;
                         .gradient(#009200, #007100);
+                        font-size: 1.1em; 
+                        color: #FFF;
+                        .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");
+                    }
+
+                    .listing-code {
+                        width: 4.5em;
+                        text-align: center;
+                        float: left;
+                        position: relative;
+                        top: 0;
+                        right: 0;
+                        margin: -1px;
+                        padding: 0.313em 0.25em;
+                        border: solid 1px #004400;
+                        .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+                        .rounded-top-right(0.250em);
+                        // background: url(../images/listing-price-bg.png) repeat-x center center;
+                        background-size: cover;
+                        .gradient(#929292, #717171);
                         font-size: 1.1em; 
                         color: #FFF;
                         .text-shadow(~"0px -1px 0px rgba(0,0,0,1)");

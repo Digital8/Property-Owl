@@ -1,10 +1,13 @@
 .listing-summary
-   
+  
   .header
+    .listing-code
+      = owl.code
+
     .listing-price
       strong= '$' + owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     
-    h2: a(href='/owls/#{owl.id}')= owl.fullAddress()
+    h2.listing-title: a(href='/owls/#{owl.id}')= owl.displayTitle()
   
   .listing-body
     
