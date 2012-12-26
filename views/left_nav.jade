@@ -65,7 +65,8 @@
           label(for='propertyPhone') Phone
           input#propertyPhone(type='text')
           label(for='propertyContactMethod') Contact Method
-          input#propertyId(type="hidden",name="id",value="#{owl.id}")
+          - if (locals.owl)
+            input#propertyId(type="hidden",name="id",value="#{owl.id}")
           input#propertyDeal(type="hidden",name="deal",value="owl")
           select#propertyContactMethod
            option(value="phone") Phone
