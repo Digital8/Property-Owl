@@ -37,7 +37,7 @@
       img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
       h3 Group Deals
   
-  - if (locals.share || (locals.owl && locals.area != 'index'))
+  - if (locals.barn || locals.share || (locals.owl && locals.area != 'index'))
     include share
   
   - if(req.url!='/owls/top' && req.url!='/owls/')
