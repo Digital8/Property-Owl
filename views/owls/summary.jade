@@ -48,9 +48,13 @@
       
       .listing-links
         
-        a.savebuttons.save-button(href='#', data-owl="#{owl.id}")
+        a.save-button.add-bookmark(href='#', data-deal-type="owl", data-deal-id=owl.id)
           img#save-icon(src='/images/plus-icon.png', alt='Save this owl')
-          |  Save
+
+          - if (owl.bookmark)
+            |  Saved
+          - else
+            |  Save
         
         a.details-button(href='/owls/#{owl.id}')
           img#info-icon(src='/images/info-icon.png', alt='View owl details')

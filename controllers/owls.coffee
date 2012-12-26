@@ -38,7 +38,10 @@ exports.byState = (req, res) ->
         when 'time'
           owls = _.sortBy owls, 'created_at'
     
-    res.render 'owls/state', owls: owls, state: state
+    async.map owls, (owl, callback) ->
+      owl.hydrateForUser req.user, callback
+    , (error) ->
+      res.render 'owls/state', owls: owls, state: state
 
 exports.show = (req, res) ->
   {id} = req.params
