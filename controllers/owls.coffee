@@ -13,17 +13,20 @@ exports.locate = (req, res) ->
 
 exports.top = (req, res) ->
   Owl.top (error, owl) ->
-    res.render 'owls/show', owl: owl, bestdeal: true, enquire: on, share: on
+    owl.hydrateForUser req.user, (error) ->
+      res.render 'owls/show', owl: owl, bestdeal: true, enquire: on, share: on
 
 exports.hot = (req, res) ->
   async.map ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa'], (state, callback) ->
     Owl.topstate state, callback
   , (error, owls) ->
-    #sortedOwls = owls
-    sortedOwls = _.sortBy owls, 'state'
-    #sortedOwls.reverse()
     
-    res.render 'owls/list', owls: sortedOwls, maxPages: 1, currentPage: 1
+    owls = _.sortBy owls, 'state'
+    
+    async.map owls, (owl, callback) ->
+      owl.hydrateForUser req.user, callback
+    , (error) ->
+      res.render 'owls/list', owls: owls, maxPages: 1, currentPage: 1
 
 exports.byState = (req, res) ->
   {state} = req.params
