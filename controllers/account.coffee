@@ -68,6 +68,16 @@ exports.update = (req,res) ->
 
 exports.destroy = (req,res) ->
 
+exports.preferences = (req, res) ->
+  res.render 'user/preferences'
+
+exports.updatePreferences = (req, res) ->
+  results = [ req.body.suburb, req.body.state, req.body.pType, req.body.dType, req.body.minPrice, req.body.maxPrice, req.body.minBeds, req.body.maxBeds, req.body.bathrooms,req.body.cars, req.body.devStage, res.locals.objUser.id ]
+  system.db.query "UPDATE po_users SET pref_suburb = ?, pref_state = ?, pref_ptype = ?, pref_dtype = ?, pref_min_price = ?, pref_max_price = ?, pref_min_beds = ?, pref_max_beds = ?, pref_bathrooms = ?, pref_cars = ?, pref_dev_stage = ? WHERE user_id = ?", results, (err, results) ->
+    if err then throw err
+    req.flash('success','Preferences have been updated')
+    res.redirect 'back'
+
 exports.registrations = (req, res) ->
   models.registrations.findByUser res.locals.objUser.id, (err, results) ->
     if err then console.log err

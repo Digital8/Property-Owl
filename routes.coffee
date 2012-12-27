@@ -25,6 +25,9 @@ module.exports = (app) ->
   
   app.get '/adclick/:id', controllers.adclick.index
   
+  app.get '/preferences', authenticate, controllers.account.preferences
+  app.post '/preferences', authenticate, controllers.account.updatePreferences
+
   app.get '/registrations', authenticate, controllers.account.registrations
 
   app.get '/contact', controllers.contact.index
