@@ -1,6 +1,7 @@
 extends ../../layout
 
 block content
+  
   .container.row.main
     
     include ../menu
@@ -10,27 +11,30 @@ block content
     include actions
     
     .grid-header.form-header
+
       ol.six
         li.active
           .ol-1-active
           | Details
+        
         li
           .ol-2
           | Features
+        
         li
           .ol-3
-          | Barn Deal
+          | Deals
+        
         li
           .ol-4
           | Images
+        
         li
           .ol-5
-          | Property Lots
-        li
-          .ol-6
-          | Complete!
+          | Files
     
     .details
+      
       h2 Owl Details
       
       hr
@@ -42,8 +46,6 @@ block content
         include ../../flashify
         
         include inputs
-        
-        //- include image_inputs
         
         .submit
           input.button(type='submit', value='Edit Owl')
