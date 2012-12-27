@@ -1,8 +1,8 @@
 # Patterns
 
-### Array-ify
+## Arrayify
 
-Ensures an object is an array.
+### Ensures an object is an array.
 
 If input is not an Array, it is returned as the first element in a new Array.
 
