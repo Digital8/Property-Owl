@@ -1,0 +1,24 @@
+.inputs
+  label.required Files
+
+.inputs
+
+.inputs
+  
+  table.admin-gridview.files
+    
+    thead
+      tr
+        td Thumb
+        td Actions
+    
+    tbody.body
+      - if (owl.files && owl.files.length)
+        - each file in owl.files
+          include file_input
+    
+    tfooter.footer
+      tr
+        td(colspan=3)
+          label Upload
+          input#image(type='file', name='image', multiple)
