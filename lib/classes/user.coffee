@@ -25,6 +25,18 @@ module.exports = class User
     @subscribedNewsletters = userData.subscribed_newsletter or 0
     @subscribedAlerts = userData.subscribed_alerts or 0
     @avatar = if userData.photo  then "/uploads/#{userData.photo}" else 'http://placehold.it/150x150'
+    @preferences =
+      suburb: userData.pref_suburb or ''
+      state: userData.pref_state or ''
+      propertyType: userData.pref_ptype or ''
+      dealType: userData.pref_dtype or ''
+      minPrice: userData.pref_min_price or ''
+      maxPrice: userData.pref_max_price or '' 
+      minBeds: userData.pref_min_beds or ''
+      maxBeds: userData.pref_max_beds or ''
+      bathrooms: userData.pref_bathrooms or ''
+      cars: userData.pref_cars or ''
+      developmentStage: userData.pref_dev_stage or ''
   
   isHacker: -> app.argv.hack and (@company is 'Digital8')
   

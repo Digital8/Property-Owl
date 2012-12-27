@@ -19,152 +19,101 @@ block content
             form#input-form(action="/preferences",method="post")
               img(src='/images/search-map-icon.png', alt='Suburb')
               label(for='propertySuburb') Suburb
-              input#propertySuburb(type='text',name='suburb')
+              input#propertySuburb(type='text',name='suburb', value="#{objUser.preferences.suburb}")
               img(src='/images/search-map-icon.png', alt='State / Territory')
               label(for='propertyState') State / Territory
               select#propertyState(name="state")
-                option(value='all') All
-                option(value="act") ACT
-                option(value="nsw") NSW
-                option(value="nt") NT
-                option(value="qld") QLD
-                option(value="sa") SA
-                option(value="tas") TAS
-                option(value="vic") VIC
-                option(value="wa") WA
+                - var states = ['All', 'ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']
+                each state in states
+                  - var s = (objUser.preferences.state.toLowerCase() == state.toLowerCase()) ? true : false;
+                  option(value="#{state.toLowerCase()}", selected=s)= state
+
               img(src='/images/search-property-icon.png', alt='Property Type')
               label(for='propertyType') Property Type
+              - var propertyTypes = ['All', 'Apartment', 'Townhouse', 'Unit', 'House', 'Land', 'House and Land', 'Villa', 'Acreage'];
               select#propertyType(name="pType")
-                option(value="all") All
-                option(value="apartment") Apartment
-                option(value="townhouse") Townhouse
-                option(value="unit") Unit
-                option(value="house") House
-                option(value="land") Land
-                option(value="house and land") House and Land
-                option(value="villa") Villa
-                option(value="acreage") Acreage
+                each p in propertyTypes
+                  - var s = (objUser.preferences.propertyType.toLowerCase() == p.toLowerCase()) ? true : false;
+                  option(value="#{p.toLowerCase()}", selected=s)= p
+
               img(src='/images/search-deal-icon.png', alt='Deal Type')
               label(for='propertyDealType') Deal Type
+              - var dealTypes = ['All', 'Stamp Duty', 'Furniture Package', 'Blinds', 'Rental Guarantee', 'Entertainment System']
               select#propertyDealType(name="dType")
-                option All
-                option Stamp Duty
-                option Furniture Package
-                option Blinds
-                option Rental Guarantee
-                option Entertainment System
+                each deal in dealTypes
+                  - var s = (objUser.preferences.dealType.toLowerCase() == deal.toLowerCase()) ? true : false;
+                  option(value="#{deal.toLowerCase()}", selected=s)= deal
+               
               img(src='/images/search-price-icon.png', alt='Minimum Price')
               label(for='propertyMinPrice') Min. Price
+              - var prices = ['Any', 50000, 100000,150000,200000,250000,300000,350000,400000,450000,500000, 550000,600000,650000,700000,750000,800000,850000,900000,950000,1000000,125000, 1500000,1750000,2000000,2500000,3000000,4000000,5000000,10000000]
               select#propertyMinPrice(name="minPrice")
-                option(value="any") Any
-                option(value="50000") 50,000
-                option(value="100000") 100,000
-                option(value="150000") 150,000
-                option(value="200000") 200,000
-                option(value="250000") 250,000
-                option(value="300000") 300,000
-                option(value="350000") 350,000
-                option(value="400000") 400,000
-                option(value="450000") 450,000
-                option(value="500000") 500,000
-                option(value="550000") 550,000
-                option(value="600000") 600,000
-                option(value="650000") 650,000
-                option(value="700000") 700,000
-                option(value="750000") 750,000
-                option(value="800000") 800,000
-                option(value="850000") 850,000
-                option(value="900000") 900,000
-                option(value="950000") 950,000
-                option(value="1000000") 1,000,000
-                option(value="1250000") 1,250,000
-                option(value="1500000") 1,500,000
-                option(value="1750000") 1,750,000
-                option(value="2000000") 2,000,000
-                option(value="2500000") 2,500,000
-                option(value="3000000") 3,000,000
-                option(value="4000000") 4,000,000
-                option(value="5000000") 5,000,000
-                option(value="10000000") 10,000,000
+                each price in prices
+                  - var s = (objUser.preferences.minPrice == price) ? true : false;
+                  option(value=price, selected=s).price= price
+
               img(src='/images/search-price-icon.png', alt='Maximum Price')
               label(for='propertyMaxPrice') Max. Price
+              - var prices = ['Any', 50000, 100000,150000,200000,250000,300000,350000,400000,450000,500000, 550000,600000,650000,700000,750000,800000,850000,900000,950000,1000000,125000, 1500000,1750000,2000000,2500000,3000000,4000000,5000000,10000000]
               select#propertyMaxPrice(name="maxPrice")
-                option(value="any") Any
-                option(value="50000") 50,000
-                option(value="100000") 100,000
-                option(value="150000") 150,000
-                option(value="200000") 200,000
-                option(value="250000") 250,000
-                option(value="300000") 300,000
-                option(value="350000") 350,000
-                option(value="400000") 400,000
-                option(value="450000") 450,000
-                option(value="500000") 500,000
-                option(value="550000") 550,000
-                option(value="600000") 600,000
-                option(value="650000") 650,000
-                option(value="700000") 700,000
-                option(value="750000") 750,000
-                option(value="800000") 800,000
-                option(value="850000") 850,000
-                option(value="900000") 900,000
-                option(value="950000") 950,000
-                option(value="1000000") 1,000,000
-                option(value="1250000") 1,250,000
-                option(value="1500000") 1,500,000
-                option(value="1750000") 1,750,000
-                option(value="2000000") 2,000,000
-                option(value="2500000") 2,500,000
-                option(value="3000000") 3,000,000
-                option(value="4000000") 4,000,000
-                option(value="5000000") 5,000,000
-                option(value="10000000") 10,000,000
+                each price in prices
+                  - var s = (objUser.preferences.maxPrice == price) ? true : false;
+                  option(value=price, selected=s).price= price
+
               .small-left
                 img.small(src='/images/search-bed-icon.png', alt='Number of Beds')
                 label(for='propertyMinBeds') Min. Beds
+                - var beds = ['Any', '1', '2', '3', '4', '5']
                 select#propertyMinBeds(name="minBeds")
-                  option(value="any") Any
-                  option(value="1") 1
-                  option(value="2") 2
-                  option(value="3") 3
-                  option(value="4") 4
-                  option(value="5") 5
+                  each b in beds
+                    - var s = (objUser.preferences.minBeds.toLowerCase() == b.toLowerCase()) ? true : false;
+                    option(value=b, selected=s) #{b}+
+
               .small-right
                 img.small(src='/images/search-bed-icon.png', alt='Number of Beds')
                 label(for='propertyMaxBeds') Max. Beds
+                - var beds = ['Any', '1', '2', '3', '4', '5']
                 select#propertyMaxBeds(name="maxBeds")
-                  option(value="any") Any
-                  option(value="1") 1
-                  option(value="2") 2
-                  option(value="3") 3
-                  option(value="4") 4
-                  option(value="5") 5
+                  each b in beds
+                    - var s = (objUser.preferences.maxBeds.toLowerCase() == b.toLowerCase()) ? true : false;
+                    option(value=b, selected=s) #{b}+
+
               .small-left
                 img.small(src='/images/search-bath-icon.png', alt='Number of Bathrooms')
                 label(for='propertyBathrooms') Bathrooms
+                - var bathrooms = ['Any', '1', '2', '3', '4', '5']
                 select#propertyBathrooms(name="bathrooms")
-                  option(value="any") Any
-                  option(value="1") 1+
-                  option(value="2") 2+
-                  option(value="3") 3+
-                  option(value="4") 4+
-                  option(value="5") 5+
+                  each b in bathrooms
+                    - var s = (objUser.preferences.bathrooms.toLowerCase() == b.toLowerCase()) ? true : false;
+                    option(value=b, selected=s) #{b}+
+
               .small-right
                 img.small(src='/images/search-car-icon.png', alt='Number of Car Spaces')
                 label(for='propertyCarSpaces') Car Spaces
+                - var cars = ['Any', '1', '2', '3', '4', '5']
                 select#propertyCarSpaces(name="cars")
-                  option(value="any") Any
-                  option(value="1") 1+
-                  option(value="2") 2+
-                  option(value="3") 3+
-                  option(value="4") 4+
-                  option(value="5") 5+
+                  each c in cars
+                    - var s = (objUser.preferences.cars.toLowerCase() == c.toLowerCase()) ? true : false;
+                    option(value=c, selected=s) #{c}+
+
               img(src='/images/search-development-icon.png', alt='Development Stage')
               label(for='propertyState') Development Stage
-              select#propertyState(name="devStage")
-                option(value="all") All
-                option(value="otp") Off The Plan
-                option(value="completed") Completed
+              select#propertyStage(name="devStage")
+                if (objUser.preferences.developmentStage.toLowerCase() == 'all')
+                  option(value="all", selected=true) All
+                else
+                  option(value="all") All
+
+                if (objUser.preferences.developmentStage.toLowerCase() == 'otp')
+                  option(value="otp", selected=true) Off The Plan
+                else
+                  option(value="otp") Off The Plan
+
+                if (objUser.preferences.developmentStage.toLowerCase() == 'completed')
+                  option(value="completed", selected=true) Completed
+                else
+                  option(value="completed") Completed
+
               input.button(type='submit', value='Submit')
     
     include ../right_nav
