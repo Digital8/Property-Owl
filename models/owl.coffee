@@ -144,7 +144,7 @@ module.exports = class Owl extends Model
       return callback error if error
       
       callback null
-
+  
   upload: (req, callback) ->
     
     async.series
@@ -171,30 +171,49 @@ module.exports = class Owl extends Model
         
         deals.pop()
         
-        
         async.forEach deals, (deal, callback) =>
           @constructor.db.query "INSERT INTO deals SET ?", deal, callback
         , callback
-    
-    , (error) =>
-      return callback() unless req.files?
       
-      for key, files of req.files
-        files = [].concat files
+      # TODO refactor file/image uploads [@pyro]
+      images: (callback) =>
+        return do callback unless req.images?
         
-        async.forEach files, (file, callback) =>
-          console.log 'file', file
+        for key, files of req.images
+          files = [].concat files
           
-          return do callback unless file.size
-          
-          Media.upload
-            entity_id: @id
-            owner_id: req.user.id
-            file: file
-            type: 'owl'
-          , callback
+          async.forEach files, (file, callback) =>
+            console.log 'file', file
+            
+            return do callback unless file.size
+            
+            Media.upload
+              entity_id: @id
+              owner_id: req.user.id
+              file: file
+              type: 'owl'
+            , callback
+      
+      # TODO refactor file/image uploads [@pyro]
+      files: (callback) =>
+        return do callback unless req.files?
         
-        , callback
+        for key, files of req.files
+          files = [].concat files
+          
+          async.forEach files, (file, callback) =>
+            console.log 'file', file
+            
+            return do callback unless file.size
+            
+            Media.upload
+              entity_id: @id
+              owner_id: req.user.id
+              file: file
+              type: 'owl'
+            , callback
+    
+    , callback
   
   @inBarn = (barnId, callback) =>
     @db.query "SELECT * FROM #{@table.name} WHERE barn_id = ?", [barnId], (error, rows) =>
