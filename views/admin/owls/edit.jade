@@ -39,8 +39,8 @@ block content
       
       hr
       
-      form.details-form.fake(action='/admin/owls/#{owl.id}', method='post', enctype='multipart/form-data')
-      
+      form.details-form.fake.owl(action="/admin/owls/#{owl.id}", method='post', enctype='multipart/form-data', data-id=owl.id)
+        
         input(type='hidden', name='_method', value='put')
         
         include ../../flashify

@@ -48,6 +48,14 @@ module.exports = class Model
       else
         this[key] = ''
     
+    if @constructor.fields?
+      
+      for key, field of @constructor.table.columns
+        if @constructor.fields?[key]?.type?
+          if @constructor.fields?[key]?.type is Boolean
+            # console.log 'TYPE', key, this[key], typeof this[key] # @constructor.fields[key]?.type
+            this[key] = Boolean this[key]
+    
     callback null, this
   
   ###
@@ -67,17 +75,40 @@ module.exports = class Model
     # callback()
   
   ###
-  Model::update
-  - commits/persists dirty fields (changes) to the underlying row/record
+  Model.patch
+  - persists certain fields (changes) to the underlying row/record
+  - bit of a hack
+  ###
+  @patch = (id, hash, callback) ->
+    
+    @get id, (error, model) =>
+      
+      for key, field of model.constructor.fields when hash[key]?
+        if field.type? and field.type is Boolean
+          model[key] = {true: true, false: false}[hash[key]]
+        else
+          model[key] = hash[key]
+      
+      map = {}
+      
+      for key, value of hash
+        map[key] = model[key]
+      
+      @db.query "UPDATE #{@table.name} SET ? WHERE #{@table.key} = ?", [map, model.id], (error) =>
+        callback error, model
+  
+  ###
+  Model.update
+  - persists dirty fields (changes) to the underlying row/record
   ###
   @update = (id, hash, callback) ->
     
     @get id, (error, model) ->
       
-      for key, field of model.constructor.fields
+      for key, field of model.constructor.fields when hash[key]?
         model[key] = hash[key]
       
-      model.save (error) ->
+      model.save (error) =>
         callback error, model
   
   ###
@@ -90,7 +121,7 @@ module.exports = class Model
     model.hydrate callback
   
   ###
-  Model::create
+  Model.create
   - similar (shortcut) to using Model.new + model.save
   ###
   @create = (map, callback) ->
@@ -118,7 +149,8 @@ module.exports = class Model
         callback null, model
   
   ###
-  Model.get | gets ALL records of a model
+  Model.get
+  - gets ALL records of a model
   - used in index/list actions
   - 
   ###
@@ -147,7 +179,7 @@ module.exports = class Model
       callback arguments...
   
   ###
-  Model::get
+  Model.get
   - fetches a row from the underlying datasource
   - instantiates
   - needs alot of work [TODO] [@pyro]
@@ -161,7 +193,7 @@ module.exports = class Model
       model.hydrate callback
   
   ###
-  Model::dry
+  Model.dry
   - fetches a row from the underlying datasource
   - does not hydrate (no associations)
   - needs alot of work [TODO] [@pyro]

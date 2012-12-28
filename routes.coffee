@@ -162,6 +162,7 @@ module.exports = (app) ->
   admin 'post', '/owls', (authorize acl.developers), controllers.admin.owls.create
   admin 'get', '/owls/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.owls.edit
   admin 'put', '/owls/:id(\\d+)', controllers.admin.owls.update
+  admin 'patch', '/owls/:id(\\d+)', controllers.admin.owls.patch
   admin 'get', '/owls/:id(\\d+)/delete', controllers.admin.owls.delete
   admin 'del', '/owls/:id(\\d+)', controllers.admin.owls.destroy
   

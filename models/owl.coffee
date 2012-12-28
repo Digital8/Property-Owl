@@ -18,6 +18,8 @@ module.exports = class Owl extends Model
   
   @field 'barn_id'
   
+  @field 'approved', type: Boolean
+  
   @field 'title'
   @field 'address'
   @field 'suburb'
@@ -30,10 +32,6 @@ module.exports = class Owl extends Model
   @field 'cars'
   @field 'internal_area'
   @field 'external_area'
-  # @field 'approved'
-  # ,
-  #   default: 0
-  #   parse: ->
   
   @field 'indoor_features'
   @field 'outdoor_features'
@@ -58,10 +56,18 @@ module.exports = class Owl extends Model
           
           callback()
       
-      media: (callback) =>
+      images: (callback) =>
         Media = system.models.media
-        Media.for this, (error, medias) =>
+
+        Media.forEntityWithClass this, klass: 'image', (error, medias) =>
           @images = medias
+          callback error
+      
+      files: (callback) =>
+        Media = system.models.media
+
+        Media.forEntityWithClass this, klass: 'file', (error, medias) =>
+          @files = medias
           callback error
       
       deals: (callback) =>
@@ -147,6 +153,28 @@ module.exports = class Owl extends Model
   
   upload: (req, callback) ->
     
+    processFiles = (req, key, callback = ->) =>
+      files = req.files["#{key}s"]
+      
+      do callback unless files?
+      
+      files = [].concat files
+      
+      async.forEach files, (file, callback) =>
+        console.log "processing #{key} file...", file
+        
+        return do callback unless file.size
+        
+        Media.upload
+          entity_id: @id
+          owner_id: req.user.id
+          file: file
+          type: 'owl'
+          class: key
+        , callback
+      
+      , callback
+    
     async.series
       removeDeals: (callback) =>
         @constructor.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'owl'", @id, callback
@@ -175,45 +203,29 @@ module.exports = class Owl extends Model
           @constructor.db.query "INSERT INTO deals SET ?", deal, callback
         , callback
       
-      # TODO refactor file/image uploads [@pyro]
-      images: (callback) =>
-        return do callback unless req.images?
+      uploads: (callback) =>
         
-        for key, files of req.images
-          files = [].concat files
+        async.parallel
+        
+          image: (callback) =>
+            processFiles req, 'image', callback
           
-          async.forEach files, (file, callback) =>
-            console.log 'file', file
-            
-            return do callback unless file.size
-            
-            Media.upload
-              entity_id: @id
-              owner_id: req.user.id
-              file: file
-              type: 'owl'
-            , callback
+          file: (callback) =>
+            processFiles req, 'file', callback
+        
+        , callback
       
-      # TODO refactor file/image uploads [@pyro]
-      files: (callback) =>
-        return do callback unless req.files?
+      nested: (callback) =>
+        return do callback unless req.body.files? 
         
-        for key, files of req.files
-          files = [].concat files
-          
-          async.forEach files, (file, callback) =>
-            console.log 'file', file
-            
-            return do callback unless file.size
-            
-            Media.upload
-              entity_id: @id
-              owner_id: req.user.id
-              file: file
-              type: 'owl'
-            , callback
+        for file in req.body.files when file? and file.id? and file.description?
+          Media.update file.id, description: file.description, ->
+        
+        do callback
     
-    , callback
+    , (error) ->
+      console.log 'done'
+      do callback
   
   @inBarn = (barnId, callback) =>
     @db.query "SELECT * FROM #{@table.name} WHERE barn_id = ?", [barnId], (error, rows) =>
@@ -227,8 +239,6 @@ module.exports = class Owl extends Model
         callback null, models
   
   @state = (state, callback) ->
-    
-    
     @db.query "SELECT * FROM #{@table.name} WHERE state = ? ORDER BY created_at ASC", [state], (error, rows) =>
       return callback error if error
       

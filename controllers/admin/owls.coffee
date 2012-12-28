@@ -53,6 +53,12 @@ exports.update = (req, res) ->
     owl.upload req, ->
       res.redirect '/admin/owls'
 
+exports.patch = (req, res) ->
+  Owl.patch req.params.id, req.body, (error, owl) ->
+    console.log 'patch', arguments
+    
+    res.redirect '/admin/owls'
+
 exports.delete = (req, res) ->
   Owl.get req.params.id, (error, owl) ->
     res.render 'admin/owls/delete', owl: owl

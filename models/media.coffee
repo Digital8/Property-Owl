@@ -20,8 +20,11 @@ module.exports = class Media extends Model
   @field 'entity_id'
   @field 'filename'
   @field 'type'
+  @field 'class'
+  @field 'description'
   
   constructor: (args = {}) ->
+    
     super
   
   hydrate: (callback) ->
@@ -31,9 +34,8 @@ module.exports = class Media extends Model
   @upload = (args, callback) =>
     id = uuid() + '.png'
     
-    console.log 'uploading...', file
-    
     {file, entity_id, owner_id, type} = args
+    klass = args.class
     
     fs.readFile file.path, (error, data) =>
       path = "#{system.bucket}/#{id}"
@@ -44,12 +46,24 @@ module.exports = class Media extends Model
           owner_id: owner_id
           filename: id
           type: type
+          class: klass
+          description: file.name
         , callback
   
   @for = (model, callback) =>
     type = model.constructor.name.toLowerCase()
     
     system.db.query "SELECT * FROM medias WHERE entity_id = ? AND type = '#{type}'", [model.id], (error, rows) =>
+      return callback error if error?
+      
+      models = (new this row for row in rows)
+      
+      callback null, models
+  
+  @forEntityWithClass = (model, {klass}, callback) =>
+    type = model.constructor.name.toLowerCase()
+    
+    system.db.query "SELECT * FROM medias WHERE entity_id = ? AND type = '#{type}' AND class = '#{klass}'", [model.id], (error, rows) =>
       return callback error if error?
       
       models = (new this row for row in rows)

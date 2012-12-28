@@ -6,5 +6,7 @@ module.exports = class AffiliateCategory extends Model
     name: 'affiliate_categories'
     key: 'affiliate_category_id'
   
+  @field 'name'
+  
   constructor: (args = {}) ->
     super

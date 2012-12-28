@@ -1,8 +1,13 @@
 tr.media(data-id=file.id, data-type=file.type, data-entity-id=owl.id)
   
+  input(type='hidden', name="files[#{file.id}][id]", value=file.id)
+  
   td
     if(file.filename)
-      img(src='/uploads/#{image.filename}', width='128', height='128', data-json=JSON.stringify(file))
+      img(src='/uploads/#{file.filename}', width='128', height='128', data-json=JSON.stringify(file))
+  
+  td
+    input(type='text', name="files[#{file.id}][description]", value=file.description)
   
   td
     a.delete(href='/admin/owls/#{owl.id}/delete', alt='delete owl deal')
