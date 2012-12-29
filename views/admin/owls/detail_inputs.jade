@@ -1,0 +1,31 @@
+.inputs
+  label(for='title') Title
+  input#title(type='text', name='title', value='#{owl.title}')
+
+.inputs
+  label(for='development_type_id') Type
+  select#development_type_id(type='text', name='development_type_id')
+    option
+    - for type in data.developmentTypes
+      option(value='#{type.id}', selected=owl.development_type_id == type.id)= type.name
+
+.inputs
+  label(for='price') Price
+  input#price(type='number', name='price', value='#{owl.price}', min='0', max='100000000', pattern='^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$')
+
+.inputs
+  label(for='description') Description
+    textarea#description(name='description')
+      = owl.description
+
+.inputs
+  label(for='bedrooms') Bedrooms
+  input#bedrooms(type='number', name='bedrooms', value='#{owl.bedrooms}', min='0')
+  
+.inputs
+  label(for='bathrooms') Bathrooms
+  input#bathrooms(type='number', name='bathrooms', value='#{owl.bathrooms}', min='0')
+  
+.inputs
+  label(for='cars') Cars
+  input#cars(type='number', name='cars', value='#{owl.cars}', min='0')

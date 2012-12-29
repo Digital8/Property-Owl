@@ -11,33 +11,31 @@ block content
     include actions
     
     .grid-header.form-header
-
-      ol.six
-        li.active
-          .ol-1-active
-          | Details
+    
+      //- ol.six
+      //-   li.active
         
-        li
-          .ol-2
-          | Features
+      //-   li
+      //-     .ol-1-active
+      //-     | Details
         
-        li
-          .ol-3
-          | Deals
+      //-   li
+      //-     .ol-2
+      //-     | Features
         
-        li
-          .ol-4
-          | Images
+      //-   li
+      //-     .ol-3
+      //-     | Deals
         
-        li
-          .ol-5
-          | Files
+      //-   li
+      //-     .ol-4
+      //-     | Images
+        
+      //-   li
+      //-     .ol-5
+      //-     | Files
     
     .details
-      
-      h2 Owl Details
-      
-      hr
       
       form.details-form.fake.owl(action="/admin/owls/#{owl.id}", method='post', enctype='multipart/form-data', data-id=owl.id)
         
