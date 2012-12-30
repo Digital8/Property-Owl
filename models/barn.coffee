@@ -6,6 +6,8 @@ Table = require '../lib/table'
 
 system = require '../system'
 
+Deal = system.models.deal
+
 module.exports = class Barn extends Model
   @table = new Table
     name: 'barns'
@@ -87,12 +89,14 @@ module.exports = class Barn extends Model
         @constructor.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'barn'", @id, callback
       
       addDeals: (callback) =>
-        values = req.body.value.pop()
-        names = req.body.name.pop()
-        types = req.body.type.pop()
+
+        console.log req.body
+        values = req.body.value
+        names = req.body.name
+        types = req.body.type
         
         deals = []
-        
+
         return callback() unless types
         
         for index in [0...types.length]
@@ -103,8 +107,6 @@ module.exports = class Barn extends Model
             value: values[index]
             created_by: req.session.user_id
             type: 'barn'
-        
-        deals.pop()
         
         console.log deals
         

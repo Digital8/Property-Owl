@@ -29,6 +29,7 @@ exports.add = (req, res) ->
 exports.create = (req, res) ->
   Owl.create req.body, (error, owl) ->
     
+    if error then console.log error
     template = 'listing-confirmation'
 
     user =
@@ -39,13 +40,17 @@ exports.create = (req, res) ->
       contactName: res.locals.objUser.firstName
       dealLink: '/admin/owls/#{owl.insertId}/edit'
 
-    system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
-      if results is true 
-        #owl.upload req, ->
-        res.redirect "/owls/#{owl.id}"
-      else
-        res.redirect "/owls/#{owl.id}"
-
+    if owl
+      system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
+        if results is true 
+          owl.upload req, ->
+            res.redirect "/owls/#{owl.id}"
+        else
+          res.redirect "/owls/#{owl.id}"
+    else
+      req.flash('error',error)
+      res.redirect 'back'
+      
 exports.update = (req, res) ->
   delete req.body.approved
   

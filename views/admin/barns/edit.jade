@@ -31,9 +31,9 @@ block content
     $(document).ready(function(){
         $('.addBarn').click(function(e){
           e.preventDefault();
-          if ($('.owl tr').length < 3  || $('.owl tr').length > 5)
+          if ($('.owl tr').length > 5)
           {
-            alert('Barn deals must only have between 3 and 5 barns');
+            alert('Barn deals can only have up to 5 owls');
           }
         else
           {
