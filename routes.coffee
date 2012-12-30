@@ -73,6 +73,7 @@ module.exports = (app) ->
   
   barn 'get', '', controllers.barns.index
   barn 'get', "/:id(\\d+)", controllers.barns.show
+  barn 'get', "/:id(\\d+)/owls", controllers.barns.owls
   
   news = (method, path, middleware...) ->
     app[method] "/news#{path}", middleware...

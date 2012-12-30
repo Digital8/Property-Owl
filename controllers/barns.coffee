@@ -15,6 +15,11 @@ exports.show = (req, res) ->
   Barn.get id, (error, barn) ->
     res.render 'barns/show', barn: barn, enquire: on
 
+exports.owls = (req,res) ->
+  {id} = req.params
+  
+  Barn.get id, (error, barn) ->
+    res.send barn.owls
 # exports.owls = {}
 
 exports.nest = (req, res) ->
