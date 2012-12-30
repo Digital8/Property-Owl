@@ -25,5 +25,19 @@ block content
         include inputs
 
         .submit
-          input.button(type='submit', value='Create Barn')
+          input.button(type='submit', value='Create Barn').addBarn
           a.left-button(href="/admin/barns") Cancel
+  script
+    $(document).ready(function(){
+        $('.addBarn').click(function(e){
+          e.preventDefault();
+          if ($('.owl tr').length < 3  || $('.owl tr').length > 5)
+          {
+            alert('Barn deals must only have between 3 and 5 barns');
+          }
+        else
+          {
+            $('.details-form').submit();
+          }
+        });
+    });

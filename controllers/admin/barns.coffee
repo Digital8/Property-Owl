@@ -42,7 +42,6 @@ exports.destroy = (req, res) ->
 
 exports.update = (req, res) ->
   Barn.update req.params.id, req.body, (error, barn) ->
-    console.log 'update', arguments
     
     barn.upload req, ->
       res.redirect '/admin/barns'
