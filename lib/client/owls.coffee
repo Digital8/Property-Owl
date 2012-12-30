@@ -60,8 +60,11 @@ module.exports = ->
         
         activate key
   
-  activate 'index'
-
+  if window.location.hash? and window.location.hash.length
+    activate window.location.hash[1..]
+  else
+    activate 'index'
+  
   #   # $panes = $ '.panes'
     
   #   class Pane
