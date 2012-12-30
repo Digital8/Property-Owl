@@ -30,6 +30,19 @@ module.exports = ->
       $.patch "/admin/owls/#{owlId}/deals/#{dealId}",
         value: $value.val()
       , -> console.log arguments...
+    
+    # delete
+    owlId = ($ 'form').data 'id'
+    dealId = row.data 'id'
+    
+    deleteButton = row.find '.delete'
+    
+    deleteButton.click (event) ->
+      event.preventDefault()
+      
+      $.delete "/admin/owls/#{owlId}/deals/#{dealId}", (response, body, jqXHR) ->
+        if jqXHR.status is 200
+            row.remove()
   
   $ ->
     ($ '.admin-gridview.deals .add').click (event) ->
@@ -66,18 +79,6 @@ module.exports = ->
   $ ->
     for dealRow in $ '.admin-gridview.deals tr.deal'
       $dealRow = $ dealRow
-      
-      owlId = ($ 'form').data 'id'
-      dealId = $dealRow.data 'id'
-      
-      deleteButton = $dealRow.find '.delete'
-      
-      deleteButton.click (event) ->
-        event.preventDefault()
-        
-        $.delete "/admin/owls/#{owlId}/deals/#{dealId}", (response, body, jqXHR) ->
-          if jqXHR.status is 200
-            $dealRow.remove()
       
       sync $dealRow
       
