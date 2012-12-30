@@ -1,5 +1,31 @@
 module.exports = ->
   
+  header = $ '.grid-header.form-header'
+  
+  ol = $ '<ol>'
+  ol.addClass 'six'
+  ol.appendTo header
+  
+  li = $ "<li>"
+  li.addClass 'active'
+  li.appendTo ol
+  
+  sections = ['index', 'detail', 'address', 'area', 'image', 'file', 'deal']
+  
+  for section, index in sections
+    
+    $pane = $ ".inputs.#{section}.pane"
+    
+    li = $ "<li>"
+    li.appendTo ol
+    
+    div = $ '<div>'
+    div.addClass ".ol-#{index}"
+    div.appendTo li
+    
+    li.append section
+    
+  
 #   # $panes = $ '.panes'
   
 #   class Pane

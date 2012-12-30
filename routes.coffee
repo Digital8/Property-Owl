@@ -23,19 +23,25 @@ module.exports = (app) ->
   app.get '/sign-up', controllers.signup.index
   app.post '/sign-up', controllers.signup.create
   
+  # ads
   app.get '/adclick/:id', controllers.adclick.index
   
+  # preferences
   app.get '/preferences', authenticate, controllers.account.preferences
   app.post '/preferences', authenticate, controllers.account.updatePreferences
-
+  
+  # registrations
   app.get '/registrations', authenticate, controllers.account.registrations
 
+  # contat
   app.get '/contact', controllers.contact.index
   app.post '/contact', controllers.contact.create
   
+  # account
   app.get '/account', authenticate, controllers.account.index
   app.put '/account', authenticate, controllers.account.update
   
+  # media
   media = (method, path, middleware...) ->
     app[method] "/medias#{path}", authenticate, middleware...
   

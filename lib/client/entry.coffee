@@ -5,12 +5,12 @@ window.commas = commas = require '../helpers/commas'
 
 require './reports'
 
-require './admin'
-
 makeMap = require './map'
 
 $ ->
   (require './shim') $
+  
+  do require './admin'
   
   do require './media'
   
