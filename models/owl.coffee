@@ -18,7 +18,7 @@ module.exports = class Owl extends Model
   
   @field 'barn_id'
   
-  @field 'approved', type: Boolean
+  @field 'approved', type: Boolean, default: no
   
   @field 'title'
   @field 'address'
