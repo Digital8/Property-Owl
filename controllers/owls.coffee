@@ -3,6 +3,7 @@ _ = require 'underscore'
 system = require '../system'
 async = require 'async'
 Owl = system.models.owl
+Deal = system.models.deal
 
 exports.index = (req, res) ->
   Owl.all (error, owls) ->
@@ -52,3 +53,18 @@ exports.show = (req, res) ->
   Owl.get id, (error, owl) ->
     owl.hydrateForUser req.user, (error) ->
       res.render 'owls/show', owl: owl, enquire: on
+
+exports.addDeal = (req, res) ->
+  map = req.body
+  map.entity_id = req.params.id
+  map.type = 'owl'
+  map.user_id = req.user.id
+  
+  console.log map
+  
+  Deal.create req.body, (error, deal) ->
+    res.send 'OK'
+
+exports.removeDeal = (req, res) ->
+  Deal.delete req.params.deal_id, ->
+    res.send 'OK'

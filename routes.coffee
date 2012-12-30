@@ -181,8 +181,13 @@ module.exports = (app) ->
   # admin 'get', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.delete
   # admin 'del', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.destroy
   
+  # nesting
   admin 'post', '/barns/:id(\\d+)/owls', controllers.barns.nest
   admin 'del',  '/barns/:barn_id(\\d+)/owls/:owl_id(\\d+)', controllers.barns.unnest
+  
+  # owl deals
+  admin 'post', '/owls/:id(\\d+)/deals', controllers.owls.addDeal
+  admin 'del',  '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', controllers.owls.removeDeal
   
   # admin/reports
   admin 'get', '/reports', controllers.admin.reports.index
