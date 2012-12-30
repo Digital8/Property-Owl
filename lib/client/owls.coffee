@@ -1,6 +1,6 @@
 module.exports = ->
   
-  header = $ '.grid-header.form-header'
+  header = $ '.grid-header.form-header.pane-nav'
   
   ol = $ '<ol>'
   ol.addClass 'six'
@@ -10,9 +10,20 @@ module.exports = ->
   li.addClass 'active'
   li.appendTo ol
   
+  activate = (section) ->
+    ($ ".panes").show()
+    
+    ($ ".pane").hide()
+    
+    ($ ".#{section}.pane").show()
+    
+    ($ "ol li").removeClass 'active'
+    
+    ($ "ol li.#{section}").addClass 'active'
+  
   sections = ['index', 'detail', 'address', 'area', 'image', 'file', 'deal']
   
-  for section, index in sections
+  for section, index in sections then do (section, index) ->
     
     $pane = $ ".inputs.#{section}.pane"
     
@@ -25,7 +36,14 @@ module.exports = ->
     
     li.append section
     
+    do (li) ->  
+      li.click (event) ->
+        event.preventDefault()
+        
+        activate section
   
+  activate 'index'
+
 #   # $panes = $ '.panes'
   
 #   class Pane
