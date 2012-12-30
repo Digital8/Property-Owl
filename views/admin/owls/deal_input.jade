@@ -9,4 +9,7 @@ tr.deal(data-id=deal.id, data-value=deal.value, data-type=deal.type, data-descri
   td
     input#value(type='number', name='value[]', value='#{deal.value}')
   td
-    input#delete(type='checkbox', name='delete[]', value='#{deal.id}')
+    //- input#delete(type='checkbox', name='delete[]', value='#{deal.id}')
+    a.delete(href='/admin/owls/#{owl.id}/delete', alt='delete owl deal')
+      img(src='/images/delete.png', alt='Delete')
+      | Delete

@@ -77,7 +77,9 @@ module.exports = ->
   $suburb.bind 'change keydown', ->
     update()
   
-  do update
+  matrix = $ '.owl-matrix'
+  
+  do update if matrix.length
   
   for row in $('.owl-matrix .owl')
     $row = $ row

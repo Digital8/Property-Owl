@@ -72,6 +72,14 @@ module.exports = ->
   #   #   # for deal in deals
     
   #   # change()
+  
+  ###
+  
+  $.delete "/admin/barns/#{barnId}/owls/#{owlId}", ->
+          console.log arguments
+          
+          $row.remove()
+  ###
 
   for form in ($ 'form.details-form.owl')
     $form = $ form
