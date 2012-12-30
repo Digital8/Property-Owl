@@ -60,11 +60,17 @@ exports.addDeal = (req, res) ->
   map.type = 'owl'
   map.user_id = req.user.id
   
-  console.log map
-  
   Deal.create req.body, (error, deal) ->
-    res.send 'OK'
+    res.send deal
 
 exports.removeDeal = (req, res) ->
   Deal.delete req.params.deal_id, ->
+    res.send 'OK'
+
+exports.patchDeal = (req, res) ->
+  owlId = req.params.owl_id
+  dealId = req.params.deal_id
+  
+  Deal.patch dealId, req.body, (error, deal) ->
+    # console.log arguments
     res.send 'OK'
