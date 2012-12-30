@@ -6,9 +6,9 @@ module.exports = ->
   ol.addClass 'six'
   ol.appendTo header
   
-  li = $ "<li>"
-  li.addClass 'active'
-  li.appendTo ol
+  #li = $ "<li>"
+  #li.addClass 'active'
+  #li.appendTo ol
   
   activate = (section) ->
     ($ ".panes").show()
@@ -21,13 +21,14 @@ module.exports = ->
     
     ($ "ol li.#{section}").addClass 'active'
   
-  sections = ['index', 'detail', 'address', 'area', 'image', 'file', 'deal']
+  sections = ['approval', 'detail', 'address', 'area', 'image', 'file', 'deal']
   
   for section, index in sections then do (section, index) ->
     
     $pane = $ ".inputs.#{section}.pane"
     
     li = $ "<li>"
+    li.css 'width', '14%'
     li.appendTo ol
     
     div = $ '<div>'
