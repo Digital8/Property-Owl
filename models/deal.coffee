@@ -20,9 +20,11 @@ module.exports = class Deal extends Model
   @field 'description'
   @field 'deal_type_id'
   
-  # @field 'owner_id'
-  # @field 'entity_id'
-  # @field 'filename'
+  @field 'user_id'
+  
+  @field 'entity_id'
+  
+  @field 'type'
   
   constructor: (args = {}) ->
     super
@@ -38,27 +40,6 @@ module.exports = class Deal extends Model
           callback()
     , (error) =>
       super callback
-  
-  # @upload = (args, callback) =>
-  #   id = uuid()
-  
-  #   console.log 'uploading...', file
-  
-  #   {file, entity_id, owner_id} = args
-  
-  #   fs.readFile file.path, (error, data) =>
-  #     path = "#{system.bucket}/#{id}"
-  
-  #     fs.writeFile path, data, (error) =>
-  #       @create
-  #         entity_id: entity_id
-  #         owner_id: owner_id
-  #         filename: id
-  #       , callback
-  
-  # @for = (model, callback) =>
-  #   @all (error, callback) ->
-  #     console.log 'media', arguments
   
   @for = (model, callback) =>
     type = model.constructor.name.toLowerCase()

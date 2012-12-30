@@ -47,6 +47,8 @@ exports.create = (req, res) ->
         res.redirect "/owls/#{owl.id}"
 
 exports.update = (req, res) ->
+  delete req.body.approved
+  
   Owl.update req.params.id, req.body, (error, owl) ->
     console.log 'update', arguments
     

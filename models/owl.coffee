@@ -176,32 +176,32 @@ module.exports = class Owl extends Model
       , callback
     
     async.series
-      removeDeals: (callback) =>
-        @constructor.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'owl'", @id, callback
+      # removeDeals: (callback) =>
+      #   @constructor.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'owl'", @id, callback
       
-      addDeals: (callback) =>
-        values = req.body.value.pop()
-        names = req.body.name.pop()
-        types = req.body.type.pop()
+      # addDeals: (callback) =>
+      #   values = req.body.value.pop()
+      #   names = req.body.name.pop()
+      #   types = req.body.type.pop()
         
-        deals = []
+      #   deals = []
         
-        return callback() unless types
+      #   return callback() unless types
         
-        for index in [0...types.length]
-          deals.push
-            entity_id: @id
-            deal_type_id: types[index]
-            description: names[index]
-            value: values[index]
-            created_by: req.session.user_id
-            type: 'owl'
+      #   for index in [0...types.length]
+      #     deals.push
+      #       entity_id: @id
+      #       deal_type_id: types[index]
+      #       description: names[index]
+      #       value: values[index]
+      #       created_by: req.session.user_id
+      #       type: 'owl'
         
-        deals.pop()
+      #   deals.pop()
         
-        async.forEach deals, (deal, callback) =>
-          @constructor.db.query "INSERT INTO deals SET ?", deal, callback
-        , callback
+      #   async.forEach deals, (deal, callback) =>
+      #     @constructor.db.query "INSERT INTO deals SET ?", deal, callback
+      #   , callback
       
       uploads: (callback) =>
         
