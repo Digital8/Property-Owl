@@ -13,9 +13,10 @@ helpers =
   hash: system.load.helper 'hash'
   mailer: system.load.helper 'mailer'
 
+
 exports.login = (req, res) ->
   models.user.login req.body.e, helpers.hash(req.body.p), (err, results) ->
-    
+  
     if results.length >= 1
       results = results.pop()
       req.session.user_id = results.user_id
@@ -24,10 +25,10 @@ exports.login = (req, res) ->
           res.cookie 'pouser', results.user_id, maxAge: 604800000
           res.cookie 'popwd', results.password, maxAge: 604800000
       res.send status: 200
-    
+  
     else
       res.send status: 401
-
+        
 exports.register = (req, res) ->
   req.assert('e', 'Invalid Email Address').isEmail()
   req.assert('p', 'Password must be at least 6 characters').len(6)
@@ -241,12 +242,12 @@ exports.search = (req, res) ->
   system.db.query "SELECT * FROM owls WHERE address SOUNDS LIKE ? AND suburb SOUNDS LIKE ?", [address, suburb], (error, rows) ->
     Owl = system.models.owl
     
-    models = ((new Owl row) for row in rows)
+    _models = ((new Owl row) for row in rows)
     
-    async.forEach models, (model, callback) =>
+    async.forEach _models, (model, callback) =>
       model.hydrate callback
     , (error) ->
-      res.send [null, models]
+      res.send [null, _models]
 
 exports.enquiry = (req, res) ->
   system.db.query "SELECT * FROM affiliates WHERE affiliate_id = ?", [req.body.aid], (err, affiliate) ->
