@@ -17,6 +17,7 @@ module.exports = ->
   
   return (req, res, next) ->
     if req.url is '/bundle.js'
+      res.set 'Content-Type', 'text/javascript'
       res.send bundle.bundle()
     else
       next()
