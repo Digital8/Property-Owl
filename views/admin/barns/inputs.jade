@@ -1,13 +1,23 @@
-.inputs
-  label(for='title') Approved
-    input.big_checkbox(name='approved', type='checkbox', checked=barn.approved)
-
-include feature_inputs
-
-include address_inputs
-
-include image_inputs
-
-include deal_inputs
-
-include owl_inputs
+.panes(style='display: none;')
+  
+  .inputs.index.pane(data-key='index')
+    label(for='title') Approved
+      input.big_checkbox(name='approved', type='checkbox', checked=barn.approved)
+  
+  .inputs.detail.pane(data-key='detail')
+    include detail_inputs
+  
+  .inputs.feature.pane(data-key='feature')
+    include feature_inputs
+  
+  .inputs.address.pane(data-key='address')
+    include address_inputs
+  
+  .inputs.image.pane(data-key='image')
+    include image_inputs
+  
+  .inputs.deal.pane(data-key='deal')
+    include deal_inputs
+  
+  .inputs.owl.pane(data-key='owl')
+    include owl_inputs
