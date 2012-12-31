@@ -25,6 +25,7 @@ block content
                     td Mobile
                     td Comment
                     td Sent
+                    td
                 
                 tbody
                   - if (referals && referals.length)
@@ -35,6 +36,7 @@ block content
                         td= referal.mobile
                         td= referal.comment
                         td= referal.created_at
+                        td: a(href="/#{referal.entity_type}s/#{referal.entity_id}") View
                   -else
                     h4 You have not refered any listings
     
