@@ -1,23 +1,23 @@
 .panes(style='display: none;')
   
-  .inputs.index.pane
+  .inputs.index.pane(data-key='index')
     label(for='title') Approved
       input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
-
-  .inputs.detail.pane
+  
+  .inputs.detail.pane(data-key='detail')
     include detail_inputs
-
-  .inputs.address.pane
+  
+  .inputs.address.pane(data-key='address')
     include address_inputs
-
-  .inputs.area.pane
+  
+  .inputs.area.pane(data-key='area')
     include area_inputs
-
-  .inputs.image.pane
+  
+  .inputs.image.pane(data-key='iamge')
     include image_inputs
-
-  .inputs.file.pane
+  
+  .inputs.file.pane(data-key='file')
     include file_inputs
-
-  .inputs.deal.pane
+  
+  .inputs.deal.pane(data-key='deal')
     include deal_inputs

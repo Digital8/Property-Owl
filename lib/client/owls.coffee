@@ -6,10 +6,6 @@ module.exports = ->
   ol.addClass 'six'
   ol.appendTo header
   
-  #li = $ "<li>"
-  #li.addClass 'active'
-  #li.appendTo ol
-  
   activate = (section) ->
     ($ ".panes").show()
     
@@ -23,14 +19,15 @@ module.exports = ->
     
     window.location.hash = section
   
-  sections =
-    index: {title: 'approval'}
-    detail: {}
-    address: {}
-    area: {}
-    image: {}
-    file: {}
-    deal: {}
+  sections = {}
+  
+  for pane in $ '.inputs.pane'
+    
+    $pane = $ pane
+    
+    key = $pane.data 'key'
+    
+    sections[key] = pane: $pane, title: key
   
   i = 0
   for key, section of sections
@@ -64,43 +61,6 @@ module.exports = ->
     activate window.location.hash[1..]
   else
     activate 'index'
-  
-  #   # $panes = $ '.panes'
-    
-  #   class Pane
-  #     constructor: ({@element}) ->
-    
-  #   class Panes
-  #     constructor: ({@element}) ->
-    
-  #   $panes.data 'init', ->
-  #     $panes.data 'panes', []
-      
-  #     header = $ '.grid-header.form-header'
-      
-  #     header.empty()
-      
-  #     ol = $ '<ol>'
-  #     ol.appendTo header
-      
-  #     panes = new Panes
-          
-  #     # panes = (new Pane element: element) for element in $ '.inputs.pane'
-    
-  #   # change = ->
-  #   #   deals = $ '.deals .deal'
-      
-  #   #   # for deal in deals
-    
-  #   # change()
-  
-  ###
-  
-  $.delete "/admin/barns/#{barnId}/owls/#{owlId}", ->
-          console.log arguments
-          
-          $row.remove()
-  ###
 
   for form in ($ 'form.details-form.owl')
     $form = $ form
@@ -115,5 +75,3 @@ module.exports = ->
       console.log 'click'
       
       $.patch "/admin/owls/#{id}", approved: approved.is(':checked'), -> console.log arguments 
-  
-  

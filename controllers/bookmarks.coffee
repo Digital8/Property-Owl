@@ -9,7 +9,7 @@ exports.index = (req, res) ->
 exports.create = (req, res) ->
   {type, id} = req.body
   
-  user = res.locals.objUser
+  user = req.user
   
   row =
     entity_id: id
