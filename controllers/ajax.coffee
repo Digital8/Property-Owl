@@ -127,7 +127,7 @@ exports.referfriend = (req, res) ->
   req.assert('entity_id', 'invalid entity').notEmpty()
   req.assert('entity_type', 'invalid entity type').notEmpty()
 
-  # console.log(req.body)
+  console.log(req.body)
 
   errors = req.validationErrors(true)
 

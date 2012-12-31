@@ -304,8 +304,8 @@ $(function(){
 	  var email = $(".refer-friend-email").val();
 	  var mobile = $(".refer-friend-phone").val();
 	  var comment = $(".refer-friend-comment").val();
-	  var entity = 'owl';
-	  var entity_id = '45';
+	  var entity = $("#entity").text()
+	  var entity_id = $("#entity_id").text()
 	  
 	  $.ajax({
 	    url: '/ajax/referfriend',

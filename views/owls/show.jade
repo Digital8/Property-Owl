@@ -22,6 +22,10 @@ block content
     include ../left_nav
     
     #wide-center-col
+      div#entity(style="display: none;") owl
+      div#entity_id(style="display: none;")= owl.id
+
+
       - if (owl.images && owl.images.length)
         #mySlider.evoslider.galleriffic
           dl
