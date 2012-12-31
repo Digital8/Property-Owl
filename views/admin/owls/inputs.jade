@@ -1,8 +1,27 @@
-.panes(style='display: none;')
+.panes(style='display: none;', data-tab=objUser.level)
   
-  .inputs.index.pane(data-key='index')
-    label(for='title') Approved
-      input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
+  - if (objUser.isAdmin())
+    .inputs.index.pane(data-key='index')
+      label(for='title') Approved
+        input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
+      - var display = (owl.approved == true) ? 'block' : 'none';
+      div#approved_at(style="display: #{display}")
+        label(for='title') Approved at
+        input(id='approved_at_val', name='approved_at', type='date')
+      script
+        $(document).ready(function(){
+          $("#approved").click(function(){
+            if ($(this).attr('checked'))
+            {
+              $("#approved_at").show();
+            }
+          else
+            {
+              $("#approved_at").hide();
+            }
+          });
+        });
+
   
   .inputs.detail.pane(data-key='detail')
     include detail_inputs
@@ -13,7 +32,7 @@
   .inputs.area.pane(data-key='area')
     include area_inputs
   
-  .inputs.image.pane(data-key='iamge')
+  .inputs.image.pane(data-key='image')
     include image_inputs
   
   .inputs.file.pane(data-key='file')

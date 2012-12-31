@@ -60,12 +60,18 @@ module.exports = ->
   if window.location.hash? and window.location.hash.length
     activate window.location.hash[1..]
   else
-    activate 'index'
+    level = $('.panes').data('tab')
+    if level is 3
+      activate 'index'
+    else 
+      activate 'detail'
 
   for form in ($ 'form.details-form.owl')
     $form = $ form
     
     id = $form.data 'id'
+    
+    # approved bool
     
     approved = $form.find('[name=approved]')
     
@@ -75,3 +81,14 @@ module.exports = ->
       console.log 'click'
       
       $.patch "/admin/owls/#{id}", approved: approved.is(':checked'), -> console.log arguments 
+    
+    # # date
+    
+    picker = $ '#approved_at_val'
+    
+    picker.change (event) ->
+      
+      $.patch "/admin/owls/#{id}",
+        approved_at: picker.val()
+      , (body, res, xhr) ->
+        console.log arguments...

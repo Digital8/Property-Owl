@@ -304,11 +304,13 @@ $(function(){
 	  var email = $(".refer-friend-email").val();
 	  var mobile = $(".refer-friend-phone").val();
 	  var comment = $(".refer-friend-comment").val();
+	  var entity = $("#entity").text()
+	  var entity_id = $("#entity_id").text()
 	  
 	  $.ajax({
 	    url: '/ajax/referfriend',
 	    type: 'post',
-	    data: 'e=' + email + '&m=' + mobile + '&f=' + firstName + '&l=' + lastName + '&c=' + comment
+	    data: 'email=' + email + '&mobile=' + mobile + '&first_name=' + firstName + '&last_name=' + lastName + '&comment=' + comment+'&entity_type='+entity+'&entity_id='+entity_id
 	  }).done(function(d){
 	    if (d.status == 200) {
 	      //showPayment();

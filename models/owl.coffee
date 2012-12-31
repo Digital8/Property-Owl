@@ -290,7 +290,10 @@ module.exports = class Owl extends Model
            WHERE owl_id = OWLS.owl_id
         ) AS discount
     FROM owls AS OWLS
-    WHERE state = ? AND approved
+    WHERE
+      approved
+      AND
+      state = ?
     HAVING discount) AS TEMP
     ORDER BY ratio DESC
     LIMIT 1

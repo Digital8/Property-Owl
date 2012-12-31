@@ -2,6 +2,8 @@ system = require '../system'
 
 helpers = hash: system.load.helper 'hash'
 
+RAF = system.models.raf
+
 models = 
   user: system.load.model 'user'
   registrations: system.load.model 'registrations'
@@ -82,3 +84,7 @@ exports.registrations = (req, res) ->
   models.registrations.findByUser res.locals.objUser.id, (err, results) ->
     if err then console.log err
     res.render 'user/registrations', registrations: results or {}
+
+exports.referals = (req, res) ->
+  RAF.getByUser res.locals.objUser.id, (error, referals) ->
+    res.render 'user/referals', referals: referals or {}

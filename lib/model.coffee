@@ -138,8 +138,8 @@ module.exports = class Model
       continue if key is @table.key
       hash[key] = model[key]
     
-    hash.created_at = 'NOW()'
-    hash.updated_at = 'NOW()'
+    hash.created_at = new Date
+    hash.updated_at = new Date
     
     model.hydrate (error, model) =>
       @db.query "INSERT INTO #{@table.name} SET ?", hash, (error, result) =>
