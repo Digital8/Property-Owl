@@ -15,3 +15,7 @@
       
       .listing-links
         a.enquire-button(href='#',data-id="#{affiliate.affiliate_id}") Enquire
+        - if (objUser.isAdmin())
+            a(href="/admin/affiliates/#{affiliate.affiliate_id}/edit").admin-button
+              img#admin-icon(src="/images/view.png",alt="View owl details")
+              |  Admin

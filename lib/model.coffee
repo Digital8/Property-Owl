@@ -46,6 +46,7 @@ module.exports = class Model
   hydrate: (callback) ->
     for key, field of @constructor.table.columns
       continue if this[key]?
+      continue if @constructor?.fields?[key]?.null
       
       if /int\(\d+\)/.test field.Type
         this[key] = 0

@@ -4,17 +4,21 @@ system = require '../../system'
 
 models =
   advertisement: system.load.model 'advertisement'
+  users: system.load.model 'user'
 
 Owl = system.models.owl
 Barn = system.models.barn
+Affiliate = system.models.affiliate
 
 exports.index = (req,res) ->
   async.parallel
     owls: (callback) -> Owl.pending callback
     barns: (callback) -> Barn.pending callback
     activeAdvertisementCount: (callback) -> models.advertisement.countActive callback
-  , (error, {owls, barns, activeAdvertisementCount}) ->
-    res.render 'admin/index', activeAdvertisementCount: activeAdvertisementCount, owls: owls or {}, barns: barns or {}
+    usersThisMonth: (callback) -> models.users.thisMonth callback
+    affiliates: (callback) -> Affiliate.all callback
+  , (error, {owls, barns, activeAdvertisementCount, usersThisMonth, affiliates}) ->
+    res.render 'admin/index', activeAdvertisementCount: activeAdvertisementCount, owls: owls or {}, barns: barns or {}, usersThisMOnth: usersThisMonth or {}, affiliates: affiliates or {}
 
 exports.view = (req,res) ->
 

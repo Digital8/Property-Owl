@@ -8,19 +8,19 @@ hr
 
 .inputs
   label(for='title') Address
-  input#address(type='text', name='address', value='#{owl.address}')
+  input.address(type='text', name='address', value='#{owl.address}')
 
 .inputs
   label(for='suburb') Suburb
-  input#suburb(type='text', name='suburb', value='#{owl.suburb}')
+  input.suburb(type='text', name='suburb', value='#{owl.suburb}')
 
 .inputs
   label(for='postcode') Postcode
-  input#postcode(type='text', name='postcode', value='#{owl.postcode}')
+  input.postcode(type='text', name='postcode', value='#{owl.postcode}')
 
 .inputs
   label(for='state') State
-  select#state(name='state')
+  select.state(name='state')
     option
     - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
       option(value='#{state}', selected=state == owl.state) #{state.toUpperCase()}

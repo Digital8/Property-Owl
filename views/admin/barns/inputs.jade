@@ -1,106 +1,13 @@
-.left
-  
-  .inputs
-    label(for='listed_by') Listed By 
-    select#listed_by(name='listed_by')
-      option
-      - each developer in developers
-        option(value='#{developer.user_id}', selected=developer.user_id == barn.listed_by) #{developer.first_name} #{developer.last_name}
-
-  .inputs
-    label(for='title') Title
-    input#title(type='text', name='title', value='#{barn.title}')
-  
-  .inputs
-    label(for='description') Description
-      textarea#description(name='description',rows='7')
-        = barn.description
-  
-  .inputs
-    label(for='indoor_features') Indoor Features
-    textarea(name='indoor_features')= barn.indoor_features
-  
-  .inputs
-    label(for='outdoor_features') Outdoor Features
-    textarea(name='outdoor_features')= barn.outdoor_features
-  
-  .inputs
-    label(for='other_features') Other Features
-    textarea(name='other_features')= barn.other_features
-
-.right
-
-  .inputs
-    label(for='title') Approved
-      input.big_checkbox(name='approved', type='checkbox', checked=barn.approved)
-
-  .inputs
-    label(for='title') Address
-    input#address(type='text', name='address', value='#{barn.address}')
-  
-  .inputs
-    label(for='suburb') Suburb
-    input#suburb(type='text', name='suburb', value='#{barn.suburb}')
-  
-  .inputs
-    label(for='postcode') Postcode
-    input#postcode(type='text', name='postcode', value='#{barn.postcode}')
-
-  .inputs
-    label(for='state') State
-    select#state(name='state')
-      option
-      - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
-        option(value='#{state}', selected=state == barn.state) #{state.toUpperCase()}
-
-  include image_inputs
-
-  hr
-  
-  include deal_inputs
-
 .inputs
+  label(for='title') Approved
+    input.big_checkbox(name='approved', type='checkbox', checked=barn.approved)
 
-.inputs.owl-matrix.nested
-  label Properties
-  
-  - var owls = barn.owls || {}
-  
-  table.admin-gridview
-    thead
-      tr
-        td ID
-        td Listed On
-        td Title
-        td Address
-        td State
-        td Status
-        td Deal Value
-        td Registrations
-        td(colspan='3') Actions
-    tbody.owl
-     - each owl in owls
-       include owl_summary
+include feature_inputs
 
-.inputs
+include address_inputs
 
-.inputs.owl-matrix.search(data-barn-id=barn.id)
-  label Search
-  
-  //- - var owls = barn.owls
-  
-  table.admin-gridview
-    thead
-      tr
-        td ID
-        td Listed On
-        td Title
-        td Address
-        td State
-        td Status
-        td Deal Value
-        td Registrations
-        td(colspan='3') Actions
-    tbody
-     // - each owl in owls
-     //   include ../owls/summary
+include image_inputs
+
+include deal_inputs
+
+include owl_inputs

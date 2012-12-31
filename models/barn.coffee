@@ -105,7 +105,7 @@ module.exports = class Barn extends Model
             deal_type_id: types[index]
             description: names[index]
             value: values[index]
-            created_by: req.session.user_id
+            user_id: req.session.user_id
             type: 'barn'
         
         console.log deals

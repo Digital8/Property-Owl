@@ -17,34 +17,54 @@ module.exports = ->
     
     ($ ".#{section}.pane").show()
     
-    ($ "ol li").removeClass 'active'
+    ol.find('li').removeClass 'active'
     
-    ($ "ol li.#{section}").addClass 'active'
-  
-  sections = ['approval', 'detail', 'address', 'area', 'image', 'file', 'deal']
-  
-  for section, index in sections then do (section, index) ->
+    ol.find("li.#{section}").addClass 'active'
     
-    $pane = $ ".inputs.#{section}.pane"
+    window.location.hash = section
+  
+  sections =
+    index: {title: 'approval'}
+    detail: {}
+    address: {}
+    area: {}
+    image: {}
+    file: {}
+    deal: {}
+  
+  i = 0
+  for key, section of sections
+    section.title ?= key
+    section.index = i
+    section.key = key
+    i++
+  
+  for key, section of sections then do (key, section) ->
+    
+    $pane = $ ".inputs.#{key}.pane"
     
     li = $ "<li>"
     li.css 'width', '14%'
+    li.addClass key
     li.appendTo ol
     
     div = $ '<div>'
-    div.addClass ".ol-#{index}"
+    div.addClass ".ol-#{section.index}"
     div.appendTo li
     
-    li.append section
+    li.append section.title
     
-    do (li) ->  
+    do (li) ->
       li.click (event) ->
         event.preventDefault()
         
-        activate section
+        activate key
   
-  activate 'index'
-
+  if window.location.hash? and window.location.hash.length
+    activate window.location.hash[1..]
+  else
+    activate 'index'
+  
   #   # $panes = $ '.panes'
     
   #   class Pane

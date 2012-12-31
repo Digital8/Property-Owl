@@ -1,13 +1,13 @@
 tr.deal(data-id=deal.id, data-value=deal.value, data-type=deal.type, data-description=deal.description)
   td
-    select.deal_type_id(type='text', name='deal_type_id', data-index='#{deal.id}')
+    select.deal_type_id(type='text', data-index='#{deal.id}')
       option
       - each dealType in data.dealTypes
         option(value='#{dealType.id}', selected=deal.deal_type_id == dealType.id)= dealType.name
   td
-    input.description(type='text', name='description', placeholder='default', value='#{deal.description}')
+    input.description(type='text', placeholder='default', value='#{deal.description}')
   td
-    input.value(type='number', name='value', value='#{deal.value}')
+    input.value(type='number', value='#{deal.value}')
   td
     a.delete(href='#', alt='delete owl deal')
       img(src='/images/delete.png', alt='Delete')
