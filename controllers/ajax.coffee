@@ -124,8 +124,8 @@ exports.referfriend = (req, res) ->
   req.assert('first_name', 'First name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
   req.assert('last_name', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
   req.assert('comment', 'Comment cannot be empty').notEmpty()
-  #req.assert('entity_id', 'invalid entity').notEmpty()
-  #req.assert('entity_type', 'invalid entity type').notEmpty()
+  req.assert('entity_id', 'invalid entity').notEmpty()
+  req.assert('entity_type', 'invalid entity type').notEmpty()
 
   # console.log(req.body)
 
