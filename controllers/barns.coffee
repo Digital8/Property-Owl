@@ -20,7 +20,6 @@ exports.owls = (req,res) ->
   
   Barn.get id, (error, barn) ->
     res.send barn.owls
-# exports.owls = {}
 
 exports.nest = (req, res) ->
   barnId = req.params.id
@@ -34,5 +33,9 @@ exports.unnest = (req, res) ->
   
   system.db.query "UPDATE owls SET barn_id = NULL WHERE owl_id = ?", [owl_id], (error, results) ->
     res.send [error, results]
+
+exports.print = (req, res) ->
+  {id} = req.params
   
-  # res.send null
+  Barn.get id, (error, barn) ->
+    res.render 'barns/print', barn: barn, enquire: on

@@ -2,9 +2,14 @@
 .share
   ul
     li
-      a(href='#', onclick='javascript:window.print()')
-        img(src='/images/share-print-icon.png', alt='Print')
-        | Print Deal
+      - if (typeof(barn) != 'undefined')
+        a(href='/barns/#{barn.id}/print')
+          img(src='/images/share-print-icon.png', alt='Print')
+          | Print Deal
+      - else
+        a(href='/owls/#{owl.id}/print')
+          img(src='/images/share-print-icon.png', alt='Print')
+          | Print Deal
     
     li.add-bookmark(data-deal-id="#{deal.id}", data-deal-type='owl')
       img(src='/images/share-save-icon.png', alt='Save')

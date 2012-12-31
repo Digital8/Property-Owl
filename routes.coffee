@@ -73,6 +73,7 @@ module.exports = (app) ->
     app[method] "/barns#{path}", authenticate, middleware...
   
   barn 'get', '', controllers.barns.index
+  barn 'get', "/:id(\\d+)/print", controllers.barns.print
   barn 'get', "/:id(\\d+)", controllers.barns.show
   barn 'get', "/:id(\\d+)/owls", controllers.barns.owls
   
