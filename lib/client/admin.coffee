@@ -15,6 +15,7 @@ module.exports = ->
             $row.remove()
           else
             alert 'could not approve'
+            
   sync = (row) ->
     $type = row.find '.deal_type_id'
     $type.bind 'change keydown input', ->
