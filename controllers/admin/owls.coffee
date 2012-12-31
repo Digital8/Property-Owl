@@ -27,6 +27,9 @@ exports.add = (req, res) ->
     res.render 'admin/owls/add', owl: owl
 
 exports.create = (req, res) ->
+  
+  if not res.locals.objUser.isAdmin() then req.body.approved = 0
+
   Owl.create req.body, (error, owl) ->
     
     if error then console.log error
@@ -48,14 +51,15 @@ exports.create = (req, res) ->
         else
           res.redirect "/owls/#{owl.id}"
     else
-      req.flash('error',error)
+      req.flash('error', 'Database says: ' + error.code)
       res.redirect 'back'
       
 exports.update = (req, res) ->
-  delete req.body.approved
-  
+  delete req.body.approved # Not sure what this delete is doing..?
+
+  if not res.locals.objUser.isAdmin() then req.body.approved = 0
+
   Owl.update req.params.id, req.body, (error, owl) ->
-    console.log 'update', arguments
     
     owl.upload req, ->
       res.redirect '/admin/owls'

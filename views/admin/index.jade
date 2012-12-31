@@ -164,12 +164,12 @@ block content
           tbody
             tr
               td Suppliers currently in rotation
-              td TODO
+              td= affiliates.length
           
           tfoot
             tr
               td(colspan='4')
-                a.button(href="/admin/services") Manage Suppliers
+                a.button(href="/admin/affiliates") Manage Suppliers
     - else
       h1 Developer Dashboard
       h3

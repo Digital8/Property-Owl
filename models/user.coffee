@@ -36,3 +36,6 @@ exports.updateAvatar = (user_id, fileName, callback) =>
 
 exports.getSubscribers = (callback) =>
   @db.query "SELECT * FROM po_users WHERE subscribed_newsletter = 1", callback
+
+exports.thisMonth = (callback) =>
+  @db.query "SELECT * FROM po_users AS U WHERE U.created_at BETWEEN date_format(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') AND last_day(NOW())", callback
