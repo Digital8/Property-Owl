@@ -18,7 +18,7 @@ block content
                td(colspan='6')
                 | There are no pending owl deals. 
         - else
-          table.admin-gridview
+          table.admin-gridview.pending-owls
            thead
              tr
                td ID
@@ -27,7 +27,7 @@ block content
                td(colspan='3') Actions
             tbody
             - each owl in owls
-              tr
+              tr(data-id="#{owl.id}")
                td= owl.id
                - var listed = new Date(owl.created_at)
                td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
@@ -37,7 +37,7 @@ block content
                    img(src='/images/edit.png', alt='Edit')
                    | Edit
                 td.actions
-                  a(href='#')
+                  a.approve(href='#')
                     img(src='images/approve.png', alt='View')
                     | Approve
             tfoot

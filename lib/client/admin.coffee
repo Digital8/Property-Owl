@@ -1,5 +1,20 @@
 module.exports = ->
   
+  grid = $ '.admin-gridview.pending-owls'
+  
+  for row in grid.find 'tbody tr'
+    $row = $ row
+    do ($row) ->
+      id = $row.data 'id'
+      approve = $row.find '.approve'
+      approve.click (event) ->
+        event.preventDefault()
+        
+        $.patch "/admin/owls/#{id}", approved: yes, (body, response, xhr) ->
+          if xhr.status == 200
+            $row.remove()
+          else
+            alert 'could not approve'
   sync = (row) ->
     $type = row.find '.deal_type_id'
     $type.bind 'change keydown input', ->
