@@ -1,0 +1,102 @@
+
+#wide-center-col    
+    .property-info
+      #left
+        
+        if(typeof(bestdeal) != 'undefined' && bestdeal)
+          h1 Australia's Best Property Deal
+        else
+          h1= owl.title
+
+        span.price-highlight $
+          span.price= owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        br
+        
+        | #{owl.code} - #{owl.fullAddress()}
+        
+        hr.light
+        
+        h2 Property Details
+        
+        if(typeof(bestdeal) != 'undefined' && bestdeal)
+          strong= owl.title
+        
+        p= owl.description
+        
+        .general-features
+          h3 General Features
+          ul
+            - if(owl.price)
+              li Price: 
+                strong= '$' + owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            - if(owl.property_type)
+              li Property Type: 
+                strong #{owl.property_type}
+            - if(owl.bedrooms)
+              li Bedrooms: 
+                strong #{owl.bedrooms}
+            - if(owl.bathrooms)
+              li Bathrooms: 
+                strong #{owl.bathrooms}
+            - if(owl.cars)
+              li Car Spaces: 
+                strong #{owl.cars}
+            - if(owl.development_stage)
+              li Development Stage: 
+                strong #{owl.development_stage}
+            - if(owl.internal_area)
+              li Internal Area: 
+                strong #{owl.internal_area} sq. m
+            - if(owl.external_area)
+              li External Area: 
+                strong #{owl.external_area} sq. m
+            - if(owl.internal_area && owl.external_area)
+              li Total Area: 
+                strong #{parseFloat(owl.external_area) + parseFloat(owl.internal_area)} sq. m
+          
+          - if (owl.indoorFeatures.length > 0)
+            h3 Indoor Features
+            ul
+              - each feature in owl.indoorFeatures
+                li= feature
+            //- p= owl.indoor_features
+        
+        .other-features
+          
+          - if (owl.outdoorFeatures.length > 0)
+            h3 Outdoor Features
+            ul
+              - each feature in owl.outdoorFeatures
+                li= feature
+          
+          - if (owl.otherFeatures.length > 0)
+            h3 Other Features
+            ul
+              - each feature in owl.otherFeatures
+                li= feature
+      
+      #right
+        h3 Deals
+        - if (owl.deals)
+          - if (owl.deals.length)
+            ul
+              - each deal in owl.deals
+                li.price= '$' + deal.value.toString() + ' ' + deal.description
+          - else
+            ul
+              li No deals have been listed
+                
+        
+        iframe#google-map(width='50%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=#{owl.address + ' ' + owl.suburb + ' ' + owl.state + ' ' + owl.postcode}z=14&output=embed&iwloc=near',style="float: right;top:20%;right: 10;position: absolute;")
+
+  - if (owl.images && owl.images.length)
+    br
+    h3 Images
+    hr
+    - var i = 0
+    - each image in owl.images
+      - i++
+      img(src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}',style="width: 200px;padding: 10px;")
+
+script
+  window.print();

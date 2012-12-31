@@ -70,7 +70,13 @@ exports.removeDeal = (req, res) ->
 exports.patchDeal = (req, res) ->
   owlId = req.params.owl_id
   dealId = req.params.deal_id
+
+exports.print = (req, res) ->
+  {id} = req.params
   
-  Deal.patch dealId, req.body, (error, deal) ->
-    # console.log arguments
-    res.send 'OK'
+  Owl.get id, (error, owl) ->
+    owl.hydrateForUser req.user, (error) ->
+      if typeof(owl.id) is 'undefined'
+        res.render 'errors/404'
+      else
+        res.render 'owls/print', owl: owl, enquire: on

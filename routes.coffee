@@ -62,6 +62,7 @@ module.exports = (app) ->
     app[method] "/owls#{path}", authenticate, middleware...
   
   owl 'get', '', controllers.owls.index
+  owl 'get', '/:id(\\d+)/print', controllers.owls.print
   owl 'get', '/:id(\\d+)', controllers.owls.show
   owl 'get', '/top', controllers.owls.top
   owl 'get', '/hot', controllers.owls.hot
