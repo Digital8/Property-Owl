@@ -1,18 +1,18 @@
 .inputs
   label(for='title') Address
-  input#address(type='text', name='address', value='#{barn.address}')
+  input.address(type='text', name='address', value='#{barn.address}')
 
 .inputs
   label(for='suburb') Suburb
-  input#suburb(type='text', name='suburb', value='#{barn.suburb}')
+  input.suburb(type='text', name='suburb', value='#{barn.suburb}')
 
 .inputs
   label(for='postcode') Postcode
-  input#postcode(type='text', name='postcode', value='#{barn.postcode}')
+  input.postcode(type='text', name='postcode', value='#{barn.postcode}')
 
 .inputs
   label(for='state') State
-  select#state(name='state')
+  select.state(name='state')
     option
     - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
       option(value='#{state}', selected=state == barn.state) #{state.toUpperCase()}
