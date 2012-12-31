@@ -1,8 +1,9 @@
-.panes(style='display: none;')
+.panes(style='display: none;', data-tab=objUser.level)
   
-  .inputs.index.pane(data-key='index')
-    label(for='title') Approved
-      input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
+  - if (objUser.isAdmin())
+    .inputs.index.pane(data-key='index')
+      label(for='title') Approved
+        input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
   
   .inputs.detail.pane(data-key='detail')
     include detail_inputs
