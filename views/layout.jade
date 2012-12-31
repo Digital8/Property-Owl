@@ -27,7 +27,7 @@ html.no-js(lang='en')
       try{Typekit.load();}catch(e){}
     
     //- jquery
-    script(src='/js/modernizr.custom.17343.js')
+    script(src='/js/modernizr-custom.js')
     script(src='/js/libs/jquery-1.7.2.min.js')
     script(src='/js/moment.min.js')
     script(src="/select2/select2.js")
@@ -35,7 +35,10 @@ html.no-js(lang='en')
     script(src='/js/jquery.easing.1.3.js')
     script(src='/js/jquery.evoslider-2.1.1.min.js')
     script(src='/js/jquery.autosize.js')
-    
+    script(src='/js/libs/polyfiller.js')
+    script
+      $.webshims.polyfill('forms');
+      
     script(src='/codemirror/lib/codemirror.js')
     script(src='/codemirror/mode/markdown.js')
     
