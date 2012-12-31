@@ -71,6 +71,8 @@ module.exports = ->
     
     id = $form.data 'id'
     
+    # approved bool
+    
     approved = $form.find('[name=approved]')
     
     approved.change (event) ->
@@ -79,3 +81,14 @@ module.exports = ->
       console.log 'click'
       
       $.patch "/admin/owls/#{id}", approved: approved.is(':checked'), -> console.log arguments 
+    
+    # # date
+    
+    # picker = $ 'body'
+    
+    # picker.change (event) ->
+      
+    #   $.patch "/admin/owls/#{id}",
+    #     approved_at: picker.val()
+    #   , (body, res, xhr) ->
+    #     console.log arguments...
