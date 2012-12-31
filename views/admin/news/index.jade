@@ -14,17 +14,25 @@ block content
     
     .grid-header
     
-    table.admin-gridview
+    table.admin-gridview.news
+      
      thead
+      
       tr
+       
        td Type
+       
        td Headline
+       
        td Date
+       
        td(colspan='2') Actions
      
      tbody
-     - each post in news
-      include summary
+       - each post in news
+        
+        include summary
      
      tfoot
+      
        tr

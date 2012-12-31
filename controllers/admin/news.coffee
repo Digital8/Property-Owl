@@ -91,8 +91,11 @@ exports.update = (req, res) ->
         res.redirect '/admin/news'
 
 exports.delete = (req, res) ->
+  
   News.get req.params.id, (error, post) ->
+    
     if error?
+      
       req.flash 'error', "Uh Oh, that news post doesn't exist."
       
       res.redirect '/admin/news'
@@ -102,7 +105,9 @@ exports.delete = (req, res) ->
     res.render 'admin/news/delete', post: post
 
 exports.destroy = (req, res) ->
-  models.news.delete req.params.id, (err, results) ->
+  
+  News.delete req.params.id, (err, results) ->
+    
     req.flash 'success', 'news post deleted'
     
     res.redirect '/admin/news'

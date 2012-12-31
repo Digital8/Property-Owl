@@ -2,7 +2,7 @@ tr.bookmark(data-bookmark-id=bookmark.id)
   td(style="width:50%"): a(href="/#{bookmark.type}s/#{bookmark.entity_id}")= bookmark.deal.title
   td: strong= bookmark.type
   //- td: Current
-  td= moment(bookmark.created_at).format('d/MMM/YY')
+  td= moment(bookmark.created_at).format('DD/MMM/YYYY')
   td
     a.delete(href='#')
       img(src='images/delete.png')
