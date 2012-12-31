@@ -84,11 +84,11 @@ module.exports = ->
     
     # # date
     
-    # picker = $ 'body'
+    picker = $ '#approved_at_val'
     
-    # picker.change (event) ->
+    picker.change (event) ->
       
-    #   $.patch "/admin/owls/#{id}",
-    #     approved_at: picker.val()
-    #   , (body, res, xhr) ->
-    #     console.log arguments...
+      $.patch "/admin/owls/#{id}",
+        approved_at: picker.val()
+      , (body, res, xhr) ->
+        console.log arguments...
