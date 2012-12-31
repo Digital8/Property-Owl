@@ -9,6 +9,8 @@ models =
   registrations: system.load.model 'registrations'
   # owl: system.load.model 'owl'
 
+RAF = system.models.raf
+
 helpers = 
   hash: system.load.helper 'hash'
   mailer: system.load.helper 'mailer'
@@ -116,32 +118,37 @@ exports.securedeal = (req, res) ->
         res.send status: 400, errors: {msg: 'unable to send email'}
 
 exports.referfriend = (req, res) ->
-  req.assert('e', 'Invalid Email Address').isEmail()
-  req.assert('m', 'Phone Number is invalid').is(/^[\+0-9][ 0-9]*[0-9]$/).len(8,16)
-  req.assert('f', 'First name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
-  req.assert('l', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
-  req.assert('c', 'Comment cannot be empty').notEmpty()
-  console.log(req.body)
+  req.body.user_id ?= res.locals.objUser.id
+  req.assert('email', 'Invalid Email Address').isEmail()
+  req.assert('mobile', 'Phone Number is invalid').is(/^[\+0-9][ 0-9]*[0-9]$/).len(8,16)
+  req.assert('first_name', 'First name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
+  req.assert('last_name', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
+  req.assert('comment', 'Comment cannot be empty').notEmpty()
+  #req.assert('entity_id', 'invalid entity').notEmpty()
+  #req.assert('entity_type', 'invalid entity type').notEmpty()
+
+  # console.log(req.body)
 
   errors = req.validationErrors(true)
 
   if errors is false then errors = {}
-
+  console.log errors
   if Object.keys(errors)?.length > 0
     res.send status: 400, errors: errors
-
   else
-    mailer
-      to: req.body.e
-      from: 'mailer@propertyowl.com.au'
-      fromname: 'Property Owl'
-      subject: 'Property Owl Referral'
-      text: req.body.f + """,
+    RAF.create req.body, (err, r) ->
+      console.log arguments...
+      mailer
+        to: req.body.email
+        from: 'mailer@propertyowl.com.au'
+        fromname: 'Property Owl'
+        subject: 'Property Owl Referral'
+        text: req.body.first_name + """,
 
-      You have been referred some property
-      """
-    , 'Property Owl Referral'
-    res.send status: 200
+        You have been referred some property
+        """
+      , 'Property Owl Referral'
+      res.send status: 200
 
 # exports.savedeal = (req, res) ->
 #   req.assert('id', 'Property ID Not Numeric').isInt()
