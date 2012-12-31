@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+  
+  .container.row.main
+    
+    include ../left_nav
+    
+    #center-col
+        h1 My Account
+        
+        .tabs.account
+          
+          include menu
+          
+          .tabs-content
+            
+            .padding
+              
+              table.admin-gridview
+                thead
+                  tr
+                    td Email
+                    td Name
+                    td Mobile
+                    td Comment
+                    td Sent
+                
+                tbody
+                  - if (referals && referals.length)
+                    - each referal in referals
+                      tr
+                        td= referal.email
+                        td #{referal.first_name} #{referal.last_name}
+                        td= referal.mobile
+                        td= referal.comment
+                        td= referal.created_at
+                  -else
+                    h4 You have not refered any listings
+    
+    include ../right_nav

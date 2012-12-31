@@ -33,6 +33,9 @@ module.exports = (app) ->
   # registrations
   app.get '/registrations', authenticate, controllers.account.registrations
 
+  # referals
+  app.get '/referals', authenticate, controllers.account.referals
+
   # contat
   app.get '/contact', controllers.contact.index
   app.post '/contact', controllers.contact.create

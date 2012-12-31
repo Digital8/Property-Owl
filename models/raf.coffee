@@ -26,3 +26,7 @@ module.exports = class raf extends Model
   
   hydrate: (callback) ->
     super callback
+
+  @getByUser: (user_id, callback) ->
+    system.db.query "SELECT * FROM #{@table.name} WHERE user_id = ?", [user_id], (error, rows) =>
+      callback(error, rows)

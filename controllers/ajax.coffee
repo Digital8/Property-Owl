@@ -137,7 +137,6 @@ exports.referfriend = (req, res) ->
     res.send status: 400, errors: errors
   else
     RAF.create req.body, (err, r) ->
-      console.log arguments...
       mailer
         to: req.body.email
         from: 'mailer@propertyowl.com.au'
@@ -146,6 +145,7 @@ exports.referfriend = (req, res) ->
         text: req.body.first_name + """,
 
         You have been referred some property
+        http://propertyowl.com.au/#{req.body.entity_type}s/#{req.body.entity_id}
         """
       , 'Property Owl Referral'
       res.send status: 200
