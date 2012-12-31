@@ -1,0 +1,43 @@
+.inputs.owl-matrix.nested
+  label Properties
+  
+  - var owls = barn.owls || {}
+  
+  table.admin-gridview
+    thead
+      tr
+        td ID
+        td Listed On
+        td Title
+        td Address
+        td State
+        td Status
+        td Deal Value
+        td Registrations
+        td(colspan='3') Actions
+    tbody.owl
+     - each owl in owls
+       include owl_summary
+
+.inputs
+
+.inputs.owl-matrix.search(data-barn-id=barn.id)
+  label Search
+  
+  //- - var owls = barn.owls
+  
+  table.admin-gridview
+    thead
+      tr
+        td ID
+        td Listed On
+        td Title
+        td Address
+        td State
+        td Status
+        td Deal Value
+        td Registrations
+        td(colspan='3') Actions
+    tbody
+     // - each owl in owls
+     //   include ../owls/summary

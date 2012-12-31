@@ -55,10 +55,10 @@ exports.create = (req, res) ->
       res.redirect 'back'
       
 exports.update = (req, res) ->
-  delete req.body.approved # Not sure what this delete is doing..?
-
+  # delete req.body.approved
+  
   if not res.locals.objUser.isAdmin() then req.body.approved = 0
-
+  
   Owl.update req.params.id, req.body, (error, owl) ->
     
     owl.upload req, ->
