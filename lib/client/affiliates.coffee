@@ -30,14 +30,16 @@ module.exports = ->
     
     $row = $ row
     
-    $row.find('.delete').click (event) ->
+    do ($row) ->
       
-      event.preventDefault()
-      
-      id = $row.data 'id'
-      
-      $.delete "/admin/affiliates/#{id}", ->
+      $row.find('.delete').click (event) ->
         
-        $row.remove()
+        event.preventDefault()
         
-        console.log args
+        id = $row.data 'id'
+        
+        $.delete "/admin/affiliates/#{id}", ->
+          
+          $row.remove()
+          
+          console.log args
