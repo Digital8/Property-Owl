@@ -48,9 +48,9 @@ exports.create = (req, res) ->
       system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
         if results is true
           affiliate.upload req, ->
-            res.redirect "/affiliates/#{affiliate.id}"
+            res.redirect '/admin/affiliates'
         else
-          res.redirect "/affiliates/#{affiliate.id}"
+          res.redirect '/admin/affiliates'
 
 exports.update = (req, res) ->
   Affiliate.update req.params.id, req.body, (error, affiliate) ->

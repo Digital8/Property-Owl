@@ -14,11 +14,11 @@ $ ->
   
   do require './media'
   
-  # do require './affiliates'
+  do require './affiliates'
   
   do require './live'
   
-  require './bookmarks'
+  do require './bookmarks'
   
   do require './barns'
   
