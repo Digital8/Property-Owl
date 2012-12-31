@@ -3,6 +3,7 @@ extends ../../layout
 block content
  
   .container.row.main
+    
     include ../menu
     
     h1 Affiliates
@@ -16,32 +17,46 @@ block content
              | Add Affiliate
     
     .grid-header.form-header
-    table.admin-gridview
+    
+    table.admin-gridview.affiliates
       thead
         tr
           td Name
+          
           td Category
+          
           td Suburb
+          
           td State
+          
           td Visible
+          
           td Enquiries
+          
           td(colspan='3') Actions
       
       tbody
        - each affiliate in affiliates
-          tr
+          tr(data-id=affiliate.id)
             td= affiliate.name
+            
             td= affiliate.category.name
+            
             td= affiliate.suburb
+            
             td= affiliate.state.toUpperCase()
-            td Yes
-            td 65
+            
+            td TODO
+            
+            td TODO
+            
             td.actions
-              a(href='/admin/affiliates/#{affiliate.affiliate_id}/edit', alt='edit property')
+              a.edit(href='/admin/affiliates/#{affiliate.affiliate_id}/edit', alt='edit property')
                 img(src='/images/edit.png', alt='Edit')
                 | Edit
+            
             td.actions
-              a(href='/admin/affiliates/delete/#{affiliate.affiliate_id}', alt='delete property')
+              a.delete(href='/admin/affiliates/#{affiliate.id}/delete', alt='delete property')
                 img(src='/images/delete.png', alt='Delete')
                 | Delete
       
