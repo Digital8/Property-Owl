@@ -297,8 +297,8 @@ exports.enquireDeal = (req, res) ->
     enquiryEmail: req.body.email
 
   system.helpers.mailer template,'New Enquiry', user, secondary, (results) ->
-    #system.db.query  "INSERT INTO enquiries (user_id, affiliate_id, enquiry) VALUES (?,?,?)", [res.locals.objUser.id, req.body.aid, req.body.enquiry], (err, rows) ->
-    if err 
-      res.send status: 500, error: err
-    else 
-      res.send status: 200
+    system.db.query  "INSERT INTO enquiries (user_id, affiliate_id, enquiry) VALUES (?,?,?)", [res.locals.objUser.id, req.body.aid, req.body.enquiry], (err, rows) ->
+      if err 
+        res.send status: 500, error: err
+      else 
+        res.send status: 200
