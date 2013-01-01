@@ -145,7 +145,14 @@ $(function(){
 	$(".show-login, .close-login").on("click", function(event){
 		event.preventDefault();
 		registerModal.hide();
-		loginModal.fadeToggle(150);
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) )
+		{
+			window.location = '/login';
+		}
+		else
+		{
+			loginModal.fadeToggle(150);
+		}	
 		return false;
 	});
 	
