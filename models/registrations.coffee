@@ -17,5 +17,12 @@ exports.findByUser = (user_id, callback) ->
 
 exports.report = (cred, callback) ->
   vals = []
-  query = "SELECT U.first_name, U.last_name, R.registered_at, count(registration_id) AS total FROM po_registrations AS R INNER JOIN po_users AS U ON R.user_id = U.user_id GROUP BY U.user_id"
+  query = "SELECT U.first_name, U.last_name, R.registered_at, count(registration_id) AS total FROM po_registrations AS R INNER JOIN po_users AS U ON R.user_id = U.user_id "
+  
+  if cred.month != ''
+    console.log cred
+    query += ' AND MONTH(R.registered_at) = ?'
+    vals.push(cred.month)
+
+  query += ' GROUP BY U.user_id'
   db.query query, vals, callback

@@ -81,7 +81,11 @@ exports.propertySearches = (req,res) ->
   res.render 'admin/reports/propertySearches', searches: searches or {}, propertyTypes: {}
 
 exports.dealRegistrations = (req,res) ->
-  cred = {}
+  cred = 
+    month: req.query.month or ''
+
+  if cred.month is 'all' then cred.month = '%'
+  unless cred.month is '' then cred.month = months[cred.month] or ''
 
   models.registrations.report cred, (err, registrations) ->
     if err then console.log err

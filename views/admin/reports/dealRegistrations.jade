@@ -7,28 +7,26 @@ block content
       span.secondary  - Deal Registrations
     include reportsMenu
     .grid-header
-      form#search-form
-        input#propertySearch(type='text')
+      form#search-form(action="", method="get")
+        select#propertyMonth(name="month")
+          option(value="all") Month
+          option(value="jan") January
+          option(value="feb") February
+          option(value="mar") March
+          option(value="apr") April
+          option(value="may") May
+          option(value="jun") June
+          option(value="jul") July
+          option(value="aug") August
+          option(value="sep") September
+          option(value="oct") October
+          option(value="nov") November
+          option(value="dec") December
         | &nbsp;
         input.button(type='submit', value='Go')
         | &nbsp;
         input.button(type='submit', value='Reset')
         .divider
-        select#propertyMonth
-          option Month
-          option January
-          option February
-          option March
-          option April
-          option May
-          option June
-          option July
-          option August
-          option September
-          option October
-          option November
-          option December
-        | &nbsp;
     table.admin-gridview
       thead
         tr
