@@ -9,6 +9,7 @@ models =
 
 Deal = system.models.deal
 AdClicks = system.models.click
+Enquriy = system.models.enquiry
 
 helpers = {}
 
@@ -90,13 +91,15 @@ exports.dealRegistrations = (req,res) ->
   res.render 'admin/reports/dealRegistrations', registrations: registrations or {}, members: {}
 
 exports.servicesEnquiries = (req,res) ->
-  enquiries = [
-    'date':'01/10/2012'
-    'supplier':'Company 1'
-    'enquiry_count':'24'
-  ]
+  cred = 
+    month: req.query.month or ''
+    advertiser: req.query.advertiser or '0'
 
-  res.render 'admin/reports/servicesEnquiries', enquiries: enquiries or {}, suppliers: {}
+  if cred.month is 'all' then cred.month = '%'
+  unless cred.month is '' then cred.month = months[cred.month] or ''
+  
+  Enquriy.report cred, (err, enquiries) ->
+    res.render 'admin/reports/servicesEnquiries', enquiries: enquiries or {}, suppliers: {}
 
 exports.advertisingClicks = (req,res) ->
 
