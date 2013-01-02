@@ -41,7 +41,7 @@ exports.dealListings = (req,res) ->
   if cred.state is 'all' then cred.state = '%'
 
   unless cred.month is '' then cred.month = months[cred.month] or ''
-  
+
   models.users.getUsersByGroup 2, (err, developers) ->
     Deal.getByMonth cred, (err, listings) ->
       if err then console.log err
@@ -85,7 +85,7 @@ exports.dealRegistrations = (req,res) ->
     'barn_deal_count':'34'
   ]
   
-  res.render 'admin/reports/dealRegistrations', registrations: registrations or {}, members: members or {}
+  res.render 'admin/reports/dealRegistrations', registrations: registrations or {}, members: {}
 
 exports.servicesEnquiries = (req,res) ->
   enquiries = [
@@ -94,7 +94,7 @@ exports.servicesEnquiries = (req,res) ->
     'enquiry_count':'24'
   ]
 
-  res.render 'admin/reports/servicesEnquiries', enquiries: enquiries or {}, suppliers: suppliers or {}
+  res.render 'admin/reports/servicesEnquiries', enquiries: enquiries or {}, suppliers: {}
 
 exports.advertisingClicks = (req,res) ->
   adverts = [
@@ -105,4 +105,4 @@ exports.advertisingClicks = (req,res) ->
     'clickthroughs':'34'
   ]
   
-  res.render 'admin/reports/advertisingClicks', adverts: adverts or {}, advertisers: advertisers or {}
+  res.render 'admin/reports/advertisingClicks', adverts: adverts or {}, advertisers: {}
