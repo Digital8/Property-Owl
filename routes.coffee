@@ -36,13 +36,16 @@ module.exports = (app) ->
   # referals
   app.get '/referals', authenticate, controllers.account.referals
 
-  # contat
+  ### contact ###
   app.get '/contact', controllers.contact.index
   app.post '/contact', controllers.contact.create
   
-  # account
+  ### account ###
   app.get '/account', authenticate, controllers.account.index
   app.put '/account', authenticate, controllers.account.update
+  
+  ### enquiries ###
+  app.post '/enquiries', authenticate, controllers.enquiries.create
   
   # media
   media = (method, path, middleware...) ->
@@ -211,8 +214,6 @@ module.exports = (app) ->
   
   ajax 'post', '/login', controllers.ajax.login
   ajax 'post', '/register', controllers.ajax.register
-  ajax 'post', '/enquiry', controllers.ajax.enquiry
-  ajax 'post', '/enquireDeal', controllers.ajax.enquireDeal
   ajax 'get', '/search', controllers.ajax.search
   
   authedAjax = (method, path, middleware...) ->

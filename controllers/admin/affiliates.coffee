@@ -53,6 +53,10 @@ exports.create = (req, res) ->
           res.redirect '/admin/affiliates'
 
 exports.update = (req, res) ->
+  req.body.visible ?= no
+  
+  console.log req.body
+  
   Affiliate.update req.params.id, req.body, (error, affiliate) ->
     console.log 'update', arguments
     

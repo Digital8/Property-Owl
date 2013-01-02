@@ -21,7 +21,7 @@ module.exports = class Affiliate extends Model
   @field 'state'
   @field 'email'
   @field 'postcode'
-  @field 'visible'
+  @field 'visible', type: Boolean, default: yes
   @field 'description'
   @field 'created_at'
   @field 'affiliate_category_id'
@@ -44,6 +44,12 @@ module.exports = class Affiliate extends Model
         Media.for this, (error, medias) =>
           @images = medias
           console.log @images
+          callback error
+      
+      enquiries: (callback) =>
+        Enquiry = system.models.enquiry
+        Enquiry.for this, (error, enquiries) =>
+          @enquiries = enquiries
           callback error
     
     , (error) => super callback

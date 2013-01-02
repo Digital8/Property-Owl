@@ -38,29 +38,3 @@ block content
           br
           br
           button#sendEnquiry Send
-
-    script
-      $(document).ready(function(){
-        $('.enquire-button').on('click', function(e){
-          
-          e.preventDefault();
-          $('.modal-enquiry').fadeToggle();
-
-          var id = $(this).data('id');
-          
-
-
-          $('#sendEnquiry').on('click', function(){
-            var enquiry = $('#enquiry').val();
-
-            $.ajax({
-              url: '/ajax/enquiry',
-              type: 'post',
-              data: 'aid='+id+'&enquiry='+enquiry
-            }).done(function(d){
-              console.log(d);
-              $('.modal-enquiry').fadeToggle();
-            });
-          });
-        });
-      });

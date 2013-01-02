@@ -46,9 +46,9 @@ block content
             
             td= affiliate.state.toUpperCase()
             
-            td TODO
+            td= {true: 'yes', false: 'no'}[affiliate.visible.toString()]
             
-            td TODO
+            td= affiliate.enquiries.length
             
             td.actions
               a.edit(href='/admin/affiliates/#{affiliate.affiliate_id}/edit', alt='edit property')

@@ -111,7 +111,22 @@ module.exports = class Model
     @get id, (error, model) ->
       
       for key, field of model.constructor.fields when hash[key]?
-        model[key] = hash[key]
+        if field.type? and field.type is Boolean
+          value = hash[key]
+          
+          map =
+            true: true
+            false: false
+            on: on
+            off: off
+          
+          console.log 'setting', key, value
+          
+          model[key] = map[value]
+        
+        else
+          
+          model[key] = hash[key]
       
       model.save (error) =>
         callback error, model

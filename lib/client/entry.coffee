@@ -30,6 +30,8 @@ $ ->
   
   do require './google_maps'
   
+  do require './enquiries'
+  
   if ($ "#map").length
     makeMap 'map'
   if ($ "#big-map").length
