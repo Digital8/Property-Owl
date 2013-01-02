@@ -86,7 +86,8 @@ block content
             tbody
               - each owl in barn.owls
                 tr
-                  td #{barn.code}#{owl.alpha}
+                  td 
+                    a(href='/owls/#{owl.owl_id}') #{barn.code}#{owl.alpha}
                   td= owl.bedrooms
                   td= owl.bathrooms
                   td= owl.carspaces
