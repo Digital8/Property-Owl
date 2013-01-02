@@ -47,6 +47,7 @@ block content
           td Owl Deal Count
           td Barn Deal Count
       tbody
+      - var graph = []
       - each listing in listings
         tr
           - var listed = new Date(listing.created_at)
@@ -56,52 +57,36 @@ block content
           td= listing.owl_count
           td= listing.barn_count
 
-    div#holder(style="height:480px")
-    
+      - each listing in dev_count
+        - graph.push([listing.first_name + ' ' + listing.last_name, (listing.owl_count + listing.barn_count)]);
+  div#chart_div
     script
-        window.onload = function () {
-            var r = Raphael("holder"),
-                txtattr = { font: "12px sans-serif" };
-            
-            var x = [], y = [], y2 = [], y3 = [];
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
 
-            for (var i = 0; i < 1e6; i++) {
-                x[i] = i * 10;
-                y[i] = (y[i - 1] || 0) + (Math.random() * 7) - 3;
-                y2[i] = (y2[i - 1] || 150) + (Math.random() * 7) - 3.5;
-                y3[i] = (y3[i - 1] || 300) + (Math.random() * 7) - 4;
-            }
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
 
-            r.text(160, 10, "Deal listings by month").attr(txtattr);
-            r.text(480, 10, "Deal listings by month").attr(txtattr);;
-            r.text(160, 250, "Deal listings by month").attr(txtattr);
-            r.text(480, 250, "Deal listings by month").attr(txtattr);
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
 
-            r.linechart(10, 10, 300, 220, x, [y.slice(0, 1e3), y2.slice(0, 1e3), y3.slice(0, 1e3)]).hoverColumn(function () {
-                this.set = r.set(
-                    r.circle(this.x, this.y[0]),
-                    r.circle(this.x, this.y[1]),
-                    r.circle(this.x, this.y[2])
-                );
-            }, function () {
-                this.set.remove();
-            });
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows(
+          !{JSON.stringify(graph)});
 
-            r.linechart(330, 10, 300, 220, x, [y.slice(0, 1e4), y2.slice(0, 1e4), y3.slice(0, 1e4)], { shade: true });
-            r.linechart(10, 250, 300, 220, x, [y, y2, y3], { nostroke: true, shade: true });
-
-            var lines = r.linechart(330, 250, 300, 220, [[1, 2, 3, 4, 5, 6, 7],[3.5, 4.5, 5.5, 6.5, 7, 8]], [[12, 32, 23, 15, 17, 27, 22], [10, 20, 30, 25, 15, 28]], { nostroke: false, axis: "0 0 1 1", symbol: "circle", smooth: true }).hoverColumn(function () {
-                this.tags = r.set();
-
-                for (var i = 0, ii = this.y.length; i < ii; i++) {
-                    this.tags.push(r.tag(this.x, this.y[i], this.values[i], 160, 10).insertBefore(this).attr([{ fill: "#fff" }, { fill: this.symbols[i].attr("fill") }]));
-                }
-            }, function () {
-                this.tags && this.tags.remove();
-            });
-
-            lines.symbols.attr({ r: 6 });
-            // lines.lines[0].animate({"stroke-width": 6}, 1000);
-            // lines.symbols[0].attr({stroke: "#fff"});
-            // lines.symbols[0][1].animate({fill: "#f00"}, 1000);
+        // Set chart options
+        var options = {
+          'title':'Developer Listings',
+          'width':400,
+          'height':300,
         };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
