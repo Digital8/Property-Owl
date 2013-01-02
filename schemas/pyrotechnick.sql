@@ -129,7 +129,7 @@ CREATE TABLE `bookmarks` (
   `entity_id` mediumint(8) unsigned NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`bookmark_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `bookmarks` (
 
 LOCK TABLES `bookmarks` WRITE;
 /*!40000 ALTER TABLE `bookmarks` DISABLE KEYS */;
-INSERT INTO `bookmarks` VALUES (11,3,'owl',42,'2012-12-12 02:37:27'),(38,1,'owl',42,'2012-12-31 12:45:40'),(37,1,'owl',1,'2012-12-31 11:57:29');
+INSERT INTO `bookmarks` VALUES (11,3,'owl',42,'2012-12-12 02:37:27'),(39,1,'owl',10,'2013-01-02 15:29:54'),(38,1,'owl',42,'2012-12-31 12:45:40'),(37,1,'owl',1,'2012-12-31 11:57:29');
 /*!40000 ALTER TABLE `bookmarks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,7 +409,7 @@ CREATE TABLE `owls` (
 
 LOCK TABLES `owls` WRITE;
 /*!40000 ALTER TABLE `owls` DISABLE KEYS */;
-INSERT INTO `owls` VALUES (42,'Rose Cottage','117 Lansdowne Way','Chuwar','4306','qld','A nice house in the suburbs of far Western Brisbane.',1,789000,6,2,5,'',NULL,218,5130,NULL,'Split-level, open-planned layout\r\nFireplace','Salt-water Swimming Pool\r\nPagola','Short walk to shops\r\nChicken Coop','53',NULL,1,1,NULL,'2012-10-08 19:49:47','0000-00-00 00:00:00'),(10,'Fit for a King!','12 Karen Court','Redbank Plains','1442','qld','Reside in style with this fantastic property in suburban Redbank Plans, Queensland.',1,900000,4,2,2,'completed',NULL,120,220,NULL,NULL,NULL,NULL,'',NULL,2,1,NULL,'2012-12-05 06:37:23','0000-00-00 00:00:00'),(17,'Dont buy it','12 Bell Street','Ipswich','2134','qld','Dont buy this place.',1,493100,11,22,33,'otp',NULL,111,222,NULL,NULL,NULL,NULL,'',NULL,2,1,NULL,'2012-12-05 06:37:23','0000-00-00 00:00:00'),(47,'MODERN AND STYLISH AND DESIRABLE','15 Kent St','Deakin','2600','act','Exciting near new two storey terrace home in a discreet group of 5 in the highly sought after suburb of Deakin. ',1,980000,3,2,2,'',NULL,140,100,NULL,'','','Air conditioning\r\nAlarm System\r\nBalcony / Deck\r\nBroadband internet access\r\nBuilt in wardrobes\r\nDishwasher\r\nDouble glazed windows\r\nFloorboards\r\nFully fenced\r\nGarden / Courtyard\r\nInternal Laundry\r\nNorth Facing\r\nPets allowed\r\nSecure Parking\r\nWall / ceiling i','',NULL,0,1,NULL,'2012-12-05 18:30:39','0000-00-00 00:00:00'),(48,'OMG - This is an Awesome Waterfront Property!','32 Rosevears Dr','Lanena','7275','tas','For the buyers serious about boating and lifestyle I have 2046m2 of low maintenance property which allows time on the boat!\r\n\r\nEnjoying a HIGH WATER TITLE and an excellent quality jetty and floating pontoon, brick boathouse with winch, this property is the real deal!\r\n\r\nQuality solid brick house is spacious and complete in itself upstairs and enjoys awesome river views and sunshine then downstairs there is the easy possibility of making it all self contained, may suit a family with elders?\r\n\r\nThere is a separate, heated indoor pool for exercise and a triple garage big enough to take boat and caravan! Everything is in such excellent order the owners can lock up and go for 3-4 months at a time - how good is that?',1,899000,4,3,3,'',NULL,1000,2047,NULL,'','','High Water Title\r\nQuality Boat Shed\r\nJetty & Floating Pontoon\r\nHuge Rumpus Room','',NULL,0,1,NULL,'2012-12-06 00:26:20','0000-00-00 00:00:00'),(49,'Magnificence At Its Best','64 McMinns Dr','McMinns Lagoon','0822','nt','With absolute water frontage to McMinns Lagoon Wildlife Reserve and set amongst 6 magnificent acres of fertile and exotic Northern Territory land, this eco friendly, architecturally designed, nature lovers paradise is offered for sale. Don\'t miss this opportunity to purchase your piece of paradise in this highly sought after exclusive location! This boutique property is one of the Northern Territory\'s finest examples of a luxury rural lifestyle within 30 minutes of the Darwin CBD. Enjoy all the benefits of an iconic Territorian lifestyle just 7 minutes from the new Coolalinga shopping and regional centre. Incorporating Coles, Kmart, supporting speciality shops and entertaining facilities are due to commence construction only months away.\r\nMcMinns Lagoon is a highly sought after rural location and this property, being one of only 6 on the lagoon, is its epicentre. Nestled at one end of the kidney shaped Lagoon the property enjoys views across the far side of the Lagoon greatly enhancing the amenity and privacy of the property',8,2300000,5,2,3,'',NULL,300,2500,NULL,'Built-In Wardrobes\r\nFormal Lounge\r\nSeparate Dining','Garden\r\nSecure Parking','Close to Shops','',NULL,0,1,NULL,'2012-12-06 00:34:26','0000-00-00 00:00:00'),(50,'House & Land Packages returning 12.2% pa!!!','61 Dampier Terrace','Derby','6728','wa','The Derby property market has undergone significant changes; development and growth over the last five years have continued to defy critics, with expansions from government departments and the influx of resource based projects expected in the near future, NOW is the time to capitalise on the upward swing of this market!',6,635000,4,2,2,'',NULL,682,3570,NULL,'Air Conditioning\r\nWater Closets','Patio','','',NULL,0,1,NULL,'2012-12-06 00:39:55','0000-00-00 00:00:00'),(51,'MODERN ARCHITECTURALLY DESIGNED TOWNHOUSES, APARTMENTS & UNITS','18-24 Winona St','Findon','5023','sa','Choose from a vibrant mix of modern apartments and townhouses.\r\n\r\nSelect a design that meets your needs with up to 12 options available from courtyards to level 2 apartments serviced by lifts.\r\n\r\nAdaptable floorplans all designed with lifestyle in mind, stepless entrance points, overwidth doorways and easy access bathrooms, secure entry and intercom. Bright kitchens adjacent to open plan living areas flowing out to generous balconies or courtyards blending home and community. All apartments have secure under cover parking with auto roller doors.\r\n\r\nThese brand new apartments boast secure entry with intercoms, a six star energy rating and electric boosted solar hot water services.\r\n\r\nEmbrace a new lifestyle with low maintenance living, a better way to enjoy all the benefits of this fabulous suburb with over 50 specialty shops and services\r\nat your doorstep. Less than 6 kms to the beach and a short trip to the city.\r\n\r\nTake advantage of the new $8,500 housing construction grant available to any purchaser and up to $23,500 assistance for first home owners.',4,279950,2,1,1,'',NULL,0,0,NULL,'','','','',NULL,0,1,NULL,'2012-12-06 00:43:59','0000-00-00 00:00:00'),(52,'Stunning north facing apartment','380 Bay St','Brighton','3186','vic','The 380degrees development is the residential masterpiece by RotheLowman Architects',4,995000,2,2,2,'',NULL,58,19,NULL,'','','Study','',NULL,0,1,NULL,'2012-12-06 00:47:45','0000-00-00 00:00:00'),(43,'Suite 1 Level 7 Emirates House','167 Eagle St','Brisbane','4000','qld','prestige city views',4,450000,12,4,6,'',NULL,4000,10000,NULL,NULL,NULL,NULL,'',1,0,1,NULL,'2012-12-05 08:23:10','0000-00-00 00:00:00'),(45,'Luxurious terrace home','16 Pottinger St','Dawes Point','2000','nsw','Few residences can create such an immediate impression of quality, space and sophisticated family living.',1,3200000,3,3,2,'',NULL,109,200,NULL,NULL,NULL,NULL,'',NULL,0,1,NULL,'2012-12-05 09:55:27','0000-00-00 00:00:00');
+INSERT INTO `owls` VALUES (42,'Rose Cottage','117 Lansdowne Way','Chuwar','4306','qld','A nice house in the suburbs of far Western Brisbane.',1,789000,6,2,5,'',NULL,218,5130,NULL,'Split-level, open-planned layout\r\nFireplace','Salt-water Swimming Pool\r\nPagola','Short walk to shops\r\nChicken Coop','53',NULL,1,1,'0000-00-00 00:00:00','2012-10-08 19:49:47','0000-00-00 00:00:00'),(10,'Fit for a King!','12 Karen Court','Redbank Plains','1442','qld','Reside in style with this fantastic property in suburban Redbank Plans, Queensland.',1,900000,4,2,2,'completed',NULL,120,220,NULL,NULL,NULL,NULL,'',NULL,2,1,NULL,'2012-12-05 06:37:23','0000-00-00 00:00:00'),(17,'Dont buy it','12 Bell Street','Ipswich','2134','qld','Dont buy this place.',2,493100,11,22,33,'otp',NULL,111,222,NULL,'','','','',NULL,2,1,NULL,'2012-12-05 06:37:23','0000-00-00 00:00:00'),(47,'MODERN AND STYLISH AND DESIRABLE','15 Kent St','Deakin','2600','act','Exciting near new two storey terrace home in a discreet group of 5 in the highly sought after suburb of Deakin. ',1,980000,3,2,2,'',NULL,140,100,NULL,'','','Air conditioning\r\nAlarm System\r\nBalcony / Deck\r\nBroadband internet access\r\nBuilt in wardrobes\r\nDishwasher\r\nDouble glazed windows\r\nFloorboards\r\nFully fenced\r\nGarden / Courtyard\r\nInternal Laundry\r\nNorth Facing\r\nPets allowed\r\nSecure Parking\r\nWall / ceiling i','',NULL,0,1,NULL,'2012-12-05 18:30:39','0000-00-00 00:00:00'),(48,'OMG - This is an Awesome Waterfront Property!','32 Rosevears Dr','Lanena','7275','tas','For the buyers serious about boating and lifestyle I have 2046m2 of low maintenance property which allows time on the boat!\r\n\r\nEnjoying a HIGH WATER TITLE and an excellent quality jetty and floating pontoon, brick boathouse with winch, this property is the real deal!\r\n\r\nQuality solid brick house is spacious and complete in itself upstairs and enjoys awesome river views and sunshine then downstairs there is the easy possibility of making it all self contained, may suit a family with elders?\r\n\r\nThere is a separate, heated indoor pool for exercise and a triple garage big enough to take boat and caravan! Everything is in such excellent order the owners can lock up and go for 3-4 months at a time - how good is that?',1,899000,4,3,3,'',NULL,1000,2047,NULL,'','','High Water Title\r\nQuality Boat Shed\r\nJetty & Floating Pontoon\r\nHuge Rumpus Room','',NULL,0,1,NULL,'2012-12-06 00:26:20','0000-00-00 00:00:00'),(49,'Magnificence At Its Best','64 McMinns Dr','McMinns Lagoon','0822','nt','With absolute water frontage to McMinns Lagoon Wildlife Reserve and set amongst 6 magnificent acres of fertile and exotic Northern Territory land, this eco friendly, architecturally designed, nature lovers paradise is offered for sale. Don\'t miss this opportunity to purchase your piece of paradise in this highly sought after exclusive location! This boutique property is one of the Northern Territory\'s finest examples of a luxury rural lifestyle within 30 minutes of the Darwin CBD. Enjoy all the benefits of an iconic Territorian lifestyle just 7 minutes from the new Coolalinga shopping and regional centre. Incorporating Coles, Kmart, supporting speciality shops and entertaining facilities are due to commence construction only months away.\r\nMcMinns Lagoon is a highly sought after rural location and this property, being one of only 6 on the lagoon, is its epicentre. Nestled at one end of the kidney shaped Lagoon the property enjoys views across the far side of the Lagoon greatly enhancing the amenity and privacy of the property',8,2300000,5,2,3,'',NULL,300,2500,NULL,'Built-In Wardrobes\r\nFormal Lounge\r\nSeparate Dining','Garden\r\nSecure Parking','Close to Shops','',NULL,0,1,NULL,'2012-12-06 00:34:26','0000-00-00 00:00:00'),(50,'House & Land Packages returning 12.2% pa!!!','61 Dampier Terrace','Derby','6728','wa','The Derby property market has undergone significant changes; development and growth over the last five years have continued to defy critics, with expansions from government departments and the influx of resource based projects expected in the near future, NOW is the time to capitalise on the upward swing of this market!',6,635000,4,2,2,'',NULL,682,3570,NULL,'Air Conditioning\r\nWater Closets','Patio','','',NULL,0,1,NULL,'2012-12-06 00:39:55','0000-00-00 00:00:00'),(51,'MODERN ARCHITECTURALLY DESIGNED TOWNHOUSES, APARTMENTS & UNITS','18-24 Winona St','Findon','5023','sa','Choose from a vibrant mix of modern apartments and townhouses.\r\n\r\nSelect a design that meets your needs with up to 12 options available from courtyards to level 2 apartments serviced by lifts.\r\n\r\nAdaptable floorplans all designed with lifestyle in mind, stepless entrance points, overwidth doorways and easy access bathrooms, secure entry and intercom. Bright kitchens adjacent to open plan living areas flowing out to generous balconies or courtyards blending home and community. All apartments have secure under cover parking with auto roller doors.\r\n\r\nThese brand new apartments boast secure entry with intercoms, a six star energy rating and electric boosted solar hot water services.\r\n\r\nEmbrace a new lifestyle with low maintenance living, a better way to enjoy all the benefits of this fabulous suburb with over 50 specialty shops and services\r\nat your doorstep. Less than 6 kms to the beach and a short trip to the city.\r\n\r\nTake advantage of the new $8,500 housing construction grant available to any purchaser and up to $23,500 assistance for first home owners.',4,279950,2,1,1,'',NULL,0,0,NULL,'','','','',NULL,0,1,NULL,'2012-12-06 00:43:59','0000-00-00 00:00:00'),(52,'Stunning north facing apartment','380 Bay St','Brighton','3186','vic','The 380degrees development is the residential masterpiece by RotheLowman Architects',4,995000,2,2,2,'',NULL,58,19,NULL,'','','Study','',NULL,0,1,NULL,'2012-12-06 00:47:45','0000-00-00 00:00:00'),(43,'Suite 1 Level 7 Emirates House','167 Eagle St','Brisbane','4000','qld','prestige city views',4,450000,12,4,6,'',NULL,4000,10000,NULL,NULL,NULL,NULL,'',1,0,1,NULL,'2012-12-05 08:23:10','0000-00-00 00:00:00'),(45,'Luxurious terrace home','16 Pottinger St','Dawes Point','2000','nsw','Few residences can create such an immediate impression of quality, space and sophisticated family living.',1,3200000,3,3,2,'',NULL,109,200,NULL,NULL,NULL,NULL,'',NULL,0,1,NULL,'2012-12-05 09:55:27','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `owls` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -590,7 +590,7 @@ CREATE TABLE `po_registrations` (
   `user_id` int(11) NOT NULL,
   `registered_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`registration_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -599,7 +599,7 @@ CREATE TABLE `po_registrations` (
 
 LOCK TABLES `po_registrations` WRITE;
 /*!40000 ALTER TABLE `po_registrations` DISABLE KEYS */;
-INSERT INTO `po_registrations` VALUES (1,1,'property',1,'2012-11-30 04:52:49'),(4,2,'property',1,'2012-11-30 04:57:53'),(5,0,'property',1,'2012-12-04 13:09:27'),(6,41,'owl',1,'2012-12-04 20:16:17'),(7,43,'owl',1,'2012-12-04 22:23:20'),(8,43,'owl',7,'2012-12-05 04:59:01'),(9,10,'owl',7,'2012-12-05 06:27:10'),(10,42,'owl',7,'2012-12-05 09:40:08'),(11,1,'barn',7,'2012-12-05 10:10:43'),(12,47,'owl',7,'2012-12-05 13:29:59'),(13,48,'owl',7,'2012-12-05 13:30:55'),(14,43,'owl',3,'2012-12-08 09:16:37'),(15,47,'owl',3,'2012-12-11 14:51:24');
+INSERT INTO `po_registrations` VALUES (1,1,'property',1,'2012-11-30 04:52:49'),(4,2,'property',1,'2012-11-30 04:57:53'),(5,0,'property',1,'2012-12-04 13:09:27'),(6,41,'owl',1,'2012-12-04 20:16:17'),(7,43,'owl',1,'2012-12-04 22:23:20'),(8,43,'owl',7,'2012-12-05 04:59:01'),(9,10,'owl',7,'2012-12-05 06:27:10'),(10,42,'owl',7,'2012-12-05 09:40:08'),(11,1,'barn',7,'2012-12-05 10:10:43'),(12,47,'owl',7,'2012-12-05 13:29:59'),(13,48,'owl',7,'2012-12-05 13:30:55'),(14,43,'owl',3,'2012-12-08 09:16:37'),(15,47,'owl',3,'2012-12-11 14:51:24'),(16,42,'owl',1,'2013-01-02 07:01:42'),(17,1,'barn',1,'2013-01-02 07:08:32');
 /*!40000 ALTER TABLE `po_registrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -685,6 +685,40 @@ LOCK TABLES `raf` WRITE;
 INSERT INTO `raf` VALUES (2,1,'pyro@feisty.io','4444 5555','nick','kinsey','test',47,'owl','2012-12-31 04:58:48','2012-12-31 04:58:48');
 /*!40000 ALTER TABLE `raf` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `searches`
+--
+
+DROP TABLE IF EXISTS `searches`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `searches` (
+  `search_id` int(11) NOT NULL AUTO_INCREMENT,
+  `suburb` varchar(100) DEFAULT NULL,
+  `state` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `development_type_id` int(11) DEFAULT NULL,
+  `minPrice` int(11) DEFAULT NULL,
+  `maxPrice` int(11) DEFAULT NULL,
+  `minBeds` int(11) DEFAULT NULL,
+  `maxBeds` int(11) DEFAULT NULL,
+  `bathrooms` int(11) DEFAULT NULL,
+  `cars` int(11) DEFAULT NULL,
+  PRIMARY KEY (`search_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `searches`
+--
+
+LOCK TABLES `searches` WRITE;
+/*!40000 ALTER TABLE `searches` DISABLE KEYS */;
+INSERT INTO `searches` VALUES (1,'test','all','2013-01-02 17:26:15','2013-01-02 17:26:15',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'test','all','2013-01-02 17:26:40','2013-01-02 17:26:40',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'test','all','2013-01-02 17:29:07','2013-01-02 17:29:07',0,0,0,0,0,0,0),(4,'chuwar','qld','2013-01-02 17:29:35','2013-01-02 17:29:35',1,50000,100000,3,4,4,5);
+/*!40000 ALTER TABLE `searches` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -695,4 +729,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-12-31 16:04:47
+-- Dump completed on 2013-01-02 17:48:07

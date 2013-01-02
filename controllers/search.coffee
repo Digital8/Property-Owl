@@ -1,9 +1,13 @@
-system = require '../system'
+{models} = system = require '../system'
 
-models =
-  owl: system.load.model 'owl'
+Search = models.search
+Owl = models.owl
 
 exports.index = (req, res) ->
+  
+  Search.create req.query, (error, search) ->
+    console.log arguments...
+  
   if req.query.state is 'all' then req.query.state = '%'
   if req.query.suburb is '' then req.query.suburb = '%' else req.query.suburb += '%'
   
@@ -21,7 +25,7 @@ exports.index = (req, res) ->
   
   # if req.query.devStage is 'any' then req.query.devStage = '%'
   
-  models.owl.search req.query, (err, results) ->
+  Owl.search req.query, (err, results) ->
     if err then throw err
     res.render 'searchResults', search: results or {}
   
