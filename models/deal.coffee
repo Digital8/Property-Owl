@@ -52,7 +52,29 @@ module.exports = class Deal extends Model
       callback null, models
 
   @getByMonth = (cred, callback) ->
+
+    query = "SELECT U.first_name, U.last_name, U.state, U.created_at, O.approved, count(O.owl_id) as owl_count, count(B.barn_id) AS barn_count FROM po_users AS U LEFT JOIN owls as O ON U.user_id = O.listed_by LEFT JOIN barns as B ON B.listed_by = U.user_id WHERE"
+    vals = []
+
     if cred.month != ''
-      @db.query "SELECT count(user_id) AS total, first_name, last_name, state, created_at FROM po_users  WHERE state LIKE ? AND MONTH(created_at) = ? GROUP BY state", [cred.state, cred.month], callback
-    else
-      @db.query "SELECT count(user_id) AS total, state, created_at FROM po_users  WHERE state LIKE % GROUP BY state", [cred.state], callback
+      query += ' MONTH(O.created_at) = ? AND'
+      vals.push(cred.month)
+
+    if cred.developer != '0'
+      query += ' U.user_id = ? AND'
+      vals.push(cred.developer)
+
+    query += ' O.state LIKE ?'
+
+    vals.push(cred.state)
+
+    ###if (cred.status != '-1')
+      query += ' AND (O.approved = ? OR B.approved = ?)'
+      vals.push(cred.status)
+      vals.push(cred.status)###
+
+    query += ' GROUP BY U.user_id, O.approved'
+
+    console.log query
+
+    @db.query "#{query}", vals, callback

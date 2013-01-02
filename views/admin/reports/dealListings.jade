@@ -6,41 +6,38 @@ block content
     h1 Reports
       span.secondary  - Deal Listings
     include reportsMenu
-    div#holder(style="height:480px")
     .grid-header
-      form#search-form
-        input#propertySearch(type='text')
+      form#search-form(action="", method="get")
+        select#propertyMonth(name="month")
+          option(value="all") Month
+          option(value="jan") January
+          option(value="feb") February
+          option(value="mar") March
+          option(value="apr") April
+          option(value="may") May
+          option(value="jun") June
+          option(value="jul") July
+          option(value="aug") August
+          option(value="sep") September
+          option(value="oct") October
+          option(value="nov") November
+          option(value="dec") December
         | &nbsp;
-        input.button(type='submit', value='Search')
-        | &nbsp;
-        input.button(type='submit', value='Reset')
-        .divider
-        select#propertyMonth
-          option Month
-          option January
-          option February
-          option March
-          option April
-          option May
-          option June
-          option July
-          option August
-          option September
-          option October
-          option November
-          option December
-        | &nbsp;
-        select#propertyDeveloper
-          option Developer
+        select#propertyDeveloper(name="developer")
+          option(value="0") Developer
           - each developer in developers
             option(value=developer.user_id) #{developer.first_name} #{developer.last_name}
         | &nbsp;
-        select#propertyStatus
-          option Status
-          option Pending
-          option Pre-approved
-          option Current
-          option Ended
+        //
+          select#propertyStatus(name="status")
+          option(value="-1") Status
+          option(value="0") Pending
+          option(value="1") Approved
+        .divider
+        input.button(type='submit', value='Go')
+        | &nbsp;
+        input.button(type='submit', value='Reset')
+
     table.admin-gridview
       thead
         tr
@@ -54,10 +51,12 @@ block content
         tr
           - var listed = new Date(listing.created_at)
           td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
-          td= listing.developer
-          td= listing.status
-          td= listing.owl_deal_count
-          td= listing.barn_deal_count
+          td #{listing.first_name} #{listing.last_name}
+          td= (listing.approved) ? 'Approved' : 'Pending'
+          td= listing.owl_count
+          td= listing.barn_count
+
+    div#holder(style="height:480px")
     
     script
         window.onload = function () {

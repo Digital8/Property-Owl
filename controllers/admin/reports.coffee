@@ -16,7 +16,7 @@ exports.index = (req,res) ->
     db.query "SELECT CONCAT(YEAR(registered_at),'-',MONTH(registered_at),'-01') AS 'date', Count(*) as 'count' FROM po_registrations WHERE type = ? GROUP BY YEAR(registered_at), MONTH(registered_at)", ['owl'], (err, owls) ->
       res.render 'admin/reports/index', barns: barns or {}, owls: owls or {}
 
-months = [
+months =
   'jan' : 1
   'feb' : 2
   'mar' : 3
@@ -29,28 +29,23 @@ months = [
   'oct' : 10
   'nov' : 11
   'dec' : 12
-]
 
 exports.dealListings = (req,res) ->
-  listings = [
-    'created_at':'01/10/2012'
-    'developer':'Developer 1'
-    'status':'current'
-    'owl_deal_count':'12'
-    'barn_deal_count':'14'
-  ]
 
   cred = 
     state: req.query.state or '%'
+    status: req.query.status or '1'
     month: req.query.month or ''
+    developer: req.query.developer or '0'
 
   if cred.state is 'all' then cred.state = '%'
 
   unless cred.month is '' then cred.month = months[cred.month] or ''
   
   models.users.getUsersByGroup 2, (err, developers) ->
-    Deal.getByMonth cred, (err, results) ->
+    Deal.getByMonth cred, (err, listings) ->
       if err then console.log err
+      console.log listings
       res.render 'admin/reports/dealListings', listings: listings or {}, developers: developers or {}
 
 exports.websiteRegistrations = (req,res) ->
