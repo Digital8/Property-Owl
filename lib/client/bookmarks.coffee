@@ -10,7 +10,7 @@ module.exports = ->
     , (response, status) ->
       if response.status is 200
         $this.contents().last().remove()
-        $this.append 'Saved'
+        $this.append ' Saved'
         
       else
         alert status
