@@ -6,6 +6,7 @@ db = system.db
 models =
   users: system.load.model 'user'
   advertisers: system.load.model 'advertiser'
+  registrations: system.load.model 'registrations'
 
 Deal = system.models.deal
 AdClicks = system.models.click
@@ -80,15 +81,11 @@ exports.propertySearches = (req,res) ->
   res.render 'admin/reports/propertySearches', searches: searches or {}, propertyTypes: {}
 
 exports.dealRegistrations = (req,res) ->
-  registrations = [
-    'date':'01/10/2012'
-    'user_name':'John Doe'
-    'status':'Interested'
-    'owl_deal_count':'34'
-    'barn_deal_count':'34'
-  ]
-  
-  res.render 'admin/reports/dealRegistrations', registrations: registrations or {}, members: {}
+  cred = {}
+
+  models.registrations.report cred, (err, registrations) ->
+    if err then console.log err
+    res.render 'admin/reports/dealRegistrations', registrations: registrations or {}, members: {}
 
 exports.servicesEnquiries = (req,res) ->
   cred = 
@@ -97,7 +94,7 @@ exports.servicesEnquiries = (req,res) ->
 
   if cred.month is 'all' then cred.month = '%'
   unless cred.month is '' then cred.month = months[cred.month] or ''
-  
+
   Enquriy.report cred, (err, enquiries) ->
     res.render 'admin/reports/servicesEnquiries', enquiries: enquiries or {}, suppliers: {}
 
