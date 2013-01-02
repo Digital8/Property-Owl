@@ -26,3 +26,9 @@ module.exports = class Search extends Model
 
   constructor: (args = {}) ->
     super
+
+  @report = (cred, callback) ->
+    query = "SELECT S.state, count(S.search_id) AS total, S.created_at as date FROM searches as S GROUP BY state "
+    vals = []
+
+    @db.query query, vals, callback

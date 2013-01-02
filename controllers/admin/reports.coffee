@@ -11,6 +11,7 @@ models =
 Deal = system.models.deal
 AdClicks = system.models.click
 Enquriy = system.models.enquiry
+Search = system.models.search
 
 helpers = {}
 
@@ -68,17 +69,16 @@ exports.websiteRegistrations = (req,res) ->
     res.render 'admin/reports/websiteRegistrations', members: results or {}
 
 exports.propertySearches = (req,res) ->
-  searches = [
-    'date':'01/10/2012'
-    'state':'QLD'
-    'property_type':'Apartment'
-    'deal_type':'Owl Deal'
-    'stage':'Completed'
-    'price':'$300,000 - $400,000'
-    'search_count':'427'
-  ]
-  
-  res.render 'admin/reports/propertySearches', searches: searches or {}, propertyTypes: {}
+  cred = 
+    state: req.query.state or '%'
+    month: req.query.month or ''
+
+  if cred.state is 'all' then cred.state = '%'
+  if cred.month is 'all' then cred.month = '%'
+
+  Search.report cred, (err, searches) ->
+    if err then console.log err
+    res.render 'admin/reports/propertySearches', searches: searches or {}, propertyTypes: {}
 
 exports.dealRegistrations = (req,res) ->
   cred = 
@@ -114,6 +114,5 @@ exports.advertisingClicks = (req,res) ->
 
     AdClicks.report cred, (err, clicks) ->
       if err then console.log err
-      console.log clicks
-
+      
       res.render 'admin/reports/advertisingClicks', advertisers: advertisers or {}, clicks: clicks or {}
