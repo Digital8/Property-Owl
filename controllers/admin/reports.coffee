@@ -8,6 +8,7 @@ models =
   advertisers: system.load.model 'advertiser'
 
 Deal = system.models.deal
+AdClicks = system.models.click
 
 helpers = {}
 
@@ -39,7 +40,7 @@ exports.dealListings = (req,res) ->
     developer: req.query.developer or '0'
 
   if cred.state is 'all' then cred.state = '%'
-
+  if cred.month is 'all' then cred.month = '%'
   unless cred.month is '' then cred.month = months[cred.month] or ''
 
   models.users.getUsersByGroup 2, (err, developers) ->
@@ -55,6 +56,7 @@ exports.websiteRegistrations = (req,res) ->
     month: req.query.month or ''
 
   if cred.state is 'all' then cred.state = '%'
+  if cred.month is 'all' then cred.month = '%'
 
   unless cred.month is '' then cred.month = months[cred.month] or ''
 
@@ -97,12 +99,17 @@ exports.servicesEnquiries = (req,res) ->
   res.render 'admin/reports/servicesEnquiries', enquiries: enquiries or {}, suppliers: {}
 
 exports.advertisingClicks = (req,res) ->
-  adverts = [
-    'advertisement_id':'1'
-    'created_at':'01/10/2012'
-    'advertiser':'Advertiser 1'
-    'ad':'ad 282'
-    'clickthroughs':'34'
-  ]
-  
-  res.render 'admin/reports/advertisingClicks', adverts: adverts or {}, advertisers: {}
+
+  models.advertisers.all (err, advertisers) ->
+    cred = 
+      month: req.query.month or ''
+      advertiser: req.query.advertiser or '0'
+
+    if cred.month is 'all' then cred.month = '%'
+    unless cred.month is '' then cred.month = months[cred.month] or ''
+
+    AdClicks.report cred, (err, clicks) ->
+      if err then console.log err
+      console.log clicks
+
+      res.render 'admin/reports/advertisingClicks', advertisers: advertisers or {}, clicks: clicks or {}

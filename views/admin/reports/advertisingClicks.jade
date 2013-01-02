@@ -6,97 +6,87 @@ block content
     h1 Reports
       span.secondary  - Advertising Click Throughs
     include reportsMenu
-    div#holder(style="height:480px")
     .grid-header
-      form#search-form
-        input#propertySearch(type='text')
+      rid-header
+      form#search-form(action="", method="get")
+        select#propertyMonth(name="month")
+          option(value="all") Month
+          option(value="jan") January
+          option(value="feb") February
+          option(value="mar") March
+          option(value="apr") April
+          option(value="may") May
+          option(value="jun") June
+          option(value="jul") July
+          option(value="aug") August
+          option(value="sep") September
+          option(value="oct") October
+          option(value="nov") November
+          option(value="dec") December
         | &nbsp;
+        select#advertiser(name="advertiser")
+          option(value="0") Advertiser
+          - each advertiser in advertisers
+            option(value=advertiser.advertiser_id) #{advertiser.name}
+        .divider
         input.button(type='submit', value='Go')
         | &nbsp;
         input.button(type='submit', value='Reset')
-        .divider
-        select#propertyMonth
-          option Month
-          option January
-          option February
-          option March
-          option April
-          option May
-          option June
-          option July
-          option August
-          option September
-          option October
-          option November
-          option December
-        | &nbsp;
-        select#advertiser
-          option Advertiser
-          - each advertiser in advertisers
-            option(value=advertiser.advertiser_id) #{advertiser.name}
-        | &nbsp;
     table.admin-gridview
       thead
         tr
-          td ID
           td Started On
           td Advertiser
           td Ad
           td Click Throughs
       tbody
-      - each advert in adverts
-        tr
-          td= advert.advertisement_id
-          - var listed = new Date(advert.created_at)
-          td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
-          td= advert.advertiser
-          td= advert.ad
-          td= advert.clickthroughs
+      - var graph = []
+      - each click in clicks
+        - var c = 0
+        if click.advertiser != null
+          - c++
+          tr
+            - var listed = new Date(click.start)
+            td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+            td= click.advertiser
+            td= click.description
+            td= click.click_count
+            - graph.push([click.description, click.click_count]);
+        if c == 0
+          tr
+            td ---
+            td ---
+            td ---
+            td ---
 
+    div#chart_div
     script
-        window.onload = function () {
-            var r = Raphael("holder"),
-                txtattr = { font: "12px sans-serif" };
-            
-            var x = [], y = [], y2 = [], y3 = [];
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
 
-            for (var i = 0; i < 1e6; i++) {
-                x[i] = i * 10;
-                y[i] = (y[i - 1] || 0) + (Math.random() * 7) - 3;
-                y2[i] = (y2[i - 1] || 150) + (Math.random() * 7) - 3.5;
-                y3[i] = (y3[i - 1] || 300) + (Math.random() * 7) - 4;
-            }
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
 
-            r.text(160, 10, "Advertising clickthroughs by month").attr(txtattr);
-            r.text(480, 10, "Advertising clickthroughs by month").attr(txtattr);;
-            r.text(160, 250, "Advertising clickthroughs by month").attr(txtattr);
-            r.text(480, 250, "Advertising clickthroughs by month").attr(txtattr);
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
 
-            r.linechart(10, 10, 300, 220, x, [y.slice(0, 1e3), y2.slice(0, 1e3), y3.slice(0, 1e3)]).hoverColumn(function () {
-                this.set = r.set(
-                    r.circle(this.x, this.y[0]),
-                    r.circle(this.x, this.y[1]),
-                    r.circle(this.x, this.y[2])
-                );
-            }, function () {
-                this.set.remove();
-            });
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows(
+          !{JSON.stringify(graph)});
 
-            r.linechart(330, 10, 300, 220, x, [y.slice(0, 1e4), y2.slice(0, 1e4), y3.slice(0, 1e4)], { shade: true });
-            r.linechart(10, 250, 300, 220, x, [y, y2, y3], { nostroke: true, shade: true });
-
-            var lines = r.linechart(330, 250, 300, 220, [[1, 2, 3, 4, 5, 6, 7],[3.5, 4.5, 5.5, 6.5, 7, 8]], [[12, 32, 23, 15, 17, 27, 22], [10, 20, 30, 25, 15, 28]], { nostroke: false, axis: "0 0 1 1", symbol: "circle", smooth: true }).hoverColumn(function () {
-                this.tags = r.set();
-
-                for (var i = 0, ii = this.y.length; i < ii; i++) {
-                    this.tags.push(r.tag(this.x, this.y[i], this.values[i], 160, 10).insertBefore(this).attr([{ fill: "#fff" }, { fill: this.symbols[i].attr("fill") }]));
-                }
-            }, function () {
-                this.tags && this.tags.remove();
-            });
-
-            lines.symbols.attr({ r: 6 });
-            // lines.lines[0].animate({"stroke-width": 6}, 1000);
-            // lines.symbols[0].attr({stroke: "#fff"});
-            // lines.symbols[0][1].animate({fill: "#f00"}, 1000);
+        // Set chart options
+        var options = {
+          'title':'Advertisment Click %',
+          'width':400,
+          'height':300,
         };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
