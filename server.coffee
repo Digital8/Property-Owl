@@ -116,6 +116,14 @@ app.configure ->
         done()
     
     app.use (req, res, done) ->
+      DevelopmentStatus = system.models.development_status
+      
+      DevelopmentStatus.all (error, developmentStatuses) ->
+        system.data ?= {}
+        system.data.developmentStatuses = developmentStatuses
+        done()
+    
+    app.use (req, res, done) ->
       DealType = system.models.deal_type
       
       DealType.all (error, dealTypes) ->

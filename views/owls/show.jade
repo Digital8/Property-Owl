@@ -59,33 +59,43 @@ block content
           p= owl.description
           
           .general-features
+            
             h3 General Features
+            
             ul
-              - if(owl.price)
+              - if (owl.price)
                 li Price: 
                   strong= '$' + owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              - if(owl.development_type_id)
+              
+              - if (owl.developmentType)
                 li Property Type: 
-                  strong #{owl.developmentType}
-              - if(owl.bedrooms)
+                  strong= owl.developmentType.name
+              
+              - if (owl.bedrooms)
                 li Bedrooms: 
-                  strong #{owl.bedrooms}
-              - if(owl.bathrooms)
+                  strong= owl.bedrooms
+              
+              - if (owl.bathrooms)
                 li Bathrooms: 
-                  strong #{owl.bathrooms}
-              - if(owl.cars)
+                  strong= owl.bathrooms
+              
+              - if (owl.cars)
                 li Car Spaces: 
-                  strong #{owl.cars}
-              - if(owl.development_stage)
+                  strong= owl.cars
+              
+              - if (owl.developmentStatus)
                 li Development Stage: 
-                  strong #{owl.development_stage}
-              - if(owl.internal_area)
+                  strong= owl.developmentStatus.name
+              
+              - if (owl.internal_area)
                 li Internal Area: 
                   strong #{owl.internal_area} sq. m
-              - if(owl.external_area)
+              
+              - if (owl.external_area)
                 li External Area: 
                   strong #{owl.external_area} sq. m
-              - if(owl.internal_area && owl.external_area)
+              
+              - if (owl.internal_area && owl.external_area)
                 li Total Area: 
                   strong #{parseFloat(owl.external_area) + parseFloat(owl.internal_area)} sq. m
             

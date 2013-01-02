@@ -8,7 +8,7 @@ system = require '../../system'
 Owl = system.models.owl
 
 helpers =
-  mailer: system.load.helper('mailer')
+  mailer: system.load.helper 'mailer'
 
 exports.index = (req, res) ->
   Owl.all (error, owls) ->

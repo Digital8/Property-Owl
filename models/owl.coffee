@@ -39,7 +39,7 @@ module.exports = class Owl extends Model
   
   @field 'development_type_id'
   
-  #@field 'feature_image'
+  @field 'development_status_id'
   
   constructor: (args = {}) ->
     Object.defineProperty this, 'code', get: => _s.pad @id.toString(), 5, '0'
@@ -52,7 +52,15 @@ module.exports = class Owl extends Model
         DevelopmentType = system.models.development_type
         
         DevelopmentType.get @development_type_id, (error, developmentType) =>
-          @type = developmentType
+          @developmentType = developmentType
+          
+          callback()
+      
+      developmentStatus: (callback) =>
+        DevelopmentStatus = system.models.development_status
+        
+        DevelopmentStatus.get @development_status_id, (error, developmentStatus) =>
+          @developmentStatus = developmentStatus
           
           callback()
       
