@@ -28,7 +28,6 @@ module.exports = ->
         event.preventDefault()
         
         $.delete "/bookmarks/#{id}", (response, status, jqXHR) ->
-          console.log arguments
           
           if jqXHR.status is 200
             do $bookmark.remove

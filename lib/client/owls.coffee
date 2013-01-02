@@ -65,24 +65,25 @@ module.exports = ->
       activate 'index'
     else 
       activate 'detail'
-
-  for form in ($ 'form.details-form.owl')
+  
+  for form in $ 'form.details-form.owl'
+    
     $form = $ form
     
     id = $form.data 'id'
     
     # approved bool
     
-    approved = $form.find('[name=approved]')
+    approved = $form.find '[name=approved]'
     
     approved.change (event) ->
       event.preventDefault()
       
-      console.log 'click'
-      
-      $.patch "/admin/owls/#{id}", approved: approved.is(':checked'), -> console.log arguments 
-    
-    # # date
+      $.patch "/admin/owls/#{id}",
+        approved: approved.is ':checked'
+      , ->
+        
+    # date
     
     picker = $ '#approved_at_val'
     
@@ -91,4 +92,3 @@ module.exports = ->
       $.patch "/admin/owls/#{id}",
         approved_at: picker.val()
       , (body, res, xhr) ->
-        console.log arguments...

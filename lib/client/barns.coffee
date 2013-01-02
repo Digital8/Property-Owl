@@ -44,12 +44,8 @@ module.exports = ->
       """
   
   update = ->
+    
     $.get "/ajax/search?address=#{$address.val()}&suburb=#{$suburb.val()}", ([error, owls]) ->
-      # console.log arguments
-      
-      console.log 'error', error
-      
-      console.log 'owls', owls
       
       table = $ '.owl-matrix.search'
       barnId = table.data 'barn-id'
@@ -58,7 +54,6 @@ module.exports = ->
       tbody.empty()
       
       for owl in owls then do (owl) ->
-        console.log owl
         
         row = makeRow owl
         row.appendTo tbody
@@ -66,8 +61,7 @@ module.exports = ->
         row.find('.nest').click (event) ->
           event.preventDefault()
           
-          $.post "/admin/barns/#{barnId}/owls", {id: owl.id},
-            # (-> console.log arguments)
+          $.post "/admin/barns/#{barnId}/owls", id: owl.id,
             row = makeListRow owl
             row.appendTo $('.owl-matrix.nested tbody')
   
@@ -92,9 +86,6 @@ module.exports = ->
         barnId = $row.data 'barn-id'
         owlId = $row.data 'owl-id'
         
-        console.log barnId
-        
         $.delete "/admin/barns/#{barnId}/owls/#{owlId}", ->
-          console.log arguments
           
           $row.remove()

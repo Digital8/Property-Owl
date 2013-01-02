@@ -15,7 +15,7 @@ module.exports = ->
         $.patch "/admin/owls/#{id}", approved: yes, (body, response, xhr) ->
           if xhr.status == 200
             $row.remove()
-            
+  
   sync = (row) ->
     $type = row.find '.deal_type_id'
     $type.bind 'change keydown input', ->
@@ -26,7 +26,6 @@ module.exports = ->
       $.patch "/admin/owls/#{owlId}/deals/#{dealId}",
         deal_type_id: $type.val()
       , ->
-        # console.log arguments...
     
     $description = row.find '.description'
     $description.bind 'change keydown input', ->
@@ -37,7 +36,6 @@ module.exports = ->
       $.patch "/admin/owls/#{owlId}/deals/#{dealId}",
         description: $description.val()
       , ->
-        # console.log arguments...
     
     $value = row.find '.value'
     $value.bind 'change keydown input', ->
@@ -48,7 +46,6 @@ module.exports = ->
       $.patch "/admin/owls/#{owlId}/deals/#{dealId}",
         value: $value.val()
       , ->
-        # console.log arguments...
     
     # delete
     owlId = ($ 'form').data 'id'
@@ -73,9 +70,7 @@ module.exports = ->
         value: 0
         description: ''
         deal_type_id: 0
-      , (res, body, jqXHR) ->      
-        
-        console.log 'res', res
+      , (res, body, jqXHR) ->
         
         template = ($ '.template tr').clone()
         

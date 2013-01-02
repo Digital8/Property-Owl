@@ -20,11 +20,6 @@ module.exports = ->
     geocoder = new google.maps.Geocoder
     
     geocoder.geocode address: address, (results, status) ->
-      # if status is google.maps.GeocoderStatus.OK
-      
-      # if status isnt google.maps.GeocoderStatus.ZERO_RESULTS
-      
-      console.log arguments...
       
       map.setCenter results[0].geometry.location
       

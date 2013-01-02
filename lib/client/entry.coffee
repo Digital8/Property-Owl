@@ -38,10 +38,6 @@ $ ->
     makeMap 'big-map', width: 500, height: 350, stroke: '#0c6cb7', hover: '#DE1515'
   
   do require './timer'
-  
-  $('body').on 'keypress', (event) ->
-    if (event.keyCode == 6) and event.ctrlKey
-      console.log 'fake that shit'
 
   forms = ($ '.fake')
   
@@ -96,8 +92,6 @@ $ ->
           if map[name]
             value = do map[name]
           
-          console.log "setting #{name} to #{value}"
-          
           field.val value
     
     $button.prependTo form
@@ -122,7 +116,7 @@ $ ->
         return unless results?.length
         
         for result in results then do (result) ->
-          console.log result
+          
           li = $ '<li>'
           li.appendTo ul
           

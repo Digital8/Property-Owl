@@ -17,5 +17,3 @@ module.exports = ->
         $.delete "/admin/news/#{id}", ->
           
           $row.remove()
-          
-          console.log args

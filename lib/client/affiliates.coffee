@@ -20,7 +20,7 @@
 #             $.post '/clicks',
 #               resource_id: id
 #               type: 'affiliate'
-#             , -> console.log 'posted', arguments
+#             , ->
 
 module.exports = ->
   
@@ -41,5 +41,3 @@ module.exports = ->
         $.delete "/admin/affiliates/#{id}", ->
           
           $row.remove()
-          
-          console.log args
