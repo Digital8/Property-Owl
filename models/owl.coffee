@@ -153,6 +153,9 @@ module.exports = class Owl extends Model
   
   upload: (req, callback) ->
     
+    # process(Req, String, Function)
+    # creates Media for each filea req's uploads
+    # takes
     processFiles = (req, key, callback = ->) =>
       files = req.files["#{key}s"]
       
@@ -175,33 +178,9 @@ module.exports = class Owl extends Model
       
       , callback
     
+    # uploads
+    
     async.series
-      # removeDeals: (callback) =>
-      #   @constructor.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'owl'", @id, callback
-      
-      # addDeals: (callback) =>
-      #   values = req.body.value.pop()
-      #   names = req.body.name.pop()
-      #   types = req.body.type.pop()
-        
-      #   deals = []
-        
-      #   return callback() unless types
-        
-      #   for index in [0...types.length]
-      #     deals.push
-      #       entity_id: @id
-      #       deal_type_id: types[index]
-      #       description: names[index]
-      #       value: values[index]
-      #       created_by: req.session.user_id
-      #       type: 'owl'
-        
-      #   deals.pop()
-        
-      #   async.forEach deals, (deal, callback) =>
-      #     @constructor.db.query "INSERT INTO deals SET ?", deal, callback
-      #   , callback
       
       uploads: (callback) =>
         
