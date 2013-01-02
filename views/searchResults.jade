@@ -13,51 +13,10 @@ block content
          h4 No properties have been found matching your select criteria
        - else
          - var i = 0; // Just a hack for PoC
-         - each property in search
+         - each owl in search
           - i++
-          //
-            listing
-          .listing-summary
-            .header
-              .listing-price
-                | $ 
-                span.price #{property.price}
-              h2 #{property.address}, #{property.suburb}
-            .listing-body
-              .listing-thumb
-                img.thumb(src='/images/property-thumb.jpg', alt='76 Orchard Terrace, St Lucia')
-                //
-                  show if top listing
-                - if (i == 1)
-                  img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
-              .listing-details
-                .features
-                  span.property-type
-                    strong= property.type
-                  span
-                    img(src='/images/bed-icon.png', alt='3 Bedroom')
-                    strong= property.bedrooms
-                    |  Bedrooms
-                  span
-                    img(src='/images/bath-icon.png', alt='2 Bathroom')
-                    strong= property.bathrooms
-                    |  Bathrooms
-                  span
-                    img(src='/images/car-icon.png', alt='2 Car Spaces')
-                    strong= property.cars
-                    |  Car Spaces
-                .summary
-                  h3= property.title
-                  p= property.description.substr(0,200) + '...'
-                .listing-links
-                  a.savebuttons.save-button(href='#', data-property="#{property.property_id}")
-                    img#save-icon(src='/images/plus-icon.png', alt='Save this property')
-                    |  Save
-                  a.details-button(href='/properties/view/#{property.property_id}')
-                    img#info-icon(src='/images/info-icon.png', alt='View property details')
-                    |  Details
-          //
-            end listing
+          include owls/summary
+         
 
     //
       end center-col

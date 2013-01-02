@@ -37,7 +37,7 @@ block content
       
       .property-info
         #left
-          p= owl.code
+          p= 'Property No. ' + owl.code
           
           if(typeof(bestdeal) != 'undefined' && bestdeal)
             h1 Australia's Best Property Deal
@@ -64,9 +64,9 @@ block content
               - if(owl.price)
                 li Price: 
                   strong= '$' + owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              - if(owl.property_type)
+              - if(owl.development_type_id)
                 li Property Type: 
-                  strong #{owl.property_type}
+                  strong #{owl.developmentType}
               - if(owl.bedrooms)
                 li Bedrooms: 
                   strong #{owl.bedrooms}
