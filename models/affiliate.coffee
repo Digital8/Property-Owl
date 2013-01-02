@@ -18,7 +18,6 @@ module.exports = class Affiliate extends Model
   @field 'phone'
   @field 'address'
   @field 'suburb'
-  @field 'suburb'
   @field 'state'
   @field 'email'
   @field 'postcode'
