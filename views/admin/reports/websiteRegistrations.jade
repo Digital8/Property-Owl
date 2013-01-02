@@ -9,7 +9,7 @@ block content
     .grid-header
       form#search-form(action="", method="get")
         select#propertyMonth(name="month")
-          option(value="all") Month
+          option(value="all") All Months
           option(value="jan") January
           option(value="feb") February
           option(value="mar") March
@@ -22,7 +22,7 @@ block content
           option(value="oct") October
           option(value="nov") November
           option(value="dec") December
-        .divider
+        | &nbsp;
         select#propertyState(name="state")
           option(value='all') State
           option(value="act") ACT
@@ -33,11 +33,9 @@ block content
           option(value="tas") TAS
           option(value="vic") VIC
           option(value="wa") WA
-        .divider
+        .divider          
         | &nbsp;
         input.button(type='submit', value='Go')
-        | &nbsp;
-        input.button(type='submit', value='Reset')
     table.admin-gridview
       thead
         tr

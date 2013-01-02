@@ -28,7 +28,17 @@ module.exports = class Search extends Model
     super
 
   @report = (cred, callback) ->
-    query = "SELECT S.state, count(S.search_id) AS total, S.created_at as date FROM searches as S GROUP BY state "
+    query = "SELECT * FROM searches AS S WHERE "
     vals = []
+
+    if cred.month != ''
+      query += "MONTH(S.created_at) = ? AND "
+      vals.push(cred.month)
+
+    if cred.state != '' and cred.state != 'all'
+      query += 'S.state = ? AND '
+      vals.push(cred.state)
+
+    query += '1=1'
 
     @db.query query, vals, callback

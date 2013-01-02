@@ -70,11 +70,13 @@ exports.websiteRegistrations = (req,res) ->
 
 exports.propertySearches = (req,res) ->
   cred = 
-    state: req.query.state or '%'
+    state: req.query.state or ''
     month: req.query.month or ''
 
   if cred.state is 'all' then cred.state = '%'
   if cred.month is 'all' then cred.month = '%'
+
+  unless cred.month is '' then cred.month = months[cred.month] or ''
 
   Search.report cred, (err, searches) ->
     if err then console.log err
