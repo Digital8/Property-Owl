@@ -25,8 +25,10 @@ $ ->
   do require './barns'
   
   do require './owls'
-
+  
   do require './pages'
+  
+  do require './google_maps'
   
   if ($ "#map").length
     makeMap 'map'

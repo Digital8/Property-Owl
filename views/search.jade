@@ -1,9 +1,11 @@
 .find-deals
   h2 Find Deals
   form#input-form(action="/search",method="get")
+    
     img(src='/images/search-map-icon.png', alt='Suburb')
     label(for='propertySuburb') Suburb
     input#propertySuburb(type='text',name='suburb')
+    
     img(src='/images/search-map-icon.png', alt='State / Territory')
     label(for='propertyState') State / Territory
     select#propertyState(name="state")
@@ -16,27 +18,30 @@
       option(value="tas") TAS
       option(value="vic") VIC
       option(value="wa") WA
+    
     img(src='/images/search-property-icon.png', alt='Property Type')
-    label(for='propertyType') Property Type
-    select#propertyType(name="pType")
-      option(value="all") All
-      option(value="apartment") Apartment
-      option(value="townhouse") Townhouse
-      option(value="unit") Unit
-      option(value="house") House
-      option(value="land") Land
-      option(value="house and land") House and Land
-      option(value="villa") Villa
-      option(value="acreage") Acreage
-    img(src='/images/search-deal-icon.png', alt='Deal Type')
-    label(for='propertyDealType') Deal Type
-    select#propertyDealType(name="dType")
-      option All
-      option Stamp Duty
-      option Furniture Package
-      option Blinds
-      option Rental Guarantee
-      option Entertainment System
+    label(for='development_type_id') Property Type
+    select.development_type_id(name='development_type_id')
+      option Any
+      option(value='1') House
+      option(value='2') Townhouse
+      option(value='3') Unit
+      option(value='4') Apartment
+      option(value='5') Land
+      option(value='6') House and Land
+      option(value='7') Villa
+      option(value='8') Acreage
+    
+    //- img(src='/images/search-deal-icon.png', alt='Deal Type')
+    //- label(for='propertyDealType') Deal Type
+    //- select#propertyDealType(name="dType")
+    //-   option All
+    //-   option Stamp Duty
+    //-   option Furniture Package
+    //-   option Blinds
+    //-   option Rental Guarantee
+    //-   option Entertainment System
+    
     img(src='/images/search-price-icon.png', alt='Minimum Price')
     label(for='propertyMinPrice') Min. Price
     select#propertyMinPrice(name="minPrice")
@@ -70,6 +75,7 @@
       option(value="4000000") 4,000,000
       option(value="5000000") 5,000,000
       option(value="10000000") 10,000,000
+    
     img(src='/images/search-price-icon.png', alt='Maximum Price')
     label(for='propertyMaxPrice') Max. Price
     select#propertyMaxPrice(name="maxPrice")
@@ -103,6 +109,7 @@
       option(value="4000000") 4,000,000
       option(value="5000000") 5,000,000
       option(value="10000000") 10,000,000
+    
     .small-left
       img.small(src='/images/search-bed-icon.png', alt='Number of Beds')
       label(for='propertyMinBeds') Min. Beds
@@ -113,6 +120,7 @@
         option(value="3") 3
         option(value="4") 4
         option(value="5") 5
+    
     .small-right
       img.small(src='/images/search-bed-icon.png', alt='Number of Beds')
       label(for='propertyMaxBeds') Max. Beds
@@ -123,6 +131,7 @@
         option(value="3") 3
         option(value="4") 4
         option(value="5") 5
+    
     .small-left
       img.small(src='/images/search-bath-icon.png', alt='Number of Bathrooms')
       label(for='propertyBathrooms') Bathrooms
@@ -133,6 +142,7 @@
         option(value="3") 3+
         option(value="4") 4+
         option(value="5") 5+
+    
     .small-right
       img.small(src='/images/search-car-icon.png', alt='Number of Car Spaces')
       label(for='propertyCarSpaces') Car Spaces
@@ -143,10 +153,12 @@
         option(value="3") 3+
         option(value="4") 4+
         option(value="5") 5+
-    img(src='/images/search-development-icon.png', alt='Development Stage')
-    label(for='propertyState') Development Stage
-    select#propertyState(name="devStage")
-      option(value="") All
-      option(value="otp") Off The Plan
-      option(value="completed") Completed
+    
+    //- img(src='/images/search-development-icon.png', alt='Development Stage')
+    //- label(for='propertyState') Development Stage
+    //- select#propertyState(name="devStage")
+    //-   option(value="") All
+    //-   option(value="otp") Off The Plan
+    //-   option(value="completed") Completed
+    
     input.button(type='submit', value='Submit')

@@ -153,6 +153,9 @@ module.exports = class Owl extends Model
   
   upload: (req, callback) ->
     
+    # process(Req, String, Function)
+    # creates Media for each filea req's uploads
+    # takes
     processFiles = (req, key, callback = ->) =>
       files = req.files["#{key}s"]
       
@@ -175,33 +178,9 @@ module.exports = class Owl extends Model
       
       , callback
     
+    # uploads
+    
     async.series
-      # removeDeals: (callback) =>
-      #   @constructor.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'owl'", @id, callback
-      
-      # addDeals: (callback) =>
-      #   values = req.body.value.pop()
-      #   names = req.body.name.pop()
-      #   types = req.body.type.pop()
-        
-      #   deals = []
-        
-      #   return callback() unless types
-        
-      #   for index in [0...types.length]
-      #     deals.push
-      #       entity_id: @id
-      #       deal_type_id: types[index]
-      #       description: names[index]
-      #       value: values[index]
-      #       created_by: req.session.user_id
-      #       type: 'owl'
-        
-      #   deals.pop()
-        
-      #   async.forEach deals, (deal, callback) =>
-      #     @constructor.db.query "INSERT INTO deals SET ?", deal, callback
-      #   , callback
       
       uploads: (callback) =>
         
@@ -316,8 +295,42 @@ module.exports = class Owl extends Model
       , (error) ->
         callback null, models
   
-  @search: (v, callback) ->
-    @db.query "SELECT P.* FROM owls AS P INNER JOIN development_types AS PT WHERE suburb LIKE ? AND state LIKE ? AND PT.name LIKE ? AND price >= ? AND price <= ? AND bedrooms >= ? AND bedrooms <= ? AND bathrooms >= ? AND cars >= ? AND development_stage LIKE ? GROUP BY P.owl_id", [v.suburb, v.state, v.pType, v.minPrice, v.maxPrice, v.minBeds, v.maxBeds, v.bathrooms, v.cars, v.devStage], (error, rows) =>
+  @search: (q, callback) ->
+    console.log 'search', q
+    
+    @db.query """
+      SELECT *
+      FROM owls
+      WHERE
+        suburb LIKE ?
+        AND
+        state LIKE ?
+        AND
+        development_type_id LIKE ?
+        AND
+        price >= ?
+        AND
+        price <= ?
+        AND
+        bedrooms >= ?
+        AND
+        bedrooms <= ?
+        AND
+        bathrooms >= ?
+        AND
+        cars >= ?
+      GROUP BY owl_id
+    """, [
+      q.suburb
+      q.state
+      q.development_type_id
+      q.minPrice
+      q.maxPrice
+      q.minBeds
+      q.maxBeds
+      q.bathrooms
+      q.cars
+    ], (error, rows) =>
       return callback error if error
       
       models = (new this row for row in rows)
