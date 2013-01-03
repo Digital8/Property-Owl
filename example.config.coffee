@@ -30,3 +30,7 @@ module.exports =
     key: './ssl/localhost.key'
     cert: './ssl/localhost.crt'
     passphrase: ''
+  
+  hack:
+    user:
+      id: 1
