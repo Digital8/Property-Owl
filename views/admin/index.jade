@@ -61,54 +61,54 @@ block content
         
         .grid-header
           h2 Pending Barn Deal Listings
-          
-          - if (barns.length == 0)
-            table.admin-gridview
-             thead
-               tr 
-                 td(colspan='6')
-                  | There are no pending barn deals. 
-          - else
-            table.admin-gridview
-             thead
-               tr
-                 td ID
-                 td Listed On
-                 td Title
-                 td(colspan='3') Actions
-              tbody
-              - each barn in barns
-                tr
-                 td= barn.id
-                 - var listed = new Date(barn.created_at)
-                 td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
-                 td= barn.title
-                 td.actions
-                   a(href='/admin/barns/#{barn.id}/edit', alt='edit barn deal')
-                     img(src='/images/edit.png', alt='Edit')
-                     | Edit
-                  td.actions
-                    a(href='#')
-                      img(src='images/approve.png', alt='View')
-                      | Approve
-          
-             tfoot
+        
+        - if (barns.length == 0)
+          table.admin-gridview
+           thead
+             tr 
+               td(colspan='6')
+                | There are no pending barn deals. 
+        - else
+          table.admin-gridview
+           thead
+             tr
+               td ID
+               td Listed On
+               td Title
+               td(colspan='3') Actions
+            tbody
+            - each barn in barns
               tr
-               td(colspan='5')
-                a.button(href="/admin/barns") Manage All Barn Deals
-                //- ul.pager
-                //-  li
-                //-   a(href='#') Prev
-                //-  li.selected
-                //-   a(href='#') 1
-                //-  li
-                //-   a(href='#') 2
-                //-  li
-                //-   a(href='#') 3
-                //-  li
-                //-   a(href='#') 4
-                //-  li
-                //-   a(href='#') Next
+               td= barn.id
+               - var listed = new Date(barn.created_at)
+               td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+               td= barn.title
+               td.actions
+                 a(href='/admin/barns/#{barn.id}/edit', alt='edit barn deal')
+                   img(src='/images/edit.png', alt='Edit')
+                   | Edit
+                td.actions
+                  a(href='#')
+                    img(src='images/approve.png', alt='View')
+                    | Approve
+        
+           tfoot
+            tr
+             td(colspan='5')
+              a.button(href="/admin/barns") Manage All Barn Deals
+              //- ul.pager
+              //-  li
+              //-   a(href='#') Prev
+              //-  li.selected
+              //-   a(href='#') 1
+              //-  li
+              //-   a(href='#') 2
+              //-  li
+              //-   a(href='#') 3
+              //-  li
+              //-   a(href='#') 4
+              //-  li
+              //-   a(href='#') Next
       
       #dashboard-right-col
         .grid-header
