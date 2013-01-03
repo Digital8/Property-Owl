@@ -9,9 +9,9 @@
       
       a.details-button(href="/news/#{post.news_id}")
         - if (post.images[0])
-          img.thumb(src='/uploads/#{post.imageURL()}', alt='')
+          img.thumb(src='/uploads/#{post.imageURL()}', alt='#{post.title}')
         - else
-          img.thumb(src='/images/news-thumb.jpg', alt='')
+          img.thumb(src='/images/placeholder.png', alt='#{post.title}')
     
     .listing-details
       

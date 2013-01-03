@@ -76,7 +76,7 @@ module.exports = class Affiliate extends Model
     if @images.length
       return '/uploads/' + @images.pop().filename
     else
-      return '/images/services-thumb.jpg' # or whatever it is
+      return '/images/placeholder.png' # or whatever it is
 
   @published = (callback) ->
     @db.query "SELECT * FROM affiliates WHERE visible", (error, rows) =>
