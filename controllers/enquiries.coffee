@@ -24,6 +24,7 @@ exports.create = (req, res) ->
       
       system.helpers.mailer template,'New Enquiry', user, secondary, (results) ->
   
+<<<<<<< HEAD
         map =
           user_id: req.user.id
           entity_id: req.body.entity_id
@@ -35,3 +36,20 @@ exports.create = (req, res) ->
             res.send status: 500
           else
             res.send status: 200
+=======
+  map =
+    user_id: req.user.id
+    entity_id: req.body.entity_id
+    entity_type: req.body.entity_type
+    enquiry: req.body.enquiry
+  
+  Enquiry.create map, (error, model) ->
+    console.log arguments...
+    res.send status: 200
+  
+  # system.db.query  "INSERT INTO enquiries VALUES ?", map, (err, rows) ->
+  #   if err 
+  #     res.send status: 500, error: err
+  #   else 
+  #     res.send status: 200
+>>>>>>> 618f825084eb332c0ad36ae922608c53b524c3e2

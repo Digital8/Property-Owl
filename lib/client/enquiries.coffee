@@ -1,5 +1,6 @@
 module.exports = ->
   
+  # affiliates
   $(".enquire-button").on "click", (e) ->
     e.preventDefault()
     
@@ -26,3 +27,12 @@ module.exports = ->
           $(".modal-enquiry").fadeToggle()
         else
           alert "Uh oh an error occured!"
+  
+  # owls
+  ($ '.enquire').click (event) ->
+    
+    event.preventDefault()
+    
+    $form = $ '.enquire-form'
+    
+    $.post '/enquiries', $form.serialize()

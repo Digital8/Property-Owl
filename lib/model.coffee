@@ -151,6 +151,9 @@ module.exports = class Model
     
     for key, field of @fields
       continue if key is @table.key
+      
+      continue unless model[key]?
+      
       hash[key] = model[key]
     
     hash.created_at = new Date
@@ -158,13 +161,13 @@ module.exports = class Model
     
     model.hydrate (error, model) =>
       @db.query "INSERT INTO #{@table.name} SET ?", hash, (error, result) =>
-        # console.log arguments
         
         if error then return callback error
         
         id = result.insertId
         
         model.id = id
+        
         model[@table.key] = id
         
         callback null, model
