@@ -31,6 +31,8 @@ $ ->
   do require './google_maps'
   
   do require './enquiries'
+
+  do require './register'
   
   if ($ "#map").length
     makeMap 'map'

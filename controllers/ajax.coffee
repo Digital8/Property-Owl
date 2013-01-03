@@ -230,9 +230,9 @@ exports.addRegistration = (req, res) ->
             res.send status: 200
 
           else
-            res.send status: 400
+            res.send status: 400, message: 'DB error'
       else
-        res.send status: 400
+        res.send status: 400, message: 'Already registered to property'
 
 exports.delRegistration = (req, res) ->
   req.query.id ?= ''

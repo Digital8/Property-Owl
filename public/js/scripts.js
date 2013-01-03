@@ -316,9 +316,6 @@ $(function(){
 	    data: 'email=' + email + '&mobile=' + mobile + '&first_name=' + firstName + '&last_name=' + lastName + '&comment=' + comment+'&entity_type='+entity+'&entity_id='+entity_id
 	  }).done(function(d){
 	    if (d.status == 200) {
-	      //showPayment();
-	      //success();
-	      //window.location.replace('/');
 	      referFriendModal.fadeToggle(150);
 	      $("#generic-modal, #generic-modal .modal.main").removeClass('error').addClass('success')
 	      $('#generic-modal-title').html('Thanks for referring a friend!');
@@ -375,7 +372,8 @@ $(function(){
 	  }
 	});
   
-  $('.register').click(function(){
+  $('.register').click(function(e){
+  	e.preventDefault();
   	var type = $(this).data('type');
   	var id = $(this).data('id');
 
@@ -384,8 +382,14 @@ $(function(){
       method: 'GET',
       data: 'id='+id+'&type='+type
     }).done(function(d){
-      //console.log(d);
-      //if(d.status == 200) alert('You have registered for this property')
+      console.log(d);
+      if(d.status == 200) {
+      	alert('You have registered for this property')
+      }
+      else
+      {
+      	alert(d.message);
+      }
   	});
   });	
 });
