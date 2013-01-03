@@ -2,12 +2,16 @@
   
   - if (objUser.isAdmin())
     .inputs.index.pane(data-key='index')
+      
       label(for='title') Approved
         input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
+      
       - var display = (owl.approved == true) ? 'block' : 'none';
+      
       div#approved_at(style="display: #{display}")
         label(for='title') Approved at
         input(id='approved_at_val', name='approved_at', type='date')
+      
       script
         $(document).ready(function(){
           $("#approved").click(function(){
@@ -21,7 +25,8 @@
             }
           });
         });
-
+      
+      
   
   .inputs.detail.pane(data-key='detail')
     include detail_inputs
