@@ -150,56 +150,6 @@ exports.referfriend = (req, res) ->
       , 'Property Owl Referral'
       res.send status: 200
 
-# exports.savedeal = (req, res) ->
-#   req.assert('id', 'Property ID Not Numeric').isInt()
-  
-#   errors = req.validationErrors true
-
-#   if errors
-#     res.send status: false
-#   else
-#     models.saveddeals.checkDeal req.body.id, res.locals.objUser.id, (err, results) ->
-#       if results.length is 0
-#         models.saveddeals.saveDeal req.body.id, res.locals.objUser.id, (err, results) ->
-#           if err?
-#             res.send status: false
-#           else
-#             res.send status: true
-#       else
-#         res.send status: true
-
-# exports.removedeal = (req, res) ->
-#   req.assert('id', 'Property ID Not Numeric').isInt()
-  
-#   errors = req.validationErrors true
-  
-#   if errors
-#     res.send status: false
-#   else
-#     models.saveddeals.removeSavedDeal req.body.id, res.locals.objUser.id, (err, results) ->
-#       if err?
-#         res.send status: false
-#       else
-#         res.send status:true
-
-# exports.addDeal = (req, res) ->
-#   req.body.property_id ?= req.body.pid
-#   req.body.created_by = res.locals.objUser.id
-  
-#   models.deals.addDeal req.body, (err, results) ->
-#     if err then throw err
-    
-#     res.send results
-
-# exports.delDeal = (req, res) ->
-#   models.deals.getDealById req.body.id, (err, results) ->
-#     if err then throw err
-    
-#     if results.length is 1 then results = results.pop()
-    
-#     models.deals.deleteDealById req.body.id, (err) ->
-#       res.send results
-
 exports.addRegistration = (req, res) ->
   req.query.id ?= ''
   req.query.type ?= ''
