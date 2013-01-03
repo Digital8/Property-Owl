@@ -37,6 +37,8 @@ module.exports = class User
       bathrooms: userData.pref_bathrooms or ''
       cars: userData.pref_cars or ''
       developmentStage: userData.pref_dev_stage or ''
+    
+    Object.defineProperty this, 'fullName', get: => "#{@firstName} #{@lastName}"
   
   isHacker: -> app.argv.hack and (@company is 'Digital8')
   

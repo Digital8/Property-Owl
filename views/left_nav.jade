@@ -55,49 +55,34 @@
         break
   
   - if(locals.enquire)
+    
     .enquiry
-       h2 Enquire About This Deal
-       form#input-form
-          label(for='propertyName') Name
-          input#propertyName(type='text',disabled,value=objUser.firstName+' '+objUser.lastName)
-          label(for='propertyEmail') Email:
-          input#propertyEmail(type='text',disabled,value=objUser.email)
-          label(for='propertyPhone') Phone
-          input#propertyPhone(type='text')
-          label(for='propertyContactMethod') Contact Method
-          - if (locals.owl)
-            input#propertyId(type="hidden",name="id",value="#{owl.id}")
-          input#propertyDeal(type="hidden",name="deal",value="owl")
-          select#propertyContactMethod
-           option(value="phone") Phone
-           option(value="email") Email
-          label(for='propertyComments') Comments
-          textarea#propertyComments(rows='5')
-          input.enquire.button(type='submit', value='Submit')
-
-    script
-      $(document).ready(function(){
-        $('.enquire').on('click',function(d){
-          d.preventDefault();
-          // Get values
-          var name = $("#propertyName").val();
-          var id = $("#propertyId").val();
-          var deal = $("#propertyDeal").val();
-          var email = $("#propertyEmail").val();
-          var phone = $("#propertyPhone").val();
-          var contactMethod = $("#propertyContactMethod").val();
-          var comments = $("#propertyComments").val();
-
-          $.ajax({
-            url: '/ajax/enquireDeal',
-            type: 'post',
-            data: 'name='+ name +'&email='+email+'&phone='+phone+'&contactMethod='+contactMethod+'&comments='+comments+'&id='+id+'&deal='+deal
-          }).done(function(d){
-            console.log(d);
-          });
-
-        });
-      });
-
+      
+      h2 Enquire About This Deal
+      
+      form.enquire-form.input-form
+        
+        label(for='name') Name
+        input.name(type='text', disabled, value=objUser.fullName)
+        
+        label(for='email') Email:
+        input.email(type='text', disabled, value=objUser.email)
+        
+        label(for='phone') Phone
+        input.phone(type='text')
+        
+        input(type='hidden', name='entity_id', value=owl.id)
+        input(type='hidden', name='entity_type', value='owl')
+        
+        label(for='contactMethod') Contact Method
+        select.contactMethod(name='contactMethod')
+         option(value='phone') Phone
+         option(value='email') Email
+        
+        label(for='enquiry') Comments
+        textarea.enquiry(name='enquiry', rows='5')
+        
+        input.enquire.button(type='submit', value='Submit')
+  
   - if (!locals.owl || (locals.area && locals.area == 'index'))
     include search

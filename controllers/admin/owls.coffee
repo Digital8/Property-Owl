@@ -23,7 +23,7 @@ exports.edit = (req, res) ->
     res.render 'admin/owls/edit', owl: owl
 
 exports.add = (req, res) ->
-  Owl.new (error, owl) ->
+  Owl.create {}, (error, owl) ->
     res.render 'admin/owls/add', owl: owl
 
 exports.create = (req, res) ->

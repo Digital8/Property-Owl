@@ -26,11 +26,12 @@ exports.create = (req, res) ->
   map =
     user_id: req.user.id
     entity_id: req.body.entity_id
-    entity_type: 'affiliate'
+    entity_type: req.body.entity_type
     enquiry: req.body.enquiry
   
   Enquiry.create map, (error, model) ->
     console.log arguments...
+    res.send status: 200
   
   # system.db.query  "INSERT INTO enquiries VALUES ?", map, (err, rows) ->
   #   if err 
