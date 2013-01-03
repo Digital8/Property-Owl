@@ -17,7 +17,10 @@ block content
       
       .listing-details
         .listing-thumb
-          img.thumb(src='/images/news-thumb.jpg', alt='')
+          - if (post.images[0])
+            img.thumb(src='/uploads/#{post.imageURL()}', alt='#{post.title}')
+          - else
+            img.thumb(src='/images/placeholder.png', alt='#{post.title}')
       
       div !{post.content.replace(/\n/g, '<p />')}
     
