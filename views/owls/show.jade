@@ -4,165 +4,167 @@ extends ../layout
 
 block content
   
-  div#fb-root
-  
-  script
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  
-  .container.row.main
-    #deal_id(style='display:none')
-      | #{owl.owl_id}
+  if (owl && owl.id)
     
-    include ../left_nav
+    div#fb-root
     
-    #wide-center-col
-      div#entity(style="display: none;") owl
-      div#entity_id(style="display: none;")= owl.id
-
-
-      - if (owl.images && owl.images.length)
-        #mySlider.evoslider.galleriffic
-          dl
-            - var i = 0
-            - each image in owl.images
-              - i++
-              dt "slide #{i}"
-              dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
+    script
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    
+    .container.row.main
+      #deal_id(style='display:none')
+        | #{owl.owl_id}
       
-      .property-info
-        #left
-          p= 'Property No. ' + owl.code
-          
-          if(typeof(bestdeal) != 'undefined' && bestdeal)
-            h1 Australia's Best Property Deal
-          else
-            h1= owl.title
-          
-          span.price-highlight $
-            span.price= owl.price
-          
-          | #{owl.fullAddress()}
-          
-          hr.light
-          
-          h2 Property Details
-          
-          if(typeof(bestdeal) != 'undefined' && bestdeal)
-            strong= owl.title
-          
-          p= owl.description
-          
-          .general-features
-            
-            h3 General Features
-            
-            ul
-              - if (owl.price)
-                li Price: 
-                  strong= '$' + owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              
-              - if (owl.developmentType)
-                li Property Type: 
-                  strong= owl.developmentType.name
-              
-              - if (owl.bedrooms)
-                li Bedrooms: 
-                  strong= owl.bedrooms
-              
-              - if (owl.bathrooms)
-                li Bathrooms: 
-                  strong= owl.bathrooms
-              
-              - if (owl.cars)
-                li Car Spaces: 
-                  strong= owl.cars
-              
-              - if (owl.developmentStatus)
-                li Development Stage: 
-                  strong= owl.developmentStatus.name
-              
-              - if (owl.internal_area)
-                li Internal Area: 
-                  strong #{owl.internal_area} sq. m
-              
-              - if (owl.external_area)
-                li External Area: 
-                  strong #{owl.external_area} sq. m
-              
-              - if (owl.internal_area && owl.external_area)
-                li Total Area: 
-                  strong #{parseFloat(owl.external_area) + parseFloat(owl.internal_area)} sq. m
-            
-            - if (owl.indoorFeatures.length > 0)
-              h3 Indoor Features
-              ul
-                - each feature in owl.indoorFeatures
-                  li= feature
-              //- p= owl.indoor_features
-          
-          .other-features
-            
-            - if (owl.outdoorFeatures.length > 0)
-              h3 Outdoor Features
-              ul
-                - each feature in owl.outdoorFeatures
-                  li= feature
-            
-            - if (owl.otherFeatures.length > 0)
-              h3 Other Features
-              ul
-                - each feature in owl.otherFeatures
-                  li= feature
+      include ../left_nav
+      
+      #wide-center-col
+        div#entity(style="display: none;") owl
+        div#entity_id(style="display: none;")= owl.id
+
+
+        - if (owl.images && owl.images.length)
+          #mySlider.evoslider.galleriffic
+            dl
+              - var i = 0
+              - each image in owl.images
+                - i++
+                dt "slide #{i}"
+                dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
         
-        #right
-          - if (objUser.isAdmin())
-            .more-info(style='text-align: center; background: #BADA55;')
-              a(href="/admin/owls/#{owl.id}/edit") Admin
-          
-          - if (owl.deals)
-            .deal
-              h2
-                | Reveal the Deal
-                img.arrow(src='/images/blue-arrow-icon-down.png', alt='Reveal the Deal')
-              - if (owl.deals.length)
+        .property-info
+          #left
+            p= 'Property No. ' + owl.code
+            
+            if(typeof(bestdeal) != 'undefined' && bestdeal)
+              h1 Australia's Best Property Deal
+            else
+              h1= owl.title
+            
+            span.price-highlight $
+              span.price= owl.price
+            
+            | #{owl.fullAddress()}
+            
+            hr.light
+            
+            h2 Property Details
+            
+            if(typeof(bestdeal) != 'undefined' && bestdeal)
+              strong= owl.title
+            
+            p= owl.description
+            
+            .general-features
+              
+              h3 General Features
+              
+              ul
+                - if (owl.price)
+                  li Price: 
+                    strong= '$' + owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                
+                - if (owl.developmentType)
+                  li Property Type: 
+                    strong= owl.developmentType.name
+                
+                - if (owl.bedrooms)
+                  li Bedrooms: 
+                    strong= owl.bedrooms
+                
+                - if (owl.bathrooms)
+                  li Bathrooms: 
+                    strong= owl.bathrooms
+                
+                - if (owl.cars)
+                  li Car Spaces: 
+                    strong= owl.cars
+                
+                - if (owl.developmentStatus)
+                  li Development Stage: 
+                    strong= owl.developmentStatus.name
+                
+                - if (owl.internal_area)
+                  li Internal Area: 
+                    strong #{owl.internal_area} sq. m
+                
+                - if (owl.external_area)
+                  li External Area: 
+                    strong #{owl.external_area} sq. m
+                
+                - if (owl.internal_area && owl.external_area)
+                  li Total Area: 
+                    strong #{parseFloat(owl.external_area) + parseFloat(owl.internal_area)} sq. m
+              
+              - if (owl.indoorFeatures.length > 0)
+                h3 Indoor Features
                 ul
-                  - each deal in owl.deals
-                    li.price= '$' + deal.value.toString() + ' ' + deal.description
-              - else
+                  - each feature in owl.indoorFeatures
+                    li= feature
+                //- p= owl.indoor_features
+            
+            .other-features
+              
+              - if (owl.outdoorFeatures.length > 0)
+                h3 Outdoor Features
                 ul
-                  li No deals have been listed
-                  
-            .secure-deal
-              a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.id}", data-type="owl") Express Your Interest!
-          
-            - if(owl.barn)
-              .barn-link
-                a(href="/barns/#{owl.barn_id}") View Barn Deal
-                  img#barn-image(src='/images/barn-link.png', alt='View Barn Deal')
-          
-          include ../map
-          mixin map(owl)
-          
-          br
-          
-          a(href='http://maps.google.com.au/maps?q=117%20Lansdowne%20Way%20Chuwar%20qld%204306', target="_blank") View Larger Map
-          
-          - if (owl.files && owl.files.length)
-            .more-info
-              h2 
-                | More Information
-                img.arrow(src='/images/blue-arrow-icon-down.png', alt='More Information')
-              - if (owl.files)
+                  - each feature in owl.outdoorFeatures
+                    li= feature
+              
+              - if (owl.otherFeatures.length > 0)
+                h3 Other Features
                 ul
-                  - each file in owl.files
-                    li
-                      a(href="/uploads/#{file.filename}") #{file.description}
-              - else
-                ul
-                  li No files have been uploaded
+                  - each feature in owl.otherFeatures
+                    li= feature
+          
+          #right
+            - if (objUser.isAdmin())
+              .more-info(style='text-align: center; background: #BADA55;')
+                a(href="/admin/owls/#{owl.id}/edit") Admin
+            
+            - if (owl.deals)
+              .deal
+                h2
+                  | Reveal the Deal
+                  img.arrow(src='/images/blue-arrow-icon-down.png', alt='Reveal the Deal')
+                - if (owl.deals.length)
+                  ul
+                    - each deal in owl.deals
+                      li.price= '$' + deal.value.toString() + ' ' + deal.description
+                - else
+                  ul
+                    li No deals have been listed
+                    
+              .secure-deal
+                a.show-secure-deal.secure-button.register(href='#',data-id="#{owl.id}", data-type="owl") Express Your Interest!
+            
+              - if(owl.barn)
+                .barn-link
+                  a(href="/barns/#{owl.barn_id}") View Barn Deal
+                    img#barn-image(src='/images/barn-link.png', alt='View Barn Deal')
+            
+            include ../map
+            mixin map(owl)
+            
+            br
+            
+            a(href='http://maps.google.com.au/maps?q=117%20Lansdowne%20Way%20Chuwar%20qld%204306', target="_blank") View Larger Map
+            
+            - if (owl.files && owl.files.length)
+              .more-info
+                h2 
+                  | More Information
+                  img.arrow(src='/images/blue-arrow-icon-down.png', alt='More Information')
+                - if (owl.files)
+                  ul
+                    - each file in owl.files
+                      li
+                        a(href="/uploads/#{file.filename}") #{file.description}
+                - else
+                  ul
+                    li No files have been uploaded

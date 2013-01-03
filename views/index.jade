@@ -1,50 +1,53 @@
 extends layout
 
 block content
-  .container.row.best-deal
-    .home-deal-stats
-      .home-timer
-        #timer
-          #day-timer
-            span.label Days
-            span#day-timer-days.value
-          #hour-timer
-            span.label Hours
-            span#day-timer-hours.value
-          #minute-timer
-            span.label Mins
-            span#day-timer-mins.value
+  
+  if (owl && owl.id)
+    
+    .container.row.best-deal
+      .home-deal-stats
+        .home-timer
+          #timer
+            #day-timer
+              span.label Days
+              span#day-timer-days.value
+            #hour-timer
+              span.label Hours
+              span#day-timer-hours.value
+            #minute-timer
+              span.label Mins
+              span#day-timer-mins.value
+          
+          #map
         
-        #map
+        .home-counter
+          span.label Number of Enquiries
+          span.value= Number(owl.registrations) + 1337
+           //- + Math.floor((Math.random() * 1337))
       
-      .home-counter
-        span.label Number of Enquiries
-        span.value= Number(owl.registrations) + 1337
-         //- + Math.floor((Math.random() * 1337))
+      .deal-summary.clickable(style="background-image: url('#{owl.heroImageURL()}');", url='owls/top')
+        .home-hero-caption
+          img#house-icon(src='/images/house-icon.png', alt=owl.title)
+          h2= owl.title
+          p
+            = _s.prune(owl.description, 150)
+            | &nbsp; 
+            a(href='#', alt="Find out more about Australia's best property deal") find out more
+        
+        a.secure-button(href='/owls/top')
+          | Reveal the Deal
+          img#secure-arrow(src='/images/arrow-icon.png', alt='Reveal the Deal')
     
-    .deal-summary.clickable(style="background-image: url('#{owl.heroImageURL()}');", url='owls/top')
-      .home-hero-caption
-        img#house-icon(src='/images/house-icon.png', alt=owl.title)
-        h2= owl.title
-        p
-          = _s.prune(owl.description, 150)
-          | &nbsp; 
-          a(href='#', alt="Find out more about Australia's best property deal") find out more
+    .container.row.main
       
-      a.secure-button(href='/owls/top')
-        | Reveal the Deal
-        img#secure-arrow(src='/images/arrow-icon.png', alt='Reveal the Deal')
-  
-  .container.row.main
-    
-    #left-col
+      #left-col
+        
+        include left_nav
       
-      include left_nav
-    
-    #home-center-col
+      #home-center-col
+        
+        include home
       
-      include home
+      include right_nav
     
-    include right_nav
-  
-  include creep
+    include creep

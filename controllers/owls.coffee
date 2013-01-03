@@ -27,6 +27,11 @@ exports.hot = (req, res) ->
     async.map owls, (owl, callback) ->
       owl.hydrateForUser req.user, callback
     , (error) ->
+      
+      owls = _.filter owls, (owl) -> owl?.id?
+      
+      console.log 'owls', owls
+      
       res.render 'owls/list', owls: owls, maxPages: 1, currentPage: 1
 
 exports.byState = (req, res) ->
