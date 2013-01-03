@@ -47,4 +47,7 @@ exports.update = (req, res) ->
       res.redirect '/admin/barns'
 
 exports.patch = (req, res) ->
-  res.send status: 200
+  
+  Barn.patch req.params.id, req.body, (error, barn) ->
+    
+    res.send status: 200

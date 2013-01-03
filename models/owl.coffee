@@ -250,11 +250,16 @@ module.exports = class Owl extends Model
            WHERE owl_id = OWLS.owl_id
         ) AS discount
     FROM owls AS OWLS
-    WHERE approved
+    WHERE
+      approved
+      AND
+      approved_at < ?
+      AND
+      TIMESTAMPDIFF(MINUTE, approved_at, ?) < 10080
     HAVING discount) AS TEMP
     ORDER BY ratio DESC
     LIMIT 1
-    """, (error, rows) ->
+    """, [system.last_epoch.toDate(), system.last_epoch.toDate()], (error, rows) ->
       return callback error if error
       
       owl = new Owl rows[0]

@@ -15,6 +15,7 @@ express = require 'express'
 expressValidator = require 'express-validator'
 flashify = require 'flashify'
 prettyjson = require 'prettyjson'
+moment = require 'moment'
 
 {load, config} = system = require './system'
 
@@ -130,6 +131,22 @@ app.configure ->
         system.data ?= {}
         system.data.dealTypes = dealTypes
         done()
+    
+    # last epoch
+    app.use (req, res, done) ->
+      now = moment()
+      epoch = moment()
+      
+      epoch.day 3
+      epoch.startOf 'day'
+      epoch.hours 12
+      
+      unless now.valueOf() > epoch.valueOf()
+        epoch.sub 'weeks', 1
+      
+      system.last_epoch = epoch
+      
+      do done
     
     app.use (req, res, done) ->
       res.locals.session  = req.session
