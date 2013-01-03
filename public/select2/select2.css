@@ -8,6 +8,7 @@ Version: @@ver@@ Timestamp: @@timestamp@@
     zoom: 1;
     *display: inline;
     vertical-align: top;
+    width:100% !important;
 }
 
 .select2-container,

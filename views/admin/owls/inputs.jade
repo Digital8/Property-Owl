@@ -4,6 +4,7 @@
     .inputs.index.pane(data-key='index')
       
       label(for='title') Approved
+        | &nbsp;
         input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
       
       - var display = (owl.approved == true) ? 'block' : 'none';
@@ -28,7 +29,7 @@
       
       
   
-  .inputs.detail.pane(data-key='detail')
+  .inputs.detail.pane(data-key='detail', data-label='details')
     include detail_inputs
   
   .inputs.address.pane(data-key='address')
@@ -37,10 +38,10 @@
   .inputs.area.pane(data-key='area')
     include area_inputs
   
-  .inputs.image.pane(data-key='image')
+  .inputs.image.pane(data-key='image', data-label='images')
     include image_inputs
   
-  .inputs.file.pane(data-key='file')
+  .inputs.file.pane(data-key='file', data-label='files')
     include file_inputs
   
   .inputs.deal.pane(data-key='deal')

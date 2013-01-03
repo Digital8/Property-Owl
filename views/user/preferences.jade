@@ -25,7 +25,7 @@ block content
               input#propertySuburb(type='text',name='suburb', value="#{objUser.preferences.suburb}")
             .inputs
               label(for='propertyState') State / Territory
-              select#propertyState(name="state")
+              select#propertyState(name="state", class="select2")
                 - var states = ['All', 'ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']
                 each state in states
                   - var s = (objUser.preferences.state.toLowerCase() == state.toLowerCase()) ? true : false;
@@ -33,63 +33,67 @@ block content
             .inputs
               label(for='propertyType') Property Type
               - var propertyTypes = ['All', 'Apartment', 'Townhouse', 'Unit', 'House', 'Land', 'House and Land', 'Villa', 'Acreage'];
-              select#propertyType(name="pType")
+              select#propertyType(name="pType", class="select2")
                 each p in propertyTypes
                   - var s = (objUser.preferences.propertyType.toLowerCase() == p.toLowerCase()) ? true : false;
                   option(value="#{p.toLowerCase()}", selected=s)= p
             .inputs
               label(for='propertyDealType') Deal Type
               - var dealTypes = ['All', 'Stamp Duty', 'Furniture Package', 'Blinds', 'Rental Guarantee', 'Entertainment System']
-              select#propertyDealType(name="dType")
+              select#propertyDealType(name="dType", class="select2")
                 each deal in dealTypes
                   - var s = (objUser.preferences.dealType.toLowerCase() == deal.toLowerCase()) ? true : false;
                   option(value="#{deal.toLowerCase()}", selected=s)= deal
             .inputs
               label(for='propertyMinPrice') Min. Price
               - var prices = ['Any', 50000, 100000,150000,200000,250000,300000,350000,400000,450000,500000, 550000,600000,650000,700000,750000,800000,850000,900000,950000,1000000,125000, 1500000,1750000,2000000,2500000,3000000,4000000,5000000,10000000]
-              select#propertyMinPrice(name="minPrice")
+              select#propertyMinPrice(name="minPrice", class="select2")
                 each price in prices
                   - var s = (objUser.preferences.minPrice == price) ? true : false;
                   option(value=price, selected=s).price= price
             .inputs
               label(for='propertyMaxPrice') Max. Price
               - var prices = ['Any', 50000, 100000,150000,200000,250000,300000,350000,400000,450000,500000, 550000,600000,650000,700000,750000,800000,850000,900000,950000,1000000,125000, 1500000,1750000,2000000,2500000,3000000,4000000,5000000,10000000]
-              select#propertyMaxPrice(name="maxPrice")
+              select#propertyMaxPrice(name="maxPrice", class="select2")
                 each price in prices
                   - var s = (objUser.preferences.maxPrice == price) ? true : false;
                   option(value=price, selected=s).price= price
           .right
             .inputs
               label(for='propertyMinBeds') Min. Beds
-              - var beds = ['Any', '1', '2', '3', '4', '5']
-              select#propertyMinBeds(name="minBeds")
+              - var beds = ['1', '2', '3', '4', '5']
+              select#propertyMinBeds(name="minBeds", class="select2")
+                option(value='Any') Any
                 each b in beds
                   - var s = (objUser.preferences.minBeds.toLowerCase() == b.toLowerCase()) ? true : false;
                   option(value=b, selected=s) #{b}+
             .inputs
               label(for='propertyMaxBeds') Max. Beds
-              - var beds = ['Any', '1', '2', '3', '4', '5']
-              select#propertyMaxBeds(name="maxBeds")
+              - var beds = ['1', '2', '3', '4', '5']
+              select#propertyMaxBeds(name="maxBeds", class="select2")
+                option(value='Any') Any
                 each b in beds
                   - var s = (objUser.preferences.maxBeds.toLowerCase() == b.toLowerCase()) ? true : false;
                   option(value=b, selected=s) #{b}+
             .inputs
               label(for='propertyBathrooms') Bathrooms
-              - var bathrooms = ['Any', '1', '2', '3', '4', '5']
-              select#propertyBathrooms(name="bathrooms")
+              - var bathrooms = ['1', '2', '3', '4', '5']
+              select#propertyBathrooms(name="bathrooms", class="select2")
+                option(value='Any') Any
                 each b in bathrooms
                   - var s = (objUser.preferences.bathrooms.toLowerCase() == b.toLowerCase()) ? true : false;
                   option(value=b, selected=s) #{b}+
             .inputs
               label(for='propertyCarSpaces') Car Spaces
-              - var cars = ['Any', '1', '2', '3', '4', '5']
-              select#propertyCarSpaces(name="cars")
+              - var cars = ['1', '2', '3', '4', '5']
+              select#propertyCarSpaces(name="cars", class="select2")
+                option(value='Any') Any
                 each c in cars
                   - var s = (objUser.preferences.cars.toLowerCase() == c.toLowerCase()) ? true : false;
                   option(value=c, selected=s) #{c}+
             .inputs
               label(for='propertyState') Development Stage
-              select#propertyStage(name="devStage")
+              select#propertyStage(name="devStage", class="select2")
                 if (objUser.preferences.developmentStage.toLowerCase() == 'all')
                   option(value="all", selected=true) All
                 else

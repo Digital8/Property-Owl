@@ -65,7 +65,7 @@ block content
             .inputs
               label(for='subscribed_news') Subscribed to Newsletter
                 td
-                  select(name='subscribed_news', class="half-field")
+                  select(name='subscribed_news', class="select2")
                     - var sel = (objUser.subscribedNewsletters == '1') ? true : false
                     option(value='1', selected=sel) Yes
                     - var sel = (objUser.subscribedNewsletters == '0') ? true : false
@@ -73,7 +73,7 @@ block content
             .inputs
               label(for='property_alerts') Subscribed to Property Alerts
                 td
-                  select(name='property_alerts', class="half-field")
+                  select(name='property_alerts', class="select2")
                     - var sel = (objUser.subscribedAlerts == '1') ? true : false
                     option(value='1', selected=sel) Yes
                     - var sel = (objUser.subscribedAlerts == '0') ? true : false
