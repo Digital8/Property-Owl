@@ -1,4 +1,4 @@
-module.exports =->
+module.exports = ->
   
   $(".enquire-button").on "click", (e) ->
     e.preventDefault()
@@ -9,9 +9,20 @@ module.exports =->
     
     $("#sendEnquiry").on "click", ->
       enquiry = $("#enquiry").val()
+      name =  $("#name").val()
+      method = $("#method").val()
+      phone = $("#phone").val()
+      email = $("#email").val()
       
       $.post "/enquiries",
         entity_id: id
         enquiry: enquiry
-      , ->
-        $(".modal-enquiry").fadeToggle()
+        name: name
+        contact: method
+        email: email
+        phone: phone
+      , (data) ->
+        if data.status == 200)
+          $(".modal-enquiry").fadeToggle()
+        else
+          alert "Uh oh an error occured!"

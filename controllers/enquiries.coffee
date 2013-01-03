@@ -3,37 +3,35 @@ system = require '../system'
 Enquiry = system.models.enquiry
 
 exports.create = (req, res) ->
-  # system.db.query "SELECT * FROM affiliates WHERE affiliate_id = ?", [req.body.aid], (err, affiliate) ->
-  #   if err or affiliate.length is 0
-  #     res.send status: 500, error: 'Invalid product'
-  #   else
-  #     template = 'service-enquiry'
+  console.log req.body
+  system.db.query "SELECT * FROM affiliates WHERE affiliate_id = ?", [req.body.entity_id], (err, affiliate) ->
+    if err or affiliate.length is 0
+      res.send status: 500, error: 'Invalid product', body: req.body or {}
+    else
+      template = 'service-enquiry'
 
-  #     user =
-  #       firstName: res.locals.objUser.firstName
-  #       email: affiliate[0].email
-  #       lastName: res.locals.objUser.lastName
-  #       phone: res.locals.objUser.phone
+      user =
+        firstName: req.body.name
+        email: affiliate[0].email
+        lastName: ''
+        phone: req.body.phone
 
-  #     secondary =
-  #       contactName: affiliate[0].name
-  #       description: req.body.enquiry
-  #       contact_method: 'email'
-  #       enquiryEmail: res.locals.objUser.email
+      secondary =
+        contactName: affiliate[0].name
+        description: req.body.enquiry
+        contact_method: req.body.contact or 'phone'
+        enquiryEmail: req.body.email
       
-  #     system.helpers.mailer template,'New Enquiry', user, secondary, (results) ->
+      system.helpers.mailer template,'New Enquiry', user, secondary, (results) ->
   
-  map =
-    user_id: req.user.id
-    entity_id: req.body.entity_id
-    entity_type: 'affiliate'
-    enquiry: req.body.enquiry
-  
-  Enquiry.create map, (error, model) ->
-    console.log arguments...
-  
-  # system.db.query  "INSERT INTO enquiries VALUES ?", map, (err, rows) ->
-  #   if err 
-  #     res.send status: 500, error: err
-  #   else 
-  #     res.send status: 200
+        map =
+          user_id: req.user.id
+          entity_id: req.body.entity_id
+          entity_type: 'affiliate'
+          enquiry: req.body.enquiry
+          
+        Enquiry.create map, (error, model) ->
+          if err 
+            res.send status: 500
+          else
+            res.send status: 200
