@@ -1,14 +1,17 @@
 .grid-header
+  
   h2 Pending Owl Deal Listings
 
 - if (owls.length == 0)
+  
   table.admin-gridview
    thead
      tr 
        td(colspan='6')
         | There are no pending owl deals. 
 - else
-  table.admin-gridview.pending-owls(data-entity_type='barn')
+  
+  table.admin-gridview.pending-owls(data-entity_type='owl')
    
    thead
      tr

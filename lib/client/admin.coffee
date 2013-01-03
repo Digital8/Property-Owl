@@ -15,7 +15,7 @@ module.exports = ->
         approve.click (event) ->
           event.preventDefault()
           
-          $.patch "/admin/#{entity_type}/#{id}", approved: yes, (body, response, xhr) ->
+          $.patch "/admin/#{entity_type}s/#{id}", approved: yes, (body, response, xhr) ->
             if xhr.status == 200
               $row.remove()
   

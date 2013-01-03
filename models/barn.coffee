@@ -27,6 +27,8 @@ module.exports = class Barn extends Model
   
   @field 'listed_by'
   
+  @field 'approved', type: Boolean, default: no
+  
   constructor: (args = {}) ->
     Object.defineProperty this, 'code', get: => _s.pad @id.toString(), 5, '0'
     
