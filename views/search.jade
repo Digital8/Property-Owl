@@ -8,21 +8,21 @@
     
     img(src='/images/search-map-icon.png', alt='State / Territory')
     label(for='propertyState') State / Territory
-    select#propertyState(name="state")
-      option(value='all') All
-      option(value="act") ACT
-      option(value="nsw") NSW
-      option(value="nt") NT
-      option(value="qld") QLD
-      option(value="sa") SA
-      option(value="tas") TAS
-      option(value="vic") VIC
-      option(value="wa") WA
+    select#propertyState(name='state')
+      option(value='any') Any
+      option(value='act') ACT
+      option(value='nsw') NSW
+      option(value='nt') NT
+      option(value='qld') QLD
+      option(value='sa') SA
+      option(value='tas') TAS
+      option(value='vic') VIC
+      option(value='wa') WA
     
     img(src='/images/search-property-icon.png', alt='Property Type')
     label(for='development_type_id') Property Type
     select.development_type_id(name='development_type_id')
-      option Any
+      option(value='') Any
       option(value='1') House
       option(value='2') Townhouse
       option(value='3') Unit
@@ -156,9 +156,9 @@
     
     img(src='/images/search-development-icon.png', alt='Development Stage')
     label(for='propertyState') Development Stage
-    select#propertyState(name="devStage")
-      option(value="") All
-      option(value="otp") Off The Plan
-      option(value="completed") Completed
+    select#propertyState(name='development_status_id')
+      option(value='') Any
+      option(value='1') Completed
+      option(value='2') Off The Plan
     
     input.button(type='submit', value='Submit')

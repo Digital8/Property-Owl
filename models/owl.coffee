@@ -316,6 +316,8 @@ module.exports = class Owl extends Model
         AND
         development_type_id LIKE ?
         AND
+        development_status_id LIKE ?
+        AND
         price >= ?
         AND
         price <= ?
@@ -332,6 +334,7 @@ module.exports = class Owl extends Model
       q.suburb
       q.state
       q.development_type_id
+      q.development_status_id
       q.minPrice
       q.maxPrice
       q.minBeds
