@@ -10,90 +10,76 @@ block content
       legend
         h1 My Account
       
-      .tabs.account
-        
+      .grid-header.form-header.pane-nav
         include menu
         
-        .tabs-content
+      .details
+        
+        form.details-form(action="/account",method="post")
           
-          .padding
-            
-            form(action="/account",method="post")
-              
-              input(type='hidden', name='_method', value='put')
-              
-              include ../flashify
-              
-              table.admin-gridview.no-head
-                tbody
-                  tr
-                    td First name
-                    td
-                      input(type='text', name='fname', value=objUser.firstName)
-                  tr
-                    td Last name
-                    td
-                      input(type='text', name='lname', value=objUser.lastName)
-                  tr
-                    td Password
-                      br
-                      small Password will not be changed if left blank
-                    td
-                      input(type='password', name='password', value="")
-                      br
-                      br
-                      input(type='password', name='confirmPassword', value="")
-                  tr
-                    td Company
-                    td
-                      input(type='text', name='company', value=objUser.company)
-                  tr
-                    td Email
-                    td
-                      input(type='email', name='email', value=objUser.email)
-                  tr
-                    td Phone
-                    td
-                      input(type='tel', name='phone', value=objUser.phone)
-                  tr
-                    td Work Phone
-                    td
-                      input(type='tel', name='work_phone', value=objUser.work)
-                  tr
-                    td Mobile
-                    td
-                      input(type='tel', name='mobile', value=objUser.mobile)
-                  tr
-                    td Address
-                    td
-                      textarea(name='address')= objUser.address
-                  tr
-                    td Suburb
-                    td
-                      input(type='text', name='suburb', value=objUser.suburb)
-                  tr
-                    td Postcode
-                    td
-                      input(type='text', name='postcode', value=objUser.postcode)
-                  tr
-                    td Subscribed to Newsletter
-                    td
-                      select(name='subscribed_news')
-                        - var sel = (objUser.subscribedNewsletters == '1') ? true : false
-                        option(value='1', selected=sel) Yes
-                        - var sel = (objUser.subscribedNewsletters == '0') ? true : false
-                        option(value='0', selected=sel) No
-                  tr
-                    td Subscribed to Property Alerts
-                    td
-                      select(name='property_alerts')
-                        - var sel = (objUser.subscribedAlerts == '1') ? true : false
-                        option(value='1', selected=sel) Yes
-                        - var sel = (objUser.subscribedAlerts == '0') ? true : false
-                        option(value='0', selected=sel) No
-                  tr
-                    td
-                    td
-                      input(type='submit', value='Save Details')
+          input(type='hidden', name='_method', value='put')
+          
+          include ../flashify
+          
+          .left
+            .inputs 
+              label(for='fname') First name
+              input(type='text', name='fname', value=objUser.firstName)
+            .inputs 
+              label(for='lname') Last name
+              input(type='text', name='lname', value=objUser.lastName)
+            .inputs
+              label(for='company') Company
+              input(type='text', name='company', value=objUser.company)
+            .inputs
+              label(for='email') Email
+              input(type='email', name='email', value=objUser.email)
+            .inputs
+              label(for='phone') Phone
+              input(type='tel', name='phone', value=objUser.phone)
+            .inputs
+              label(for='work_phone') Work Phone
+              input(type='tel', name='work_phone', value=objUser.work)
+            .inputs
+              label(for='mobile') Mobile
+              input(type='tel', name='mobile', value=objUser.mobile)
+          .right
+            .inputs
+              label(for='password') Password
+              input(type='password', name='password', value="")
+              label(for='confirmPassword') Confirm Password
+              input(type='password', name='confirmPassword', value="")
+              small Password will not change if left blank
+            .inputs
+              label(for='address') Address
+                td
+                  textarea(name='address')= objUser.address
+            .inputs
+              label(for='suburb') Suburb
+                td
+                  input(type='text', name='suburb', value=objUser.suburb)
+            .inputs
+              label(for='postcode') Postcode
+                td
+                  input(type='text', name='postcode', value=objUser.postcode)
+            .inputs
+              label(for='subscribed_news') Subscribed to Newsletter
+                td
+                  select(name='subscribed_news', class="half-field")
+                    - var sel = (objUser.subscribedNewsletters == '1') ? true : false
+                    option(value='1', selected=sel) Yes
+                    - var sel = (objUser.subscribedNewsletters == '0') ? true : false
+                    option(value='0', selected=sel) No
+            .inputs
+              label(for='property_alerts') Subscribed to Property Alerts
+                td
+                  select(name='property_alerts', class="half-field")
+                    - var sel = (objUser.subscribedAlerts == '1') ? true : false
+                    option(value='1', selected=sel) Yes
+                    - var sel = (objUser.subscribedAlerts == '0') ? true : false
+                    option(value='0', selected=sel) No
+          .inputs
+          .submit
+              input.button(type='submit', value='Save')
     
     include ../right_nav

@@ -1713,9 +1713,13 @@ body {
             div.ol-5-active:before {
                 content: url(../images/ol5-active.png);
             }
-      div.ol-6-active:before {
-          content: url(../images/ol6-active.png);
-      }
+            div.ol-6-active:before {
+                content: url(../images/ol6-active.png);
+            }
+
+            &.tabs {
+              font-size:0.75em;
+            }
         }
         
         li {
@@ -2062,7 +2066,7 @@ body {
             font-size: 0.8em;
         }
         
-        input[type=text], input[type=number], input[type=password], textarea {
+        input[type=text], input[type=number], input[type=tel], input[type=email], input[type=password], textarea {
             border: solid 1px #adadad;
             .rounded(0.313em);
             .box-shadow(~"inset 0px 1px 1px rgba(0,0,0,0.1)");

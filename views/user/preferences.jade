@@ -9,94 +9,85 @@ block content
     #center-col
       h1 My Account
       
-      .tabs.account
-        
+      .grid-header.form-header.pane-nav
         include menu
         
-        .tabs-content
-          
-          .padding
-            form#input-form(action="/preferences",method="post")
-              img(src='/images/search-map-icon.png', alt='Suburb')
+      .details
+
+        form.details-form(action="/preferences",method="post")
+          .inputs
+            p Enter your property preferences to refine the property alert notifications sent to you by Property Owl. You can subscribe to receive property alerts in the 
+              a(href='account#detail') settings tab
+              | .
+          .left
+            .inputs
               label(for='propertySuburb') Suburb
               input#propertySuburb(type='text',name='suburb', value="#{objUser.preferences.suburb}")
-              img(src='/images/search-map-icon.png', alt='State / Territory')
+            .inputs
               label(for='propertyState') State / Territory
               select#propertyState(name="state")
                 - var states = ['All', 'ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']
                 each state in states
                   - var s = (objUser.preferences.state.toLowerCase() == state.toLowerCase()) ? true : false;
                   option(value="#{state.toLowerCase()}", selected=s)= state
-
-              img(src='/images/search-property-icon.png', alt='Property Type')
+            .inputs
               label(for='propertyType') Property Type
               - var propertyTypes = ['All', 'Apartment', 'Townhouse', 'Unit', 'House', 'Land', 'House and Land', 'Villa', 'Acreage'];
               select#propertyType(name="pType")
                 each p in propertyTypes
                   - var s = (objUser.preferences.propertyType.toLowerCase() == p.toLowerCase()) ? true : false;
                   option(value="#{p.toLowerCase()}", selected=s)= p
-
-              img(src='/images/search-deal-icon.png', alt='Deal Type')
+            .inputs
               label(for='propertyDealType') Deal Type
               - var dealTypes = ['All', 'Stamp Duty', 'Furniture Package', 'Blinds', 'Rental Guarantee', 'Entertainment System']
               select#propertyDealType(name="dType")
                 each deal in dealTypes
                   - var s = (objUser.preferences.dealType.toLowerCase() == deal.toLowerCase()) ? true : false;
                   option(value="#{deal.toLowerCase()}", selected=s)= deal
-               
-              img(src='/images/search-price-icon.png', alt='Minimum Price')
+            .inputs
               label(for='propertyMinPrice') Min. Price
               - var prices = ['Any', 50000, 100000,150000,200000,250000,300000,350000,400000,450000,500000, 550000,600000,650000,700000,750000,800000,850000,900000,950000,1000000,125000, 1500000,1750000,2000000,2500000,3000000,4000000,5000000,10000000]
               select#propertyMinPrice(name="minPrice")
                 each price in prices
                   - var s = (objUser.preferences.minPrice == price) ? true : false;
                   option(value=price, selected=s).price= price
-
-              img(src='/images/search-price-icon.png', alt='Maximum Price')
+            .inputs
               label(for='propertyMaxPrice') Max. Price
               - var prices = ['Any', 50000, 100000,150000,200000,250000,300000,350000,400000,450000,500000, 550000,600000,650000,700000,750000,800000,850000,900000,950000,1000000,125000, 1500000,1750000,2000000,2500000,3000000,4000000,5000000,10000000]
               select#propertyMaxPrice(name="maxPrice")
                 each price in prices
                   - var s = (objUser.preferences.maxPrice == price) ? true : false;
                   option(value=price, selected=s).price= price
-
-              .small-left
-                img.small(src='/images/search-bed-icon.png', alt='Number of Beds')
-                label(for='propertyMinBeds') Min. Beds
-                - var beds = ['Any', '1', '2', '3', '4', '5']
-                select#propertyMinBeds(name="minBeds")
-                  each b in beds
-                    - var s = (objUser.preferences.minBeds.toLowerCase() == b.toLowerCase()) ? true : false;
-                    option(value=b, selected=s) #{b}+
-
-              .small-right
-                img.small(src='/images/search-bed-icon.png', alt='Number of Beds')
-                label(for='propertyMaxBeds') Max. Beds
-                - var beds = ['Any', '1', '2', '3', '4', '5']
-                select#propertyMaxBeds(name="maxBeds")
-                  each b in beds
-                    - var s = (objUser.preferences.maxBeds.toLowerCase() == b.toLowerCase()) ? true : false;
-                    option(value=b, selected=s) #{b}+
-
-              .small-left
-                img.small(src='/images/search-bath-icon.png', alt='Number of Bathrooms')
-                label(for='propertyBathrooms') Bathrooms
-                - var bathrooms = ['Any', '1', '2', '3', '4', '5']
-                select#propertyBathrooms(name="bathrooms")
-                  each b in bathrooms
-                    - var s = (objUser.preferences.bathrooms.toLowerCase() == b.toLowerCase()) ? true : false;
-                    option(value=b, selected=s) #{b}+
-
-              .small-right
-                img.small(src='/images/search-car-icon.png', alt='Number of Car Spaces')
-                label(for='propertyCarSpaces') Car Spaces
-                - var cars = ['Any', '1', '2', '3', '4', '5']
-                select#propertyCarSpaces(name="cars")
-                  each c in cars
-                    - var s = (objUser.preferences.cars.toLowerCase() == c.toLowerCase()) ? true : false;
-                    option(value=c, selected=s) #{c}+
-
-              img(src='/images/search-development-icon.png', alt='Development Stage')
+          .right
+            .inputs
+              label(for='propertyMinBeds') Min. Beds
+              - var beds = ['Any', '1', '2', '3', '4', '5']
+              select#propertyMinBeds(name="minBeds")
+                each b in beds
+                  - var s = (objUser.preferences.minBeds.toLowerCase() == b.toLowerCase()) ? true : false;
+                  option(value=b, selected=s) #{b}+
+            .inputs
+              label(for='propertyMaxBeds') Max. Beds
+              - var beds = ['Any', '1', '2', '3', '4', '5']
+              select#propertyMaxBeds(name="maxBeds")
+                each b in beds
+                  - var s = (objUser.preferences.maxBeds.toLowerCase() == b.toLowerCase()) ? true : false;
+                  option(value=b, selected=s) #{b}+
+            .inputs
+              label(for='propertyBathrooms') Bathrooms
+              - var bathrooms = ['Any', '1', '2', '3', '4', '5']
+              select#propertyBathrooms(name="bathrooms")
+                each b in bathrooms
+                  - var s = (objUser.preferences.bathrooms.toLowerCase() == b.toLowerCase()) ? true : false;
+                  option(value=b, selected=s) #{b}+
+            .inputs
+              label(for='propertyCarSpaces') Car Spaces
+              - var cars = ['Any', '1', '2', '3', '4', '5']
+              select#propertyCarSpaces(name="cars")
+                each c in cars
+                  - var s = (objUser.preferences.cars.toLowerCase() == c.toLowerCase()) ? true : false;
+                  option(value=c, selected=s) #{c}+
+            .inputs
               label(for='propertyState') Development Stage
               select#propertyStage(name="devStage")
                 if (objUser.preferences.developmentStage.toLowerCase() == 'all')
@@ -113,7 +104,8 @@ block content
                   option(value="completed", selected=true) Completed
                 else
                   option(value="completed") Completed
-
-              input.button(type='submit', value='Submit')
+          .inputs
+          .submit
+              input.button(type='submit', value='Save')
     
     include ../right_nav

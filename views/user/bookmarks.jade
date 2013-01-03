@@ -7,17 +7,15 @@ block content
     include ../left_nav
     
     #center-col
-        h1 My Account
+      h1 My Account
         
-        .tabs.account
-          
-          include menu
-          
-          .tabs-content
-            
-            .padding
-              
-              table.admin-gridview
+      .grid-header.form-header.pane-nav
+        include menu
+    
+      .tabs.account  
+        .tabs-content
+          .padding  
+            table.admin-gridview
                 thead
                   tr
                     td Title
