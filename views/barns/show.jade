@@ -127,7 +127,7 @@ block content
             - if (barn.deals.length)
               ul
                 - each deal in barn.deals
-                  li.price= '$' + deal.value.toString() + ' ' + deal.description
+                  li.price $ #{deal.value} #{deal.description}
             - else
               ul
                 li No barn deals have been listed

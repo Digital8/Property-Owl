@@ -199,6 +199,11 @@ module.exports = (app) ->
   admin 'patch', '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', controllers.owls.patchDeal
   admin 'del',   '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', controllers.owls.removeDeal
   
+  # barn deals
+  admin 'post',  '/barns/:id(\\d+)/deals', controllers.barns.addDeal
+  admin 'patch', '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', controllers.barns.patchDeal
+  admin 'del',   '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', controllers.barns.removeDeal
+  
   # admin/reports
   admin 'get', '/reports', controllers.admin.reports.index
   admin 'get', '/reports/dealListings', controllers.admin.reports.dealListings

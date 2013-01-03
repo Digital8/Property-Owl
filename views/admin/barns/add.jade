@@ -20,7 +20,7 @@ block content
       
       hr
       
-      form.details-form.fake(action='/admin/barns', method='post', enctype='multipart/form-data')
+      form.details-form.fake(action='/admin/barns', method='post', enctype='multipart/form-data', data-id=barn.id)
         
         include ../../flashify
         

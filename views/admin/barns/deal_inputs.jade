@@ -1,23 +1,28 @@
-//- .inputs
-//-   label.required(for='image') Deal
-//-     input#image(type='text', name="image")
-
 .inputs
-  label.required() Deals
-  table.admin-gridview.deals
+  
+  label.required Deals
+  
+  table.admin-gridview.deals(data-entity_type='barn')
+    
     thead
       tr
         td Type
         td Description
         td Value
+        td Actions
+    
     tbody.body
       - if (barn.deals && barn.deals.length)
         - each deal in barn.deals
           include deal_input
+    
     tfooter.footer
       tr
-        td(colspan='3')
-          a.add(href='#') add deal +
+        td(colspan='4')
+          a.add(href='#', style="text-align: center;")
+            img(src='/images/add.png')
+            | &nbsp;
+            | Add Deal
 
 table.template(style='display: none;')
   tbody
