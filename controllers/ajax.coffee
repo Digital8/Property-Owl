@@ -200,18 +200,6 @@ exports.referfriend = (req, res) ->
 #     models.deals.deleteDealById req.body.id, (err) ->
 #       res.send results
 
-exports.updateHero = (req, res) ->
-  models.media.clearHero req.body.pid, (err) ->
-    models.media.setHero req.body.mid, (err, results) ->
-      res.send results
-
-exports.deleteMedia = (req, res) ->
-  req.body.mid ?= 0
-  
-  models.media.deleteMedia req.body.mid, (err, results) ->
-    if err then console.log err
-    res.send results
-      
 exports.addRegistration = (req, res) ->
   req.query.id ?= ''
   req.query.type ?= ''
