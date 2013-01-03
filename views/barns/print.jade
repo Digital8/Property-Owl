@@ -1,77 +1,81 @@
-h2= barn.title
-p #{barn.address}, #{barn.suburb}, #{barn.state.toUpperCase()} #{barn.postcode}
-hr
+extends ../print
 
-.property-info
+block content
 
-- if (barn.owls && barn.owls.length)
-  
-  table.barn-lots(width="70%")
-    
-    thead
-      td Lot
-      td Bed
-      td Bath
-      td Car
-      td Level
-      td Int. Size
-      td Ext. Size
-      td Aspect
-      td List Price
-      td Floor Plan
-    
-    tbody
-      - each owl in barn.owls
-        tr
-          td #{barn.code}#{owl.alpha}
-          td= owl.bedrooms
-          td= owl.bathrooms
-          td= owl.carspaces
-          td= owl.level
-          td #{owl.internal_area} sq.m
-          td #{owl.external_area} sq.m
-          td= owl.aspect
-          td.price $ #{owl.price}
-          td
+  h2= barn.title
+  p #{barn.address}, #{barn.suburb}, #{barn.state.toUpperCase()} #{barn.postcode}
   hr
 
-.property-info
+  .property-info
 
-#left
-
-  
-  p= barn.description
-  
-  .general-features
-    h3 Indoor Features
-    p= barn.indoor_features
-    h3 Outdoor Features
-    p= barn.outdoor_features
-  
-  .other-features
-    h3 Other Features
-    p= barn.other_features
-
-#right
-  .deal
-    h2
-      | Deals
+  - if (barn.owls && barn.owls.length)
     
-    - if (barn.deals.length)
-      ul
-        - each deal in barn.deals
-          li.price= '$' + deal.value.toString() + ' ' + deal.description
-    - else
-      ul
-        li No barn deals have been listed
+    table.barn-lots(width="70%")
       
-  
-  iframe#google-map(width='50%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=#{barn.address + ' ' + barn.suburb + ' ' + barn.state + ' ' + barn.postcode}z=14&output=embed&iwloc=near', style="float: right;top:20%;right: 10;position: absolute;",  onload="window.print()")
-  h3 Images
-  hr
-  - locals.owli = barn.owls[0]
-  - if (owli.images && owli.images.length)
-    - var i = 0
-    - each image in owli.images
-      - i++
-      img(src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}',style="width: 200px;padding: 10px;")
+      thead
+        td Lot
+        td Bed
+        td Bath
+        td Car
+        td Level
+        td Int. Size
+        td Ext. Size
+        td Aspect
+        td List Price
+        td Floor Plan
+      
+      tbody
+        - each owl in barn.owls
+          tr
+            td #{barn.code}#{owl.alpha}
+            td= owl.bedrooms
+            td= owl.bathrooms
+            td= owl.carspaces
+            td= owl.level
+            td #{owl.internal_area} sq.m
+            td #{owl.external_area} sq.m
+            td= owl.aspect
+            td.price $ #{owl.price}
+            td
+    hr
+
+  .property-info
+
+  #left
+
+    
+    p= barn.description
+    
+    .general-features
+      h3 Indoor Features
+      p= barn.indoor_features
+      h3 Outdoor Features
+      p= barn.outdoor_features
+    
+    .other-features
+      h3 Other Features
+      p= barn.other_features
+
+  #right
+    .deal
+      h2
+        | Deals
+      
+      - if (barn.deals.length)
+        ul
+          - each deal in barn.deals
+            li.price= '$' + deal.value.toString() + ' ' + deal.description
+      - else
+        ul
+          li No barn deals have been listed
+        
+    
+    iframe#google-map(width='50%', height='350', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=#{barn.address + ' ' + barn.suburb + ' ' + barn.state + ' ' + barn.postcode}z=14&output=embed&iwloc=near', style="float: right;top:20%;right: 10;position: absolute;",  onload="window.print()")
+    h3 Images
+    hr
+    - locals.owli = barn.owls[0]
+    - if (owli.images && owli.images.length)
+      - var i = 0
+      - each image in owli.images
+        - i++
+        img(src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}',style="width: 200px;padding: 10px;")
