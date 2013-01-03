@@ -37,15 +37,15 @@ block content
             label#enquiryName Name
             input#name(type="text", name="name", value="#{objUser.displayName}")
             label#enquiryName Phone
-            input#phone(type="text", name="name", value="#{objUser.phone}")
+            input#phone(type="text", name="phone", value="#{objUser.phone}")
             label Contact Method
-            select#method
+            select#method(name="method")
               option(value="Phone") Phone
               option(value="Email") Email
             label Email
             input#email(type="text", name="email", value="#{objUser.email}")
             label Enquiry
-            textarea#enquiry
+            textarea#enquiry(name="enquiry")
             br
             br
             button#sendEnquiry Send

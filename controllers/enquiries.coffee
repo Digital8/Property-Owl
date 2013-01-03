@@ -35,5 +35,7 @@ exports.create = (req, res) ->
           enquiry: req.body.enquiry
         
         Enquiry.create map, (error, model) ->
-          console.log arguments...
-          res.send status: 200
+          if err
+            res.send status: 500, error: 'Error sending email'
+          else
+            res.send status: 200

@@ -256,6 +256,7 @@ $(function(){
 	});
 	
 	// Secure Deal
+	- var processing = false;
 	$(".secure-deal-button").on("click", function(event){
 	  var firstName = $(".secure-deal-first-name").val();
 	  var lastName = $(".secure-deal-last-name").val();
@@ -263,38 +264,33 @@ $(function(){
 	  var mobile = $(".secure-deal-phone").val();
 	  var comment = $(".secure-deal-comment").val();
 	  
-	  $.ajax({
-	    url: '/ajax/securedeal',
-	    type: 'post',
-	    data: 'e=' + email + '&m=' + mobile + '&f=' + firstName + '&l=' + lastName + '&c=' + comment
-	  }).done(function(d){
-	    if (d.status == 200) {
-	      //showPayment();
-	      //success();
-	      //window.location.replace('/');
-	      secureDealModal.fadeToggle(150);
-	      $("#generic-modal, #generic-modal .modal.main").removeClass('error').addClass('success')
-	      $('#generic-modal-title').html('Thanks for registering!');
-	      $('#generic-modal-content').html('<br /><br /><center>You should recieve an email shortly</center>');
-	      $('#generic-modal').fadeToggle(150);
-	    }
-	    else {
-	      var errors = Object.keys(d.errors);
-  	    
-  	    $("#generic-modal, #generic-modal .modal.main").removeClass('success').addClass('error')
-	      $('#generic-modal-title').html('Please fix the following');
-	      $('#generic-modal-content').html('<br /><ul>');
-	      for(i=0; i<errors.length;i++)
-	      {
-	         $('#generic-modal-content').append('<li><b>' + d.errors[errors[i]].msg + '</b></li>');
-	      }
-        $('#generic-modal-content').append('</ul>');
-        
-	      $('#generic-modal').fadeToggle(150);
-	      //modalCallback = function(){console.log('penis')};
-	    }
-	  });
-	  return false;
+	  if (!processing)
+	  {
+	  	processing = true;
+		  $.ajax({
+		    url: '/ajax/securedeal',
+		    type: 'post',
+		    data: 'e=' + email + '&m=' + mobile + '&f=' + firstName + '&l=' + lastName + '&c=' + comment
+		  }).done(function(d){
+		  	processing = false;
+		    if (d.status == 200) {
+		      $(".secure-deal-errors").html('Message Sent!')
+		      $(".secure-deal-comment").val('');
+		    }
+		    else {
+		      var errors = Object.keys(d.errors);
+	  	    
+	  	    $(".secure-deal-errors").html('')
+		      for(i=0; i<errors.length;i++)
+		      {
+		         $('.secure-deal-errors').append('<li style="color: #f00	"><b>' + d.errors[errors[i]].msg + '</b></li>');
+		      }
+	        $('.secure-deal-errors').append('</ul>');
+		      
+		    }
+		  });
+		  return false;
+		}
 	});
 	
 	$(".secure-deal-first-name, .secure-deal-last-name, .secure-deal-email, .secure-deal-phone, .secure-deal-comment").on("keypress", function(event){
