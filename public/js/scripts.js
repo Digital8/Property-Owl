@@ -256,7 +256,7 @@ $(function(){
 	});
 	
 	// Secure Deal
-	- var processing = false;
+	var processing = false;
 	$(".secure-deal-button").on("click", function(event){
 	  var firstName = $(".secure-deal-first-name").val();
 	  var lastName = $(".secure-deal-last-name").val();
