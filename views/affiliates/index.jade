@@ -27,25 +27,21 @@ block content
     
     include ../right_nav
 
-    .modal-overlay.overlay.modal-enquiry#generic-modal
-      .modal.main
-        a.close-modal(href='#')
-          img(src='/images/modal-close.png', alt='Close')
-        h1.modal-title#generic-modal-title Enquire
-        .modal-content.details-form#generic-modal-content
-          form#enquiryForm
-            label#enquiryName Name
-            input#name(type="text", name="name", value="#{objUser.displayName}")
-            label#enquiryName Phone
-            input#phone(type="text", name="phone", value="#{objUser.phone}")
-            label Contact Method
-            select#method(name="method")
-              option(value="Phone") Phone
-              option(value="Email") Email
-            label Email
-            input#email(type="text", name="email", value="#{objUser.email}")
-            label Enquiry
-            textarea#enquiry(name="enquiry")
-            br
-            br
-            button#sendEnquiry Send
+    .secure-deal-overlay.overlay.overlay.modal-enquiry#generic-modal
+      .modal.main.success
+        a.close-modal-enquiry(href='#')
+          img(src='/images/modal-close-white.png', alt='Close')
+        
+        h1.modal-title Send Enquiry
+        
+        .modal-content.details-form
+          div.secure-deal-errors.error
+          input.half.secure-deal-first-name#name(type='text', placeholder='Name', value="#{objUser.displayName}")
+          input.half.secure-deal-email#email(type='text', placeholder='Email Address', value="#{objUser.email}")
+          input.half.secure-deal-phone#phone(type='text', placeholder='Phone Number', value="#{objUser.mobile}")
+          select#method(name="method",style="width: 225px;").half.secure-deal-email
+            option(value="Phone") Contact me by phone
+            option(value="Email") Contact me by email
+          textarea.full.secure-deal-comment#enquiry(placeholder='Place your enquiry here', style="width:98%;")
+          .submit-buttons
+            button#sendEnquiry.button.right(style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;") Send

@@ -25,7 +25,6 @@ exports.create = (req, res) ->
       enquiry: req.body.enquiry
     
     Enquiry.create map, (error, model) ->
-      console.log arguments...
       
       res.send status: 200
       
@@ -39,7 +38,7 @@ exports.create = (req, res) ->
         user =
           firstName: req.body.name
           email: req.body.email
-          lastName: req.body.name
+          lastName: ''
           phone: req.body.phone
         
         secondary =

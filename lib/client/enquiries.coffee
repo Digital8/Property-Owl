@@ -1,6 +1,7 @@
 module.exports = ->
   
   # affiliates
+  processing = false
   $(".enquire-button").on "click", (e) ->
     e.preventDefault()
     
@@ -8,26 +9,34 @@ module.exports = ->
     
     id = $(this).data("id")
     
+    $('.close-modal-enquiry').click ->
+      $('.modal-enquiry').hide()
+
+
     $("#sendEnquiry").on "click", ->
-      enquiry = $("#enquiry").val()
-      name =  $("#name").val()
-      method = $("#method").val()
-      phone = $("#phone").val()
-      email = $("#email").val()
       
-      $.post "/enquiries",
-        entity_id: id
-        entity_type: 'affiliate'
-        enquiry: enquiry
-        name: name
-        contact: method
-        email: email
-        phone: phone
-      , (data) ->
-        if data.status is 200
-          $(".modal-enquiry").fadeToggle()
-        else
-          alert "Uh oh an error occured!"
+      if not processing
+        processing = true
+        enquiry = $("#enquiry").val()
+        name =  $("#name").val()
+        method = $("#method").val()
+        phone = $("#phone").val()
+        email = $("#email").val()
+        
+        $.post "/enquiries",
+          entity_id: id
+          entity_type: 'affiliate'
+          enquiry: enquiry
+          name: name
+          contact: method
+          email: email
+          phone: phone
+        , (data) ->
+          processing = false
+          if data.status is 200
+            $(".modal-enquiry").hide()
+          else
+            alert 'An error occured'
   
   # owls
   ($ '.enquire').click (event) ->
