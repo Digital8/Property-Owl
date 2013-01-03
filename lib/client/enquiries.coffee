@@ -23,7 +23,7 @@ module.exports = ->
         email: email
         phone: phone
       , (data) ->
-        if data.status == 200)
+        if data.status is 200
           $(".modal-enquiry").fadeToggle()
         else
           alert "Uh oh an error occured!"

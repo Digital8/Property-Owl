@@ -4,18 +4,22 @@ Enquiry = system.models.enquiry
 
 exports.create = (req, res) ->
   console.log req.body
+  
   system.db.query "SELECT * FROM affiliates WHERE affiliate_id = ?", [req.body.entity_id], (err, affiliate) ->
+    
     if err or affiliate.length is 0
+      
       res.send status: 500, error: 'Invalid product', body: req.body or {}
+    
     else
       template = 'service-enquiry'
-
+      
       user =
         firstName: req.body.name
         email: affiliate[0].email
         lastName: ''
         phone: req.body.phone
-
+      
       secondary =
         contactName: affiliate[0].name
         description: req.body.enquiry
@@ -23,33 +27,13 @@ exports.create = (req, res) ->
         enquiryEmail: req.body.email
       
       system.helpers.mailer template,'New Enquiry', user, secondary, (results) ->
-  
-<<<<<<< HEAD
+        
         map =
           user_id: req.user.id
           entity_id: req.body.entity_id
-          entity_type: 'affiliate'
+          entity_type: req.body.entity_type
           enquiry: req.body.enquiry
-          
+        
         Enquiry.create map, (error, model) ->
-          if err 
-            res.send status: 500
-          else
-            res.send status: 200
-=======
-  map =
-    user_id: req.user.id
-    entity_id: req.body.entity_id
-    entity_type: req.body.entity_type
-    enquiry: req.body.enquiry
-  
-  Enquiry.create map, (error, model) ->
-    console.log arguments...
-    res.send status: 200
-  
-  # system.db.query  "INSERT INTO enquiries VALUES ?", map, (err, rows) ->
-  #   if err 
-  #     res.send status: 500, error: err
-  #   else 
-  #     res.send status: 200
->>>>>>> 618f825084eb332c0ad36ae922608c53b524c3e2
+          console.log arguments...
+          res.send status: 200
