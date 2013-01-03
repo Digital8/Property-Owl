@@ -255,30 +255,3 @@ exports.search = (req, res) ->
       model.hydrate callback
     , (error) ->
       res.send [null, _models]
-
-# exports.enquireDeal = (req, res) ->
-#   template = 'owl-deal-enquiry'
-#   user =
-#     firstName: req.body.name
-#     email: req.body.email
-#     phone: res.locals.objUser.phone
-
-#   secondary =
-#     contactName: '[change me]'
-#     description: req.body.comments
-#     contact_method: req.body.contactMethod
-#     enquiryEmail: req.body.email
-
-#   system.helpers.mailer template,'New Enquiry', user, secondary, (results) ->
-    
-#     map =
-#       user_id: req.user.id
-#       entity_id: req.body.entity_id
-#       entity_type: 'deal'
-#       enquiry: req.body.enquiry
-    
-#     system.db.query  "INSERT INTO enquiries VALUES ?", map, (err, rows) ->
-#       if err 
-#         res.send status: 500, error: err
-#       else 
-#         res.send status: 200
