@@ -70,6 +70,10 @@ exports.removeDeal = (req, res) ->
 exports.patchDeal = (req, res) ->
   owlId = req.params.owl_id
   dealId = req.params.deal_id
+  
+  Deal.patch dealId, req.body, (error, model) ->
+    
+    res.send status: 200
 
 exports.print = (req, res) ->
   {id} = req.params
