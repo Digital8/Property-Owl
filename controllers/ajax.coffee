@@ -150,68 +150,6 @@ exports.referfriend = (req, res) ->
       , 'Property Owl Referral'
       res.send status: 200
 
-# exports.savedeal = (req, res) ->
-#   req.assert('id', 'Property ID Not Numeric').isInt()
-  
-#   errors = req.validationErrors true
-
-#   if errors
-#     res.send status: false
-#   else
-#     models.saveddeals.checkDeal req.body.id, res.locals.objUser.id, (err, results) ->
-#       if results.length is 0
-#         models.saveddeals.saveDeal req.body.id, res.locals.objUser.id, (err, results) ->
-#           if err?
-#             res.send status: false
-#           else
-#             res.send status: true
-#       else
-#         res.send status: true
-
-# exports.removedeal = (req, res) ->
-#   req.assert('id', 'Property ID Not Numeric').isInt()
-  
-#   errors = req.validationErrors true
-  
-#   if errors
-#     res.send status: false
-#   else
-#     models.saveddeals.removeSavedDeal req.body.id, res.locals.objUser.id, (err, results) ->
-#       if err?
-#         res.send status: false
-#       else
-#         res.send status:true
-
-# exports.addDeal = (req, res) ->
-#   req.body.property_id ?= req.body.pid
-#   req.body.created_by = res.locals.objUser.id
-  
-#   models.deals.addDeal req.body, (err, results) ->
-#     if err then throw err
-    
-#     res.send results
-
-# exports.delDeal = (req, res) ->
-#   models.deals.getDealById req.body.id, (err, results) ->
-#     if err then throw err
-    
-#     if results.length is 1 then results = results.pop()
-    
-#     models.deals.deleteDealById req.body.id, (err) ->
-#       res.send results
-
-exports.updateHero = (req, res) ->
-  models.media.clearHero req.body.pid, (err) ->
-    models.media.setHero req.body.mid, (err, results) ->
-      res.send results
-
-exports.deleteMedia = (req, res) ->
-  req.body.mid ?= 0
-  
-  models.media.deleteMedia req.body.mid, (err, results) ->
-    if err then console.log err
-    res.send results
-      
 exports.addRegistration = (req, res) ->
   req.query.id ?= ''
   req.query.type ?= ''
@@ -255,30 +193,3 @@ exports.search = (req, res) ->
       model.hydrate callback
     , (error) ->
       res.send [null, _models]
-
-# exports.enquireDeal = (req, res) ->
-#   template = 'owl-deal-enquiry'
-#   user =
-#     firstName: req.body.name
-#     email: req.body.email
-#     phone: res.locals.objUser.phone
-
-#   secondary =
-#     contactName: '[change me]'
-#     description: req.body.comments
-#     contact_method: req.body.contactMethod
-#     enquiryEmail: req.body.email
-
-#   system.helpers.mailer template,'New Enquiry', user, secondary, (results) ->
-    
-#     map =
-#       user_id: req.user.id
-#       entity_id: req.body.entity_id
-#       entity_type: 'deal'
-#       enquiry: req.body.enquiry
-    
-#     system.db.query  "INSERT INTO enquiries VALUES ?", map, (err, rows) ->
-#       if err 
-#         res.send status: 500, error: err
-#       else 
-#         res.send status: 200
