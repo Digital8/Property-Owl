@@ -17,6 +17,7 @@ module.exports = ->
       
       $.post "/enquiries",
         entity_id: id
+        entity_type: 'affiliate'
         enquiry: enquiry
         name: name
         contact: method
