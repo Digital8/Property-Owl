@@ -45,3 +45,6 @@ exports.update = (req, res) ->
     
     barn.upload req, ->
       res.redirect '/admin/barns'
+
+exports.patch = (req, res) ->
+  res.send status: 200

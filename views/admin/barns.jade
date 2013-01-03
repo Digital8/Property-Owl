@@ -1,0 +1,45 @@
+.grid-header
+  h2 Pending Barn Deal Listings
+
+- if (barns.length == 0)
+  table.admin-gridview
+   
+   thead
+     tr 
+       td(colspan='6')
+        | There are no pending barn deals. 
+- else
+  table.admin-gridview.pending-barns(data-entity_type='barn')
+   
+   thead
+     tr
+       td ID
+       td Listed On
+       td Title
+       td(colspan='3') Actions
+    
+    tbody
+    - each barn in barns
+      tr(data-id=barn.id)
+        td= barn.id
+        
+        - var listed = new Date(barn.created_at)
+        
+        td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+        
+        td= barn.title
+        
+        td.actions
+          a(href='/admin/barns/#{barn.id}/edit', alt='edit barn deal')
+            img(src='/images/edit.png', alt='Edit')
+            | Edit
+        
+        td.actions
+          a.approve(href='#')
+            img(src='images/approve.png', alt='View')
+            | Approve
+   
+   tfoot
+    tr
+     td(colspan='5')
+      a.button(href="/admin/barns") Manage All Barn Deals

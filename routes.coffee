@@ -187,6 +187,7 @@ module.exports = (app) ->
   admin 'post', '/barns', controllers.admin.barns.create
   admin 'get', '/barns/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.barns.edit
   admin 'put', '/barns/:id(\\d+)', controllers.admin.barns.update
+  admin 'patch', '/barns/:id(\\d+)', controllers.admin.barns.patch
   # admin 'get', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.delete
   # admin 'del', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.destroy
   

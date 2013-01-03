@@ -3,112 +3,15 @@ extends ../layout
 block content
   .container.row.main
   
-    include menu    
+    include menu
+    
     if (objUser.isAdmin())
       h1 Admin Dashboard
       #dashboard-left-col
-        .grid-header
-          h2 Pending Owl Deal Listings
-          // .grid-summary 1 - 4 of 24
         
-        - if (owls.length == 0)
-          table.admin-gridview
-           thead
-             tr 
-               td(colspan='6')
-                | There are no pending owl deals. 
-        - else
-          table.admin-gridview.pending-owls
-           thead
-             tr
-               td ID
-               td Listed On
-               td Title
-               td(colspan='3') Actions
-            tbody
-            - each owl in owls
-              tr(data-id="#{owl.id}")
-               td= owl.id
-               - var listed = new Date(owl.created_at)
-               td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
-               td= owl.title
-               td.actions
-                 a(href='/admin/owls/#{owl.id}/edit', alt='edit owl deal')
-                   img(src='/images/edit.png', alt='Edit')
-                   | Edit
-                td.actions
-                  a.approve(href='#')
-                    img(src='images/approve.png', alt='View')
-                    | Approve
-            tfoot
-              tr
-                td(colspan='6')
-                  a.button(href="/admin/owls") Manage All Owl Deals
-                  //- ul.pager
-                  //-   li
-                  //-     a(href='#') Prev
-                  //-   li.selected
-                  //-     a(href='#') 1
-                  //-   li
-                  //-     a(href='#') 2
-                  //-   li
-                  //-     a(href='#') 3
-                  //-   li
-                  //-     a(href='#') 4
-                  //-   li
-                  //-     a(href='#') Next
-            //- TODO paging for all front and admin list views and gridviews
+        include owls
         
-        .grid-header
-          h2 Pending Barn Deal Listings
-        
-        - if (barns.length == 0)
-          table.admin-gridview
-           thead
-             tr 
-               td(colspan='6')
-                | There are no pending barn deals. 
-        - else
-          table.admin-gridview
-           thead
-             tr
-               td ID
-               td Listed On
-               td Title
-               td(colspan='3') Actions
-            tbody
-            - each barn in barns
-              tr
-               td= barn.id
-               - var listed = new Date(barn.created_at)
-               td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
-               td= barn.title
-               td.actions
-                 a(href='/admin/barns/#{barn.id}/edit', alt='edit barn deal')
-                   img(src='/images/edit.png', alt='Edit')
-                   | Edit
-                td.actions
-                  a(href='#')
-                    img(src='images/approve.png', alt='View')
-                    | Approve
-        
-           tfoot
-            tr
-             td(colspan='5')
-              a.button(href="/admin/barns") Manage All Barn Deals
-              //- ul.pager
-              //-  li
-              //-   a(href='#') Prev
-              //-  li.selected
-              //-   a(href='#') 1
-              //-  li
-              //-   a(href='#') 2
-              //-  li
-              //-   a(href='#') 3
-              //-  li
-              //-   a(href='#') 4
-              //-  li
-              //-   a(href='#') Next
+        include barns
       
       #dashboard-right-col
         .grid-header
@@ -174,5 +77,5 @@ block content
       h1 Developer Dashboard
       h3
         ul
-          li: a(href="/admin/owls") Owl Deals
-          li: a(href="/admin/barns") Barn Deals
+          li: a(href='/admin/owls') Owl Deals
+          li: a(href='/admin/barns') Barn Deals
