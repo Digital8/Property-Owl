@@ -22,15 +22,13 @@ exports.hot = (req, res) ->
     Owl.topstate state, callback
   , (error, owls) ->
     
-    owls = _.sortBy owls, 'state'
-    
     async.map owls, (owl, callback) ->
       owl.hydrateForUser req.user, callback
     , (error) ->
       
       owls = _.filter owls, (owl) -> owl?.id?
-      
-      console.log 'owls', owls
+      owls = (_.sortBy owls, 'ratio').reverse()
+
       
       res.render 'owls/list', owls: owls, maxPages: 1, currentPage: 1
 
