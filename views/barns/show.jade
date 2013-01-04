@@ -65,6 +65,8 @@ block content
                 - i++
                 dt "slide #{i}"
                 dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
+      - else
+        strong No owls have been uploaded!
       div#entity(style="display: none;") barn
       div#entity_id(style="display: none;")= barn.id
       .property-info
