@@ -45,4 +45,8 @@ module.exports = ->
     
     $form = $ '.enquire-form'
     
-    $.post '/enquiries', $form.serialize()
+    $.post '/enquiries', $form.serialize(), (data) ->
+      if data.success is 200
+        alert 'Enquiry sent!'
+      else
+        alert 'Internal error sending email. Please try again later.'

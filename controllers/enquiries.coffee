@@ -6,7 +6,6 @@ Owl = system.models.owl
 Barn = system.models.barn
 
 exports.create = (req, res) ->
-  
   {entity_id, entity_type} = req.body
   
   unless entity_type in ['owl', 'barn', 'affiliate']
@@ -15,6 +14,7 @@ exports.create = (req, res) ->
   model = system.models[entity_type]
   
   model.get entity_id, (error, record) ->
+
     if error? or not record
       return res.send status: 404
     
@@ -30,6 +30,8 @@ exports.create = (req, res) ->
       
       template_map =
         affiliate: 'service-enquiry'
+        owl: 'owl-deal-enquiry'
+        barn: 'barn-deal-enquiry'
       
       if template_map[entity_type]?
         
@@ -48,3 +50,7 @@ exports.create = (req, res) ->
           enquiryEmail: req.body.email
         
         system.helpers.mailer template, 'New Enquiry', user, secondary, (results) ->
+          if results is true
+            res.send status: 200
+          else
+            res.send status: 500
