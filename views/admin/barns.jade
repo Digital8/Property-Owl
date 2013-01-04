@@ -21,7 +21,7 @@
     tbody
     - each barn in barns
       tr(data-id=barn.id)
-        td= barn.id
+        td= barn.code
         
         - var listed = new Date(barn.created_at)
         
