@@ -18,7 +18,7 @@ block content
             table.admin-gridview
               thead
                 tr
-                  td Resource ID
+                  td ID
                   td Deal Type
                   td Actions
               
@@ -37,7 +37,9 @@ block content
                           default 
                             p= registration.type
                       td
-                        a.reg-delete(href="#", data-id="#{registration.registration_id}") Delete
+                        a.reg-delete(href="#", data-id="#{registration.registration_id}") 
+                          img(src='images/delete.png')
+                          | Remove
     
     include ../right_nav
 
