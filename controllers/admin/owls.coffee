@@ -11,8 +11,12 @@ helpers =
   mailer: system.load.helper 'mailer'
 
 exports.index = (req, res) ->
-  Owl.all (error, owls) ->
-    res.render 'admin/owls/index', owls: owls
+  if res.locals.objUser.isDeveloper
+    Owl.byDeveloper res.locals.objUser.id, (error, owls) ->
+      res.render 'admin/owls/index', owls: owls
+  else
+    Owl.all (error, owls) ->
+      res.render 'admin/owls/index', owls: owls
 
 exports.view = (req, res) ->
   Owl.get req.params.id, (error, owl) ->

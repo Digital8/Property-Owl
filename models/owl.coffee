@@ -158,7 +158,7 @@ module.exports = class Owl extends Model
       return callback error if error
       
       callback null
-  
+
   upload: (req, callback) ->
     
     # process(Req, String, Function)
@@ -301,6 +301,17 @@ module.exports = class Owl extends Model
       owl.hydrate ->
         callback null, owl
   
+  @byDeveloper = (id, callback) ->
+    @db.query "SELECT * FROM owls WHERE listed_by = ?", [id] ,(error, rows) =>
+      return callback error if error
+      
+      models = (new this row for row in rows)
+      
+      async.forEach models, (model, callback) =>
+        model.hydrate callback
+      , (error) ->
+        callback null, models
+
   @pending = (callback) ->
     @db.query "SELECT * FROM owls WHERE approved = false", (error, rows) =>
       return callback error if error
