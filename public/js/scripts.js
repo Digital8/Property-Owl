@@ -309,33 +309,27 @@ $(function(){
 	  var comment = $(".refer-friend-comment").val();
 	  var entity = $("#entity").text()
 	  var entity_id = $("#entity_id").text()
-	  
+
 	  $.ajax({
 	    url: '/ajax/referfriend',
 	    type: 'post',
 	    data: 'email=' + email + '&mobile=' + mobile + '&first_name=' + firstName + '&last_name=' + lastName + '&comment=' + comment+'&entity_type='+entity+'&entity_id='+entity_id
 	  }).done(function(d){
+	  	console.log(d);
 	    if (d.status == 200) {
-	      referFriendModal.fadeToggle(150);
-	      $("#generic-modal, #generic-modal .modal.main").removeClass('error').addClass('success')
-	      $('#generic-modal-title').html('Thanks for referring a friend!');
-	      $('#generic-modal-content').html('<br /><br /><center>Your friend should recieve an email shortly</center>');
-	      $('#generic-modal').fadeToggle(150);
+	      $(".raf-errors").html('<ul>');
+        $('.raf-errors').append('<li style="color: green; "><b>Referal Sent</b></li>');
+        $('.raf-errors').append('</ul>');
 	    }
 	    else {
 	      var errors = Object.keys(d.errors);
   	    
-  	    $("#generic-modal, #generic-modal .modal.main").removeClass('success').addClass('error')
-	      $('#generic-modal-title').html('Please fix the following');
-	      $('#generic-modal-content').html('<br /><ul>');
-	      for(i=0; i<errors.length;i++)
-	      {
-	         $('#generic-modal-content').append('<li><b>' + d.errors[errors[i]].msg + '</b></li>');
-	      }
-        $('#generic-modal-content').append('</ul>');
-        
-	      $('#generic-modal').fadeToggle(150);
-	      //modalCallback = function(){console.log('penis')};
+  	    $(".raf-errors").html('');
+        for(i=0; i<errors.length;i++)
+        {
+           $('.raf-errors').append('<li style="color: #f00 "><b>' + d.errors[errors[i]].msg + '</b></li>');
+        }
+        $('.raf-errors').append('</ul>');
 	    }
 	  });
 	  return false;
