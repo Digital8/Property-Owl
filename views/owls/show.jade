@@ -26,7 +26,13 @@ block content
       #wide-center-col
         div#entity(style="display: none;") owl
         div#entity_id(style="display: none;")= owl.id
+            
+        p(style='float: right;')= 'Property No. ' + owl.code
 
+        if(typeof(bestdeal) != 'undefined' && bestdeal)
+          h1 Australia's Best Property Deal
+        else
+          h1= owl.title
 
         - if (owl.images && owl.images.length)
           #mySlider.evoslider.galleriffic
@@ -39,12 +45,6 @@ block content
         
         .property-info
           #left
-            p= 'Property No. ' + owl.code
-            
-            if(typeof(bestdeal) != 'undefined' && bestdeal)
-              h1 Australia's Best Property Deal
-            else
-              h1= owl.title
             
             span.price-highlight $
               span.price= owl.price
