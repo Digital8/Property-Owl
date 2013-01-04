@@ -315,11 +315,8 @@ $(function(){
 	    type: 'post',
 	    data: 'email=' + email + '&mobile=' + mobile + '&first_name=' + firstName + '&last_name=' + lastName + '&comment=' + comment+'&entity_type='+entity+'&entity_id='+entity_id
 	  }).done(function(d){
-	  	console.log(d);
 	    if (d.status == 200) {
-	      $(".raf-errors").html('<ul>');
-        $('.raf-errors').append('<li style="color: green; "><b>Referal Sent</b></li>');
-        $('.raf-errors').append('</ul>');
+	      $(".refer-friend-overlay").hide();
 	    }
 	    else {
 	      var errors = Object.keys(d.errors);
