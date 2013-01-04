@@ -11,7 +11,7 @@ helpers =
   mailer: system.load.helper 'mailer'
 
 exports.index = (req, res) ->
-  if res.locals.objUser.isDeveloper
+  if res.locals.objUser.isDeveloper() and not res.locals.objUser.isAdmin()
     Owl.byDeveloper res.locals.objUser.id, (error, owls) ->
       res.render 'admin/owls/index', owls: owls
   else
