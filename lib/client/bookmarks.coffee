@@ -27,9 +27,10 @@ module.exports = ->
       $bookmark.find('.delete').click (event) ->
         event.preventDefault()
         
-        $.delete "/bookmarks/#{id}", (response, status, jqXHR) ->
-          
-          if jqXHR.status is 200
-            do $bookmark.remove
-          else
-            alert "uh oh! spaghettio!"
+        if confirm('Are you sure you want to remove this?')
+          $.delete "/bookmarks/#{id}", (response, status, jqXHR) ->
+            
+            if jqXHR.status is 200
+              do $bookmark.fadeOut
+            else
+              alert "uh oh! spaghettio!"

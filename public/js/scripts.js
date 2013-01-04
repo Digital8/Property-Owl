@@ -375,10 +375,11 @@ $(function(){
     }).done(function(d){
       console.log(d);
       if(d.status == 200) {
-      	alert('You have registered for this property')
+      	
       }
       else
       {
+      	$('.overlay').hide();
       	alert(d.message);
       }
   	});
