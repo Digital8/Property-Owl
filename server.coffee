@@ -142,7 +142,8 @@ app.configure ->
       epoch.hours 12
       
       unless now.valueOf() > epoch.valueOf()
-        epoch.sub 'weeks', 1
+        # console.log 'epoch', epoch
+        epoch.subtract 'weeks', 1
       
       system.last_epoch = epoch
       
