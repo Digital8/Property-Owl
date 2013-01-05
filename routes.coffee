@@ -181,6 +181,8 @@ module.exports = (app) ->
   admin 'get', '/owls/:id(\\d+)/delete', controllers.admin.owls.delete
   admin 'del', '/owls/:id(\\d+)', controllers.admin.owls.destroy
   
+  admin 'post', '/owls/:id(\\d+)/clone', controllers.admin.owls.clone
+  
   # admin/barn
   admin 'get', '/barns', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.barns.index
   admin 'get', '/barns/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.barns.add

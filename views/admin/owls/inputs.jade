@@ -3,6 +3,8 @@
   - if (objUser.isAdmin())
     .inputs.index.pane(data-key='index')
       
+      h2 Approval
+      
       label(for='title') Approved
         | &nbsp;
         input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
@@ -27,12 +29,37 @@
           });
         });
       
-      label.clone_label Clone
+      h2 Similar Deals
       
-      //- - (var count = pair[0])
-      //- - (var text = pair[1])
+      table.similar_deals_table
+        th
+          //- td ID
+          //- td Title
+          //- td Address
+          //- td Suburb
+          //- td State
+        tbody
+        
+        tfooter
       
-      option(value=)= "Clone owl #{text}"
+      h2 Clone
+      
+      label.clone_label
+      
+      .clone_range_label(style='float: left; width: 1em;')
+      
+      input.clone_range(type='range', min='1', max='5', step='1', style='float: left; width: 10%; height: 32px; margin-left: 1em; margin-right: 1em;')
+      
+      button.clone_button(style='margin-left: 1em; width: 6em; height: 32px; line-height: 32px;') Clone
+      
+      div(style='clear: both;')
+      
+      table.clone_table(style='width: 100%;')
+      
+      style
+        table.clone_table td {
+          border: 1px dashed #ddd;
+        }
   
   .inputs.detail.pane(data-key='detail', data-label='details')
     include detail_inputs

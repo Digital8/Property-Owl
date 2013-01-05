@@ -9,7 +9,12 @@ exports.index = (req, res) ->
     console.log arguments...
   
   if req.query.state is 'any' then req.query.state = '%'
-  if req.query.suburb is '' then req.query.suburb = '%' else req.query.suburb += '%'
+  # if req.query.suburb is '' then req.query.suburb = '%' else req.query.suburb += '%'
+  
+  unless req.query.suburb.length
+    req.query.suburbQuery = "suburb SOUNDS LIKE '#{req.query.suburb}' AND"
+  else
+    req.query.suburbQuery = ''
   
   if req.query.development_type_id is '' then req.query.development_type_id = '%'
   

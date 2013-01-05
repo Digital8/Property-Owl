@@ -80,6 +80,25 @@ exports.delete = (req, res) ->
 
 exports.destroy = (req, res) ->
   Owl.delete req.params.id, (error) ->
-    req.flash 'success', 'owl deleted'
     
-    res.redirect '/admin/owls'
+    res.send status: 200
+
+exports.clone = (req, res) ->
+  id = req.params.id
+  
+  count = parseInt req.body.count
+  
+  unless 0 <= count <= Infinity
+    return req.send status: 500
+  
+  Owl.get id, (error, owl) ->
+    if error? then return req.send status: 500
+    
+    console.log arguments...
+    
+    async.map [0..count], (index, callback) ->
+      owl.clone callback
+    , (error) ->
+      return res.send status: 500 if error?
+      
+      res.send status: 200

@@ -79,6 +79,14 @@ module.exports = class Model
     
     # callback()
   
+  clone: (callback) ->
+    map = {}
+    
+    for key, field of @constructor.fields
+      map[key] = @[key]
+    
+    @constructor.create map, callback
+  
   ###
   Model.patch
   - persists certain fields (changes) to the underlying row/record

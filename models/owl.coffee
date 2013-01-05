@@ -330,8 +330,7 @@ module.exports = class Owl extends Model
       SELECT *
       FROM owls
       WHERE
-        suburb LIKE ?
-        AND
+        ?
         state LIKE ?
         AND
         development_type_id LIKE ?
@@ -351,7 +350,7 @@ module.exports = class Owl extends Model
         cars >= ?
       GROUP BY owl_id
     """, [
-      q.suburb
+      q.suburbQuery
       q.state
       q.development_type_id
       q.development_status_id

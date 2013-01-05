@@ -1,4 +1,4 @@
-tr
+tr(data-id=owl.id)
   td(style='text-align: center;')= owl.code
   
   - var listed = new Date(owl.created_at)
@@ -26,11 +26,11 @@ tr
   //-     | View
   
   td.actions
-    a(href='/admin/owls/#{owl.owl_id}/edit', alt='edit owl deal')
+    a.edit(href='/admin/owls/#{owl.owl_id}/edit', alt='edit owl deal')
       img(src='/images/edit.png', alt='Edit')
       | Edit
   
   td.actions
-    a(href='/admin/owls/#{owl.owl_id}/delete', alt='delete owl deal')
+    a.delete(href='/admin/owls/#{owl.owl_id}/delete', alt='delete owl deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete
