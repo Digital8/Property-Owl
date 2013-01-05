@@ -27,11 +27,13 @@ module.exports = ->
     
     key = $pane.data 'key'
     
-    sections[key] = pane: $pane, title: key
+    label = $pane.data 'label'
+    
+    sections[key] = pane: $pane, key: key, label: label
   
   i = 0
   for key, section of sections
-    section.title ?= key
+    section.title = section.label or section.key
     section.index = i
     section.key = key
     i++

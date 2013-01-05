@@ -41,25 +41,6 @@
         tbody
         
         tfooter
-      
-      h2 Clone
-      
-      label.clone_label
-      
-      .clone_range_label(style='float: left; width: 1em;')
-      
-      input.clone_range(type='range', min='1', max='5', step='1', style='float: left; width: 10%; height: 32px; margin-left: 1em; margin-right: 1em;')
-      
-      button.clone_button(style='margin-left: 1em; width: 6em; height: 32px; line-height: 32px;') Clone
-      
-      div(style='clear: both;')
-      
-      table.clone_table(style='width: 100%;')
-      
-      style
-        table.clone_table td {
-          border: 1px dashed #ddd;
-        }
   
   .inputs.detail.pane(data-key='detail', data-label='details')
     include detail_inputs
@@ -78,3 +59,6 @@
   
   .inputs.deal.pane(data-key='deal')
     include deal_inputs
+  
+  .inputs.clone.pane(data-key='clone')
+    include clone_inputs
