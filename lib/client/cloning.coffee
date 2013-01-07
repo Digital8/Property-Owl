@@ -29,16 +29,20 @@ module.exports = ->
     # table
     $table.empty()
     
-    owl =
-      id: '?'
-      address: '117 Lansdowne Way'
-      suburb: 'Chuwar'
-      state: 'QLD'
+    owl = $form.serializeObject()
+    
+    owl.id = '?'
+    
+    schema =
+      id: {}
+      address: {}
+      suburb: {}
+      state: {}
     
     $header = $ '<tr>'
     $header.appendTo $table
     
-    for key, value of owl
+    for key, value of schema
       $th = $ '<th>'
       $th.text key
       $th.appendTo $header
@@ -53,9 +57,9 @@ module.exports = ->
       
       $row.appendTo $tbody
       
-      for key, value of owl
+      for key, schematic of schema
         $cell = $ '<td>'
-        $cell.text value
+        $cell.text owl[key]
         $cell.appendTo $row
 
   $range.change (event) ->
