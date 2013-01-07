@@ -23,6 +23,7 @@
     "request": "~2.12.0",
     "underscore.string": "~2.3.1",
     "prettyjson": "~0.7.1",
-    "socket.io": "~0.9.13"
+    "socket.io": "~0.9.13",
+    "mmmagic": "~0.2.5"
   }
 }

@@ -8,6 +8,8 @@ Table = require '../lib/table'
 
 system = require '../system'
 
+{Magic, MAGIC_MIME_TYPE} = require 'mmmagic'
+
 module.exports = class Media extends Model
   @table = new Table
     name: 'medias'
@@ -32,23 +34,41 @@ module.exports = class Media extends Model
     super callback
   
   @upload = (args, callback) =>
-    id = uuid() + '.png'
     
     {file, entity_id, owner_id, type} = args
     klass = args.class
     
-    fs.readFile file.path, (error, data) =>
-      path = "#{system.bucket}/#{id}"
+    magic = new Magic MAGIC_MIME_TYPE
+    
+    map =
+      'image/jpeg':
+        ext: '.jpg'
+      'image/png':
+        ext: '.png'
+      'application/pdf':
+        ext: '.pdf'
+    
+    magic.detectFile file.path, (error, mime) =>
+      return callback 'bad mime' if error?
       
-      fs.writeFile path, data, (error) =>
-        @create
-          entity_id: entity_id
-          owner_id: owner_id
-          filename: id
-          type: type
-          class: klass
-          description: file.name
-        , callback
+      return callback 'bad type' unless map[mime]?
+      
+      fs.readFile file.path, (error, data) =>
+        id = uuid()
+        
+        filename = "#{id}#{map[mime].ext}"
+        
+        path = "#{system.bucket}/#{filename}"
+        
+        fs.writeFile path, data, (error) =>
+          @create
+            entity_id: entity_id
+            owner_id: owner_id
+            filename: filename
+            type: type
+            class: klass
+            description: file.name
+          , callback
   
   @for = (model, callback) =>
     type = model.constructor.name.toLowerCase()
