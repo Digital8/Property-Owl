@@ -41,6 +41,8 @@ module.exports = class Owl extends Model
   
   @field 'development_status_id'
   
+  @field 'feature_image'
+  
   constructor: (args = {}) ->
     Object.defineProperty this, 'code', get: => _s.pad @id.toString(), 5, '0'
     
