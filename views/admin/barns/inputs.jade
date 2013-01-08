@@ -13,8 +13,11 @@
   .inputs.address.pane(data-key='address')
     include address_inputs
   
-  .inputs.image.pane(data-key='image')
+  .inputs.image.pane(data-key='image', data-label='images')
     include image_inputs
+  
+  .inputs.file.pane(data-key='file', data-label='files')
+    include file_inputs
   
   .inputs.deal.pane(data-key='deal')
     include deal_inputs
