@@ -135,10 +135,13 @@ app.configure ->
     # last epoch
     app.use (req, res, done) ->
       
-      console.log 'time', app.argv.time
+      if app.argv.time?
+        now = moment app.argv.time
+        epoch = moment app.argv.time
       
-      now = moment()
-      epoch = moment()
+      else
+        now = moment()
+        epoch = moment()
       
       epoch.day 3
       epoch.startOf 'day'
@@ -149,6 +152,11 @@ app.configure ->
         epoch.subtract 'weeks', 1
       
       system.last_epoch = epoch
+      
+      console.log '---'.yellow
+      console.log 'now', now
+      console.log 'last_epoch', epoch
+      console.log '---'.yellow
       
       do done
     

@@ -1,0 +1,25 @@
+.inputs
+  label.required Files
+
+.inputs
+
+.inputs
+  
+  table.admin-gridview.files
+    
+    thead
+      tr
+        td Thumb
+        td Caption
+        td Actions
+    
+    tbody.body
+      - if (barn.files && barn.files.length)
+        - each file in barn.files
+          include file_input
+    
+    tfooter.footer
+      tr
+        td(colspan=3)
+          label Upload
+          input#files(type='file', name='files', multiple='multiple')

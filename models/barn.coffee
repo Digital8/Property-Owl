@@ -1,4 +1,5 @@
 async = require 'async'
+_ = require 'underscore'
 _s = require 'underscore.string'
 
 Model = require '../lib/model'
@@ -48,6 +49,33 @@ module.exports = class Barn extends Model
           
           callback error
       
+      images: (callback) =>
+        Media = system.models.media
+
+        Media.forEntityWithClass this, klass: 'image', (error, medias) =>
+          @images = medias
+          
+          if @feature_image? and @images.length
+            
+            feature_id = parseInt @feature_image
+            
+            feature_image = _.detect @images, (image) -> image.id is feature_id
+            
+            @images = _.filter @images, (image) -> image.id isnt feature_id
+            
+            @images.unshift feature_image
+            
+            @images = _.filter @images, (image) -> image?
+          
+          callback error
+      
+      files: (callback) =>
+        Media = system.models.media
+
+        Media.forEntityWithClass this, klass: 'file', (error, medias) =>
+          @files = medias
+          callback error
+      
       deals: (callback) =>
         Deal = system.models.deal
         Deal.for this, (error, deals) =>
@@ -90,59 +118,60 @@ module.exports = class Barn extends Model
     "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
   
   upload: (req, callback) ->
-    console.log 'filez', req
+    
+    Media = system.models.media
+    
+    # process(Req, String, Function)
+    # creates Media for each filea req's uploads
+    processFiles = (req, key, callback = ->) =>
+      files = req.files["#{key}s"]
+      
+      do callback unless files?
+      
+      files = [].concat files
+      
+      async.forEach files, (file, callback) =>
+        console.log "processing #{key} file...", file
+        
+        return do callback unless file.size
+        
+        Media.upload
+          entity_id: @id
+          owner_id: req.user.id
+          file: file
+          type: 'barn'
+          class: key
+        , callback
+      
+      , callback
+    
+    # uploads
     
     async.series
-      removeDeals: (callback) =>
-        @constructor.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'barn'", @id, callback
       
-      addDeals: (callback) =>
-
-        console.log req.body
-        values = req.body.value
-        names = req.body.name
-        types = req.body.type
+      uploads: (callback) =>
         
-        deals = []
-
-        return callback() unless types
+        async.parallel
         
-        for index in [0...types.length]
-          deals.push
-            entity_id: @id
-            deal_type_id: types[index]
-            description: names[index]
-            value: values[index]
-            user_id: req.session.user_id
-            type: 'barn'
+          image: (callback) =>
+            processFiles req, 'image', callback
+          
+          file: (callback) =>
+            processFiles req, 'file', callback
         
-        console.log deals
-        
-        async.forEach deals, (deal, callback) =>
-          @constructor.db.query "INSERT INTO deals SET ?", deal, callback
         , callback
+      
+      nested: (callback) =>
+        return do callback unless req.body.files? 
+        
+        for file in req.body.files when file? and file.id? and file.description?
+          Media.update file.id, description: file.description, ->
+        
+        do callback
     
-    , (error) =>
-      if req.files? and (Object.keys req.files).length
-        async.forEach (Object.keys req.files), (key, callback) =>
-          file = req.files[key]
-          
-          if file.size <= 0 then return callback null
-          
-          Media.upload
-            entity_id: @id
-            owner_id: req.session.user_id
-            file: file
-            type: 'barn'
-          , (error, media) ->
-            callback error, media
-        
-        , callback
-      
-      else
-        console.log 'no uploads'
-        
-        callback()
+    , (error) ->
+      console.log 'done'
+      do callback
   
   @pending = (callback) ->
     @db.query "SELECT * FROM barns WHERE approved = false", (error, rows) =>

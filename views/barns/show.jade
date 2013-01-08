@@ -123,6 +123,10 @@ block content
             p= barn.other_features
         
         #right
+          - if (objUser.isAdmin())
+            .more-info(style='text-align: center; background: #BADA55;')
+              a(href="/admin/barns/#{barn.id}/edit") Admin
+          
           .deal
             h2
               | Reveal the Deal
