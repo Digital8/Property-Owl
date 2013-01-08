@@ -120,14 +120,11 @@ exports.securedeal = (req, res) ->
 exports.referfriend = (req, res) ->
   req.body.user_id ?= res.locals.objUser.id
   req.assert('email', 'Invalid Email Address').isEmail()
-  req.assert('mobile', 'Phone Number is invalid').is(/^[\+0-9][ 0-9]*[0-9]$/).len(8,16)
   req.assert('first_name', 'First name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
   req.assert('last_name', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
   req.assert('comment', 'Comment cannot be empty').notEmpty()
   req.assert('entity_id', 'invalid entity').notEmpty()
   req.assert('entity_type', 'invalid entity type').notEmpty()
-
-  console.log(req.body)
 
   errors = req.validationErrors(true)
 
@@ -139,8 +136,8 @@ exports.referfriend = (req, res) ->
     RAF.create req.body, (err, r) ->
       mailer
         to: req.body.email
-        from: 'mailer@propertyowl.com.au'
-        fromname: 'Property Owl'
+        from: res.locals.objUser.email
+        fromname: res.locals.objUser.displayName
         subject: 'Property Owl Referral'
         text: req.body.first_name + """,
 
