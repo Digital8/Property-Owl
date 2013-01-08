@@ -1,5 +1,5 @@
 module.exports = ->
-  rows = $ '.owl-grid tbody tr'
+  rows = $ '.deal-grid tbody tr'
   
   for row in rows
     $row = $ row
@@ -14,10 +14,10 @@ module.exports = ->
         
         id = $row.data 'id'
         
-        r = confirm "Really delete Owl #{id} ?"
+        entity_type = $row.data 'entity_type'
         
-        if r
+        if confirm "Really delete #{entity_type} #{id} ?"
         
-          $.delete "/admin/owls/#{id}", ->
+          $.delete "/admin/#{entity_type}s/#{id}", ->
             
             $row.remove()

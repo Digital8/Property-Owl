@@ -11,42 +11,15 @@ block content
     
     include actions
     
-    - if (!(locals.barns && barns.length))
+    - if (!locals.barns || !barns.length)
+      
       p No barn deals have been created yet.
     
     - else
+      
       .grid-header
-        //- form#search-form
-        //-   input#projectSearch(type='text')
-        //-   | &nbsp;
-        //-   input.button(type='submit', value='Go')
-        //-   | &nbsp;
-        //-   input.button(type='submit', value='Reset')
-        //-   .divider
-        //-   select#propertyDeveloper
-        //-     option Developer
-        //-     - each developer in developers
-        //-       option(value=developer.user_id) #{developer.first_name} #{developer.last_name}
-        //-   | &nbsp;
-        //-   select#propertyState
-        //-     option State
-        //-     option ACT
-        //-     option NSW
-        //-     option NT
-        //-     option QLD
-        //-     option SA
-        //-     option TAS
-        //-     option VIC
-        //-     option WA
-        //-   | &nbsp;
-        //-   select#propertyStatus
-        //-     option Status
-        //-     option Pending
-        //-     option Pre-release
-        //-     option Current
-        //-     option Ended
-        
-      table.admin-gridview
+      
+      table.admin-gridview.deal-grid
         thead
           tr
             td ID
@@ -64,18 +37,3 @@ block content
            include summary
         
         tfoot
-          tr
-            td(colspan='9')
-              ul.pager
-                //- li.disabled
-                //-              a(href='#') Prev
-                //-            li.selected
-                //-              a(href='#') 1
-                //-            li
-                //-              a(href='#') 2
-                //-            li
-                //-              a(href='#') 3
-                //-            li
-                //-              a(href='#') 4
-                //-            li
-                //-              a(href='#') Next

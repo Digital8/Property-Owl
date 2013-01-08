@@ -20,8 +20,11 @@ exports.edit = (req, res) ->
       res.render 'admin/barns/edit', barn: barn, developers: developers
 
 exports.add = (req, res) ->
-  Barn.new (error, barn) ->
+  
+  Barn.create {}, (error, barn) ->
+    
     User.getUsersByGroup 2, (error, developers) ->
+      
       res.render 'admin/barns/add', barn: barn, developers: developers
 
 exports.create = (req, res) ->
