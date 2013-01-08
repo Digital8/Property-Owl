@@ -231,6 +231,7 @@ module.exports = (app) ->
   authedAjax 'post', '/referfriend', controllers.ajax.referfriend
   authedAjax 'get', '/addRegistration', controllers.ajax.addRegistration
   authedAjax 'get', '/delRegistration', controllers.ajax.delRegistration
+  authedAjax 'post', '/registerStatus', controllers.ajax.registerStatus
   
   adminAjax = (method, path, middleware...) ->
     app[method] "/ajax#{path}", authenticate, (authorize acl.admin), middleware...

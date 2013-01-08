@@ -387,5 +387,24 @@ $(function(){
       	alert(d.message);
       }
   	});
-  });	
+  });
+
+  $('.registration').change(function(){
+  	var id = $(this).data('id');
+  	var val = $(this).val();
+  	$.ajax({
+  		url: '/ajax/registerStatus',
+  		type: 'post',
+  		data: 'id='+id+'&val='+val
+  	}).done(function(d){
+  		if (d.status == 200)
+  		{
+  			alert("Status Updated!");
+  		}
+  		else
+  		{
+  			alert('An error occured changing the status');
+  		}
+  	});
+  });
 });

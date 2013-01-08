@@ -169,6 +169,19 @@ exports.addRegistration = (req, res) ->
       else
         res.send status: 400, message: 'Already registered to property'
 
+exports.registerStatus = (req, res) ->
+  req.body.id ?= 0
+  req.body.val ?= 0
+
+  if res.locals.objUser.isDeveloper()
+    models.registrations.changeStatus req.body, (err,results) ->
+      if err
+        res.send status: 500
+      else
+        res.send status: 200
+  else
+    res.send status: 403
+
 exports.delRegistration = (req, res) ->
   req.query.id ?= ''
   req.query.user_id = res.locals.objUser.id

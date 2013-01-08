@@ -10,10 +10,13 @@ exports.add = (vals, callback) ->
   db.query "INSERT INTO po_registrations (resource_id, type, user_id) VALUES(?,?,?)", [vals.id, vals.type, vals.user_id], callback
 
 exports.delete = (vals, callback) ->
-  db.query "DELETE FROM po_registrations WHERE registration_id = ? and user_id = ?",[vals.id, vals.user_id], callback
+  db.query "UPDATE po_registrations SET status = 0 WHERE registration_id = ? and user_id = ?",[vals.id, vals.user_id], callback
 
 exports.findByUser = (user_id, callback) ->
   db.query "SELECT * FROM po_registrations WHERE user_id = ?", [user_id], callback
+
+exports.changeStatus = (vals, callback) ->
+  db.query "UPDATE po_registrations SET status = ? WHERE registration_id = ?",[vals.val, vals.id], callback
 
 exports.report = (cred, callback) ->
   vals = []

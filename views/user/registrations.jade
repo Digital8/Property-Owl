@@ -27,20 +27,21 @@ block content
                   h4 You haven't registered to any property.
                 - else
                   each registration in registrations 
-                    tr
-                      td= registration.resource_id
-                      td
-                        case (registration.type)
-                          when 'owl'
-                            a(href="/owls/#{registration.resource_id}") Owl Deal
+                    if registration.status != 0
+                      tr
+                        td= registration.resource_id
+                        td
+                          case (registration.type)
+                            when 'owl'
+                              a(href="/owls/#{registration.resource_id}") Owl Deal
 
-                          default 
-                            p= registration.type
-                      td
-                        a.reg-delete(href="#", data-id="#{registration.registration_id}") 
-                          img(src='images/delete.png')
-                          | Remove
-    
+                            default 
+                              p= registration.type
+                        td
+                          a.reg-delete(href="#", data-id="#{registration.registration_id}") 
+                            img(src='images/delete.png')
+                            | Remove
+      
     include ../right_nav
 
   script
