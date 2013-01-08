@@ -18,9 +18,9 @@ exports.index = (req, res) ->
     Owl.all (error, owls) ->
       res.render 'admin/owls/index', owls: owls
 
-exports.view = (req, res) ->
+exports.show = (req, res) ->
   Owl.get req.params.id, (error, owl) ->
-    res.render 'admin/owls/view', owl: owl
+    res.render 'admin/owls/show', owl: owl
     
 exports.edit = (req, res) ->
   Owl.get req.params.id, (error, owl) ->

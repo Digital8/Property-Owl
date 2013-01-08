@@ -4,7 +4,7 @@ tr(data-id=owl.id)
   - var listed = new Date(owl.created_at)
   td(style='text-align: center;') #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
   
-  td= owl.title
+  td: a(href="/admin/owls/#{owl.id}")= owl.title
   
   td= owl.address
   
@@ -18,7 +18,7 @@ tr(data-id=owl.id)
   
   td(style='text-align: right;') #{owl.value} %
   
-  td(style='text-align: right;') #{owl.registrations}
+  td(style='text-align: right;') #{owl.registrations.length}
   
   //- td.actions
   //-   a(href='/admin/owls/#{owl.owl_id}/view', alt='view owl deal')

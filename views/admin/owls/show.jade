@@ -1,0 +1,84 @@
+extends ../../layout
+
+block content
+  
+  .container.row.main
+    
+    include ../menu
+    
+    h1 Owl Deal
+    
+    include actions
+    
+    table
+      tr
+        td ID
+        td= owl.code
+      
+      tr
+        td Listed By
+        td= owl.user_id
+      
+      tr
+        td Listed On
+        td= owl.approved_at
+      
+      tr
+        td Status
+        td= owl.status
+      
+      tr
+        td Time Left
+        td= owl.time_left
+      
+      tr
+        td Property Type
+        td= owl.developmentType.name
+      
+      tr
+        td Development Stage
+        td= owl.developmentStatus.name
+      
+      tr
+        td Price
+        td= owl.price
+      
+      tr
+        td Title
+        td= owl.title
+      
+      tr
+        td Address
+        td= owl.fullAddress()
+      
+      tr
+        td Bedrooms
+        td= owl.bedrooms
+      
+      tr
+        td Bathrooms
+        td= owl.bathrooms
+      
+      tr
+        td Cars
+        td= owl.cars
+      
+      tr
+        td Total Area
+        td= owl.area
+      
+      tr
+        td Indoor Features
+        td= owl.indoor_features
+      
+      tr
+        td Outdoor Features
+        td= owl.outdoor_features
+      
+      tr
+        td Other Features
+        td= owl.other_features
+    
+    h3 Description
+    
+    pre= owl.description

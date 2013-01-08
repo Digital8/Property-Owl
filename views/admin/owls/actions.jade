@@ -1,12 +1,19 @@
 .admin-actions
   ul
     
-    if(action != 'add')
+    if(action != 'add' && action != 'show')
       li
         a(href='/admin/owls/add')
          img(src='/images/add.png')
          | &nbsp;
          | Add Owl Deal
+    
+    if(locals.owl && action == 'show')
+      li
+        a(href="/admin/owls/#{owl.id}/edit")
+         img(src='/images/manage.png')
+         | &nbsp;
+         | Edit Owl Deal
     
     if(action != 'index')
       li
