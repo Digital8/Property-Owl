@@ -41,7 +41,10 @@ block content
         tr
           td Date
           td State
-          td Registration Count
+          if typeof(members[0].first_name) == 'undefined'
+            td Registration Count
+          else
+            td Member
 
       tbody
       if members.length == 0
@@ -56,7 +59,10 @@ block content
             - var listed = new Date(member.created_at)
             td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
             td= member.state.toUpperCase()
-            td= member.total
+            if typeof(member.first_name) != 'undefined'
+              td #{member.first_name} #{member.last_name}
+            else
+              td= member.total
             - graph.push([member.state.toUpperCase(), member.total]);
 
     div#chart_div
