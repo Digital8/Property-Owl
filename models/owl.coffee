@@ -20,6 +20,8 @@ module.exports = class Owl extends Model
   
   @field 'approved', type: Boolean, default: no
   
+  @field 'approved_at', type: Date
+  
   @field 'title'
   @field 'address'
   @field 'suburb'
@@ -216,6 +218,16 @@ module.exports = class Owl extends Model
       console.log 'done'
       do callback
   
+  @change =
+    approved: ({values, model}) ->
+      if values.new is yes and values.old is no
+        
+        model.constructor.patch model.id, approved_at: new Date, ->
+      
+      if values.new is no and values.old is yes
+        
+        model.constructor.patch model.id, approved_at: 0, ->
+  
   @inBarn = (barnId, callback) =>
     @db.query "SELECT * FROM #{@table.name} WHERE barn_id = ?", [barnId], (error, rows) =>
       return callback error if error
@@ -228,7 +240,19 @@ module.exports = class Owl extends Model
         callback null, models
   
   @state = (state, callback) ->
-    @db.query "SELECT * FROM #{@table.name} WHERE state = ? ORDER BY created_at ASC", [state], (error, rows) =>
+    @db.query """
+      SELECT *
+      FROM #{@table.name}
+      WHERE
+          state = ?
+        AND
+          approved
+        AND
+          approved_at < ?
+        AND
+          TIMESTAMPDIFF(MINUTE, approved_at, ?) < 10080
+      ORDER BY created_at ASC
+    """, [state, system.last_epoch.toDate(), system.last_epoch.toDate()], (error, rows) =>
       return callback error if error
       
       models = (new this row for row in rows)
