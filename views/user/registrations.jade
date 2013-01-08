@@ -34,7 +34,8 @@ block content
                           case (registration.type)
                             when 'owl'
                               a(href="/owls/#{registration.resource_id}") Owl Deal
-
+                            when 'barn'
+                              a(href="barns/#{registration.resource_id}") Barn Deal
                             default 
                               p= registration.type
                         td
