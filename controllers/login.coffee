@@ -15,7 +15,7 @@ exports.index = (req,res) ->
       if results.length is 0
         req.flash 'error', 'Invalid login details'
         
-        res.render 'user/login', modal: false
+        res.render 'user/login'
       else
         results = results.pop()
         req.session.user_id = results.user_id
@@ -26,7 +26,7 @@ exports.index = (req,res) ->
           res.redirect '/'
     
   else
-    res.render 'user/login', modal: true
+    res.render 'user/login'
 
 exports.view = (req,res) ->
 

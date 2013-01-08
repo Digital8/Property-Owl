@@ -37,7 +37,7 @@ block content
            
            input(type="hidden",name="redirect",value="#{redirect_url}")
     
-    - if (modal)
+    - if (typeof(modal) != 'undefined' && modal == true)
       script
         $(document).ready(function(){
           $(".login-overlay").show();
