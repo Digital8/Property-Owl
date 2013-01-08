@@ -111,25 +111,6 @@ block content
           p #{barn.address}, #{barn.suburb}, #{barn.state.toUpperCase()} #{barn.postcode}
           
           p= barn.description
-          
-          - if (objUser.isAdmin())
-            hr.light
-            h3 Registrations
-            table.admin-gridview
-              thead
-                tr
-                  td Full Name
-                  td Date
-              tbody.body
-                if barn.registrations.length == 0
-                  tr
-                    td No registrations for this barn
-                    td
-                - else
-                  each registration in barn.registrations
-                    tr
-                      td #{registration.first_name} #{registration.last_name}
-                      td= registration.registered_at
 
           .general-features
             h3 Indoor Features
@@ -156,7 +137,7 @@ block content
                 li No barn deals have been listed
               
           .secure-deal
-            a.show-secure-deal.secure-button.register(href='#',data-id="#{barn.id}", data-type="barn") Express Your Interest!
+            a.show-secure-deal.secure-button.express-button(href='#',data-id="#{barn.id}", data-type="barn") Express Your Interest!
           .time-left
             p
               | Time left

@@ -254,7 +254,29 @@ $(function(){
 	    $(".register-button").click();
 	  }
 	});
-	
+
+	doInterest = function(obj)
+	{
+		var type = obj.data('type');
+  	var id = obj.data('id');
+
+    $.ajax({
+      url: '/ajax/addRegistration',
+      method: 'GET',
+      data: 'id='+id+'&type='+type
+    }).done(function(d){
+      console.log(d);
+      if(d.status == 200) {
+      	$('.overlay').hide();
+      }
+      else
+      {
+      	$('.overlay').hide();
+      	alert(d.message);
+      }
+  	});
+	};
+
 	// Secure Deal
 	var processing = false;
 	$(".secure-deal-button").on("click", function(event){
@@ -276,6 +298,7 @@ $(function(){
 		    if (d.status == 200) {
 		      $(".secure-deal-errors").html('Message Sent!')
 		      $(".secure-deal-comment").val('');
+		      doInterest($('.express-button'));
 		    }
 		    else {
 		      var errors = Object.keys(d.errors);
@@ -369,24 +392,7 @@ $(function(){
   
   $('.register').click(function(e){
   	e.preventDefault();
-  	var type = $(this).data('type');
-  	var id = $(this).data('id');
-
-    $.ajax({
-      url: '/ajax/addRegistration',
-      method: 'GET',
-      data: 'id='+id+'&type='+type
-    }).done(function(d){
-      console.log(d);
-      if(d.status == 200) {
-      	
-      }
-      else
-      {
-      	$('.overlay').hide();
-      	alert(d.message);
-      }
-  	});
+  	doInterest($(this));
   });
 
   $('.registration').change(function(){
