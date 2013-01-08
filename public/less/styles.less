@@ -183,6 +183,29 @@ body {
           ul {
               .rounded(0.313em);
 //              border: solid 1px #7a7a7a;
+              background: #DDD;
+              .rounded(5px);
+              width: 13em;
+              left: 0;
+              padding: 0.5em 0;
+              
+              li {
+                display: block;
+                float: none;
+                width: 100%;
+                
+                a {
+                  display: block;
+                  padding: 0.4em 1em;
+                  text-decoration: none;
+                  .text-shadow(~"none");
+                  
+                  &:hover {
+                    background: #CCC;
+                    color: #000;
+                  }
+                }
+              }
           }
           
           ul, li {
@@ -207,35 +230,6 @@ body {
                   width: 100%;
                   .text-shadow(~"0px 0px 0px rgba(0,0,0,0)");
               }
-          }
-          
-          
-          
-          
-          ul {
-            background: #DDD;
-            .rounded(5px);
-            width: 20em;
-            left: 0;
-            padding: 0.5em 0;
-            
-            li {
-              display: block;
-              float: none;
-              width: 100%;
-              
-              a {
-                display: block;
-                padding: 0.4em 1em;
-                text-decoration: none;
-                .text-shadow(~"none");
-                
-                &:hover {
-                  background: #CCC;
-                  color: #000;
-                }
-              }
-            }
           }
         }
     }
@@ -1853,6 +1847,11 @@ body {
             img {
                 border: none;
                 margin-right: @padding-small;
+
+                &.grid-thumb {
+                  width:128px;
+                  height:96px;
+                }
             }
             
             td {

@@ -2,7 +2,7 @@ tr.media(data-id=image.id, data-type=image.type, data-entity-id=owl.id)
   
   td
     if(image.filename)
-      img(src='/uploads/#{image.filename}', width='128', height='128', data-json=JSON.stringify(image))
+      img.grid-thumb(src='/uploads/#{image.filename}', data-json=JSON.stringify(image))
   
   td
     input(type='radio', name='feature_image', checked=owl.feature_image == image.id, value=image.id)
