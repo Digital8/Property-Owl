@@ -3,20 +3,25 @@
 
 - if (barns.length == 0)
   table.admin-gridview
-   
-   thead
-     tr 
-       td(colspan='6')
-        | There are no pending barn deals. 
+  
+  thead
+    tr 
+      th(colspan='6')
+       | There are no pending barn deals. 
+  
+  tfoot
+    tr
+     td(colspan='5')
+      a.button(href="/admin/barns") Manage All Barn Deals
 - else
   table.admin-gridview.pending-barns(data-entity_type='barn')
    
-   thead
-     tr
-       td ID
-       td Listed On
-       td Title
-       td(colspan='3') Actions
+    thead
+      tr
+        th ID
+        th Listed On
+        th Title
+        th(colspan='3') Actions
     
     tbody
     - each barn in barns
@@ -38,8 +43,8 @@
           a.approve(href='#')
             img(src='images/approve.png', alt='View')
             | Approve
-   
-   tfoot
-    tr
-     td(colspan='5')
-      a.button(href="/admin/barns") Manage All Barn Deals
+    
+    tfoot
+      tr
+       td(colspan='5')
+        a.button(href="/admin/barns") Manage All Barn Deals

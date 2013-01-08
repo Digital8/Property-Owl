@@ -82,8 +82,11 @@ block content
     h3 Description
     
     pre= owl.description
+    
     hr.light
+    
     h3 Registrations
+    
     table.admin-gridview
       thead
         tr
@@ -108,8 +111,11 @@ block content
                   - var c = (registration.status == 1) ? true : false
                   option(value='1',selected=c) Interested
               td= registration.registered_at
+    
     hr.light
+    
     h3 Enquiries
+    
     table.admin-gridview
       thead
         tr
@@ -128,3 +134,13 @@ block content
               td #{enquiry.first_name} #{enquiry.last_name}
               td= enquiry.enquiry
               td= enquiry.created_at
+    
+    h3 Deals
+    
+    form(data-id=owl.id)
+      
+      include file_inputs
+      
+      include image_inputs
+      
+      include deal_inputs
