@@ -1,4 +1,5 @@
 async = require 'async'
+_ = require 'underscore'
 _s = require 'underscore.string'
 
 Model = require '../lib/model'
@@ -48,6 +49,33 @@ module.exports = class Barn extends Model
           
           callback error
       
+      images: (callback) =>
+        Media = system.models.media
+
+        Media.forEntityWithClass this, klass: 'image', (error, medias) =>
+          @images = medias
+          
+          if @feature_image? and @images.length
+            
+            feature_id = parseInt @feature_image
+            
+            feature_image = _.detect @images, (image) -> image.id is feature_id
+            
+            @images = _.filter @images, (image) -> image.id isnt feature_id
+            
+            @images.unshift feature_image
+            
+            @images = _.filter @images, (image) -> image?
+          
+          callback error
+      
+      files: (callback) =>
+        Media = system.models.media
+
+        Media.forEntityWithClass this, klass: 'file', (error, medias) =>
+          @files = medias
+          callback error
+      
       deals: (callback) =>
         Deal = system.models.deal
         Deal.for this, (error, deals) =>
@@ -90,6 +118,8 @@ module.exports = class Barn extends Model
     "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
   
   upload: (req, callback) ->
+    
+    Media = system.models.media
     
     # process(Req, String, Function)
     # creates Media for each filea req's uploads
