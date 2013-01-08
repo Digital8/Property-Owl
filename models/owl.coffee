@@ -73,6 +73,17 @@ module.exports = class Owl extends Model
 
         Media.forEntityWithClass this, klass: 'image', (error, medias) =>
           @images = medias
+          
+          if @feature_image? and @images.length
+            
+            feature_id = parseInt @feature_image
+            
+            feature_image = _.detect @images, (image) -> image.id is feature_id
+            
+            @images = _.filter @images, (image) -> image.id isnt feature_id
+            
+            @images.unshift feature_image
+          
           callback error
       
       files: (callback) =>
