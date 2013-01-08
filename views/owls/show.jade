@@ -60,6 +60,26 @@ block content
             
             p= owl.description
             
+            - if (objUser.isAdmin())
+              hr.light
+              h3 Registrations
+              table.admin-gridview
+                thead
+                  tr
+                    td Full Name
+                    td Date
+                tbody.body
+                  if owl.registrations.length == 0
+                    tr
+                      td No registrations for this owl
+                      td
+                  - else
+                    each registration in owl.registrations
+                      tr
+                        td #{registration.first_name} #{registration.last_name}
+                        td= registration.registered_at
+
+
             .general-features
               
               h3 General Features
@@ -108,6 +128,7 @@ block content
                     li= feature
                 //- p= owl.indoor_features
             
+
             .other-features
               
               - if (owl.outdoorFeatures.length > 0)
@@ -121,7 +142,6 @@ block content
                 ul
                   - each feature in owl.otherFeatures
                     li= feature
-          
           #right
             - if (objUser.isAdmin())
               .more-info(style='text-align: center; background: #BADA55;')

@@ -112,6 +112,25 @@ block content
           
           p= barn.description
           
+          - if (objUser.isAdmin())
+            hr.light
+            h3 Registrations
+            table.admin-gridview
+              thead
+                tr
+                  td Full Name
+                  td Date
+              tbody.body
+                if barn.registrations.length == 0
+                  tr
+                    td No registrations for this barn
+                    td
+                - else
+                  each registration in barn.registrations
+                    tr
+                      td #{registration.first_name} #{registration.last_name}
+                      td= registration.registered_at
+
           .general-features
             h3 Indoor Features
             p= barn.indoor_features

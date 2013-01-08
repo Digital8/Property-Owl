@@ -14,7 +14,10 @@ exports.show = (req, res) ->
   {id} = req.params
   
   Barn.get id, (error, barn) ->
-    res.render 'barns/show', barn: barn, enquire: on
+    if typeof(barn.id) is 'undefined'
+      res.render 'errors/404'
+    else
+      res.render 'barns/show', barn: barn, enquire: on
 
 exports.owls = (req,res) ->
   {id} = req.params

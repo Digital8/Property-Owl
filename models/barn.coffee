@@ -59,6 +59,12 @@ module.exports = class Barn extends Model
           return callback 'no owner' unless rows?.length
           @user = rows.pop()
           do callback
+
+      registrations: (callback) =>
+        system.db.query "SELECT * FROM po_registrations AS R INNER JOIN po_users AS U ON R.user_id = U.user_id where R.type = 'barn' and R.resource_id = ?", [@id], (err, results) =>
+          @registrations = results
+
+          callback()
     
     , (error) =>
       @user ?= {}
