@@ -1,22 +1,15 @@
 # Property Owl
 
-## We Give a Hoot!
+## Servers
 
-### Installation
+### Production
 
-##### Homebrew
-```sh
-ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
-```
+http: http://propertyowl.com.au:1337
 
-##### Cairo
-```sh
-brew install cairo
-```
+https: https://propertyowl.com.au
 
-##### app
-```sh
-npm i
-```
+### Staging
 
+http: http://propertyowl.com.au:10080
 
+https: https://propertyowl.com.au:10443
