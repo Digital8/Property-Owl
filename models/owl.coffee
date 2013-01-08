@@ -83,6 +83,8 @@ module.exports = class Owl extends Model
             @images = _.filter @images, (image) -> image.id isnt feature_id
             
             @images.unshift feature_image
+            
+            @images = _.filter @images, (image) -> image?
           
           callback error
       
