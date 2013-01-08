@@ -4,10 +4,12 @@
 
 ### Production
 
-http://propertyowl.com.au:1337
-https://propertyowl.com.au
+http: http://propertyowl.com.au:1337
+
+https: https://propertyowl.com.au
 
 ### Staging
 
-http://propertyowl.com.au:10080
-https://propertyowl.com.au:10443
+http: http://propertyowl.com.au:10080
+
+https: https://propertyowl.com.au:10443
