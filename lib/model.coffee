@@ -96,11 +96,25 @@ module.exports = class Model
     
     @get id, (error, model) =>
       
+      values = {}
+      
       for key, field of model.constructor.fields when hash[key]?
-        if field.type? and field.type is Boolean
-          model[key] = {true: true, false: false}[hash[key]]
+        
+        # store old value (for changes / diffs)
+        values[key] ?= {}
+        values[key].old = model[key]
+        
+        # determine new value
+        value = if field.type? and field.type is Boolean
+          {true: true, false: false}[hash[key]]
         else
-          model[key] = hash[key]
+          hash[key]
+        
+        # update the model
+        model[key] = value
+        
+        # store the new value (for changes / diffs)
+        values[key].new = model[key]
       
       map = {}
       
@@ -108,6 +122,15 @@ module.exports = class Model
         map[key] = model[key]
       
       @db.query "UPDATE #{@table.name} SET ? WHERE #{@table.key} = ?", [map, model.id], (error) =>
+        
+        for key in (Object.keys hash)
+          
+          continue unless values[key]?
+          
+          if values[key].new isnt values[key].old
+            
+            model.constructor.change[key]? values: values[key], model: model
+        
         callback error, model
   
   ###
