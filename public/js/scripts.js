@@ -336,6 +336,10 @@ $(function(){
 	  if(event.keyCode == 13){
 	    $(".refer-friend-button").click();
 	  }
+	  else
+	  {
+	  	console.log(event.keyCode);
+	  }
 	});
 	
 	$(".login-button").on("click", function(event){
