@@ -47,6 +47,22 @@ module.exports = class Media extends Model
         ext: '.png'
       'application/pdf':
         ext: '.pdf'
+      'video/x-flv':
+        ext: '.flv'
+      'video/mp4':
+        ext: '.mp4'
+      'application/x-mpegURL':
+        ext: '.m3u8'
+      'video/MP2T':
+        ext: '.ts'
+      'video/3gpp':
+        ext: '.mov'
+      'video/x-msvideo':
+        ext: '.avi'
+      'video/x-ms-wmv':
+        ext: '.wmv'
+      'application/x-shockwave-flash'
+        ext: '.swf'
     
     magic.detectFile file.path, (error, mime) =>
       return callback 'bad mime' if error?
