@@ -82,3 +82,39 @@ block content
     h3 Description
     
     pre= owl.description
+    hr.light
+    h3 Registrations
+    table.admin-gridview
+      thead
+        tr
+          td Full Name
+          td Date
+      tbody.body
+        if owl.registrations.length == 0
+          tr
+            td No registrations for this owl
+            td
+        - else
+          each registration in owl.registrations
+            tr
+              td #{registration.first_name} #{registration.last_name}
+              td= registration.registered_at
+    hr.light
+    h3 Enquiries
+    table.admin-gridview
+      thead
+        tr
+          td Sent By
+          td Message
+          td Date
+      tbody.body
+        if owl.enquiries.length == 0
+          tr
+            td No enquiries for this owl
+            td
+        - else
+          each enquiry in owl.enquiries
+            tr
+              td #{enquiry.first_name} #{enquiry.last_name}
+              td= enquiry.enquiry
+              td= enquiry.created_at

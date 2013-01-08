@@ -59,26 +59,6 @@ block content
               strong= owl.title
             
             p= owl.description
-            
-            - if (objUser.isAdmin())
-              hr.light
-              h3 Registrations
-              table.admin-gridview
-                thead
-                  tr
-                    td Full Name
-                    td Date
-                tbody.body
-                  if owl.registrations.length == 0
-                    tr
-                      td No registrations for this owl
-                      td
-                  - else
-                    each registration in owl.registrations
-                      tr
-                        td #{registration.first_name} #{registration.last_name}
-                        td= registration.registered_at
-
 
             .general-features
               

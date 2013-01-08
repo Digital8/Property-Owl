@@ -117,6 +117,13 @@ module.exports = class Owl extends Model
         
           callback()
       
+      enquiries: (callback) =>
+        
+        system.db.query "SELECT * FROM enquiries AS E INNER JOIN po_users AS U ON E.user_id = U.user_id where E.entity_type = 'owl' and E.entity_id = ?", [@id], (err, results) =>
+          @enquiries = results
+        
+          callback()
+
       features: (callback) =>
         expose = (type) =>
           @["#{type}Features"] = []
