@@ -191,7 +191,7 @@ module.exports = (app) ->
   admin 'put', '/barns/:id(\\d+)', controllers.admin.barns.update
   admin 'patch', '/barns/:id(\\d+)', controllers.admin.barns.patch
   # admin 'get', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.delete
-  # admin 'del', '/barns/delete/:barn_id(\\d+)/:owl_id(\\d+)', controllers.admin.barns.destroy
+  admin 'del', '/barns/:id(\\d+)', controllers.admin.barns.destroy
   
   # nesting
   admin 'post', '/barns/:id(\\d+)/owls', controllers.barns.nest

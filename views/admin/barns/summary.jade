@@ -1,4 +1,4 @@
-tr
+tr(data-id=barn.id, data-entity_type='barn')
   td= barn.code
   td= moment(barn.created_at).format('LLL')
   td= barn.user.first_name + ' ' + barn.user.last_name
@@ -16,6 +16,6 @@ tr
       | Edit
   
   td.actions
-    a(href='/admin/barns/#{barn.barn_id}/delete', alt='Delete Barn Deal')
+    a.delete(href='/admin/barns/#{barn.barn_id}/delete', alt='Delete Barn Deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete

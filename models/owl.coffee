@@ -146,6 +146,12 @@ module.exports = class Owl extends Model
         Barn.dry @barn_id, (error, barn) =>
           @barn = barn
           do callback
+      
+      user: (callback) =>
+        system.models.user.getUserById @user_id, (error, [user]) =>
+          return callback error if error?
+          @user = user
+          do callback
     
     , (error) => super callback
   
