@@ -61,7 +61,7 @@ module.exports = class Media extends Model
         ext: '.avi'
       'video/x-ms-wmv':
         ext: '.wmv'
-      'application/x-shockwave-flash'
+      'application/x-shockwave-flash':
         ext: '.swf'
     
     magic.detectFile file.path, (error, mime) =>
