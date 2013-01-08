@@ -129,7 +129,7 @@ module.exports = class Model
           
           if values[key].new isnt values[key].old
             
-            model.constructor.change[key]? values: values[key], model: model
+            model.constructor.change?[key]? values: values[key], model: model
         
         callback error, model
   

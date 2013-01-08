@@ -22,6 +22,7 @@ module.exports.augmentApp = (app) ->
   app.argv = optimist
     .alias('verbose', 'v')
     .alias('fake', 'f')
+    .alias('time', 't')
     .argv
   
   if app.argv.verbose

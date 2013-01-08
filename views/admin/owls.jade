@@ -5,20 +5,28 @@
 - if (owls.length == 0)
   
   table.admin-gridview
-   thead
-     tr 
-       td(colspan='6')
-        | There are no pending owl deals. 
+    
+    thead
+      tr 
+        th(colspan='6')
+        | There are no pending owl deals.
+    
+    tbody
+    
+    tfoot
+      tr
+        td(colspan='6')
+          a.button(href="/admin/owls") Manage All Owl Deals
 - else
   
   table.admin-gridview.pending-owls(data-entity_type='owl')
    
    thead
      tr
-       td ID
-       td Listed On
-       td Title
-       td(colspan='3') Actions
+       th ID
+       th Listed On
+       th Title
+       th(colspan='3') Actions
     
     tbody
     - each owl in owls

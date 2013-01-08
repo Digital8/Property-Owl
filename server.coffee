@@ -134,6 +134,9 @@ app.configure ->
     
     # last epoch
     app.use (req, res, done) ->
+      
+      console.log 'time', app.argv.time
+      
       now = moment()
       epoch = moment()
       
