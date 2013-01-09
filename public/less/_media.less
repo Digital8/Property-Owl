@@ -333,7 +333,7 @@
 
     .secure-deal-overlay {
       .modal {
-        padding-top:143px;
+        padding-top:160px;
       }
     }
     
@@ -728,23 +728,38 @@
         }
     }
 
-    .login-overlay {
+    .login-overlay, .register-overlay, .secure-deal-overlay {
       .modal {
         top:46%;
-        height:50.5625em;
-        padding: 190px 90px 0;
         background-size:113% auto;
         overflow:hidden;
       }
     }
 
+    .login-overlay {
+      .modal {
+        height:50.5625em;
+        padding: 190px 90px 0;
+      }
+    }
+
     .register-overlay {
       .modal {
-        top:46%;
         height:49.5625em;
         padding: 175px 90px 0;
-        background-size:113% auto;
-        overflow:hidden;
+      }
+    }
+
+    .secure-deal-overlay {
+      .modal {
+        height:50.5625em;
+        padding: 186px 90px 0;
+
+        .modal-content {
+          .button.right {
+            margin-right:2em;
+          }
+        }
       }
     }
     
