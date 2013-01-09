@@ -85,13 +85,10 @@ app.configure ->
     app.use (req, res, done) ->
       schemas = []
       
-      console.log 'schemas'
-      
       for key, model of system.models when model instanceof Function
         schemas.push model
       
       async.forEach schemas, (schema, callback) ->
-        console.log schema.table.name
         
         system.db.query "SHOW COLUMNS FROM #{schema.table.name}", (error, rows) ->
           return callback() unless rows?.length?
@@ -99,13 +96,17 @@ app.configure ->
           for field in rows
             schema.table.columns[field.Field] = field
           callback()
+      
       , (error) -> done()
     
     app.use (req, res, done) ->
-      console.log 'signupsThisMonth'
+      
       system.db.query "SELECT COUNT(*) AS count FROM po_users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH)", (error, rows) ->
+        
         return done() unless rows?.length
+        
         app.locals.signupsThisMonth = rows.pop().count
+        
         done()
     
     app.use (req, res, done) ->
