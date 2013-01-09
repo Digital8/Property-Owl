@@ -120,8 +120,7 @@ exports.securedeal = (req, res) ->
 exports.referfriend = (req, res) ->
   req.body.user_id ?= res.locals.objUser.id
   req.assert('email', 'Invalid Email Address').isEmail()
-  req.assert('first_name', 'First name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
-  req.assert('last_name', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
+  req.assert('fullname', 'Full name is invalid').is(/^[A-Z]'?[- a-zA-Z]+$/).len(2,20)
   req.assert('comment', 'Comment cannot be empty').notEmpty()
   req.assert('entity_id', 'invalid entity').notEmpty()
   req.assert('entity_type', 'invalid entity type').notEmpty()
@@ -139,10 +138,12 @@ exports.referfriend = (req, res) ->
         from: res.locals.objUser.email
         fromname: res.locals.objUser.displayName
         subject: 'Property Owl Referral'
-        text: req.body.first_name + """,
+        text: req.body.fullname + """,
 
-        You have been referred some property
+        You have been referred a property at
         http://propertyowl.com.au/#{req.body.entity_type}s/#{req.body.entity_id}
+
+        #{req.body.comment}
         """
       , 'Property Owl Referral'
       res.send status: 200
