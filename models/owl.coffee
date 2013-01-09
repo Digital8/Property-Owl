@@ -385,10 +385,8 @@ module.exports = class Owl extends Model
         ?
         state LIKE ?
         AND
-        development_type_id LIKE ?
-        AND
-        development_status_id LIKE ?
-        AND
+        #{q.developmentTypeQuery}
+        #{q.developStatusQuery}
         price >= ?
         AND
         price <= ?
