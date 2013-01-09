@@ -13,7 +13,10 @@
       
       div#approved_at(style="display: #{display}")
         label(for='title') Approved at
-        input(id='approved_at_val', name='approved_at', type='date')
+        if owl.approved_at
+          input(id='approved_at_val', name='approved_at', type='date', value=moment(owl.approved_at).format('YYYY-MM-DD'))
+        else
+          input(id='approved_at_val', name='approved_at', type='date')
       
       script
         $(document).ready(function(){
@@ -41,6 +44,10 @@
         tbody
         
         tfooter
+      
+      h2 Read
+      
+      //- include read
   
   .inputs.detail.pane(data-key='detail', data-label='details')
     include detail_inputs

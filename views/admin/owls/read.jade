@@ -1,0 +1,136 @@
+table
+  tr
+    td ID
+    td= owl.code
+  
+  - if (owl.user)
+    tr
+      td Listed By
+      td #{owl.user.first_name} #{owl.user.last_name}
+  
+  - if (owl.approved_at)
+    tr
+      td Listed On
+      td= owl.approved_at
+  
+  tr
+    td Status
+    td= owl.status
+  
+  tr
+    td Time Left
+    td= owl.time_left
+  
+  tr
+    td Property Type
+    td= owl.developmentType.name
+  
+  tr
+    td Development Stage
+    td= owl.developmentStatus.name
+  
+  tr
+    td Price
+    td= owl.price
+  
+  tr
+    td Title
+    td= owl.title
+  
+  tr
+    td Address
+    td= owl.fullAddress()
+  
+  tr
+    td Bedrooms
+    td= owl.bedrooms
+  
+  tr
+    td Bathrooms
+    td= owl.bathrooms
+  
+  tr
+    td Cars
+    td= owl.cars
+  
+  tr
+    td Total Area
+    td= owl.area
+  
+  tr
+    td Indoor Features
+    td= owl.indoor_features
+  
+  tr
+    td Outdoor Features
+    td= owl.outdoor_features
+  
+  tr
+    td Other Features
+    td= owl.other_features
+
+h3 Description
+
+pre= owl.description
+
+hr.light
+
+h3 Registrations
+
+table.admin-gridview
+  thead
+    tr
+      td Full Name
+      td Email
+      td Status
+      td Date
+  tbody.body
+    if owl.registrations.length == 0
+      tr
+        td No registrations for this owl
+        td
+    - else
+      each registration in owl.registrations
+        tr
+          td #{registration.first_name} #{registration.last_name}
+          td= registration.email
+          td
+            select.registration(data-id="#{registration.registration_id}")
+              - var c = (registration.status == 0) ? true : false
+              option(value='0',selected=c) Not Interested
+              - var c = (registration.status == 1) ? true : false
+              option(value='1',selected=c) Interested
+          td= registration.registered_at
+
+hr.light
+
+h3 Enquiries
+
+table.admin-gridview
+  thead
+    tr
+      td Sent By
+      td Message
+      td Status
+      td Date
+  tbody.body
+    if owl.enquiries.length == 0
+      tr
+        td No enquiries for this owl
+        td
+    - else
+      each enquiry in owl.enquiries
+        tr
+          td #{enquiry.first_name} #{enquiry.last_name}
+          td= enquiry.enquiry
+          td= enquiry.created_at
+
+h3 Deals
+
+form(data-id=owl.id)
+  
+  include file_inputs
+  
+  include image_inputs
+  
+  include deal_inputs
