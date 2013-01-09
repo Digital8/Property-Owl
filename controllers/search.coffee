@@ -29,11 +29,15 @@ exports.index = (req, res) ->
   
   if req.query.cars is 'any' then req.query.cars = 0
   
-  unless req.query.development_status_id?.length
-    req.query.developmentStatusQuery = 'development_status_id = ? AND'
+  req.query.developmentStatusQuery = if req.query.development_status_id?.length
+    'development_type_id = ? AND'
+  else
+    ''
   
-  unless req.query.development_type_id?.length
-    req.query.developmentTypeQuery = 'development_type_id = ? AND'
+  req.query.developmentTypeQuery = if req.query.development_type_id?.length
+    'development_type_id = ? AND'
+  else
+    ''
   
   Owl.search req.query, (err, results) ->
     if err then throw err
