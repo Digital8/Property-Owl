@@ -11,6 +11,9 @@ exports.index = (req, res) ->
   if req.query.state is 'any' then req.query.state = '%'
   # if req.query.suburb is '' then req.query.suburb = '%' else req.query.suburb += '%'
   
+  if req.query.suburb?.length <= 0
+     req.query.suburb = '%'
+  
   unless req.query.suburb.length
     req.query.suburbQuery = "suburb SOUNDS LIKE '#{req.query.suburb}' AND"
   else
