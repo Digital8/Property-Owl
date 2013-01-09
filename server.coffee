@@ -94,6 +94,8 @@ app.configure ->
         console.log schema.table.name
         
         system.db.query "SHOW COLUMNS FROM #{schema.table.name}", (error, rows) ->
+          return callback() unless rows?.length?
+          
           for field in rows
             schema.table.columns[field.Field] = field
           callback()
