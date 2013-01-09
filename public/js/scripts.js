@@ -229,7 +229,6 @@ $(function(){
 	      window.location.replace('/');
 	    }
 	    else {
-	      //console.log('fix this plz');
 	      console.log(d);
 	      var errors = Object.keys(d.errors);
   	    
@@ -243,7 +242,6 @@ $(function(){
         $('#generic-modal-content').append('</ul>');
         
 	      $('#generic-modal').fadeToggle(150);
-	      //modalCallback = function(){console.log('penis')};
 	    }
 	  });
 	  return false;
@@ -303,18 +301,23 @@ $(function(){
 		    else {
 		      var errors = Object.keys(d.errors);
 	  	    
-	  	    $(".secure-deal-errors").html('')
+	  	    $(".secure-deal-errors").html('<ul><img src="images/icons/close.png" id="close-errors" alt="Close" /></ul>')
 		      for(i=0; i<errors.length;i++)
 		      {
-		         $('.secure-deal-errors').append('<li style="color: #f00	"><b>' + d.errors[errors[i]].msg + '</b></li>');
+		         $('.secure-deal-errors ul').append('<li style="color: #f00	"><b>' + d.errors[errors[i]].msg + '</b></li>');
 		      }
-	        $('.secure-deal-errors').append('</ul>');
+	       
 		      
 		    }
 		  });
 		  return false;
 		}
 	});
+
+$("#close-errors").on("click", function(){
+  var errorList = $(this).closest("ul");
+  errorList.fadeOut(150);
+});
 	
 	$(".secure-deal-first-name, .secure-deal-last-name, .secure-deal-email, .secure-deal-phone, .secure-deal-comment").on("keypress", function(event){
 	  if(event.keyCode == 13){
