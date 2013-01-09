@@ -5,19 +5,18 @@ Owl = models.owl
 
 exports.index = (req, res) ->
   
+  console.log req.query
+  
   Search.create req.query, (error, search) ->
     console.log arguments...
   
-  if req.query.state is 'any' then req.query.state = '%'
-  # if req.query.suburb is '' then req.query.suburb = '%' else req.query.suburb += '%'
+  req.query.stateQuery = if req.query.state isnt 'any'
+    "state SOUNDS LIKE '#{req.query.state}' AND"
+  else ''
   
-  if req.query.suburb?.length <= 0
-     req.query.suburb = '%'
-  
-  unless req.query.suburb.length
-    req.query.suburbQuery = "suburb SOUNDS LIKE '#{req.query.suburb}' AND"
-  else
-    req.query.suburbQuery = ''
+  req.query.suburbQuery = if req.query.suburb?.length
+     "suburb SOUNDS LIKE '#{req.query.suburb}' AND"
+  else ''
   
   if req.query.minPrice is 'any' then req.query.minPrice = 0
   if req.query.maxPrice is 'any' then req.query.maxPrice = 99999999999
@@ -30,14 +29,12 @@ exports.index = (req, res) ->
   if req.query.cars is 'any' then req.query.cars = 0
   
   req.query.developmentStatusQuery = if req.query.development_status_id?.length
-    'development_type_id = ? AND'
-  else
-    ''
+    "development_type_id = #{req.query.development_status_id} AND"
+  else ''
   
   req.query.developmentTypeQuery = if req.query.development_type_id?.length
-    'development_type_id = ? AND'
-  else
-    ''
+    "development_type_id = #{req.query.development_type_id} AND"
+  else ''
   
   Owl.search req.query, (err, results) ->
     if err then throw err

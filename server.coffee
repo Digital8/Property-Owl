@@ -139,7 +139,6 @@ app.configure ->
       if app.argv.time?
         now = moment app.argv.time
         epoch = moment app.argv.time
-      
       else
         now = moment()
         epoch = moment()
@@ -149,15 +148,9 @@ app.configure ->
       epoch.hours 12
       
       unless now.valueOf() > epoch.valueOf()
-        # console.log 'epoch', epoch
         epoch.subtract 'weeks', 1
       
       system.last_epoch = epoch
-      
-      console.log '---'.yellow
-      console.log 'now', now
-      console.log 'last_epoch', epoch
-      console.log '---'.yellow
       
       do done
     

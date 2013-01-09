@@ -378,13 +378,12 @@ module.exports = class Owl extends Model
   @search: (q, callback) ->
     console.log 'search', q
     
-    @db.query """
+    query = """
       SELECT *
       FROM owls
       WHERE
-        ?
-        state LIKE ?
-        AND
+        #{q.suburbQuery}
+        #{q.stateQuery}
         #{q.developmentTypeQuery}
         #{q.developmentStatusQuery}
         price >= ?
@@ -399,18 +398,22 @@ module.exports = class Owl extends Model
         AND
         cars >= ?
       GROUP BY owl_id
-    """, [
-      q.suburbQuery
-      q.state
-      q.development_type_id
-      q.development_status_id
+    """
+    
+    console.log query
+    
+    args = [
       q.minPrice
       q.maxPrice
       q.minBeds
       q.maxBeds
       q.bathrooms
       q.cars
-    ], (error, rows) =>
+    ]
+    
+    console.log args
+    
+    @db.query query, args, (error, rows) =>
       return callback error if error
       
       models = (new this row for row in rows)
