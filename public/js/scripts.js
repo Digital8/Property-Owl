@@ -328,8 +328,7 @@ $("#close-errors").on("click", function(){
 	
 	// Refer Friend
 	$(".refer-friend-button").on("click", function(event){
-	  var firstName = $(".refer-friend-first-name").val();
-	  var lastName = $(".refer-friend-last-name").val();
+	  var fullname = $(".refer-friend-fullname").val();
 	  var email = $(".refer-friend-email").val();
 	  var mobile = $(".refer-friend-phone").val();
 	  var comment = $(".refer-friend-comment").val();
@@ -339,7 +338,7 @@ $("#close-errors").on("click", function(){
 	  $.ajax({
 	    url: '/ajax/referfriend',
 	    type: 'post',
-	    data: 'email=' + email + '&mobile=' + mobile + '&first_name=' + firstName + '&last_name=' + lastName + '&comment=' + comment+'&entity_type='+entity+'&entity_id='+entity_id
+	    data: 'email=' + email + '&mobile=' + mobile + '&fullname=' + fullname + '&comment=' + comment+'&entity_type='+entity+'&entity_id='+entity_id
 	  }).done(function(d){
 	    if (d.status == 200) {
 	      $(".refer-friend-overlay").hide();
