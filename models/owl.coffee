@@ -274,7 +274,7 @@ module.exports = class Owl extends Model
         AND
           approved
       ORDER BY created_at ASC
-    """, [state, system.last_epoch.toDate(), system.last_epoch.toDate()], (error, rows) =>
+    """, [state], (error, rows) =>
       return callback error if error
       
       models = (new this row for row in rows)
@@ -303,7 +303,7 @@ module.exports = class Owl extends Model
     HAVING discount) AS TEMP
     ORDER BY ratio DESC
     LIMIT 1
-    """, [system.last_epoch.toDate(), system.last_epoch.toDate()], (error, rows) ->
+    """, [], (error, rows) ->
       return callback error if error
       
       owl = new Owl rows[0]
@@ -333,7 +333,7 @@ module.exports = class Owl extends Model
     HAVING discount) AS TEMP
     ORDER BY ratio DESC
     LIMIT 1
-    """, [system.last_epoch.toDate(), system.last_epoch.toDate(), state], (error, rows) ->
+    """, [state], (error, rows) ->
       return callback error if error
       
       owl = new Owl rows[0]

@@ -9,28 +9,28 @@
         | &nbsp;
         input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
       
-      - var display = (owl.approved == true) ? 'block' : 'none';
+      //- - var display = (owl.approved == true) ? 'block' : 'none';
       
-      div#approved_at(style="display: #{display}")
-        label(for='title') Approved at
-        if owl.approved_at
-          input(id='approved_at_val', name='approved_at', type='date', value=moment(owl.approved_at).format('YYYY-MM-DD'))
-        else
-          input(id='approved_at_val', name='approved_at', type='date')
+      //- div#approved_at(style="display: #{display}")
+      //-   label(for='title') Approved at
+      //-   if owl.approved_at
+      //-     input(id='approved_at_val', name='approved_at', type='date', value=moment(owl.approved_at).format('YYYY-MM-DD'))
+      //-   else
+      //-     input(id='approved_at_val', name='approved_at', type='date')
       
-      script
-        $(document).ready(function(){
-          $("#approved").click(function(){
-            if ($(this).attr('checked'))
-            {
-              $("#approved_at").show();
-            }
-          else
-            {
-              $("#approved_at").hide();
-            }
-          });
-        });
+      //- script
+      //-   $(document).ready(function(){
+      //-     $("#approved").click(function(){
+      //-       if ($(this).attr('checked'))
+      //-       {
+      //-         $("#approved_at").show();
+      //-       }
+      //-     else
+      //-       {
+      //-         $("#approved_at").hide();
+      //-       }
+      //-     });
+      //-   });
   
   .inputs.detail.pane(data-key='detail', data-label='details')
     include detail_inputs

@@ -11,8 +11,12 @@ task 'server', 'run the server', ->
     prompt: "Password? "
     # spawnOptions: {} # other options for spawn
   
-  child = sudo ['supervisor', 'server.coffee'], options
+  args = ['supervisor', '--', 'server.coffee', '--ignore', 'node_modules,public,doc,test,views,support,ssl,schemas,resources,locale']
+  
+  console.log JSON.stringify args
+  
+  child = sudo args, options
   
   child.stdout.on "data", (data) ->
     
-    console.log data.toString()
+    console.log 'data', data.toString()
