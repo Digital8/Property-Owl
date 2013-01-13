@@ -273,10 +273,6 @@ module.exports = class Owl extends Model
           state = ?
         AND
           approved
-        AND
-          approved_at < ?
-        AND
-          TIMESTAMPDIFF(MINUTE, approved_at, ?) < 10080
       ORDER BY created_at ASC
     """, [state, system.last_epoch.toDate(), system.last_epoch.toDate()], (error, rows) =>
       return callback error if error
@@ -304,10 +300,6 @@ module.exports = class Owl extends Model
     FROM owls AS OWLS
     WHERE
       approved
-      AND
-      approved_at < ?
-      AND
-      TIMESTAMPDIFF(MINUTE, approved_at, ?) < 10080
     HAVING discount) AS TEMP
     ORDER BY ratio DESC
     LIMIT 1
@@ -336,10 +328,6 @@ module.exports = class Owl extends Model
     FROM owls AS OWLS
     WHERE
       approved
-      AND
-      approved_at < ?
-      AND
-      TIMESTAMPDIFF(MINUTE, approved_at, ?) < 10080
       AND
       state = ?
     HAVING discount) AS TEMP
