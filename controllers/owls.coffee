@@ -34,7 +34,6 @@ exports.hot = (req, res) ->
 
 exports.byState = (req, res) ->
   {state} = req.params
-  console.log state
   
   Owl.state state, (error, owls) ->
     
