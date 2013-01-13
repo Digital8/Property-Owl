@@ -35,7 +35,7 @@ module.exports = class Affiliate extends Model
         AffiliateCategory = system.models.affiliate_category
         
         AffiliateCategory.get @affiliate_category_id, (error, affiliateCategory) =>
-          @category = affiliateCategory
+          @category = affiliateCategory or {}
           
           callback()
 
