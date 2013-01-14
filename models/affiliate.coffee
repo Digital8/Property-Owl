@@ -24,18 +24,19 @@ module.exports = class Affiliate extends Model
   @field 'visible', type: Boolean, default: yes
   @field 'description'
   @field 'created_at'
-  @field 'affiliate_category_id'
+  
+  @field 'category_id'
 
   constructor: (args = {}) ->
     super
 
   hydrate: (callback) ->
     async.series
-      affiliateCategory: (callback) =>
-        AffiliateCategory = system.models.affiliate_category
+      category: (callback) =>
+        Category = system.models.category
         
-        AffiliateCategory.get @affiliate_category_id, (error, affiliateCategory) =>
-          @category = affiliateCategory or {}
+        Category.get @category_id, (error, category) =>
+          @category = category or {}
           
           callback()
 

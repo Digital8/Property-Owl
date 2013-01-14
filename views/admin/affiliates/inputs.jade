@@ -1,10 +1,10 @@
 .left
   .inputs
-    label.required(for='affiliate_category_id') Category *
-    select#affiliate_category_id(name="affiliate_category_id")
+    label.required(for='category_id') Category *
+    select#category_id(name="category_id")
       option
-      - each category in affiliateCategories
-        option(value='#{category.id}', selected=affiliate.affiliate_category_id == category.id)= category.name
+      - each category in categories
+        option(value='#{category.id}', selected=affiliate.category_id == category.id)= category.key
     
   .inputs
     label.required(for='affiliateCompanyName') Company Name *

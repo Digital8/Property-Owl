@@ -6,11 +6,15 @@ uuid = require 'node-uuid'
 system = require '../../system'
 
 Affiliate = system.models.affiliate
-AffiliateCategories = system.models.affiliate_category
+Category = system.models.category
 
 exports.index = (req, res) ->
-  Affiliate.all (error, affiliates) ->
-    res.render 'admin/affiliates/index', affiliates: affiliates
+  async.parallel
+    affiliates: (callback) -> Affiliate.published callback
+    categories: (callback) -> Category.for 'affiliate', callback
+  , (error, {affiliates, categories}) ->
+    console.log arguments...
+    res.render 'admin/affiliates/index', affiliates: affiliates, categories: categories
 
 exports.view = (req, res) ->
   Affiliate.get req.params.id, (error, affiliate) ->
@@ -19,16 +23,16 @@ exports.view = (req, res) ->
 exports.edit = (req, res) ->
   async.parallel
     affiliate: (callback) -> Affiliate.get req.params.id, callback
-    affiliateCategories: (callback) -> AffiliateCategories.all callback
-  , (error, {affiliate, affiliateCategories}) ->
-    res.render 'admin/affiliates/edit', affiliate: affiliate, affiliateCategories: affiliateCategories
+    categories: (callback) -> Category.for 'affiliate', callback
+  , (error, {affiliate, categories}) ->
+    res.render 'admin/affiliates/edit', affiliate: affiliate, categories: categories
 
 exports.add = (req, res) ->
   async.parallel
     affiliate: (callback) -> Affiliate.new callback
-    affiliateCategories: (callback) -> AffiliateCategories.all callback
-  , (error, {affiliate, affiliateCategories}) ->
-    res.render 'admin/affiliates/add', affiliate: affiliate, affiliateCategories: affiliateCategories
+    categories: (callback) -> Category.for 'affiliate', callback
+  , (error, {affiliate, categories}) ->
+    res.render 'admin/affiliates/add', affiliate: affiliate, categories: categories
 
 exports.create = (req, res) ->
   Affiliate.create req.body, (error, affiliate) ->
@@ -56,4 +60,3 @@ exports.destroy = (req, res) ->
     req.flash 'success', 'affiliate deleted'
     
     res.redirect '/admin/affiliates'
-

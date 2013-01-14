@@ -36,6 +36,7 @@ block content
           td(colspan='3') Actions
       
       tbody
+       //- - (locals.affiliates = locals.affiliates || [])
        - each affiliate in affiliates
           tr(data-id=affiliate.id)
             td= affiliate.name
@@ -63,4 +64,25 @@ block content
       tfoot
         tr
           td(colspan='12')
+          | &nbsp;
+  
+    h1 Affiliate Categories
+    
+    .grid-header.form-header
+    
+    table.admin-gridview.affiliates
+      thead
+        tr
+          td Name
+          
+          td(colspan='2') Actions
+      
+      tbody
+       //- - (locals.affiliateCategories = locals.affiliateCategories || [])
+       - each category in categories
+          include ../categories/summary
+      
+      tfoot
+        tr
+          td(colspan='2')
           | &nbsp;
