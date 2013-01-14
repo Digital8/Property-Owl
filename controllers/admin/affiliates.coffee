@@ -25,6 +25,8 @@ exports.edit = (req, res) ->
     affiliate: (callback) -> Affiliate.get req.params.id, callback
     categories: (callback) -> Category.for 'affiliate', callback
   , (error, {affiliate, categories}) ->
+    if error then throw error
+  
     res.render 'admin/affiliates/edit', affiliate: affiliate, categories: categories
 
 exports.add = (req, res) ->
