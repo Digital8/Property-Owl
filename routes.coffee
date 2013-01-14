@@ -55,6 +55,14 @@ module.exports = (app) ->
   # media 'post', '', controllers.medias.create
   media 'del', '/:id(\\d+)', controllers.medias.destroy
   
+  # media
+  category = (method, path, middleware...) ->
+    app[method] "/categories#{path}", authenticate, middleware...
+  
+  # media 'get', '', controllers.bookmarks.index
+  # media 'post', '', controllers.medias.create
+  category 'del', '/:id(\\d+)', controllers.categories.destroy
+  
   bookmark = (method, path, middleware...) ->
     app[method] "/bookmarks#{path}", authenticate, middleware...
   
