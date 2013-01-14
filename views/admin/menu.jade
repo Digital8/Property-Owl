@@ -41,7 +41,3 @@ nav#admin-menu.admin-menu
       li  
         - var c = (menu == 'members') ? 'active' : ''
         a(href='/admin/members', class="#{c}") Members
-    
-    - if (req.user.isHacker())
-      li.hacker
-        a(href='#', class="#{c}", style="color: #D95477;") #{req.user.fullName} { id: #{req.user.id}, email: #{req.user.email} }
