@@ -30,7 +30,7 @@ block content
         
         .inputs
           label.control-label(for='inputContent') Content
-          textarea#inputContent.codemirror(name='content', placeholder='Page Content', rows='30', cols='100')
+          textarea#inputContent(name='content', placeholder='Page Content', rows='30', cols='100')
             = page.content.replace(/<br \/>/g,"\r\n")
         
         .inputs
