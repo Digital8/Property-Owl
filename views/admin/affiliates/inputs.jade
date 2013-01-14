@@ -3,7 +3,7 @@
     label.required(for='category_id') Category *
     select#category_id(name="category_id")
       - each category in categories
-        option(value='#{category.id}', selected=affiliate.category_id == category.id)= category.name
+        option(value='#{category.id}', selected=affiliate.category_id == category.id)= category.key
     
   .inputs
     label.required(for='affiliateCompanyName') Company Name *
