@@ -113,7 +113,7 @@ module.exports = class Owl extends Model
         
       registrations: (callback) =>
         system.db.query "SELECT * FROM po_registrations AS R INNER JOIN po_users AS U ON R.user_id = U.user_id where R.type = 'owl' and R.resource_id = ?", [@id], (err, results) =>
-          @registrations = results or 0
+          @registrations = results
         
           callback()
       
@@ -121,7 +121,6 @@ module.exports = class Owl extends Model
         
         system.db.query "SELECT * FROM enquiries AS E INNER JOIN po_users AS U ON E.user_id = U.user_id where E.entity_type = 'owl' and E.entity_id = ?", [@id], (err, results) =>
           @enquiries = results
-        
           callback()
 
       features: (callback) =>
