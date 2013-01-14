@@ -229,10 +229,9 @@ $(function(){
 	      window.location.replace('/');
 	    }
 	    else {
-	      console.log(d);
 	      var errors = Object.keys(d.errors);
   	    
-  	    $("#generic-modal, #generic-modal .modal.main").removeClass('success').addClass('error');
+  	    $("#generic-modal, #generic-modal .modal.main").removeClass('success');
 	      $('#generic-modal-title').html('Please fix the following');
 	      $('#generic-modal-content').html('<br /><ul>');
 	      for(i=0; i<errors.length;i++)
@@ -270,7 +269,6 @@ $(function(){
       else
       {
       	$('.overlay').hide();
-      	alert(d.message);
       }
   	});
 	};
@@ -301,11 +299,16 @@ $(function(){
 		    else {
 		      var errors = Object.keys(d.errors);
 	  	    
-	  	    $(".secure-deal-errors").html('<ul><img src="images/icons/close.png" id="close-errors" alt="Close" /></ul>')
+	  	    $("#generic-modal, #generic-modal .modal.main").removeClass('success');
+		      $('#generic-modal-title').html('Please fix the following');
+		      $('#generic-modal-content').html('<br /><ul>');
 		      for(i=0; i<errors.length;i++)
 		      {
-		         $('.secure-deal-errors ul').append('<li style="color: #f00	"><b>' + d.errors[errors[i]].msg + '</b></li>');
+		         $('#generic-modal-content').append('<li><b>' + d.errors[errors[i]].msg + '</b></li>');
 		      }
+	        $('#generic-modal-content').append('</ul>');
+	        
+		      $('#generic-modal').fadeToggle(150);
 	       
 		      
 		    }
@@ -345,13 +348,17 @@ $("#close-errors").on("click", function(){
 	    }
 	    else {
 	      var errors = Object.keys(d.errors);
-  	    
-  	    $(".raf-errors").html('');
-        for(i=0; i<errors.length;i++)
-        {
-           $('.raf-errors').append('<li style="color: #f00 "><b>' + d.errors[errors[i]].msg + '</b></li>');
-        }
-        $('.raf-errors').append('</ul>');
+	      
+  	    $("#generic-modal, #generic-modal .modal.main").removeClass('success');
+	      $('#generic-modal-title').html('Please fix the following');
+	      $('#generic-modal-content').html('<br /><ul>');
+	      for(i=0; i<errors.length;i++)
+	      {
+	         $('#generic-modal-content').append('<li><b>' + d.errors[errors[i]].msg + '</b></li>');
+	      }
+        $('#generic-modal-content').append('</ul>');
+        
+	      $('#generic-modal').fadeToggle(150);
 	    }
 	  });
 	  return false;
