@@ -14,7 +14,7 @@ exports.create = (req, res) ->
     key: key
   
   Category.create map, (error, category) ->
-    res.send category: category, status: 200
+    res.send category: category
 
 exports.patch = (req, res) ->
   console.log 'patch', req.params.id, req.body
