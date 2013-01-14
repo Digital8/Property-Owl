@@ -50,8 +50,6 @@ module.exports = ->
     $tbody = $ '<tbody>'
     $tbody.appendTo $table
     
-    console.log rangeValue
-    
     for i in [0...rangeValue]
       $row = $ '<tr>'
       
