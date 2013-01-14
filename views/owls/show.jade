@@ -58,7 +58,7 @@ block content
             if(typeof(bestdeal) != 'undefined' && bestdeal)
               strong= owl.title
             
-            p= owl.description
+            p !{owl.description.replace(/\r\n/g,"<br />")}
 
             .general-features
               

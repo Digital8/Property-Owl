@@ -211,8 +211,7 @@ module.exports = class Model
   ###
   @all = (callback) ->
     # console.log uuid(), @name
-
-    @db.query "SELECT * FROM #{@table.name}", (error, rows) =>
+    @db.query "SELECT * FROM #{@table.name} ORDER BY #{@table.key}", (error, rows) =>
       return callback error if error
       
       models = (new this row for row in rows)

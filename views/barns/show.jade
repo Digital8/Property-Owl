@@ -159,11 +159,9 @@ block content
               | More Information
               img.arrow(src='/images/blue-arrow-icon-down.png', alt='More Information')
             ul
-              li No files have been uploaded
-            //-               ul
-            //-                 li No files have been uploaded
-            //-             - else
-            //-               ul
-            //-               - each file in files
-            //-                 li
-            //-                   a(href="/uploads/#{file.filename}") #{file.description}
+              if barn.files.length == 0
+                li No files have been uploaded
+              else
+                each file in barn.files
+                  li
+                    a(href="/uploads/#{file.filename}") #{file.description}
