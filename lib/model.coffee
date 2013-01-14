@@ -139,9 +139,9 @@ module.exports = class Model
   ###
   @update = (id, hash, callback) ->
     
-    @get id, (error, model) ->
+    @get id, (error, model) =>
       
-      for key, field of model.constructor.fields when hash[key]?
+      for key, field of @fields when hash[key]?
         if field.type? and field.type is Boolean
           value = hash[key]
           
@@ -178,19 +178,20 @@ module.exports = class Model
   @create = (map, callback) ->
     model = new this map
     
-    hash = {}
-    
-    for key, field of @fields
-      continue if key is @table.key
-      
-      continue unless model[key]?
-      
-      hash[key] = model[key]
-    
-    hash.created_at = new Date
-    hash.updated_at = new Date
-    
     model.hydrate (error, model) =>
+      
+      hash = {}
+      
+      for key, field of @fields
+        continue if key is @table.key
+        
+        continue unless model[key]?
+        
+        hash[key] = model[key]
+      
+      hash.created_at = new Date
+      hash.updated_at = new Date
+      
       @db.query "INSERT INTO #{@table.name} SET ?", hash, (error, result) =>
         
         if error then return callback error
