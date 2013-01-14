@@ -10,7 +10,7 @@ Category = system.models.category
 
 exports.index = (req, res) ->
   async.parallel
-    affiliates: (callback) -> Affiliate.published callback
+    affiliates: (callback) -> Affiliate.all callback
     categories: (callback) -> Category.for 'affiliate', callback
   , (error, {affiliates, categories}) ->
     console.log arguments...
