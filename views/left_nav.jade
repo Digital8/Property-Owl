@@ -44,15 +44,14 @@
     - var i = 0, max = 1;
     each ad in adUpperBox 
       - i++
-      include adverts/box
-      - if (i == max)
-        break
+      if (i <= max)
+        include adverts/box
+
     i = 0;
     each ad in adLowerBox 
       - i++
-      include adverts/box
-      if (i == max)
-        break
+      if (i <= max)
+        include adverts/box
   
   - if (locals.enquire)
     
