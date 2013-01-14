@@ -18,6 +18,8 @@ $ ->
   
   do require './affiliates'
   
+  do require './categories'
+  
   do require './live'
   
   do require './bookmarks'
