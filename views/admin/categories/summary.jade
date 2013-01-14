@@ -1,5 +1,6 @@
 tr(data-id=category.id)
-  td= category.name
+  td
+    input(type="text", value=category.key)
 
   td.actions
     a.edit(href='/admin/categories/#{category.id}/edit', alt='edit property')

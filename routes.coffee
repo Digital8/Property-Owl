@@ -47,6 +47,10 @@ module.exports = (app) ->
   ### enquiries ###
   app.post '/enquiries', authenticate, controllers.enquiries.create
   
+  ### enquiries ###
+  app.post '/categories', authenticate, controllers.categories.create
+  app.patch '/categories/:id((\\d+))', authenticate, controllers.categories.patch
+  
   # media
   media = (method, path, middleware...) ->
     app[method] "/medias#{path}", authenticate, middleware...

@@ -6,19 +6,21 @@ Category = system.models.category
 #   Bookmark.forUser req.user, (error, bookmarks) ->
 #     res.render 'user/bookmarks', bookmarks: bookmarks
 
-# exports.create = (req, res) ->
-#   {type, id} = req.body
+exports.create = (req, res) ->
+  {entity_type, key} = req.body
+  
+  map =
+    entity_type: entity_type
+    key: key
+  
+  Category.create map, (error, category) ->
+    res.send category: category, status: 200
 
-#   user = res.locals.objUser
-
-#   row =
-#     entity_id: id
-#     type: type
-#     user_id: user.id
-#     created_at: new Date
-
-#   system.db.query "INSERT INTO bookmarks SET ?", row, ->
-#     res.send status: 200
+exports.patch = (req, res) ->
+  console.log 'patch', req.params.id, req.body
+  
+  Category.patch req.params.id, req.body, (error, category) ->
+    res.send status: 200
 
 exports.destroy = (req, res) ->
   Category.delete req.params.id, (error, result) ->

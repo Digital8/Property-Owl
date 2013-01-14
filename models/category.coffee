@@ -10,6 +10,8 @@ module.exports = class Category extends Model
   
   @field 'key'
   
+  @field 'entity_type'
+  
   constructor: (args = {}) ->
     super
   
