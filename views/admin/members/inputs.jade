@@ -8,60 +8,60 @@
   .inputs
     label.required(for='first_name') Full Name
     - if (values.fname == undefined) values.fname = ''
-      input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.fname}",class="half-field")
+      input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.fname}",class="half-field",maxlength='100')
       | &nbsp;
     - if (values.lname == undefined) values.lname = ''
-      input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.lname}",class="half-field")
+      input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.lname}",class="half-field",maxlength='100')
   
   .inputs
     label(for='company') Company
     - if (values.company == undefined) values.company = ''
-      input#company(type="text",placeholder="Company",name="company",value="#{values.company}")
+      input#company(type="text",placeholder="Company",name="company",value="#{values.company}",maxlength='100')
   
   .inputs
     label.required(for='phone') Phone
     - if (values.phone == undefined) values.phone = ''
-      input#phone(type="text",placeholder="Phone",name="phone",value="#{values.phone}")
+      input#phone(type="text",placeholder="Phone",name="phone",value="#{values.phone}",maxlength='100')
   
   .inputs
     label(for='workPhone') Work Phone
     - if (values.work_phone == undefined) values.work_phone = ''
-      input#work_phone(type="text",placeholder="Work Phone",name="work_phone",value="#{values.work_phone}")
+      input#work_phone(type="text",placeholder="Work Phone",name="work_phone",value="#{values.work_phone}",maxlength='100')
   
   .inputs
     label(for='mobile') Mobile
     - if (values.mobile == undefined) values.mobile = ''
-     input#mobile(type="text",placeholder="Mobile",name="mobile",value="#{values.mobile}")
+     input#mobile(type="text",placeholder="Mobile",name="mobile",value="#{values.mobile}",maxlength='100')
 
 .right
   
   .inputs
    label.required(for='email') Email
    - if (values.email == undefined) values.email = ''
-    input#email(type="text",placeholder="Email",name="email",value="#{values.email}")
+    input#email(type="text",placeholder="Email",name="email",value="#{values.email}",maxlength='100')
   
   .inputs
    label.required(for='password') Password
-   input#password(type="password",name="password",class="half-field",placeholder="Password")
+   input#password(type="password",name="password",class="half-field",placeholder="Password",maxlength='100')
    | &nbsp;
-   input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword",class="half-field")
+   input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword",class="half-field",maxlength='100')
     br
     p.note Password will not be changed if left blank
   
   .inputs
    label.required(for='address') Address
    - if (values.address == undefined) values.address = ''
-    input#address(type="text",placeholder="Address",name="address",value="#{values.address}")
+    input#address(type="text",placeholder="Address",name="address",value="#{values.address}",maxlength='100')
   
   .inputs
    label.required(for='suburb') Suburb
    - if (values.suburb == undefined) values.suburb = ''
-    input#suburb(type="text",placeholder="Suburb",name="suburb",value="#{values.suburb}")
+    input#suburb(type="text",placeholder="Suburb",name="suburb",value="#{values.suburb}",maxlength='100')
   
   .inputs
    label.required(for='postcode') Postcode
    - if (values.postcode == undefined) values.postcode = ''
-    input#postcode(type="text",name="postcode",placeholder="Postcode",value="")
+    input#postcode(type="text",name="postcode",placeholder="Postcode",value="",maxlength='100')
   
   br
   

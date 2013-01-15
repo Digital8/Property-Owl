@@ -2,40 +2,40 @@
   
   .inputs
     label.required(for='name') Name
-    input#name(type='text', name='name', placeholder='Name', value=advertiser.name)
+    input#name(type='text', name='name', placeholder='Name', value=advertiser.name,maxlength='100')
   
   .inputs
     label(for='description') Description
-    input#description(type='text', placeholder='Description', name='description', value=advertiser.description)
+    input#description(type='text', placeholder='Description', name='description', value=advertiser.description,maxlength='100')
   
   .inputs
     label.required(for='contactee') Contactee
-    input#contactee(type='text', placeholder='Contactee', name='contactee', value=advertiser.contactee)
+    input#contactee(type='text', placeholder='Contactee', name='contactee', value=advertiser.contactee,maxlength='100')
+  
+  .inputs
+    label.required(for='email') Email
+    input#email(type='email', name='email', placeholder='Email', value=advertiser.email,maxlength='100')
+  
+  .inputs
+    label.required(for='phone') Phone
+    input#phone(type='tel', placeholder='Phone', name='phone', value=advertiser.phone,maxlength='100')
 
 .right
   
   .inputs
-    label.required(for='email') Email
-    input#email(type='email', name='email', placeholder='Email', value=advertiser.email)
-  
-  .inputs
-    label.required(for='phone') Phone
-    input#phone(type='tel', placeholder='Phone', name='phone', value=advertiser.phone)
-  
-  .inputs
     label.required(for='address') Address
-    input#address(type='text', placeholder='Address', name='address', value=advertiser.address)
+    input#address(type='text', placeholder='Address', name='address', value=advertiser.address,maxlength='100')
  
   .inputs
     label.required(for='suburb') Suburb
-    input#suburb(type='text', placeholder='Suburb', name='suburb', value=advertiser.suburb)
+    input#suburb(type='text', placeholder='Suburb', name='suburb', value=advertiser.suburb,maxlength='100')
  
   .inputs
     label.required(for='postcode') Postcode
-    input#postcode(type='text', name='postcode', placeholder='Postcode', value=advertiser.postcode)
+    input#postcode(type='text', name='postcode', placeholder='Postcode', value=advertiser.postcode,maxlength='100')
   
   .inputs
     label.required(for='state') State
-    input#state(type='text', name='state', placeholder='State', value=advertiser.state)
+    input#state(type='text', name='state', placeholder='State', value=advertiser.state,maxlength='100')
 
 .inputs
