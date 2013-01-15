@@ -38,14 +38,11 @@ module.exports = () ->
   $addA.click (event) ->
     event.preventDefault()
     
-    # alert 'add'
+    #alert 'add'
     
     $.post "/categories", {key: '', entity_type: 'affiliate'}, (body, res, xhr) ->
       
-      console.log arguments...
-      
-      
-      
+      # console.log arguments...
       if xhr.status is 200
        
         $tr = $ """
@@ -71,7 +68,7 @@ module.exports = () ->
         $tr.appendTo $tbody
   
   sync = ($trs) ->
-    console.log 'syncing', $trs
+    # console.log 'syncing', $trs
     
     for tr in $trs
       $tr = $ tr

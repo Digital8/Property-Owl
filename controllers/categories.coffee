@@ -17,7 +17,6 @@ exports.create = (req, res) ->
     res.send category: category
 
 exports.patch = (req, res) ->
-  console.log 'patch', req.params.id, req.body
   
   Category.patch req.params.id, req.body, (error, category) ->
     res.send status: 200

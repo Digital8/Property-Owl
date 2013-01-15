@@ -120,7 +120,7 @@ exports.securedeal = (req, res) ->
 exports.referfriend = (req, res) ->
   req.body.user_id ?= res.locals.objUser.id
   req.assert('email', 'Invalid Email Address').isEmail()
-  req.assert('fullname', 'Full name is invalid').is(/^[A-Z]'?[- a-zA-Z]+$/).len(2,20)
+  req.assert('fullname', 'Full name is invalid').len(2,20)#.is(/^[A-Z]'?[- a-zA-Z]+$/).len(2,20)
   req.assert('comment', 'Comment cannot be empty').notEmpty()
   req.assert('entity_id', 'invalid entity').notEmpty()
   req.assert('entity_type', 'invalid entity type').notEmpty()
