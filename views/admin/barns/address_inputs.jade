@@ -8,15 +8,15 @@ hr
 
 .inputs
   label(for='title') Address
-  input.address(type='text', name='address', value='#{barn.address}')
+  input.address(type='text', name='address', value='#{barn.address}',maxlength='100')
 
 .inputs
   label(for='suburb') Suburb
-  input.suburb(type='text', name='suburb', value='#{barn.suburb}')
+  input.suburb(type='text', name='suburb', value='#{barn.suburb}',maxlength='100')
 
 .inputs
   label(for='postcode') Postcode
-  input.postcode(type='text', name='postcode', value='#{barn.postcode}')
+  input.postcode(type='text', name='postcode', value='#{barn.postcode}',maxlength='10')
 
 .inputs
   label(for='state') State

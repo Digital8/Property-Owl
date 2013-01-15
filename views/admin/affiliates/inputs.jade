@@ -7,7 +7,7 @@
     
   .inputs
     label.required(for='affiliateCompanyName') Company Name *
-    input#affiliateCompanyName(type='text',name="name",value=affiliate.name)
+    input#affiliateCompanyName(type='text',name="name",value=affiliate.name,maxlength='100')
   .inputs
     label.file-upload(for='affiliateLogo')
       | Logo Image *
@@ -16,7 +16,7 @@
     p.success Uploaded file: image.png (30kb)
   .inputs
     label.required(for='supplerEmail') Email Address *
-    input#supplerEmail(type='text',name="email",value=affiliate.email)
+    input#supplerEmail(type='text',name="email",value=affiliate.email,maxlength='100')
   .inputs
     label
       input(type='checkbox', name='visible', checked=affiliate.visible)
@@ -24,13 +24,13 @@
 .right
   .inputs
     label.required(for='affiliatePhone') Phone *
-    input#affiliatePhone(type='text',name="phone",value='#{affiliate.phone}')
+    input#affiliatePhone(type='text',name="phone",value='#{affiliate.phone}',maxlength='15')
   .inputs
     label.required(for='affiliateAddressLine1') Address Line 1 *
     input#affiliateAddressLine1(type='text',name="address",value='#{affiliate.address}')
   .inputs
     label.required(for='affiliateSuburb') Suburb
-    input#affiliateSuburb(type='text',name="suburb",value='#{affiliate.suburb}')
+    input#affiliateSuburb(type='text',name="suburb",value='#{affiliate.suburb}',maxlength='100')
   .inputs
     label(for='state') State
     select#state(name='state')
@@ -39,9 +39,9 @@
         option(value='#{state}', selected=state == affiliate.state) #{state.toUpperCase()}
   .inputs
     label.required(for='propertyPostcode') Postcode
-    input#propertyPostcode(type='text',name="postcode",value='#{affiliate.postcode}')
+    input#propertyPostcode(type='text',name="postcode",value='#{affiliate.postcode}',maxlength='20')
 .inputs  
 .inputs
   label(for='affiliateServiceDescription') Description
-  textarea#affiliateServiceDescription(rows='5',name="description")
+  textarea#affiliateServiceDescription(rows='3',name="description")
     = affiliate.description

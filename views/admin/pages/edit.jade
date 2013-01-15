@@ -22,11 +22,11 @@ block content
         
         .inputs
           label.control-label(for='inputTitle') Page URL
-          input#inputUrl(type='text', name='url', placeholder='/url', value="#{page.url}")
+          input#inputUrl(type='text', name='url', placeholder='/url', value="#{page.url}",maxlength='100')
         
         .inputs
           label.control-label(for='inputTitle') Page Title
-          input#inputTitle(type='text', name='header', placeholder='Page Title', value="#{page.header}")
+          input#inputTitle(type='text', name='header', placeholder='Page Title', value="#{page.header}",maxlength='100')
         
         .inputs
           label.control-label(for='inputContent') Content

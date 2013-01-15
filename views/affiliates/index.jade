@@ -21,6 +21,7 @@ block content
         h4 Filter By Category:
           form(action="",method="get")
             select(name="category")
+              option(value='All') All
               each category in categories
                 option(value="#{category.id}")= category.key
             | &nbsp; 
@@ -45,7 +46,7 @@ block content
 
     .secure-deal-overlay.overlay.overlay.modal-enquiry#generic-modal
       .modal.main.success
-        a.close-modal-enquiry(href='#')
+        a.close-secure-deal(href='#')
           img(src='/images/modal-close-white.png', alt='Close')
         
         h1.modal-title Send Enquiry
@@ -55,7 +56,7 @@ block content
           input.half.secure-deal-first-name#name(type='text', placeholder='Name', value="#{objUser.displayName}")
           input.half.secure-deal-email#email(type='text', placeholder='Email Address', value="#{objUser.email}")
           input.half.secure-deal-phone#phone(type='text', placeholder='Phone Number', value="#{objUser.mobile}")
-          select#method(name="method",style="width: 225px;").half.secure-deal-email
+          select#method(name="method",style="width: 14.063em;").half.secure-deal-email
             option(value="Phone") Contact me by phone
             option(value="Email") Contact me by email
           textarea.full.secure-deal-comment#enquiry(placeholder='Place your enquiry here', style="width:98%;")
