@@ -21,8 +21,9 @@ block content
         h4 Filter By Category:
           form(action="",method="get")
             select(name="category")
+              option(value='All') All
               each category in categories
-                option(value="#{category.id}")= category.name
+                option(value="#{category.id}")= category.key
             | &nbsp; 
             input(type="submit")
         - each category in categories
