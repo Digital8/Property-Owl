@@ -22,6 +22,9 @@ exports.getUserByEmail = (email, callback) =>
 exports.createUser = (user, callback) =>
   @db.query "INSERT INTO po_users (email,password,first_name,last_name,account_type_id,created_at) VALUES(?,?,?,?,?,?)", [user.email, user.password, user.fname, user.lname, user.group, new Date], callback
 
+exports.updateGroup = (user, callback) =>
+  @db.query "UPDATE po_users SET account_type_id = ? WHERE user_id = ?", [user.group, user.id], callback
+
 exports.updateUser = (user, callback) =>
   @db.query "UPDATE po_users SET email = ?, first_name = ?, last_name = ?, company = ?, phone = ?, work_phone = ?, mobile = ?, address = ?, suburb = ?, state = ?, postcode = ?, subscribed_newsletter = ?, subscribed_alerts = ? WHERE user_id = ?", [user.email, user.fname, user.lname, user.company, user.phone, user.work_phone, user.mobile, user.address, user.suburb, user.state, user.postcode, user.subscribed_news, user.property_alerts,user.id], callback
 

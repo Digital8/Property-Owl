@@ -64,14 +64,18 @@
     input#postcode(type="text",name="postcode",placeholder="Postcode",value="",maxlength='100')
   
   br
-  
-  //- TODO fix checkbox not updating fields
+
+  //
   .inputs
-    input(type="checkbox", name="subscribed_newsletter", value="1", checked=((values.subscribed_newsletter==1) ? true : false))
     |  Subscribed to newsletter
-  
+    select(name='subscribed_news')
+      option(value='1',selected=(values.subscribed_newsletter == 1) ? true : false) Yes
+      option(value='0',selected=(values.subscribed_newsletter == 0) ? true : false) No
+
   .inputs
-    input(type="checkbox", name="subscribed_alerts", value="1", checked=((values.subscribed_alerts==1) ? true : false))
-    |  Subscribed to property alerts
+    |  Subscribed to Propery Alerts
+    select(name='property_alerts')
+      option(value='1',selected=(values.subscribed_alerts == 1) ? true : false) Yes
+      option(value='0',selected=(values.subscribed_alerts == 0) ? true : false) No
 
 .inputs

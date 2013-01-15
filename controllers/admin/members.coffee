@@ -70,6 +70,7 @@ exports.update = (req,res) ->
   req.body.fname ?= ''
   req.body.lname ?= ''
   req.body.id = req.params.id
+  req.body.group ?= 1
     
   req.assert('email', 'Invalid Email Address').isEmail()
  
@@ -104,11 +105,14 @@ exports.update = (req,res) ->
           if err
             console.log err
             req.flash 'error', "An unknown error has occured. Error code: #{err.code}"
+            res.redirect 'back'
           else
             # todo: Update the users group
-            req.flash 'success', 'Your details have successfully been updated'
+            models.user.updateGroup req.body, (err, results) ->
+              if err then console.log err
+              req.flash 'success', 'Details have successfully been updated'
           
-          res.redirect '/admin/members'
+              res.redirect 'back'
 
 exports.delete = (req, res) ->
 
