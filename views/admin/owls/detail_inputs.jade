@@ -22,7 +22,7 @@
 
 .inputs
   label(for='description') Description
-    textarea.description(name='description',rows='7')
+    textarea#description(name='description',rows='7', style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 181px;")
       = owl.description
 
 .inputs

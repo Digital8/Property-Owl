@@ -64,21 +64,21 @@ block content
           td(colspan='12')
           | &nbsp;
     
-    //- h1 Affiliate Categories
+    h1 Affiliate Categories
     
-    //- table.admin-gridview.categories
-    //-   thead
-    //-     tr
-    //-       td Name
+    table.admin-gridview.categories
+      thead
+        tr
+          td Name
           
-    //-       td(colspan='2') Actions
+          td(colspan='2') Actions
       
-    //-   tbody
-    //-    //- - (locals.affiliateCategories = locals.affiliateCategories || [])
-    //-    - each category in categories
-    //-       include ../categories/summary
+      tbody
+       //- - (locals.affiliateCategories = locals.affiliateCategories || [])
+       each category in categories
+          include ../categories/summary
       
-    //-   tfoot
-    //-     tr
-    //-       td(colspan='2')
-    //-       | &nbsp;
+      tfoot
+        tr
+          td(colspan='2')
+          | &nbsp;

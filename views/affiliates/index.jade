@@ -22,7 +22,7 @@ block content
           form(action="",method="get")
             select(name="category")
               each category in categories
-                option(value="#{category.id}")= category.name
+                option(value="#{category.id}")= category.key
             | &nbsp; 
             input(type="submit")
         - each category in categories
