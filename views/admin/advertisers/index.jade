@@ -16,10 +16,6 @@ block content
          td Contactee
          td Email
          td Phone
-         td Address
-         td Suburb
-         td State
-         td Postcode
          td Map
          td(colspan='2') Actions
      tbody
@@ -33,10 +29,6 @@ block content
              a(href='mailto:' + advertiser.email, target='_blank')= advertiser.email
            td
              a(href='tel:' + advertiser.phone, target='_blank')= advertiser.phone
-           td= advertiser.address
-           td= advertiser.suburb
-           td= advertiser.state
-           td= advertiser.postcode
            td
              a(href='http://maps.google.com/?q=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode, target='_blank')
                img(src='http://maps.googleapis.com/maps/api/staticmap?sensor=false&center=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode + '&zoom=7&size=192x128')

@@ -4,7 +4,8 @@ tr(data-id=post.id)
   
   td= post.title
   
-  td= moment(post.created_at).format('LLL')
+  - var listed = new Date(post.created_at)
+  td(style='text-align: center;') #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
   
   td.actions
     
