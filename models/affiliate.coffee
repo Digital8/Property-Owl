@@ -79,6 +79,21 @@ module.exports = class Affiliate extends Model
     else
       return '/images/placeholder.png' # or whatever it is
 
+  @byCategory = (category_id, callback) ->
+    @db.query "SELECT * FROM affiliates WHERE visible AND category_id = ?", [category_id], (error, rows) =>
+      return callback error if error
+      
+      models = []
+      
+      for row in rows
+        model = new Affiliate row
+        models.push model
+      
+      async.forEach models, (model, callback) =>
+        model.hydrate callback
+      , (error) ->
+        callback null, models
+
   @published = (callback) ->
     @db.query "SELECT * FROM affiliates WHERE visible", (error, rows) =>
       return callback error if error

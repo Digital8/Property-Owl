@@ -18,7 +18,13 @@ block content
       h3 Property Owl &#45; Innovation in delivering Australia&#39;s Best Property Deals
       
       - if (locals.categories && locals.categories.length)
-        
+        h4 Filter By Category:
+          form(action="",method="get")
+            select(name="category")
+              each category in categories
+                option(value="#{category.id}")= category.name
+            | &nbsp; 
+            input(type="submit")
         - each category in categories
         
           h3= category.key

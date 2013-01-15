@@ -6,11 +6,18 @@ Affiliate = system.models.affiliate
 Category = system.models.category
 
 exports.index = (req, res) ->
-  async.parallel
-    affiliates: (callback) -> Affiliate.all callback
-    categories: (callback) -> Category.for 'affiliate', callback
-  , (error, {affiliates, categories}) ->
-    res.render 'affiliates/index', affiliates: affiliates, categories: categories
+  if req.query.category?
+    async.parallel
+      affiliates: (callback) -> Affiliate.byCategory req.query.category, callback
+      categories: (callback) -> Category.for 'affiliate', callback
+    , (error, {affiliates, categories}) ->
+      res.render 'affiliates/index', affiliates: affiliates, categories: categories
+  else
+    async.parallel
+      affiliates: (callback) -> Affiliate.all callback
+      categories: (callback) -> Category.for 'affiliate', callback
+    , (error, {affiliates, categories}) ->
+      res.render 'affiliates/index', affiliates: affiliates, categories: categories
 
 exports.view = (req,res) ->
 
