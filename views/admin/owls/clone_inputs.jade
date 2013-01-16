@@ -1,18 +1,21 @@
 h2 Clone
+if owl.id
+  label.clone_label
 
-label.clone_label
+  .clone_range_label(style='float: left; width: 1em;')
 
-.clone_range_label(style='float: left; width: 1em;')
+  input.clone_range(type='range', min='1', max='5', step='1', style='float: left; width: 10%; height: 32px; margin-left: 1em; margin-right: 1em;')
 
-input.clone_range(type='range', min='1', max='5', step='1', style='float: left; width: 10%; height: 32px; margin-left: 1em; margin-right: 1em;')
+  button.clone_button(style='margin-left: 1em; width: 6em; height: 32px; line-height: 32px;') Clone
 
-button.clone_button(style='margin-left: 1em; width: 6em; height: 32px; line-height: 32px;') Clone
+  div(style='clear: both;')
 
-div(style='clear: both;')
+  table.clone_table(style='width: 100%;')
 
-table.clone_table(style='width: 100%;')
-
-style
-  table.clone_table td {
-    border: 1px dashed #ddd;
-  }
+  style
+    table.clone_table td {
+      border: 1px dashed #ddd;
+    }
+else
+  strong Number of clones:
+    input(type="text",name="clone_num",value="0")

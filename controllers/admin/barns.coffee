@@ -21,11 +21,8 @@ exports.edit = (req, res) ->
 
 exports.add = (req, res) ->
   
-  Barn.create {}, (error, barn) ->
-    
-    User.getUsersByGroup 2, (error, developers) ->
-      
-      res.render 'admin/barns/add', barn: barn, developers: developers
+  User.getUsersByGroup 2, (error, developers) ->
+      res.render 'admin/barns/add', barn: {}, developers: developers
 
 exports.create = (req, res) ->
   console.log 'creating barn'

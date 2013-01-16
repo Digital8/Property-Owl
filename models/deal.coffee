@@ -51,6 +51,11 @@ module.exports = class Deal extends Model
       
       callback null, models
 
+  @owl_create = (values, callback) =>
+    @db.query "INSERT INTO deals(description,entity_id,user_id,value,deal_type_id) VALUES(?,?,?,?,?)", [values.desc, values.entity_id, values.user_id, values.value, values.deal_type_id], (err, results) =>
+      console.log 'callback?'
+      callback(err, results)
+
   @getByMonth = (cred, callback) ->
 
     query = "SELECT U.first_name, U.last_name, U.state, U.created_at, O.approved, count(O.owl_id) as owl_count, count(B.barn_id) AS barn_count FROM po_users AS U LEFT JOIN owls as O ON U.user_id = O.listed_by LEFT JOIN barns as B ON B.listed_by = U.user_id WHERE"

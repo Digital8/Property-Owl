@@ -6,6 +6,7 @@ uuid = require 'node-uuid'
 system = require '../../system'
 
 Owl = system.models.owl
+Deal = system.models.deal
 
 helpers =
   mailer: system.load.helper 'mailer'
@@ -27,36 +28,80 @@ exports.edit = (req, res) ->
     res.render 'admin/owls/edit', owl: owl
 
 exports.add = (req, res) ->
-  Owl.create {}, (error, owl) ->
-    res.render 'admin/owls/add', owl: owl
+  res.render 'admin/owls/add', owl: {}
 
 exports.create = (req, res) ->
+  count = 0
   
   if not res.locals.objUser.isAdmin() then req.body.approved = 0
 
-  Owl.create req.body, (error, owl) ->
-    
-    if error then console.log error
-    template = 'listing-confirmation'
+  async.whilst ->
+    # While count < clone_num evaluates true
+    return count <= req.body.clone_num
+  ,
+  (callback) ->
+    # Increment our counter
+    count++
 
-    user =
-      contactName: res.locals.objUser.firstName
-      email: res.locals.objUser.email
+    # Create the owl
+    Owl.create req.body, (error, owl) -> 
+      if error then console.log error
+      template = 'listing-confirmation'
 
-    secondary = 
-      contactName: res.locals.objUser.firstName
-      dealLink: '/admin/owls/#{owl.insertId}/edit'
+      user =
+        contactName: res.locals.objUser.firstName
+        email: res.locals.objUser.email
 
-    if owl
-      system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
-        if results is true 
-          owl.upload req, ->
-            res.redirect "/owls/#{owl.id}"
+      secondary = 
+        contactName: res.locals.objUser.firstName
+        dealLink: '/admin/owls/#{owl.insertId}/edit'
+
+      email = ->
+        # If owl created, send email
+        if owl
+          system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
+            if results is true 
+              owl.upload req, ->
+                callback()
+            else
+              callback()
         else
-          res.redirect "/owls/#{owl.id}"
-    else
-      req.flash('error', 'Database says: ' + error.code)
-      res.redirect 'back'
+          callback()
+
+      # Create some deals
+      if req.body.deal_type_id? and req.body.deal_type_id.length > 1
+
+        req.body.deal_type_id.pop() # Remove empty array off the end
+
+
+        j = 0
+
+        async.whilst ->
+          return j < req.body.deal_type_id.length
+        ,
+        (cb) ->
+          values =
+            desc: req.body.deal_desc[j] or ''
+            entity_id: owl.id
+            user_id: res.locals.objUser.id or 0
+            value: req.body.deal_value[j] or 0
+            deal_type_id: req.body.deal_type_id[j] or 0
+
+          system.db.query "INSERT INTO deals(description,entity_id,user_id,value,deal_type_id,type,updated_at, created_at) VALUES(?,?,?,?,?,'owl',now(), now())", [values.desc, values.entity_id, values.user_id, values.value, values.deal_type_id], (err, results) ->
+            if err then console.log err
+            j++
+            cb()
+        ,
+        ->
+          email()
+
+      else
+        email()
+  ,
+  (err) ->
+    # Set a notification and redirect
+    req.flash('success', 'Owls generated successfully')
+    res.redirect 'back'
       
 exports.update = (req, res) ->
   # delete req.body.approved
@@ -64,9 +109,34 @@ exports.update = (req, res) ->
   if not res.locals.objUser.isAdmin() then req.body.approved = false
   
   Owl.update req.params.id, req.body, (error, owl) ->
-    if error then console.log error
     owl.upload req, ->
-      res.redirect '/admin/owls'
+      # Delete the old deals, and recreate them
+      system.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'owl'", [req.params.id], ->
+        j = 0
+        if req.body.deal_type_id? and req.body.deal_type_id.length <= 1
+          res.redirect '/admin/owls'
+        else
+          req.body.deal_type_id.pop() # Remove empty array off the end
+          console.log req.body.deal_type_id.length
+          async.whilst ->
+            return j < req.body.deal_type_id.length
+          ,
+          (cb) ->
+            console.log values
+            values =
+              desc: req.body.deal_desc[j] or ''
+              entity_id: owl.id
+              user_id: res.locals.objUser.id or 0
+              value: req.body.deal_value[j] or 0
+              deal_type_id: req.body.deal_type_id[j] or 0
+
+            system.db.query "INSERT INTO deals(description,entity_id,user_id,value,deal_type_id,type,updated_at, created_at) VALUES(?,?,?,?,?,'owl',now(), now())", [values.desc, values.entity_id, values.user_id, values.value, values.deal_type_id], (err, results) ->
+              if err then console.log err
+              j++
+              cb()
+          ,
+          ->
+            res.redirect '/admin/owls'
 
 exports.patch = (req, res) ->
   Owl.patch req.params.id, req.body, (error, owl) ->

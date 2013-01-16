@@ -7,19 +7,19 @@ hr
 hr
 .inputs
   label(for='level') Level
-    input.level(type='number', name='level', value='#{owl.level}', min='0')
+    input.level(type='number', name='level', value='#{owl.level || ""}', min='0')
 
 .inputs
   label(for='address') Address
-  input.address(type='text', name='address', value='#{owl.address}')
+  input.address(type='text', name='address', value='#{owl.address || ""}')
 
 .inputs
   label(for='suburb') Suburb
-  input.suburb(type='text', name='suburb', value='#{owl.suburb}',maxlength='100')
+  input.suburb(type='text', name='suburb', value='#{owl.suburb || ""}',maxlength='100')
 
 .inputs
   label(for='postcode') Postcode
-  input.postcode(type='text', name='postcode', value='#{owl.postcode}',maxlength='10')
+  input.postcode(type='text', name='postcode', value='#{owl.postcode || ""}',maxlength='10')
 
 .inputs
   label(for='state') State
