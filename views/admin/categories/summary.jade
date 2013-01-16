@@ -3,11 +3,6 @@ tr(data-id=category.id)
     input(type="text", value=category.key)
 
   td.actions
-    a.edit(href='/admin/categories/#{category.id}/edit', alt='edit property')
-      img(src='/images/edit.png', alt='Edit')
-      | Edit
-
-  td.actions
     a.delete(href='/admin/categories/#{category.id}/delete', alt='delete property')
       img(src='/images/delete.png', alt='Delete')
       | Delete

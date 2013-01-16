@@ -49,6 +49,8 @@ module.exports = (app) ->
   
   ### enquiries ###
   app.post '/categories', authenticate, controllers.categories.create
+  app.get '/categories/add', authenticate, controllers.categories.add
+  app.post '/categories/add', authenticate, controllers.categories.dontDoNicksStupidCreate
   app.patch '/categories/:id((\\d+))', authenticate, controllers.categories.patch
   
   # media

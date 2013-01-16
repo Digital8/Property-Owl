@@ -28,3 +28,21 @@ exports.destroy = (req, res) ->
     return res.send status: 404 unless result.affectedRows
     
     res.send status: 200
+
+exports.add = (req, res) ->
+  res.render 'admin/categories/add'
+
+exports.dontDoNicksStupidCreate = (req,res) ->
+  {entity_type, key} = req.body
+  
+  map =
+    entity_type: entity_type
+    key: key
+  
+  Category.create map, (error, category) ->
+    if error
+      console.log error
+      req.flash('error','An error occured: ' + error.code)
+    else
+      req.flash('success', 'Category created!')
+    res.redirect 'back'

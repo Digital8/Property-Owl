@@ -1,0 +1,33 @@
+extends ../../layout
+
+block content
+  .container.row.main
+    
+    include ../menu
+    
+    h1 Add Category
+    
+    .grid-header.form-header
+      ol.six
+        li.active
+          .ol-1-active
+          | Details
+    
+    .details
+      h2 Category Details
+      
+      hr
+      
+      form.details-form(action='/categories/add',method='post')
+        
+        include ../../flashify
+        
+        .inputs
+          label.required(for='Name') Name *
+          input#name(type='text',name="key")
+        
+          input(type="hidden",name="entity_type",value="affiliate")
+
+        .submit
+          input.button(type='submit', value='Create Category')
+          a.left-button(href='/admin/affiliates') Cancel
