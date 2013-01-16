@@ -23,7 +23,7 @@ module.exports = ->
         <td>#{owl.state.toUpperCase()}</td>
         <td>Active</td>
         <td>#{owl.value}</td>
-        <td>#{owl.registrations}</td>
+        <td>#{owl.registrations.length}</td>
         <td><a href="#" class="nest"><img src="/images/add.png" /> Nest</a></td>
       </tr>
       """
@@ -38,7 +38,7 @@ module.exports = ->
         <td>#{owl.state.toUpperCase()}</td>
         <td>Active</td>
         <td>#{owl.value}</td>
-        <td>#{owl.registrations}</td>
+        <td>#{owl.registrations.length}</td>
         <td><a href="#" class="nest"><img src="/images/edit.png" /> Un-Nest</a></td>
       </tr>
       """
@@ -60,10 +60,12 @@ module.exports = ->
         
         row.find('.nest').click (event) ->
           event.preventDefault()
+          p = $(this)
           
           $.post "/admin/barns/#{barnId}/owls", id: owl.id,
             row = makeListRow owl
             row.appendTo $('.owl-matrix.nested tbody')
+            p.parent().parent().remove()
   
   $address.bind 'change keydown', ->
     update()

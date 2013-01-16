@@ -2,7 +2,7 @@ tr.owl(data-owl-id=owl.id, data-barn-id=barn.id)
   td(style='text-align: center;')= owl.owl_id
   
   - var listed = new Date(owl.created_at)
-  td(style='text-align: center;') #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+  td(style='text-align: center;') #{listed.getDay()}/#{listed.getMonth()+1}/#{listed.getFullYear()}
   
   td= owl.title
   
