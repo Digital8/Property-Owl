@@ -9,3 +9,11 @@
 .inputs
   label(for='other_features') Other Features
   textarea(name='other_features',maxlength='255')= owl.other_features
+
+- var aspects = ['north','south','east','west','north-east','north-west','south-east','sout-west']
+
+.inputs
+  label(for='aspect') Aspect
+  select(name="aspect")
+    each aspect in aspects
+      option(value=aspect,selected=(owl.aspect == aspect) ? true : false)= aspect

@@ -29,6 +29,7 @@ module.exports = class Owl extends Model
   @field 'state'
   @field 'description'
   @field 'price'
+  @field 'level'
   @field 'bedrooms'
   @field 'bathrooms'
   @field 'cars'
@@ -38,6 +39,7 @@ module.exports = class Owl extends Model
   @field 'indoor_features'
   @field 'outdoor_features'
   @field 'other_features'
+  @field 'aspect'
   
   @field 'development_type_id'
   

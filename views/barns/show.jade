@@ -85,7 +85,6 @@ block content
               td Gross Floor
               td Aspect
               td List Price
-              td Floor Plan
               td Register
             
             tbody
@@ -95,13 +94,12 @@ block content
                     a(href='/owls/#{owl.owl_id}') #{barn.code}#{owl.alpha}
                   td= owl.bedrooms
                   td= owl.bathrooms
-                  td= owl.carspaces
+                  td= owl.cars
                   td= owl.level
                   td #{owl.internal_area} sq.m
                   td #{owl.external_area} sq.m
                   td= owl.aspect
                   td.price $ #{owl.price}
-                  td
                   td
                     a.barn-register.show-secure-deal.secure-button.express-button(href='#', alt='Register', data-id="#{owl.id}", data-type="owl") Register
       

@@ -60,12 +60,11 @@ exports.create = (req, res) ->
       
 exports.update = (req, res) ->
   # delete req.body.approved
-  
   if req.body.approved is 'on' then req.body.approved = true
   if not res.locals.objUser.isAdmin() then req.body.approved = false
   
   Owl.update req.params.id, req.body, (error, owl) ->
-    
+    if error then console.log error
     owl.upload req, ->
       res.redirect '/admin/owls'
 
