@@ -126,7 +126,7 @@ $(function(){
 	
 	$(".show-secure-deal, .close-secure-deal").on("click", function(event){
 		event.preventDefault();
-		secureDealModal.fadeToggle(150);
+		secureDealModal.hide(150);
 		return false;
 	});
 	
