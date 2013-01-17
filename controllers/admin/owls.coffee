@@ -105,24 +105,104 @@ exports.create = (req, res) ->
       
 exports.update = (req, res) ->
   # delete req.body.approved
+
+  req.body.clone_num ?= 0
+  count = 0
+
   if req.body.approved is 'on' then req.body.approved = true
   if not res.locals.objUser.isAdmin() then req.body.approved = false
   
+  clone = ->
+    # Now, we check if we're having to create any clones before we redirect
+    if parseInt(req.body.clone_num) is 0
+      res.redirect '/admin/owls'
+    else
+      n = 0
+      async.whilst ->
+        # While count < clone_num evaluates true
+        return n < req.body.clone_num
+      ,
+      (callback) ->
+        # Increment our counter
+        n++
+        console.log "DEFUQ" + typeof(callback)
+        # Create the owl
+        Owl.create req.body, (error, owl) -> 
+          if error then console.log error
+          template = 'listing-confirmation'
+
+          user =
+            contactName: res.locals.objUser.firstName
+            email: res.locals.objUser.email
+
+          secondary = 
+            contactName: res.locals.objUser.firstName
+            dealLink: '/admin/owls/#{owl.insertId}/edit'
+
+          email = ->
+            # If owl created, send email
+            if owl
+              system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
+                if results is true 
+                  owl.upload req, ->
+                    callback()
+                else
+                  callback()
+            else
+              callback()
+
+          # Create some deals
+          if req.body.deal_type_id? and req.body.deal_type_id.length > 1
+
+            req.body.deal_type_id.pop() # Remove empty array off the end
+
+
+            j = 0
+
+            async.whilst ->
+              return j < req.body.deal_type_id.length
+            ,
+            (cb) ->
+              values =
+                desc: req.body.deal_desc[j] or ''
+                entity_id: owl.id
+                user_id: res.locals.objUser.id or 0
+                value: req.body.deal_value[j] or 0
+                deal_type_id: req.body.deal_type_id[j] or 0
+
+              system.db.query "INSERT INTO deals(description,entity_id,user_id,value,deal_type_id,type,updated_at, created_at) VALUES(?,?,?,?,?,'owl',now(), now())", [values.desc, values.entity_id, values.user_id, values.value, values.deal_type_id], (err, results) ->
+                if err then console.log err
+                j++
+                cb()
+            ,
+            ->
+              email()
+
+          else
+            email()
+      ,
+      (err) ->
+        # Set a notification and redirect
+        req.flash('success', 'Owls updated successfully')
+        res.redirect 'back'
+
   Owl.update req.params.id, req.body, (error, owl) ->
     owl.upload req, ->
+
       # Delete the old deals, and recreate them
       system.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'owl'", [req.params.id], ->
         j = 0
+
         if req.body.deal_type_id? and req.body.deal_type_id.length <= 1
-          res.redirect '/admin/owls'
+          clone()
         else
           req.body.deal_type_id.pop() # Remove empty array off the end
-          console.log req.body.deal_type_id.length
+
           async.whilst ->
             return j < req.body.deal_type_id.length
           ,
           (cb) ->
-            console.log values
+
             values =
               desc: req.body.deal_desc[j] or ''
               entity_id: owl.id
@@ -136,7 +216,8 @@ exports.update = (req, res) ->
               cb()
           ,
           ->
-            res.redirect '/admin/owls'
+           clone()
+
 
 exports.patch = (req, res) ->
   Owl.patch req.params.id, req.body, (error, owl) ->
