@@ -54,18 +54,18 @@ module.exports = ->
       tbody.empty()
       
       for owl in owls then do (owl) ->
-        
-        row = makeRow owl
-        row.appendTo tbody
-        
-        row.find('.nest').click (event) ->
-          event.preventDefault()
-          p = $(this)
+        if not owl.barn_id
+          row = makeRow owl
+          row.appendTo tbody
           
-          $.post "/admin/barns/#{barnId}/owls", id: owl.id,
-            row = makeListRow owl
-            row.appendTo $('.owl-matrix.nested tbody')
-            p.parent().parent().remove()
+          row.find('.nest').click (event) ->
+            event.preventDefault()
+            p = $(this)
+            
+            $.post "/admin/barns/#{barnId}/owls", id: owl.id,
+              row = makeListRow owl
+              row.appendTo $('.owl-matrix.nested tbody')
+              p.parent().parent().remove()
   
   $address.bind 'change keydown', ->
     update()
