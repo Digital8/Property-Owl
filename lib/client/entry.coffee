@@ -142,7 +142,7 @@ $ ->
             ($ '#address').val null
             ($ '#suburb').val null
             ($ '#postcode').val null
-            ($ '#state')[0].selectedIndex = 0
+            ($ '#state').selectedIndex = 0
             
             for component in result.address_components
               if 'street_number' in component.types
