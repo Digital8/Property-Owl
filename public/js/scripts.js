@@ -129,6 +129,12 @@ $(function(){
 		secureDealModal.hide(150);
 		return false;
 	});
+
+	$('.show-secure-deal').on('click', function(event){
+		event.preventDefault();
+		secureDealModal.fadeIn(150);
+		return false;
+	});
 	
 	// show refer friend form
 	var referFriendModal = $(".refer-friend-overlay");
@@ -281,6 +287,8 @@ $(function(){
 	  var email = $(".secure-deal-email").val();
 	  var mobile = $(".secure-deal-phone").val();
 	  var comment = $(".secure-deal-comment").val();
+	  var id = $('.express-button').data('id');
+	  var type = $('.express-button').data('type');
 	  
 	  if (!processing)
 	  {
@@ -288,7 +296,7 @@ $(function(){
 		  $.ajax({
 		    url: '/ajax/securedeal',
 		    type: 'post',
-		    data: 'e=' + email + '&m=' + mobile + '&f=' + firstName + '&l=' + lastName + '&c=' + comment
+		    data: 'id='+id+'&type='+type+'&e=' + email + '&m=' + mobile + '&f=' + firstName + '&l=' + lastName + '&c=' + comment
 		  }).done(function(d){
 		  	processing = false;
 		    if (d.status == 200) {

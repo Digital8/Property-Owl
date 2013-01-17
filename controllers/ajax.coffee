@@ -11,6 +11,8 @@ models =
 
 RAF = system.models.raf
 
+Owl = system.models.owl
+
 helpers = 
   hash: system.load.helper 'hash'
   mailer: system.load.helper 'mailer'
@@ -88,7 +90,8 @@ exports.securedeal = (req, res) ->
   req.assert('f', 'First name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
   req.assert('l', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
   req.assert('c', 'Comment cannot be empty').notEmpty()
-  console.log(req.body)
+
+  console.log(req.body);
 
   errors = req.validationErrors(true)
 
@@ -98,24 +101,25 @@ exports.securedeal = (req, res) ->
     res.send status: 400, errors: errors
 
   else
-    template = 'barn-deal-registration'
+    template = 'owl-deal-registration'
 
     user =
       firstName: res.locals.objUser.firstName
       email: res.locals.objUser.email
 
-    secondary =
-      barndealLink: ''
-      BarnDealTitle: ''
-      BarnDealAddress: ''
-      BarnDealDescription: ''
+    Owl.get req.body.id, (err, owl) ->
+      secondary =
+        link: 'owls/'+owl.id
+        title: owl.title or ''
+        address: owl.address or ''
+        description: owl.description or ''
 
 
-    system.helpers.mailer template,'Barn Deal Registration', user, secondary, (results) ->
-      if results is true 
-        res.send status: 200, errors: {}
-      else
-        res.send status: 400, errors: {msg: 'unable to send email'}
+      system.helpers.mailer template,'Owl Deal Registration', user, secondary, (results) ->
+        if results is true 
+          res.send status: 200, errors: {}
+        else
+          res.send status: 400, errors: {msg: 'unable to send email'}
 
 exports.referfriend = (req, res) ->
   req.body.user_id ?= res.locals.objUser.id
@@ -141,7 +145,7 @@ exports.referfriend = (req, res) ->
         text: req.body.fullname + """,
 
         You have been referred a property at
-        http://propertyowl.com.au/#{req.body.entity_type}s/#{req.body.entity_id}
+        https://propertyowl.com.au/#{req.body.entity_type}s/#{req.body.entity_id}
 
         #{req.body.comment}
         """
