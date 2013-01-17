@@ -173,6 +173,17 @@ module.exports = class Barn extends Model
       console.log 'done'
       do callback
   
+  @byDeveloper = (id, callback) ->
+    @db.query "SELECT * FROM barns WHERE listed_by = ?", [id],(error, rows) =>
+      return callback error if error
+      
+      models = (new this row for row in rows)
+      
+      async.forEach models, (model, callback) =>
+        model.hydrate callback
+      , (error) ->
+        callback null, models
+
   @pending = (callback) ->
     @db.query "SELECT * FROM barns WHERE approved = false", (error, rows) =>
       return callback error if error

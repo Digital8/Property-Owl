@@ -9,8 +9,12 @@ Barn = system.models.barn
 User = system.models.user
 
 exports.index = (req, res) ->
-  Barn.all (error, barns) ->
-      res.render 'admin/barns/index', barns: barns
+  if res.locals.objUser.isDeveloper() and not res.locals.objUser.isAdmin()
+    Barn.byDeveloper res.locals.objUser.id, (error, barns) ->
+      res.render 'admin/barns/index', barns: barns or {}
+  else
+    Barn.all (error, barns) ->
+      res.render 'admin/barns/index', barns: barns or {}
 
 exports.edit = (req, res) ->
   Barn.get req.params.id, (error, barn) ->
