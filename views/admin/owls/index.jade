@@ -27,8 +27,8 @@ block content
             td(style='text-align: center;', colspan='3') Actions
         
         tbody
-        if owls.length > 0
-          - each owl in owls
-            include summary
+          if owls
+            each owl in owls
+              include summary
         
         tfoot

@@ -167,7 +167,7 @@ app.configure ->
       res.locals.util = require 'util'
       res.locals._ = require 'underscore'
       
-      if app.argv.hack then req.session.user_id = config.hack?.user?.id or 1
+      if app.argv.hack then req.session.user_id = config.hack?.user?.id or 13
       
       res.locals.navigation = [
         {key: 'aus-best-deal',    href: '/owls/top',        label: "Australia's Best Deal"}
