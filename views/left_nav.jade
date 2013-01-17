@@ -40,7 +40,7 @@
   - if (locals.barn || locals.share || (locals.owl && locals.area != 'index'))
     include share
   
-  - if(req.url!='/owls/top' && req.url!='/owls/')
+  - if(req.url!='/owls/top' && req.url!='/owls/' && !locals.owl)
     - var i = 0, max = 1;
     each ad in adUpperBox 
       - i++
@@ -91,5 +91,5 @@
         
         input.enquire.button(type='submit', value='Submit')
   
-  - if (!locals.owl || (locals.area && locals.area == 'index'))
+  - if ((!locals.owl && !locals.barn) || (locals.area && locals.area == 'index'))
     include search

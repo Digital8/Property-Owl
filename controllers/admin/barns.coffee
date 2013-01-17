@@ -15,8 +15,6 @@ exports.index = (req, res) ->
 exports.edit = (req, res) ->
   Barn.get req.params.id, (error, barn) ->
     User.getUsersByGroup 2, (error, developers) ->
-      console.log 'got', arguments
-    
       res.render 'admin/barns/edit', barn: barn, developers: developers
 
 exports.add = (req, res) ->
@@ -25,7 +23,6 @@ exports.add = (req, res) ->
       res.render 'admin/barns/add', barn: {}, developers: developers
 
 exports.create = (req, res) ->
-  console.log 'creating barn'
   Barn.create req.body, (error, barn) ->
     # barn.upload req, ->
     res.redirect "/barns/#{barn.id}"
@@ -37,7 +34,6 @@ exports.delete = (req, res) ->
 exports.destroy = (req, res) ->
   Barn.delete req.params.id, (error) ->
     req.flash 'success', 'barn deleted'
-    
     res.redirect '/admin/barns'
 
 exports.update = (req, res) ->
