@@ -5,7 +5,6 @@ module.exports = (req, res) ->
   epoch = moment()
   
   if req.query.test?
-    console.log 'testing', req.query.test
     now = moment req.query.test
     epoch = moment req.query.test
   
