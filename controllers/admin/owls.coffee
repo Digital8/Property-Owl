@@ -34,7 +34,7 @@ exports.create = (req, res) ->
   count = 0
   
   if not res.locals.objUser.isAdmin() then req.body.approved = 0
-
+  req.body.listed_by ?= res.locals.objUser.id
   async.whilst ->
     # While count < clone_num evaluates true
     return count <= req.body.clone_num
@@ -125,9 +125,10 @@ exports.update = (req, res) ->
       (callback) ->
         # Increment our counter
         n++
-        console.log "DEFUQ" + typeof(callback)
+        
         # Create the owl
-        Owl.create req.body, (error, owl) -> 
+        req.body.listed_by ?= res.locals.objUser.id
+        Owl.create req.body, (error, owl) ->
           if error then console.log error
           template = 'listing-confirmation'
 

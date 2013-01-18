@@ -35,6 +35,8 @@ module.exports = class Owl extends Model
   @field 'cars'
   @field 'internal_area'
   @field 'external_area'
+
+  @field 'listed_by'
   
   @field 'indoor_features'
   @field 'outdoor_features'

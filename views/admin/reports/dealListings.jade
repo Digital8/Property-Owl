@@ -49,7 +49,7 @@ block content
       - each listing in listings
         tr
           - var listed = new Date(listing.created_at)
-          td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+          td #{listed.getDay()}/#{listed.getMonth() + 1}/#{listed.getFullYear()}
           td #{listing.first_name} #{listing.last_name}
           td= (listing.approved) ? 'Approved' : 'Pending'
           td= listing.owl_count

@@ -80,7 +80,6 @@ module.exports = class Deal extends Model
 
     query += ' GROUP BY U.user_id, O.approved'
 
-    console.log query
 
     @db.query "#{query}", vals, callback
 

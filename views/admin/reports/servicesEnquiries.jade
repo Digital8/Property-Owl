@@ -8,10 +8,6 @@ block content
     include reportsMenu
     .grid-header
       form#search-form
-        input#propertySearch(type='text')
-        | &nbsp;
-        input.button(type='submit', value='Go')
-        .divider
         select#propertyMonth
           option Month
           option January
@@ -26,6 +22,8 @@ block content
           option October
           option November
           option December
+        .divider
+        input.button(type='submit', value='Go')
         //- | &nbsp;
         //- select#supplier
         //-   option Supplier

@@ -48,6 +48,8 @@ exports.dealListings = (req,res) ->
 
   models.users.getUsersByGroup 2, (err, developers) ->
     Deal.getByMonth cred, (err, listings) ->
+      if err then console.log err
+      console.log listings
       Deal.getByUser cred, (err, dev_count) ->
         if err then console.log err
         res.render 'admin/reports/dealListings', listings: listings or {}, developers: developers or {}, dev_count: dev_count or {}
