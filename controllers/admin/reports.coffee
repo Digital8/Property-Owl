@@ -108,7 +108,7 @@ exports.advertisingClicks = (req,res) ->
 
   models.advertisers.all (err, advertisers) ->
     cred = 
-      month: req.query.month or ''
+      month: req.query.month or 'all'
       advertiser: req.query.advertiser or '0'
 
     if cred.month is 'all' then cred.month = '%'

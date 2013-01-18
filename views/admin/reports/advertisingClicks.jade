@@ -33,7 +33,6 @@ block content
     table.admin-gridview
       thead
         tr
-          td Started On
           td Advertiser
           td Ad
           td Click Throughs
@@ -44,15 +43,12 @@ block content
         if click.advertiser != null
           - c++
           tr
-            - var listed = new Date(click.start)
-            td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
             td= click.advertiser
             td= click.description
             td= click.click_count
             - graph.push([click.description, click.click_count]);
         if c == 0
           tr
-            td ---
             td ---
             td ---
             td ---

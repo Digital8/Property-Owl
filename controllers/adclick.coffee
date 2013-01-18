@@ -22,8 +22,10 @@ exports.index = (req,res) ->
         browser: req.header('user-agent') or ''
         user_id: res.locals.objUser.id or 0
         req: utils.inspect(req)
+        type: 'ad'
 
       models.adclick.add data, (err, results) ->
+        if err then console.log err
         res.redirect ad.hyperlink
 
 exports.view = (req,res) ->
