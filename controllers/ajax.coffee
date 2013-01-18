@@ -136,6 +136,7 @@ exports.referfriend = (req, res) ->
   if Object.keys(errors)?.length > 0
     res.send status: 400, errors: errors
   else
+    req.body.first_name ?= req.body.fullname
     RAF.create req.body, (err, r) ->
       mailer
         to: req.body.email
