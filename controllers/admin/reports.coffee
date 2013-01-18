@@ -102,6 +102,7 @@ exports.servicesEnquiries = (req,res) ->
   unless cred.month is '' then cred.month = months[cred.month] or ''
 
   Enquriy.report cred, (err, enquiries) ->
+    if err then console.log err
     res.render 'admin/reports/servicesEnquiries', enquiries: enquiries or {}, suppliers: {}
 
 exports.advertisingClicks = (req,res) ->
