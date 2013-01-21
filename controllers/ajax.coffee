@@ -15,7 +15,6 @@ Owl = system.models.owl
 
 helpers = 
   hash: system.load.helper 'hash'
-  mailer: system.load.helper 'mailer'
 
 
 exports.login = (req, res) ->

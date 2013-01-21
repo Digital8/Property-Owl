@@ -70,13 +70,13 @@
       form#input-form.enquire-form
         
         label(for='name') Name
-        input.name(type='text', disabled, value=objUser.fullName)
+        input.name(type='text', disabled, value=objUser.fullName,name="name")
         
         label(for='email') Email:
-        input.email(type='text', disabled, value=objUser.email)
+        input.email(type='text', disabled, value=objUser.email,name="email")
         
         label(for='phone') Phone
-        input.phone(type='text')
+        input.phone(type='text',name="phone")
         
         input(type='hidden', name='entity_id', value=deal.id)
         input(type='hidden', name='entity_type', value=entity_type)

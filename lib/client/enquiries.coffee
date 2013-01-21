@@ -44,9 +44,9 @@ module.exports = ->
     event.preventDefault()
     
     $form = $ '.enquire-form'
-    
+    console.log $form
     $.post '/enquiries', $form.serialize(), (data) ->
-      if data.success is 200
+      if data.status is 200
         alert 'Enquiry sent!'
       else
         alert 'Internal error sending email. Please try again later.'

@@ -4,6 +4,7 @@ Enquiry = system.models.enquiry
 Affiliate = system.models.affiliate
 Owl = system.models.owl
 Barn = system.models.barn
+User = system.models.user
 
 exports.create = (req, res) ->
   {entity_id, entity_type} = req.body
@@ -14,43 +15,44 @@ exports.create = (req, res) ->
   model = system.models[entity_type]
   
   model.get entity_id, (error, record) ->
-
     if error? or not record
       return res.send status: 404
-    
-    map =
-      user_id: req.user.id
-      entity_id: req.body.entity_id
-      entity_type: req.body.entity_type
-      enquiry: req.body.enquiry
-    
-    Enquiry.create map, (error, model) ->
+    User.getUserById record.listed_by , (err, developer) ->
+      map =
+        user_id: req.user.id
+        entity_id: req.body.entity_id
+        entity_type: req.body.entity_type
+        enquiry: req.body.enquiry
       
-      res.send status: 200
-      
-      template_map =
-        affiliate: 'service-enquiry'
-        owl: 'owl-deal-enquiry'
-        barn: 'barn-deal-enquiry'
-      
-      if template_map[entity_type]?
+      Enquiry.create map, (error, model) ->
         
-        template = template_map[entity_type]
+        res.send status: 200
         
-        user =
-          firstName: req.body.name
-          email: req.body.email
-          lastName: ''
-          phone: req.body.phone
+        template_map =
+          affiliate: 'service-enquiry'
+          owl: 'owl-deal-enquiry'
+          barn: 'barn-deal-enquiry'
         
-        secondary =
-          contactName: req.body.name
-          description: req.body.enquiry
-          contact_method: req.body.contact or 'phone'
-          enquiryEmail: req.body.email
-        
-        system.helpers.mailer template, 'New Enquiry', user, secondary, (results) ->
-          if results is true
-            res.send status: 200
-          else
-            res.send status: 500
+        if template_map[entity_type]?
+          template = template_map[entity_type]
+          user =
+            email: developer[0].email
+            firstName: req.body.name or res.locals.objUser.displayName
+            email: req.body.email or res.locals.objUser.email
+            lastName: ''
+            phone: req.body.phone
+          
+          secondary =
+            owl_id: record.id
+            contactName: req.body.name
+            address: record.address or ''
+            description: req.body.enquiry
+            contact_method: req.body.contact or 'phone'
+            enquiryEmail: req.body.email or res.locals.objUser.email
+            contactName: developer[0].first_name
+          
+          system.helpers.mailer template, 'New Enquiry', user, secondary, (results) ->
+            if results is true
+              res.send status: 200
+            else
+              res.send status: 500

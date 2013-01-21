@@ -27,7 +27,7 @@ module.exports = (template, subject, objUser, secondary, callback) ->
         html: data
 
       switch template
-        when 'password-reset','forgot-password','barn-deal-enquiry', 'barn-deal-registration-developer', 'barn-deal-registration', 'expression-of-interest', 'withdraw-interest', 'signup-confirmation', 'service-enquiry', 'service-enquiry-confirmation', 'property-recommendations', 'property-enquiry-confirmation', 'owl-deal-registration-developer', 'owl-deal-registration', 'barn-deal-enquiry', 'new-listing', 'listing-confirmation'
+        when 'password-reset','forgot-password','barn-deal-enquiry', 'barn-deal-registration-developer', 'barn-deal-registration', 'expression-of-interest', 'withdraw-interest', 'signup-confirmation', 'service-enquiry', 'service-enquiry-confirmation', 'property-recommendations', 'property-enquiry-confirmation', 'owl-deal-registration-developer', 'owl-deal-registration','owl-deal-enquiry', 'barn-deal-enquiry', 'new-listing', 'listing-confirmation'
           email.setCategory 'Property Owl'
           email.addSubVal '{{contact_name}}', secondary.contact_name
           email.addSubVal '{{contactName}}', secondary.contactName
@@ -41,6 +41,7 @@ module.exports = (template, subject, objUser, secondary, callback) ->
           email.addSubVal '{{comments}}', secondary.description
           email.addSubVal '{{code}}', secondary.code or ''
           email.addSubVal '{{barn_id}}', secondary.barn_id
+          email.addSubVal '{{owl_id}}', secondary.owl_id
           email.addSubVal '{{contact_method}}', secondary.contact_method
           email.addSubVal '{{title}}', secondary.title
           email.addSubVal '{{address}}', secondary.address
