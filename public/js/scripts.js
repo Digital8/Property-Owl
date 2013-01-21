@@ -23,6 +23,10 @@ $(function(){
 	// reveal deal list
 	var dealsHeight = 0;
 	
+	$('.forgot-password').click(function(){
+		window.location = '/account/recover';
+	});
+
 	$(".deal h2").on("click", function(){
 		var deals = $(this).closest(".deal"),
 			dealsList = $("ul", deals);
