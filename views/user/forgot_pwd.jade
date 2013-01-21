@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+  
+  .container.row.main
+  
+    include ../left_nav
+    
+    #center-col
+      
+      h1 Forgot Password?
+      
+      .details
+        
+        form.details-form(action="/account/recover",method="post")
+        
+         include ../flashify
+         
+         .left
+           
+           .inputs
+             label(for='email') Email
+             input#email(type="text",name="email",placeholder="",value="")
+           
+         .inputs
+         
+         .submit
+           input.button(type="submit",value="Send Reset Instruction")
+
+    include ../right_nav

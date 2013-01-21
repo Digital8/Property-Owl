@@ -13,6 +13,10 @@ module.exports = (app) ->
   # epoch
   app.get '/epoch', controllers.epoch
   
+  # Reset password
+  app.get '/account/recover', controllers.forgot_pwd.index
+  app.post '/account/recover', controllers.forgot_pwd.create
+
   # clicks
   app.post '/clicks', controllers.clicks.create
   
