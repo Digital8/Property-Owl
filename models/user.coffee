@@ -48,3 +48,6 @@ exports.getByMonth = (cred, callback) =>
     @db.query "SELECT count(user_id) AS total, first_name, last_name, state, created_at FROM po_users  WHERE state LIKE ? AND MONTH(created_at) = ? GROUP BY state", [cred.state, cred.month], callback
   else
     @db.query "SELECT count(user_id) AS total, state, created_at FROM po_users  WHERE state LIKE ? GROUP BY state", [cred.state], callback
+
+exports.delete = (id, callback) =>
+  @db.query "DELETE FROM po_users WHERE user_id = ?", [id], callback

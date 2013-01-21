@@ -117,3 +117,8 @@ exports.update = (req,res) ->
 exports.delete = (req, res) ->
 
 exports.destroy = (req, res) ->
+  models.user.delete req.params.id, (err, results) ->
+    if err 
+      res.send status: 500
+    else
+      res.send status: 200

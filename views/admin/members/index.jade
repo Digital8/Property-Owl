@@ -11,36 +11,6 @@ block content
     include actions
     
     .grid-header
-      form#search-form
-        input#memberSearch(type='text')
-        
-        | &nbsp;
-        
-        input.button(type='submit', value='Go')
-        
-        | &nbsp;
-        
-        input.button(type='submit', value='Reset')
-        
-        .divider
-        
-        select#memberType
-          option Potential Buyer
-          option Property Developer
-          option Administrator
-        
-        | &nbsp;
-        
-        select#propertyState
-          option State
-          option ACT
-          option NSW
-          option NT
-          option QLD
-          option SA
-          option TAS
-          option VIC
-          option WA
     
     table.admin-gridview
       thead
@@ -65,19 +35,30 @@ block content
               | Edit
           
           td.actions
-            a(href="/admin/members/#{user.user_id}/delete")
+            a(href="#", data-id="#{user.user_id}").deleteUser
               img(src='/images/delete.png', alt='Delete')
               | Delete
       
-      //- tfoot
-      //-   tr
-      //-     td(colspan='5')
-      //-       ul.pager
-      //-        //- li.disabled
-      //-        //-  a(href='#') Prev
-      //-        //- li.selected
-      //-        //-  a(href='#') 1
-      //-        //- li
-      //-        //-  a(href='#') 2
-      //-        //- li
-      //-        //-  a(href='#') Next 
+  script
+    $(document).ready(function(){
+      $('.deleteUser').click(function(e){
+        e.preventDefault();
+        var $id = $(this).data('id');
+        var $that = $(this);
+        if (confirm("Are you sure you want to delete this user? This can not be undone"))
+        {
+          $.ajax({
+            url: '/admin/members/'+$id,
+            type: 'delete'
+          }).done(function(d){
+            if (d.status == 200){
+              $that.closest('tr').fadeOut('fast');
+            }
+            else
+            {
+              alert('internal error');
+            }
+          });
+        }
+      });
+    });
