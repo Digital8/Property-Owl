@@ -36,7 +36,7 @@ exports.create = (req, res) ->
         if template_map[entity_type]?
           template = template_map[entity_type]
           user =
-            email: developer[0].email
+            email: record.user.email or ''
             firstName: req.body.name or res.locals.objUser.displayName
             email: req.body.email or res.locals.objUser.email
             lastName: ''
