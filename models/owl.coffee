@@ -151,7 +151,7 @@ module.exports = class Owl extends Model
           do callback
       
       user: (callback) =>
-        system.models.user.getUserById @user_id, (error, [user]) =>
+        system.models.user.getUserById @listed_by, (error, [user]) =>
           return callback error if error?
           @user = user
           do callback
