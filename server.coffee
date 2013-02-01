@@ -199,7 +199,8 @@ app.configure ->
         upperBox  : (callback) -> models.advertisement.random url, 'upper box',   (err, result) -> callback err, result
         lowerBox  : (callback) -> models.advertisement.random url, 'lower box',   (err, result) -> callback err, result
       , (err, results) ->
-        
+        console.log(err)
+        console.log(results)
         res.locals.adspaceTop   = if results.top?         then results.top        else ''
         res.locals.adUpperTower = if results.upperTower?  then results.upperTower else ''
         res.locals.adLowerTower = if results.lowerTower?  then results.lowerTower else ''
