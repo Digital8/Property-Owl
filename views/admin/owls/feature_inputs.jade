@@ -1,16 +1,16 @@
 .inputs
   label(for='indoor_features') Indoor Features
-  textarea(name='indoor_features',maxlength='255')= owl.indoor_features
+  textarea(name='indoor_features')= owl.indoor_features
 
 .inputs
   label(for='outdoor_features') Outdoor Features
-  textarea(name='outdoor_features',maxlength='255')= owl.outdoor_features
+  textarea(name='outdoor_features')= owl.outdoor_features
 
 .inputs
   label(for='other_features') Other Features
-  textarea(name='other_features',maxlength='255')= owl.other_features
+  textarea(name='other_features')= owl.other_features
 
-- var aspects = ['north','south','east','west','north-east','north-west','south-east','sout-west']
+- var aspects = ['North','South','East','West','North-East','North-West','South-East','South-West', ' ']
 
 .inputs
   label(for='aspect') Aspect
