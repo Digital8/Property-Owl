@@ -108,7 +108,7 @@ block content
         #left
           | #{barn.address}, #{barn.suburb}, #{barn.state.toUpperCase()} #{barn.postcode}
           
-          p= barn.description
+          p !{barn.description}
 
           .general-features
             h3 Indoor Features
