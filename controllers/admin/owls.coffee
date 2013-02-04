@@ -8,16 +8,20 @@ system = require '../../system'
 Owl = system.models.owl
 Deal = system.models.deal
 
+models =
+  user: system.load.model('user')
+
 helpers =
   mailer: system.load.helper 'mailer'
 
 exports.index = (req, res) ->
   if res.locals.objUser.isDeveloper() and not res.locals.objUser.isAdmin()
     Owl.byDeveloper res.locals.objUser.id, (error, owls) ->
-      res.render 'admin/owls/index', owls: owls
+      res.render 'admin/owls/index', owls: owls, developers: {}
   else
     Owl.all (error, owls) ->
-      res.render 'admin/owls/index', owls: owls
+      models.user.getUsersByGroup 2, (err, developers) ->
+        res.render 'admin/owls/index', owls: owls, developers: developers or {}
 
 exports.show = (req, res) ->
   Owl.get req.params.id, (error, owl) ->
@@ -25,10 +29,16 @@ exports.show = (req, res) ->
     
 exports.edit = (req, res) ->
   Owl.get req.params.id, (error, owl) ->
-    res.render 'admin/owls/edit', owl: owl
+    models.user.getUsersByGroup 2, (err, developers) ->
+      models.user.getUsersByGroup 3, (err, admins) ->
+        developers = developers.concat(admins)
+        res.render 'admin/owls/edit', owl: owl, developers: developers or {}
 
 exports.add = (req, res) ->
-  res.render 'admin/owls/add', owl: {}
+  models.user.getUsersByGroup 2, (err, developers) ->
+    models.user.getUsersByGroup 3, (err, admins) ->
+      developers = developers.concat(admins)
+      res.render 'admin/owls/add', owl: {}, developers: developers or {}
 
 exports.create = (req, res) ->
   count = 0

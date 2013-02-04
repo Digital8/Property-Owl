@@ -9,6 +9,12 @@
         | &nbsp;
         input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
       
+      label(for='title') Listed By
+        | &nbsp;
+        select(name="listed_by")
+          each developer in developers
+            option(value=developer.user_id, selected=(owl.user.user_id == developer.user_id) ? true : false) #{developer.first_name} #{developer.last_name}
+
       //- - var display = (owl.approved == true) ? 'block' : 'none';
       
       //- div#approved_at(style="display: #{display}")
