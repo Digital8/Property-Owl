@@ -112,13 +112,13 @@ block content
 
           .general-features
             h3 Indoor Features
-            p= barn.indoor_features
+            p !{barn.indoor_features.replace(/\r\n/g,"<br />")}
             h3 Outdoor Features
-            p= barn.outdoor_features
+            p !{barn.outdoor_features.replace(/\r\n/g,"<br />")}
           
           .other-features
             h3 Other Features
-            p= barn.other_features
+            p !{barn.other_features.replace(/\r\n/g,"<br />")}
         
         #right
           - if (objUser.isAdmin())
