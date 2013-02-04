@@ -27,6 +27,7 @@ module.exports = class Barn extends Model
   @field 'other_features'
   
   @field 'listed_by'
+  @field 'feature_image'
   
   @field 'approved', type: Boolean, default: no
   
@@ -54,7 +55,7 @@ module.exports = class Barn extends Model
 
         Media.forEntityWithClass this, klass: 'image', (error, medias) =>
           @images = medias
-          
+          console.log(@images)
           if @feature_image? and @images.length
             
             feature_id = parseInt @feature_image
