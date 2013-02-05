@@ -18,6 +18,12 @@ exports.create = (req, res) ->
     if error? or not record
       return res.send status: 404
     User.getUserById record.listed_by , (err, developer) ->
+
+      if developer.length is 0
+        developer = 'Developer'
+      else
+        developer = developer[0].first_name
+        
       map =
         user_id: req.user.id
         entity_id: req.body.entity_id
@@ -25,7 +31,7 @@ exports.create = (req, res) ->
         enquiry: req.body.enquiry
       
       Enquiry.create map, (error, model) ->
-        
+        if error then throw error
         res.send status: 200
         
         template_map =
@@ -34,9 +40,10 @@ exports.create = (req, res) ->
           barn: 'barn-deal-enquiry'
         
         if template_map[entity_type]?
+
           template = template_map[entity_type]
           user =
-            email: record.user.email or ''
+            email: record.email or ''
             firstName: req.body.name or res.locals.objUser.displayName
             email: req.body.email or res.locals.objUser.email
             lastName: ''
@@ -49,7 +56,7 @@ exports.create = (req, res) ->
             description: req.body.enquiry
             contact_method: req.body.contact or 'phone'
             enquiryEmail: req.body.email or res.locals.objUser.email
-            contactName: developer[0].first_name
+            contactName: developer
           
           system.helpers.mailer template, 'New Enquiry', user, secondary, (results) ->
             if results is true
