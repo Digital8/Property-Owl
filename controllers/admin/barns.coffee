@@ -29,7 +29,18 @@ exports.add = (req, res) ->
 exports.create = (req, res) ->
   Barn.create req.body, (error, barn) ->
     # barn.upload req, ->
-    res.redirect "/barns/#{barn.id}"
+    template = 'listing-confirmation'
+
+    user =
+      contactName: res.locals.objUser.firstName
+      email: res.locals.objUser.email
+
+    secondary = 
+      contactName: res.locals.objUser.firstName
+      link: "/admin/barns/#{barn.id}/edit"
+
+    system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
+      res.redirect "/barns/#{barn.id}"
 
 exports.delete = (req, res) ->
   Barn.get req.params.id, (error, barn) ->
