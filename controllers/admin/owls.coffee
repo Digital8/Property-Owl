@@ -64,7 +64,7 @@ exports.create = (req, res) ->
 
       secondary = 
         contactName: res.locals.objUser.firstName
-        dealLink: "/admin/owls/#{owl.id}/edit"
+        link: "/admin/owls/#{owl.id}/edit"
 
       email = ->
         # If owl created, send email

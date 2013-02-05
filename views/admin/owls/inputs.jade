@@ -13,7 +13,10 @@
         | &nbsp;
         select(name="listed_by")
           each developer in developers
-            option(value=developer.user_id, selected=(owl.user.user_id == developer.user_id) ? true : false) #{developer.first_name} #{developer.last_name}
+            - var sel = false
+              if typeof(owl.user) != 'undefined'
+                - var sel = (owl.user.user_id == developer.user_id) ? true : false;
+            option(value=developer.user_id, selected=sel) #{developer.first_name} #{developer.last_name}
 
       //- - var display = (owl.approved == true) ? 'block' : 'none';
       
