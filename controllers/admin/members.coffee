@@ -5,10 +5,14 @@ models = user: system.load.model 'user'
 helpers = hash: system.load.helper 'hash'
 
 exports.index = (req,res) ->
-  models.user.getAllUsers (err, results) ->
+  callback = (err, results) ->
     if err then throw err
-    
-    res.render 'admin/members/index', users: results
+    res.render 'admin/members/index', users: results, search: req.query.name or ''
+
+  if req.query.name?
+    models.user.search '%'+req.query.name+'%', callback
+  else
+    models.user.getAllUsers(callback)
 
 exports.view = (req,res) ->
 

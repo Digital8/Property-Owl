@@ -43,6 +43,9 @@ exports.getSubscribers = (callback) =>
 exports.thisMonth = (callback) =>
   @db.query "SELECT * FROM po_users AS U WHERE U.created_at BETWEEN date_format(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') AND last_day(NOW())", callback
 
+exports.search = (name, callback) =>
+  @db.query "SELECT U.*, AT.name AS account_type FROM po_users AS U INNER JOIN po_account_types AS AT ON U.account_type_id = AT.account_type_id WHERE CONCAT( U.first_name,  ' ', U.last_name ) LIKE ?", [name], callback 
+
 exports.getByMonth = (cred, callback) =>
   if cred.month != ''
     @db.query "SELECT count(user_id) AS total, first_name, last_name, state, created_at FROM po_users  WHERE state LIKE ? AND MONTH(created_at) = ? GROUP BY state", [cred.state, cred.month], callback

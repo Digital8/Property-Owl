@@ -10,7 +10,11 @@ block content
     
     include actions
     
-    .grid-header
+    .grid-header 
+      form#search-form(action="/admin/members", method="get")
+        input#memberSearch(type="text",placeholder="Name",name="name", value=search) &nbsp; 
+        input(type="submit",value="Search",class="button")
+
     
     table.admin-gridview
       thead
