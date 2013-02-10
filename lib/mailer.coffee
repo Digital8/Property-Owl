@@ -16,6 +16,7 @@ module.exports = (template, data, callback) ->
     fromname: 'Property Owl'
     subject: subject
     html: template
+    bcc: ['swoopin@propertyowl.com.au']
 
   email.setCategory 'Property Owl'
 
