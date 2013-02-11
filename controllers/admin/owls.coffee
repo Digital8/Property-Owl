@@ -75,7 +75,7 @@ exports.create = (req, res) ->
               template = 'new-listing'
 
               user =
-                email: 'brendan@digital8.com.au'
+                email: 'swoopin@propertyowl.com.au'
 
               secondary = 
                 contactName: res.locals.objUser.firstName
