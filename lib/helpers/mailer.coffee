@@ -27,7 +27,7 @@ module.exports = (template, subject, objUser, secondary, callback) ->
         html: data
 
       switch template
-        when 'password-reset','forgot-password','barn-deal-enquiry', 'barn-deal-registration-developer', 'barn-deal-registration', 'expression-of-interest', 'withdraw-interest', 'signup-confirmation', 'service-enquiry', 'service-enquiry-confirmation', 'property-recommendations', 'property-enquiry-confirmation', 'owl-deal-registration-developer', 'owl-deal-registration','owl-deal-enquiry', 'barn-deal-enquiry', 'new-listing', 'listing-confirmation'
+        when 'listing-approval','password-reset','forgot-password','barn-deal-enquiry', 'barn-deal-registration-developer', 'barn-deal-registration', 'expression-of-interest', 'withdraw-interest', 'signup-confirmation', 'service-enquiry', 'service-enquiry-confirmation', 'property-recommendations', 'property-enquiry-confirmation', 'owl-deal-registration-developer', 'owl-deal-registration','owl-deal-enquiry', 'barn-deal-enquiry', 'new-listing', 'listing-confirmation'
           email.setCategory 'Property Owl'
           email.addSubVal '{{contact_name}}', secondary.contact_name
           email.addSubVal '{{contactName}}', secondary.contactName

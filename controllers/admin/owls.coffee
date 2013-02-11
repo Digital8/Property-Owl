@@ -133,10 +133,25 @@ exports.update = (req, res) ->
   if req.body.approved is 'on' then req.body.approved = true
   if not res.locals.objUser.isAdmin() then req.body.approved = false
   
-  clone = ->
+  clone = (owl) ->
     # Now, we check if we're having to create any clones before we redirect
     if parseInt(req.body.clone_num) is 0
-      res.redirect '/admin/owls'
+      if req.body.approved
+        template = 'listing-approval'
+        user =
+          email: owl.user.email
+
+        secondary =
+          contactName: owl.user.first_name 
+          link: '/admin/owls/#{owl.id}/edit'
+          address: "#{owl.address}, #{owl.suburb}, #{owl.state.toUpperCase()}"
+        
+        # Send approval message
+        system.helpers.mailer template,'Property Approved', user, secondary, (results) ->
+          res.redirect '/admin/owls'
+
+      else
+        res.redirect '/admin/owls'
     else
       n = 0
       async.whilst ->
@@ -210,13 +225,12 @@ exports.update = (req, res) ->
 
   Owl.update req.params.id, req.body, (error, owl) ->
     owl.upload req, ->
-
       # Delete the old deals, and recreate them
       system.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'owl'", [req.params.id], ->
         j = 0
 
         if req.body.deal_type_id? and req.body.deal_type_id.length <= 1
-          clone()
+          clone(owl)
         else
           req.body.deal_type_id.pop() # Remove empty array off the end
 
@@ -235,10 +249,11 @@ exports.update = (req, res) ->
             system.db.query "INSERT INTO deals(description,entity_id,user_id,value,deal_type_id,type,updated_at, created_at) VALUES(?,?,?,?,?,'owl',now(), now())", [values.desc, values.entity_id, values.user_id, values.value, values.deal_type_id], (err, results) ->
               if err then console.log err
               j++
+
               cb()
           ,
           ->
-           clone()
+            clone(owl)
 
 
 exports.patch = (req, res) ->
