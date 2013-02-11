@@ -191,12 +191,40 @@ exports.delRegistration = (req, res) ->
   req.query.id ?= ''
   req.query.user_id = res.locals.objUser.id
   
-  models.registrations.delete req.query, (err, results) ->
-    if err then res.send status: 400 else res.send status: 200
+  # Get the registration so we can email to let the person know they're not interested
+  models.registrations.find req.query.id, (err, results) ->
+    if results.length is 1 
+      results = results.pop()
+
+      unless results.type in ['owl', 'barn']
+        return res.send status: 500
+
+      model = system.models[results.type]
+
+      model.get results.resource_id, (err, record) ->
+        if err then console.log err
+        # Send withdraw email
+        template = 'withdraw-interest'
+
+        user =
+          firstName: res.locals.objUser.displayName
+          email: res.locals.objUser.email
+        
+        secondary =
+          owl_id: record.id
+          contactName: req.body.name
+          address: record.address or ''
+          link: "/#{results.type}s/#{record.id}"
+
+        system.helpers.mailer template,'Withdrawal Confirmation', user, secondary, (results) ->
+          res.send results
+
+
+  del = ->
+    models.registrations.delete req.query, (err, results) ->
+      if err then res.send status: 400 else res.send status: 200
 
 exports.search = (req, res) ->
-  console.log req.query
-  
   {address, suburb} = req.query
   
   system.db.query "SELECT * FROM owls WHERE address SOUNDS LIKE ? AND suburb SOUNDS LIKE ?", [address, suburb], (error, rows) ->
