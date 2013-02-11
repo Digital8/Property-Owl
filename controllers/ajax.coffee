@@ -217,7 +217,7 @@ exports.delRegistration = (req, res) ->
           link: "/#{results.type}s/#{record.id}"
 
         system.helpers.mailer template,'Withdrawal Confirmation', user, secondary, (results) ->
-          res.send results
+          del()
 
 
   del = ->
