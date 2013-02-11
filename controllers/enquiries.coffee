@@ -60,7 +60,13 @@ exports.create = (req, res) ->
             link: "/#{entity_type}s/#{record.id}"
           
           system.helpers.mailer template, 'New Enquiry', user, secondary, (results) ->
-            if results is true
-              res.send status: 200
-            else
-              res.send status: 500
+            user =
+              email: res.locals.objUser.email
+              firstName: res.locals.objUser.displayName
+              lastName: ''
+
+            system.helpers.mailer 'property-enquiry-confirmation', 'Property Enquiry Confirmation', user, secondary, ->
+              if results is true
+                res.send status: 200
+              else
+                res.send status: 500
