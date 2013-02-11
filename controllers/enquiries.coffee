@@ -20,7 +20,7 @@ exports.create = (req, res) ->
     User.getUserById record.listed_by , (err, developer) ->
 
       if developer.length is 0
-        developer = 'Developer'
+        developer = 'Service'
       else
         developer = developer[0].first_name
         
@@ -40,8 +40,8 @@ exports.create = (req, res) ->
           barn: 'barn-deal-enquiry'
         
         if template_map[entity_type]?
-
           template = template_map[entity_type]
+
           user =
             email: developer[0].email or ''
             firstName: req.body.name or res.locals.objUser.displayName
@@ -53,6 +53,7 @@ exports.create = (req, res) ->
             owl_id: record.id
             contactName: req.body.name
             address: record.address or ''
+            title: record.name or ''
             description: req.body.enquiry
             contact_method: req.body.contact or 'phone'
             enquiryEmail: req.body.email or res.locals.objUser.email
@@ -65,7 +66,7 @@ exports.create = (req, res) ->
               firstName: res.locals.objUser.displayName
               lastName: ''
 
-            system.helpers.mailer 'property-enquiry-confirmation', 'Property Enquiry Confirmation', user, secondary, ->
+            system.helpers.mailer "#{entity_type}-enquiry-confirmation", "Enquiry Confirmation", user, secondary, ->
               if results is true
                 res.send status: 200
               else

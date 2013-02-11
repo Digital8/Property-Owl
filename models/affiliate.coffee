@@ -12,7 +12,8 @@ module.exports = class Affiliate extends Model
   @table = new Table
     name: 'affiliates'
     key: 'affiliate_id'
-  
+
+  @field 'user_id'
   @field 'name'
   @field 'logo'
   @field 'phone'
@@ -52,6 +53,12 @@ module.exports = class Affiliate extends Model
         Enquiry.for this, (error, enquiries) =>
           @enquiries = enquiries
           callback error
+
+      user: (callback) =>
+        system.models.user.getUserById @user_id, (error, [user]) =>
+          return callback error if error?
+          @user = user
+          do callback
     
     , (error) => super callback
   

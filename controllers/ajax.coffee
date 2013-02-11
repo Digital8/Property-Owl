@@ -166,7 +166,7 @@ exports.addRegistration = (req, res) ->
         models.registrations.add req.query, (err, results) ->
           if err then console.log err
           if results.affectedRows is 1
-
+            
             res.send status: 200
 
           else
