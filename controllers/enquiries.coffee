@@ -43,7 +43,7 @@ exports.create = (req, res) ->
 
           template = template_map[entity_type]
           user =
-            email: record.email or ''
+            email: developer[0].email or ''
             firstName: req.body.name or res.locals.objUser.displayName
             email: req.body.email or res.locals.objUser.email
             lastName: ''
@@ -57,6 +57,7 @@ exports.create = (req, res) ->
             contact_method: req.body.contact or 'phone'
             enquiryEmail: req.body.email or res.locals.objUser.email
             contactName: developer
+            link: "/#{entity_type}s/#{record.id}"
           
           system.helpers.mailer template, 'New Enquiry', user, secondary, (results) ->
             if results is true
