@@ -70,9 +70,20 @@ exports.create = (req, res) ->
         # If owl created, send email
         if owl
           system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
-            if results is true 
-              owl.upload req, ->
-                callback()
+            if results is true
+              # Notify Admin of new listing
+              template = 'new-listing'
+
+              user =
+                email: 'brendan@digital8.com.au'
+
+              secondary = 
+                contactName: res.locals.objUser.firstName
+                link: "/admin/owls/#{owl.id}/edit"
+
+              system.helpers.mailer template,'New Listing', user, secondary, (results) ->
+                owl.upload req, ->
+                  callback()
             else
               callback()
         else
