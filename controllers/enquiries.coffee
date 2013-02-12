@@ -17,7 +17,13 @@ exports.create = (req, res) ->
   model.get entity_id, (error, record) ->
     if error? or not record
       return res.send status: 404
+
+    rcpt = res.locals.objUser.email
+
     User.getUserById record.listed_by , (err, developer) ->
+
+      if entity_type is 'affiliate'
+        rcpt = record.email
 
       if developer.length is 0
         developer = 'Service'
@@ -43,9 +49,8 @@ exports.create = (req, res) ->
           template = template_map[entity_type]
 
           user =
-            email: developer[0].email or ''
+            email: rcpt
             firstName: req.body.name or res.locals.objUser.displayName
-            email: req.body.email or res.locals.objUser.email
             lastName: ''
             phone: req.body.phone
           
@@ -61,6 +66,7 @@ exports.create = (req, res) ->
             link: "/#{entity_type}s/#{record.id}"
           
           system.helpers.mailer template, 'New Enquiry', user, secondary, (results) ->
+            console.log(results)
             user =
               email: res.locals.objUser.email
               firstName: res.locals.objUser.displayName

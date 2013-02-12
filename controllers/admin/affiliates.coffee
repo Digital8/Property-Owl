@@ -45,6 +45,7 @@ exports.create = (req, res) ->
 exports.update = (req, res) ->
   req.body.visible ?= no
   
+  console.log 'do we have an update'
   console.log req.body
   
   Affiliate.update req.params.id, req.body, (error, affiliate) ->
