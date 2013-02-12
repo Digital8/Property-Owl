@@ -13,7 +13,6 @@ module.exports = class News extends Model
     name: 'news'
     key: 'news_id'
   @field 'title'
-  
   @field 'content'
   @field 'created_at'
   @field 'type'
@@ -23,9 +22,7 @@ module.exports = class News extends Model
   
   hydrate: (callback) ->
     Media.for this, (error, medias) =>
-      console.log medias
       @images = medias
-      console.log @images
       super callback
   
   upload: (req, callback) ->

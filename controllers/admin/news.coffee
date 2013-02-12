@@ -22,6 +22,7 @@ exports.add = (req, res) ->
 
 exports.create = (req, res) ->
   req.body.id = req.user.id
+  req.body.user_id = res.locals.objUser.id
   
   News.create req.body, (error, post) ->
     if error?
