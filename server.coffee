@@ -178,8 +178,9 @@ app.configure ->
         {key: 'my-nest',          href: '#',                label: 'My Nest'}
       ]
       
-      req.url = req.url.split('?')[0]
-      url = '/' + req.url.split('/')[1] + '%'
+      url = req.url.split('?')[0]
+      url = '/' + url.split('/')[1] + '%'
+      
       if url is '/%' then url = '/'
       
       if app.argv.verbose
