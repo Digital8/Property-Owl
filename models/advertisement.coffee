@@ -50,4 +50,4 @@ exports.countActive = (callback) =>
     callback null, result[0]['COUNT(*)']
 
 exports.random = (url, pos, callback) =>
-  @db.query "SELECT * FROM #{table} AS adv INNER JOIN po_pages AS P ON adv.page_id = P.page_id INNER JOIN po_adspaces AS adsp ON adv.adspace_id = adsp.adspace_id WHERE P.url LIKE ? AND adsp.name = ? ORDER BY RAND() ", [url, pos], callback
+  @db.query "SELECT * FROM #{table} AS adv INNER JOIN po_pages AS P ON adv.page_id = P.page_id INNER JOIN po_adspaces AS adsp ON adv.adspace_id = adsp.adspace_id WHERE P.url LIKE ? AND adsp.name = ? AND adv.visible = 1 ORDER BY RAND() ", [url, pos], callback
