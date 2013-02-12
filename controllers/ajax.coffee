@@ -90,7 +90,6 @@ exports.securedeal = (req, res) ->
   req.assert('l', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
   req.assert('c', 'Comment cannot be empty').notEmpty()
 
-  console.log(req.body);
 
   errors = req.validationErrors(true)
 
@@ -107,11 +106,16 @@ exports.securedeal = (req, res) ->
       email: res.locals.objUser.email
 
     Owl.get req.body.id, (err, owl) ->
+      image = 'images/placeholder.png'
+
+      if owl.feature_image != '' then image = 'uploads/'+owl.feature_image
+
       secondary =
         link: 'owls/'+owl.id
         title: owl.title or ''
         address: owl.address or ''
         description: owl.description or ''
+        image: image or ''
 
 
       system.helpers.mailer template,'Owl Deal Registration', user, secondary, (results) ->
