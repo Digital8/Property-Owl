@@ -23,7 +23,7 @@ block content
                 
                 .summary
                   p= post.posted_at
-                  p= post.content
+                  p !{post.content}
                 
                 .listing-links
                   a.details-button(href="/research/#{post.news_id}")

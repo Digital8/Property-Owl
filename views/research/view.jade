@@ -5,15 +5,23 @@ block content
   .container.row.main
     
     include ../left_nav
-   
+     
     #center-col
       h1 Research
+      
       a(href="/research") View All Research
+      
       h2= post.title
+      
       p= post.posted_at
-      .listing-body
+      
+      .listing-details
         .listing-thumb
-          img.thumb(src='/images/news-thumb.jpg', alt='')
-      p= post.content
+          - if (post.images[0])
+            img.thumb(src='/uploads/#{post.imageURL()}', alt='#{post.title}')
+          - else
+            img.thumb(src='/images/placeholder.png', alt='#{post.title}')
+      
+      div !{post.content.replace(/\n/g, '<p />')}
     
     include ../right_nav

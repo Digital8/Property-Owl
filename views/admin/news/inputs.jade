@@ -3,7 +3,7 @@ script(src="/js/tiny_mce/tiny_mce.js")
   label.required(for='newsType') Article Type
   select#newsType.half-field(name='type')
     - each type in ['News', 'Research']
-      option(value=type.toLowerCase(), selected=post.type == type)= type
+      option(value=type.toLowerCase(), selected=post.type == type.toLowerCase())= type
 
 .inputs
   label.control-label(for="inputTitle") Title
