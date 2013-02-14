@@ -44,7 +44,7 @@ module.exports = class News extends Model
     , callback
 
   @findByType: (type, callback) =>
-    system.db.query "SELECT * FROM #{@table.name} WHERE type = ? ORDER BY  #{@table.key}", [type], (error, rows) =>
+    system.db.query "SELECT * FROM #{@table.name} WHERE type = ? ORDER BY created_at DESC", [type], (error, rows) =>
       return callback error if error
       
       models = (new this row for row in rows)
