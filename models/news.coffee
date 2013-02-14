@@ -43,9 +43,17 @@ module.exports = class News extends Model
     
     , callback
 
-  @findByType: (type, callback) ->
-    system.db.query "SELECT * FROM #{@table.name} WHERE type = ?", [type], (error, rows) ->
-      callback(error, rows)
+  @findByType: (type, callback) =>
+    system.db.query "SELECT * FROM #{@table.name} WHERE type = ? ORDER BY  #{@table.key}", [type], (error, rows) =>
+      return callback error if error
+      
+      models = (new this row for row in rows)
+
+      async.forEach models, (model, callback) ->
+        model.hydrate ->
+          callback()
+      , (error) ->
+        callback null, models
 
   imageURL: ->
     if @images.length

@@ -1,0 +1,26 @@
+.listing-summary
+  
+  .header
+    a(href="/research/#{post.news_id}")
+      h2= post.title
+  
+  .listing-body
+    
+    .listing-thumb
+      
+      a.details-button(href="/research/#{post.news_id}")
+        - if (post.images[0])
+          img.thumb(src='/uploads/#{post.imageURL()}', alt='#{post.title}')
+        - else
+          img.thumb(src='/images/placeholder.png', alt='#{post.title}')
+
+    .listing-details
+      
+      .summary
+        p= post.posted_at
+        p !{_s.prune(post.content, 200)}
+      
+      .listing-links
+        a.details-button(href="/research/#{post.news_id}")
+          img#info-icon(src='/images/info-icon.png', alt='View details')
+          |  Details
