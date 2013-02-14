@@ -16,7 +16,7 @@ block content
       p Cannot find a product or service that suits your needs? Advise us of your property needs and we will find the business or businesses who are willing to provide a great deal to Property Owl subscribers.
       
       h3 Property Owl &#45; Innovation in delivering Australia&#39;s Best Property Deals
-      
+
       - if (locals.categories && locals.categories.length)
         h4 Filter By Category:
           form(action="",method="get")
@@ -26,7 +26,7 @@ block content
                 - var s = (id == category.id) ? true : false
                 option(value="#{category.id}",selected=s)= category.key
             | &nbsp; 
-            input(type="submit")
+            input(type="submit",value="Search",class="button")
         - each category in categories
           - if (id != 0 && id != 'All')
             if (id == category.id)
