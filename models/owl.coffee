@@ -183,9 +183,13 @@ module.exports = class Owl extends Model
   fullAddress: ->
     "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
   
+  displayTitleShort: ->
+    shortAddress = _s.prune @address, 20
+    "#{shortAddress}, #{@suburb}, #{@state.toUpperCase()}"
+  
   displayTitle: ->
     "#{@address}, #{@suburb}, #{@state.toUpperCase()}"
-  
+
   deals: (callback) ->
     @db.query "SELECT * FROM deals WHERE #{@table.key} = ?", [@id], (error) ->
       return callback error if error
