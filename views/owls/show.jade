@@ -38,10 +38,12 @@ block content
           #mySlider.evoslider.galleriffic
             dl
               - var i = 0
+              dt "slide #{i}"
+                - var hero = owl.heroImageURL()
+                dd(data-src=hero, data-thumb=hero)
               - each image in owl.images
-                - i++
                 dt "slide #{i}"
-                dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
+                  dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
         
         .property-info
           #left
