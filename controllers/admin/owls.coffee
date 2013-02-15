@@ -79,7 +79,7 @@ exports.create = (req, res) ->
 
               secondary = 
                 contactName: res.locals.objUser.firstName
-                link: "/admin/owls/#{owl.id}/edit"
+                link: "admin/owls/#{owl.id}/edit"
 
               system.helpers.mailer template,'New Listing', user, secondary, (results) ->
                 owl.upload req, ->

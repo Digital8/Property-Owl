@@ -3,10 +3,9 @@ system = require '../system'
 News = system.models.news
 
 exports.index = (req,res) ->
-  News.all (error, news) ->
-    throw error if error
-    
-    res.render 'news/index', news: news
+  News.findByType 'news', (err, results) ->
+    if err then throw err
+    res.render 'news/index', news: results or {}
 
 exports.view = (req,res) ->
   News.get req.params.id, (error, news) ->
