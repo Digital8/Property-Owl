@@ -31,25 +31,34 @@ block content
           - if (id != 0 && id != 'All')
             if (id == category.id)
               h3= category.key
-            
+              - var count = 0
               each affiliate in affiliates
               
                 - if (affiliate.category_id == category.id)
                   
                   //- h5= affiliate.name
-                  
-                  include summary
+                  if affiliate.visible == 1
+                    include summary
+                    - count++
+                    
+              if count == 0
+                p No services found for this category yet.
         
           - else
             h3= category.key
-            
+            - var count = 0
             each affiliate in affiliates
-            
+              
               - if (affiliate.category_id == category.id)
                 
                 //- h5= affiliate.name
                 
-                include summary
+                if affiliate.visible == 1
+                  include summary
+                  - count++
+
+            if count == 0
+              p No services found for this category yet.
       
       - else
         
