@@ -34,7 +34,7 @@ function attachWebWalkVideo(client_id){
 	//alert(window.location.protocol);
 	if (window.location.protocol == 'https:') {
 	
-		baseURL = "http://webwalk.com.au";  
+		baseURL = "https://webwalk.com.au";  
 	}
 	else
 	{
