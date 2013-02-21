@@ -25,6 +25,7 @@ module.exports = (template, subject, objUser, secondary, callback) ->
         fromname: 'Property Owl'
         subject: subject
         html: data
+        bcc: ['swoopin@propertyowl.com.au']
 
       switch template
         when 'affiliate-enquiry-confirmation', 'listing-approval','password-reset','forgot-password','barn-deal-enquiry', 'barn-deal-registration-developer', 'barn-deal-registration', 'expression-of-interest', 'withdraw-interest', 'signup-confirmation', 'service-enquiry', 'service-enquiry-confirmation', 'property-recommendations', 'property-enquiry-confirmation', 'owl-deal-registration-developer', 'owl-deal-registration','owl-deal-enquiry', 'barn-deal-enquiry', 'new-listing', 'listing-confirmation'

@@ -41,10 +41,13 @@ exports.add = (req, res) ->
       res.render 'admin/owls/add', owl: {}, developers: developers or {}
 
 exports.create = (req, res) ->
+  console.log("CREAT TEST")
   count = 0
   
   if not res.locals.objUser.isAdmin() then req.body.approved = 0
   req.body.listed_by ?= res.locals.objUser.id
+
+
   async.whilst ->
     # While count < clone_num evaluates true
     return count <= req.body.clone_num
