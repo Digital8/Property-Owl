@@ -41,7 +41,7 @@ exports.add = (req, res) ->
       res.render 'admin/owls/add', owl: {}, developers: developers or {}
 
 exports.create = (req, res) ->
-  console.log("CREAT TEST")
+  console.log("CREATE ")
   count = 0
   
   if not res.locals.objUser.isAdmin() then req.body.approved = 0

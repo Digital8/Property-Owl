@@ -10,6 +10,7 @@
 
 module.exports = (acl) ->
   (req,res,next) ->
+    console.log(res.locals.objUser.level)
     if (res.locals.objUser.level == acl) or res.locals.objUser.isAdmin()
       next()
     else
