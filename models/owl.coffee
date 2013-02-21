@@ -76,6 +76,7 @@ module.exports = class Owl extends Model
         Media = system.models.media
 
         Media.forEntityWithClass this, klass: 'image', (error, medias) =>
+
           @images = medias
           
           if @feature_image? and @images.length
@@ -169,16 +170,17 @@ module.exports = class Owl extends Model
   heroImageURL: ->
     unless @images? and @images.length then return '/images/placeholder.png'
     
-    # find the hero
-    hero = _.find @images, (image) =>
-      return Number(image.id) is Number(@feature_image)
     
-    # console.log owl: @, hero: hero
+    if @feature_image != ''
+      return "/uploads/#{@feature_image}"
+    else
+      # default to latest image
+      # # find the hero
+      hero = _.find @images, (image) => return Number(image.filename) is Number(@feature_image)
     
-    # default to latest image
-    hero ?= @images.pop()
-    
-    return "/uploads/#{hero.filename}"
+      # console.log owl: @, hero: hero
+      hero ?= @images.pop()
+      return "/uploads/#{hero.filename}"
   
   fullAddress: ->
     "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
