@@ -18,7 +18,7 @@
       
       .summary
         - var listed = new Date(post.created_at)
-        p #{listed.getDay()}/#{listed.getMonth()+1}/#{listed.getFullYear()}
+        p #{moment(listed).format('L')}
         p !{_s.prune(post.content, 200)}
       
       .listing-links
