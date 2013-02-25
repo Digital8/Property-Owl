@@ -179,7 +179,15 @@ app.configure ->
       ]
       
       url = req.url.split('?')[0]
-      url = '/' + url.split('/')[1] + '%'
+      tmpUrl = url.split('/')
+
+      url = '/' + tmpUrl[1]
+
+      if tmpUrl[1] is 'owls' 
+        if tmpUrl[2] in ['hot','top', 'locate'] then url += "#{tmpUrl[2]}/"
+
+      url += '%'
+
       
       if url is '/%' then url = '/'
       

@@ -98,11 +98,6 @@ exports.securedeal = (req, res) ->
     res.send status: 400, errors: errors
 
   else
-    template = 'owl-deal-registration'
-
-    user =
-      firstName: res.locals.objUser.firstName
-      email: res.locals.objUser.email
 
     Owl.get req.body.id, (err, owl) ->
       #console.log(owl)
