@@ -184,7 +184,7 @@ app.configure ->
       url = '/' + tmpUrl[1]
 
       if tmpUrl[1] is 'owls' 
-        if tmpUrl[2] in ['hot','top', 'locate'] then url += "/#{tmpUrl[2]}/"
+        if tmpUrl[2] in ['hot','top', 'locate'] then url += "/#{tmpUrl[2]}"
 
       url += '%'
 
