@@ -19,6 +19,8 @@ exports.create = (req, res) ->
       return res.send status: 404
 
     rcpt = res.locals.objUser.email
+    
+    if record.user.email? then rcpt = record.user.email
 
     User.getUserById record.listed_by , (err, developer) ->
 
@@ -66,7 +68,6 @@ exports.create = (req, res) ->
             link: "/#{entity_type}s/#{record.id}"
           
           system.helpers.mailer template, 'New Enquiry', user, secondary, (results) ->
-            console.log(results)
             user =
               email: res.locals.objUser.email
               firstName: res.locals.objUser.displayName

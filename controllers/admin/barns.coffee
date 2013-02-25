@@ -5,6 +5,9 @@ uuid = require 'node-uuid'
 
 system = require '../../system'
 
+models =
+  user: system.load.model('user')
+
 Barn = system.models.barn
 User = system.models.user
 
@@ -18,12 +21,15 @@ exports.index = (req, res) ->
 
 exports.edit = (req, res) ->
   Barn.get req.params.id, (error, barn) ->
-    User.getUsersByGroup 2, (error, developers) ->
-      res.render 'admin/barns/edit', barn: barn, developers: developers
+    models.user.getUsersByGroup 2, (err, developers) ->
+      models.user.getUsersByGroup 3, (err, admins) ->
+        developers = developers.concat(admins)
+        res.render 'admin/barns/edit', barn: barn, developers: developers
 
 exports.add = (req, res) ->
-  
-  User.getUsersByGroup 2, (error, developers) ->
+  models.user.getUsersByGroup 2, (err, developers) ->
+    models.user.getUsersByGroup 3, (err, admins) ->
+        developers = developers.concat(admins)
       res.render 'admin/barns/add', barn: {}, developers: developers
 
 exports.create = (req, res) ->

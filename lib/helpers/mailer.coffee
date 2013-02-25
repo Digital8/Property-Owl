@@ -28,7 +28,7 @@ module.exports = (template, subject, objUser, secondary, callback) ->
         bcc: ['swoopin@propertyowl.com.au']
 
       switch template
-        when 'affiliate-enquiry-confirmation', 'listing-approval','password-reset','forgot-password','barn-deal-enquiry', 'barn-deal-registration-developer', 'barn-deal-registration', 'expression-of-interest', 'withdraw-interest', 'signup-confirmation', 'service-enquiry', 'service-enquiry-confirmation', 'property-recommendations', 'property-enquiry-confirmation', 'owl-deal-registration-developer', 'owl-deal-registration','owl-deal-enquiry', 'barn-deal-enquiry', 'new-listing', 'listing-confirmation'
+        when 'owl-enquiry-confirmation', 'affiliate-enquiry-confirmation', 'listing-approval','password-reset','forgot-password','barn-deal-enquiry', 'barn-deal-registration-developer', 'barn-deal-registration', 'expression-of-interest', 'withdraw-interest', 'signup-confirmation', 'service-enquiry', 'service-enquiry-confirmation', 'property-recommendations', 'property-enquiry-confirmation', 'owl-deal-registration-developer', 'owl-deal-registration','owl-deal-enquiry', 'barn-deal-enquiry', 'new-listing', 'listing-confirmation'
           email.setCategory 'Property Owl'
           email.addSubVal '{{contact_name}}', secondary.contact_name
           email.addSubVal '{{contactName}}', secondary.contactName
@@ -49,6 +49,7 @@ module.exports = (template, subject, objUser, secondary, callback) ->
           email.addSubVal '{{description}}', secondary.description
           email.addSubVal '{{link}}', secondary.link
           email.addSubVal '{{enquiry_email}}', secondary.enquiryEmail
+          email.addSubVal '{{enquiryEmail}}', secondary.enquiryEmail
           email.addSubVal '{{image}}', secondary.image
         when 'news'
           email.addSubVal '{{NewsTitle}}', secondary.title

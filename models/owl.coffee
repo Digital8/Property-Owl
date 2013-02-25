@@ -153,8 +153,10 @@ module.exports = class Owl extends Model
       
       user: (callback) =>
         system.models.user.getUserById @listed_by, (error, [user]) =>
+          console.log(@listed_by)
           return callback error if error?
           @user = user
+          console.log(user)
           do callback
     
     , (error) => super callback

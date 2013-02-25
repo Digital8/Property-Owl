@@ -84,9 +84,10 @@ module.exports = class Barn extends Model
           callback error
       
       user: (callback) =>
-        system.db.query "SELECT * FROM po_users WHERE user_id = ?", [@listed_by], (error, rows) =>
-          return callback 'no owner' unless rows?.length
-          @user = rows.pop()
+        system.models.user.getUserById @listed_by, (error, [user]) =>
+          return callback error if error?
+          console.log(user)
+          @user = user
           do callback
 
       registrations: (callback) =>

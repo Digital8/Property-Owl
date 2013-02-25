@@ -90,7 +90,6 @@ exports.securedeal = (req, res) ->
   req.assert('l', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2,20)
   req.assert('c', 'Comment cannot be empty').notEmpty()
 
-
   errors = req.validationErrors(true)
 
   if errors is false then errors = {}
@@ -106,6 +105,7 @@ exports.securedeal = (req, res) ->
       email: res.locals.objUser.email
 
     Owl.get req.body.id, (err, owl) ->
+      #console.log(owl)
       image = 'images/placeholder.png'
 
       if owl.feature_image != '' then image = 'uploads/'+owl.feature_image
@@ -117,12 +117,29 @@ exports.securedeal = (req, res) ->
         description: owl.description or ''
         image: image or ''
 
-
       system.helpers.mailer template,'Owl Deal Registration', user, secondary, (results) ->
-        if results is true 
-          res.send status: 200, errors: {}
-        else
-          res.send status: 400, errors: {msg: 'unable to send email'}
+        if not owl.user? then owl.user = {}
+
+        user =
+          firstName: res.locals.objUser.displayName
+          email: owl.user.email or ''
+          phone: req.body.m or ''
+
+        secondary =
+          owl_id: owl.id
+          contactName: owl.user.first_name
+          address: owl.address or ''
+          title: owl.name or ''
+          description: req.body.c
+          contact_method: req.body.contact or 'phone'
+          enquiryEmail: req.body.e or ''
+          link: "/owls/#{owl.id}"
+
+        system.helpers.mailer 'owl-deal-registration-developer','Owl Deal Registration', user, secondary, (devEmailResults) ->
+          if results is true 
+            res.send status: 200, errors: {}
+          else
+            res.send status: 400, errors: {msg: 'unable to send email'}
 
 exports.referfriend = (req, res) ->
   req.body.user_id ?= res.locals.objUser.id
