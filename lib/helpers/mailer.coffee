@@ -51,6 +51,7 @@ module.exports = (template, subject, objUser, secondary, callback) ->
           email.addSubVal '{{enquiry_email}}', secondary.enquiryEmail
           email.addSubVal '{{enquiryEmail}}', secondary.enquiryEmail
           email.addSubVal '{{image}}', secondary.image
+          email.addSubVal '{{entity}}', secondary.entity
         when 'news'
           email.addSubVal '{{NewsTitle}}', secondary.title
           email.addSubVal '{{NewsSummary}}', secondary.summary

@@ -98,21 +98,32 @@ exports.securedeal = (req, res) ->
     res.send status: 400, errors: errors
 
   else
-
+    entity = 'owl' # default to owl
     Owl.get req.body.id, (err, owl) ->
-      #console.log(owl)
+      if owl.barn_id then entity = 'barn'
+
+      # We have changed this to work for owl/barn
+      template = 'owl-deal-registration'
+
+      user =
+        firstName: res.locals.objUser.firstName
+        email: res.locals.objUser.email
+
       image = 'images/placeholder.png'
 
       if owl.feature_image != '' then image = 'uploads/'+owl.feature_image
 
       secondary =
-        link: 'owls/'+owl.id
+        link: entity+'s/'+owl.id
         title: owl.title or ''
         address: owl.address or ''
         description: owl.description or ''
         image: image or ''
+        entity: entity
 
-      system.helpers.mailer template,'Owl Deal Registration', user, secondary, (results) ->
+      if entity is 'owl' then subject = 'Owl' else subject = 'Barn'
+
+      system.helpers.mailer template, subject + ' Deal Registration', user, secondary, (results) ->
         if not owl.user? then owl.user = {}
 
         user =
@@ -121,16 +132,17 @@ exports.securedeal = (req, res) ->
           phone: req.body.m or ''
 
         secondary =
-          owl_id: owl.id
+          owl_id: owl.barn_id or owl.id
           contactName: owl.user.first_name
           address: owl.address or ''
           title: owl.name or ''
           description: req.body.c
           contact_method: req.body.contact or 'phone'
           enquiryEmail: req.body.e or ''
+          entity: entity
           link: "/owls/#{owl.id}"
 
-        system.helpers.mailer 'owl-deal-registration-developer','Owl Deal Registration', user, secondary, (devEmailResults) ->
+        system.helpers.mailer 'owl-deal-registration-developer', subject + ' Deal Registration', user, secondary, (devEmailResults) ->
           if results is true 
             res.send status: 200, errors: {}
           else
@@ -147,7 +159,6 @@ exports.referfriend = (req, res) ->
   errors = req.validationErrors(true)
 
   if errors is false then errors = {}
-  console.log errors
   if Object.keys(errors)?.length > 0
     res.send status: 400, errors: errors
   else
