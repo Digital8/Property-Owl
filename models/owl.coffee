@@ -188,7 +188,7 @@ module.exports = class Owl extends Model
     "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
   
   displayTitleShort: ->
-    shortAddress = _s.prune @address, 20
+    shortAddress = _s.prune @address, 16
     "#{shortAddress}, #{@suburb}, #{@state.toUpperCase()}"
   
   displayTitle: ->
