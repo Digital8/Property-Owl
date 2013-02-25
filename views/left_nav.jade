@@ -40,7 +40,7 @@
   - if (locals.barn || locals.share || (locals.owl && locals.area != 'index'))
     include share
 
-  - if ((req.url!='/owls/top' && req.url!='/owls/' && !locals.owl) || req.url == '/')
+  - if ((req.url!='/owls/top' && req.url!='/owls/' && !locals.owl && !locals.barn) || req.url == '/')
     - var i = 0, max = 1;
     each ad in adUpperBox 
       - i++
