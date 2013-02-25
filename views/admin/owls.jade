@@ -33,7 +33,7 @@
       tr(data-id=owl.id)
        td= owl.code
        - var listed = new Date(owl.created_at)
-       td #{listed.getDay()}/#{listed.getMonth()+1}/#{listed.getFullYear()}
+       td #{moment(listed).format('DD/MM/YYYY')}
        td= owl.title
        td.actions
          a(href='/admin/owls/#{owl.id}/edit', alt='edit owl deal')

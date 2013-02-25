@@ -51,7 +51,7 @@ block content
       - each search in searches
         tr
           - var listed = new Date(search.created_at)
-          td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+          td #{moment(listed).format('DD/MM/YYYY')}
           td= search.state || ''
           td.price= search.minPrice || '--'
           td.price= search.maxPrice || '--'

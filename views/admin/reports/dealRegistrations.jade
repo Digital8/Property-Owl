@@ -37,7 +37,7 @@ block content
       - each registration in registrations
         tr
           - var listed = new Date(registration.registered_at)
-          td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+          td #{moment(listed).format('DD/MM/YYYY')}
           td #{registration.first_name} #{registration.last_name}
           - graph.push([registration.first_name + ' ' + registration.last_name, registration.total])
           td= registration.total

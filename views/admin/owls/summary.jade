@@ -2,7 +2,7 @@ tr(data-id=owl.id, data-entity_type='owl')
   td(style='text-align: center;')= owl.code
   
   - var listed = new Date(owl.created_at)
-  td(style='text-align: center;') #{listed.getDay()}/#{listed.getMonth() + 1}/#{listed.getFullYear()}
+  td(style='text-align: center;') #{moment(listed).format('DD/MM/YYYY')}
   
   td: a(href="/admin/owls/#{owl.id}")= owl.title
   

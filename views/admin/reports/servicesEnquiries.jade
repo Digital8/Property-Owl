@@ -40,7 +40,7 @@ block content
       - each enquiry in enquiries
         tr
           - var listed = new Date(enquiry.date)
-          td #{listed.getDay()}/#{listed.getMonth()+1}/#{listed.getFullYear()}
+          td #{moment(listed).format('DD/MM/YYYY')}
           td= enquiry.name
           td= enquiry.total
           - graph.push([enquiry.name, enquiry.total])
