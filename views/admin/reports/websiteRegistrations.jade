@@ -57,7 +57,7 @@ block content
         each member in members
           tr
             - var listed = new Date(member.created_at)
-            td #{listed.getDay()}/#{listed.getMonth()}/#{listed.getFullYear()}
+            td #{moment(listed).format('DD/MM/YYYY')}
             td= member.state.toUpperCase()
             if typeof(member.first_name) != 'undefined'
               td #{member.first_name} #{member.last_name}

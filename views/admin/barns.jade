@@ -31,7 +31,7 @@
         
         - var listed = new Date(barn.created_at)
         
-        td #{listed.getDay()}/#{listed.getMonth()+1}/#{listed.getFullYear()}
+        td #{moment(listed).format('DD/MM/YYYY')}
         
         td= barn.title
         
