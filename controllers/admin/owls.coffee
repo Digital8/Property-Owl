@@ -42,6 +42,7 @@ exports.add = (req, res) ->
 
 exports.create = (req, res) ->
   count = 0
+  popped = false
   
   if not res.locals.objUser.isAdmin() then req.body.approved = 0
   req.body.listed_by ?= res.locals.objUser.id
@@ -94,7 +95,9 @@ exports.create = (req, res) ->
       # Create some deals
       if req.body.deal_type_id? and req.body.deal_type_id.length > 1
 
-        req.body.deal_type_id.pop() # Remove empty array off the end
+        if popped is false
+          req.body.deal_type_id.pop() # Remove empty array off the end
+          popped = true
 
 
         j = 0
