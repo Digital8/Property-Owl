@@ -18,12 +18,11 @@ exports.create = (req, res) ->
     if error? or not record
       return res.send status: 404
 
-    rcpt = res.locals.objUser.email
+    rcpt = res.locals.objUser.email or ''
     
-    if record.user.email? then rcpt = record.user.email
+    if record.user? then rcpt = record.user.email
 
     User.getUserById record.listed_by , (err, developer) ->
-
       if entity_type is 'affiliate'
         rcpt = record.email
 
