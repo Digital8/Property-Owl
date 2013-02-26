@@ -127,7 +127,7 @@ exports.securedeal = (req, res) ->
       system.helpers.mailer template, subject + ' Deal Registration', user, secondary, (results) ->
         if not owl.user? then owl.user = {}
 
-        if owl.barn_id then link = "/barns/#{owl.id}" else link = "/owls/#{owl.id}"
+        if owl.barn_id then link = "barns/#{owl.id}" else link = "owls/#{owl.id}"
 
         user =
           firstName: res.locals.objUser.displayName
