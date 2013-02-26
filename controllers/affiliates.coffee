@@ -17,6 +17,7 @@ exports.index = (req, res) ->
       affiliates: (callback) -> Affiliate.all callback
       categories: (callback) -> Category.for 'affiliate', callback
     , (error, {affiliates, categories}) ->
+      console.log(categories)
       res.render 'affiliates/index', affiliates: affiliates, categories: categories, id: req.query.category or 0
 
 exports.view = (req,res) ->

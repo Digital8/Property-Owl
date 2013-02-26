@@ -28,6 +28,7 @@ block content
             | &nbsp; 
             input(type="submit",value="Search",class="button")
         - each category in categories
+          
           - if (id != 0 && id != 'All')
             if (id == category.id)
               h3= category.key

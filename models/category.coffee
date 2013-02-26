@@ -20,7 +20,7 @@ module.exports = class Category extends Model
     
     # console.log 'type', type, model.constructor.name
     
-    system.db.query "SELECT * FROM categories WHERE entity_type = ?", [key], (error, rows) =>
+    system.db.query "SELECT * FROM categories WHERE entity_type = ? ORDER BY `key`", [key], (error, rows) =>
       return callback error if error?
       
       models = (new this row for row in rows)
