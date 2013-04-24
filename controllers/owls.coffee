@@ -54,6 +54,7 @@ exports.show = (req, res) ->
   {id} = req.params
   
   Owl.get id, (error, owl) ->
+    console.log(owl)
     owl.hydrateForUser req.user, (error) ->
       res.render 'owls/show', owl: owl, enquire: on
 
