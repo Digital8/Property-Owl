@@ -52,13 +52,16 @@ exports.register = (req, res) ->
       res.send status: 400, errors: errors
       
     else
+      console.log 'Got Form', req.body
+
       user = req.body
       user.password = helpers.hash user.p
       user.group = 1
       user.email = user.e
       user.fname = user.f
       user.lname = user.l
-        
+
+      console.log 'Creating User', user        
       models.user.createUser user, (err, results) ->
         if err
           console.log err
@@ -75,7 +78,7 @@ exports.register = (req, res) ->
 
           secondary = {}
 
-
+          console.log 'Sending Email', template, user, secondary
           system.helpers.mailer template,'Registration Confirmation', user, secondary, (results) ->
             if results is true 
               res.send status: 200, errors: {}
