@@ -79,7 +79,8 @@ block content
           table.barn-lots
             
             thead
-              td Property Lot ID
+              td Lot ID
+              td Unit
               td Bed
               td Bath
               td Car
@@ -95,6 +96,7 @@ block content
                 tr
                   td 
                     a(href='/owls/#{owl.owl_id}') #{barn.code}#{owl.alpha}
+                  td= owl.unit
                   td= owl.bedrooms
                   td= owl.bathrooms
                   td= owl.cars

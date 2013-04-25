@@ -47,6 +47,14 @@ module.exports = class Barn extends Model
           for owl, index in @owls
             owl.index = index
             owl.alpha = 'ABCDE'[index]
+            owl.unit = ''
+
+            #dirty hack to get the unit number
+            _address = owl.address
+            _address.replace '\\', '/'
+            _address = _address.split '/'
+            if _address.length > 1
+              owl.unit = _address[0].trim()
           
           callback error
       
