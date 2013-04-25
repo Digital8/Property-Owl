@@ -1,5 +1,5 @@
 _ = require 'underscore'
-
+jade = require 'jade'
 system = require '../system'
 async = require 'async'
 Owl = system.models.owl
@@ -10,7 +10,21 @@ exports.index = (req, res) ->
     res.render 'owls/index', owls: owls
 
 exports.locate = (req, res) ->
-  res.render 'owls/locate'
+  Page = system.models.page
+  async.parallel
+    page_top: (callback) -> Page.findByUrl '/owl-deals-top', callback
+    page_bottom: (callback) -> Page.findByUrl '/owl-deals-bottom', callback
+  , (error, {page_top, page_bottom}) ->
+    try
+      page_top = page_top.shift().shift()
+      fn_top = jade.compile page_top.content
+      cms_top = do fn_top
+      page_bottom = page_bottom.shift().shift()
+      fn_bottom = jade.compile page_bottom.content
+      cms_bottom = do fn_bottom
+      res.render 'owls/locate', cms_top: cms_top, cms_bottom: cms_bottom
+    catch e
+      res.render 'errors/404'
 
 exports.top = (req, res) ->
   Owl.top (error, owl) ->

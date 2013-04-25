@@ -44,7 +44,8 @@ module.exports = class Affiliate extends Model
         Media = system.models.media
         Media.for this, (error, medias) =>
           @images = medias
-          console.log @images
+          #epix spam removal
+          #console.log @images
           callback error
       
       enquiries: (callback) =>

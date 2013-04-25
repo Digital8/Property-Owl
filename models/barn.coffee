@@ -63,7 +63,8 @@ module.exports = class Barn extends Model
 
         Media.forEntityWithClass this, klass: 'image', (error, medias) =>
           @images = medias
-          console.log(@images)
+          #epic spam removal
+          #console.log(@images)
           if @feature_image? and @images.length
             
             feature_id = parseInt @feature_image

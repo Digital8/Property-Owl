@@ -19,7 +19,7 @@ exports.index = (req,res) ->
       #console.log owl
       res.render 'index', owl: owl, home: home
     catch e
-      res.render '404'
+      res.render 'errors/404'
 
 exports.view = (req,res) ->
 

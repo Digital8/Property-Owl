@@ -1,14 +1,24 @@
 _ = require 'underscore'
-
+jade = require 'jade'
 system = require '../system'
-
+async = require 'async'
 Barn = system.models.barn
 Deal = system.models.deal
 
 exports.index = (req, res) ->
+  Page = system.models.page
   Barn.all (error, barns) ->
     barns = _.sortBy barns, 'created_at'
-    res.render 'barns/index', barns: barns
+    async.parallel
+      page: (callback) -> Page.findByUrl '/barn', callback
+    , (error, {page}) ->
+      try
+        page = page.shift().shift()
+        fn = jade.compile page.content
+        cms = do fn
+        res.render 'barns/index', barns: barns, cms: cms
+      catch e
+        res.render 'errors/404'
 
 exports.show = (req, res) ->
   {id} = req.params

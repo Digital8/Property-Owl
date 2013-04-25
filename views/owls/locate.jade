@@ -8,11 +8,13 @@ block content
     include ../left_nav
     
     #center-col
-      h1 Welcome to Owl Deals
-      
-      p Looking to swoop on a great deal when buying a new property?  Look no further as Owl Deals provides for a wide range of different properties throughout Australia whereby Sellers offer great deals when it comes to houses, apartments, townhouses, land, villas, and other new properties.
-      
-      p Click on a State/Territory from the map below to view the many new property deals on offer.
+      div!= cms_top
+      //
+        h1 Welcome to Owl Deals
+        
+        p Looking to swoop on a great deal when buying a new property?  Look no further as Owl Deals provides for a wide range of different properties throughout Australia whereby Sellers offer great deals when it comes to houses, apartments, townhouses, land, villas, and other new properties.
+        
+        p Click on a State/Territory from the map below to view the many new property deals on offer.
       
       #big-map
         //- div(style='text-align: center; width: 401px; margin-left: auto; margin-right: auto;')
@@ -30,12 +32,14 @@ block content
       
       br
       
-      p Click on the ‘Reveal the Deal’ icon to view the deal put forward by the Seller.  Like what you see? – Then click on the ‘Express Your Interest’ tab.
-      
-      p Your interest in a selected property deal is forwarded to the Seller who can answer any questions you may have and guide you through the purchasing process.
-      
-      p If you see the ‘View the Barn Deal’ icon on any of the Owl Deal listings then click on the icon and you may see an even better deal waiting, should you and others wish to secure a limited number of similar properties.
-      
-      p Not really in the market to buy a new property, but know of someone who is?  Click on the ‘Refer a Friend’ tab in the left hand column and forward the property details to selected friends and family who you know may have an interest in buying a property.  If that friend or family member subscribes to Property Owl and they purchase a property, then you will be rewarded with a $1000.00 nest egg.  The more people that you refer that subscribe and buy – then the more you earn.
+      div!= cms_bottom
+      //
+        p Click on the ‘Reveal the Deal’ icon to view the deal put forward by the Seller.  Like what you see? – Then click on the ‘Express Your Interest’ tab.
+        
+        p Your interest in a selected property deal is forwarded to the Seller who can answer any questions you may have and guide you through the purchasing process.
+        
+        p If you see the ‘View the Barn Deal’ icon on any of the Owl Deal listings then click on the icon and you may see an even better deal waiting, should you and others wish to secure a limited number of similar properties.
+        
+        p Not really in the market to buy a new property, but know of someone who is?  Click on the ‘Refer a Friend’ tab in the left hand column and forward the property details to selected friends and family who you know may have an interest in buying a property.  If that friend or family member subscribes to Property Owl and they purchase a property, then you will be rewarded with a $1000.00 nest egg.  The more people that you refer that subscribe and buy – then the more you earn.
     
     include ../right_nav
