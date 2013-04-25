@@ -15,7 +15,8 @@ exports.index = (req,res) ->
       page = page.shift().shift()
       fn = jade.compile page.content
       home = do fn
-      console.log owl
+      #remove epic spam
+      #console.log owl
       res.render 'index', owl: owl, home: home
     catch e
       res.render '404'

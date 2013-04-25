@@ -86,7 +86,8 @@ module.exports = class Barn extends Model
       user: (callback) =>
         system.models.user.getUserById @listed_by, (error, [user]) =>
           return callback error if error?
-          console.log(user)
+          #remove epic spam
+          #console.log(user)
           @user = user
           do callback
 
