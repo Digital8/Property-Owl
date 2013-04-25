@@ -60,6 +60,7 @@ exports.register = (req, res) ->
       user.email = user.e
       user.fname = user.f
       user.lname = user.l
+      user.postcode = user.c
 
       console.log 'Creating User', user        
       models.user.createUser user, (err, results) ->
