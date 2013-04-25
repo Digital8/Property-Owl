@@ -18,7 +18,12 @@ module.exports = (template, subject, objUser, secondary, callback) ->
     if err?
       console.log 'Error:', err
       throw err
-    else     
+    else
+
+      #check for valid email address
+      #minimum... a@b.cn
+      return unless objUser.email.length > 5
+
       email = new Email
         to: objUser.email
         from: 'no-reply@propertyowl.com.au'

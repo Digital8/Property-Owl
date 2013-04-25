@@ -34,6 +34,11 @@ module.exports = class Bookmark extends Model
       super callback
   
   @forUser = (user, callback) =>
+    #if user isn't logged in
+    unless user?
+      callback null, null
+      null
+
     system.db.query "SELECT * FROM #{@table.name} WHERE user_id = ?", [user.id], (error, rows) =>
       return callback error if error?
       
@@ -48,6 +53,11 @@ module.exports = class Bookmark extends Model
   @forUserAndDeal = (user, deal, callback) =>
     type = deal.constructor.name.toLowerCase()
     
+    #if user isn't logged in
+    unless user?
+      callback null, null
+      return
+
     system.db.query "SELECT * FROM #{@table.name} WHERE entity_id = ? AND type = ? AND user_id = ? LIMIT 1", [deal.id, type, user.id], (error, rows) =>
       return callback error if error?
       

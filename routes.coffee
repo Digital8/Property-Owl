@@ -30,26 +30,27 @@ module.exports = (app) ->
   # ads
   app.get '/adclick/:id', controllers.adclick.index
   
-  # preferences
+  # preferences - my account
   app.get '/preferences', authenticate, controllers.account.preferences
   app.post '/preferences', authenticate, controllers.account.updatePreferences
   
-  # registrations
+  # registrations - my account
   app.get '/registrations', authenticate, controllers.account.registrations
 
-  # referals
+  # referals - my account
   app.get '/referals', authenticate, controllers.account.referals
 
   ### contact ###
   app.get '/contact', controllers.contact.index
   app.post '/contact', controllers.contact.create
   
-  ### account ###
+  # account - my account
   app.get '/account', authenticate, controllers.account.index
   app.put '/account', authenticate, controllers.account.update
   
   ### enquiries ###
-  app.post '/enquiries', authenticate, controllers.enquiries.create
+  #app.post '/enquiries', authenticate, controllers.enquiries.create
+  app.post '/enquiries', controllers.enquiries.create
   
   ### enquiries ###
   app.post '/categories', authenticate, controllers.categories.create
@@ -57,12 +58,13 @@ module.exports = (app) ->
   app.post '/categories/add', authenticate, controllers.categories.dontDoNicksStupidCreate
   app.patch '/categories/:id((\\d+))', authenticate, controllers.categories.patch
   
-  # media
+  # media - what does this do???
   media = (method, path, middleware...) ->
     app[method] "/medias#{path}", authenticate, middleware...
   
   # media 'get', '', controllers.bookmarks.index
   # media 'post', '', controllers.medias.create
+  # why is there only delete??
   media 'del', '/:id(\\d+)', controllers.medias.destroy
   
   # media
@@ -73,17 +75,21 @@ module.exports = (app) ->
   # media 'post', '', controllers.medias.create
   category 'del', '/:id(\\d+)', controllers.categories.destroy
   
+  # bookmarks - my account
   bookmark = (method, path, middleware...) ->
-    app[method] "/bookmarks#{path}", authenticate, middleware...
+    #app[method] "/bookmarks#{path}", authenticate, middleware...
+    app[method] "/bookmarks#{path}", middleware...
   
   bookmark 'get', '', controllers.bookmarks.index
   bookmark 'post', '', controllers.bookmarks.create
   bookmark 'del', '/:id(\\d+)', controllers.bookmarks.destroy
   
-  app.get '/affiliates', authenticate, controllers.affiliates.index
+  #app.get '/affiliates', authenticate, controllers.affiliates.index
+  app.get '/affiliates', controllers.affiliates.index
   
   owl = (method, path, middleware...) ->
-    app[method] "/owls#{path}", authenticate, middleware...
+    #app[method] "/owls#{path}", authenticate, middleware...
+    app[method] "/owls#{path}", middleware...
   
   owl 'get', '', controllers.owls.index
   owl 'get', '/:id(\\d+)/print', controllers.owls.print
@@ -94,7 +100,8 @@ module.exports = (app) ->
   owl 'get', '/state/:state', controllers.owls.byState
   
   barn = (method, path, middleware...) ->
-    app[method] "/barns#{path}", authenticate, middleware...
+    #app[method] "/barns#{path}", authenticate, middleware...
+    app[method] "/barns#{path}", middleware...
   
   barn 'get', '', controllers.barns.index
   barn 'get', "/:id(\\d+)/print", controllers.barns.print
@@ -105,17 +112,19 @@ module.exports = (app) ->
     app[method] "/news#{path}", middleware...
   
   news 'get', '', controllers.news.index
-  news 'get', '/:id(\\d+)', controllers.news.view
+  news 'get', '/:id(\\d+)', [authenticate, controllers.news.view]
   
   research = (method, path, middleware...) ->
-    app[method] "/research#{path}", authenticate, middleware...
+    #app[method] "/research#{path}", authenticate, middleware...
+    app[method] "/research#{path}", middleware...
   
   research 'get', '', controllers.research.index
-  research 'get', '/:id(\\d+)', controllers.research.view
+  research 'get', '/:id(\\d+)', [authenticate, controllers.research.view]
   
   ### search ###
   search = (method, path, middleware...) ->
-    app[method] "/search#{path}", authenticate, middleware...
+    #app[method] "/search#{path}", authenticate, middleware...
+    app[method] "/search#{path}", middleware...
   
   search 'get', '', controllers.search.index
   

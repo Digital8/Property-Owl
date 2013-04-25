@@ -8,6 +8,8 @@ User = system.models.user
 
 exports.create = (req, res) ->
   {entity_id, entity_type} = req.body
+
+  console.log 'enquiry form', req.body
   
   unless entity_type in ['owl', 'barn', 'affiliate']
     return res.send status: 500
@@ -32,7 +34,7 @@ exports.create = (req, res) ->
         developer = developer[0].first_name
         
       map =
-        user_id: req.user.id
+        user_id: req.user?.id or 0
         entity_id: req.body.entity_id
         entity_type: req.body.entity_type
         enquiry: req.body.enquiry
@@ -51,7 +53,7 @@ exports.create = (req, res) ->
 
           user =
             email: rcpt
-            firstName: req.body.name or res.locals.objUser.displayName
+            firstName: req.body.name# or res.locals.objUser.displayName
             lastName: ''
             phone: req.body.phone
           
@@ -62,14 +64,14 @@ exports.create = (req, res) ->
             title: record.name or ''
             description: req.body.enquiry
             contact_method: req.body.contact or 'phone'
-            enquiryEmail: req.body.email or res.locals.objUser.email
+            enquiryEmail: req.body.email# or res.locals.objUser.email
             contactName: developer
             link: "/#{entity_type}s/#{record.id}"
           
           system.helpers.mailer template, 'New Enquiry', user, secondary, (results) ->
             user =
-              email: res.locals.objUser.email
-              firstName: res.locals.objUser.displayName
+              email: req.body.email# or res.locals.objUser.email
+              firstName: req.body.name# or res.locals.objUser.displayName
               lastName: ''
 
             system.helpers.mailer "#{entity_type}-enquiry-confirmation", "Enquiry Confirmation", user, secondary, ->

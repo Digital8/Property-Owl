@@ -29,7 +29,7 @@ html.no-js(lang='en')
     // script(type='text/javascript', src='//use.typekit.net/rej6muq.js')
     script(type='text/javascript')
       try{Typekit.load();}catch(e){}
-    
+
     //- jquery
     script(src='/js/modernizr-custom.js')
     script(src='/js/libs/jquery-1.7.2.min.js')
@@ -183,6 +183,19 @@ html.no-js(lang='en')
     include footer
 
 script(type='text/javascript')
+  //when jQuery is loaded, extend with isAuthed
+  $(function(){
+    $.isAuthed = #{objUser.isAuthed()};
+    $.showLogin = function() {
+      $(".login-overlay").show();
+      return $.isAuthed;
+    };
+    $.showRegister = function() {
+      $(".register-overlay").show();
+      return $.isAuthed;
+    };
+  });
+
   var mySlider = $("#mySlider").evoSlider({
     mode: "slider",
     controlNav: true,

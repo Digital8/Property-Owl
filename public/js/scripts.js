@@ -28,6 +28,9 @@ $(function(){
 	});
 
 	$(".deal h2").on("click", function(){
+
+		if (!$.isAuthed) return $.showRegister();
+
 		var deals = $(this).closest(".deal"),
 			dealsList = $("ul", deals);
 		
@@ -55,6 +58,7 @@ $(function(){
 	var infoHeight = 0;
 	
 	$(".more-info h2").on("click", function(){ 
+		if (!$.isAuthed) return $.showRegister();
 	  //console.log('sdfsdf');
 		var infoitems = $(this).closest(".more-info"),
 			infoList = $("ul", infoitems);
@@ -136,6 +140,7 @@ $(function(){
 
 	$('.show-secure-deal').on('click', function(event){
 		event.preventDefault();
+		if (!$.isAuthed) return $.showRegister();
 		secureDealModal.fadeIn(150);
 		return false;
 	});
@@ -145,6 +150,7 @@ $(function(){
 	
 	$(".show-refer-friend, .close-refer-friend").on("click", function(event){
 		event.preventDefault();
+		if (!$.isAuthed) return $.showRegister();
 		referFriendModal.fadeToggle(150);
 		return false;
 	});
@@ -347,8 +353,8 @@ $("#close-errors").on("click", function(){
 	  var email = $(".refer-friend-email").val();
 	  var mobile = $(".refer-friend-phone").val();
 	  var comment = $(".refer-friend-comment").val();
-	  var entity = $("#entity").text()
-	  var entity_id = $("#entity_id").text()
+	  var entity = $("#entity").text();
+	  var entity_id = $("#entity_id").text();
 
 	  $.ajax({
 	    url: '/ajax/referfriend',

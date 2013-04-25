@@ -5,6 +5,8 @@ module.exports = ->
   $(".enquire-button").on "click", (e) ->
     e.preventDefault()
     
+    return $.showRegister() unless $.isAuthed
+
     $(".modal-enquiry").fadeToggle()
     
     id = $(this).data("id")
@@ -14,7 +16,7 @@ module.exports = ->
 
 
     $("#sendEnquiry").on "click", ->
-      
+
       if not processing
         processing = true
         enquiry = $("#enquiry").val()

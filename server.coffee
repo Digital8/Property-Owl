@@ -58,6 +58,7 @@ app.configure ->
     app.set 'views', "#{__dirname}/views"
     app.set 'view engine', 'jade'
     
+    app.use express.static "#{__dirname}/public", maxAge: 1024
     app.use express.logger 'dev'
     app.use express.bodyParser()
     app.use express.methodOverride()
@@ -79,8 +80,6 @@ app.configure ->
     #       stream.pipe res
       
     #   else do next
-    
-    app.use express.static "#{__dirname}/public", maxAge: 1024
     
     app.use (req, res, done) ->
       schemas = []
@@ -289,8 +288,8 @@ app.configure ->
     insecureApp = express()
     
     insecureApp.get '*', (req, res) ->
-      res.redirect "http://propertyowlnest.com/"
-      # res.redirect "https://#{req.headers.host.split(':')[0]}#{req.url}"
+      #res.redirect "http://propertyowlnest.com/"
+      res.redirect "https://#{req.headers.host.split(':')[0]}#{req.url}"
     
     insecureServer = http.createServer insecureApp
     insecureServer.listen config.http.port, ->

@@ -1,21 +1,27 @@
 module.exports = ->
   ($ '.add-bookmark').click (event) ->
     event.preventDefault()
-    
-    $this = $ this
-    
-    $.post '/bookmarks',
-      type: $this.data 'deal-type'
-      id: $this.data 'deal-id'
-    , (response, status) ->
-      if response.status is 200
         
-        $this.contents().last().remove()
-        
-        $this.append ' Saved'
-        
-      else
-        alert status
+    if $.isAuthed
+
+      $this = $ this
+      
+      $.post '/bookmarks',
+        type: $this.data 'deal-type'
+        id: $this.data 'deal-id'
+      , (response, status) ->
+        if response.status is 200
+          
+          $this.contents().last().remove()
+          
+          $this.append ' Saved'
+          
+        else
+          alert status
+
+    else
+      $.showRegister()
+
 
   for bookmark in ($ '.bookmark')
     $bookmark = $ bookmark
@@ -34,3 +40,4 @@ module.exports = ->
               do $bookmark.fadeOut
             else
               alert "uh oh! spaghettio!"
+              

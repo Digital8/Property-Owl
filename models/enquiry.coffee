@@ -20,6 +20,12 @@ module.exports = class Enquiry extends Model
   
   @field 'created_at'
   @field 'updated_at'
+
+  # @_create = @create
+
+  # @create = (map, callback) ->
+  #   console.log "some shit going on"
+  #   @_create map, callback
   
   @for = (model, callback) =>
     type = model.constructor.name.toLowerCase()

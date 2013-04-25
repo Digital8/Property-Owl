@@ -59,14 +59,17 @@ module.exports = ->
         
         activate key
   
-  if window.location.hash? and window.location.hash.length
-    activate window.location.hash[1..]
-  else
-    level = $('.panes').data('tab')
-    if level is 3
-      activate 'index'
-    else 
-      activate 'detail'
+  #this wasn't really documented but its pretty annoying putting #detail over everything
+  #i think its just for admin...
+  if window.location.pathname.indexOf('admin') != -1
+    if window.location.hash? and window.location.hash.length
+      activate window.location.hash[1..]
+    else
+      level = $('.panes').data('tab')
+      if level is 3
+        activate 'index'
+      else
+        activate 'detail'
   
   for form in $ 'form.details-form.owl'
     
