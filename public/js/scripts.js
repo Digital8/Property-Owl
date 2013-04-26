@@ -145,6 +145,13 @@ $(function(){
 		return false;
 	});
 	
+	$('.details-button').on('click', function(event){
+	  if (!$.isAuthed) {
+	    event.preventDefault();
+	    return $.showRegister();
+    }
+	});
+	
 	// show refer friend form
 	var referFriendModal = $(".refer-friend-overlay");
 	
