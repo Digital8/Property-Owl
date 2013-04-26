@@ -30,12 +30,20 @@
         .counter
           span.label Number of Enquiries
           span.value= owl.registrations.length
-  
+
   .barn-box
     a(href='/barns')
       h2 The Barn
       img#barn-image(src='/images/barn.png', alt='The Barn Group Deals')
       h3 Group Deals
+  
+  .refer-a-friend-box
+    a(href='/refer-a-friend')
+      h2 Refer a Friend
+      img#refer-a-friend-image(src='/images/refer-a-friend.png', alt='Refer a Friend')
+      h3 Get a 
+        span.refer-emphasis $1000 
+        | Nest Egg!      
   
   - if (locals.barn || locals.share || (locals.owl && locals.area != 'index'))
     include share
