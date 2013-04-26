@@ -33,7 +33,7 @@ exports.index = (req, res) ->
         cms = do fn
         res.render 'affiliates/index', affiliates: affiliates, categories: categories, id: req.query.category or 0, cms: cms
       catch e
-        res.render '404'
+        res.render 'errors/404'
 
 exports.view = (req,res) ->
 
