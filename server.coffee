@@ -286,6 +286,7 @@ app.configure ->
       started 'https'
     
     insecureApp = express()
+    insecureApp.use express.static "#{__dirname}/public", maxAge: 1024
     
     insecureApp.get '*', (req, res) ->
       #res.redirect "http://propertyowlnest.com/"
