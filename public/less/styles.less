@@ -1277,6 +1277,7 @@ body {
                 padding-right: 1.875em;
                 text-transform: uppercase;
                 text-decoration: none;
+                margin-bottom:@padding-small;
             }
             
             #map {
@@ -1417,7 +1418,7 @@ body {
                         .column(9,0);
                         position: relative;
                         padding-bottom: @padding-small;
-                        height: 9.750em;
+                        min-height: 9.750em;
                         
                         .features {
                             background: #eaeaea;
@@ -3735,6 +3736,11 @@ li.sfHover > a > .sf-sub-indicator {
   background-position: -@padding-small 0; /* arrow hovers for modern browsers*/
 }
 /* @end */
+
+.clear {
+  .clearfix;
+}
+
 
 @import "_media.less";
 
