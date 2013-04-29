@@ -44,7 +44,7 @@ exports.create = (req, res) ->
         res.send status: 200
         
         template_map =
-          affiliate: 'service-enquiry'
+          affiliate: 'affiliate-enquiry'
           owl: 'owl-deal-enquiry'
           barn: 'barn-deal-enquiry'
         
