@@ -59,6 +59,7 @@ exports.create = (req, res) ->
           
           secondary =
             owl_id: record.id
+            barn_id: record.id
             contactName: req.body.name
             address: record.address or ''
             title: record.name or ''

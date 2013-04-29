@@ -3,7 +3,7 @@
   ul
     li
       - if (typeof(barn) != 'undefined')
-        a(href='/barns/#{barn.id}/print')
+        a(href='/barns/#{barn.id}/print',target='_blank')
           img(src='/images/share-print-icon.png', alt='Print')
           | Print Deal
       - else
