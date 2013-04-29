@@ -147,8 +147,11 @@ $(function(){
 	
 	$('.details-button').on('click', function(event){
 	  if (!$.isAuthed) {
-	    event.preventDefault();
-	    return $.showRegister();
+	    var href = $(this).attr('href');
+	    if ((href.indexOf('research') != -1) || (href.indexOf('news') != -1)) {
+	      event.preventDefault();
+	      return $.showRegister();
+      }
     }
 	});
 	
