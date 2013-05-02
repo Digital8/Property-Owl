@@ -16,6 +16,49 @@ block content
         js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+
+      $(document).ready(function(){
+        // enlarge slideshow
+        $(".evoslider").each(function(){
+        var slider = $(this);
+        slider.on("mouseenter", function(){
+        slider.append('<a href="#" class="enlarge-slider">Click to enlarge</a>');
+        });
+        slider.on("mouseleave", function(){
+        $(".enlarge-slider", slider).remove();
+        });
+        $(".enlarge-slider", slider).live("click", function(){
+        $("body").append('<div class="window-overlay" id="large-slideshow"><div class="modal"></div></div>');
+        var overlay = $("#large-slideshow");
+        $(".modal", overlay).append(duplicateSlider);
+        var duplicate = duplicateSlider.evoSlider({
+        mode: "slider",
+        controlNav: true,
+        controlNavMode: "thumbnails",
+        controlNavVertical: false,
+        controlNavPosition: "outside",
+        controlNavVerticalAlign: "right",
+        width: "1000",
+        height: '466',
+        mouse: false,
+        imageScale: "fitImage",
+        keyboard: false,
+        startIndex: mySlider.getIndex() // slide to start from
+        });
+        overlay.fadeIn(150);
+        return false;
+        });
+        });
+        // window overlay
+        $(".window-overlay").live("click", function(){
+        $(this).fadeOut(150, function(){
+        $(this).remove();
+        });
+        });
+        $(".modal").live("click", function(){
+        return false;
+        });
+        });  
     
     .container.row.main
       #deal_id(style='display:none')

@@ -196,6 +196,9 @@ script(type='text/javascript')
     };
   });
 
+  var duplicateSlider = $("#mySlider").clone();
+  duplicateSlider.attr("id", "duplicate-slider");
+
   var mySlider = $("#mySlider").evoSlider({
     mode: "slider",
     controlNav: true,
