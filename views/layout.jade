@@ -197,7 +197,9 @@ script(type='text/javascript')
   });
 
   var duplicateSlider = $("#mySlider").clone();
+  var initialSlider = $("#mySlider").clone();
   duplicateSlider.attr("id", "duplicate-slider");
+  initialSlider.attr("id", "duplicate-slider");
 
   var mySlider = $("#mySlider").evoSlider({
     mode: "slider",

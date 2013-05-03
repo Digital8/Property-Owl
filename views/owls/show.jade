@@ -20,23 +20,24 @@ block content
       $(document).ready(function(){
         // enlarge slideshow
         $(".evoslider").each(function() {
-          var slider;
+          var slider = $(this);
 
-          slider = $(this);
-          return (function(slider, duplicateSlider) {
-            slider.on("mouseenter", function() {
-              return slider.append("<a href=\"#\" class=\"enlarge-slider\">Click to enlarge</a>");
-            });
-            slider.on("mouseleave", function() {
-              return $(".enlarge-slider", slider).remove();
-            });
-            return $(".enlarge-slider", slider).live("click", function() {
-              var duplicate, overlay;
+          slider.on("mouseenter", function() {
+            slider.append("<a href=\"#\" class=\"enlarge-slider\">Click to enlarge</a>");
+          });
 
-              $("body").append("<div class=\"window-overlay\" id=\"large-slideshow\"><div class=\"modal\"></div></div>");
-              overlay = $("#large-slideshow");
-              $(".modal", overlay).append(duplicateSlider);
-              duplicate = duplicateSlider.evoSlider({
+          slider.on("mouseleave", function() {
+            $(".enlarge-slider", slider).remove();
+          });
+
+          $(".enlarge-slider, .evoImage", slider).live("click", function() {
+            $("body").append("<div class=\"window-overlay\" id=\"large-slideshow\"><div class=\"modal\"></div></div>");
+            var overlay = $("#large-slideshow");
+            duplicateSlider = initialSlider.clone();
+            $(".modal", overlay).append(duplicateSlider);
+            //(function (mySlider) {
+              //console.log ('slider index: ' + mySlider.getIndex());
+              var duplicate = duplicateSlider.evoSlider({
                 mode: "slider",
                 controlNav: true,
                 controlNavMode: "thumbnails",
@@ -51,10 +52,10 @@ block content
                 keyboard: false,
                 startIndex: mySlider.getIndex()
               });
-              overlay.fadeIn(150);
-              return false;
-            });
-          })(slider, duplicateSlider);
+            //})(mySlider);
+            overlay.fadeIn(150);
+            return false;
+          });
         });
 
         // window overlay
