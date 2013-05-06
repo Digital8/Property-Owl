@@ -16,6 +16,59 @@ block content
         js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+
+      $(document).ready(function(){
+        // enlarge slideshow
+        $(".evoslider").each(function() {
+          var slider = $(this);
+
+          slider.on("mouseenter", function() {
+            slider.append("<a href=\"#\" class=\"enlarge-slider\">Click to enlarge</a>");
+          });
+
+          slider.on("mouseleave", function() {
+            $(".enlarge-slider", slider).remove();
+          });
+
+          $(".enlarge-slider, .evoImage", slider).live("click", function() {
+            $("body").append("<div class=\"window-overlay\" id=\"large-slideshow\"><div class=\"modal\"></div></div>");
+            var overlay = $("#large-slideshow");
+            duplicateSlider = initialSlider.clone();
+            $(".modal", overlay).append(duplicateSlider);
+            //(function (mySlider) {
+              //console.log ('slider index: ' + mySlider.getIndex());
+              var duplicate = duplicateSlider.evoSlider({
+                mode: "slider",
+                controlNav: true,
+                controlNavMode: "thumbnails",
+                controlNavVertical: false,
+                autoplay: false,
+                controlNavPosition: "outside",
+                controlNavVerticalAlign: "right",
+                width: "1000",
+                height: "466",
+                mouse: false,
+                imageScale: "fitImage",
+                keyboard: false,
+                startIndex: mySlider.getIndex()
+              });
+            //})(mySlider);
+            overlay.fadeIn(150);
+            return false;
+          });
+        });
+
+        // window overlay
+        $(".window-overlay").live("click", function(){
+          $(this).fadeOut(150, function(){
+            $(this).remove();
+          });
+        });
+
+        $(".modal").live("click", function(){
+          return false;
+        });
+      });  
     
     .container.row.main
       #deal_id(style='display:none')
@@ -38,12 +91,17 @@ block content
           #mySlider.evoslider.galleriffic
             dl
               - var i = 0
-              dt "slide #{i}"
-                - var hero = owl.heroImageURL()
-                dd(data-src=hero, data-thumb=hero)
-              - each image in owl.images
+              - var hero = owl.heroImageURL()
+              - if (hero.length > 12)
                 dt "slide #{i}"
-                  dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
+                  dd(data-src=hero, data-thumb=hero)
+                - i = 1
+              - each image in owl.images
+                - var currentImg = '/uploads/' + image.filename
+                - if (hero != currentImg)
+                  dt "slide #{i}"
+                    dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
+                  - i = i+1
         
         .property-info
           #left

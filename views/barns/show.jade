@@ -12,7 +12,60 @@ block content
         js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    
+
+      $(document).ready(function(){
+        // enlarge slideshow
+        $(".evoslider").each(function() {
+          var slider = $(this);
+
+          slider.on("mouseenter", function() {
+            slider.append("<a href=\"#\" class=\"enlarge-slider\">Click to enlarge</a>");
+          });
+
+          slider.on("mouseleave", function() {
+            $(".enlarge-slider", slider).remove();
+          });
+
+          $(".enlarge-slider, .evoImage", slider).live("click", function() {
+            $("body").append("<div class=\"window-overlay\" id=\"large-slideshow\"><div class=\"modal\"></div></div>");
+            var overlay = $("#large-slideshow");
+            duplicateSlider = initialSlider.clone();
+            $(".modal", overlay).append(duplicateSlider);
+            //(function (mySlider) {
+              //console.log ('slider index: ' + mySlider.getIndex());
+              var duplicate = duplicateSlider.evoSlider({
+                mode: "slider",
+                controlNav: true,
+                controlNavMode: "thumbnails",
+                controlNavVertical: false,
+                autoplay: false,
+                controlNavPosition: "outside",
+                controlNavVerticalAlign: "right",
+                width: "1000",
+                height: "466",
+                mouse: false,
+                imageScale: "fitImage",
+                keyboard: false,
+                startIndex: mySlider.getIndex()
+              });
+            //})(mySlider);
+            overlay.fadeIn(150);
+            return false;
+          });
+        });
+
+        // window overlay
+        $(".window-overlay").live("click", function(){
+          $(this).fadeOut(150, function(){
+            $(this).remove();
+          });
+        });
+
+        $(".modal").live("click", function(){
+          return false;
+        });
+      });  
+
     #left-col
       include ../left_nav
       
@@ -41,35 +94,28 @@ block content
 
       h1= barn.title
 
-      //- image slider
-      // #mySlider.evoslider.galleriffic
-      //   dl
-      //     dt slide one
-      //     //- dd(data-src='/uploads/#{image.filename}', data-thumb='/images/slide1-thumb.jpg')
-      //     dd(data-src='/uploads/slider2.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-      //     dt slide two
-      //     dd(data-src='/uploads/slider3.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-      //     dt slide three
-      //     dd(data-src='/uploads/slider4.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-      //     dt slide four
-      //     dd(data-src='/uploads/slider5.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-      //     dt slide five
-      //     dd(data-src='/uploads/slider1.jpg', data-thumb='/uploads/slide1-thumb.jpg')
-      
-      - locals.owli = barn.owls[0]
-      - if (typeof(owli) != 'undefined' && owli.images && owli.images.length)
+      //
+        image slider
+      //
+        - locals.owli = barn.owls[0]
+        - if (typeof(owli) != 'undefined' && owli.images && owli.images.length)
+      - if (barn.images && barn.images.length)
         #mySlider.evoslider.galleriffic
           dl
             - var i = 0
+            - var hero = barn.heroImageURL()
+            - if (hero.length > 12)
               dt "slide #{i}"
-              - var hero = barn.heroImageURL()
-              dd(data-src=hero, data-thumb=hero)
-              - each image in owli.images
-                - i++
+                dd(data-src=hero, data-thumb=hero)
+              - i = 1
+            - each image in barn.images
+              - var currentImg = '/uploads/' + image.filename
+              - if (hero != currentImg)
                 dt "slide #{i}"
-                dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
+                  dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
+                - i = i+1
       - else
-        strong No owls have been uploaded!
+        strong No barn images have been uploaded!
       div#entity(style="display: none;") barn
       div#entity_id(style="display: none;")= barn.id
       .property-info

@@ -44,7 +44,7 @@ exports.create = (req, res) ->
         res.send status: 200
         
         template_map =
-          affiliate: 'service-enquiry'
+          affiliate: 'affiliate-enquiry'
           owl: 'owl-deal-enquiry'
           barn: 'barn-deal-enquiry'
         
@@ -59,6 +59,7 @@ exports.create = (req, res) ->
           
           secondary =
             owl_id: record.id
+            barn_id: record.id
             contactName: req.body.name
             address: record.address or ''
             title: record.name or ''

@@ -3644,6 +3644,64 @@ evoslider.galleriffic dd .evoEmbed img
   }
 }
 
+.enlarge-slider {
+  position: absolute;
+  top: 45%;
+  left: 25%;
+  z-index: 1000;
+  background: rgba(0,0,0,0.8);
+  padding: 15px 25px;
+  text-decoration: none;
+  color: #FFF !important;
+  border-radius: 8px;
+}
+
+.window-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999999;
+  background: rgba(0,0,0,0.85);
+}
+
+.window-overlay .modal {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+}
+
+.window-overlay .evoslider {
+  padding: 0;
+}
+
+.window-overlay .evoslider,
+.window-overlay .evoslider dd,
+.window-overlay .evoslider .evoImage,
+.window-overlay .evoslider .control_wrapper {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.window-overlay .evoslider > dl {
+  width: 100% !important;
+  height: 85% !important;
+}
+
+.window-overlay .evoslider .outer_control {
+  width: 100% !important;
+  height: 15% !important;
+}
+
+.window-overlay .evoslider .controlNav {
+  width: 100% !important;
+}
+
+
 /*Superfish menu */
 /*** ESSENTIAL STYLES ***/
 .sf-menu ul {
