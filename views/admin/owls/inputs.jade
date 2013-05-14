@@ -1,23 +1,28 @@
 .panes(style='display: none;', data-tab=objUser.level)
   
-  - if (objUser.isAdmin())
-    .inputs.index.pane(data-key='index')
-      
-      h2 Approval
-      
-      label(for='title') Approved
-        | &nbsp;
-        input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
-      
-      label(for='title') Listed By
-        | &nbsp;
-        select(name="listed_by")
-          each developer in developers
-            - var sel = false
-              if typeof(owl.user) != 'undefined'
-                - var sel = (owl.user.user_id == developer.user_id) ? true : false;
-            option(value=developer.user_id, selected=sel) #{developer.first_name} #{developer.last_name}
+  .inputs.index.pane(data-key='index', data-label='details')
 
+    h2 Details
+    hr
+      
+    - if (objUser.isAdmin())
+
+      .left
+        .inputs
+          label(for='title') Listed By
+            | &nbsp;
+            select(name="listed_by")
+              each developer in developers
+                - var sel = false
+                  if typeof(owl.user) != 'undefined'
+                    - var sel = (owl.user.user_id == developer.user_id) ? true : false;
+                option(value=developer.user_id, selected=sel) #{developer.first_name} #{developer.last_name}
+
+        .inputs
+          label(for='title') Approved
+            | &nbsp;
+            input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
+      
       //- - var display = (owl.approved == true) ? 'block' : 'none';
       
       //- div#approved_at(style="display: #{display}")
@@ -40,17 +45,45 @@
       //-       }
       //-     });
       //-   });
-  
-  .inputs.detail.pane(data-key='detail', data-label='details')
-    include detail_inputs
+    
+    .inputs
+
+    .left
+
+      .inputs
+        label(for='development_type_id') Development Type
+        select.development_type_id(type='text', name='development_type_id')
+          option
+          - for type in data.developmentTypes
+            option(value='#{type.id}', selected=owl.development_type_id == type.id)= type.name
+
+      .inputs
+        label(for='development_status_id') Development Stage
+        select.development_status_id(type='text', name='development_status_id')
+          option
+          - for status in data.developmentStatuses
+            option(value='#{status.id}', selected=owl.development_status_id == status.id)= status.name
+    
+      .inputs
+        label(for='price') Price
+        input.price(type='number', name='price', value='#{owl.price}', min='0', max='100000000', pattern='^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$')
+
+    .inputs 
+
+    .inputs
+      label(for='title') Title
+      input#title(type='text', name='title', value='#{owl.title || ""}',maxlength='100')
+
+    .inputs
+      label(for='description') Description
+        textarea#description(name='description',rows='7', style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 181px;")
+          = owl.description
   
   .inputs.address.pane(data-key='address')
     include address_inputs
   
   .inputs.feature.pane(data-key='feature', data-label='features')
     include feature_inputs
-    
-    include area_inputs
   
   .inputs.image.pane(data-key='image', data-label='images')
     include image_inputs

@@ -1,3 +1,4 @@
+h2 Address
 hr
 
 .inputs(data-geo='master')
@@ -6,21 +7,23 @@ hr
 
 hr
 
-.inputs
-  label(for='title') Address
-  input.address(type='text', name='address', value='#{barn.address}',maxlength='100')
+.left
+  .inputs
+    label(for='title') Address Line 1
+    input.address(type='text', name='address', value='#{barn.address || ""}',maxlength='100')
 
-.inputs
-  label(for='suburb') Suburb
-  input.suburb(type='text', name='suburb', value='#{barn.suburb}',maxlength='100')
+  .inputs
+    label(for='suburb') Suburb
+    input.suburb(type='text', name='suburb', value='#{barn.suburb || ""}',maxlength='100')
 
-.inputs
-  label(for='postcode') Postcode
-  input.postcode(type='text', name='postcode', value='#{barn.postcode}',maxlength='10')
+.right
+  .inputs
+    label(for='postcode') Postcode
+    input.postcode(type='text', name='postcode', value='#{barn.postcode || ""}',maxlength='10')
 
-.inputs
-  label(for='state') State
-  select.state(name='state')
-    option
-    - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
-      option(value='#{state}', selected=state == barn.state) #{state.toUpperCase()}
+  .inputs
+    label(for='state') State
+    select.state(name='state')
+      option
+      - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
+        option(value='#{state}', selected=state == barn.state) #{state.toUpperCase()}

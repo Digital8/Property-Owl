@@ -1,24 +1,19 @@
+h2 Images
+hr
 .inputs
-  label.required Images
+  label Browse
+  input#image(type='file', name='images', multiple='multiple')
+  span.note Max file size 4MB. Images will be resized to 580 x 435 pixels (w x h).
 
 .inputs
-
-.inputs
-  
   table.admin-gridview.images
     thead
       tr
         td Thumb
         td Hero Image
-        td Delete?
+        td Actions
     
     tbody.body
       - if (barn.images && barn.images.length)
         - each image in barn.images
           include image_input
-    
-    tfooter.footer
-      tr
-        td(colspan='3')
-          label Upload
-          input#image(type='file', name='images', multiple='multiple')

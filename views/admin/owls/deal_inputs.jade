@@ -1,14 +1,14 @@
+h2 Deal Details
+hr
 .inputs
-  
-  label.required Deals
   
   table.admin-gridview.deals(data-entity_type='owl')
     
     thead
       tr
-        td Type
+        td.thumb Deal Type
         td Description
-        td Value
+        td.thumb Value
         td Actions
     
     tbody.body
@@ -19,11 +19,11 @@
     tfooter.footer
       tr
         td(colspan='4')
-          a.add(href='#', style="text-align: center;")
+          a.add.button(href='#')
             img(src='/images/add.png')
             | &nbsp;
             | Add Deal
-
+    
 table.template(style='display: none;')
   tbody
     - if (!locals.deal) { locals.deal = {}; }

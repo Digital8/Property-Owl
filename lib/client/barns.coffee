@@ -16,30 +16,27 @@ module.exports = ->
   makeRow = (owl) ->
     row = $ """
       <tr>
-        <td>#{owl.id}</td>
-        <td>#{moment(owl.created_at).format('L')}</td>
+        <td style='text-align: center;'>#{owl.id}</td>
+        <td style='text-align: center;'>#{moment(owl.created_at).format('DD/MM/YYYY')}</td>
         <td>#{owl.title}</td>
         <td>#{owl.address}</td>
-        <td>#{owl.state.toUpperCase()}</td>
-        <td>Active</td>
-        <td>#{owl.value}</td>
-        <td>#{owl.registrations.length}</td>
-        <td><a href="#" class="nest"><img src="/images/add.png" /> Nest</a></td>
+        <td style='text-align: center;'>#{owl.state.toUpperCase()}</td>
+        <td style='text-align: right;'>#{owl.value} %</td>
+        <td class="actions"><a href="#" class="nest"><img src="/images/add.png" /> Add</a></td>
       </tr>
       """
   
   makeListRow = (owl) ->
+    barnId = $('.inputs.owl-matrix.search').data('barn-id')
     row = $ """
-      <tr>
-        <td>#{owl.id}</td>
-        <td>#{moment(owl.created_at).format('L')}</td>
+      <tr data-owl-id="#{owl.id}" data-barn-id="#{barnId}">
+        <td style='text-align: center;'>#{owl.id}</td>
+        <td style='text-align: center;'>#{moment(owl.created_at).format('DD/MM/YYYY')}</td>
         <td>#{owl.title}</td>
         <td>#{owl.address}</td>
-        <td>#{owl.state.toUpperCase()}</td>
-        <td>Active</td>
-        <td>#{owl.value}</td>
-        <td>#{owl.registrations.length}</td>
-        <td><a href="#" class="nest"><img src="/images/edit.png" /> Un-Nest</a></td>
+        <td style='text-align: center;'>#{owl.state.toUpperCase()}</td>
+        <td style='text-align: right;'>#{owl.value} %</td>
+        <td class="actions"><a href="#" class="unnest"><img src="/images/delete.png" />Remove</a></td>
       </tr>
       """
   
@@ -66,6 +63,20 @@ module.exports = ->
               row = makeListRow owl
               row.appendTo $('.owl-matrix.nested tbody')
               p.parent().parent().remove()
+
+              do (row) ->
+                $row = $ row
+                $row.find('.unnest').click (event) ->
+                  event.preventDefault()
+
+                  barnId = $row.data 'barn-id'
+                  owlId = $row.data 'owl-id'
+
+                  if barnId? and owlId?
+                    $.delete "/admin/barns/#{barnId}/owls/#{owlId}", ->
+                      $row.remove()
+                      update()
+
   
   $address.bind 'change keydown', ->
     update()
@@ -77,17 +88,16 @@ module.exports = ->
   
   do update if matrix.length
   
-  for row in $('.owl-matrix .owl')
+  for row in $('.owl-matrix .owl') then do (row) ->
     $row = $ row
     
-    do ($row, row) ->
+    $row.find('.unnest').click (event) ->
+      event.preventDefault()
       
-      $row.find('.unnest').click (event) ->
-        event.preventDefault()
-        
-        barnId = $row.data 'barn-id'
-        owlId = $row.data 'owl-id'
-        
+      barnId = $row.data 'barn-id'
+      owlId = $row.data 'owl-id'
+
+      if barnId? and owlId?
         $.delete "/admin/barns/#{barnId}/owls/#{owlId}", ->
-          
           $row.remove()
+          update()

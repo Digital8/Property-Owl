@@ -1,17 +1,38 @@
-.panes(style='display: none;')
+.panes(style='display: none;', data-tab=objUser.level)
   
-  .inputs.index.pane(data-key='index')
-    label(for='title') Approved
-      input.big_checkbox(name='approved', type='checkbox', checked=barn.approved)
-  
-  .inputs.detail.pane(data-key='detail')
-    include detail_inputs
-  
-  .inputs.feature.pane(data-key='feature')
-    include feature_inputs
+  .inputs.index.pane(data-key='index', data-label='details')
+    
+    h2 Details
+    hr
+      
+    - if (objUser.isAdmin())
+      .left
+        .inputs
+          label(for='listed_by') Listed By 
+          select#listed_by(name='listed_by')
+            option
+            - each developer in developers
+              option(value='#{developer.user_id}', selected=developer.user_id == barn.listed_by) #{developer.first_name} #{developer.last_name}
+
+        .inputs
+          label(for='title') Approved
+            | &nbsp;
+            input.big_checkbox(name='approved', type='checkbox', checked=barn.approved)
+    .inputs
+    .inputs
+      label(for='title') Title
+      input#title(type='text', name='title', value='#{barn.title || ""}',maxlength='100')
+
+    .inputs
+      label(for='description') Description
+        textarea#description(name='description',rows='7', style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 181px;")
+          = barn.description
   
   .inputs.address.pane(data-key='address')
     include address_inputs
+  
+  .inputs.feature.pane(data-key='feature', data-label='features')
+    include feature_inputs
   
   .inputs.image.pane(data-key='image', data-label='images')
     include image_inputs
@@ -22,5 +43,5 @@
   .inputs.deal.pane(data-key='deal')
     include deal_inputs
   
-  .inputs.owl.pane(data-key='owl')
+  .inputs.owl.pane(data-key='owl', data-label='property lots')
     include owl_inputs

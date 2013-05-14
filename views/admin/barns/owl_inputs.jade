@@ -1,6 +1,9 @@
+h2 Property Lots
+hr
+
 .inputs.owl-matrix.nested
-  label Properties
-  
+  .label Added
+
   - var owls = barn.owls || {}
   
   table.admin-gridview
@@ -11,9 +14,7 @@
         td Title
         td Address
         td State
-        td Status
         td Deal Value
-        td Registrations
         td(colspan='3') Actions
     tbody.owl
      - each owl in owls
@@ -34,10 +35,6 @@
         td Title
         td Address
         td State
-        td Status
         td Deal Value
-        td Registrations
         td(colspan='3') Actions
     tbody
-     // - each owl in owls
-     //   include ../owls/summary

@@ -1,25 +1,19 @@
+h2 Files
+hr
 .inputs
-  label.required Files
+  label Browse
+  input#files(type='file', name='files', multiple='multiple')
+  span.note Max file size 4MB.
 
 .inputs
-
-.inputs
-  
   table.admin-gridview.files
-    
     thead
       tr
-        td Thumb
-        td Caption
+        td.thumb Thumb
+        td File Name
         td Actions
     
     tbody.body
       - if (barn.files && barn.files.length)
         - each file in barn.files
           include file_input
-    
-    tfooter.footer
-      tr
-        td(colspan=3)
-          label Upload
-          input#files(type='file', name='files', multiple='multiple')

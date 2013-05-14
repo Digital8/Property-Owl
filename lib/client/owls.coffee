@@ -66,10 +66,7 @@ module.exports = ->
       activate window.location.hash[1..]
     else
       level = $('.panes').data('tab')
-      if level is 3
-        activate 'index'
-      else
-        activate 'detail'
+      activate 'index'
   
   for form in $ 'form.details-form.owl'
     
