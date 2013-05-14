@@ -137,35 +137,44 @@ $ ->
           span.appendTo a
           
           a.click (event) ->
+
             event.preventDefault()
             
-            ($ '#address').val null
-            ($ '#suburb').val null
-            ($ '#postcode').val null
-            ($ '#state').selectedIndex = 0
+            ($ '.inputs .address').val null
+            ($ '.inputs .suburb').val null
+            ($ '.inputs .postcode').val null
+            ($ '.inputs .state').selectedIndex = 0
             
             for component in result.address_components
               if 'street_number' in component.types
-                ($ '#address').val ($ '#address').val() + component.long_name
+                ($ '.inputs .address').val ($ '.inputs .address').val() + component.long_name
               
               if 'route' in component.types
-                ($ '#address').val ($ '#address').val() + ' ' + component.long_name
+                ($ '.inputs .address').val ($ '.inputs .address').val() + ' ' + component.long_name
               
               if 'locality' in component.types
-                ($ '#suburb').val component.long_name
+                ($ '.inputs .suburb').val component.long_name
               
               if 'postal_code' in component.types
-                ($ '#postcode').val component.long_name
+                ($ '.inputs .postcode').val component.long_name
               
               if 'administrative_area_level_1' in component.types
-                ($ '#state').val component.short_name.toLowerCase()
+                ($ '.inputs .state').val component.short_name.toLowerCase()
+
+            address = ($ '.inputs .address').val()
+            suburb = ($ '.inputs .suburb').val()
+            
+            if address.length > 1 and suburb.length > 1
+              $('.inputs .address').change()
         
       , 'json'
     , 1000
     
     $input.bind 'change', ->
-      ul.empty()
-      
+      return if ul.length
+      throttled arguments...
+
+    $input.bind 'keyup', ->
       throttled arguments...
 
 $ ->

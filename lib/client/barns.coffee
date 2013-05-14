@@ -76,12 +76,14 @@ module.exports = ->
                     $.delete "/admin/barns/#{barnId}/owls/#{owlId}", ->
                       $row.remove()
                       update()
+        else
+          console.log 'Owl is Already in a Barn', owl
 
   
-  $address.bind 'change keydown', ->
+  $address.bind 'change keyup', ->
     update()
   
-  $suburb.bind 'change keydown', ->
+  $suburb.bind 'change keyup', ->
     update()
   
   matrix = $ '.owl-matrix'

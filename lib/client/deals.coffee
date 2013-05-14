@@ -2,7 +2,7 @@ module.exports = ->
   
   sync = (row) ->
     $type = row.find '.deal_type_id'
-    $type.bind 'change keydown input', ->
+    $type.bind 'change keyup input', ->
       
       owlId = ($ 'form').data 'id'
       dealId = row.data 'id'
@@ -12,7 +12,7 @@ module.exports = ->
       , ->
     
     $description = row.find '.description'
-    $description.bind 'change keydown input', ->
+    $description.bind 'change keyup input', ->
       
       owlId = ($ 'form').data 'id'
       dealId = row.data 'id'
@@ -22,7 +22,7 @@ module.exports = ->
       , ->
     
     $value = row.find '.value'
-    $value.bind 'change keydown input', ->
+    $value.bind 'change keyup input', ->
       
       owlId = ($ 'form').data 'id'
       dealId = row.data 'id'
