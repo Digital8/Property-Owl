@@ -1,13 +1,18 @@
 .admin-actions
   ul
-    if(action != 'add')
+    if((typeof action == 'undefined') || action != 'add')
       li
         a(href='/admin/affiliates/add')
          img(src='/images/add.png')
          | &nbsp;
          | Add Affiliate
+    li
+      a(href='/categories/add')
+        img(src='/images/add.png')
+        | &nbsp;
+        | Add Category
     
-    if(action != 'index')
+    if((typeof action == 'undefined') || action != 'index')
       li
         a(href='/admin/affiliates')
           img(src='/images/manage.png')

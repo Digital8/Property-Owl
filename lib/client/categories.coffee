@@ -3,18 +3,20 @@ module.exports = () ->
   
   for row in $rows
     $row = $ row
-    
     id = $row.data 'id'
     
-    $row.find('.delete').click (event) ->
-      
-      event.preventDefault()
-      
-      $.delete "/categories/#{id}", (res, body, xhr) ->
+    do ($row, id) ->
+
+      $row.find('.delete').click (event) ->
+
+        event.preventDefault()
         
-        if xhr.status is 200
-          
-          $row.fadeOut()
+        if confirm("Are you sure you want to remove this?")
+          $.delete "/categories/#{id}", (res, body, xhr) ->
+            
+            if xhr.status is 200
+              
+              $row.fadeOut()
   
   $tbody = $ '.categories tbody'
   

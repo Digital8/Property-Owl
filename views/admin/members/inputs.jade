@@ -6,7 +6,7 @@
          option(value="#{group.account_type_id}", selected=group.account_type_id == values.account_type_id)= group.name
   
   .inputs
-    label.required(for='first_name') Full Name
+    label.required(for='first_name') Full Name *
     - if (values.fname == undefined) values.fname = ''
       input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.fname}",class="half-field",maxlength='100')
       | &nbsp;
@@ -36,12 +36,12 @@
 .right
   
   .inputs
-   label.required(for='email') Email
+   label.required(for='email') Email *
    - if (values.email == undefined) values.email = ''
     input#email(type="text",placeholder="Email",name="email",value="#{values.email}",maxlength='100')
   
   .inputs
-   label.required(for='password') Password
+   label.required(for='password') Password *
    input#password(type="password",name="password",class="half-field",placeholder="Password",maxlength='100')
    | &nbsp;
    input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword",class="half-field",maxlength='100')
@@ -53,19 +53,19 @@
    - if (values.address == undefined) values.address = ''
     input#address(type="text",placeholder="Address",name="address",value="#{values.address}",maxlength='100')
   
-  .inputs
-   label.required(for='suburb') Suburb
-   - if (values.suburb == undefined) values.suburb = ''
-    input#suburb(type="text",placeholder="Suburb",name="suburb",value="#{values.suburb}",maxlength='100')
-  
-  .inputs
-   label.required(for='postcode') Postcode
-   - if (values.postcode == undefined) values.postcode = ''
-    input#postcode(type="text",name="postcode",placeholder="Postcode",value="",maxlength='100')
+  .left
+    .inputs
+     label.required(for='suburb') Suburb
+     - if (values.suburb == undefined) values.suburb = ''
+      input#suburb(type="text",placeholder="Suburb",name="suburb",value="#{values.suburb}",maxlength='100')
+  .right
+    .inputs
+     label.required(for='postcode') Postcode
+     - if (values.postcode == undefined) values.postcode = ''
+      input#postcode(type="text",name="postcode",placeholder="Postcode",value="",maxlength='100')
   
   br
 
-  //
   .inputs
     |  Subscribed to newsletter
     select(name='subscribed_news')
@@ -73,7 +73,7 @@
       option(value='0',selected=(values.subscribed_newsletter == 0) ? true : false) No
 
   .inputs
-    |  Subscribed to Propery Alerts
+    |  Subscribed to property alerts
     select(name='property_alerts')
       option(value='1',selected=(values.subscribed_alerts == 1) ? true : false) Yes
       option(value='0',selected=(values.subscribed_alerts == 0) ? true : false) No

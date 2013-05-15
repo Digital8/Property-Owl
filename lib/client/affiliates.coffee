@@ -38,6 +38,8 @@ module.exports = ->
         
         id = $row.data 'id'
         
-        $.delete "/admin/affiliates/#{id}", ->
-          
-          $row.remove()
+        if confirm('Are you sure you want to remove this?')
+	        $.delete "/admin/affiliates/#{id}", ->
+	          
+	          $row.remove()
+

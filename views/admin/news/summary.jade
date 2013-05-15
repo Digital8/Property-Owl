@@ -1,6 +1,6 @@
 tr(data-id=post.id)
   
-  td= post.type
+  td= post.type.charAt(0).toUpperCase() + post.type.substr(1).toLowerCase()
   
   td= post.title
   

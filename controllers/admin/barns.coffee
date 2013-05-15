@@ -46,7 +46,7 @@ exports.create = (req, res) ->
       link: "/admin/barns/#{barn.id}/edit"
 
     system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
-      res.redirect "/barns/#{barn.id}"
+      res.redirect 'back'
 
 exports.delete = (req, res) ->
   Barn.get req.params.id, (error, barn) ->

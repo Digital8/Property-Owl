@@ -23,14 +23,15 @@ block content
          tr
            td= advertiser.name
            td= advertiser.description
-           td
-             a(href='http://google.com/search?q=' + advertiser.contactee)= advertiser.contactee
+           //- td
+           //-  a(href='http://google.com/search?q=' + advertiser.contactee)= advertiser.contactee
+           td= advertiser.contactee
            td
              a(href='mailto:' + advertiser.email, target='_blank')= advertiser.email
            td
              a(href='tel:' + advertiser.phone, target='_blank')= advertiser.phone
            td
-             a(href='http://maps.google.com/?q=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode, target='_blank')
+             a(href='http://maps.google.com/?q=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state.toUpperCase() + ',' + advertiser.postcode, target='_blank')
                img(src='http://maps.googleapis.com/maps/api/staticmap?sensor=false&center=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode + '&zoom=7&size=192x128')
            td.actions
              a(href='/admin/advertisers/#{advertiser.advertiser_id}/edit', alt='edit')
@@ -40,3 +41,8 @@ block content
              a(href='/admin/advertisers/#{advertiser.advertiser_id}/delete', alt='delete')
                img(src='/images/delete.png', alt='delete')
                | Delete
+
+       tfoot
+        tr
+          td(colspan='8')
+            | &nbsp;

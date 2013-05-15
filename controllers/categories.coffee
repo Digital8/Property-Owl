@@ -22,6 +22,7 @@ exports.patch = (req, res) ->
     res.send status: 200
 
 exports.destroy = (req, res) ->
+  console.log 'deleting category with id', req.params.id or 'none'
   Category.delete req.params.id, (error, result) ->
     return res.send status: 400 if error?
     
@@ -40,9 +41,20 @@ exports.dontDoNicksStupidCreate = (req,res) ->
     key: key
   
   Category.create map, (error, category) ->
-    if error
-      console.log error
-      req.flash('error','An error occured: ' + error.code)
+    req.body.key ?= ''
+
+    req.assert('key', 'Category name is empty').len(1, 100).notEmpty()
+
+    errors = req.validationErrors true
+    
+    if errors
+      keys = Object.keys errors
+      req.flash('error', errors[key].msg) for key in keys
+      res.redirect 'back'
     else
-      req.flash('success', 'Category created!')
-    res.redirect 'back'
+      if error
+        console.log error
+        req.flash('error','An error occured: ' + error.code)
+      else
+        req.flash('success', 'Category created!')
+        res.redirect 'admin/affiliates#categories'

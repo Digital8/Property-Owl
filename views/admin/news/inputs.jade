@@ -1,3 +1,6 @@
+
+include ../../flashify
+
 script(src="/js/tiny_mce/tiny_mce.js")
 .inputs
   label.required(for='newsType') Article Type
@@ -6,7 +9,7 @@ script(src="/js/tiny_mce/tiny_mce.js")
       option(value=type.toLowerCase(), selected=post.type == type.toLowerCase())= type
 
 .inputs
-  label.control-label(for="inputTitle") Title
+  label.control-label(for="inputTitle") Title *
   input#inputTitle(type='text', name='title', value=post.title,maxlength='100')
 
 .inputs
@@ -15,4 +18,4 @@ script(src="/js/tiny_mce/tiny_mce.js")
 
 .inputs 
   label.control-label(for="inputContent") Content
-  textarea#inputContent.span8(name='content', rows='10')= post.content
+  textarea#inputContent.span8(name='content', rows='20')= post.content

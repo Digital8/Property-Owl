@@ -59,6 +59,7 @@ block content
           td= search.maxBeds || '--'
           td= search.bathrooms || '--'
           td= search.cars || '--'
-    tfooter
-      tr
-        td: p: strong Total: #{searches.length}
+      tfoot
+        tr
+          td(colspan=8)
+            p: strong &nbsp; Total: #{searches.length}

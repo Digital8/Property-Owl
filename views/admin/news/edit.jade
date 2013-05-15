@@ -8,6 +8,8 @@ block content
     
     h1 Edit Article
     
+    include actions
+    
     .grid-header.form-header
     
     .details
@@ -18,8 +20,6 @@ block content
       form.details-form(action="/admin/news/#{post.id}", method='post', enctype="multipart/form-data")
         
         input(type='hidden', name='_method', value='put')
-        
-        include ../../flashify
         
         include inputs
         

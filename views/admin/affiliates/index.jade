@@ -1,36 +1,24 @@
 extends ../../layout
 
 block content
- 
   .container.row.main
-    
     include ../menu
     
     h1 Affiliates
     
-    .admin-actions
-       ul
-         li
-           a(href='/admin/affiliates/add')
-             img(src='/images/add.png')
-             | &nbsp;
-             | Add Affiliate
-    
+    include actions
+   
+    .grid-header.form-header
+
     table.admin-gridview.affiliates
       thead
         tr
           td Name
-          
           td Category
-          
           td Suburb
-          
           td State
-          
           td Visible
-          
           td Enquiries
-          
           td(colspan='3') Actions
       
       tbody
@@ -62,22 +50,19 @@ block content
       tfoot
         tr
           td(colspan='12')
-          | &nbsp;
-    
+            | &nbsp;
+    br
+    a#categories
     h1 Affiliate Categories
-    .admin-actions
-       ul
-         li
-           a(href='/categories/add')
-             img(src='/images/add.png')
-             | &nbsp;
-             | Add Category
+
+    include ../../flashify
+             
+    .grid-header.form-header
 
     table.admin-gridview.categories
       thead
         tr
           td Name
-          
           td(colspan='2') Actions
       
       tbody
@@ -88,4 +73,4 @@ block content
       tfoot
         tr
           td(colspan='2')
-          | &nbsp;
+            | &nbsp;

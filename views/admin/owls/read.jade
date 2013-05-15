@@ -1,90 +1,78 @@
 .details.read
   h3= owl.title
-  table
-    tr
-      td Property ID
-      td= owl.code
-    
-    - if (owl.user)
+
+  .left
+
+    table.left-table
       tr
-        td Listed By
-        td #{owl.user.first_name} #{owl.user.last_name}
-    
-    - if (owl.approved_at)
+        td.key Property ID
+        td.value= owl.code
+
+      - if (owl.user)
+        tr
+          td.key Listed By
+          td.value #{owl.user.first_name} #{owl.user.last_name}
+      
+      - if (owl.approved_at)
+        tr
+          td.key Listed On
+          td.value= owl.approved_at
       tr
-        td Listed On
-        td= owl.approved_at
-    
-    tr
-      td Status
-      td= owl.status
-    
-    tr
-      td Time Left
-      td= owl.time_left
-    
-    tr
-      td Property Type
-      td= owl.developmentType.name
-    
-    tr
-      td Development Stage
-      td= owl.developmentStatus.name
-    
-    tr
-      td Price
-      td= owl.price
-    
-    tr
-      td Address
-      td= owl.fullAddress()
-    
-    tr
-      td Bedrooms
-      td= owl.bedrooms
-    
-    tr
-      td Bathrooms
-      td= owl.bathrooms
-    
-    tr
-      td Cars
-      td= owl.cars
-    
-    tr
-      td Total Area
-      td= owl.area
-    
-    tr
-      td Indoor Features
-      td
-        - if (owl.indoorFeatures.length > 0)
-          ul
-            - each feature in owl.indoorFeatures
-              li= feature
-    
-    tr
-      td Outdoor Features
-      td
-        - if (owl.outdoorFeatures.length > 0)
-          ul
-            - each feature in owl.outdoorFeatures
-              li= feature
-    
-    tr
-      td Other Features
-      td
-        - if (owl.otherFeatures.length > 0)
-          ul
-            - each feature in owl.otherFeatures
-              li= feature
+        td.key Status
+        td.value= owl.status
+      tr
+        td.key Time Left
+        td.value= owl.time_left
+      tr
+        td.key Property Type
+        td.value= owl.developmentType.name
+      tr
+        td.key Development Stage
+        td.value= owl.developmentStatus.name
+      tr
+        td.key Price
+        td.value= '$' + owl.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      tr
+        td.key Address
+        td.value= owl.fullAddress()
+      tr
+        td.key Bedrooms
+        td.value= owl.bedrooms
+      tr
+        td.key Bathrooms
+        td.value= owl.bathrooms
+      tr
+        td.key Car Spaces
+        td.value= owl.cars
+      tr
+        td.key Total Area
+        td.value= owl.area
+      tr
+        td.key Indoor Features
+        td.value
+          - if (owl.indoorFeatures.length > 0)
+            ul
+              - each feature in owl.indoorFeatures
+                li= feature
+      tr
+        td.key Outdoor Features
+        td.value
+          - if (owl.outdoorFeatures.length > 0)
+            ul
+              - each feature in owl.outdoorFeatures
+                li= feature
+      tr
+        td.key Other Features
+        td.value
+          - if (owl.otherFeatures.length > 0)
+            ul
+              - each feature in owl.otherFeatures
+                li= feature
+  .right
+    label Description
 
-  hr
-  h3 Description
-
-  p= owl.description
-
-  hr.light
+    p= owl.description
+  .inputs
 
   h3 Registrations
 

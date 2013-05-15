@@ -8,40 +8,16 @@ block content
     h1 Edit Page
     
     include actions
+  
+    .grid-header.form-header
     
     .details
-      h2 Page Details
-      
-      hr
       
       form.details-form(action="/admin/pages/#{page.page_id}", method='post')
       
         input(type='hidden', name='_method', value='put')
         
-        include ../../flashify
-        
-        .inputs
-          label.control-label(for='inputTitle') Page URL
-          input#inputUrl(type='text', name='url', placeholder='/url', value="#{page.url}",maxlength='100')
-        
-        .inputs
-          label.control-label(for='inputTitle') Page Title
-          input#inputTitle(type='text', name='header', placeholder='Page Title', value="#{page.header}",maxlength='100')
-        
-        .inputs
-          label.control-label(for='inputContent') Content
-          textarea#inputContent(name='content', placeholder='Page Content', rows='30', cols='100')
-            = page.content.replace(/<br \/>/g,"\r\n")
-        
-        .inputs
-          select(name='enabled')
-            option(value='1') Enabled
-            option(value='0') Disabled
-        
-        .inputs
-          select(name='static')
-            option(value='1', selected=true) Static
-            option(value='0') Dynamic (used for adverts)
+        include inputs
         
         .submit
           input.button(type='submit', value='Update Page')

@@ -1,0 +1,29 @@
+
+h2 Page Details
+hr
+
+include ../../flashify
+
+.inputs
+  label.control-label(for='inputTitle') Page URL *
+  input#inputUrl(type='text', name='url', placeholder='/url', value="#{page.url || ""}",maxlength='100')
+
+.inputs
+  label.control-label(for='inputTitle') Page Title *
+  input#inputTitle(type='text', name='header', placeholder='Page Title', value="#{page.header || ""}",maxlength='100')
+br
+.left
+  .inputs
+    select(name='enabled')
+      option(value='1') Enabled
+      option(value='0') Disabled
+.right
+  .inputs
+    select(name='static')
+      option(value='1', selected=true) Static
+      option(value='0') Dynamic (used for adverts)
+
+.inputs
+  label.control-label(for='inputContent') Content
+  textarea#inputContent(name='content', placeholder='Page Content', rows='30')
+    = page.content.replace(/<br \/>/g,"\r\n")

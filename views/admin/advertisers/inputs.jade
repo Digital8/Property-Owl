@@ -36,6 +36,9 @@
   
   .inputs
     label.required(for='state') State
-    input#state(type='text', name='state', placeholder='State', value=advertiser.state,maxlength='100')
+    select.state#state(name='state')
+      option
+      - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
+        option(value='#{state}', selected=state == advertiser.state) #{state.toUpperCase()}
 
 .inputs

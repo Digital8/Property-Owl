@@ -1,29 +1,32 @@
 extends ../../layout
 
 block content
- .container.row.main
-   include ../menu
+  .container.row.main
+    include ../menu
    
-   h1 Advertisements
-   
-   include actions
-   
-   .grid-header.form-header
-   
-   table.admin-gridview
-     thead
-       tr
-         td ID
-         td Description
-         td Advertiser
-         td Page
-         //- td Space
-         td Image
-         td Hyperlink
-         //- td Duration
-         td Visible
-         td(colspan='2') Actions
+    h1 Advertisements
+
+    include actions
+
+    .grid-header.form-header
+
+    table.admin-gridview
+      thead
+        tr
+          td Description
+          td Advertiser
+          td Page
+          //- td Space
+          td Image
+          //- td Duration
+          td Visible
+          td(colspan='2') Actions
      
-     tbody
+      tbody
       - each advertisement in advertisements
-         include summary
+        include summary
+
+      tfoot
+        tr
+          td(colspan='7')
+            | &nbsp;

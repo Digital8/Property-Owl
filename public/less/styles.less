@@ -2066,6 +2066,44 @@ body {
       padding:20px;
       .rounded-top-left(5px);
       .rounded-top-right(5px);
+
+      table {
+        &.left-table {
+          margin-right:20px;
+        }
+        tr {
+
+          font-family:Arial, sans-serif;
+          font-size:0.9em;
+          border-bottom:solid 1px #ccc;
+
+          td {
+            padding:5px 0;
+          }
+        
+          td.key {
+            font-weight:bold;
+            padding-right:20px;
+            text-align:left;
+            width:35%;
+          }
+
+          td.value {
+            font-weight:normal;
+            width:65%;
+
+            ul {
+              margin:0 0 20px 15px;
+              padding:0;
+              font-size:1em;
+            }
+            li {
+              margin:0;
+              padding:0;
+            }
+          }
+        }
+      }
     }
     
     .details-form {        
@@ -2080,7 +2118,7 @@ body {
             font-size: 0.8em;
         }
         
-        input[type=text], input[type=number], input[type=tel], input[type=email], input[type=password], textarea {
+        input[type=text], input[type=number], input[type=tel], input[type=email], input[type=password], input[type=date], input[type=url], textarea {
             border: solid 1px #adadad;
             .rounded(0.313em);
             .box-shadow(~"inset 0px 1px 1px rgba(0,0,0,0.1)");
@@ -2092,7 +2130,7 @@ body {
             display: inline;
         }
         
-        input[type=text], input[type=number], input[type=password], textarea, select, input[type=url], input[type=email], input[type=date], input[type=tel], input[type=file] {
+        input[type=text], input[type=number], input[type=password], textarea, select, input[type=date], input[type=url], input[type=email], input[type=date], input[type=tel], input[type=file] {
             width: 100%;
             line-height: 25px;
         }

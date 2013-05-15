@@ -1,6 +1,5 @@
 tr(data-id=category.id)
-  td
-    input(type="text", value=category.key)
+  td= category.key
 
   td.actions
     a.delete(href='/admin/categories/#{category.id}/delete', alt='delete property')

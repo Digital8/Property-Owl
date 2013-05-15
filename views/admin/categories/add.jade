@@ -7,16 +7,11 @@ block content
     
     h1 Add Category
     
+    include ../affiliates/actions
+    
     .grid-header.form-header
-      ol.six
-        li.active
-          .ol-1-active
-          | Details
     
     .details
-      h2 Category Details
-      
-      hr
       
       form.details-form(action='/categories/add',method='post')
         

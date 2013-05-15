@@ -10,40 +10,12 @@ block content
     include actions
   
     .grid-header.form-header
-      ol.six
-        li.active
-          .ol-1-active
-          | Details
     
     .details
-      h2 Page Details
-      
-      hr
       
       form.details-form(action='/admin/pages', method='post')
-        include ../../flashify
         
-        .inputs
-          label.required(for='inputUrl') Page URL
-            input#inputUrl(type='text', name='url', placeholder='/url',maxlength='100')
-        
-        .inputs
-          label.required(for='inputTitle') Page Title
-            input#inputTitle(type='text', name='header', placeholder='Page Title',maxlength='100')
-        
-        .inputs
-          label.control-label(for='inputContent') Content:
-            textarea#inputContent.span8(name='content', placeholder='Page Content', rows='30')
-        
-        .inputs
-          select(name='enabled')
-            option(value='1', selected=true) Enabled
-            option(value='0') Disabled
-       
-        .inputs
-          select(name='static')
-            option(value='1', selected=true) Static Page
-            option(value='0') Dynamic Page (used for advertising sections)
+        include inputs
 
         .submit
          input.button(type='submit', value='Create Page')

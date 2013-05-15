@@ -23,24 +23,35 @@ exports.add = (req, res) ->
 exports.create = (req, res) ->
   req.body.id = req.user.id
   req.body.user_id = res.locals.objUser.id
+  req.body.title ?= ''
+
+  req.assert('title', 'News title is empty').len(1,100).notEmpty()
+
+  errors = req.validationErrors true
   
-  News.create req.body, (error, post) ->
-    if error?
-      console.log error
+  if errors
+    keys = Object.keys errors
+    req.flash('error', errors[key].msg) for key in keys
+    res.redirect 'back'
+  
+  else
+    News.create req.body, (error, post) ->
+      if error?
+        console.log error
+        
+        req.flash 'error', 'Some unknown error occured'
+        
+        res.redirect 'back'
+        
+        return
       
-      req.flash 'error', 'Some unknown error occured'
-      
-      res.redirect 'back'
-      
-      return
-    
-    else
-      render =  ->
-        req.flash 'success', 'News post submitted'
-        res.redirect '/admin/news'
-      
-      post.upload req, ->
-        do render
+      else
+        render =  ->
+          req.flash 'success', 'News post submitted'
+          res.redirect '/admin/news'
+        
+        post.upload req, ->
+          do render
       
     
     #   # Email everyone
@@ -66,6 +77,17 @@ exports.create = (req, res) ->
     #     async.map users, sendEmail, (err, results) ->
 
     #       res.redirect '/admin/news'
+
+
+
+
+
+
+
+
+
+
+
 
 exports.edit = (req, res) ->
   News.get req.params.id, (error, post) ->

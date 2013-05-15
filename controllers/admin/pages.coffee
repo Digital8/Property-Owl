@@ -11,8 +11,8 @@ exports.index = (req,res) ->
 exports.view = (req,res) ->
 
 exports.add = (req,res) ->
-  res.render 'admin/pages/add'
-  
+  res.render 'admin/pages/add', page: {content: '', url: '', header: ''}
+
 exports.create = (req, res) ->
   req.body.url ?= ''
   req.body.header ?= ''

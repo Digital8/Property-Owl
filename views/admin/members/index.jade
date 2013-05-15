@@ -9,12 +9,12 @@ block content
     h1 Members
     
     include actions
-    
+
     .grid-header 
       form#search-form(action="/admin/members", method="get")
-        input#memberSearch(type="text",placeholder="Name",name="name", value=search) &nbsp; 
-        input(type="submit",value="Search",class="button")
-
+        input#memberSearch(type="text",placeholder="Name",name="name", value=search)
+        &nbsp;
+        input.button(type="submit",value="Search")
     
     table.admin-gridview
       thead
@@ -42,7 +42,10 @@ block content
             a(href="#", data-id="#{user.user_id}").deleteUser
               img(src='/images/delete.png', alt='Delete')
               | Delete
-      
+      tfoot
+        tr
+          td(colspan='5')
+            &nbsp;
   script
     $(document).ready(function(){
       $('.deleteUser').click(function(e){

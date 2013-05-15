@@ -64,7 +64,11 @@ block content
             else
               td= member.total
             - graph.push([member.state.toUpperCase(), member.total]);
-
+      tfoot
+        tr
+          td(colspan='5')
+            &nbsp;
+            
     div#chart_div
     script
       // Load the Visualization API and the piechart package.
