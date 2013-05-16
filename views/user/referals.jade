@@ -32,7 +32,10 @@ block content
                       td #{referal.first_name} #{referal.last_name}
                       td= referal.comment
                       td= referal.created_at
-                      td: a(href="/#{referal.entity_type}s/#{referal.entity_id}") View
+                      - if (referal.entity_id != '0')
+                        td: a(href="/#{referal.entity_type}s/#{referal.entity_id}") View
+                      - else
+                        td Generic
                 -else
                   h4 You have not refered any listings
     
