@@ -1,0 +1,34 @@
+extends ../../layout
+
+block content
+  .container.row.main
+    include ../menu
+    h1 Reports
+      span.secondary  - Friend Referrals
+    include reportsMenu
+
+    table.admin-gridview
+      thead
+        tr
+          td Date
+          td Referrer Name
+          td Referrer Email
+          td Friends Name
+          td Friends Email
+          td Type
+          td ID
+      tbody
+      - each referral in referrals
+        tr
+          - var referred = new Date(referral.created_at)
+          td #{moment(referred).format('DD/MM/YYYY')}
+          td #{referral.user.first_name} #{referral.user.last_name}
+          td #{referral.user.email}
+          td #{referral.first_name}
+          td #{referral.email}
+          td #{referral.entity_type}
+          td #{referral.entity_id}
+      tfoot
+        tr
+          td(colspan='7')
+            &nbsp;

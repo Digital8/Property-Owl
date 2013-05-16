@@ -12,6 +12,7 @@ Deal = system.models.deal
 AdClicks = system.models.click
 Enquriy = system.models.enquiry
 Search = system.models.search
+Raf = system.models.raf
 
 helpers = {}
 
@@ -122,3 +123,14 @@ exports.advertisingClicks = (req,res) ->
       if err then console.log err
       
       res.render 'admin/reports/advertisingClicks', advertisers: advertisers or {}, clicks: clicks or {}
+
+exports.friendReferrals = (req,res) ->
+
+  Raf.all (err, referrals) ->
+    async.eachLimit referrals, 5, (referral, cb) ->
+      models.users.getUserById referral.user_id, (err, user) ->
+        if user.length
+          referral.user = user.pop()
+        cb null
+    , (err) ->
+      res.render 'admin/reports/friendReferrals', referrals: referrals

@@ -157,11 +157,15 @@ exports.securedeal = (req, res) ->
 
 exports.referfriend = (req, res) ->
   req.body.user_id ?= res.locals.objUser.id
+  req.body.entity_id = parseInt req.body.entity_id or 0
+  req.body.entity_type ?= 'generic'
+  if req.body.entity_type.length is 0
+    req.body.entity_type = 'generic'
   req.assert('email', 'Invalid Email Address').isEmail()
   req.assert('fullname', 'Full name is invalid').len(2,20)#.is(/^[A-Z]'?[- a-zA-Z]+$/).len(2,20)
   req.assert('comment', 'Comment cannot be empty').notEmpty()
-  req.assert('entity_id', 'invalid entity').notEmpty()
-  req.assert('entity_type', 'invalid entity type').notEmpty()
+  #req.assert('entity_id', 'invalid entity').notEmpty()
+  #req.assert('entity_type', 'invalid entity type').notEmpty()
 
   errors = req.validationErrors(true)
 
@@ -170,19 +174,36 @@ exports.referfriend = (req, res) ->
     res.send status: 400, errors: errors
   else
     req.body.first_name ?= req.body.fullname
+
+    text = ""
+    
+    #if its generic
+    if req.body.entity_type is 'generic'
+      text = req.body.fullname + """,
+
+      You have been referred a property at <a href="https://www.propertyowl.com.au">Property Owl</a>.
+
+      #{req.body.comment}
+      """
+    
+    #if its referring direct to a property or barn
+    else
+      text = req.body.fullname + """,
+
+      You have been referred a property at <a href="https://www.propertyowl.com.au/#{req.body.entity_type}s/#{req.body.entity_id}">Property Owl</a>.
+
+      #{req.body.comment}
+      """
+
     RAF.create req.body, (err, r) ->
+      if err?
+        console.log 'Error Creating Referral', err
       mailer
         to: req.body.email
         from: res.locals.objUser.email
         fromname: res.locals.objUser.displayName
         subject: 'Property Owl Referral'
-        text: req.body.fullname + """,
-
-        You have been referred a property at
-        https://propertyowl.com.au/#{req.body.entity_type}s/#{req.body.entity_id}
-
-        #{req.body.comment}
-        """
+        text: text
       , 'Property Owl Referral'
       res.send status: 200
 

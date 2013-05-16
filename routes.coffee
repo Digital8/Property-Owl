@@ -242,6 +242,7 @@ module.exports = (app) ->
   admin 'get', '/reports/dealRegistrations', controllers.admin.reports.dealRegistrations
   admin 'get', '/reports/servicesEnquiries', controllers.admin.reports.servicesEnquiries
   admin 'get', '/reports/advertisingClicks', controllers.admin.reports.advertisingClicks
+  admin 'get', '/reports/friendReferrals', controllers.admin.reports.friendReferrals
   
   ### ajax ###
   ajax = (method, path, middleware...) ->

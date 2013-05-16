@@ -375,6 +375,7 @@ $("#close-errors").on("click", function(){
 	      $(".refer-friend-overlay").hide();
 	    }
 	    else {
+	    	console.log('refer response', d);
 	      var errors = Object.keys(d.errors);
 	      
   	    $("#generic-modal, #generic-modal .modal.main").removeClass('success');
@@ -396,10 +397,10 @@ $("#close-errors").on("click", function(){
 	  if(event.keyCode == 13){
 	    $(".refer-friend-button").click();
 	  }
-	  else
+	  /*else
 	  {
 	  	console.log(event.keyCode);
-	  }
+	  }*/
 	});
 	
 	$(".login-button").on("click", function(event){

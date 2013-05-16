@@ -10,5 +10,7 @@
  
 crypto = require 'crypto'
 
+#console.log 'hash for password', crypto.createHmac('sha256', 'TimeForAdviceSalt').update('password').digest('hex')
+
 module.exports = (msg) ->
   crypto.createHmac('sha256', 'TimeForAdviceSalt').update(msg).digest('hex')
