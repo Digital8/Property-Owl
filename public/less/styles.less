@@ -1304,6 +1304,27 @@ body {
               .rounded(0.313em);
               .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
             }
+
+            a.show-refer-friend {
+              display: block;
+              margin:0 200px;
+              text-align:center;
+              font-size:1.1em;
+              color:#fff;
+              text-decoration:none;
+              text-transform:uppercase;
+              font-weight:bold;
+              padding: 0.813em @padding-small;
+              border: solid 1px #004400;
+              .box-shadow(~"inset 0px 1px 0px rgba(255,255,255,0.25)");
+              .rounded-top-left(0.313em);
+              .rounded-top-right(0.313em);
+              .rounded-bottom-left(0.313em);
+              .rounded-bottom-right(0.313em);
+              background: url(../images/secure-bg.png) repeat-x center center;
+              background-size: cover;
+              .text-shadow(~"0px -1px 0px rgba(0,0,0,100)");
+            }
             
             .sort-form {
                 text-align: right;
@@ -2511,6 +2532,27 @@ a, a:visited {
 
 /* @group modal */
 
+.window-overlay {
+  .modal {
+    .close-modal {
+      display: block;
+      position: absolute;
+      top: -1.7em;
+      right: 0;
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      text-transform:uppercase;
+      font-size:0.9em;
+
+      img {
+        width: 1.125em;
+        height: 1.125em;
+      }
+    }
+  }
+}
+
 .modal-overlay {
   display: none;
   position: fixed;
@@ -3216,8 +3258,8 @@ To display index, set the showToggleIndex plugin option to true.
   border-color: inherit;
   border-width: 0;
   position :absolute;
-    right : 10px;
-    top : 150px;
+    right : 15em;
+    top : 9.375em;
     width : 35px;
     height : 34px;
   background : url('../images/arrows.png') no-repeat -35px 0;
@@ -3225,6 +3267,9 @@ To display index, set the showToggleIndex plugin option to true.
     margin :0;
     padding :0;
     text-decoration: none;
+}
+.window-overlay .modal .evoslider.galleriffic .arrow_next  {
+  right:0.5em;
 }
 
 /* The hover state of the arrow next */

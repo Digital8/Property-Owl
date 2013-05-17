@@ -31,7 +31,7 @@ block content
           });
 
           $(".enlarge-slider, .evoImage", slider).live("click", function() {
-            $("body").append("<div class=\"window-overlay\" id=\"large-slideshow\"><div class=\"modal\"></div></div>");
+            $("body").append("<div class=\"window-overlay\" id=\"large-slideshow\"><div class=\"modal\"><a href=\"#\" class=\"close-modal\">CLOSE <img src=\"/images/modal-close-white.png\" alt=\"Close\" /></div></div>");
             var overlay = $("#large-slideshow");
             duplicateSlider = initialSlider.clone();
             $(".modal", overlay).append(duplicateSlider);
@@ -49,6 +49,7 @@ block content
                 height: "466",
                 mouse: false,
                 imageScale: "fitImage",
+                easing: "linear",
                 keyboard: false,
                 startIndex: mySlider.getIndex()
               });
@@ -59,9 +60,9 @@ block content
         });
 
         // window overlay
-        $(".window-overlay").live("click", function(){
-          $(this).fadeOut(150, function(){
-            $(this).remove();
+        $(".window-overlay, .close-modal").live("click", function(){
+          $(".window-overlay").fadeOut(150, function(){
+            $(".window-overlay").remove();
           });
         });
 
