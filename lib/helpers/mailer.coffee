@@ -61,5 +61,6 @@ module.exports = (template, subject, objUser, secondary, callback) ->
       email.addSubVal '{{entity_type}}', secondary.entity_type
       email.addSubVal '{{entity_id}}', secondary.entity_id
       email.addSubVal '{{comment}}', secondary.comment
+      email.addSubVal '{{friend_name}}', secondary.first_name
 
       sendgrid.send email, callback

@@ -177,7 +177,7 @@ exports.referfriend = (req, res) ->
 
     template = 'refer-property'
     if req.body.entity_type is 'generic'
-      template = 'refer-generic'
+      template = 'refer-general'
 
     RAF.create req.body, (err, r) ->
       if err?
@@ -186,7 +186,7 @@ exports.referfriend = (req, res) ->
       #swap out the friends email
       res.locals.objUser.email = req.body.email
       console.log 'Sending Email', template, res.locals.objUser, req.body
-      system.helpers.mailer template, 'Registration Confirmation', res.locals.objUser, req.body, (results) ->
+      system.helpers.mailer template, 'Referral', res.locals.objUser, req.body, (results) ->
         if results is true 
           res.send status: 200, errors: {}
         else
