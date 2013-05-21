@@ -1519,10 +1519,14 @@ EvoSlider.prototype = {
      * @param {Number} ulWidth
      * @param {Boolean} isHorizontal
      * @return instance
-     */    
+     */
+    //lastpos: 0,
     _controlScrollMove: function( wrapperWidth, coord, wrapperOffset, ulWidth, isHorizontal ) {
         var pos = ( coord - wrapperOffset ) * (( ulWidth - wrapperWidth ) / wrapperWidth );
-        pos = Math.abs( pos );        
+        //var _pos = pos;
+        pos = Math.abs( pos );
+        //this.lastpos = _pos;
+        //console.log('pos', pos, 'coord', coord);       
                
         if ( isHorizontal ) {
             this._controlUl.stop( true, false ).animate({"left": - pos + "px"}, "linear");

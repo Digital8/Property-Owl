@@ -175,37 +175,22 @@ exports.referfriend = (req, res) ->
   else
     req.body.first_name ?= req.body.fullname
 
-    text = ""
-    
-    #if its generic
+    template = 'refer-property'
     if req.body.entity_type is 'generic'
-      text = req.body.fullname + """,
-
-      You have been referred a property at <a href="https://www.propertyowl.com.au">Property Owl</a>.
-
-      #{req.body.comment}
-      """
-    
-    #if its referring direct to a property or barn
-    else
-      text = req.body.fullname + """,
-
-      You have been referred a property at <a href="https://www.propertyowl.com.au/#{req.body.entity_type}s/#{req.body.entity_id}">Property Owl</a>.
-
-      #{req.body.comment}
-      """
+      template = 'refer-generic'
 
     RAF.create req.body, (err, r) ->
       if err?
         console.log 'Error Creating Referral', err
-      mailer
-        to: req.body.email
-        from: res.locals.objUser.email
-        fromname: res.locals.objUser.displayName
-        subject: 'Property Owl Referral'
-        text: text
-      , 'Property Owl Referral'
-      res.send status: 200
+
+      #swap out the friends email
+      res.locals.objUser.email = req.body.email
+      console.log 'Sending Email', template, res.locals.objUser, req.body
+      system.helpers.mailer template, 'Registration Confirmation', res.locals.objUser, req.body, (results) ->
+        if results is true 
+          res.send status: 200, errors: {}
+        else
+          res.send status: 400, errors: {msg: 'unable to send email'}
 
 exports.addRegistration = (req, res) ->
   req.query.id ?= ''
