@@ -52,6 +52,23 @@ block content
               });
             //})(mySlider);
             overlay.fadeIn(150);
+
+            var screenwidth = $(window).width();
+            var sliderwidth = 320;
+
+            if(screenwidth >= 1000) {
+              sliderwidth = 1000;
+              //console.log('fullscreen');
+            }
+            else if(screenwidth >= 650) {
+              sliderwidth = 640;
+              //console.log('tablet');
+            }
+            else {
+              //console.log('mobile');
+            }
+
+            $('#large-slideshow .modal').css({left:(screenwidth-sliderwidth)/2+'px'});
             return false;
           });
         });

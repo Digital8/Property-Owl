@@ -2372,6 +2372,25 @@ a, a:visited {
 
 /* @group register modal */
 
+.window-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999999;
+  background: rgba(0,0,0,0.85);
+}
+
+.window-overlay .modal {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+}
+
 .login-overlay,
 .refer-friend-overlay,
 .secure-deal-overlay,
@@ -3268,9 +3287,6 @@ To display index, set the showToggleIndex plugin option to true.
     padding :0;
     text-decoration: none;
 }
-.window-overlay .modal .evoslider.galleriffic .arrow_next  {
-  right:0.5em;
-}
 
 /* The hover state of the arrow next */
 .evoslider.galleriffic .arrow_next:hover
@@ -3750,27 +3766,13 @@ evoslider.galleriffic dd .evoEmbed img
   border-radius: 8px;
 }
 
-.window-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999999;
-  background: rgba(0,0,0,0.85);
-}
-
-.window-overlay .modal {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
-}
-
 .window-overlay .evoslider {
   padding: 0;
+}
+
+#large-slideshow .modal {
+  width:1000px;
+  height:903px !important;
 }
 
 .window-overlay .evoslider,
@@ -3783,25 +3785,40 @@ evoslider.galleriffic dd .evoEmbed img
 
 .window-overlay .evoslider > dl {
   width: 100% !important;
-  height: 85% !important;
+  height: 742px !important;
     
     dd {
       width: 100% !important;
       
       img {
         width: 100% !important;
-        height: 100% !important;
+        height: 742px !important;
       }
     }
 }
 
+.window-overlay .modal .evoslider.galleriffic .arrow_next  {
+  right:0.5em;
+}
+.window-overlay .controlNav li.thumbnails .overlay {
+  top:3px;
+  left:3px;
+}
+
 .window-overlay .evoslider .outer_control {
   width: 100% !important;
-  height: 15% !important;
+  height: 151px !important;
 }
 
 .window-overlay .evoslider .controlNav {
   width: 100% !important;
+
+  img {
+    border:solid 3px #fff;
+  }
+  .active img {
+    border:solid 3px #0C3559;
+  }
 }
 
 
