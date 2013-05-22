@@ -8,15 +8,13 @@
     - if (objUser.isAdmin())
 
       .left
+
         .inputs
-          label(for='title') Listed By
-            | &nbsp;
-            select(name="listed_by")
-              each developer in developers
-                - var sel = false
-                  if typeof(owl.user) != 'undefined'
-                    - var sel = (owl.user.user_id == developer.user_id) ? true : false;
-                option(value=developer.user_id, selected=sel) #{developer.first_name} #{developer.last_name}
+          label(for='listed_by') Listed By 
+          select#listed_by(name='listed_by')
+            option Select
+            - each developer in developers
+              option(value='#{developer.user_id}', selected=developer.user_id == owl.listed_by) #{developer.first_name} #{developer.last_name}        
 
         .inputs
           label(for='title') Approved
@@ -53,14 +51,14 @@
       .inputs
         label(for='development_type_id') Development Type
         select.development_type_id(type='text', name='development_type_id')
-          option
+          option Select
           - for type in data.developmentTypes
             option(value='#{type.id}', selected=owl.development_type_id == type.id)= type.name
 
       .inputs
         label(for='development_status_id') Development Stage
         select.development_status_id(type='text', name='development_status_id')
-          option
+          option Select
           - for status in data.developmentStatuses
             option(value='#{status.id}', selected=owl.development_status_id == status.id)= status.name
     

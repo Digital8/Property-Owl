@@ -10,7 +10,7 @@
         .inputs
           label(for='listed_by') Listed By 
           select#listed_by(name='listed_by')
-            option
+            option Select
             - each developer in developers
               option(value='#{developer.user_id}', selected=developer.user_id == barn.listed_by) #{developer.first_name} #{developer.last_name}
 
