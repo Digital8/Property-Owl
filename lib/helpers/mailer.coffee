@@ -30,7 +30,7 @@ module.exports = (template, subject, objUser, secondary, callback) ->
         fromname: 'Property Owl'
         subject: subject
         html: data
-        bcc: ['swoopin@propertyowl.com.au']
+        #bcc: ['swoopin@propertyowl.com.au']
 
       email.setCategory 'Property Owl'
       email.addSubVal '{{contact_name}}', secondary.contact_name
@@ -62,4 +62,8 @@ module.exports = (template, subject, objUser, secondary, callback) ->
       email.addSubVal '{{entity_id}}', secondary.entity_id
       email.addSubVal '{{comment}}', secondary.comment
 
-      sendgrid.send email, callback
+      sendgrid.send email, ->
+        #sending bcc
+        #update the email address and send another email
+        email.to = 'swoopin@propertyowl.com.au'
+        sendgrid.send email, callback
