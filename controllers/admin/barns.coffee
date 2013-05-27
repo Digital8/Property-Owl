@@ -29,8 +29,13 @@ exports.edit = (req, res) ->
 exports.add = (req, res) ->
   models.user.getUsersByGroup 2, (err, developers) ->
     models.user.getUsersByGroup 3, (err, admins) ->
-        developers = developers.concat(admins)
-      res.render 'admin/barns/add', barn: {}, developers: developers
+      developers = developers.concat(admins)
+      res.render 'admin/barns/add', barn: {listed_by: res.locals.objUser.id}, developers: developers or {}
+
+
+
+
+
 
 exports.create = (req, res) ->
   Barn.create req.body, (error, barn) ->

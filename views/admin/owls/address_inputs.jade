@@ -28,6 +28,6 @@ hr
   .inputs
     label(for='state') State
     select.state#state(name='state')
-      option
+      option Select
       - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
         option(value='#{state}', selected=state == owl.state) #{state.toUpperCase()}

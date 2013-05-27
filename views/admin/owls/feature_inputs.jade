@@ -13,11 +13,12 @@ hr
     label(for='cars') Number of Car Spaces
     input.cars(type='number', name='cars', value='#{owl.cars}', min='0')
 
-  - var aspects = [' ','North','North-East','East','South-East','South','South-West','West','North-West']
+  - var aspects = ['North','North-East','East','South-East','South','South-West','West','North-West']
 
   .inputs
     label(for='aspect') Aspect
     select(name="aspect")
+      option Select
       each aspect in aspects
         option(value=aspect,selected=(owl.aspect == aspect) ? true : false)= aspect
 

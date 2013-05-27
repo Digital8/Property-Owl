@@ -38,7 +38,7 @@ exports.add = (req, res) ->
   models.user.getUsersByGroup 2, (err, developers) ->
     models.user.getUsersByGroup 3, (err, admins) ->
       developers = developers.concat(admins)
-      res.render 'admin/owls/add', owl: {}, developers: developers or {}
+      res.render 'admin/owls/add', owl: {listed_by: res.locals.objUser.id}, developers: developers or {}
 
 exports.create = (req, res) ->
   count = 0

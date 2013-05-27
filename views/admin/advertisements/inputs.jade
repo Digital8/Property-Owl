@@ -9,7 +9,7 @@ hr
 
   .inputs
     label(for='page') Advertiser
-    select(name="advertiser_id", class="select2", data-placeholder="Choose an advertiser")
+    select(name="advertiser_id", class="select2", data-placeholder="Select")
       option(value="")
       - each advertiser in advertisers
         option(value="#{advertiser.advertiser_id}", selected=advertisement.advertiser_id == advertiser.advertiser_id)= advertiser.name
@@ -18,7 +18,7 @@ hr
     label(for='page') Page
     //- make this optional [TODO] [@pyro]
     select(name="page_id", class="select3", data-placeholder="Choose a page")
-      option(value="")
+      option(value="") Select
       - each page in pages
         option(value="#{page.page_id}", selected=advertisement.page_id == page.page_id)= page.header
 
