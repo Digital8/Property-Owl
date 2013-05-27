@@ -115,9 +115,9 @@ html.no-js(lang='en')
         
         .modal-content.details-form
           div.secure-deal-errors.error
-          input.half.secure-deal-first-name(type='text', placeholder='First Name', value="#{objUser.firstName}")
-          input.half.secure-deal-last-name(type='text', placeholder='Last Name', value="#{objUser.lastName}")
-          input.half.secure-deal-email(type='text', placeholder='Email Address', value="#{objUser.email}")
+          input.half.secure-deal-first-name(type='text', placeholder='First Name', value="#{objUser.firstName}", disabled='disabled')
+          input.half.secure-deal-last-name(type='text', placeholder='Last Name', value="#{objUser.lastName}", disabled='disabled')
+          input.half.secure-deal-email(type='text', placeholder='Email Address', value="#{objUser.email}", disabled='disabled')
           input.half.secure-deal-phone(type='text', placeholder='Phone Number', value="#{objUser.mobile}")
           textarea.full.secure-deal-comment(placeholder='Please leave a comment for the developer', style="width:98%;")
           

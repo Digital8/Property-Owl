@@ -1,7 +1,7 @@
 .listing-summary
   .header
     h2
-      a(href="/barns/#{barn.id}") #{barn.address}, #{barn.suburb}, #{barn.postcode}
+      a(href="/barns/#{barn.id}") #{barn.address}, #{barn.suburb}, #{barn.postcode}, #{barn.state.toUpperCase()}
   
   .listing-body
     .listing-thumb
