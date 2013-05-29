@@ -53,6 +53,7 @@ block content
             //})(mySlider);
             overlay.fadeIn(150);
 
+            var documentheight = $(document).height();
             var screenwidth = $(window).width();
             var sliderwidth = 320;
 
@@ -69,6 +70,7 @@ block content
             }
 
             $('#large-slideshow .modal').css({left:(screenwidth-sliderwidth)/2+'px'});
+            $('#large-slideshow').css({height:documentheight+'px'});
             return false;
           });
         });

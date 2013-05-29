@@ -30,6 +30,7 @@ block content
             $(".enlarge-slider", slider).remove();
           });
 
+
           $(".enlarge-slider, .evoImage", slider).live("click", function() {
             $("body").append("<div class=\"window-overlay\" id=\"large-slideshow\"><div class=\"modal\"><a href=\"#\" class=\"close-modal\">CLOSE <img src=\"/images/modal-close-white.png\" alt=\"Close\" /></div></div>");
             var overlay = $("#large-slideshow");
@@ -56,6 +57,7 @@ block content
             //})(mySlider);
             overlay.fadeIn(150);
 
+            var documentheight = $(document).height();
             var screenwidth = $(window).width();
             var sliderwidth = 320;
 
@@ -72,6 +74,7 @@ block content
             }
 
             $('#large-slideshow .modal').css({left:(screenwidth-sliderwidth)/2+'px'});
+            $('#large-slideshow').css({height:documentheight+'px'});
             return false;
           });
         });
