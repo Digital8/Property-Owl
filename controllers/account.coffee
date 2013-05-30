@@ -25,16 +25,22 @@ exports.update = (req,res) ->
   req.body.id = res.locals.objUser.id
   
   req.assert('email', 'Invalid Email Address').isEmail()
- 
+   
   if req.body.password != ''
     req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
     req.assert('confirmPassword', 'Password does not match').isIn [req.body.password]
- 
+  
   req.assert('fname', 'First name is invalid').isAlpha().len(2,20).notEmpty()
   req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
   
   models.user.getUserByEmail req.body.email, (err, email) ->
-    if email.length > 0 and req.body.email != res.locals.objUser.email then req.flash('error','Email address is already in use')
+    
+    if email.length > 0 and req.body.email != res.locals.objUser.email
+      req._validationErrors ?= []
+      req._validationErrors.push
+        param: 'email'
+        msg: 'Email address is already in use'
+        value: req.body.email
     
     errors = req.validationErrors true
     
