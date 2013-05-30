@@ -9,8 +9,8 @@ tr
   else
     td
   
-  if advertisement.page != null
-    td= advertisement.page.header
+  if advertisement.pages != null
+    td= _.pluck(advertisement.pages, 'header').join(', ')
   else
     td
   

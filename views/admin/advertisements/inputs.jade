@@ -1,26 +1,29 @@
 
 h2 Advertisement Details
+
 hr
 
 .left
   .inputs
     label.required(for="description") Description *
-    input#description(type="text", name="description",maxlength='100')= advertisement.description
-
+    input#description(type="text", name="description", maxlength='100', value=advertisement.description)
+  
   .inputs
     label(for='page') Advertiser
     select(name="advertiser_id", class="select2", data-placeholder="Select")
       option(value="")
       - each advertiser in advertisers
         option(value="#{advertiser.advertiser_id}", selected=advertisement.advertiser_id == advertiser.advertiser_id)= advertiser.name
-
+  
   .inputs
+    
     label(for='page') Page
-    //- make this optional [TODO] [@pyro]
-    select(name="page_id", class="select3", data-placeholder="Choose a page")
-      option(value="") Select
+    
+    select(name="page_ids", class="select3", data-placeholder="Choose pages", multiple, size=32)
+      
       - each page in pages
-        option(value="#{page.page_id}", selected=advertisement.page_id == page.page_id)= page.header
+        
+        option(value="#{page.page_id}", selected=_.contains(advertisement.page_ids, page.page_id))= page.header
 
   .inputs
     label(for='adspace') Space
@@ -36,23 +39,23 @@ hr
   .inputs
     label.required(for='hyperlink') Hyperlink
     input#hyperlink(type="url", name="hyperlink", value=advertisement.hyperlink,maxlength='100')
-
+  
   .inputs
     label.required(for='visible') Visible
     | &nbsp;
     input#visible(type="checkbox", name="visible", checked=advertisement.visible)
-
+  
   .inputs
     label.required(for='start') Start
-    input#start(type="date", name="start", value=advertisement.start)
-
+    input#start(type="date", name="start", value=moment(advertisement.start).format('YYYY-MM-DD'))
+  
   .inputs
-    label.required(for='stop') End
-    input#stop(type="date", name="stop", value=advertisement.stop)
+    label.required(for='stop') Stop
+    input#stop(type="date", name="stop", value=moment(advertisement.stop).format('YYYY-MM-DD'))
 
 .inputs
 
 .inputs
   label.required(for='image') Image
-  img(style="width: 320px; height: 240px;", src="/uploads/#{advertisement.image_id}")
+  img.small-advert(src="/uploads/#{advertisement.image_id}")
   input#image(type="file", name="image")
