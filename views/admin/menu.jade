@@ -35,6 +35,10 @@ nav#admin-menu.admin-menu
         a(href='/admin/pages', class="#{c}") Pages
       
       li
+        - var c = (menu == 'pages') ? 'active' : ''
+        a(href='/admin/files', class="#{c}") Files
+      
+      li
         - var c = (menu == 'reports') ? 'active' : ''
         a(href='/admin/reports', class="#{c}") Reports
       

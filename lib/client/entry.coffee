@@ -16,6 +16,8 @@ $ ->
   
   do require './news'
   
+  do require './files'
+  
   do require './affiliates'
   
   do require './categories'

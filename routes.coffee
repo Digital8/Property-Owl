@@ -194,6 +194,11 @@ module.exports = (app) ->
   admin 'get', '/pages/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.pages.edit
   admin 'get', '/pages/:id(\\d+)/delete', controllers.admin.pages.delete
   
+  # admin/files
+  admin 'get', '/files', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.files.index
+  admin 'post', '/files', controllers.admin.files.create
+  admin 'delete', '/files/:id(\\d+)', controllers.admin.files.destroy
+  
   # admin/advertising
   admin 'get', '/deals', controllers.admin.deals.index
   

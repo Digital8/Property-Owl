@@ -1,0 +1,39 @@
+extends ../../layout
+
+block content
+ 
+  .container.row.main
+    
+    include ../menu
+    
+    h1 Files
+    
+    include ../../flashify
+    
+    .grid-header
+    
+    table.admin-gridview.files
+      
+     thead
+      
+      tr
+       
+       td ID
+       
+       td Date
+       
+       td Preview
+       
+       td(colspan='2') Actions
+     
+     tbody
+       - each file in files
+        
+        include summary
+     
+     tfoot
+        tr
+          td(colspan='5')
+            | &nbsp;
+  
+    include upload

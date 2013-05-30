@@ -67,7 +67,7 @@ module.exports = class Media extends Model
     magic.detectFile file.path, (error, mime) =>
       return callback 'bad mime' if error?
       
-      return callback 'bad type' unless map[mime]?
+      return callback 'Unacceptable file type. Must be a valid media file (image, document, video).' unless map[mime]?
       
       fs.readFile file.path, (error, data) =>
         id = uuid()
@@ -85,6 +85,16 @@ module.exports = class Media extends Model
             class: klass
             description: file.name
           , callback
+  
+  @type = (type, callback) =>
+    
+    system.db.query "SELECT * FROM medias WHERE type = ?", type, (error, rows) =>
+      
+      return callback error if error?
+      
+      models = (new this row for row in rows)
+      
+      callback null, models
   
   @for = (model, callback) =>
     type = model.constructor.name.toLowerCase()
