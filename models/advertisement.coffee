@@ -70,6 +70,9 @@ exports.update = (ad, callback) =>
       
       return callback null unless ad.page_ids?
       
+      unless _.isArray ad.page_ids
+        ad.page_ids = [ad.page_ids]
+      
       async.map ad.page_ids, (page_id, callback) =>
         
         record =
