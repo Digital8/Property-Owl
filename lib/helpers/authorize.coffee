@@ -9,16 +9,25 @@
  ###
 
 module.exports = (acl) ->
-  (req,res,next) ->
-    console.log(res.locals.objUser.level)
-    if (res.locals.objUser.level == acl) or res.locals.objUser.isAdmin()
-      next()
-    else
-      #res.render 'errors/404'
-      if req.url.indexOf('?login=1') is -1 
-        res.redirect req.url + '?login=1'
-      else
-        if not res.locals.objUser.isAuthed() 
-          res.render 'user/login', redirect: req.url or '/', modal: true
-        else
-          res.render 'errors/404'
+  
+  (req, res, next) ->
+    
+    return next() if (res.locals.objUser.level == acl) or res.locals.objUser.isAdmin()
+    
+    # #res.render 'errors/404'
+    
+    # if req.url.indexOf('?login=1') is -1 
+    #   res.redirect req.url + '?login=1'
+    # else
+    
+    return res.render 'errors/404' if res.locals.objUser.isAuthed()
+    
+    # res.render 'user/login',
+    #   redirect: req.url or '/'
+    #   modal: true
+    
+    console.log 'storing, redirecting'
+    
+    req.session.redirect_to = req.url
+    
+    res.redirect '/login'

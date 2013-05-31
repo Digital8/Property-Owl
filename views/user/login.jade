@@ -29,17 +29,15 @@ block content
          .inputs
          
          .submit
+          
            a.left-button(href="/sign-up") Sign Up
            
            input.button(type="submit",value="login")
-           
-           - var redirect_url = (typeof(redirect) !== "undefined") ? redirect : '/'
-           
-           input(type="hidden",name="redirect",value="#{redirect_url}")
     
     - if (typeof(modal) != 'undefined' && modal == true)
       script
         $(document).ready(function(){
           $(".login-overlay").show();
         });
+    
     include ../right_nav
