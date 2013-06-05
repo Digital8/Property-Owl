@@ -2343,9 +2343,9 @@ body {
 }
 .main > div#center-col a.show-refer-friend {
   display: block;
-  margin: 0 200px;
+  margin: auto 200px;
   text-align: center;
-  font-size: 1.1em;
+  font-family: arial, helvetica, sans-serif;
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
@@ -5558,6 +5558,9 @@ li.sfHover > a > .sf-sub-indicator {
   .main > div#left-col .share ul {
     font-size: 0.8em;
   }
+  .main > div#center-col a.show-refer-friend {
+    margin: auto 100px;
+  }
   .main > div#center-col .grid-header ol.tabs {
     font-size: 0.6em;
   }
@@ -6008,6 +6011,10 @@ li.sfHover > a > .sf-sub-indicator {
     padding: 0;
     padding-left: 1.875em;
     display: table-header-group;
+  }
+  .main > div#home-center-col a.show-refer-friend,
+  .main > div#center-col a.show-refer-friend {
+    margin: auto 50px;
   }
   .main > div#home-center-col .grid-header ol.tabs,
   .main > div#center-col .grid-header ol.tabs {
