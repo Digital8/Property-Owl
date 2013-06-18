@@ -68,19 +68,6 @@ app.configure ->
     app.use flashify
     app.use bundle
     
-    # app.use (req, res, next) ->
-    #   console.log 'query', req.query
-    #   console.log 'url', req.url
-    #   console.log 'req.query.raw?', req.query.raw?
-      
-    #   if (req.url.match /\/uploads\/(.*)/) and not req.query.raw?
-    #     watermarker = require './lib/watermarker'
-        
-    #     watermarker "#{__dirname}/public#{req.url}", (error, stream) ->
-    #       stream.pipe res
-      
-    #   else do next
-    
     app.use (req, res, done) ->
       schemas = []
       

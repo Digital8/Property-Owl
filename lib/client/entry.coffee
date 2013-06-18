@@ -1,7 +1,7 @@
 faker = require 'Faker'
 moment = require 'moment'
 _ = require 'underscore'
-window.commas = commas = require '../helpers/commas'
+window.commas = commas = require './commas'
 
 require './reports'
 

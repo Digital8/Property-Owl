@@ -1,7 +1,6 @@
 async = require 'async'
 
 system = require '../system'
-mailer = require '../lib/helpers/email'
 
 models =
   user: system.load.model 'user'

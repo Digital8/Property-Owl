@@ -1,10 +1,6 @@
-system = require '../../system'
-
 async = require 'async'
 
-helpers = 
-  mailer: system.load.mailer
-  uploader: system.load.helper('fileUploader')
+system = require '../../system'
 
 News = system.models.news
 
@@ -52,42 +48,6 @@ exports.create = (req, res) ->
         
         post.upload req, ->
           do render
-      
-    
-    #   # Email everyone
-    #   sendEmail = (user, callback) ->
-    #     template = 'news'
-
-    #     user =
-    #       firstName: user.first_name
-    #       email: user.email
-
-    #     secondary =
-    #       title: req.body.title
-    #       summary: req.body.content
-    #       link: '/news/#{results.insertId}'
-
-
-    #     system.helpers.mailer template,'Newsletter', user, secondary, (results) ->
-    #       callback()
-
-    #   # Get news subscribers
-    #   models.user.getSubscribers (err, users) ->
-    #     # Email each user
-    #     async.map users, sendEmail, (err, results) ->
-
-    #       res.redirect '/admin/news'
-
-
-
-
-
-
-
-
-
-
-
 
 exports.edit = (req, res) ->
   News.get req.params.id, (error, post) ->
