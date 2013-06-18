@@ -2,16 +2,12 @@ module.exports = ->
   
   for mapElement in $ '.map'
     
-    # map
-    
     options =
       zoom: 15
       disableDefaultUI: true
       mapTypeId: google.maps.MapTypeId.ROADMAP
     
     map = new google.maps.Map mapElement, options
-    
-    # geo
     
     $map = $ mapElement
     
@@ -20,6 +16,8 @@ module.exports = ->
     geocoder = new google.maps.Geocoder
     
     geocoder.geocode address: address, (results, status) ->
+      return if status is 'ERROR'
+      return unless results.length
       
       map.setCenter results[0].geometry.location
       
