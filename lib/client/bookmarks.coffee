@@ -9,15 +9,15 @@ module.exports = ->
       $.post '/bookmarks',
         type: $this.data 'deal-type'
         id: $this.data 'deal-id'
-      , (response, status) ->
-        if response.status is 200
+      , (response, status, jqXHR) ->
+        if jqXHR.status is 200
           
           $this.contents().last().remove()
           
           $this.append ' Saved'
           
         else
-          alert status
+          console.log status
 
     else
       $.showRegister()

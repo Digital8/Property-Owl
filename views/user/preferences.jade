@@ -15,49 +15,52 @@ block content
       .details
 
         form.details-form(action="/preferences",method="post")
+          
           .inputs
             p Enter your property preferences to refine the property alert notifications sent to you by Property Owl. You can subscribe to receive property alerts in the 
               a(href='account#detail') settings tab
               | .
+          
           .left
             .inputs
               label(for='propertySuburb') Suburb
-              input#propertySuburb(type='text',name='suburb', value="#{objUser.preferences.suburb}")
+              input#propertySuburb(type='text',name='suburb', value="#{req.user.preferences.suburb}")
             .inputs
               label(for='propertyState') State / Territory
               select#propertyState(name="state", class="select2")
                 - var states = ['All', 'ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']
                 each state in states
-                  - var s = (objUser.preferences.state.toLowerCase() == state.toLowerCase()) ? true : false;
+                  - var s = (req.user.preferences.state.toLowerCase() == state.toLowerCase()) ? true : false;
                   option(value="#{state.toLowerCase()}", selected=s)= state
             .inputs
               label(for='propertyType') Property Type
               - var propertyTypes = ['All', 'Apartment', 'Townhouse', 'Unit', 'House', 'Land', 'House and Land', 'Villa', 'Acreage'];
               select#propertyType(name="pType", class="select2")
                 each p in propertyTypes
-                  - var s = (objUser.preferences.propertyType.toLowerCase() == p.toLowerCase()) ? true : false;
+                  - var s = (req.user.preferences.propertyType.toLowerCase() == p.toLowerCase()) ? true : false;
                   option(value="#{p.toLowerCase()}", selected=s)= p
             .inputs
               label(for='propertyDealType') Deal Type
               - var dealTypes = ['All', 'Stamp Duty', 'Furniture Package', 'Blinds', 'Rental Guarantee', 'Entertainment System']
               select#propertyDealType(name="dType", class="select2")
                 each deal in dealTypes
-                  - var s = (objUser.preferences.dealType.toLowerCase() == deal.toLowerCase()) ? true : false;
+                  - var s = (req.user.preferences.dealType.toLowerCase() == deal.toLowerCase()) ? true : false;
                   option(value="#{deal.toLowerCase()}", selected=s)= deal
             .inputs
               label(for='propertyMinPrice') Min. Price
               - var prices = ['Any', 50000, 100000,150000,200000,250000,300000,350000,400000,450000,500000, 550000,600000,650000,700000,750000,800000,850000,900000,950000,1000000,125000, 1500000,1750000,2000000,2500000,3000000,4000000,5000000,10000000]
               select#propertyMinPrice(name="minPrice", class="select2")
                 each price in prices
-                  - var s = (objUser.preferences.minPrice == price) ? true : false;
+                  - var s = (req.user.preferences.minPrice == price) ? true : false;
                   option(value=price, selected=s).price= price
             .inputs
               label(for='propertyMaxPrice') Max. Price
               - var prices = ['Any', 50000, 100000,150000,200000,250000,300000,350000,400000,450000,500000, 550000,600000,650000,700000,750000,800000,850000,900000,950000,1000000,125000, 1500000,1750000,2000000,2500000,3000000,4000000,5000000,10000000]
               select#propertyMaxPrice(name="maxPrice", class="select2")
                 each price in prices
-                  - var s = (objUser.preferences.maxPrice == price) ? true : false;
+                  - var s = (req.user.preferences.maxPrice == price) ? true : false;
                   option(value=price, selected=s).price= price
+          
           .right
             .inputs
               label(for='propertyMinBeds') Min. Beds
@@ -65,7 +68,7 @@ block content
               select#propertyMinBeds(name="minBeds", class="select2")
                 option(value='Any') Any
                 each b in beds
-                  - var s = (objUser.preferences.minBeds.toLowerCase() == b.toLowerCase()) ? true : false;
+                  - var s = (req.user.preferences.minBeds.toLowerCase() == b.toLowerCase()) ? true : false;
                   option(value=b, selected=s) #{b}+
             .inputs
               label(for='propertyMaxBeds') Max. Beds
@@ -73,7 +76,7 @@ block content
               select#propertyMaxBeds(name="maxBeds", class="select2")
                 option(value='Any') Any
                 each b in beds
-                  - var s = (objUser.preferences.maxBeds.toLowerCase() == b.toLowerCase()) ? true : false;
+                  - var s = (req.user.preferences.maxBeds.toLowerCase() == b.toLowerCase()) ? true : false;
                   option(value=b, selected=s) #{b}+
             .inputs
               label(for='propertyBathrooms') Bathrooms
@@ -81,7 +84,7 @@ block content
               select#propertyBathrooms(name="bathrooms", class="select2")
                 option(value='Any') Any
                 each b in bathrooms
-                  - var s = (objUser.preferences.bathrooms.toLowerCase() == b.toLowerCase()) ? true : false;
+                  - var s = (req.user.preferences.bathrooms.toLowerCase() == b.toLowerCase()) ? true : false;
                   option(value=b, selected=s) #{b}+
             .inputs
               label(for='propertyCarSpaces') Car Spaces
@@ -89,26 +92,28 @@ block content
               select#propertyCarSpaces(name="cars", class="select2")
                 option(value='Any') Any
                 each c in cars
-                  - var s = (objUser.preferences.cars.toLowerCase() == c.toLowerCase()) ? true : false;
+                  - var s = (req.user.preferences.cars.toLowerCase() == c.toLowerCase()) ? true : false;
                   option(value=c, selected=s) #{c}+
             .inputs
               label(for='propertyState') Development Stage
               select#propertyStage(name="devStage", class="select2")
-                if (objUser.preferences.developmentStage.toLowerCase() == 'all')
+                if (req.user.preferences.developmentStage.toLowerCase() == 'all')
                   option(value="all", selected=true) All
                 else
                   option(value="all") All
 
-                if (objUser.preferences.developmentStage.toLowerCase() == 'otp')
+                if (req.user.preferences.developmentStage.toLowerCase() == 'otp')
                   option(value="otp", selected=true) Off The Plan
                 else
                   option(value="otp") Off The Plan
 
-                if (objUser.preferences.developmentStage.toLowerCase() == 'completed')
+                if (req.user.preferences.developmentStage.toLowerCase() == 'completed')
                   option(value="completed", selected=true) Completed
                 else
                   option(value="completed") Completed
+          
           .inputs
+          
           .submit
               input.button(type='submit', value='Save')
     

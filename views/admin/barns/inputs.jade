@@ -1,11 +1,12 @@
-.panes(style='display: none;', data-tab=objUser.level)
+.panes(style='display: none;', data-tab=req.user.level)
   
   .inputs.index.pane(data-key='index', data-label='details')
     
     h2 Barn Details
+    
     hr
       
-    - if (objUser.isAdmin())
+    - if (req.user && req.user.isAdmin())
       .left
         .inputs
           label(for='listed_by') Listed By 
@@ -19,6 +20,7 @@
             | &nbsp;
             input.big_checkbox(name='approved', type='checkbox', checked=barn.approved)
     .inputs
+    
     .inputs
       label(for='title') Title
       input#title(type='text', name='title', value='#{barn.title || ""}',maxlength='100')

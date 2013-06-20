@@ -1,4 +1,5 @@
 ul.sf-menu
+  
   li
     - var c = (menu == 'aus-best-deal') ? 'active' : ''
     a(href='/owls/top',class="#{c}") Australia's Best Deal
@@ -22,12 +23,12 @@ ul.sf-menu
     - var c = (menu == 'products') ? 'active' : ''
     a(href='/affiliates', class="#{c}") Products & Services
   
-  - if (objUser.isAuthed())
+  - if (req.user)
     li
       a(href='/account') My Nest
       ul
-        - if( objUser.isAdmin() || objUser.isDeveloper())
-          li: a(href="/admin") Administration
+        - if(req.user.account_type_id >= 2)
+          li: a(href='/admin') Administration
         
         li: a(href='/account') My Account
         li: a(href='/bookmarks') Saved Deals
@@ -35,5 +36,4 @@ ul.sf-menu
         li: a(href='/contact') Contact Us
         li: a(href='/sign-out') Sign Out
   - else
-    li: a.show-login(href="/login") Login
-    //- li: a(href="/sign-up") Sign Up
+    li: a.show-login(href='/login') Login

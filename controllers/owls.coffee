@@ -1,30 +1,30 @@
 _ = require 'underscore'
-jade = require 'jade'
-system = require '../system'
 async = require 'async'
-Owl = system.models.owl
-Deal = system.models.deal
+jade = require 'jade'
 
 exports.index = (req, res) ->
+  
   Owl.all (error, owls) ->
+    
     res.render 'owls/index', owls: owls
 
 exports.locate = (req, res) ->
-  Page = system.models.page
+  
   async.parallel
+    
     page_top: (callback) -> Page.findByUrl '/owl-deals-top', callback
+    
     page_bottom: (callback) -> Page.findByUrl '/owl-deals-bottom', callback
+    
   , (error, {page_top, page_bottom}) ->
+    
     try
-      page_top = page_top.shift().shift()
-      fn_top = jade.compile page_top.content
-      cms_top = do fn_top
-      page_bottom = page_bottom.shift().shift()
-      fn_bottom = jade.compile page_bottom.content
-      cms_bottom = do fn_bottom
-      res.render 'owls/locate', cms_top: cms_top, cms_bottom: cms_bottom
-    catch e
-      res.render 'errors/404'
+      res.render 'owls/locate',
+        cms_top: do jade.compile page_top.content
+        cms_bottom: do jade.compile page_bottom.content
+    
+    catch {message}
+      res.render 'errors/500', {message}
 
 exports.top = (req, res) ->
   Owl.top (error, owl) ->
@@ -65,12 +65,13 @@ exports.byState = (req, res) ->
       res.render 'owls/state', owls: owls, state: state
 
 exports.show = (req, res) ->
+  
   {id} = req.params
   
   Owl.get id, (error, owl) ->
-    #remove epic spam
-    #console.log(owl)
+    
     owl.hydrateForUser req.user, (error) ->
+      
       res.render 'owls/show', owl: owl, enquire: on
 
 exports.addDeal = (req, res) ->

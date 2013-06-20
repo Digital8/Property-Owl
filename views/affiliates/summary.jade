@@ -1,21 +1,26 @@
 .listing-summary.affiliate(data-id=affiliate.id)
   
   .header
+    
     h2= affiliate.name
   
   .listing-body
     
     .listing-thumb
-      img.thumb(src='#{affiliate.imageURL()}', alt='#{affiliate.name}')
+      
+      img.thumb(src=affiliate.imageURL(), alt=affiliate.name)
     
     .listing-details
       
       .summary
+        
         p= affiliate.description
       
       .listing-links
-        a.enquire-button(href='#',data-id="#{affiliate.affiliate_id}") Enquire
-        - if (objUser.isAdmin())
-            a(href="/admin/affiliates/#{affiliate.affiliate_id}/edit").admin-button
-              img#admin-icon(src="/images/view.png",alt="View details")
+        
+        a.enquire-button(href='#', data-id=affiliate.id) Enquire
+        
+        - if (req.user && req.user.isAdmin())
+            a(href="/admin/affiliates/#{affiliate.id}/edit").admin-button
+              img#admin-icon(src="/images/view.png", alt="View details")
               |  Admin

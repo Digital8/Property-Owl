@@ -15,6 +15,6 @@ module.exports = ->
         id = $row.data 'id'
         
         if confirm('Are you sure you want to remove this?')
-	        $.delete "/admin/news/#{id}", ->
+	        $.delete "/admin/posts/#{id}", ->
 	          
 	          $row.remove()

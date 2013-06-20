@@ -1,29 +1,22 @@
 _ = require 'underscore'
-optimist = require 'optimist'
 
-module.exports = (app, system) ->
+module.exports = (app) ->
   module.exports.augmentApp app
   module.exports.augmentConsole()
-  # module.exports.augmentDB app, system
 
 module.exports.augmentDB = (app, db) ->
   if app.argv.verbose
     db._query = db.query
     db.query = (query, args..., callback) ->
-      unless query.match /po_advertisements/g or query.match /account_type/g or query.match /SHOW\sCOLUMNS/g
+      unless (query.match /advertisements/g) or (query.match /account_type/g) or (query.match /SHOW\sCOLUMNS/g) or (query.match /pages/g) or (query.match /adspaces/g)
         console.log (_.filter arguments, (argument) -> typeof argument isnt 'function')...
       db._query query, args..., (error, args...) ->
         console.log 'ERROR', error.red if error?
         callback error, args...
 
 module.exports.augmentApp = (app) ->
-  global.app = app
   
-  app.argv = optimist
-    .alias('verbose', 'v')
-    .alias('fake', 'f')
-    .alias('time', 't')
-    .argv
+  global.app = app
   
   if app.argv.verbose
     app._all = app.all

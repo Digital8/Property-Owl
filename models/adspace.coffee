@@ -1,6 +1,10 @@
-{db} = require '../system'
+Model = require '../lib/model'
+Table = require '../lib/table'
 
-table = "po_adspaces"
-
-exports.all = (callback) ->
-  db.query "SELECT * FROM #{table}", callback
+module.exports = class Adspace extends Model
+  
+  @table = new Table
+    name: 'adspaces'
+    key: 'adspace_id'
+  
+  @field 'name'

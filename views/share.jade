@@ -11,7 +11,7 @@
           img(src='/images/share-print-icon.png', alt='Print')
           | Print Deal
     
-    li.add-bookmark(data-deal-id="#{deal.id}", data-deal-type='owl')
+    li.add-bookmark(data-deal-id="#{deal.id}", data-deal-type=deal.constructor.name.toLowerCase())
       img(src='/images/share-save-icon.png', alt='Save')
       - if (deal.bookmark)
         | Saved

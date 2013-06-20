@@ -1,0 +1,39 @@
+extends ../../layout
+
+block content
+ 
+  .container.row.main
+    
+    include ../menu
+    
+    h1 News Articles
+    
+    include ../../flashify
+    
+    include actions
+    
+    .grid-header
+    
+    table.admin-gridview.news
+      
+     thead
+      
+      tr
+       
+       td Type
+       
+       td Headline
+       
+       td Date
+       
+       td(colspan='2') Actions
+     
+     tbody
+       - each post in posts
+        
+        include summary
+     
+     tfoot
+        tr
+          td(colspan='5')
+            | &nbsp;

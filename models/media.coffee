@@ -1,16 +1,13 @@
 fs = require 'fs'
 
-async = require 'async'
 uuid = require 'node-uuid'
+{Magic, MAGIC_MIME_TYPE} = require 'mmmagic'
 
 Model = require '../lib/model'
 Table = require '../lib/table'
 
-system = require '../system'
-
-{Magic, MAGIC_MIME_TYPE} = require 'mmmagic'
-
 module.exports = class Media extends Model
+  
   @table = new Table
     name: 'medias'
     key: 'media_id'
@@ -24,14 +21,6 @@ module.exports = class Media extends Model
   @field 'type'
   @field 'class'
   @field 'description'
-  
-  constructor: (args = {}) ->
-    
-    super
-  
-  hydrate: (callback) ->
-
-    super callback
   
   @upload = (args, callback) =>
     
@@ -70,6 +59,7 @@ module.exports = class Media extends Model
       return callback 'Unacceptable file type. Must be a valid media file (image, document, video).' unless map[mime]?
       
       fs.readFile file.path, (error, data) =>
+        
         id = uuid()
         
         filename = "#{id}#{map[mime].ext}"
@@ -88,7 +78,7 @@ module.exports = class Media extends Model
   
   @type = (type, callback) =>
     
-    system.db.query "SELECT * FROM medias WHERE type = ?", type, (error, rows) =>
+    @db.query "SELECT * FROM medias WHERE type = ?", type, (error, rows) =>
       
       return callback error if error?
       
@@ -97,9 +87,10 @@ module.exports = class Media extends Model
       callback null, models
   
   @for = (model, callback) =>
+    
     type = model.constructor.name.toLowerCase()
     
-    system.db.query "SELECT * FROM medias WHERE entity_id = ? AND type = '#{type}'", [model.id], (error, rows) =>
+    @db.query "SELECT * FROM medias WHERE entity_id = ? AND type = '#{type}'", [model.id], (error, rows) =>
       return callback error if error?
       
       models = (new this row for row in rows)
@@ -107,9 +98,10 @@ module.exports = class Media extends Model
       callback null, models
   
   @forEntityWithClass = (model, {klass}, callback) =>
+    
     type = model.constructor.name.toLowerCase()
     
-    system.db.query "SELECT * FROM medias WHERE entity_id = ? AND type = '#{type}' AND class = '#{klass}'", [model.id], (error, rows) =>
+    @db.query "SELECT * FROM medias WHERE entity_id = ? AND type = '#{type}' AND class = '#{klass}'", [model.id], (error, rows) =>
       return callback error if error?
       
       models = (new this row for row in rows)

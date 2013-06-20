@@ -1,0 +1,28 @@
+extends ../../layout
+
+block content
+  
+  .container.row.main
+  
+    include ../menu
+    
+    h1 Edit Article
+    
+    include actions
+    
+    .grid-header.form-header
+    
+    .details
+      
+      h2 News Details
+      
+      hr
+      form.details-form(action="/admin/posts/#{post.id}", method='post', enctype="multipart/form-data")
+        
+        input(type='hidden', name='_method', value='put')
+        
+        include inputs
+        
+        .submit
+          input.button(type='submit', value='Update News')
+          a.left-button(href='/admin/posts') Cancel

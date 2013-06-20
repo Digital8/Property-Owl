@@ -61,10 +61,11 @@
           img#info-icon(src='/images/info-icon.png', alt='View owl details')
           |  Details
         
-        - if (objUser.isHacker())
+        - if (req.user && req.user.isHacker())
           a.admin-button(href='/admin/owls/#{owl.id}/edit')
             img#admin-icon(src='/images/view.png', alt='View owl details')
             |  Admin
     
-  - if (objUser.isHacker())
+  - if (req.user && req.user.isHacker())
+    
     include hack

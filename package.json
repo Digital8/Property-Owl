@@ -25,6 +25,7 @@
     "prettyjson": "~0.7.1",
     "socket.io": "~0.9.13",
     "mmmagic": "~0.2.5",
-    "sudo": "~1.0.3"
+    "sudo": "~1.0.3",
+    "addressit": "~0.1.4"
   }
 }

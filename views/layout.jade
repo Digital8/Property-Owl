@@ -49,8 +49,7 @@ html.no-js(lang='en')
     script(src='/js/scripts.js')
     
     script(type="text/javascript",src="https://www.google.com/jsapi")
-
-
+    
     //- raphael
     script(src='/js/raphael.js')
     // script(src='/js/g.raphael.js')
@@ -63,7 +62,7 @@ html.no-js(lang='en')
     script(src='/bundle.js')
   
   body
-    - if (objUser.isHacker())
+    - if (req.user && req.user.isHacker())
       .hacker
         include admin/menu
       style
@@ -72,31 +71,7 @@ html.no-js(lang='en')
         .hacker #admin-menu > ul > li { color: #D95477; text-shadow: none; }
         .hacker #admin-menu > ul > li > a { color: #D95477; text-shadow: none; }
     
-    .register-overlay.overlay
-      .modal.main.success
-        a.close-register(href='#')
-          img(src='/images/modal-close-white.png', alt='Close')
-        h1.modal-title Register to see more!
-        .modal-content.details-form
-          input.half.register-first-name(type='text', placeholder='First Name')
-          input.half.register-last-name(type='text', placeholder='Last Name')
-          input.half.register-email(type='text', placeholder='Email Address')
-          input.half.register-postcode(type='text', placeholder='Postcode')
-          input.half.register-password(type='password', placeholder='Password')
-          input.half.register-password2(type='password', placeholder='Confirm Password')
-          .submit-buttons
-            input.button.right.register-button(type='submit', value='Create Account')
-            .terms-checkbox
-              input#terms(type='checkbox')
-              label(for='terms')
-                | I agree to the
-                br 
-                a(href='/terms-and-conditions',target="_blank") Terms & Conditions
-          hr
-          .center
-            | Already registered?
-            br
-            a.button.show-login(href='#') Click here!
+    include register
     
     #generic-modal.modal-overlay(style='display: none;')
       .modal.main.success
@@ -104,25 +79,25 @@ html.no-js(lang='en')
             img(src='/images/modal-close.png', alt='Close')
           h1#generic-modal-title.modal-title Modal title!
           #generic-modal-content.details-form
-
-
-    .secure-deal-overlay.overlay
-      .modal.main.success
-        a.close-secure-deal(href='#')
-          img(src='/images/modal-close-white.png', alt='Close')
-        
-        h1.modal-title Express Your Interest Now!
-        
-        .modal-content.details-form
-          div.secure-deal-errors.error
-          input.half.secure-deal-first-name(type='text', placeholder='First Name', value="#{objUser.firstName}", disabled='disabled')
-          input.half.secure-deal-last-name(type='text', placeholder='Last Name', value="#{objUser.lastName}", disabled='disabled')
-          input.half.secure-deal-email(type='text', placeholder='Email Address', value="#{objUser.email}", disabled='disabled')
-          input.half.secure-deal-phone(type='text', placeholder='Phone Number', value="#{objUser.mobile}")
-          textarea.full.secure-deal-comment(placeholder='Please leave a comment for the developer', style="width:98%;")
+    
+    - if (req.user)
+      .secure-deal-overlay.overlay
+        .modal.main.success
+          a.close-secure-deal(href='#')
+            img(src='/images/modal-close-white.png', alt='Close')
           
-          .submit-buttons
-            input.button.right.secure-deal-button(type='submit', value='Submit', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;")
+          h1.modal-title Express Your Interest Now!
+          
+          .modal-content.details-form
+            div.secure-deal-errors.error
+            input.half.secure-deal-first-name(type='text', placeholder='First Name', value="#{req.user.first_name}", disabled='disabled')
+            input.half.secure-deal-last-name(type='text', placeholder='Last Name', value="#{req.user.last_name}", disabled='disabled')
+            input.half.secure-deal-email(type='text', placeholder='Email Address', value="#{req.user.email}", disabled='disabled')
+            input.half.secure-deal-phone(type='text', placeholder='Phone Number', value="#{req.user.mobile}")
+            textarea.full.secure-deal-comment(placeholder='Please leave a comment for the developer', style="width:98%;")
+            
+            .submit-buttons
+              input.button.right.secure-deal-button(type='submit', value='Submit', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;")
 
     .refer-friend-overlay.overlay
       .modal.main.success
@@ -163,10 +138,13 @@ html.no-js(lang='en')
     
 
     .container.row
+      
       header#header
+        
         #top-header
         
           #logo-box
+            
             a#logo(href='/'): img(src='/images/logo.png')
 
           - var i = 0
@@ -176,6 +154,7 @@ html.no-js(lang='en')
             - if (i == 1) break;
         
         nav#menu
+          
           include menu
     
     block content
@@ -183,9 +162,10 @@ html.no-js(lang='en')
     include footer
 
 script(type='text/javascript')
+  
   //when jQuery is loaded, extend with isAuthed
   $(function(){
-    $.isAuthed = #{objUser.isAuthed()};
+    $.isAuthed = #{!!req.user};
     $.showLogin = function() {
       $(".login-overlay").show();
       return $.isAuthed;
@@ -195,7 +175,7 @@ script(type='text/javascript')
       return $.isAuthed;
     };
   });
-
+  
   var duplicateSlider = $("#mySlider").clone();
   var initialSlider = $("#mySlider").clone();
   duplicateSlider.attr("id", "duplicate-slider");

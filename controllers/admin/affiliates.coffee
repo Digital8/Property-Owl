@@ -1,12 +1,4 @@
-fs = require 'fs'
-
 async = require 'async'
-uuid = require 'node-uuid'
-
-system = require '../../system'
-
-Affiliate = system.models.affiliate
-Category = system.models.category
 
 exports.index = (req, res) ->
   async.parallel

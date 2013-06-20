@@ -1,41 +1,27 @@
-system = require '../system'
+exports.index = (req, res) ->
+  res.render 'user/settings'
+  delete req.session.form
 
-helpers = hash: system.load.helper 'hash'
-
-RAF = system.models.raf
-
-models = 
-  user: system.load.model 'user'
-  registrations: system.load.model 'registrations'
-
-exports.index = (req,res) -> res.render 'user/settings'
-
-exports.view = (req,res) ->
-
-exports.add = (req,res) ->
-
-exports.create = (req,res) ->
-
-exports.edit = (req,res) ->
-
-exports.update = (req,res) ->
-  req.body.email ?= ''
-  req.body.fname ?= ''
-  req.body.lname ?= ''
-  req.body.id = res.locals.objUser.id
+exports.update = (req, res) ->
   
-  req.assert('email', 'Invalid Email Address').isEmail()
-   
-  if req.body.password != ''
-    req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
-    req.assert('confirmPassword', 'Password does not match').isIn [req.body.password]
+  # req.body.email ?= ''
+  # req.body.fname ?= ''
+  # req.body.lname ?= ''
   
-  req.assert('fname', 'First name is invalid').isAlpha().len(2,20).notEmpty()
-  req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
+  # req.assert('fname', 'First name is invalid').isAlpha().len(2, 20).notEmpty()
+  # req.assert('lname', 'Last name is invalid').isAlpha().len(2, 20).notEmpty()
   
-  models.user.getUserByEmail req.body.email, (err, email) ->
+  # if req.body.password?.length
+  #   req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
+  #   req.assert('confirm', 'Password does not match').isIn [req.body.password]
+  
+  # req.assert('email', 'Invalid Email Address').isEmail()
+  
+  User.byEmail req.body.email, (error, user) ->
     
-    if email.length > 0 and req.body.email != res.locals.objUser.email
+    return res.send 500, error if error?
+    
+    if user? and user.id isnt req.user.id
       req._validationErrors ?= []
       req._validationErrors.push
         param: 'email'
@@ -45,52 +31,100 @@ exports.update = (req,res) ->
     errors = req.validationErrors true
     
     if errors
-      keys = Object.keys(errors)
-    
-      for key in keys
-        req.flash('error', errors[key].msg)
-    
-      req.session.signup = req.body
-
+      for key, error of errors then req.flash 'error', error.msg
+      req.session.form = req.body
       res.redirect 'back'
+      return
     
-    else
-      models.user.updateUser req.body, (err, results) ->
-        if err
-          console.log err
-          req.flash 'error', "An unknown error has occured. Error code: #{err.code}"
-        else
-          # validation has already been checked so we're checking if we need to update pwd
-          if req.body.password != '' 
-                 req.body.password = helpers.hash(req.body.password)
-                 models.user.updatePassword req.body, (err, results) ->
-                   if err
-                     console.log err
-                     req.flash('error', "An unknown error has occured. Error code: #{err.code}")
-                   else
-                     req.flash('success', 'Your details have successfully been updated')
-                   res.redirect 'back'
-          else
-            req.flash('success', 'Your details have successfully been updated')
-            res.redirect 'back'
+    User.get req.user.id, (error, user) ->
+      
+      patch = {}
+      for key, value of req.body
+        continue if user[key] is value
+        patch[key] = value
+      
+      console.log patch: patch
+      console.log before: user
+      
+      user.set patch
+      
+      console.log after: req.user
+      
+      user.validate {}, (error) ->
+        if error?
+          for key, message of error.errors then req.flash 'error', message
+          req.session.form = user
+          res.redirect 'back'
+          return
+        
+        user.save (error) ->
+          res.redirect '/account'
+      
+      # User.updateUser req.body, (error, results) ->
+      #   if error
+      #     console.log error
+      #     req.flash 'error', "An unknown error has occured. Error code: #{error.code}"
+      #   else
+      #     # validation has already been checked so we're checking if we need to update pwd
+      #     if req.body.password != '' 
+      #            req.body.password = helpers.hash(req.body.password)
+      #            User.updatePassword req.body, (error, results) ->
+      #              if error
+      #                console.log error
+      #                req.flash('error', "An unknown error has occured. Error code: #{error.code}")
+      #              else
+      #                req.flash('success', 'Your details have successfully been updated')
+      #              res.redirect 'back'
+      #     else
+      #       req.flash('success', 'Your details have successfully been updated')
+      #       res.redirect 'back'
 
-exports.destroy = (req,res) ->
-
-exports.preferences = (req, res) ->
-  res.render 'user/preferences'
+exports.preferences = (req, res) -> res.render 'user/preferences'
 
 exports.updatePreferences = (req, res) ->
-  results = [ req.body.suburb, req.body.state, req.body.pType, req.body.dType, req.body.minPrice, req.body.maxPrice, req.body.minBeds, req.body.maxBeds, req.body.bathrooms,req.body.cars, req.body.devStage, res.locals.objUser.id ]
-  system.db.query "UPDATE po_users SET pref_suburb = ?, pref_state = ?, pref_ptype = ?, pref_dtype = ?, pref_min_price = ?, pref_max_price = ?, pref_min_beds = ?, pref_max_beds = ?, pref_bathrooms = ?, pref_cars = ?, pref_dev_stage = ? WHERE user_id = ?", results, (err, results) ->
-    if err then throw err
-    req.flash('success','Preferences have been updated')
+  
+  map = [
+    req.body.suburb
+    req.body.state
+    req.body.pType
+    req.body.dType
+    req.body.minPrice
+    req.body.maxPrice
+    req.body.minBeds
+    req.body.maxBeds
+    req.body.bathrooms
+    req.body.cars
+    req.body.devStage
+    req.user.id
+  ]
+  
+  exports.db.query """
+  UPDATE users
+  SET
+    pref_suburb = ?,
+    pref_state = ?,
+    pref_ptype = ?,
+    pref_dtype = ?,
+    pref_min_price = ?,
+    pref_max_price = ?,
+    pref_min_beds = ?,
+    pref_max_beds = ?,
+    pref_bathrooms = ?,
+    pref_cars = ?,
+    pref_dev_stage = ?
+  WHERE user_id = ?
+  """, map, (error) ->
+    
+    return res.send 500, error if error?
+    
+    req.flash 'success', 'Preferences have been updated'
     res.redirect 'back'
 
 exports.registrations = (req, res) ->
-  models.registrations.findByUser res.locals.objUser.id, (err, results) ->
+  Registration.findByUser req.user.id, (err, results) ->
     if err then console.log err
     res.render 'user/registrations', registrations: results or {}
 
 exports.referals = (req, res) ->
-  RAF.getByUser res.locals.objUser.id, (error, referals) ->
+  Referral.getByUser req.user.id, (error, referals) ->
     res.render 'user/referals', referals: referals or {}

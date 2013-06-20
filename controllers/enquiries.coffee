@@ -1,38 +1,37 @@
-system = require '../system'
-
-Enquiry = system.models.enquiry
-Affiliate = system.models.affiliate
-Owl = system.models.owl
-Barn = system.models.barn
-User = system.models.user
+# TODO error checking
 
 exports.create = (req, res) ->
+  
   {entity_id, entity_type} = req.body
-
+  
   console.log 'enquiry form', req.body
   
   unless entity_type in ['owl', 'barn', 'affiliate']
-    return res.send status: 500
+    return res.send 500
   
-  model = system.models[entity_type]
+  model = exports.models[entity_type]
   
   model.get entity_id, (error, record) ->
-    if error? or not record
-      return res.send status: 404
-
-    rcpt = res.locals.objUser.email or ''
+    
+    return res.send 500, erorr if error?
+    return res.send 404 unless record?
+    
+    rcpt = req.user?.email or ''
     
     if record.user? then rcpt = record.user.email
-
-    User.getUserById record.listed_by , (err, developer) ->
+    
+    User.get record.listed_by, (error, developer) ->
+      
       if entity_type is 'affiliate'
         rcpt = record.email
-
-      if developer.length is 0
-        developer = 'Service'
+      
+      if developer?
+        developer = developer.first_name
       else
-        developer = developer[0].first_name
-        
+        developer = 'Service'
+      
+      console.log req.user
+      
       map =
         user_id: req.user?.id or 0
         entity_id: req.body.entity_id
@@ -40,6 +39,7 @@ exports.create = (req, res) ->
         enquiry: req.body.enquiry
       
       Enquiry.create map, (error, model) ->
+        
         if error then throw error
         res.send status: 200
         
@@ -49,11 +49,12 @@ exports.create = (req, res) ->
           barn: 'barn-deal-enquiry'
         
         if template_map[entity_type]?
+          
           template = template_map[entity_type]
-
+          
           user =
             email: rcpt
-            firstName: req.body.name# or res.locals.objUser.displayName
+            firstName: req.body.name
             lastName: ''
             phone: req.body.phone
           
@@ -65,18 +66,17 @@ exports.create = (req, res) ->
             title: record.name or ''
             description: req.body.enquiry
             contact_method: req.body.contact or 'phone'
-            enquiryEmail: req.body.email# or res.locals.objUser.email
+            enquiryEmail: req.body.email
             contactName: developer
             link: "/#{entity_type}s/#{record.id}"
           
-          system.helpers.mailer template, 'New Enquiry', user, secondary, (results) ->
+          (require '../lib/mailer') template, 'New Enquiry', user, secondary, (results) ->
+            
             user =
-              email: req.body.email# or res.locals.objUser.email
-              firstName: req.body.name# or res.locals.objUser.displayName
+              email: req.body.email
+              firstName: req.body.name
               lastName: ''
-
-            system.helpers.mailer "#{entity_type}-enquiry-confirmation", "Enquiry Confirmation", user, secondary, ->
-              if results is true
-                res.send status: 200
-              else
-                res.send status: 500
+            
+            (require '../lib/mailer') "#{entity_type}-enquiry-confirmation", "Enquiry Confirmation", user, secondary, ->
+              
+              res.send 200

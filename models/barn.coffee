@@ -5,11 +5,8 @@ _s = require 'underscore.string'
 Model = require '../lib/model'
 Table = require '../lib/table'
 
-system = require '../system'
-
-Deal = system.models.deal
-
 module.exports = class Barn extends Model
+  
   @table = new Table
     name: 'barns'
     key: 'barn_id'
@@ -32,39 +29,27 @@ module.exports = class Barn extends Model
   @field 'approved', type: Boolean, default: no
   
   constructor: (args = {}) ->
-    Object.defineProperty this, 'code', get: => _s.pad @id.toString(), 5, '0'
+    
+    Object.defineProperty this, 'code',
+      get: => _s.pad @id.toString(), 5, '0'
     
     super
   
   hydrate: (callback) ->
+    
     async.parallel
+      
       owls: (callback) =>
-        Owl = system.models.owl
-        
         Owl.inBarn @id, (error, owls) =>
           @owls = owls
-          
-          for owl, index in @owls
-            owl.index = index
-            owl.alpha = 'ABCDE'[index]
-            owl.unit = ''
-
-            #dirty hack to get the unit number
-            _address = owl.address
-            _address.replace '\\', '/'
-            _address = _address.split '/'
-            if _address.length > 1
-              owl.unit = _address[0].trim()
-          
+          do @tagOwls
           callback error
       
       images: (callback) =>
-        Media = system.models.media
-
         Media.forEntityWithClass this, klass: 'image', (error, medias) =>
+          
           @images = medias
-          #epic spam removal
-          #console.log(@images)
+          
           if @feature_image? and @images.length
             
             feature_id = parseInt @feature_image
@@ -80,61 +65,54 @@ module.exports = class Barn extends Model
           callback error
       
       files: (callback) =>
-        Media = system.models.media
-
         Media.forEntityWithClass this, klass: 'file', (error, medias) =>
           @files = medias
           callback error
       
       deals: (callback) =>
-        Deal = system.models.deal
         Deal.for this, (error, deals) =>
           @deals = deals
           callback error
       
       user: (callback) =>
-        system.models.user.getUserById @listed_by, (error, [user]) =>
+        User.get @listed_by, (error, user) =>
           return callback error if error?
-          #remove epic spam
-          #console.log(user)
           @user = user
           do callback
-
+      
       registrations: (callback) =>
-        system.db.query "SELECT * FROM po_registrations AS R INNER JOIN po_users AS U ON R.user_id = U.user_id where R.type = 'barn' and R.resource_id = ?", [@id], (err, results) =>
+        @constructor.db.query "SELECT * FROM po_registrations AS R INNER JOIN po_users AS U ON R.user_id = U.user_id where R.type = 'barn' and R.resource_id = ?", [@id], (err, results) =>
           @registrations = results
-
           callback()
     
     , (error) =>
       @user ?= {}
       callback error, this
-      
+  
+  tagOwls: ->
+    for owl, index in @owls
+      owl.index = index
+      owl.alpha = 'ABCDE'[index]
+  
   heroImageURL: ->
-    unless @images? and @images.length then return '/images/placeholder.png'
     
-    console.log @title
+    unless @images? and @images.length then return '/images/placeholder.png'
     
     # find the hero
     hero = _.find @images, (image) =>
       return Number(image.id) is Number(@feature_image)
     
-    # console.log owl: @, hero: hero
-    
     # default to latest image
     hero ?= @images.pop()
     
     return "/uploads/#{hero.filename}"
-
+  
   fullAddress: ->
-    "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
+    parts = _.compact [@address, @suburb, @state.toUpperCase(), @postcode]
+    return parts.join ', '
   
   upload: (req, callback) ->
     
-    Media = system.models.media
-    
-    # process(Req, String, Function)
-    # creates Media for each filea req's uploads
     processFiles = (req, key, callback = ->) =>
       files = req.files["#{key}s"]
       

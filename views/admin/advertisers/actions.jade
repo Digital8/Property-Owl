@@ -1,6 +1,6 @@
 .admin-actions
   ul
-    
+    - locals.action = locals.action || null
     if(action != 'add')
       li
         a(href='/admin/advertisers/add')

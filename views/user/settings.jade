@@ -1,6 +1,7 @@
 extends ../layout
 
 block content
+  
   .container.row.main
     
     include ../left_nav
@@ -8,78 +9,91 @@ block content
     #center-col
       
       legend
+        
         h1 My Account
       
       .grid-header.form-header.pane-nav
-        include menu
         
+        include menu
+      
       .details
         
-        form.details-form(action="/account",method="post")
+        - var user = session.form || req.user;
+        
+        form.details-form(action='/account', method='post', autocomplete='off')
           
           input(type='hidden', name='_method', value='put')
           
           include ../flashify
           
           .left
+            
             .inputs 
-              label(for='fname') First name
-              input(type='text', name='fname', value=objUser.firstName)
+              label(for='first_name') First name
+              input(type='text', name='first_name', value=user.first_name)
+            
             .inputs 
-              label(for='lname') Last name
-              input(type='text', name='lname', value=objUser.lastName)
+              label(for='last_name') Last name
+              input(type='text', name='last_name', value=user.last_name)
+           
             .inputs
               label(for='company') Company
-              input(type='text', name='company', value=objUser.company)
+              input(type='text', name='company', value=user.company)
+         
             .inputs
               label(for='email') Email
-              input(type='email', name='email', value=objUser.email)
+              input(type='email', name='email', value=user.email)
+      
             .inputs
               label(for='phone') Phone
-              input(type='tel', name='phone', value=objUser.phone)
+              input(type='tel', name='phone', value=user.phone)
+       
             .inputs
               label(for='work_phone') Work Phone
-              input(type='tel', name='work_phone', value=objUser.work)
+              input(type='tel', name='work_phone', value=user.work_phone)
+         
             .inputs
               label(for='mobile') Mobile
-              input(type='tel', name='mobile', value=objUser.mobile)
+              input(type='tel', name='mobile', value=user.mobile)
+          
           .right
+            
             .inputs
               label(for='password') Password
-              input(type='password', name='password', value="")
-              label(for='confirmPassword') Confirm Password
-              input(type='password', name='confirmPassword', value="")
+              input(type='password', name='password', value='', autocomplete='off')
+              
+              label(for='confirm') Confirm Password
+              input(type='password', name='confirm', value='', autocomplete='off')
+              
               small Password will not change if left blank
+            
             .inputs
               label(for='address') Address
-                td
-                  textarea(name='address')= objUser.address
+              textarea(name='address')= user.address
+            
             .inputs
               label(for='suburb') Suburb
-                td
-                  input(type='text', name='suburb', value=objUser.suburb)
+              input(type='text', name='suburb', value=user.suburb)
+            
             .inputs
               label(for='postcode') Postcode
-                td
-                  input(type='text', name='postcode', value=objUser.postcode)
+              input(type='text', name='postcode', value=user.postcode)
+            
             .inputs
-              label(for='subscribed_news') Subscribed to Newsletter
-                td
-                  select(name='subscribed_news', class="select2")
-                    - var sel = (objUser.subscribedNewsletters == '1') ? true : false
-                    option(value='1', selected=sel) Yes
-                    - var sel = (objUser.subscribedNewsletters == '0') ? true : false
-                    option(value='0', selected=sel) No
+              label(for='subscribed_newsletter') Subscribed to Newsletter
+              select(name='subscribed_newsletter')
+                option(value=1, selected=user.subscribed_newsletter) Yes
+                option(value=0, selected=!user.subscribed_newsletter) No
+            
             .inputs
-              label(for='property_alerts') Subscribed to Property Alerts
-                td
-                  select(name='property_alerts', class="select2")
-                    - var sel = (objUser.subscribedAlerts == '1') ? true : false
-                    option(value='1', selected=sel) Yes
-                    - var sel = (objUser.subscribedAlerts == '0') ? true : false
-                    option(value='0', selected=sel) No
+              label(for='subscribed_alerts') Subscribed to Property Alerts
+              select(name='subscribed_alerts')
+                option(value=1, selected=user.subscribed_alerts) Yes
+                option(value=0, selected=!user.subscribed_alerts) No
+          
           .inputs
+          
           .submit
-              input.button(type='submit', value='Save')
+            input.button(type='submit', value='Save')
     
     include ../right_nav

@@ -1,31 +1,26 @@
-system = require '../../system'
-
-models = user: system.load.model 'user'
-
-helpers = hash: system.load.helper 'hash'
-
 exports.index = (req,res) ->
+  
   callback = (err, results) ->
     if err then throw err
     res.render 'admin/members/index', users: results, search: req.query.name or ''
-
+  
   if req.query.name?
-    models.user.search '%'+req.query.name+'%', callback
+    User.search '%'+req.query.name+'%', callback
   else
-    models.user.getAllUsers(callback)
-
-exports.view = (req,res) ->
+    User.all callback
 
 exports.add = (req,res) ->
+  
   values = req.session.signup or {}
   delete req.session.signup
   
-  models.user.getAllGroups (err, groups) ->
+  User.getAllGroups (err, groups) ->
     if err then throw err
     
     res.render 'admin/members/add', values:  values, groups: groups or {}, menu: 'members'
 
 exports.create = (req,res) ->
+  
   req.session.signup  = req.body
   req.assert('email', 'Invalid Email').isEmail()
   req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
@@ -33,7 +28,7 @@ exports.create = (req,res) ->
   req.assert('fname', 'First name is invalid').isAlpha().len(2,20).notEmpty()
   req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
   
-  models.user.getUserByEmail req.body.email, (err, email) ->
+  User.getUserByEmail req.body.email, (err, email) ->
      if email.length > 0 then req.flash('error','Email address is already in use')
      
      errors = req.validationErrors true
@@ -52,17 +47,18 @@ exports.create = (req,res) ->
        user.password = helpers.hash user.password
        user.group ?= 1
        
-       models.user.createUser user, (err, results) ->
+       User.createUser user, (err, results) ->
          req.flash 'success', 'User created!'
          res.redirect 'admin/members'
 
 exports.edit = (req,res) ->
-  models.user.getUserById req.params.id, (err, results) ->
+  
+  User.getUserById req.params.id, (err, results) ->
     if not results
       req.flash 'error', 'User not found'
       res.redirect 'back'
     else
-      models.user.getAllGroups (err, groups) ->
+      User.getAllGroups (err, groups) ->
         member = results.pop()
         member.fname ?= member.first_name
         member.lname ?= member.last_name
@@ -70,6 +66,7 @@ exports.edit = (req,res) ->
         res.render 'admin/members/edit', values: member, groups: groups
 
 exports.update = (req,res) ->
+  
   req.body.email ?= ''
   req.body.fname ?= ''
   req.body.lname ?= ''
@@ -85,10 +82,10 @@ exports.update = (req,res) ->
   req.assert('fname', 'First name is invalid').isAlpha().len(2,20).notEmpty()
   req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
   
-  models.user.getUserById req.body.id, (err, user) ->
+  User.getUserById req.body.id, (err, user) ->
     user = user.pop()
     
-    models.user.getUserByEmail req.body.email, (err, email) ->
+    User.getUserByEmail req.body.email, (err, email) ->
       if email.length > 0 and req.body.email != user.email 
         req.assert('email','Email address is in use').isIn []
       
@@ -105,23 +102,26 @@ exports.update = (req,res) ->
         res.redirect 'back'
       
       else
-        models.user.updateUser req.body, (err, results) ->
+        User.updateUser req.body, (err, results) ->
           if err
             console.log err
             req.flash 'error', "An unknown error has occured. Error code: #{err.code}"
             res.redirect 'back'
           else
             # todo: Update the users group
-            models.user.updateGroup req.body, (err, results) ->
+            User.updateGroup req.body, (err, results) ->
               if err then console.log err
               req.flash 'success', 'Details have successfully been updated'
           
               res.redirect 'back'
 
 exports.delete = (req, res) ->
+  
+  res.send 500
 
 exports.destroy = (req, res) ->
-  models.user.delete req.params.id, (err, results) ->
+  
+  User.delete req.params.id, (err, results) ->
     if err 
       res.send status: 500
     else

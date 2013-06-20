@@ -1,9 +1,5 @@
-async = require 'async'
 _ = require 'underscore'
-
-system = require '../../system'
-
-Media = system.models.media
+async = require 'async'
 
 exports.index = (req, res) ->
   

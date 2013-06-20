@@ -1,51 +1,46 @@
 _ = require 'underscore'
-jade = require 'jade'
-system = require '../system'
 async = require 'async'
-Barn = system.models.barn
-Deal = system.models.deal
+jade = require 'jade'
 
 exports.index = (req, res) ->
-  Page = system.models.page
+  
   Barn.all (error, barns) ->
+    
     barns = _.sortBy barns, 'created_at'
-    async.parallel
-      page: (callback) -> Page.findByUrl '/barn', callback
-    , (error, {page}) ->
+    
+    Page.findByUrl '/barn', (error, page) ->
+      
       try
-        page = page.shift().shift()
-        fn = jade.compile page.content
-        cms = do fn
-        res.render 'barns/index', barns: barns, cms: cms
-      catch e
-        res.render 'errors/404'
+        res.render 'barns/index',
+          barns: barns
+          cms: do jade.compile page.content
+      
+      catch {message}
+        res.render 'errors/500', {message}
 
 exports.show = (req, res) ->
-  {id} = req.params
   
-  Barn.get id, (error, barn) ->
-    if typeof(barn.id) is 'undefined'
-      res.render 'errors/404'
-    else
-      res.render 'barns/show', barn: barn, enquire: on
+  Barn.get req.params.id, (error, barn) ->
+    
+    return res.send 500, error if error?
+    return res.render 'errors/404' unless barn?
+    
+    res.render 'barns/show', barn: barn, enquire: on
 
 exports.owls = (req,res) ->
-  {id} = req.params
-  
-  Barn.get id, (error, barn) ->
+  Barn.get req.params.id, (error, barn) ->
+    return res.send 500, error if error?
+    return res.render 'errors/404' unless barn?
     res.send barn.owls
 
 exports.nest = (req, res) ->
-  barnId = req.params.id
-  owlId = req.body.id
-  
-  system.db.query "UPDATE owls SET barn_id = ? WHERE owl_id = ?", [barnId, owlId], (error, results) ->
+  exports.db.query "UPDATE owls SET barn_id = ? WHERE owl_id = ?", [req.params.id, req.body.id], (error, results) ->
     res.send [error, results]
 
 exports.unnest = (req, res) ->
   {barn_id, owl_id} = req.params
   
-  system.db.query "UPDATE owls SET barn_id = NULL WHERE owl_id = ?", [owl_id], (error, results) ->
+  exports.db.query "UPDATE owls SET barn_id = NULL WHERE owl_id = ?", [owl_id], (error, results) ->
     res.send [error, results]
 
 exports.addDeal = (req, res) ->

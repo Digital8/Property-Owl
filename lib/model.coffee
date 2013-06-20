@@ -1,6 +1,6 @@
-uuid = require 'node-uuid'
-
+_ = require 'underscore'
 async = require 'async'
+uuid = require 'node-uuid'
 
 ###
 Model
@@ -15,9 +15,8 @@ module.exports = class Model
   ###
   @field = (key, args = {}) ->
     @fields ?= {}
-    
-    args.cardinality ?= Infinity
-    
+    # args.cardinality ?= Infinity
+    args.key ?= key
     @fields[key] = args
   
   ###
@@ -36,6 +35,61 @@ module.exports = class Model
     for key, field of @constructor.fields
       if field.default?
         @[key] ?= field.default
+  
+  set: (hash) ->
+    
+    for key, field of @constructor.fields when hash[key]?
+      
+      if field.type? and field.type is Boolean
+        
+        value = hash[key]
+        
+        map =
+          true: true
+          false: false
+          on: on
+          off: off
+          0: false
+          1: true
+        
+        @[key] = map[value]
+      
+      else
+        
+        @[key] = hash[key]
+    
+    return
+  
+  validate: (args = {}, callback) ->
+    
+    errors = {}
+    
+    emit = (field, message) ->
+      errors[field.key] ?= []
+      errors[field.key].push message
+    
+    console.log 'validating'
+    
+    for key, field of @constructor.fields
+      
+      value = @[key]
+      
+      console.log 'validating', key, field
+      
+      if field.required
+        
+        if field.type is String
+          
+          if _.isString value
+            unless value.length
+              emit field, 'length'
+          else
+            emit field, 'type'
+    
+    if (Object.keys errors).length
+      callback {errors}
+    else
+      callback null
   
   ###
   Model::hydrate
@@ -68,9 +122,11 @@ module.exports = class Model
   - commits/persists dirty fields (changes) to the underlying row/record
   ###
   save: (callback) ->
+    
     map = {}
     
     for key, field of @constructor.fields
+      
       map[key] = @[key]
     
     @constructor.db.query "UPDATE #{@constructor.table.name} SET ? WHERE #{@constructor.table.key} = ?", [map, @id], callback
@@ -80,9 +136,11 @@ module.exports = class Model
     # callback()
   
   clone: (callback) ->
+    
     map = {}
     
     for key, field of @constructor.fields
+      
       map[key] = @[key]
     
     @constructor.create map, callback
@@ -95,6 +153,8 @@ module.exports = class Model
   @patch = (id, hash, callback) ->
     
     @get id, (error, model) =>
+      
+      return callback error if error?
       
       values = {}
       
@@ -141,25 +201,10 @@ module.exports = class Model
     
     @get id, (error, model) =>
       
-      for key, field of @fields when hash[key]?
-        if field.type? and field.type is Boolean
-          value = hash[key]
-          
-          map =
-            true: true
-            false: false
-            on: on
-            off: off
-          
-          console.log 'setting', key, value
-          
-          model[key] = map[value]
-        
-        else
-          
-          model[key] = hash[key]
+      model.set hash
       
       model.save (error) =>
+        
         callback error, model
   
   ###
@@ -167,8 +212,8 @@ module.exports = class Model
   - instantiates a new instance of the model (a record)
   - doesn't persist the new model to disk
   ###
-  @new = (callback) ->
-    model = new this
+  @new = (args = {}, callback) ->
+    model = new this args
     model.hydrate callback
   
   ###
@@ -176,13 +221,15 @@ module.exports = class Model
   - similar (shortcut) to using Model.new + model.save
   ###
   @create = (map, callback) ->
-    model = new this map
     
-    model.hydrate (error, model) =>
+    @new map, (error, model) =>
+      
+      return callback error if error?
       
       hash = {}
       
       for key, field of @fields
+        
         continue if key is @table.key
         
         continue unless model[key]?
@@ -192,28 +239,32 @@ module.exports = class Model
       hash.created_at = new Date
       hash.updated_at = new Date
       
-      @db.query "INSERT INTO #{@table.name} SET ?", hash, (error, result) =>
+      model.validate {}, (error) =>
         
-        if error then return callback error
+        return callback error if error?
         
-        id = result.insertId
-        
-        model.id = id
-        
-        model[@table.key] = id
-        
-        callback null, model
+        @db.query "INSERT INTO #{@table.name} SET ?", hash, (error, result) =>
+          
+          return callback error if error?
+          
+          id = result.insertId
+          
+          model.id = id
+          
+          model[@table.key] = id
+          
+          callback null, model
   
   ###
   Model.get
   - gets ALL records of a model
   - used in index/list actions
-  - 
   ###
   @all = (callback) ->
-    # console.log uuid(), @name
+    
     @db.query "SELECT * FROM #{@table.name} ORDER BY #{@table.key}", (error, rows) =>
-      return callback error if error
+      
+      return callback error if error?
       
       models = (new this row for row in rows)
       
@@ -228,8 +279,10 @@ module.exports = class Model
   - deletes a record/row from the underlaying datasource by id
   ###
   @delete = (id, callback) ->
+    
     @db.query "DELETE FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error) =>
-      return callback error if error
+      
+      return callback error if error?
       
       callback arguments...
   
@@ -240,12 +293,13 @@ module.exports = class Model
   - needs alot of work [TODO] [@pyro]
   ###
   @get = (id, callback) ->
+    
     @db.query "SELECT * FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error, rows) =>
-      return callback error if error
       
-      model = new this rows[0]
+      return callback error if error?
+      return callback 404 unless rows.length
       
-      model.hydrate callback
+      @new rows[0], callback
   
   ###
   Model.dry
@@ -254,8 +308,11 @@ module.exports = class Model
   - needs alot of work [TODO] [@pyro]
   ###
   @dry = (id, callback) ->
+    
     @db.query "SELECT * FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error, rows) =>
-      return callback error if error
+      
+      return callback error if error?
+      return callback 404 unless rows.length
       
       model = new this rows[0]
       

@@ -5,13 +5,8 @@ async = require 'async'
 Model = require '../lib/model'
 Table = require '../lib/table'
 
-system = require '../system'
-
-Deal = system.models.deal
-Media = system.models.media
-Bookmark = system.models.bookmark
-
 module.exports = class Owl extends Model
+  
   @table = new Table
     name: 'owls'
     key: 'owl_id'
@@ -44,37 +39,40 @@ module.exports = class Owl extends Model
   @field 'aspect'
   
   @field 'development_type_id'
-  
   @field 'development_status_id'
   
   @field 'feature_image'
   
   constructor: (args = {}) ->
-    Object.defineProperty this, 'code', get: => _s.pad @id.toString(), 5, '0'
+    
+    Object.defineProperty this, 'code',
+      get: => _s.pad @id.toString(), 5, '0'
+    
+    Object.defineProperty this, 'unit',
+      get: =>
+        {address} = this
+        address.replace '\\', '/'
+        address = address.split '/'
+        if address.length > 1
+          return address[0].trim()
+        else
+          return
     
     super
   
   hydrate: (callback) ->
     async.series
       developmentType: (callback) =>
-        DevelopmentType = system.models.development_type
-        
         DevelopmentType.get @development_type_id, (error, developmentType) =>
           @developmentType = developmentType
-          
           callback()
       
       developmentStatus: (callback) =>
-        DevelopmentStatus = system.models.development_status
-        
         DevelopmentStatus.get @development_status_id, (error, developmentStatus) =>
           @developmentStatus = developmentStatus
-          
           callback()
       
       images: (callback) =>
-        Media = system.models.media
-
         Media.forEntityWithClass this, klass: 'image', (error, medias) =>
 
           @images = medias
@@ -94,8 +92,6 @@ module.exports = class Owl extends Model
           callback error
       
       files: (callback) =>
-        Media = system.models.media
-
         Media.forEntityWithClass this, klass: 'file', (error, medias) =>
           @files = medias
           callback error
@@ -117,22 +113,26 @@ module.exports = class Owl extends Model
         callback()
         
       registrations: (callback) =>
-        system.db.query "SELECT * FROM po_registrations AS R INNER JOIN po_users AS U ON R.user_id = U.user_id where R.type = 'owl' and R.resource_id = ?", [@id], (err, results) =>
+        @constructor.db.query "SELECT * FROM registrations AS R INNER JOIN users AS U ON R.user_id = U.user_id where R.type = 'owl' and R.resource_id = ?", [@id], (err, results) =>
           @registrations = results
-        
           callback()
       
       enquiries: (callback) =>
         
-        system.db.query "SELECT * FROM enquiries AS E INNER JOIN po_users AS U ON E.user_id = U.user_id where E.entity_type = 'owl' and E.entity_id = ?", [@id], (err, results) =>
+        @constructor.db.query """
+        SELECT * FROM enquiries AS E
+        INNER JOIN users AS U ON E.user_id = U.user_id
+        WHERE
+          E.entity_type = 'owl'
+        AND
+          E.entity_id = ?
+        """, [@id], (err, results) =>
           @enquiries = results
           callback()
-
+      
       features: (callback) =>
         expose = (type) =>
           @["#{type}Features"] = []
-          # if @["#{type}_features"] and @["#{type}_features"].length
-          # return unless @["#{type}_features"].length
           if @["#{type}_features"]?
             @["#{type}Features"] = @["#{type}_features"].split '\n'
         
@@ -145,20 +145,14 @@ module.exports = class Owl extends Model
       barns: (callback) =>
         return do callback unless @barn_id?
         
-        Barn = system.models.barn
-        
         Barn.dry @barn_id, (error, barn) =>
           @barn = barn
           do callback
       
       user: (callback) =>
-        system.models.user.getUserById @listed_by, (error, [user]) =>
-          #remove epic spam
-          #console.log(@listed_by)
+        User.get @listed_by, (error, user) =>
           return callback error if error?
           @user = user
-          #remove epic spam
-          #console.log(user)
           do callback
     
     , (error) => super callback
@@ -166,9 +160,7 @@ module.exports = class Owl extends Model
   hydrateForUser: (user, callback) ->
     Bookmark.forUserAndDeal user, this, (error, bookmark) =>
       return callback error if error?
-      
       @bookmark = bookmark
-      
       do callback
   
   heroImageURL: ->

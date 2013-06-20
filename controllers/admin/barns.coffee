@@ -1,57 +1,51 @@
-fs = require 'fs'
-
 async = require 'async'
-uuid = require 'node-uuid'
-
-system = require '../../system'
-
-models =
-  user: system.load.model('user')
-
-Barn = system.models.barn
-User = system.models.user
 
 exports.index = (req, res) ->
-  if res.locals.objUser.isDeveloper() and not res.locals.objUser.isAdmin()
-    Barn.byDeveloper res.locals.objUser.id, (error, barns) ->
-      res.render 'admin/barns/index', barns: barns or {}
+  
+  if req.user.isDeveloper() and not req.user.isAdmin()
+    Barn.byDeveloper req.user.id, (error, barns) ->
+      res.render 'admin/barns/index', {barns}
   else
     Barn.all (error, barns) ->
-      res.render 'admin/barns/index', barns: barns or {}
+      res.render 'admin/barns/index', {barns}
 
 exports.edit = (req, res) ->
-  Barn.get req.params.id, (error, barn) ->
-    models.user.getUsersByGroup 2, (err, developers) ->
-      models.user.getUsersByGroup 3, (err, admins) ->
-        developers = developers.concat(admins)
-        res.render 'admin/barns/edit', barn: barn, developers: developers
+  
+  async.parallel
+    barn: (callback) -> Barn.get req.params.id, callback
+    developers: (callback) -> User.developers callback
+    # developmentTypes: (callback) -> DevelopmentType.all callback
+    # developmentStatuses: (callback) -> DevelopmentStatus.all callback
+    dealTypes: (callback) -> DealType.all callback
+  , (error, results) ->
+    res.render 'admin/barns/edit', results
 
 exports.add = (req, res) ->
-  models.user.getUsersByGroup 2, (err, developers) ->
-    models.user.getUsersByGroup 3, (err, admins) ->
-      developers = developers.concat(admins)
-      res.render 'admin/barns/add', barn: {listed_by: res.locals.objUser.id}, developers: developers or {}
-
-
-
-
-
+  
+  async.parallel
+    developers: (callback) -> User.developers callback
+    # developmentTypes: (callback) -> DevelopmentType.all callback
+    # developmentStatuses: (callback) -> DevelopmentStatus.all callback
+    dealTypes: (callback) -> DealType.all callback
+  , (error, results) ->
+    results.barn = listed_by: req.user.id
+    console.log results.developers
+    res.render 'admin/barns/add', results
 
 exports.create = (req, res) ->
+  
   Barn.create req.body, (error, barn) ->
-    # barn.upload req, ->
-    template = 'listing-confirmation'
-
-    user =
-      contactName: res.locals.objUser.firstName
-      email: res.locals.objUser.email
-
-    secondary = 
-      contactName: res.locals.objUser.firstName
-      link: "/admin/barns/#{barn.id}/edit"
-
-    system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
-      res.redirect 'back'
+    
+    barn.upload req, ->
+      
+      (require '../../lib/mailer') 'listing-confirmation', 'Listing Confirmation',
+        contactName: req.user.first_name
+        email: req.user.email
+      ,
+        contactName: req.user.first_name
+        link: "/admin/barns/#{barn.id}/edit"
+      , (results) ->
+        res.redirect 'admin/barns'
 
 exports.delete = (req, res) ->
   Barn.get req.params.id, (error, barn) ->
@@ -66,17 +60,17 @@ exports.update = (req, res) ->
   
   finish = ->
     res.redirect '/admin/barns'
-
+  
   Barn.update req.params.id, req.body, (error, barn) ->
     barn.upload req, ->
       # Redo the deals
       if req.body.deal_type_id? and req.body.deal_type_id.length > 1
         console.log('deal update')
-        system.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'barn'", [req.params.id], ->
+        exports.db.query "DELETE FROM deals WHERE entity_id = ? AND type = 'barn'", [req.params.id], ->
           req.body.deal_type_id.pop() # Remove empty array off the end
-
+          
           j = 0
-
+          
           async.whilst ->
             return j < req.body.deal_type_id.length
           ,
@@ -84,11 +78,11 @@ exports.update = (req, res) ->
             values =
               desc: req.body.deal_desc[j] or ''
               entity_id: barn.id
-              user_id: res.locals.objUser.id or 0
+              user_id: req.user.id or 0
               value: req.body.deal_value[j] or 0
               deal_type_id: req.body.deal_type_id[j] or 0
-
-            system.db.query "INSERT INTO deals(description,entity_id,user_id,value,deal_type_id,type,updated_at, created_at) VALUES(?,?,?,?,?,'barn',now(), now())", [values.desc, values.entity_id, values.user_id, values.value, values.deal_type_id], (err, results) ->
+            
+            exports.db.query "INSERT INTO deals(description,entity_id,user_id,value,deal_type_id,type,updated_at, created_at) VALUES(?,?,?,?,?,'barn',now(), now())", [values.desc, values.entity_id, values.user_id, values.value, values.deal_type_id], (err, results) ->
               if err then console.log err
               j++
               cb()
@@ -97,8 +91,6 @@ exports.update = (req, res) ->
             finish()
       else
         finish()
-
-
 
 exports.patch = (req, res) ->
   

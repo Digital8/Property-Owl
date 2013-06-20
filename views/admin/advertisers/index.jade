@@ -1,14 +1,16 @@
 extends ../../layout
 
 block content
+
  .container.row.main
+  
    include ../menu
    
    h1 Advertisers
    
    include actions
    
-   table.admin-gridview
+   table.admin-gridview.advertisers-grid
      thead
        tr
          td Name
@@ -20,7 +22,7 @@ block content
          td(colspan='2') Actions
      tbody
       - each advertiser in advertisers
-         tr
+         tr(data-id=advertiser.id, data-entity_type='advertiser')
            td= advertiser.name
            td= advertiser.description
            //- td
@@ -38,7 +40,7 @@ block content
                img(src='/images/edit.png', alt='edit')
                | Edit
            td.actions
-             a(href='/admin/advertisers/#{advertiser.advertiser_id}/delete', alt='delete')
+             a.delete(href='/admin/advertisers/#{advertiser.advertiser_id}/delete', alt='delete')
                img(src='/images/delete.png', alt='delete')
                | Delete
 

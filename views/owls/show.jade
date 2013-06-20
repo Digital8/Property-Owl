@@ -204,7 +204,7 @@ block content
                   - each feature in owl.otherFeatures
                     li= feature
           #right
-            - if (objUser.isHacker())
+            - if (req.user && req.user.isHacker())
               .more-info(style='text-align: center; background: #BADA55;')
                 a(href="/admin/owls/#{owl.id}/edit") Admin
             

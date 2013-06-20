@@ -1,12 +1,15 @@
 extends ../layout
 
 block content
+  
   .container.row.main
   
     include menu
     
-    if (objUser.isAdmin())
+    if (req.user && req.user.isAdmin())
+      
       h1 Admin Dashboard
+      
       #dashboard-left-col
         
         include owls
@@ -74,7 +77,9 @@ block content
               td(colspan='4')
                 a.button(href="/admin/affiliates") Manage Suppliers
     - else
+      
       h1 Developer Dashboard
+      
       h3
         ul
           li: a(href='/admin/owls') Owl Deals

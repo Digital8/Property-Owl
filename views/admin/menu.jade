@@ -12,7 +12,7 @@ nav#admin-menu.admin-menu
           a(href='/admin/owls') Owl Deals
         li
           a(href='/admin/barns') Barn Deals
-    - if (req.user.isAdmin())
+    - if (req.user && req.user.isAdmin())
       li
         - var c = (menu == 'advertising') ? 'active' : ''
         a(href='/admin/advertisements', class="#{c}") Advertising
@@ -27,8 +27,8 @@ nav#admin-menu.admin-menu
         a(href='/admin/affiliates', class="#{c}") Affiliates
       
       li
-        - var c = (menu == 'news') ? 'active' : ''
-        a(href='/admin/news', class="#{c}") News
+        - var c = (menu == 'posts') ? 'active' : ''
+        a(href='/admin/posts', class="#{c}") News / Research
       
       li
         - var c = (menu == 'pages') ? 'active' : ''

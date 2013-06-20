@@ -3,7 +3,7 @@ tr.deal(data-id=deal.id, data-value=deal.value, data-type=deal.type, data-descri
   td
     select.deal_type_id(type='text', data-index='#{deal.id}', name="deal_type_id")
       option Select
-      - each dealType in data.dealTypes
+      - each dealType in dealTypes
         option(value='#{dealType.id}', selected=deal.deal_type_id == dealType.id)= dealType.name
   
   td

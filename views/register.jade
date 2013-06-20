@@ -1,0 +1,38 @@
+.register-overlay.overlay
+  
+  .modal.main.success
+    
+    a.close-register(href='#')
+      img(src='/images/modal-close-white.png', alt='Close')
+    
+    h1.modal-title Register to see more!
+    
+    .modal-content.details-form
+      
+      input.half.register-first-name(type='text', placeholder='First Name')
+      
+      input.half.register-last-name(type='text', placeholder='Last Name')
+      
+      input.half.register-email(type='text', placeholder='Email Address')
+      
+      input.half.register-postcode(type='text', placeholder='Postcode')
+      
+      input.half.register-password(type='password', placeholder='Password')
+      
+      input.half.register-password2(type='password', placeholder='Confirm Password')
+      
+      .submit-buttons
+        input.button.right.register-button(type='submit', value='Create Account')
+        .terms-checkbox
+          input#terms(type='checkbox')
+          label(for='terms')
+            | I agree to the
+            br 
+            a(href='/terms-and-conditions',target="_blank") Terms & Conditions
+      
+      hr
+      
+      .center
+        | Already registered?
+        br
+        a.button.show-login(href='#') Click here!

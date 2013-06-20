@@ -1,30 +1,38 @@
 fs = require 'fs'
+path = require 'path'
 
-module.exports = (app, {models, controllers, helpers}) ->
+_s = require 'underscore.string'
+
+module.exports = (argv) ->
+  
+  models = {}
+  controllers = admin: {}
+  
   console.start 'import'
   
-  files = fs.readdirSync('./models')
+  files = fs.readdirSync './models'
   files.sort() # [TODO] [@pyro, @tehlulz]
-
+  
   for file in files
     return if file[0] is '.'
-    console.log "✓ [model] #{file}" if app.argv.verbose
-    models[file.split('.')[0]] = require "./models/#{file}"
-
+    key = path.basename file, (path.extname file)
+    console.log "✓ [model] #{key}" if argv.verbose
+    model = models[key] = require "./models/#{key}"
+    do (file, key, model) ->
+      Object.defineProperty global, model.name,
+        get: -> model
+  
   fs.readdirSync('./controllers').forEach (module) ->
     return if module[0] is '.'
     return if (fs.statSync "./controllers/#{module}").isDirectory()
-    console.log "✓ [controller] #{module}" if app.argv.verbose
+    console.log "✓ [controller] #{module}" if argv.verbose
     controllers[module.split('.')[0]] = require "./controllers/#{module}"
-
+  
   fs.readdirSync('./controllers/admin').forEach (module) ->
     return if module[0] is '.'
-    console.log "✓ [controller/admin] #{module}" if app.argv.verbose
+    console.log "✓ [controller/admin] #{module}" if argv.verbose
     controllers.admin[module.split('.')[0]] = require "./controllers/admin/#{module}"
-
-  fs.readdirSync('./lib/helpers').forEach (module) ->
-    return if module[0] is '.'
-    console.log "✓ [helpers] #{module}" if app.argv.verbose
-    helpers[module.split('.')[0]] = require "./lib/helpers/#{module}"
   
   console.stop 'import'
+  
+  return {models, controllers}

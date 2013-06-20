@@ -1,56 +1,136 @@
-exports.login = (email, password, callback) =>
-  @db.query "SELECT * FROM po_users WHERE email = ? AND password = ?", [email, password], callback
+async = require 'async'
 
-exports.getAllUsers = (callback) =>
-  @db.query "SELECT U.*, AT.name AS account_type FROM po_users AS U INNER JOIN po_account_types AS AT ON U.account_type_id = AT.account_type_id ", callback
+Model = require '../lib/model'
+Table = require '../lib/table'
+
+module.exports = class User extends Model
   
-exports.getUserById = (user_id, callback) =>
-  @db.query "SELECT U.*, AT.name AS account_type FROM po_users as U INNER JOIN po_account_types AS AT ON U.account_type_id = AT.account_type_id WHERE user_id = ?", [user_id], callback
+  @table = new Table
+    name: 'users'
+    key: 'user_id'
   
-exports.getUserByAlias = (user_alias, callback) =>
-  @db.query "SELECT * FROM po_users WHERE alias = ?", [user_alias], callback
+  @field 'first_name', type: String, required: yes
+  @field 'last_name', type: String, required: yes
   
-exports.getUsersByGroup = (group, callback) =>
-  @db.query "SELECT * FROM po_users AS U INNER JOIN po_account_types AS AT ON U.account_type_id = AT.account_type_id WHERE AT.account_type_id = ?", [group], callback
-
-exports.getAllGroups = (callback) =>
-  @db.query "SELECT * FROM po_account_types", callback
-
-exports.getUserByEmail = (email, callback) =>
-  @db.query "SELECT * FROM po_users WHERE email = ?", [email], callback
-
-exports.createUser = (user, callback) =>
-  @db.query "INSERT INTO po_users (email,password,first_name,last_name,account_type_id,postcode,created_at) VALUES(?,?,?,?,?,?,?)", [user.email, user.password, user.fname, user.lname, user.group, user.postcode, new Date], callback
-
-exports.updateGroup = (user, callback) =>
-  @db.query "UPDATE po_users SET account_type_id = ? WHERE user_id = ?", [user.group, user.id], callback
-
-exports.updateUser = (user, callback) =>
-  @db.query "UPDATE po_users SET email = ?, first_name = ?, last_name = ?, company = ?, phone = ?, work_phone = ?, mobile = ?, address = ?, suburb = ?, state = ?, postcode = ?, subscribed_newsletter = ?, subscribed_alerts = ? WHERE user_id = ?", [user.email, user.fname, user.lname, user.company, user.phone, user.work_phone, user.mobile, user.address, user.suburb, user.state, user.postcode, user.subscribed_news, user.property_alerts,user.id], callback
-
-exports.updatePassword = (user, callback) =>
-  @db.query "UPDATE po_users SET password = ? WHERE user_id = ?", [user.password, user.id], callback
-
-exports.updatePermissions = (user_id, permissions,callback) =>
-  @db.query "UPDATE po_users SET admin_rights = ? WHERE user_id = ?", [permissions, user_id], callback
-
-exports.updateAvatar = (user_id, fileName, callback) =>
-  @db.query "UPDATE po_users SET photo = ? WHERE user_id = ?", [fileName, user_id], callback
-
-exports.getSubscribers = (callback) =>
-  @db.query "SELECT * FROM po_users WHERE subscribed_newsletter = 1", callback
-
-exports.thisMonth = (callback) =>
-  @db.query "SELECT * FROM po_users AS U WHERE U.created_at BETWEEN date_format(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') AND last_day(NOW())", callback
-
-exports.search = (name, callback) =>
-  @db.query "SELECT U.*, AT.name AS account_type FROM po_users AS U INNER JOIN po_account_types AS AT ON U.account_type_id = AT.account_type_id WHERE CONCAT( U.first_name,  ' ', U.last_name ) LIKE ?", [name], callback 
-
-exports.getByMonth = (cred, callback) =>
-  if cred.month != ''
-    @db.query "SELECT count(user_id) AS total, first_name, last_name, state, created_at FROM po_users  WHERE state LIKE ? AND MONTH(created_at) = ? GROUP BY state", [cred.state, cred.month], callback
-  else
-    @db.query "SELECT count(user_id) AS total, state, created_at FROM po_users  WHERE state LIKE ? GROUP BY state", [cred.state], callback
-
-exports.delete = (id, callback) =>
-  @db.query "DELETE FROM po_users WHERE user_id = ?", [id], callback
+  @field 'email', type: String, required: yes
+  
+  @field 'address', type: String
+  @field 'suburb', type: String
+  @field 'state', type: String
+  @field 'postcode', type: String, required: yes
+  
+  @field 'company', type: String
+  
+  @field 'phone', type: String
+  @field 'work_phone', type: String
+  @field 'mobile', type: String
+  
+  @field 'subscribed_newsletter', type: Boolean
+  @field 'subscribed_alerts', type: Boolean
+  
+  constructor: (args = {}) ->
+    
+    Object.defineProperty this, 'level', get: => @account_type_id
+    Object.defineProperty this, 'name', get: => @first_name + ' ' + @last_name
+    Object.defineProperty this, 'preferences', get: =>
+      suburb: @pref_suburb or ''
+      state: @pref_state or ''
+      propertyType: @pref_ptype or ''
+      dealType: @pref_dtype or ''
+      minPrice: @pref_min_price or ''
+      maxPrice: @pref_max_price or '' 
+      minBeds: @pref_min_beds or ''
+      maxBeds: @pref_max_beds or ''
+      bathrooms: @pref_bathrooms or ''
+      cars: @pref_cars or ''
+      developmentStage: @pref_dev_stage or ''
+    
+    super
+  
+  isHacker: ->
+    return no unless app?.argv?.hack
+    return no unless @company is 'Digital8'
+    return yes
+  
+  isBuyer: ->
+    @level >= 1
+  
+  isDeveloper: ->
+    @level >= 2
+  
+  isAdmin: ->
+    @level >= 3
+  
+  @developers = (callback) =>
+    async.parallel
+      developers: (callback) => @getUsersByGroup 2, callback
+      admins: (callback) => @getUsersByGroup 3, callback
+    , (error, results) =>
+      return callback error if error?
+      return callback null, [results.developers..., results.admins...]
+  
+  @byEmail = (email, callback) =>
+    
+    @db.query "SELECT * FROM users WHERE email = ?", [email], (error, rows) =>
+      
+      return callback error if error?
+      return callback null, null unless rows.length
+      
+      instance = new this rows[0]
+      
+      instance.hydrate callback
+  
+  @getUsersByGroup = (group, callback) =>
+    @db.query """
+    SELECT * FROM users AS U
+    INNER JOIN account_types AS AT ON U.account_type_id = AT.account_type_id
+    WHERE AT.account_type_id = ?
+    """, [group], (error, rows) ->
+      return callback error if error?
+      callback null, rows
+  
+  @getAllGroups = (callback) =>
+    @db.query "SELECT * FROM account_types", (error, rows) ->
+      return callback error if error?
+      callback null, rows
+  
+  # @updateGroup = (user, callback) =>
+  #   @db.query "UPDATE po_users SET account_type_id = ? WHERE user_id = ?", [user.group, user.id], callback
+  
+  # @updateUser = (user, callback) =>
+  #   @db.query "UPDATE po_users SET email = ?, first_name = ?, last_name = ?, company = ?, phone = ?, work_phone = ?, mobile = ?, address = ?, suburb = ?, state = ?, postcode = ?, subscribed_newsletter = ?, subscribed_alerts = ? WHERE user_id = ?", [user.email, user.fname, user.lname, user.company, user.phone, user.work_phone, user.mobile, user.address, user.suburb, user.state, user.postcode, user.subscribed_news, user.property_alerts,user.id], callback
+  
+  # @updatePassword = (user, callback) =>
+  #   @db.query "UPDATE po_users SET password = ? WHERE user_id = ?", [user.password, user.id], callback
+  
+  @thisMonth = (callback) =>
+    @db.query "SELECT * FROM users AS U WHERE U.created_at BETWEEN date_format(NOW() - INTERVAL 1 MONTH, '%Y-%m-01') AND last_day(NOW())", (error, rows) ->
+      return callback error if error?
+      callback null, rows
+  
+  @search = (name, callback) =>
+    @db.query """
+    SELECT U.*, AT.name AS account_type
+    FROM users AS U
+    INNER JOIN account_types AS AT ON U.account_type_id = AT.account_type_id
+    WHERE CONCAT( U.first_name,  ' ', U.last_name ) LIKE ?
+    """, [name], (error, rows) ->
+      return callback error if error?
+      callback null, rows
+  
+  @getByMonth = (cred, callback) =>
+    if cred?.month?.length
+      @db.query """
+      SELECT count(user_id) AS total, first_name, last_name, state, created_at
+      FROM users
+      WHERE state LIKE ? AND MONTH(created_at) = ?
+      GROUP BY state
+    """, [cred.state, cred.month], callback
+    
+    else
+      @db.query """
+      SELECT count(user_id) AS total, state, created_at
+      FROM users
+      WHERE state LIKE ?
+      GROUP BY state
+      """, [cred.state], callback

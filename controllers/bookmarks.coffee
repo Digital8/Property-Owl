@@ -1,29 +1,17 @@
-system = require '../system'
-
-Bookmark = system.models.bookmark
-
 exports.index = (req, res) ->
   Bookmark.forUser req.user, (error, bookmarks) ->
-    res.render 'user/bookmarks', bookmarks: bookmarks
+    return res.send 500, error if error?
+    console.log bookmarks
+    res.render 'user/bookmarks', {bookmarks}
 
 exports.create = (req, res) ->
-  {type, id} = req.body
   
-  user = req.user
+  map =
+    entity_id: req.body.id
+    type: req.body.type
+    user_id: req.user.id
   
-  row =
-    entity_id: id
-    type: type
-    user_id: user.id
-    created_at: new Date
-  
-  system.db.query "INSERT INTO bookmarks SET ?", row, ->
-    res.send status: 200
+  Bookmark.create map, (error, bookmark) ->
+    res.send 200
 
-exports.destroy = (req, res) ->
-  system.db.query "DELETE FROM bookmarks WHERE bookmark_id = ?", req.params.id, (error, result) ->
-    return res.send status: 400 if error?
-    
-    return res.send status: 404 unless result.affectedRows
-    
-    res.send status: 200
+exports.destroy = (require '../behaviors/destroy') Bookmark, prefix: ''

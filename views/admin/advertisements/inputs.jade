@@ -13,7 +13,7 @@ hr
     select(name="advertiser_id", class="select2", data-placeholder="Select")
       option(value="")
       - each advertiser in advertisers
-        option(value="#{advertiser.advertiser_id}", selected=advertisement.advertiser_id == advertiser.advertiser_id)= advertiser.name
+        option(value="#{advertiser.id}", selected=advertisement.advertiser_id == advertiser.id)= advertiser.name
   
   .inputs
     
@@ -23,7 +23,7 @@ hr
       
       - each page in pages
         
-        option(value="#{page.page_id}", selected=_.contains(advertisement.page_ids, page.page_id))= page.header
+        option(value="#{page.page_id}", selected=_.contains(_.pluck(advertisement.pages, 'page_id'), page.page_id))= page.header
 
   .inputs
     label(for='adspace') Space
@@ -47,11 +47,11 @@ hr
   
   .inputs
     label.required(for='start') Start
-    input#start(type="date", name="start", value=moment(advertisement.start).format('YYYY-MM-DD'))
+    input#start(type="date", name="start", value=date_input(advertisement.start))
   
   .inputs
     label.required(for='stop') Stop
-    input#stop(type="date", name="stop", value=moment(advertisement.stop).format('YYYY-MM-DD'))
+    input#stop(type="date", name="stop", value=date_input(advertisement.stop))
 
 .inputs
 

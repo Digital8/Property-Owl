@@ -7,28 +7,19 @@ block content
     include ../left_nav
     
     #center-col
+      
       div!= cms
-      //
-        h1 The Barn - Group Buying Power
-
-        p
-          | Take advantage of the great deals on offer through the power of group buying for new properties and land estates across Australia – Welcome to The Barn.
-        p
-          | The Barn is where Sellers display 3 to 5 properties from the same location or within the same residential development. Property Owl subscribers have the opportunity to view, select and swoop on the property offers within the specified time frame.
-        p
-          | When all of the properties within the matrix have been swooped upon then the deal is activated. See a great offer - then tell your friends on Facebook, Twitter or use the 'Refer a Friend' link within The Barn. If you do not wish to take up the opportunity in securing a deal but know of someone who would, then simply tell them to subscribe to Property Owl and you will be rewarded with a $1,000 nest egg when they 'secure the deal' and purchase.
-        p
-          | If you want to buy but can't wait for the required number of buyers to 'secure the deal', search through Owl Deals for the same property with another special offer.
-        p
-          | Swoop in today and share in the benefits and rewards available to you and your friends.
-        p
-          span.emphasis Property Owl – Innovation in Delivering Australia's Best Property Deals.
       
       - if (locals.barns && barns.length > 0)
+        
         - each barn in barns
+          
           include summary
+      
       - else
+        
         hr
+        
         p There are no barn deals available at the moment but please check back soon.
     
     include ../right_nav

@@ -193,7 +193,7 @@ block content
             p !{barn.other_features.replace(/\r\n/g,"<br />")}
         
         #right
-          - if (objUser.isAdmin())
+          - if (req.user && req.user.isAdmin())
             .more-info(style='text-align: center; background: #BADA55;')
               a(href="/admin/barns/#{barn.id}/edit") Admin
           

@@ -1,19 +1,11 @@
-system = require '../system'
-
-helpers = hash: system.load.helper('hash')
+exports.index = (req, res) ->
   
-models = user: system.load.model 'user'
-
-exports.index = (req,res) ->
-  if res.locals.objUser.isAuthed() then res.redirect '/'
+  if res.locals.objUser.isAuthed()
+    return res.redirect '/'
   
   res.render 'user/sign-up', values: req.session.signup or {}
 
-exports.view = (req,res) ->
-
-exports.add = (req,res) ->
-
-exports.create = (req,res) ->
+exports.create = (req, res) ->
   
   if res.locals.objUser.isAuthed() then res.redirect '/'
   
@@ -22,8 +14,9 @@ exports.create = (req,res) ->
   req.assert('confirmPassword', 'Password does not match').isIn [req.body.password]
   req.assert('fname', 'First name is invalid').isAlpha().len(2,20).notEmpty()
   req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
-
+  
   models.user.getUserByEmail req.body.email, (err, email) ->
+    
     if email.length > 0 then req.flash 'error', 'Email address is already in use'
     
     errors = req.validationErrors true
@@ -43,13 +36,7 @@ exports.create = (req,res) ->
       user.password = helpers.hash(user.password)
     
       models.user.createUser user, (err, results) ->
+        
         req.flash('success','You are successful')
         
         res.redirect 'back'
-
-exports.edit = (req,res) ->
-
-exports.update = (req,res) ->
-
-exports.destroy = (req,res) ->
-

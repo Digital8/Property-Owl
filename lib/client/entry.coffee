@@ -22,6 +22,9 @@ $ ->
   
   do require './categories'
   
+  do require './advertisers'
+  do require './advertisements'
+  
   do require './live'
   
   do require './bookmarks'

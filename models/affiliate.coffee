@@ -1,18 +1,14 @@
-_ = require 'underscore'
 async = require 'async'
 
 Model = require '../lib/model'
 Table = require '../lib/table'
 
-system = require '../system'
-
-Media = system.models.media
-
 module.exports = class Affiliate extends Model
+  
   @table = new Table
     name: 'affiliates'
     key: 'affiliate_id'
-
+  
   @field 'name'
   @field 'logo'
   @field 'phone'
@@ -26,30 +22,20 @@ module.exports = class Affiliate extends Model
   @field 'created_at'
   
   @field 'category_id'
-
-  constructor: (args = {}) ->
-    super
-
+  
   hydrate: (callback) ->
     async.series
       category: (callback) =>
-        Category = system.models.category
-        
         Category.get @category_id, (error, category) =>
           @category = category or {}
-          
           callback()
 
       media: (callback) =>
-        Media = system.models.media
         Media.for this, (error, medias) =>
           @images = medias
-          #epix spam removal
-          #console.log @images
           callback error
       
       enquiries: (callback) =>
-        Enquiry = system.models.enquiry
         Enquiry.for this, (error, enquiries) =>
           @enquiries = enquiries
           callback error
@@ -73,7 +59,7 @@ module.exports = class Affiliate extends Model
         callback error, media
     
     , callback
-    
+  
   imageURL: ->
     if @images.length
       return '/uploads/' + @images.pop().filename

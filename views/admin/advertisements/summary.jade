@@ -1,4 +1,4 @@
-tr
+tr(data-id=advertisement.id, data-entity_type='advertisement')
   
   //- td= advertisement.advertisement_id
   
@@ -34,6 +34,6 @@ tr
       | Edit
   
   td.actions
-    a(href="/admin/advertisements/#{advertisement.advertisement_id}/delete", alt='delete')
+    a.delete(href="/admin/advertisements/#{advertisement.advertisement_id}/delete", alt='delete')
       img(src='/images/delete.png', alt='delete')
       | Delete

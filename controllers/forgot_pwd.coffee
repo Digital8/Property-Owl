@@ -1,14 +1,7 @@
-system = require '../system'
 uuid = require 'node-uuid'
 
-models = 
-  user: system.load.model('user')
-  recovery: system.load.model('recovery')
-
-helpers = 
-  hash: system.load.helper('hash')
-
 exports.index = (req,res) ->
+  
   if not req.query.email or not req.query.code
     res.render 'user/forgot_pwd'
   else
@@ -42,10 +35,6 @@ exports.index = (req,res) ->
       else
         res.redirect '/'
 
-exports.view = (req,res) ->
-
-exports.add = (req,res) ->
-
 exports.create = (req,res) ->
   email = req.body.email or ''
 
@@ -75,9 +64,3 @@ exports.create = (req,res) ->
     else
       req.flash('error','Unable to find a user with that email address')
       res.redirect '/account/recover'
-
-exports.edit = (req,res) ->
-
-exports.update = (req,res) ->
-
-exports.destroy = (req,res) ->

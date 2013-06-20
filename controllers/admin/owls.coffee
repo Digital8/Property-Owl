@@ -1,51 +1,46 @@
-fs = require 'fs'
-
 async = require 'async'
-uuid = require 'node-uuid'
-
-system = require '../../system'
-
-Owl = system.models.owl
-Deal = system.models.deal
-
-models =
-  user: system.load.model('user')
-
-helpers =
-  mailer: system.load.helper 'mailer'
 
 exports.index = (req, res) ->
-  if res.locals.objUser.isDeveloper() and not res.locals.objUser.isAdmin()
-    Owl.byDeveloper res.locals.objUser.id, (error, owls) ->
-      res.render 'admin/owls/index', owls: owls, developers: {}
+  if req.user.isDeveloper() and not req.user.isAdmin()
+    Owl.byDeveloper req.user.id, (error, owls) ->
+      res.render 'admin/owls/index', owls: owls, developers: []
   else
     Owl.all (error, owls) ->
-      models.user.getUsersByGroup 2, (err, developers) ->
-        res.render 'admin/owls/index', owls: owls, developers: developers or {}
+      User.getUsersByGroup 2, (error, developers) ->
+        res.render 'admin/owls/index', {owls, developers}
 
 exports.show = (req, res) ->
   Owl.get req.params.id, (error, owl) ->
-    res.render 'admin/owls/show', owl: owl
-    
+    res.render 'admin/owls/show', {owl}
+
 exports.edit = (req, res) ->
-  Owl.get req.params.id, (error, owl) ->
-    models.user.getUsersByGroup 2, (err, developers) ->
-      models.user.getUsersByGroup 3, (err, admins) ->
-        developers = developers.concat(admins)
-        res.render 'admin/owls/edit', owl: owl, developers: developers or {}
+  
+  async.parallel
+    owl: (callback) -> Owl.get req.params.id, callback
+    developers: (callback) -> User.developers callback
+    developmentTypes: (callback) -> DevelopmentType.all callback
+    developmentStatuses: (callback) -> DevelopmentStatus.all callback
+    dealTypes: (callback) -> DealType.all callback
+  , (error, results) ->
+    res.render 'admin/owls/edit', results
 
 exports.add = (req, res) ->
-  models.user.getUsersByGroup 2, (err, developers) ->
-    models.user.getUsersByGroup 3, (err, admins) ->
-      developers = developers.concat(admins)
-      res.render 'admin/owls/add', owl: {listed_by: res.locals.objUser.id}, developers: developers or {}
+  
+  async.parallel
+    developers: (callback) -> User.developers callback
+    developmentTypes: (callback) -> DevelopmentType.all callback
+    developmentStatuses: (callback) -> DevelopmentStatus.all callback
+    dealTypes: (callback) -> DealType.all callback
+  , (error, results) ->
+    results.owl = listed_by: req.user.id
+    res.render 'admin/owls/add', results
 
 exports.create = (req, res) ->
   count = 0
   popped = false
   
-  if not res.locals.objUser.isAdmin() then req.body.approved = 0
-  req.body.listed_by ?= res.locals.objUser.id
+  if not req.user?.isAdmin() then req.body.approved = 0
+  req.body.listed_by ?= req.user?.id
 
 
   async.whilst ->
@@ -62,17 +57,17 @@ exports.create = (req, res) ->
       template = 'listing-confirmation'
 
       user =
-        contactName: res.locals.objUser.firstName
-        email: res.locals.objUser.email
+        contactName: req.user?.first_name
+        email: req.user?.email
 
       secondary = 
-        contactName: res.locals.objUser.firstName
+        contactName: req.user?.first_name
         link: "/admin/owls/#{owl.id}/edit"
 
       email = ->
         # If owl created, send email
         if owl
-          system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
+          (require '../../lib/mailer') template,'Listing Confirmation', user, secondary, (results) ->
             if results is true
               # Notify Admin of new listing
               template = 'new-listing'
@@ -81,10 +76,10 @@ exports.create = (req, res) ->
                 email: 'swoopin@propertyowl.com.au'
 
               secondary = 
-                contactName: res.locals.objUser.firstName
+                contactName: req.user?.first_name
                 link: "admin/owls/#{owl.id}/edit"
 
-              system.helpers.mailer template,'New Listing', user, secondary, (results) ->
+              (require '../../lib/mailer') template,'New Listing', user, secondary, (results) ->
                 owl.upload req, ->
                   callback()
             else
@@ -109,7 +104,7 @@ exports.create = (req, res) ->
           values =
             desc: req.body.deal_desc[j] or ''
             entity_id: owl.id
-            user_id: res.locals.objUser.id or 0
+            user_id: req.user?.id or 0
             value: req.body.deal_value[j] or 0
             deal_type_id: req.body.deal_type_id[j] or 0
 
@@ -136,7 +131,7 @@ exports.update = (req, res) ->
   count = 0
 
   if req.body.approved is 'on' then req.body.approved = true
-  if not res.locals.objUser.isAdmin() then req.body.approved = false
+  if not req.user?.isAdmin() then req.body.approved = false
   
   clone = (owl) ->
     # Now, we check if we're having to create any clones before we redirect
@@ -152,7 +147,7 @@ exports.update = (req, res) ->
           address: "#{owl.address}, #{owl.suburb}, #{owl.state.toUpperCase()}"
         
         # Send approval message
-        system.helpers.mailer template,'Property Approved', user, secondary, (results) ->
+        (require '../../lib/mailer') template,'Property Approved', user, secondary, (results) ->
           res.redirect '/admin/owls'
 
       else
@@ -168,23 +163,23 @@ exports.update = (req, res) ->
         n++
         
         # Create the owl
-        req.body.listed_by ?= res.locals.objUser.id
+        req.body.listed_by ?= req.user?.id
         Owl.create req.body, (error, owl) ->
           if error then console.log error
           template = 'listing-confirmation'
 
           user =
-            contactName: res.locals.objUser.firstName
-            email: res.locals.objUser.email
+            contactName: req.user?.first_name
+            email: req.user?.email
 
           secondary = 
-            contactName: res.locals.objUser.firstName
+            contactName: req.user?.first_name
             dealLink: '/admin/owls/#{owl.insertId}/edit'
 
           email = ->
             # If owl created, send email
             if owl
-              system.helpers.mailer template,'Listing Confirmation', user, secondary, (results) ->
+              (require '../../lib/mailer') template,'Listing Confirmation', user, secondary, (results) ->
                 if results is true 
                   owl.upload req, ->
                     callback()
@@ -208,7 +203,7 @@ exports.update = (req, res) ->
               values =
                 desc: req.body.deal_desc[j] or ''
                 entity_id: owl.id
-                user_id: res.locals.objUser.id or 0
+                user_id: req.user?.id or 0
                 value: req.body.deal_value[j] or 0
                 deal_type_id: req.body.deal_type_id[j] or 0
 
@@ -247,7 +242,7 @@ exports.update = (req, res) ->
             values =
               desc: req.body.deal_desc[j] or ''
               entity_id: owl.id
-              user_id: res.locals.objUser.id or 0
+              user_id: req.user?.id or 0
               value: req.body.deal_value[j] or 0
               deal_type_id: req.body.deal_type_id[j] or 0
 
@@ -260,22 +255,26 @@ exports.update = (req, res) ->
           ->
             clone(owl)
 
-
 exports.patch = (req, res) ->
+  
   Owl.patch req.params.id, req.body, (error, owl) ->
     
-    res.send status: 200
+    res.send 200
 
 exports.delete = (req, res) ->
+  
   Owl.get req.params.id, (error, owl) ->
+    
     res.render 'admin/owls/delete', owl: owl
 
 exports.destroy = (req, res) ->
+  
   Owl.delete req.params.id, (error) ->
     
-    res.send status: 200
+    res.send 200
 
 exports.clone = (req, res) ->
+  
   id = req.params.id
   
   count = parseInt req.body.count

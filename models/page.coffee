@@ -1,24 +1,23 @@
-{db} = require '../system'
+Model = require '../lib/model'
+Table = require '../lib/table'
 
-table = "po_pages"
-
-exports.all = (callback) ->
-  db.query "SELECT * FROM #{table}", callback
-
-exports.findByUrl = (url, callback) ->
-  db.query "SELECT * FROM #{table} WHERE url = ? AND static = 1", [url], callback
-
-exports.find = (id, callback) ->
-  db.query "SELECT * FROM #{table} WHERE page_id = ?", [id], callback
+module.exports = class Page extends Model
   
-exports.create = (page, callback) ->
-  db.query "INSERT INTO #{table}(url, header, content, enabled, static, page_created_at) VALUES(?,?,?,?, ?, NOW())", [page.url, page.header, page.content, page.enabled, page.static], callback
-
-exports.update = (page, callback) ->
-  db.query "UPDATE #{table} SET url = ?, header = ?, content = ?, enabled = ?, static = ? WHERE page_id = ?", [page.url, page.header, page.content, page.enabled, page.static, page.id], callback
-
-exports.delete = (id, callback) ->
-  db.query "DELETE FROM #{table} WHERE page_id = ?", [id], callback
-
-exports.findByDynamicUrl = (url, callback) ->
-  db.query "SELECT * FROM #{table} WHERE url = ? AND static = 0", [url], callback
+  @table = new Table
+    name: 'pages'
+    key: 'page_id'
+  
+  @field 'url'
+  @field 'header'
+  @field 'content'
+  @field 'enabled'
+  
+  @findByUrl = (url, callback) ->
+    @db.query "SELECT * FROM #{@table.name} WHERE url = ? AND static = 1", [url], (error, records) ->
+      return callback error if error?
+      callback null, records[0]
+  
+  @findByDynamicUrl = (url, callback) ->
+    @db.query "SELECT * FROM #{@table.name} WHERE url = ? AND static = 0", [url], (error, records) ->
+      return callback error if error?
+      callback null, records[0]
