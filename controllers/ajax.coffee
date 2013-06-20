@@ -68,7 +68,7 @@ exports.register = (req, res) ->
       req.session.user_id = user.id
       res.cookie 'user', user.id, maxAge: 604800000
       
-      (require '../lib/mailer') 'signup-confirmation', 'Registration Confirmation', user, {}, (results) ->
+      (require '../lib/mailer') 'signup-confirmation-special-launch', 'Registration Confirmation', user, {}, (results) ->
         if results is true
           res.send status: 200, errors: {}
         else
