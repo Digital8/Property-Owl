@@ -29,7 +29,7 @@ html.no-js(lang='en')
     // script(type='text/javascript', src='//use.typekit.net/rej6muq.js')
     script(type='text/javascript')
       try{Typekit.load();}catch(e){}
-
+    
     //- jquery
     script(src='/js/modernizr-custom.js')
     script(src='/js/libs/jquery-1.7.2.min.js')
@@ -40,6 +40,7 @@ html.no-js(lang='en')
     script(src='/js/jquery.evoslider-2.1.1.js')
     script(src='/js/jquery.autosize.js')
     script(src='/js/libs/polyfiller.js')
+    
     script
       $.webshims.polyfill('forms');
       
@@ -48,208 +49,33 @@ html.no-js(lang='en')
     
     script(src='/js/scripts.js')
     
-    script(type="text/javascript",src="https://www.google.com/jsapi")
+    script(src='https://www.google.com/jsapi')
     
     //- raphael
     script(src='/js/raphael.js')
-    // script(src='/js/g.raphael.js')
-    // script(src='/js/g.line.js')
-    
-    // script(src='http://d3js.org/d3.v3.js')
     
     script(src='/js/dropdowns.js')
     
     script(src='/bundle.js')
   
   body
-    - if (req.user && req.user.isHacker())
-      .hacker
-        include admin/menu
-      style
-        .hacker { background: #BADA55; }
-        .hacker #admin-menu { background: #BADA55; }
-        .hacker #admin-menu > ul > li { color: #D95477; text-shadow: none; }
-        .hacker #admin-menu > ul > li > a { color: #D95477; text-shadow: none; }
     
-    include register
+    include _hacker
     
-    #generic-modal.modal-overlay(style='display: none;')
-      .modal.main.success
-          a.close-modal(href='#')
-            img(src='/images/modal-close.png', alt='Close')
-          h1#generic-modal-title.modal-title Modal title!
-          #generic-modal-content.details-form
+    include _register
     
-    - if (req.user)
-      .secure-deal-overlay.overlay
-        .modal.main.success
-          a.close-secure-deal(href='#')
-            img(src='/images/modal-close-white.png', alt='Close')
-          
-          h1.modal-title Express Your Interest Now!
-          
-          .modal-content.details-form
-            div.secure-deal-errors.error
-            input.half.secure-deal-first-name(type='text', placeholder='First Name', value="#{req.user.first_name}", disabled='disabled')
-            input.half.secure-deal-last-name(type='text', placeholder='Last Name', value="#{req.user.last_name}", disabled='disabled')
-            input.half.secure-deal-email(type='text', placeholder='Email Address', value="#{req.user.email}", disabled='disabled')
-            input.half.secure-deal-phone(type='text', placeholder='Phone Number', value="#{req.user.mobile}")
-            textarea.full.secure-deal-comment(placeholder='Please leave a comment for the developer', style="width:98%;")
-            
-            .submit-buttons
-              input.button.right.secure-deal-button(type='submit', value='Submit', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;")
-
-    .refer-friend-overlay.overlay
-      .modal.main.success
-        a.close-refer-friend(href='#')
-          img(src='/images/modal-close-white.png', alt='Close')
-        
-        h1.modal-title Refer a Friend!
-        .modal-content.details-form
-          .raf-errors
-          input.half.refer-friend-fullname(type='text', placeholder="Friend's Full Name")
-          input.half.refer-friend-email(type='text', placeholder="Friend's Email Address")
-          textarea.full.refer-friend-comment(placeholder='Send your friend a message', style="width:98%;")
-          
-          .submit-buttons
-            input.button.right.refer-friend-button(type='submit', value='Submit', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;")
-
-    .login-overlay.overlay
-      .modal.main.success
-          a.close-login(href='#')
-            img(src='/images/modal-close-white.png', alt='Close')
-          h1.modal-title Login
-          .login-error(style="display:none; text-align:center; font-weight:bold; color:#ff4949; padding-bottom:10px;")
-          .modal-content.details-form
-            input.half.login-email(type='text', placeholder='Email Address')
-            input.half.login-password(type='password', placeholder='Password')
-            .submit-buttons
-              input.button.right.login-button(type='submit', value='Login')
-              .terms-checkbox(style='text-align: right;')
-                input#remember(type='checkbox')
-                label(for='remember') Remember Me
-            hr
-            .center
-              | Don't have an account?
-              br
-              a.button.show-register(href='#') Click here!
-              | &nbsp; 
-              a.button.forgot-password(href='/account/recover') Forgot Password?
+    include _generic
     
+    include _registration
+    
+    include _refer
+    
+    include _login
 
-    .container.row
-      
-      header#header
-        
-        #top-header
-        
-          #logo-box
-            
-            a#logo(href='/'): img(src='/images/logo.png')
-
-          - var i = 0
-          each ad in adspaceTop
-            - i++
-            include adverts/horizontal.jade
-            - if (i == 1) break;
-        
-        nav#menu
-          
-          include menu
+    include _header
     
     block content
     
     include footer
 
-script(type='text/javascript')
-  
-  //when jQuery is loaded, extend with isAuthed
-  $(function(){
-    $.isAuthed = #{!!req.user};
-    $.showLogin = function() {
-      $(".login-overlay").show();
-      return $.isAuthed;
-    };
-    $.showRegister = function() {
-      $(".register-overlay").show();
-      return $.isAuthed;
-    };
-  });
-  
-  var duplicateSlider = $("#mySlider").clone();
-  var initialSlider = $("#mySlider").clone();
-  duplicateSlider.attr("id", "duplicate-slider");
-  initialSlider.attr("id", "duplicate-slider");
-
-  var mySlider = $("#mySlider").evoSlider({
-    mode: "slider",
-    controlNav: true,
-    controlNavMode: "thumbnails",
-    controlNavVertical: true,
-    controlNavPosition: "outside",
-    controlNavVerticalAlign: "right",
-    autoplay: false,
-    width: "100%",
-    height: '510',
-    mouse: false,
-    imageScale: "fitImage",
-    keyboard: false
-  });
-    
-  var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-36760815-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-    $(document).ready(function(){
-      $('.price').each(function(){
-        $(this).text(window.commas($(this).text()));
-      });
-    });
-
-  if (typeof(tinyMCE) != 'undefined'){
-    tinyMCE.init({
-      // General options
-      mode : "textareas",
-      theme : "advanced",
-      
-      //plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups,autosave",
-      plugins : "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
-
-      // Theme options
-      
-      theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect",
-      theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,code,|,forecolor,backcolor",
-      theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,iespell,media,|,ltr,rtl,|,fullscreen,spellchecker,|,cite,abbr,acronym,del,ins,|,visualchars,nonbreaking,blockquote,|,insertfile,insertimage",
-
-      //old options can be uncommented
-      //theme_advanced_buttons1 : "bold,italic,underline,forecolor,link,unlink,formatselect,fontsizeselect,|,cut,copy,paste,pastetext,pasteword,|,search,replace",
-      //theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
-      //theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-      //theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-      //theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
-
-      
-
-      theme_advanced_toolbar_location : "top",
-      theme_advanced_toolbar_align : "left",
-      theme_advanced_statusbar_location : "bottom",
-      theme_advanced_resizing : true,
-
-      // Drop lists for link/image/media/template dialogs
-      template_external_list_url : "lists/template_list.js",
-      external_link_list_url : "lists/link_list.js",
-      external_image_list_url : "lists/image_list.js",
-      media_external_list_url : "lists/media_list.js",
-
-      // Replace values for the template plugin
-      template_replace_values : {
-        username : "Some User",
-        staffid : "991234"
-      }
-    });
-  }
+include _hacks

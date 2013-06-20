@@ -40,7 +40,7 @@ module.exports = ({app, controllers}) ->
   
   # registrations - my account
   app.get '/registrations', authenticate, controllers.account.registrations
-
+  
   # referals - my account
   app.get '/referals', authenticate, controllers.account.referals
   
@@ -55,7 +55,10 @@ module.exports = ({app, controllers}) ->
   ### enquiries ###
   app.post '/enquiries', controllers.enquiries.create
   
-  ### enquiries ###
+  ### registrations ###
+  app.post '/registrations', authenticate, controllers.registrations.create
+  
+  ### categories ###
   app.post '/categories', authenticate, controllers.categories.create
   app.get '/categories/add', authenticate, controllers.categories.add
   # app.post '/categories/add', authenticate, controllers.categories.dontDoNicksStupidCreate
@@ -246,17 +249,17 @@ module.exports = ({app, controllers}) ->
   ajax 'post', '/register', controllers.ajax.register
   ajax 'get', '/search', controllers.ajax.search
   
-  authedAjax = (method, path, middleware...) ->
-    app[method] "/ajax#{path}", authenticate, middleware...
+  # authedAjax = (method, path, middleware...) ->
+  #   app[method] "/ajax#{path}", authenticate, middleware...
   
-  authedAjax 'post', '/securedeal', controllers.ajax.securedeal
-  authedAjax 'post', '/referfriend', controllers.ajax.referfriend
-  authedAjax 'get', '/addRegistration', controllers.ajax.addRegistration
-  authedAjax 'get', '/delRegistration', controllers.ajax.delRegistration
-  authedAjax 'post', '/registerStatus', controllers.ajax.registerStatus
+  # authedAjax 'post', '/securedeal', controllers.ajax.securedeal
+  # authedAjax 'post', '/referfriend', controllers.ajax.referfriend
+  # authedAjax 'get', '/addRegistration', controllers.ajax.addRegistration
+  # authedAjax 'get', '/delRegistration', controllers.ajax.delRegistration
+  # authedAjax 'post', '/registerStatus', controllers.ajax.registerStatus
   
-  adminAjax = (method, path, middleware...) ->
-    app[method] "/ajax#{path}", authenticate, (authorize acl.admin), middleware...
+  # adminAjax = (method, path, middleware...) ->
+  #   app[method] "/ajax#{path}", authenticate, (authorize acl.admin), middleware...
   
   # adminAjax 'post', '/addDeal', controllers.ajax.addDeal
   # adminAjax 'del', '/deleteDeal', controllers.ajax.delDeal

@@ -1,0 +1,14 @@
+.refer-friend-overlay.overlay
+  .modal.main.success
+    a.close-refer-friend(href='#')
+      img(src='/images/modal-close-white.png', alt='Close')
+    
+    h1.modal-title Refer a Friend!
+    .modal-content.details-form
+      .raf-errors
+      input.half.refer-friend-fullname(type='text', placeholder="Friend's Full Name")
+      input.half.refer-friend-email(type='text', placeholder="Friend's Email Address")
+      textarea.full.refer-friend-comment(placeholder='Send your friend a message', style="width:98%;")
+      
+      .submit-buttons
+        input.button.right.refer-friend-button(type='submit', value='Submit', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;")

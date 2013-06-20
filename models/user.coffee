@@ -31,7 +31,7 @@ module.exports = class User extends Model
   constructor: (args = {}) ->
     
     Object.defineProperty this, 'level', get: => @account_type_id
-    Object.defineProperty this, 'name', get: => @first_name + ' ' + @last_name
+    Object.defineProperty this, 'name', get: => "#{@first_name} #{@last_name}"
     Object.defineProperty this, 'preferences', get: =>
       suburb: @pref_suburb or ''
       state: @pref_state or ''

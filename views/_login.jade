@@ -1,0 +1,21 @@
+.login-overlay.overlay
+  .modal.main.success
+      a.close-login(href='#')
+        img(src='/images/modal-close-white.png', alt='Close')
+      h1.modal-title Login
+      .login-error(style="display:none; text-align:center; font-weight:bold; color:#ff4949; padding-bottom:10px;")
+      .modal-content.details-form
+        input.half.login-email(type='text', placeholder='Email Address')
+        input.half.login-password(type='password', placeholder='Password')
+        .submit-buttons
+          input.button.right.login-button(type='submit', value='Login')
+          .terms-checkbox(style='text-align: right;')
+            input#remember(type='checkbox')
+            label(for='remember') Remember Me
+        hr
+        .center
+          | Don't have an account?
+          br
+          a.button.show-register(href='#') Click here!
+          | &nbsp; 
+          a.button.forgot-password(href='/account/recover') Forgot Password?

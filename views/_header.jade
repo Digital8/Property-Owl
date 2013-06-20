@@ -1,0 +1,19 @@
+.container.row
+  
+  header#header
+    
+    #top-header
+    
+      #logo-box
+        
+        a#logo(href='/'): img(src='/images/logo.png')
+
+      - var i = 0
+      each ad in adspaceTop
+        - i++
+        include adverts/horizontal.jade
+        - if (i == 1) break;
+    
+    nav#menu
+      
+      include menu

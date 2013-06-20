@@ -1,0 +1,18 @@
+- if (req.user)
+  .secure-deal-overlay.overlay
+    .modal.main.success
+      a.close-secure-deal(href='#')
+        img(src='/images/modal-close-white.png', alt='Close')
+      
+      h1.modal-title Express Your Interest Now!
+      
+      .modal-content.details-form
+        div.secure-deal-errors.error
+        input.half.secure-deal-first-name(type='text', placeholder='First Name', value="#{req.user.first_name}", disabled='disabled')
+        input.half.secure-deal-last-name(type='text', placeholder='Last Name', value="#{req.user.last_name}", disabled='disabled')
+        input.half.secure-deal-email(type='text', placeholder='Email Address', value="#{req.user.email}", disabled='disabled')
+        input.half.secure-deal-phone(type='text', placeholder='Phone Number', value="#{req.user.mobile}")
+        textarea.full.secure-deal-comment(placeholder='Please leave a comment for the developer', style="width:98%;")
+        
+        .submit-buttons
+          input.button.right.secure-deal-button(type='submit', value='Submit', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;")
