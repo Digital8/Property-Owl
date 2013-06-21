@@ -74,44 +74,6 @@ exports.register = (req, res) ->
         else
           res.send status: 400, errors: {msg: 'unable to send email'}
 
-exports.referfriend = (req, res) ->
-  
-  req.body.user_id ?= req.user?.id
-  req.body.entity_id = parseInt req.body.entity_id or 0
-  req.body.entity_type ?= 'generic'
-  if req.body.entity_type.length is 0
-    req.body.entity_type = 'generic'
-  req.assert('email', 'Invalid Email Address').isEmail()
-  req.assert('fullname', 'Full name is invalid').len(2,20)#.is(/^[A-Z]'?[- a-zA-Z]+$/).len(2,20)
-  req.assert('comment', 'Comment cannot be empty').notEmpty()
-  #req.assert('entity_id', 'invalid entity').notEmpty()
-  #req.assert('entity_type', 'invalid entity type').notEmpty()
-  
-  errors = req.validationErrors true
-  
-  if errors is false then errors = {}
-  if Object.keys(errors)?.length > 0
-    res.send status: 400, errors: errors
-  else
-    req.body.first_name ?= req.body.fullname
-    
-    template = 'refer-property'
-    if req.body.entity_type is 'generic'
-      template = 'refer-general'
-    
-    Referral.create req.body, (err, r) ->
-      if err?
-        console.log 'Error Creating Referral', err
-      
-      #swap out the friends email
-      req.user?.email = req.body.email
-      console.log 'Sending Email', template, req.user, req.body
-      (require '../lib/mailer') template, 'Referral', req.user, req.body, (results) ->
-        if results is true 
-          res.send status: 200, errors: {}
-        else
-          res.send status: 400, errors: {msg: 'unable to send email'}
-
 exports.registerStatus = (req, res) ->
   req.body.id ?= 0
   req.body.val ?= 0
@@ -125,42 +87,42 @@ exports.registerStatus = (req, res) ->
   else
     res.send status: 403
 
-exports.delRegistration = (req, res) ->
+# exports.delRegistration = (req, res) ->
   
-  req.query.id ?= ''
-  req.query.user_id = req.user?.id
+#   req.query.id ?= ''
+#   req.query.user_id = req.user?.id
   
-  # Get the registration so we can email to let the person know they're not interested
-  Registration.find req.query.id, (err, results) ->
-    if results.length is 1 
-      results = results.pop()
+#   # Get the registration so we can email to let the person know they're not interested
+#   Registration.find req.query.id, (err, results) ->
+#     if results.length is 1 
+#       results = results.pop()
       
-      unless results.type in ['owl', 'barn']
-        return res.send status: 500
+#       unless results.type in ['owl', 'barn']
+#         return res.send status: 500
         
-      model = exports.models[results.type]
+#       model = exports.models[results.type]
       
-      model.get results.resource_id, (err, record) ->
-        if err then console.log err
-        # Send withdraw email
-        template = 'withdraw-interest'
+#       model.get results.resource_id, (err, record) ->
+#         if err then console.log err
+#         # Send withdraw email
+#         template = 'withdraw-interest'
         
-        user =
-          first_name: req.user?.name
-          email: req.user?.email
+#         user =
+#           first_name: req.user?.name
+#           email: req.user?.email
         
-        secondary =
-          owl_id: record.id
-          contactName: req.body.name
-          address: record.address or ''
-          link: "/#{results.type}s/#{record.id}"
+#         secondary =
+#           owl_id: record.id
+#           contactName: req.body.name
+#           address: record.address or ''
+#           link: "/#{results.type}s/#{record.id}"
         
-        (require '../lib/mailer') template,'Withdrawal Confirmation', user, secondary, (results) ->
-          del()
+#         (require '../lib/mailer') template,'Withdrawal Confirmation', user, secondary, (results) ->
+#           del()
   
-  del = ->
-    Registration.delete req.query, (err, results) ->
-      if err then res.send status: 400 else res.send status: 200
+#   del = ->
+#     Registration.delete req.query, (err, results) ->
+#       if err then res.send status: 400 else res.send status: 200
 
 exports.search = (req, res) ->
   

@@ -11,14 +11,14 @@
           img(src='/images/share-print-icon.png', alt='Print')
           | Print Deal
     
-    li.add-bookmark(data-deal-id="#{deal.id}", data-deal-type=deal.constructor.name.toLowerCase())
+    li.add-bookmark(data-deal-id=deal.id, data-deal-type=deal.constructor.name.toLowerCase())
       img(src='/images/share-save-icon.png', alt='Save')
       - if (deal.bookmark)
         | Saved
       - else
         | Save Deal
     
-    li.show-refer-friend
+    li.show-refer-friend(data-modal='referral', data-entity_id=deal.id, data-entity_type=deal.constructor.name.toLowerCase())
       img(src='/images/share-refer-icon.png', alt='Refer')
       | Refer A Friend
     

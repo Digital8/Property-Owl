@@ -128,6 +128,6 @@ exports.registrations = (req, res, next) ->
     
     res.render 'user/registrations', {registrations}
 
-exports.referals = (req, res) ->
-  Referral.getByUser req.user.id, (error, referals) ->
-    res.render 'user/referals', referals: referals or {}
+exports.referrals = (req, res) ->
+  Referral.getByUser req.user.id, (error, referrals) ->
+    res.render 'user/referrals', referrals: referrals or {}

@@ -96,8 +96,8 @@ exports.create = (req, res, next) ->
       entity_type: entity.constructor.name.toLowerCase()
       comment: req.param 'comment'
       phone: req.param 'phone'
-    , (error, instance) ->
+    , (error, registration) ->
       
       return next error if error?
       
-      res.send id: instance.id
+      res.send id: registration.id

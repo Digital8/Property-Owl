@@ -87,16 +87,6 @@ $(function(){
 
 $(function(){
   
-  
-  // show modal
-  /*var modal = $(".modal-overlay");
-  
-  $(".show-modal, .close-modal").on("click", function(){
-    modal.fadeToggle(150);
-    
-    return false;
-  });*/
-  
   $(".overlay .modal").on("click", function(event){
     event.stopPropagation();
     event.preventDefault();
@@ -139,16 +129,6 @@ $(function(){
     }
   });
   
-  // show refer friend form
-  var referFriendModal = $(".refer-friend-overlay");
-  
-  $(".show-refer-friend, .close-refer-friend").on("click", function(event){
-    event.preventDefault();
-    if (!$.isAuthed) return $.showRegister();
-    referFriendModal.fadeToggle(150);
-    return false;
-  });
-  
   // show login form
   var loginModal = $(".login-overlay");
   
@@ -166,18 +146,18 @@ $(function(){
     return false;
   });
   
-  // show modal
-  var modal = $(".modal-overlay");
-  //var modalCallback = null;
-  $(".show-modal, .close-modal").on("click", function(event){
-    event.preventDefault();
-    modal.fadeToggle(150);
-    /*if(typeof(modalCallback)=="function"){
-      modalCallback();
-      modalCallback = null;
-    }*/
-    return false;
-  });
+  // // show modal
+  // var modal = $(".modal-overlay");
+  // //var modalCallback = null;
+  // $(".show-modal, .close-modal").on("click", function(event){
+  //   event.preventDefault();
+  //   modal.fadeToggle(150);
+  //   /*if(typeof(modalCallback)=="function"){
+  //     modalCallback();
+  //     modalCallback = null;
+  //   }*/
+  //   return false;
+  // });
 
   // find deals form (mobile breakpoint)
   $(".find-deals h2").on("click", function(){
@@ -201,10 +181,6 @@ $(function(){
     });
     return false;
   });
-  
-  /*$(".secure-button").on("click", function(){
-    $('body').append('<div class="quick-view-modal" id="register" onclick="javascript: window.location=\'/best-deal\';" style=""><div class="modal"><a href="#" class="modal-close"></a></div></div>');
-  });*/
   
   // Login
   var login = function(email, pass, callback){
@@ -266,59 +242,6 @@ $("#close-errors").on("click", function(){
   var errorList = $(this).closest("ul");
   errorList.fadeOut(150);
 });
-  
-  $(".secure-deal-first-name, .secure-deal-last-name, .secure-deal-email, .secure-deal-phone, .secure-deal-comment").on("keypress", function(event){
-    if(event.keyCode == 13){
-      $(".secure-deal-button").click();
-    }
-  });
-  
-  
-  // Refer Friend
-  $(".refer-friend-button").on("click", function(event){
-    var fullname = $(".refer-friend-fullname").val();
-    var email = $(".refer-friend-email").val();
-    var mobile = $(".refer-friend-phone").val();
-    var comment = $(".refer-friend-comment").val();
-    var entity = $("#entity").text();
-    var entity_id = $("#entity_id").text();
-
-    $.ajax({
-      url: '/ajax/referfriend',
-      type: 'post',
-      data: 'email=' + email + '&mobile=' + mobile + '&fullname=' + fullname + '&comment=' + comment+'&entity_type='+entity+'&entity_id='+entity_id
-    }).done(function(d){
-      if (d.status == 200) {
-        $(".refer-friend-overlay").hide();
-      }
-      else {
-        console.log('refer response', d);
-        var errors = Object.keys(d.errors);
-        
-        $("#generic-modal, #generic-modal .modal.main").removeClass('success');
-        $('#generic-modal-title').html('Please fix the following');
-        $('#generic-modal-content').html('<br /><ul>');
-        for(i=0; i<errors.length;i++)
-        {
-           $('#generic-modal-content').append('<li><b>' + d.errors[errors[i]].msg + '</b></li>');
-        }
-        $('#generic-modal-content').append('</ul>');
-        
-        $('#generic-modal').fadeToggle(150);
-      }
-    });
-    return false;
-  });
-  
-  $(".refer-friend-first-name, .refer-friend-last-name, .refer-friend-email, .refer-friend-phone, .refer-friend-comment").on("keypress", function(event){
-    if(event.keyCode == 13){
-      $(".refer-friend-button").click();
-    }
-    /*else
-    {
-      console.log(event.keyCode);
-    }*/
-  });
   
   $(".login-button").on("click", function(event){
     event.preventDefault();

@@ -3,10 +3,6 @@ moment = require 'moment'
 _ = require 'underscore'
 window.commas = commas = require './commas'
 
-require './reports'
-
-makeMap = require './map'
-
 $ ->
   (require './shim') $
   
@@ -39,14 +35,15 @@ $ ->
   
   do require './enquiries'
 
-  do require './register'
+  do require './registration'
   
-  if ($ "#map").length
-    makeMap 'map'
-  if ($ "#big-map").length
-    makeMap 'big-map', width: 500, height: 350, stroke: '#0c6cb7', hover: '#DE1515'
+  do require './referral'
+  
+  do require './map'
   
   do require './timer'
+  
+  do require './modals'
 
   forms = ($ '.fake')
   

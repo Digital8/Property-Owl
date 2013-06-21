@@ -297,7 +297,7 @@ module.exports = class Model
     @db.query "SELECT * FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error, rows) =>
       
       return callback error if error?
-      return callback 404 unless rows.length
+      return callback null, null unless rows.length
       
       @new rows[0], callback
   

@@ -25,15 +25,15 @@ block content
                   td
               
               tbody
-                - if (referals && referals.length)
-                  - each referal in referals
+                - if (referrals && referrals.length)
+                  - each referral in referrals
                     tr
-                      td= referal.email
-                      td #{referal.first_name} #{referal.last_name}
-                      td= referal.comment
-                      td= referal.created_at
-                      - if (referal.entity_id != '0')
-                        td: a(href="/#{referal.entity_type}s/#{referal.entity_id}") View
+                      td= referral.email
+                      td #{referral.first_name} #{referral.last_name}
+                      td= referral.comment
+                      td= referral.created_at
+                      - if (referral.entity_id != '0')
+                        td: a(href="/#{referral.entity_type}s/#{referral.entity_id}") View
                       - else
                         td Generic
                 -else

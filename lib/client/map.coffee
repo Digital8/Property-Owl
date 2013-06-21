@@ -1,4 +1,12 @@
-module.exports = (selector, options = {}) ->
+module.exports = ->
+  
+  if ($ "#map").length
+    makeMap 'map'
+  
+  if ($ "#big-map").length
+    makeMap 'big-map', width: 500, height: 350, stroke: '#0c6cb7', hover: '#DE1515'
+
+makeMap = (selector, options = {}) ->
   $map = $ "##{selector}"
   
   options.scale ?= 1

@@ -41,8 +41,8 @@ module.exports = ({app, controllers}) ->
   # registrations - my account
   app.get '/registrations', authenticate, controllers.account.registrations
   
-  # referals - my account
-  app.get '/referals', authenticate, controllers.account.referals
+  # referrals - my account
+  app.get '/referrals', authenticate, controllers.account.referrals
   
   ### contact ###
   app.get '/contact', controllers.contact.index
@@ -56,8 +56,12 @@ module.exports = ({app, controllers}) ->
   app.post '/enquiries', controllers.enquiries.create
   
   ### registrations ###
-  app['del'] '/registrations/:id(\\d+)', authenticate, controllers.registrations.destroy
   app.post '/registrations', authenticate, controllers.registrations.create
+  app.del '/registrations/:id(\\d+)', authenticate, controllers.registrations.destroy
+  
+  ### referrals ###
+  app.post '/referrals', authenticate, controllers.referrals.create
+  # app.del '/referrals/:id(\\d+)', authenticate, controllers.referrals.destroy
   
   ### categories ###
   app.post '/categories', authenticate, controllers.categories.create
