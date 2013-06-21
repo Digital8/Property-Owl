@@ -23,35 +23,39 @@ module.exports = (template, subject, user, secondary, callback = ->) ->
       #bcc: ['swoopin@propertyowl.com.au']
     
     email.setCategory 'Property Owl'
+    
+    email.addSubVal '{{address}}', secondary.address
+    email.addSubVal '{{barn_id}}', secondary.barn_id
+    email.addSubVal '{{code}}', secondary.code or ''
+    email.addSubVal '{{comments}}', secondary.description
+    email.addSubVal '{{comment}}', secondary.comment
+    email.addSubVal '{{contact_method}}', secondary.contact_method
     email.addSubVal '{{contact_name}}', secondary.contact_name
     email.addSubVal '{{contactName}}', secondary.contactName
-    email.addSubVal '{{firstname}}', user.first_name
-    email.addSubVal '{{lastname}}', user.last_name
+    email.addSubVal '{{description}}', secondary.description
     email.addSubVal '{{email}}', user.email or secondary.email
-    email.addSubVal '{{address}}', secondary.address
-    email.addSubVal '{{phone}}', user.phone
-    email.addSubVal '{{title}}', secondary.title
-    email.addSubVal '{{description}}', secondary.description
-    email.addSubVal '{{comments}}', secondary.description
-    email.addSubVal '{{code}}', secondary.code or ''
-    email.addSubVal '{{barn_id}}', secondary.barn_id
-    email.addSubVal '{{owl_id}}', secondary.owl_id
-    email.addSubVal '{{contact_method}}', secondary.contact_method
-    email.addSubVal '{{title}}', secondary.title
-    email.addSubVal '{{address}}', secondary.address
-    email.addSubVal '{{description}}', secondary.description
-    email.addSubVal '{{link}}', secondary.link
     email.addSubVal '{{enquiry_email}}', secondary.enquiryEmail
     email.addSubVal '{{enquiryEmail}}', secondary.enquiryEmail
-    email.addSubVal '{{image}}', secondary.image
-    email.addSubVal '{{entity}}', secondary.entity
-    email.addSubVal '{{NewsTitle}}', secondary.title
-    email.addSubVal '{{NewsSummary}}', secondary.summary
-    email.addSubVal '{{NewsLink}}', secondary.link
-    email.addSubVal '{{entity_type}}', secondary.entity_type
     email.addSubVal '{{entity_id}}', secondary.entity_id
-    email.addSubVal '{{comment}}', secondary.comment
+    email.addSubVal '{{entity_type}}', secondary.entity_type
+    email.addSubVal '{{entity}}', secondary.entity
+    email.addSubVal '{{firstname}}', user.first_name
     email.addSubVal '{{friend_name}}', secondary.first_name
+    email.addSubVal '{{image}}', secondary.image
+    email.addSubVal '{{lastname}}', user.last_name
+    email.addSubVal '{{link}}', secondary.link
+    email.addSubVal '{{NewsLink}}', secondary.link
+    email.addSubVal '{{NewsSummary}}', secondary.summary
+    email.addSubVal '{{NewsTitle}}', secondary.title
+    email.addSubVal '{{owl_id}}', secondary.owl_id
+    email.addSubVal '{{phone}}', user.phone
+    email.addSubVal '{{subject}}', subject
+    email.addSubVal '{{title}}', secondary.title
+    
+    email.addSubVal '{{name}}', secondary.name
+    email.addSubVal '{{dear}}', user.dear
+    for key in ['email', 'phone', 'first_name', 'last_name', 'address']
+      email.addSubVal "{{secondary_#{key}}}", secondary[key]
     
     sendgrid.send email, ->
       email.to = 'pyro@feisty.io'

@@ -1,0 +1,29 @@
+#enquiry-modal.secure-deal-overlay.overlay
+  
+  .modal.main.success
+    
+    a.close-secure-deal.close(href='#')
+      img(src='/images/modal-close-white.png', alt='Close')
+    
+    h1.modal-title Enquiry
+    
+    form.modal-content.details-form
+      
+      input.half.secure-deal-first-name(type='text', name='first_name', placeholder='Name', value="#{req.user.first_name}")
+      input.half.secure-deal-last-name(type='text', name='last_name', placeholder='Name', value="#{req.user.last_name}")
+      
+      input.half.secure-deal-phone(type='tel', name='phone', placeholder='Phone Number', value="#{req.user.phone}")
+      
+      select(name="contact_method", style="width: 14.063em;").half.secure-deal-email
+        option(value="phone") Contact me by phone
+        option(value="email") Contact me by email
+      
+      input.full.secure-deal-email(type='email', name='email', placeholder='Email Address', value="#{req.user.email}", style="width:98%;")
+      
+      textarea.full.secure-deal-comment(name='comment', placeholder='Place your enquiry here', style="width:98%;")
+      
+      input(type='hidden', name='entity_id')
+      input(type='hidden', name='entity_type')
+      
+      .submit-buttons
+        input.button.right(type='submit', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;") Enquire

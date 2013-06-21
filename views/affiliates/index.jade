@@ -59,23 +59,3 @@ block content
         p No services have been listed on Property Owl
     
     include ../right_nav
-    
-    - if (req.user)
-      .secure-deal-overlay.overlay.overlay.modal-enquiry#generic-modal
-        .modal.main.success
-          a.close-secure-deal(href='#')
-            img(src='/images/modal-close-white.png', alt='Close')
-          
-          h1.modal-title Send Enquiry
-          
-          .modal-content.details-form
-            div.secure-deal-errors.error
-            input.half.secure-deal-first-name#name(type='text', placeholder='Name', value="#{req.user.displayName}")
-            input.half.secure-deal-email#email(type='text', placeholder='Email Address', value="#{req.user.email}")
-            input.half.secure-deal-phone#phone(type='text', placeholder='Phone Number', value="#{req.user.mobile}")
-            select#method(name="method",style="width: 14.063em;").half.secure-deal-email
-              option(value="Phone") Contact me by phone
-              option(value="Email") Contact me by email
-            textarea.full.secure-deal-comment#enquiry(placeholder='Place your enquiry here', style="width:98%;")
-            .submit-buttons
-              button#sendEnquiry.button.right(style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;") Send

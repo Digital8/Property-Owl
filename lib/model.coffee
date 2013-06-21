@@ -129,11 +129,9 @@ module.exports = class Model
       
       map[key] = @[key]
     
-    @constructor.db.query "UPDATE #{@constructor.table.name} SET ? WHERE #{@constructor.table.key} = ?", [map, @id], callback
-    
-    # console.log 'mapz', map
-    
-    # callback()
+    @constructor.db.query "UPDATE #{@constructor.table.name} SET ? WHERE #{@constructor.table.key} = ?", [map, @id], (error, result) ->
+      
+      callback error result
   
   clone: (callback) ->
     

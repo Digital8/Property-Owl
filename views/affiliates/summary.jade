@@ -18,7 +18,7 @@
       
       .listing-links
         
-        a.enquire-button(href='#', data-id=affiliate.id) Enquire
+        a.enquire-button(href='#', data-entity_id=affiliate.id, data-entity_type='affiliate', data-modal='enquiry') Enquire
         
         - if (req.user && req.user.isAdmin())
             a(href="/admin/affiliates/#{affiliate.id}/edit").admin-button

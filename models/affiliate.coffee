@@ -24,11 +24,13 @@ module.exports = class Affiliate extends Model
   @field 'category_id'
   
   hydrate: (callback) ->
-    async.series
+    
+    async.parallel
+      
       category: (callback) =>
         Category.get @category_id, (error, category) =>
-          @category = category or {}
-          callback()
+          @category = category
+          callback error
 
       media: (callback) =>
         Media.for this, (error, medias) =>
@@ -40,7 +42,8 @@ module.exports = class Affiliate extends Model
           @enquiries = enquiries
           callback error
     
-    , (error) => super callback
+    , (error) =>
+      super callback
   
   upload: (req, callback) ->
     return callback null unless req.files? and (Object.keys req.files).length

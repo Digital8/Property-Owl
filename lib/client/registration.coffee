@@ -1,6 +1,6 @@
 module.exports = ->
   
-  $modal = $ '.secure-deal-overlay'
+  $modal = $ '#registration-modal'
   
   $form = $modal.find 'form'
   

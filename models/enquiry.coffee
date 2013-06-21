@@ -12,7 +12,7 @@ module.exports = class Enquiry extends Model
   @field 'entity_id'
   @field 'entity_type'
   
-  @field 'enquiry'
+  @field 'comment'
   
   @field 'created_at'
   @field 'updated_at'

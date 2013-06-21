@@ -35,9 +35,4 @@ exports.create = (req, res, next) ->
     #swap out the friends email
     req.user?.email = req.body.email
     template = 'refer-property'
-    (require '../lib/mailer') template, 'Referral', req.user, req.body, (results) ->
-    
-    # if results is true 
-    #   res.send status: 200, errors: {}
-    # else
-    #   res.send status: 400, errors: {msg: 'unable to send email'}
+    (require '../lib/mailer') template, 'Referral', req.user, req.body, (error) ->

@@ -1,6 +1,6 @@
 module.exports = ->
   
-  $modal = $ '.refer-friend-overlay'
+  $modal = $ '#referral-modal'
   
   $form = $modal.find 'form'
   

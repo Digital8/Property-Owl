@@ -6,11 +6,11 @@ exports.index = (req, res) ->
     categories: (callback) -> Category.for 'affiliate', callback
   , (error, {affiliates, categories}) ->
     console.log arguments...
-    res.render 'admin/affiliates/index', affiliates: affiliates, categories: categories
+    res.render 'admin/affiliates/index', {affiliates, categories}
 
 exports.view = (req, res) ->
   Affiliate.get req.params.id, (error, affiliate) ->
-    res.render 'admin/affiliates/view', affiliate: affiliate
+    res.render 'admin/affiliates/view', {affiliate}
 
 exports.edit = (req, res) ->
   async.parallel
@@ -19,14 +19,14 @@ exports.edit = (req, res) ->
   , (error, {affiliate, categories}) ->
     if error then throw error
   
-    res.render 'admin/affiliates/edit', affiliate: affiliate, categories: categories
+    res.render 'admin/affiliates/edit', {affiliate, categories}
 
 exports.add = (req, res) ->
   async.parallel
-    affiliate: (callback) -> Affiliate.new callback
+    affiliate: (callback) -> Affiliate.new {}, callback
     categories: (callback) -> Category.for 'affiliate', callback
   , (error, {affiliate, categories}) ->
-    res.render 'admin/affiliates/add', affiliate: affiliate, categories: categories
+    res.render 'admin/affiliates/add', {affiliate, categories}
 
 exports.create = (req, res) ->
   Affiliate.create req.body, (error, affiliate) ->
