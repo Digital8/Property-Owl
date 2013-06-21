@@ -4049,6 +4049,51 @@ a:visited {
   width: 1.125em;
   height: 1.125em;
 }
+.login-overlay .modal .promo,
+.refer-friend-overlay .modal .promo,
+.secure-deal-overlay .modal .promo,
+.register-overlay .modal .promo {
+  position: absolute;
+  top: 80%;
+  padding-top: 25px;
+  left: 59%;
+  width: 288px;
+  height: 186px;
+  letter-spacing: 0em;
+  text-align: center;
+  background: url(../images/promo-cloudbg.png) no-repeat center;
+}
+.login-overlay .modal .promo h2,
+.refer-friend-overlay .modal .promo h2,
+.secure-deal-overlay .modal .promo h2,
+.register-overlay .modal .promo h2 {
+  font-size: 0.95em;
+  color: #ec1c25;
+  letter-spacing: -0.07em;
+}
+.login-overlay .modal .promo p,
+.refer-friend-overlay .modal .promo p,
+.secure-deal-overlay .modal .promo p,
+.register-overlay .modal .promo p {
+  font-size: 0.8em;
+  color: #000;
+  line-height: 1em;
+  margin-bottom: 0;
+}
+.login-overlay .modal .promo a,
+.refer-friend-overlay .modal .promo a,
+.secure-deal-overlay .modal .promo a,
+.register-overlay .modal .promo a {
+  text-decoration: none;
+  color: #176eb5;
+  font-size: 0.7em;
+}
+.login-overlay .modal .promo a:hover,
+.refer-friend-overlay .modal .promo a:hover,
+.secure-deal-overlay .modal .promo a:hover,
+.register-overlay .modal .promo a:hover {
+  color: #1e91ef;
+}
 .login-overlay .modal .modal-title,
 .refer-friend-overlay .modal .modal-title,
 .secure-deal-overlay .modal .modal-title,
