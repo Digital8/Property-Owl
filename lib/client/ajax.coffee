@@ -1,3 +1,5 @@
+_s = require 'underscore.string'
+
 module.exports = ({url, form, success, error}) ->
   
   $form = form
@@ -38,7 +40,7 @@ module.exports = ({url, form, success, error}) ->
         $ul.appendTo $content
         
         for error in errors
-          $ul.append $ "<li><b>#{error.param} is #{error.msg}</b></li>"
+          $ul.append $ "<li><b>#{_s.humanize error.param} is #{error.msg}</b></li>"
       
       if status is 500
         

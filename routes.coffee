@@ -34,6 +34,9 @@ module.exports = ({app, controllers}) ->
   app.get '/sign-up', controllers.signup.index
   app.post '/sign-up', controllers.signup.create
   
+  ### users ###
+  app.post '/users', controllers.users.create
+  
   # preferences - my account
   app.get '/preferences', authenticate, controllers.account.preferences
   app.post '/preferences', authenticate, controllers.account.updatePreferences
@@ -251,7 +254,6 @@ module.exports = ({app, controllers}) ->
     app[method] "/ajax#{path}", middleware...
   
   ajax 'post', '/login', controllers.ajax.login
-  ajax 'post', '/register', controllers.ajax.register
   ajax 'get', '/search', controllers.ajax.search
   
   # authedAjax = (method, path, middleware...) ->

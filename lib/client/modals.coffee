@@ -6,9 +6,6 @@ module.exports = modals = ->
     
     $modal = $overlay.find '.modal'
     
-    $modal.css
-      padding: '168px 55px 0'
-    
     $close = $modal.find '.close'
     
     $submit = $modal.find 'input[type=submit]'

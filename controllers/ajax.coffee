@@ -28,52 +28,6 @@ exports.login = (req, res) ->
     
     res.send status: 200
 
-# TODO rename these fields FFS
-exports.register = (req, res) ->
-  
-  req.assert('e', 'Invalid Email Address').isEmail()
-  req.assert('p', 'Password must be at least 6 characters').len(6)
-  req.assert('f', 'First name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2, 20)
-  req.assert('l', 'Last name is invalid').is(/^[a-zA-Z][a-zA-Z -]*[a-zA-Z]$/).len(2, 20)
-  req.assert('p', 'Passwords do not match').isIn [req.body.p2]
-  req.assert('t', 'Please accept the terms and conditions').isIn ['checked', 'Checked']
-  req.assert('c', 'Postcode is invalid').len(4, 5).isInt()
-  
-  errors = (req.validationErrors true) or {}
-  
-  User.byEmail req.body.e, (error, email) ->
-    
-    return res.send 500, error if error?
-    
-    if email? then errors.inUse = msg: 'Email is already in use'
-    
-    if Object.keys(errors).length
-      return res.send status: 400, errors: errors
-    
-    # no errors
-    console.log 'Got Form', req.body
-    
-    map =
-      password: (require '../lib/hash') req.body.p
-      group: 1
-      email: req.body.e
-      first_name: req.body.f
-      last_name: req.body.l
-      postcode: req.body.c
-    
-    User.create map, (error, user) ->
-      
-      return res.send status: 500, error: error if error?
-      
-      req.session.user_id = user.id
-      res.cookie 'user', user.id, maxAge: 604800000
-      
-      (require '../lib/mailer') 'signup-confirmation-special-launch', 'Registration Confirmation', user, {}, (results) ->
-        if results is true
-          res.send status: 200, errors: {}
-        else
-          res.send status: 400, errors: {msg: 'unable to send email'}
-
 exports.registerStatus = (req, res) ->
   req.body.id ?= 0
   req.body.val ?= 0

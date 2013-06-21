@@ -109,16 +109,6 @@ $(function(){
     return false;
   });
   
-  // show register form
-  var registerModal = $(".register-overlay");
-  
-  $(".show-register, .close-register").on("click", function(event){
-    event.preventDefault();
-    loginModal.hide();
-    registerModal.fadeToggle(150);
-    return false;
-  });
-  
   $('.details-button').on('click', function(event){
     if (!$.isAuthed) {
       var href = $(this).attr('href');
@@ -128,36 +118,6 @@ $(function(){
       }
     }
   });
-  
-  // show login form
-  var loginModal = $(".login-overlay");
-  
-  $(".show-login, .close-login").on("click", function(event){
-    event.preventDefault();
-    registerModal.hide();
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) )
-    {
-      window.location = '/login';
-    }
-    else
-    {
-      loginModal.fadeToggle(150);
-    } 
-    return false;
-  });
-  
-  // // show modal
-  // var modal = $(".modal-overlay");
-  // //var modalCallback = null;
-  // $(".show-modal, .close-modal").on("click", function(event){
-  //   event.preventDefault();
-  //   modal.fadeToggle(150);
-  //   /*if(typeof(modalCallback)=="function"){
-  //     modalCallback();
-  //     modalCallback = null;
-  //   }*/
-  //   return false;
-  // });
 
   // find deals form (mobile breakpoint)
   $(".find-deals h2").on("click", function(){
@@ -193,50 +153,6 @@ $(function(){
     });
     //return false;
   }
-  
-  // Sign up
-  $(".register-button").on("click", function(event){
-    var firstName = $(".register-first-name").val();
-    var lastName = $(".register-last-name").val();
-    var email = $(".register-email").val();
-    var postcode = $(".register-postcode").val();
-    var password = $(".register-password").val();
-    var password2 = $(".register-password2").val();
-    var terms = $("#terms").attr("checked");
-    
-    $.ajax({
-      url: '/ajax/register',
-      type: 'post',
-      data: 'e=' + email + '&p=' + password + '&p2=' + password2 + '&f=' + firstName + '&l=' + lastName + '&c=' + postcode + '&t=' + terms
-    }).done(function(d){
-      if (d.status == 200) {
-        //showPayment();
-        //success();
-        window.location.replace('/');
-      }
-      else {
-        var errors = Object.keys(d.errors);
-        
-        $("#generic-modal, #generic-modal .modal.main").removeClass('success');
-        $('#generic-modal-title').html('Please fix the following');
-        $('#generic-modal-content').html('<br /><ul>');
-        for(i=0; i<errors.length;i++)
-        {
-           $('#generic-modal-content').append('<li><b>' + d.errors[errors[i]].msg + '</b></li>');
-        }
-        $('#generic-modal-content').append('</ul>');
-        
-        $('#generic-modal').fadeToggle(150);
-      }
-    });
-    return false;
-  });
-  
-  $(".register-first-name, .register-last-name, .register-email, .register-postcode, .register-password, .register-password2").on("keypress", function(event){
-    if(event.keyCode == 13){
-      $(".register-button").click();
-    }
-  });
 
 $("#close-errors").on("click", function(){
   var errorList = $(this).closest("ul");

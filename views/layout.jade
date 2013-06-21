@@ -43,7 +43,7 @@ html.no-js(lang='en')
     
     script
       $.webshims.polyfill('forms');
-      
+    
     script(src='/codemirror/lib/codemirror.js')
     script(src='/codemirror/mode/markdown.js')
     
@@ -64,15 +64,14 @@ html.no-js(lang='en')
     
     include _enquiry
     
-    include _register
+    include _login
+    include _users
     
     include _generic
     
     - if (locals.req && locals.req.user)
       include _registration
       include _referral
-    
-    include _login
 
     include _header
     

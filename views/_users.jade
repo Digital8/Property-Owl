@@ -1,0 +1,40 @@
+#users-modal.register-overlay.overlay
+  
+  .modal.main.success
+    
+    a.close-register.close(href='#')
+      img(src='/images/modal-close-white.png', alt='Close')
+    
+    h1.modal-title Register to see more!
+    
+    form.modal-content.details-form(autocomplete='off')
+      
+      input.half.register-first-name(name='first_name', type='text', placeholder='First Name')
+      
+      input.half.register-last-name(name='last_name', type='text', placeholder='Last Name')
+      
+      input.half.register-email(name='email', type='email', placeholder='Email Address')
+      
+      input.half.register-postcode(name='postcode', type='text', placeholder='Postcode')
+      
+      input.half.register-password(name='password', type='password', placeholder='Password')
+      
+      input.half.register-password2(name='confirm', type='password', placeholder='Confirm Password')
+      
+      .submit-buttons
+        
+        input.button.right.register-button(type='submit', value='Create Account')
+        
+        .terms-checkbox
+          input(type='checkbox', name='terms_and_conditions')
+          label(for='terms_and_conditions')
+            | I agree to the
+            br 
+            a(href='/terms-and-conditions',target="_blank") Terms & Conditions
+      
+      hr
+      
+      .center
+        | Already registered?
+        br
+        a.button.show-login(href='#') Click here!

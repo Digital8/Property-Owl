@@ -44,6 +44,8 @@ $ ->
   do require './timer'
   
   do require './modals'
+  
+  do require './user'
 
   forms = ($ '.fake')
   
