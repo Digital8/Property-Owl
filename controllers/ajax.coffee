@@ -41,43 +41,6 @@ exports.registerStatus = (req, res) ->
   else
     res.send status: 403
 
-# exports.delRegistration = (req, res) ->
-  
-#   req.query.id ?= ''
-#   req.query.user_id = req.user?.id
-  
-#   # Get the registration so we can email to let the person know they're not interested
-#   Registration.find req.query.id, (err, results) ->
-#     if results.length is 1 
-#       results = results.pop()
-      
-#       unless results.type in ['owl', 'barn']
-#         return res.send status: 500
-        
-#       model = exports.models[results.type]
-      
-#       model.get results.resource_id, (err, record) ->
-#         if err then console.log err
-#         # Send withdraw email
-#         template = 'withdraw-interest'
-        
-#         user =
-#           first_name: req.user?.name
-#           email: req.user?.email
-        
-#         secondary =
-#           owl_id: record.id
-#           contactName: req.body.name
-#           address: record.address or ''
-#           link: "/#{results.type}s/#{record.id}"
-        
-#         (require '../lib/mailer') template,'Withdrawal Confirmation', user, secondary, (results) ->
-#           del()
-  
-#   del = ->
-#     Registration.delete req.query, (err, results) ->
-#       if err then res.send status: 400 else res.send status: 200
-
 exports.search = (req, res) ->
   
   {address, suburb} = req.query

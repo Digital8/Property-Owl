@@ -1,3 +1,5 @@
+async = require 'async'
+
 Model = require '../lib/model'
 Table = require '../lib/table'
 
@@ -13,6 +15,21 @@ module.exports = class Registration extends Model
   
   @field 'phone', type: String, required: yes
   @field 'comment', type: String, required: yes
+  
+  hydrate: (callback) ->
+    async.parallel
+      user: (callback) =>
+        User.dry @user_id, (error, user) =>
+          @user = user
+          callback error
+      entity: (callback) =>
+        @constructor.models[@entity_type].dry @entity_id, (error, entity) =>
+          @entity = entity
+          callback error
+    , (error) =>
+      return callback error if error?
+      super callback
+    
   
   @registered = ({entity, user}, callback) ->
     @db.query """

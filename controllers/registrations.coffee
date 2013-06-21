@@ -1,4 +1,30 @@
-exports.destroy = (require '../behaviors/destroy') Registration
+# exports.destroy = (require '../behaviors/destroy') Registration
+
+exports.destroy = (req, res, next) ->
+  
+  Registration.get req.params.id, (error, registration) ->
+    
+    return next error if error?
+    
+    Registration.delete registration.id, (error) ->
+      
+      return next error if error?
+      
+      res.send {}
+      
+      user =
+        dear: req.user.first_name
+        email: req.user.email
+      
+      secondary =
+        address: registration.entity.address
+        link: "/#{registration.entity.constructor.table.name}/#{registration.entity.id}"
+      
+      (require '../lib/mailer') 'withdraw-interest', 'Withdrawal Confirmation', user, secondary, (error) ->
+  
+  del = ->
+    Registration.delete req.query, (err, results) ->
+      if err then res.send status: 400 else res.send status: 200
 
 exports.create = (req, res, next) ->
   

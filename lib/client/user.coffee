@@ -12,22 +12,26 @@ module.exports = ->
       success: (data, textStatus, jqXHR) ->
         window.location.reload()
   
-  $(".show-register, .close-register").on "click", (event) ->
+  $(".show-register").on "click", (event) ->
     event.preventDefault()
-    ('#login-modal').hide()
-    $modal.fadeToggle 150
-    false
+    
+    ($ '#login-modal').fadeOut 150
+    
+    $modal.fadeIn 150
   
   $loginModal = $ '#login-modal'
   
-  $(".show-login, .close-login").on "click", (event) ->
+  $(".show-login").on "click", (event) ->
+    
     event.preventDefault()
+    
     ($ "#users-modal").hide()
+    
     if /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
       window.location = "/login"
     else
-      loginModal.fadeToggle 150
-    false
+      $loginModal.fadeIn 150
 
   $(".register-first-name, .register-last-name, .register-email, .register-postcode, .register-password, .register-password2").on "keypress", (event) ->
-    $(".register-button").click()  if event.keyCode is 13
+    if event.keyCode is 13
+      $(".register-button").click()
