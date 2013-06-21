@@ -25,7 +25,7 @@ exports.show = (req, res) ->
     return res.send 500, error if error?
     return res.render 'errors/404' unless barn?
     
-    res.render 'barns/show', barn: barn, enquire: on
+    res.render 'barns/show', barn: barn, enquire: on, deal: barn
 
 exports.owls = (req,res) ->
   Barn.get req.params.id, (error, barn) ->
@@ -68,4 +68,4 @@ exports.print = (req, res) ->
   {id} = req.params
   
   Barn.get id, (error, barn) ->
-    res.render 'barns/print', barn: barn, enquire: on
+    res.render 'barns/print', barn: barn, enquire: on, deal: barn

@@ -81,7 +81,14 @@ module.exports = class Barn extends Model
           do callback
       
       registrations: (callback) =>
-        @constructor.db.query "SELECT * FROM po_registrations AS R INNER JOIN po_users AS U ON R.user_id = U.user_id where R.type = 'barn' and R.resource_id = ?", [@id], (err, results) =>
+        @constructor.db.query """
+        SELECT * FROM registrations AS R
+        INNER JOIN users AS U ON R.user_id = U.user_id
+        WHERE
+          R.entity_type = 'barn'
+          AND
+        R.entity_id = ?
+        """, [@id], (err, results) =>
           @registrations = results
           callback()
     

@@ -111,9 +111,16 @@ module.exports = class Owl extends Model
           @value = Math.floor(100 * @value / @price)
         
         callback()
-        
+      
       registrations: (callback) =>
-        @constructor.db.query "SELECT * FROM registrations AS R INNER JOIN users AS U ON R.user_id = U.user_id where R.type = 'owl' and R.resource_id = ?", [@id], (err, results) =>
+        @constructor.db.query """
+        SELECT * FROM registrations AS R
+        INNER JOIN users AS U ON R.user_id = U.user_id
+        WHERE
+          R.entity_type = 'owl'
+        AND
+          R.entity_id = ?
+        """, [@id], (err, results) =>
           @registrations = results
           callback()
       

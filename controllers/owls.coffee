@@ -29,7 +29,7 @@ exports.locate = (req, res) ->
 exports.top = (req, res) ->
   Owl.top (error, owl) ->
     owl.hydrateForUser req.user, (error) ->
-      res.render 'owls/show', owl: owl, bestdeal: true, enquire: on, share: on
+      res.render 'owls/show', owl: owl, bestdeal: true, enquire: on, share: on, deal: owl
 
 exports.hot = (req, res) ->
   async.map ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa'], (state, callback) ->
@@ -72,7 +72,7 @@ exports.show = (req, res) ->
     
     owl.hydrateForUser req.user, (error) ->
       
-      res.render 'owls/show', owl: owl, enquire: on
+      res.render 'owls/show', owl: owl, enquire: on, deal: owl
 
 exports.addDeal = (req, res) ->
   map = req.body

@@ -120,10 +120,13 @@ exports.updatePreferences = (req, res) ->
     req.flash 'success', 'Preferences have been updated'
     res.redirect 'back'
 
-exports.registrations = (req, res) ->
-  Registration.findByUser req.user.id, (err, results) ->
-    if err then console.log err
-    res.render 'user/registrations', registrations: results or {}
+exports.registrations = (req, res, next) ->
+  
+  Registration.forUser req.user, (error, registrations) ->
+    
+    return next error if error?
+    
+    res.render 'user/registrations', {registrations}
 
 exports.referals = (req, res) ->
   Referral.getByUser req.user.id, (error, referals) ->

@@ -7,23 +7,31 @@ module.exports = class Registration extends Model
     name: 'registrations'
     key: 'registration_id'
   
-  @find = (id, callback) ->
-    @db.query "SELECT * FROM po_registrations WHERE registration_id = ?", [id], callback
+  @field 'user_id'
+  @field 'entity_id'
+  @field 'entity_type'
   
-  @checkIfRegistered = (vals, callback) ->
-    @db.query "SELECT * FROM po_registrations WHERE resource_id = ? AND type = ? AND user_id = ? AND status = 1", [vals.id, vals.type, vals.user_id], callback
+  @field 'phone', type: String, required: yes
+  @field 'comment', type: String, required: yes
   
-  @add = (vals, callback) ->
-    @db.query "INSERT INTO po_registrations (resource_id, type, user_id) VALUES(?,?,?)", [vals.id, vals.type, vals.user_id], callback
+  @registered = ({entity, user}, callback) ->
+    @db.query """
+    SELECT *
+    FROM   registrations
+    WHERE  entity_id = ?
+           AND entity_type = ?
+           AND user_id = ?
+           AND status
+    """, [
+      entity.id
+      entity.constructor.name.toLowerCase()
+      user.id
+    ], (error, rows) ->
+      return callback error if error?
+      callback null, rows.length > 0
   
-  @delete = (vals, callback) ->
-    @db.query "UPDATE po_registrations SET status = 0 WHERE registration_id = ? and user_id = ?", [vals.id, vals.user_id], callback
-  
-  @findByUser = (user_id, callback) ->
-    @db.query "SELECT * FROM po_registrations WHERE user_id = ?", [user_id], callback
-  
-  @changeStatus = (vals, callback) ->
-    @db.query "UPDATE po_registrations SET status = ? WHERE registration_id = ?", [vals.val, vals.id], callback
+  @forUser = (user, callback) ->
+    @db.query "SELECT * FROM registrations WHERE user_id = ? AND status", [user.id], callback
   
   @report = (cred, callback) ->
     

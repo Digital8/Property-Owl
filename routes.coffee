@@ -56,6 +56,7 @@ module.exports = ({app, controllers}) ->
   app.post '/enquiries', controllers.enquiries.create
   
   ### registrations ###
+  app['del'] '/registrations/:id(\\d+)', authenticate, controllers.registrations.destroy
   app.post '/registrations', authenticate, controllers.registrations.create
   
   ### categories ###

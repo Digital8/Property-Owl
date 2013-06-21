@@ -1,3 +1,5 @@
+# process.on 'uncaughtException', -> console.log arguments...
+
 fs = require 'fs'
 https = require 'https'
 http = require 'http'
@@ -64,8 +66,11 @@ app.configure ->
     app.set 'views', "#{__dirname}/views"
     app.set 'view engine', 'jade'
     
+    app.use express.responseTime()
+    app.use express.timeout()
     app.use express.static "#{__dirname}/public", maxAge: 1024
     app.use express.logger 'dev'
+    app.use express.compress()
     app.use express.bodyParser()
     app.use express.methodOverride()
     app.use expressValidator
@@ -105,7 +110,82 @@ app.configure ->
       res.locals.sort = req.query.sort or null
       do next
     
+    app.use (req, res, next) ->
+      return next null unless req.method is 'POST'
+      entity_id = req.param 'entity_id'
+      entity_type = req.param 'entity_type'
+      return next null unless (entity_id? and entity_type?)
+      model = models[entity_type]
+      return next 400 unless model?
+      model.get entity_id, (error, instance) ->
+        return next error if error?
+        console.log 'instance', instance.id
+        return next 'no instance' unless instance?
+        req.entity = instance
+        next null
+      # req.assert('entity_id', 'required').notEmpty().isInt()
+      # req.assert('entity_type', 'required').isIn ['owl', 'barn']
+    
+    # guard
+    app.use (req, res, next) ->
+      req.guard = (req, res, done) ->
+        errors = req.validationErrors()
+        if errors
+          done errors
+        else
+          delete req._validationErrors
+        return errors
+      next null
+    
+    app.use (req, res, next) ->
+      if app.argv.hack
+        console.log req.url
+        console.log req.body
+      next error
+    
+    # # debug
+    # app.get '/debug', (req, res, next) ->
+    #   if app.argv.hack
+    #     next parseInt req.query.status
+    #   else
+    #     res.send 404
+    
     app.use app.router
+    
+    # handle validation errors
+    app.use (error, req, res, next) ->
+      if req._validationErrors?
+        console.log 'valid errors'
+        res.send 422,
+          message: 'Validation failed'
+          errors: error
+      else
+        next error
+    
+    # log errors
+    app.use (error, req, res, next) ->
+      console.log '<error>'
+      console.error error
+      if error.stack?
+        console.error error.stack
+      console.log '</error>'
+      next error
+    
+    # app.use express.errorHandler()
+    
+    # handle errors for xhr
+    app.use (error, req, res, next) ->
+      if req.xhr
+        console.log 'xhr error'
+        res.send error.status, error # 500, error: 'Something blew up!'
+      else
+        next error
+    
+    # handle errors for agents
+    app.use (error, req, res, next) ->
+      console.log 'error', error
+      res.status 500
+      res.render 'errors/500', error
     
     console.stop 'configure'
     

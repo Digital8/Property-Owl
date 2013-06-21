@@ -4,12 +4,16 @@ module.exports = (model, args = {}) ->
   
   {singular, plural, prefix} = (require './_inflect') arguments...
   
-  (req, res) ->
+  (req, res, next) ->
     
     model.delete req.params.id, (error, instance) ->
       
-      return res.send 500, error if error?
-      return res.send 404 unless instance?
+      return next error if error?
+      return next 404 unless instance?
       
       req.flash 'success', "#{model.name} destroyed!"
-      res.redirect "#{prefix}/#{plural}"
+      
+      if req.xhr
+        res.send {}
+      else
+        res.redirect "#{prefix}/#{plural}"

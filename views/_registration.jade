@@ -1,18 +1,31 @@
 - if (req.user)
+  
   .secure-deal-overlay.overlay
+    
     .modal.main.success
+      
       a.close-secure-deal(href='#')
         img(src='/images/modal-close-white.png', alt='Close')
       
       h1.modal-title Express Your Interest Now!
       
-      .modal-content.details-form
+      form.modal-content.details-form
+        
         div.secure-deal-errors.error
-        input.half.secure-deal-first-name(type='text', placeholder='First Name', value="#{req.user.first_name}", disabled='disabled')
-        input.half.secure-deal-last-name(type='text', placeholder='Last Name', value="#{req.user.last_name}", disabled='disabled')
-        input.half.secure-deal-email(type='text', placeholder='Email Address', value="#{req.user.email}", disabled='disabled')
-        input.half.secure-deal-phone(type='text', placeholder='Phone Number', value="#{req.user.mobile}")
-        textarea.full.secure-deal-comment(placeholder='Please leave a comment for the developer', style="width:98%;")
+        
+        input.half.secure-deal-first-name(type='text', name='first_name', placeholder='First Name', value="#{req.user.first_name}", disabled='disabled')
+        
+        input.half.secure-deal-last-name(type='text', name='last_name', placeholder='Last Name', value="#{req.user.last_name}", disabled='disabled')
+        
+        input.half.secure-deal-email(type='text', name='email', placeholder='Email Address', value="#{req.user.email}", disabled='disabled')
+        
+        input.half.secure-deal-phone(type='text', name='phone', placeholder='Phone Number', value="#{req.user.phone}")
+        
+        textarea.full.secure-deal-comment(name='comment', placeholder='Please leave a comment for the developer', style="width:98%;")
+        
+        - if (locals.deal)
+          input(type='hidden', name='entity_id', value=deal.id)
+          input(type='hidden', name='entity_type', value=deal.constructor.name.toLowerCase())
         
         .submit-buttons
           input.button.right.secure-deal-button(type='submit', value='Submit', style="margin-left:50%; margin-top:0.75em; position:relative; left:-6em;")

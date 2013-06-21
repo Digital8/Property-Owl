@@ -27,41 +27,20 @@ block content
                   h4 You haven't registered to any property.
                 - else
                   each registration in registrations 
-                    if registration.status != 0
+                    if registration.status
                       tr
-                        td= registration.resource_id
+                        td= registration.entity_id
                         td
-                          case (registration.type)
+                          case (registration.entity_type)
                             when 'owl'
-                              a(href="/owls/#{registration.resource_id}") Owl Deal
+                              a(href="/owls/#{registration.entity_id}") Owl Deal
                             when 'barn'
-                              a(href="barns/#{registration.resource_id}") Barn Deal
+                              a(href="barns/#{registration.entity_id}") Barn Deal
                             default 
-                              p= registration.type
+                              p= registration.entity_type
                         td
                           a.reg-delete(href="#", data-id="#{registration.registration_id}") 
                             img(src='images/delete.png')
                             | Remove
       
     include ../right_nav
-
-  script
-    $(document).ready(function(){
-      $(".reg-delete").click(function(e){
-        e.preventDefault();
-        var id = $(this).data('id');
-        var $that = $(this);
-        if (confirm('Are you sure you want to remove this?'))
-        {
-          $.ajax({
-            url: '/ajax/delRegistration',
-            method: 'get',
-            data: 'id='+id
-          }).done(function(d){
-            if (d.status == '200'){
-              $that.parent().parent().fadeOut();
-            }
-          });
-        }
-      });
-    });

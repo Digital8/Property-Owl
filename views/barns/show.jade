@@ -140,7 +140,7 @@ block content
       div#entity(style="display: none;") barn
       div#entity_id(style="display: none;")= barn.id
       .property-info
-      
+        
         - if (barn.owls && barn.owls.length)
           
           table.barn-lots
@@ -173,7 +173,7 @@ block content
                   td= owl.aspect
                   td.price $ #{owl.price}
                   td
-                    a.barn-register.show-secure-deal.secure-button.express-button(href='#', alt='Register', data-id="#{owl.id}", data-type="owl") Register
+                    a.barn-register.show-secure-deal.secure-button.express-button(href='#', alt='Register', data-entity_id="#{owl.id}", data-entity_type="owl") Register
       
       .property-info
         

@@ -4,16 +4,19 @@ module.exports = ($) ->
       url: url
       type: 'POST'
       data: {_method: 'delete'}
+      dataType: 'json'
       complete: (jqXHR, textStatus) ->
         callback {}, textStatus, jqXHR
   
   $.patch = (url, data, callback = ->) ->
-    data._method = 'patch'
+    
+    data._method = 'PATCH'
     
     $.ajax
       url: url
       type: 'POST'
       data: data
+      dataType: 'json'
       complete: (jqXHR, textStatus) ->
         callback {}, textStatus, jqXHR
   
