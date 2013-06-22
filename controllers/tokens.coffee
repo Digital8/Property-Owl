@@ -14,7 +14,7 @@ exports.uuid = (req, res, next) ->
       
       req.session.referrer_id = token.entity.id
       
-      res.redirect "/users/add"
+      res.redirect '/signup'
     
     handler = map[token.entity.constructor.name]
     

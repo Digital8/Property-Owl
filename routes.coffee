@@ -21,8 +21,9 @@ module.exports = ({app, controllers}) ->
   app.get '/epoch', controllers.epoch
   
   # recovery
-  app.get  '/account/recover', controllers.forgot_pwd.index
-  app.post '/account/recover', controllers.forgot_pwd.create
+  app.get  '/recoveries', controllers.recoveries.index
+  app.get  '/recoveries/:id', controllers.recoveries.show
+  app.post '/recoveries', controllers.recoveries.create
   
   # auth
   app.get '/login',   controllers.login.index
@@ -191,7 +192,7 @@ module.exports = ({app, controllers}) ->
   app.get '/reports/referrals',            (authorize acl.admin), controllers.reports.referrals
   
   # ajax TODO
-  app.post '/login', controllers.ajax.login
-  app.get '/search', controllers.ajax.search
+  app.post '/ajax/login', controllers.ajax.login
+  app.get '/ajax/search', controllers.ajax.search
   
   app.all '*', controllers.pages.serve

@@ -53,7 +53,8 @@ module.exports = (template, subject, user, secondary, callback = ->) ->
     email.addSubVal '{{title}}', secondary.title
     
     email.addSubVal '{{name}}', secondary.name
-    email.addSubVal '{{dear}}', user.dear
+    email.addSubVal '{{dear}}', user.dear or user.first_name
+    email.addSubVal '{{token}}', secondary.token
     for key in ['email', 'phone', 'first_name', 'last_name', 'address']
       email.addSubVal "{{secondary_#{key}}}", secondary[key]
     

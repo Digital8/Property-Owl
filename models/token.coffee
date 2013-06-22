@@ -88,6 +88,14 @@ module.exports = class Token extends Model
       # one
       @new rows[0], callback
   
+  @createForEntityWithKey = (entity, key, map, callback) =>
+    
+    map.entity_id ?= entity.id
+    map.entity_type ?= entity.constructor.name.toLowerCase()
+    map.key ?= key
+    
+    @create map, callback
+  
   @upsertForEntityByKey = (entity, key, map, callback) =>
     
     @forEntityByKey entity, key, (error, token) =>
@@ -96,8 +104,4 @@ module.exports = class Token extends Model
       
       return callback null, token if token?
       
-      map.entity_id ?= entity.id
-      map.entity_type ?= entity.constructor.name.toLowerCase()
-      map.key ?= key
-      
-      @create map, callback
+      @createForEntityWithKey entity, key, map, callback
