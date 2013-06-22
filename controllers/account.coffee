@@ -129,5 +129,5 @@ exports.registrations = (req, res, next) ->
     res.render 'user/registrations', {registrations}
 
 exports.referrals = (req, res) ->
-  Referral.getByUser req.user.id, (error, referrals) ->
-    res.render 'user/referrals', referrals: referrals or {}
+  Referral.forUser req.user, (error, referrals) ->
+    res.render 'user/referrals', {referrals}

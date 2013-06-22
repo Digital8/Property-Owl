@@ -41,8 +41,10 @@ module.exports = class Referral extends Model
     , (error) =>
       super callback
   
-  @getByUser = (user_id, callback) =>
+  @forUser = (user, callback) =>
     
-    @db.query "SELECT * FROM #{@table.name} WHERE user_id = ?", [user_id], (error, rows) =>
+    @db.query "SELECT * FROM #{@table.name} WHERE user_id = ?", [user.id], (error, rows) =>
       
-      callback error, rows
+      return callback error if error?
+      
+      async.map rows, @new.bind(this), callback

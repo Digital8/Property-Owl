@@ -7,36 +7,42 @@ block content
     include ../left_nav
     
     #center-col
+      
       h1 My Account
       
       .grid-header.form-header.pane-nav
+        
         include menu
       
       .tabs.account  
+        
         .tabs-content
-          .padding  
-            table.admin-gridview
-              thead
-                tr
-                  td Email
-                  td Name
-                  td Comment
-                  td Sent
-                  td
+          
+          .padding
+            
+            - if (referrals.length)
               
-              tbody
-                - if (referrals && referrals.length)
+              table.admin-gridview
+                
+                thead
+                  tr
+                    td Email
+                    td Name
+                    td Comment
+                    td Sent
+                    td
+                
+                tbody
+                  
                   - each referral in referrals
                     tr
                       td= referral.email
                       td #{referral.first_name} #{referral.last_name}
                       td= referral.comment
-                      td= referral.created_at
-                      - if (referral.entity_id != '0')
-                        td: a(href="/#{referral.entity_type}s/#{referral.entity_id}") View
-                      - else
-                        td Generic
-                -else
-                  h4 You have not refered any listings
+                      td= moment(referral.created_at).format('L')
+                      td: a(href=referral.entity.url) View
+            - else
+              
+              h4 You have no referrals. Try <a href="/refer-a-friend">Referring A Friend</a>!
     
     include ../right_nav
