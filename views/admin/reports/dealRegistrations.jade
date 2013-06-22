@@ -5,7 +5,7 @@ block content
     include ../menu
     h1 Reports
       span.secondary  - Deal Registrations
-    include reportsMenu
+    include _menu
     .grid-header
       form#search-form(action="", method="get")
         select#propertyMonth(name="month")
@@ -36,7 +36,7 @@ block content
       - var graph = []
       - each registration in registrations
         tr
-          - var listed = new Date(registration.registered_at)
+          - var listed = new Date(registration.created_at)
           td #{moment(listed).format('DD/MM/YYYY')}
           td #{registration.first_name} #{registration.last_name}
           - graph.push([registration.first_name + ' ' + registration.last_name, registration.total])
@@ -65,10 +65,10 @@ block content
         data.addColumn('number', 'Slices');
         data.addRows(
           !{JSON.stringify(graph)});
-
+        
         // Set chart options
         var options = {
-          'title':'Service Enquiries',
+          'title':'Deal Registrations',
           'width':400,
           'height':300,
         };

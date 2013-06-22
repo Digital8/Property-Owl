@@ -54,11 +54,19 @@ module.exports = class Registration extends Model
     
     vals = []
     
-    query = "SELECT U.first_name, U.last_name, R.registered_at, count(registration_id) AS total FROM po_registrations AS R INNER JOIN po_users AS U ON R.user_id = U.user_id "
+    query = """
+    SELECT
+      U.first_name,
+      U.last_name,
+      R.created_at,
+      count(registration_id) AS total
+    FROM registrations AS R
+    INNER JOIN users AS U ON R.user_id = U.user_id
+    """
     
     if cred.month != ''
       console.log cred
-      query += ' AND MONTH(R.registered_at) = ?'
+      query += ' AND MONTH(R.created_at) = ?'
       vals.push cred.month
 
     query += ' GROUP BY U.user_id'

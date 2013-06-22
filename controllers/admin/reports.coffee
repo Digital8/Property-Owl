@@ -3,10 +3,19 @@ async = require 'async'
 exports.index = (req, res) ->
   
   query = """
-  SELECT CONCAT(YEAR(registered_at),'-',MONTH(registered_at),'-01') AS 'date', Count(*) as 'count'
+  SELECT
+    CONCAT(
+      YEAR(created_at),
+      '-',
+      MONTH(created_at),
+      '-01'
+    ) AS 'date',
+    Count(*) as 'count'
   FROM registrations
-  WHERE type = ?
-  GROUP BY YEAR(registered_at), MONTH(registered_at)
+  WHERE entity_type = ?
+  GROUP BY
+    YEAR(created_at),
+    MONTH(created_at)
   """
   
   async.parallel
@@ -121,8 +130,8 @@ exports.advertisingClicks = (req, res) ->
       
       res.render 'admin/reports/advertisingClicks', {advertisers, clicks}
 
-exports.friendReferrals = (req, res) ->
+exports.referrals = (req, res) ->
   
   Referral.all (error, referrals) ->
     
-    res.render 'admin/reports/friendReferrals', {referrals}
+    res.render 'admin/reports/referrals', {referrals}

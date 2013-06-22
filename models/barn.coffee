@@ -33,6 +33,9 @@ module.exports = class Barn extends Model
     Object.defineProperty this, 'code',
       get: => _s.pad @id.toString(), 5, '0'
     
+    Object.defineProperty this, 'url',
+      get: => "/barns/#{@id}"
+    
     super
   
   hydrate: (callback) ->

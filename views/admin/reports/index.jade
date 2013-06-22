@@ -1,12 +1,15 @@
 extends ../../layout
 
 block content
+  
   .container.row.main
+    
     include ../menu
     
     h1 Reports
-    include reportsMenu
-
+    
+    include menu
+    
     script
       window.barns = !{JSON.stringify(barns)};
       window.owls = !{JSON.stringify(owls)};

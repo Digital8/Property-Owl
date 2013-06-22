@@ -58,6 +58,9 @@ module.exports = class Owl extends Model
         else
           return
     
+    Object.defineProperty this, 'url',
+      get: => "/owls/#{@id}"
+    
     super
   
   hydrate: (callback) ->

@@ -1,0 +1,54 @@
+extends ../../layout
+
+block content
+  
+  .container.row.main
+    
+    include ../menu
+    
+    h1 Reports
+      
+      span.secondary  - Friend Referrals
+    
+    include _menu
+    
+    style
+      td {
+        text-align: center;
+      }
+    
+    table.admin-gridview
+      
+      thead
+        tr
+          th
+          th(colspan=2) Referrer
+          th(colspan=2) Friend
+          th
+      
+      thead
+        tr
+          th Date
+          th Name
+          th Email
+          th Name
+          th Email
+          th Deal
+      
+      tbody
+      - each referral in referrals
+        tr
+          - var referred = new Date(referral.created_at)
+          - referral.user || (referral.user = {})
+          td #{moment(referred).format('DD/MM/YYYY')}
+          td #{referral.user.name}
+          td #{referral.user.email}
+          td #{referral.name}
+          td #{referral.email}
+          td
+            a(href=referral.entity.url) #{referral.entity.code}
+      
+      tfoot
+        tr
+          td(colspan='7')
+            &nbsp;
