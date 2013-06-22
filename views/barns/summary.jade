@@ -1,20 +1,24 @@
 .listing-summary
   
   .header
+    
     h2: a(href="/barns/#{barn.id}")= barn.fullAddress
   
   .listing-body
     
     .listing-thumb
+      
       a(href='/barns/#{barn.barn_id}')
         img.thumb(src=barn.heroImageURL(), alt='#{barn.fullAddress}')
     
     .listing-details
+      
       .summary
         h3= barn.title
         p= _s.prune(barn.description,250)
       
       .listing-links
+        
         a.save-button(href='#')
           img#save-icon(src='/images/plus-icon.png', alt='Save this barn listing')
           |  Save

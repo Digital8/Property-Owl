@@ -7,11 +7,16 @@ block content
     include ../left_nav
     
     #center-col
+      
       h1 Owl Deals
-      - if (locals.owls && owls.length)
-        - each owl in owls
+      
+      if locals.owls && owls.length
+        
+        each owl in owls
+          
           include summary
-      - else
+      
+      else
         p There are no current property deals right now but keep an eye out because we are always listing new deals.
     
     include ../right_nav

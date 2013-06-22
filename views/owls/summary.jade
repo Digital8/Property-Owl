@@ -1,5 +1,7 @@
 .listing-summary
+  
   .header
+    
     .listing-code
       = owl.code
 
@@ -11,14 +13,18 @@
   .listing-body
     
     .listing-thumb
+      
       a(href='/owls/#{owl.owl_id}')
+        
         img.thumb(src=owl.heroImageURL(), alt='#{owl.fullAddress}')
         
         //- TODO show if top listing
         //- img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
     
     .listing-details
+      
       .features
+        
         span.owl-type
           strong= owl.developmentType.name
         
@@ -44,13 +50,14 @@
           = (owl.cars>1) ? 's' : ''
       
       .summary
+        
         h3= owl.title
         
         p= _s.prune(owl.description, 150)
       
       .listing-links
         
-        a.save-button.add-bookmark(href='#', data-deal-type="owl", data-deal-id=owl.id)
+        a.save-button.add-bookmark(href='#', data-deal-type='owl', data-deal-id=owl.id)
           img#save-icon(src='/images/plus-icon.png', alt='Save this owl')
           - if (owl.bookmark)
             |  Saved

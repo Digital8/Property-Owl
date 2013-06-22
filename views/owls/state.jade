@@ -7,17 +7,23 @@ block content
     include ../left_nav
     
     #center-col
+      
       h1 Owl Deals for #{state.toUpperCase()}
+      
       form.sort-form
+        
         label(for="sortby") Sort by
+        
         | &nbsp;
+        
         select#sortby(onchange="location = this.options[this.selectedIndex].value;")
           option(value='/owls/state/#{state}?sort=time', selected=sort == 'time') Date Listed
           option(value='/owls/state/#{state}?sort=deal', selected=sort == 'deal') Best Deal Value
-      - if (locals.owls && owls.length)
-        - each owl in owls
+      
+      if locals.owls && owls.length
+        each owl in owls
           include summary
-      - else
+      else
         p There are no current property deals for #{state.toUpperCase()} right now but keep an eye out because we are always listing new deals. 
     
     include ../right_nav
