@@ -14,7 +14,7 @@ block content
     
     .details
       
-      form.details-form.fake.owl(action="/admin/owls/#{owl.id}", method='post', enctype='multipart/form-data', data-id=owl.id)
+      form.details-form.fake.owl(action="/owls/#{owl.id}", method='post', enctype='multipart/form-data', data-id=owl.id)
         
         input(type='hidden', name='_method', value='put')
         
@@ -24,7 +24,7 @@ block content
         
         .submit
           input.button(type='submit', value='Edit Owl').owl-button
-          a.left-button(href='/admin/owls') Cancel
+          a.left-button(href='/owls') Cancel
   script
     $(document).ready(function(){
         $('.owl-button').click(function(e){

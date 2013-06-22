@@ -6,9 +6,9 @@ module.exports = ->
   clone = (count) ->
     id = $form.data 'id'
     
-    $.post "/admin/owls/#{id}/clone", count: count, (body, res, jqXHR) ->
+    $.post "/owls/#{id}/clone", count: count, (body, res, jqXHR) ->
       if jqXHR.status is 200 then alert 'Clone completed'
-      # window.location = '/admin/owls'
+      # window.location = '/owls'
   
   $range = $ '.clone_range'
   $clone_label = $ '.clone_label'

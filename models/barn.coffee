@@ -36,6 +36,9 @@ module.exports = class Barn extends Model
     Object.defineProperty this, 'url',
       get: => "/barns/#{@id}"
     
+    Object.defineProperty this, 'fullAddress', get: =>
+      (_.compact [@address, @suburb, @state.toUpperCase(), @postcode]).join ', '
+    
     super
   
   hydrate: (callback) ->
@@ -116,10 +119,6 @@ module.exports = class Barn extends Model
     hero ?= @images.pop()
     
     return "/uploads/#{hero.filename}"
-  
-  fullAddress: ->
-    parts = _.compact [@address, @suburb, @state.toUpperCase(), @postcode]
-    return parts.join ', '
   
   upload: (req, callback) ->
     

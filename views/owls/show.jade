@@ -4,105 +4,20 @@ extends ../layout
 
 block content
   
-  if (owl && owl.id)
+  if locals.owl && owl.id
     
-    div#fb-root
+    include ../common/_facebook
     
-    script
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-
-      $(document).ready(function(){
-        // enlarge slideshow
-        $(".evoslider").each(function() {
-          var slider = $(this);
-
-          slider.on("mouseenter", function() {
-            slider.append("<a href=\"#\" class=\"enlarge-slider\">Click to enlarge</a>");
-          });
-
-          slider.on("mouseleave", function() {
-            $(".enlarge-slider", slider).remove();
-          });
-
-
-          $(".enlarge-slider, .evoImage", slider).live("click", function() {
-            $("body").append("<div class=\"window-overlay\" id=\"large-slideshow\"><div class=\"modal\"><a href=\"#\" class=\"close-modal\">CLOSE <img src=\"/images/modal-close-white.png\" alt=\"Close\" /></div></div>");
-            var overlay = $("#large-slideshow");
-            duplicateSlider = initialSlider.clone();
-            $(".modal", overlay).append(duplicateSlider);
-            //(function (mySlider) {
-              //console.log ('slider index: ' + mySlider.getIndex());
-              var duplicate = duplicateSlider.evoSlider({
-                mode: "slider",
-                controlNav: true,
-                controlNavMode: "thumbnails",
-                controlNavVertical: false,
-                autoplay: false,
-                controlNavPosition: "outside",
-                controlNavVerticalAlign: "right",
-                width: "800",
-                height: "466",
-                mouse: false,
-                imageScale: "fitImage",
-                easing: "linear",
-                keyboard: false,
-                startIndex: mySlider.getIndex()
-              });
-            //})(mySlider);
-            overlay.fadeIn(150);
-
-            var documentheight = $(document).height();
-            var screenwidth = $(window).width();
-            var sliderwidth = 320;
-
-            if(screenwidth >= 1000) {
-              sliderwidth = 800;
-              //console.log('fullscreen');
-            }
-            else if(screenwidth >= 650) {
-              sliderwidth = 640;
-              //console.log('tablet');
-            }
-            else {
-              //console.log('mobile');
-            }
-
-            $('#large-slideshow .modal').css({left:(screenwidth-sliderwidth)/2+'px'});
-            $('#large-slideshow').css({height:documentheight+'px'});
-            return false;
-          });
-        });
-
-        // window overlay
-        $(".window-overlay, .close-modal").live("click", function(){
-          $(".window-overlay").fadeOut(150, function(){
-            $(".window-overlay").remove();
-          });
-        });
-
-        $(".modal").live("click", function(){
-          return false;
-        });
-      });  
+    include ../common/_slider
     
     .container.row.main
-      #deal_id(style='display:none')
-        | #{owl.owl_id}
       
       include ../left_nav
       
       #wide-center-col
-        div#entity(style="display: none;") owl
-        div#entity_id(style="display: none;")= owl.id
             
         p(style='float: right;')= 'Property No. ' + owl.code
-
+        
         if(typeof(bestdeal) != 'undefined' && bestdeal)
           h1 Australia's Best Property Deal
         else
@@ -130,7 +45,7 @@ block content
             span.price-highlight $
               span.price= owl.price
             
-            | #{owl.fullAddress()}
+            | #{owl.fullAddress}
             
             hr.light
             
@@ -204,48 +119,49 @@ block content
                   - each feature in owl.otherFeatures
                     li= feature
           #right
-            - if (req.user && req.user.isHacker())
-              .more-info(style='text-align: center; background: #BADA55;')
-                a(href="/admin/owls/#{owl.id}/edit") Admin
             
-            - if (owl.deals)
+            if req.user && req.user.isHacker()
+              .more-info(style='text-align: center; background: #BADA55;')
+                a(href="/owls/#{owl.id}/edit") Admin
+            
+            if owl.deals
               .deal
                 h2
                   | Reveal the Deal
                   img.arrow(src='/images/blue-arrow-icon-down.png', alt='Reveal the Deal')
-                - if (owl.deals.length)
+                if owl.deals.length
                   ul
                     - each deal in owl.deals
                       li.price= '$' + deal.value.toString() + ' ' + deal.description
-                - else
+                else
                   ul
                     li No deals have been listed
               
               .secure-deal
                 a.show-secure-deal.secure-button.express-button(href='#', data-modal='registration', data-entity_id="#{owl.id}", data-entity_type="owl") Express Your Interest!
             
-              - if(owl.barn)
+              if owl.barn
                 .barn-link
                   a(href="/barns/#{owl.barn_id}") View Barn Deal
                     img#barn-image(src='/images/barn-link.png', alt='View Barn Deal')
             
             include ../map
+            
             mixin map(owl)
             
             br
             
-            a(href="http://maps.google.com.au/maps?q=#{owl.fullAddress()}", target="_blank") View Larger Map
+            a(href="http://maps.google.com.au/maps?q=#{owl.fullAddress}", target="_blank") View Larger Map
             
-            - if (owl.files && owl.files.length)
+            if owl.files && owl.files.length
               .more-info
                 h2 
                   | More Information
                   img.arrow(src='/images/blue-arrow-icon-down.png', alt='More Information')
-                - if (owl.files)
+                
+                if owl.files
                   ul
                     - each file in owl.files
-                      li
-                        a(href="/uploads/#{file.filename}") #{file.description}
-                - else
-                  ul
-                    li No files have been uploaded
+                      li: a(href="/uploads/#{file.filename}")= file.description
+                else
+                  ul: li No files have been uploaded

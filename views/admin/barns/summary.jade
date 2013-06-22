@@ -3,7 +3,7 @@ tr(data-id=barn.id, data-entity_type='barn')
   - var listed = new Date(barn.created_at)
   td(style='text-align: center;') #{moment(listed).format('DD/MM/YYYY')}
   td= barn.user.first_name + ' ' + barn.user.last_name
-  td= barn.fullAddress()
+  td= barn.fullAddress
   td Current
   - if (typeof(barn.owls) != 'undefined')
     td= barn.owls.length
@@ -12,11 +12,11 @@ tr(data-id=barn.id, data-entity_type='barn')
   td 0
   
   td.actions
-    a(href="/admin/barns/#{barn.id}/edit", alt='Edit Barn Deal')
+    a(href="/barns/#{barn.id}/edit", alt='Edit Barn Deal')
       img(src='/images/edit.png', alt='Edit')
       | Edit
   
   td.actions
-    a.delete(href='/admin/barns/#{barn.barn_id}/delete', alt='Delete Barn Deal')
+    a.delete(href='/barns/#{barn.barn_id}/delete', alt='Delete Barn Deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete

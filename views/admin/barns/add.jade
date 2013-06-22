@@ -13,7 +13,7 @@ block content
     
     .details
       
-      form.details-form.fake(action='/admin/barns', method='post', enctype='multipart/form-data', data-id=barn.id)
+      form.details-form.fake(action='/barns', method='post', enctype='multipart/form-data', data-id=barn.id)
         
         include ../../flashify
         
@@ -21,7 +21,7 @@ block content
         
         .submit
           input.button(type='submit', value='Create Barn').addBarn
-          a.left-button(href='/admin/barns') Cancel
+          a.left-button(href='/barns') Cancel
     script
       $(document).ready(function(){
           $('.addBarn').click(function(e){

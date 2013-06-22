@@ -16,7 +16,7 @@
     tfoot
       tr
         td(colspan='6')
-          a.button(href="/admin/owls") Manage All Owl Deals
+          a.button(href="/owls") Manage All Owl Deals
 - else
   
   table.admin-gridview.pending-owls(data-entity_type='owl')
@@ -36,7 +36,7 @@
        td #{moment(listed).format('DD/MM/YYYY')}
        td= owl.title
        td.actions
-         a(href='/admin/owls/#{owl.id}/edit', alt='edit owl deal')
+         a(href='/owls/#{owl.id}/edit', alt='edit owl deal')
            img(src='/images/edit.png', alt='Edit')
            | Edit
         td.actions
@@ -46,4 +46,4 @@
     tfoot
       tr
         td(colspan='6')
-          a.button(href="/admin/owls") Manage All Owl Deals
+          a.button(href="/owls") Manage All Owl Deals

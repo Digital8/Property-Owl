@@ -3,124 +3,20 @@ extends ../layout
 block content
   
   .container.row.main
-    div#fb-root
-    script
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-
-      $(document).ready(function(){
-        // enlarge slideshow
-        $(".evoslider").each(function() {
-          var slider = $(this);
-
-          slider.on("mouseenter", function() {
-            slider.append("<a href=\"#\" class=\"enlarge-slider\">Click to enlarge</a>");
-          });
-
-          slider.on("mouseleave", function() {
-            $(".enlarge-slider", slider).remove();
-          });
-
-          $(".enlarge-slider, .evoImage", slider).live("click", function() {
-            $("body").append("<div class=\"window-overlay\" id=\"large-slideshow\"><div class=\"modal\"><a href=\"#\" class=\"close-modal\">CLOSE <img src=\"/images/modal-close-white.png\" alt=\"Close\" /></div></div>");
-            var overlay = $("#large-slideshow");
-            duplicateSlider = initialSlider.clone();
-            $(".modal", overlay).append(duplicateSlider);
-            //(function (mySlider) {
-              //console.log ('slider index: ' + mySlider.getIndex());
-              var duplicate = duplicateSlider.evoSlider({
-                mode: "slider",
-                controlNav: true,
-                controlNavMode: "thumbnails",
-                controlNavVertical: false,
-                autoplay: false,
-                controlNavPosition: "outside",
-                controlNavVerticalAlign: "right",
-                width: "800",
-                height: "466",
-                mouse: false,
-                easing: "linear",
-                imageScale: "fitImage",
-                keyboard: false,
-                directionNav: true,
-                startIndex: mySlider.getIndex()
-              });
-            //})(mySlider);
-            overlay.fadeIn(150);
-
-            var documentheight = $(document).height();
-            var screenwidth = $(window).width();
-            var sliderwidth = 320;
-
-            if(screenwidth >= 1000) {
-              sliderwidth = 800;
-              //console.log('fullscreen');
-            }
-            else if(screenwidth >= 650) {
-              sliderwidth = 640;
-              //console.log('tablet');
-            }
-            else {
-              //console.log('mobile');
-            }
-
-            $('#large-slideshow .modal').css({left:(screenwidth-sliderwidth)/2+'px'});
-            $('#large-slideshow').css({height:documentheight+'px'});
-            return false;
-          });
-        });
-
-        // window overlay
-        $(".window-overlay, .close-modal").live("click", function(){
-          $(".window-overlay").fadeOut(150, function(){
-            $(".window-overlay").remove();
-          });
-        });
-
-        $(".modal").live("click", function(){
-          return false;
-        });
-      });  
-
+    
+    include ../common/_facebook
+    
+    include ../common/_slider
+    
     #left-col
+      
       include ../left_nav
-      
-      
-      
-      //- .share
-      //-   ul
-      //-     li
-      //-       a(href='#', onclick='javascript:window.print()')
-      //-         img(src='/images/share-print-icon.png', alt='Print')
-      //-         | Print Deal
-      //-     li
-      //-       img(src='/images/share-save-icon.png', alt='Save')
-      //-       | Save Deal
-      //-     li
-      //-       img(src='/images/share-refer-icon.png', alt='Refer')
-      //-       | Refer A Friend
-      //-     li
-      //-       .fb-like(data-href='http://www.propertyowl.com.au/barns#{barn.barn_id}', data-send='false', data-layout='button_count', data-width='125', data-show-faces='false')
-      //-     li
-      //-       a.twitter-share-button(href='https://twitter.com/share', data-url='http://www.propertyowl.com.au/barns#{barn.barn_id}') Tweet
-      //-       script
-      //-         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
     
     #wide-center-col
-
+      
       h1= barn.title
-
-      //
-        image slider
-      //
-        - locals.owli = barn.owls[0]
-        - if (typeof(owli) != 'undefined' && owli.images && owli.images.length)
-      - if (barn.images && barn.images.length)
+      
+      if barn.images && barn.images.length
         #mySlider.evoslider.galleriffic
           dl
             - var i = 0
@@ -135,13 +31,12 @@ block content
                 dt "slide #{i}"
                   dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
                 - i = i+1
-      - else
+      else
         strong No barn images have been uploaded!
-      div#entity(style="display: none;") barn
-      div#entity_id(style="display: none;")= barn.id
+      
       .property-info
         
-        - if (barn.owls && barn.owls.length)
+        if barn.owls && barn.owls.length
           
           table.barn-lots
             
@@ -195,7 +90,7 @@ block content
         #right
           - if (req.user && req.user.isAdmin())
             .more-info(style='text-align: center; background: #BADA55;')
-              a(href="/admin/barns/#{barn.id}/edit") Admin
+              a(href="/barns/#{barn.id}/edit") Admin
           
           .deal
             h2
@@ -206,18 +101,21 @@ block content
               ul
                 - each deal in barn.deals
                   li.price $ #{deal.value} #{deal.description}
+            
             - else
               ul
                 li No barn deals have been listed
-              
+          
           //- .secure-deal
           //-   a.show-secure-deal.secure-button.express-button(href='#',data-id="#{barn.id}", data-type="barn") Express Your Interest!
+          
           .time-left
             p
               | Time left
               span.time 04:02:35
           
           include ../map
+          
           mixin map(barn)
           
           br
@@ -229,9 +127,8 @@ block content
               | More Information
               img.arrow(src='/images/blue-arrow-icon-down.png', alt='More Information')
             ul
-              if barn.files.length == 0
+              unless barn.files.length
                 li No files have been uploaded
               else
                 each file in barn.files
-                  li
-                    a(href="/uploads/#{file.filename}") #{file.description}
+                  li: a(href="/uploads/#{file.filename}")= file.description

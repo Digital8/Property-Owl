@@ -8,6 +8,6 @@ tr.media(data-id=image.id, data-type=image.type, data-entity-id=owl.id)
     input(type='radio', name='feature_image', checked=owl.feature_image == image.filename, value=image.filename)
   
   td
-    a.delete(href='/admin/owls/#{owl.id}/delete', alt='delete owl deal')
+    a.delete(href='/owls/#{owl.id}/delete', alt='delete owl deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete

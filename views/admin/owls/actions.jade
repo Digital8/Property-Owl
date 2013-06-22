@@ -3,21 +3,21 @@
     
     if(action != 'add' && action != 'show')
       li
-        a(href='/admin/owls/add')
+        a(href='/owls/add')
          img(src='/images/add.png')
          | &nbsp;
          | Add Owl Deal
     
     if(locals.owl && action == 'show')
       li
-        a(href="/admin/owls/#{owl.id}/edit")
+        a(href="/owls/#{owl.id}/edit")
          img(src='/images/manage.png')
          | &nbsp;
          | Edit Owl Deal
     
     if(action != 'index')
       li
-        a(href='/admin/owls')
+        a(href='/owls')
           img(src='/images/manage.png')
           | &nbsp;
           | Manage Owl Deals

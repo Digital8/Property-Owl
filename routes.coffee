@@ -75,7 +75,7 @@ module.exports = ({app, controllers}) ->
   # affiliates
   app.get '/products-and-services', controllers.affiliates.browse
   
-  app.get '/owls',                 controllers.owls.index
+  # app.get '/owls',                 controllers.owls.index
   app.get '/owls/:id(\\d+)/print', controllers.owls.print
   app.get '/owls/:id(\\d+)',       controllers.owls.show
   app.get '/owls/top',             controllers.owls.top
@@ -156,14 +156,14 @@ module.exports = ({app, controllers}) ->
   app.del   '/files/:id(\\d+)', (authorize acl.admin), controllers.files.destroy
   
   for key in ['owls', 'barns']
-    app.del   '/key/:id(\\d+)',        (authorize acl.developer), controllers[key].destroy
-    app.get   '/key',                  (authorize acl.developer), controllers[key].index
-    app.get   '/key/:id(\\d+)',        (authorize acl.developer), controllers[key].show
-    app.get   '/key/:id(\\d+)/edit',   (authorize acl.developer), controllers[key].edit
-    app.get   '/key/add',              (authorize acl.developer), controllers[key].add
-    app.patch '/key/:id(\\d+)',        (authorize acl.developer), controllers[key].patch
-    app.post  '/key', (authorize 2),   (authorize acl.developer), controllers[key].create
-    app.put   '/key/:id(\\d+)',        (authorize acl.developer), controllers[key].update
+    app.del   "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].destroy
+    app.get   "/#{key}",                  (authorize acl.developer), controllers[key].index
+    app.get   "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].show
+    app.get   "/#{key}/:id(\\d+)/edit",   (authorize acl.developer), controllers[key].edit
+    app.get   "/#{key}/add",              (authorize acl.developer), controllers[key].add
+    app.patch "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].patch
+    app.post  "/#{key}", (authorize 2),   (authorize acl.developer), controllers[key].create
+    app.put   "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].update
   
   app.post '/owls/:id(\\d+)/clone', (authorize acl.admin), controllers.owls.clone
   

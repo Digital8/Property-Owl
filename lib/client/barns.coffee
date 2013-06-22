@@ -59,7 +59,7 @@ module.exports = ->
             event.preventDefault()
             p = $(this)
             
-            $.post "/admin/barns/#{barnId}/owls", id: owl.id,
+            $.post "/barns/#{barnId}/owls", id: owl.id,
               row = makeListRow owl
               row.appendTo $('.owl-matrix.nested tbody')
               p.parent().parent().remove()
@@ -73,7 +73,7 @@ module.exports = ->
                   owlId = $row.data 'owl-id'
 
                   if barnId? and owlId?
-                    $.delete "/admin/barns/#{barnId}/owls/#{owlId}", ->
+                    $.delete "/barns/#{barnId}/owls/#{owlId}", ->
                       $row.remove()
                       update()
         else
@@ -100,6 +100,6 @@ module.exports = ->
       owlId = $row.data 'owl-id'
 
       if barnId? and owlId?
-        $.delete "/admin/barns/#{barnId}/owls/#{owlId}", ->
+        $.delete "/barns/#{barnId}/owls/#{owlId}", ->
           $row.remove()
           update()

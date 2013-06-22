@@ -12,7 +12,7 @@
     
     .listing-thumb
       a(href='/owls/#{owl.owl_id}')
-        img.thumb(src=owl.heroImageURL(), alt='#{owl.fullAddress()}')
+        img.thumb(src=owl.heroImageURL(), alt='#{owl.fullAddress}')
         
         //- TODO show if top listing
         //- img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')
@@ -62,7 +62,7 @@
           |  Details
         
         - if (req.user && req.user.isHacker())
-          a.admin-button(href='/admin/owls/#{owl.id}/edit')
+          a.admin-button(href='/owls/#{owl.id}/edit')
             img#admin-icon(src='/images/view.png', alt='View owl details')
             |  Admin
     

@@ -10,13 +10,13 @@ block content
       
       div!= cms
       
-      - if (locals.barns && barns.length > 0)
+      if locals.barns && barns.length
         
-        - each barn in barns
+        each barn in barns
           
           include summary
       
-      - else
+      else
         
         hr
         

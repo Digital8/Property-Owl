@@ -13,7 +13,7 @@ block content
     
     .details
       
-      form.details-form(action="/admin/barns/#{barn.id}", method='post', enctype='multipart/form-data', data-id=barn.id)
+      form.details-form(action="/barns/#{barn.id}", method='post', enctype='multipart/form-data', data-id=barn.id)
         
         input(type='hidden', name='_method', value='put')
         
@@ -23,7 +23,7 @@ block content
 
         .submit
           input.button(type='submit', value='Edit Barn').addBarn
-          a.left-button(href="/admin/barns") Cancel
+          a.left-button(href="/barns") Cancel
   script
     $(document).ready(function(){
         $('.addBarn').click(function(e){

@@ -7,7 +7,7 @@ module.exports = ->
       owlId = ($ 'form').data 'id'
       dealId = row.data 'id'
       
-      $.patch "/admin/owls/#{owlId}/deals/#{dealId}",
+      $.patch "/owls/#{owlId}/deals/#{dealId}",
         deal_type_id: $type.val()
       , ->
     
@@ -17,7 +17,7 @@ module.exports = ->
       owlId = ($ 'form').data 'id'
       dealId = row.data 'id'
       
-      $.patch "/admin/owls/#{owlId}/deals/#{dealId}",
+      $.patch "/owls/#{owlId}/deals/#{dealId}",
         description: $description.val()
       , ->
     
@@ -27,7 +27,7 @@ module.exports = ->
       owlId = ($ 'form').data 'id'
       dealId = row.data 'id'
       
-      $.patch "/admin/owls/#{owlId}/deals/#{dealId}",
+      $.patch "/owls/#{owlId}/deals/#{dealId}",
         value: $value.val()
       , ->
     
@@ -40,7 +40,7 @@ module.exports = ->
     deleteButton.click (event) ->
       event.preventDefault()
       
-      $.delete "/admin/owls/#{owlId}/deals/#{dealId}", (response, body, jqXHR) ->
+      $.delete "/owls/#{owlId}/deals/#{dealId}", (response, body, jqXHR) ->
         if jqXHR.status is 200
           row.remove()
 

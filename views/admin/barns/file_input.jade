@@ -10,6 +10,6 @@ tr.media(data-id=file.id, data-type=file.type, data-entity-id=barn.id)
     input(type='text', name="files[#{file.id}][description]", value=file.description)
   
   td
-    a.delete(href='/admin/barns/#{barn.id}/delete', alt='delete barn deal')
+    a.delete(href='/barns/#{barn.id}/delete', alt='delete barn deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete

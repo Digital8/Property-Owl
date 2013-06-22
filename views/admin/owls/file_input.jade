@@ -10,6 +10,6 @@ tr.media(data-id=file.id, data-type=file.type, data-entity-id=owl.id)
     input(type='text', name="files[#{file.id}][description]", value=file.description)
   
   td
-    a.delete(href='/admin/owls/#{owl.id}/delete', alt='delete owl deal')
+    a.delete(href='/owls/#{owl.id}/delete', alt='delete owl deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete

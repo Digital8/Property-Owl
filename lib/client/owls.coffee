@@ -81,7 +81,7 @@ module.exports = ->
     approved.change (event) ->
       event.preventDefault()
       
-      $.patch "/admin/owls/#{id}",
+      $.patch "/owls/#{id}",
         approved: approved.is ':checked'
       , ->
         
@@ -91,6 +91,6 @@ module.exports = ->
     
     picker.change (event) ->
       
-      $.patch "/admin/owls/#{id}",
+      $.patch "/owls/#{id}",
         approved_at: picker.val()
       , (body, res, xhr) ->

@@ -13,7 +13,7 @@ block content
     
     .details
       
-      form.details-form.fake(action='/admin/owls', method='post', enctype='multipart/form-data', data-id=owl.id)
+      form.details-form.fake(action='/owls', method='post', enctype='multipart/form-data', data-id=owl.id)
         
         include ../../flashify
         
@@ -21,7 +21,7 @@ block content
         
         .submit
           input.button(type='submit', value='Create Owl').owl-button
-          a.left-button(href='/admin/owls') Cancel
+          a.left-button(href='/owls') Cancel
   script
     $(document).ready(function(){
         $('.owl-button').click(function(e){

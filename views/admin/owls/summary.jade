@@ -4,7 +4,7 @@ tr(data-id=owl.id, data-entity_type='owl')
   - var listed = new Date(owl.created_at)
   td(style='text-align: center;') #{moment(listed).format('DD/MM/YYYY')}
   
-  td: a(href="/admin/owls/#{owl.id}")= owl.title
+  td: a(href="/owls/#{owl.id}")= owl.title
   
   td= owl.address
   
@@ -21,16 +21,16 @@ tr(data-id=owl.id, data-entity_type='owl')
   td(style='text-align: right;') #{owl.registrations.length}
   
   //- td.actions
-  //-   a(href='/admin/owls/#{owl.owl_id}/view', alt='view owl deal')
+  //-   a(href='/owls/#{owl.owl_id}/view', alt='view owl deal')
   //-     img(src='/images/view.png', alt='View')
   //-     | View
   
   td.actions
-    a.edit(href='/admin/owls/#{owl.owl_id}/edit', alt='edit owl deal')
+    a.edit(href='/owls/#{owl.owl_id}/edit', alt='edit owl deal')
       img(src='/images/edit.png', alt='Edit')
       | Edit
   
   td.actions
-    a.delete(href='/admin/owls/#{owl.owl_id}/delete', alt='delete owl deal')
+    a.delete(href='/owls/#{owl.owl_id}/delete', alt='delete owl deal')
       img(src='/images/delete.png', alt='Delete')
       | Delete

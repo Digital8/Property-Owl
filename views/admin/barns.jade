@@ -13,7 +13,7 @@
     tfoot
       tr
        td(colspan='5')
-        a.button(href="/admin/barns") Manage All Barn Deals
+        a.button(href="/barns") Manage All Barn Deals
 - else
   table.admin-gridview.pending-barns(data-entity_type='barn')
    
@@ -36,7 +36,7 @@
         td= barn.title
         
         td.actions
-          a(href='/admin/barns/#{barn.id}/edit', alt='edit barn deal')
+          a(href='/barns/#{barn.id}/edit', alt='edit barn deal')
             img(src='/images/edit.png', alt='Edit')
             | Edit
         
@@ -48,4 +48,4 @@
     tfoot
       tr
         td(colspan='5')
-          a.button(href="/admin/barns") Manage All Barn Deals
+          a.button(href="/barns") Manage All Barn Deals

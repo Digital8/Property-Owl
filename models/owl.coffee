@@ -61,6 +61,9 @@ module.exports = class Owl extends Model
     Object.defineProperty this, 'url',
       get: => "/owls/#{@id}"
     
+    Object.defineProperty this, 'fullAddress', get: =>
+      (_.compact [@address, @suburb, @state.toUpperCase(), @postcode]).join ', '
+    
     super
   
   hydrate: (callback) ->
@@ -187,9 +190,6 @@ module.exports = class Owl extends Model
       # console.log owl: @, hero: hero
       hero ?= @images.pop()
       return "/uploads/#{hero.filename}"
-  
-  fullAddress: ->
-    "#{@address}, #{@suburb}, #{@state.toUpperCase()}, #{@postcode}"
   
   displayTitleShort: ->
     shortAddress = _s.prune @address, 16

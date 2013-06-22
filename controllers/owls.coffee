@@ -64,7 +64,7 @@ exports.create = (req, res) ->
 
       secondary = 
         contactName: req.user?.first_name
-        link: "/admin/owls/#{owl.id}/edit"
+        link: "/owls/#{owl.id}/edit"
 
       email = ->
         # If owl created, send email
@@ -145,15 +145,15 @@ exports.update = (req, res) ->
 
         secondary =
           contactName: owl.user.first_name 
-          link: '/admin/owls/#{owl.id}/edit'
+          link: '/owls/#{owl.id}/edit'
           address: "#{owl.address}, #{owl.suburb}, #{owl.state.toUpperCase()}"
         
         # Send approval message
         (require '../../lib/mailer') template,'Property Approved', user, secondary, (results) ->
-          res.redirect '/admin/owls'
+          res.redirect '/owls'
 
       else
-        res.redirect '/admin/owls'
+        res.redirect '/owls'
     else
       n = 0
       async.whilst ->
@@ -176,7 +176,7 @@ exports.update = (req, res) ->
 
           secondary = 
             contactName: req.user?.first_name
-            dealLink: '/admin/owls/#{owl.insertId}/edit'
+            dealLink: '/owls/#{owl.insertId}/edit'
 
           email = ->
             # If owl created, send email
@@ -296,11 +296,11 @@ exports.clone = (req, res) ->
       
       res.send status: 200
 
-exports.index = (req, res) ->
+# exports.index = (req, res) ->
   
-  Owl.all (error, owls) ->
+#   Owl.all (error, owls) ->
     
-    res.render 'owls/index', owls: owls
+#     res.render 'owls/index', owls: owls
 
 exports.locate = (req, res) ->
   

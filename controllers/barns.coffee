@@ -45,7 +45,7 @@ exports.create = (req, res) ->
         email: req.user.email
       ,
         contactName: req.user.first_name
-        link: "/admin/barns/#{barn.id}/edit"
+        link: "/barns/#{barn.id}/edit"
       , (results) ->
         res.redirect 'admin/barns'
 
@@ -56,12 +56,12 @@ exports.delete = (req, res) ->
 exports.destroy = (req, res) ->
   Barn.delete req.params.id, (error) ->
     req.flash 'success', 'barn deleted'
-    res.redirect '/admin/barns'
+    res.redirect '/barns'
 
 exports.update = (req, res) ->
   
   finish = ->
-    res.redirect '/admin/barns'
+    res.redirect '/barns'
   
   Barn.update req.params.id, req.body, (error, barn) ->
     barn.upload req, ->
