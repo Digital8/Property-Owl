@@ -1,21 +1,31 @@
-
 include ../../flashify
 
 script(src="/js/tiny_mce/tiny_mce.js")
+
 .inputs
+  
   label.required(for='newsType') Article Type
+  
   select#newsType.half-field(name='type')
-    - each type in ['News', 'Research']
-      option(value=type.toLowerCase(), selected=post.type == type.toLowerCase())= type
+    
+    - each type in ['news', 'research']
+      
+      option(value=type, selected=post.type == type)= _s.humanize(type)
 
 .inputs
+  
   label.control-label(for="inputTitle") Title *
-  input#inputTitle(type='text', name='title', value=post.title,maxlength='100')
+  
+  input#inputTitle(type='text', name='title', value=post.title, maxlength='100')
 
 .inputs
+  
   label.control-label(for="inputTitle") Image
+  
   input#inputImage(type='file', name='image')
 
-.inputs 
+.inputs
+  
   label.control-label(for="inputContent") Content
+  
   textarea#inputContent.span8(name='content', rows='20')= post.content

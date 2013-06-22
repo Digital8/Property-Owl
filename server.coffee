@@ -94,6 +94,7 @@ app.configure ->
       res.locals.util = require 'util'
       res.locals._ = require 'underscore'
       res.locals.date_input = (date) -> (moment date)?.format 'YYYY-MM-DD'
+      res.locals.action = 'index'
       
       if app.argv.hack then req.session.user_id = config.hack?.user?.id or 1
       
@@ -139,7 +140,7 @@ app.configure ->
     
     app.use (req, res, next) ->
       if app.argv.hack
-        console.log req.user
+        # console.log req.user
         console.log url: req.url, body: req.body
       next error
     

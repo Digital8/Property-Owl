@@ -1,16 +1,17 @@
 .admin-actions
+  
   ul
     
-    if(action != 'add')
+    - if (action != 'add')
       li
-        a(href='/admin/posts/add')
+        a(href='/posts/add')
          img(src='/images/add.png')
          | &nbsp;
-         | Add News Article
+         | Add Article
     
-    if(action != 'index')
+    - if (action != 'index')
       li
-        a(href='/admin/posts')
+        a(href='/posts')
           img(src='/images/manage.png')
           | &nbsp;
-          | Manage News Articles
+          | Manage Articles

@@ -17,12 +17,14 @@ block content
       h2 News Details
       
       hr
-      form.details-form(action="/admin/posts/#{post.id}", method='post', enctype="multipart/form-data")
+      form.details-form(action="/posts/#{post.id}", method='post', enctype="multipart/form-data")
         
         input(type='hidden', name='_method', value='put')
         
         include inputs
         
         .submit
+          
           input.button(type='submit', value='Update News')
-          a.left-button(href='/admin/posts') Cancel
+          
+          a.left-button(href='/posts') Cancel

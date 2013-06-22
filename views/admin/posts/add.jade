@@ -18,10 +18,12 @@ block content
       
       hr
       
-      form.details-form(action='/admin/posts', method='post', enctype="multipart/form-data")
+      form.details-form(action='/posts', method='post', enctype="multipart/form-data")
         
         include inputs
         
         .submit
+          
           input.button(type='submit', value='Post News')
-          a.left-button(href='/admin/posts') Cancel 
+          
+          a.left-button(href='/posts') Cancel 

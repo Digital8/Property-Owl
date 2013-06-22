@@ -1,20 +1,19 @@
 tr(data-id=post.id)
   
-  td= post.type.charAt(0).toUpperCase() + post.type.substr(1).toLowerCase()
+  td= _s.humanize(post.type)
   
   td= post.title
   
-  - var listed = new Date(post.created_at)
-  td(style='text-align: center;') #{moment(listed).format('DD/MM/YYYY')}
+  td(style='text-align: center;')= moment(post.created_at).format('LLL')
   
   td.actions
     
-    a(href="/admin/posts/#{post.id}/edit")
+    a(href="/posts/#{post.id}/edit")
       img(src='/images/edit.png', alt='Edit')
       | Edit
   
   td.actions
     
-    a.delete(href="/admin/posts/#{post.id}/delete")
+    a.delete(href="/posts/#{post.id}/delete")
       img(src='/images/delete.png', alt='Delete')
       | Delete

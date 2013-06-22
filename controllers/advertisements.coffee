@@ -1,4 +1,10 @@
-_ = require 'underscore'
+exports.index   = (require '../behaviors/index')   Advertisement, views: 'admin/'
+exports.add     = (require '../behaviors/add')     Advertisement, views: 'admin/', all: [Adspace, Page, Advertiser]
+exports.create  = (require '../behaviors/create')  Advertisement, views: 'admin/'
+exports.edit    = (require '../behaviors/edit')    Advertisement, views: 'admin/', all: [Adspace, Page, Advertiser]
+exports.update  = (require '../behaviors/update')  Advertisement, views: 'admin/'
+exports.delete  = (require '../behaviors/delete')  Advertisement, views: 'admin/'
+exports.destroy = (require '../behaviors/destroy') Advertisement, views: 'admin/'
 
 exports.click = (req, res) ->
   

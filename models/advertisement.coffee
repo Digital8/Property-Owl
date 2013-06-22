@@ -9,6 +9,8 @@ module.exports = class Advertisement extends Model
     name: 'advertisements'
     key: 'advertisement_id'
   
+  @has (-> Media), key: 'image', cardinality: 1
+  
   @field 'description'
   @field 'advertiser_id'
   @field 'adspace_id'

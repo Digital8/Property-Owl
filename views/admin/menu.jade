@@ -1,5 +1,7 @@
 nav#admin-menu.admin-menu
+  
   ul.sf-menu
+    
     li
       - var c = (menu == 'dashboard') ? 'active' : ''
       a(href='/admin', class="#{c}") Dashboard
@@ -13,14 +15,15 @@ nav#admin-menu.admin-menu
         li
           a(href='/admin/barns') Barn Deals
     - if (req.user && req.user.isAdmin())
+      
       li
         - var c = (menu == 'advertising') ? 'active' : ''
-        a(href='/admin/advertisements', class="#{c}") Advertising
+        a(href='/advertisements', class="#{c}") Advertising
         ul
           li
-            a(href='/admin/advertisements') Advertisements
+            a(href='/advertisements') Advertisements
           li
-            a(href='/admin/advertisers') Advertisers
+            a(href='/advertisers') Advertisers
       
       li
         - var c = (menu == 'products-service-suppliers') ? 'active' : ''
@@ -28,11 +31,11 @@ nav#admin-menu.admin-menu
       
       li
         - var c = (menu == 'posts') ? 'active' : ''
-        a(href='/admin/posts', class="#{c}") News / Research
+        a(href='/posts', class="#{c}") News / Research
       
       li
         - var c = (menu == 'pages') ? 'active' : ''
-        a(href='/admin/pages', class="#{c}") Pages
+        a(href='/pages', class="#{c}") Pages
       
       li
         - var c = (menu == 'pages') ? 'active' : ''
@@ -42,6 +45,6 @@ nav#admin-menu.admin-menu
         - var c = (menu == 'reports') ? 'active' : ''
         a(href='/admin/reports', class="#{c}") Reports
       
-      li  
+      li
         - var c = (menu == 'members') ? 'active' : ''
-        a(href='/admin/members', class="#{c}") Members
+        a(href='/users', class="#{c}") Users

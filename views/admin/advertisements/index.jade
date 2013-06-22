@@ -1,7 +1,9 @@
 extends ../../layout
 
 block content
+  
   .container.row.main
+    
     include ../menu
    
     h1 Advertisements
@@ -11,21 +13,23 @@ block content
     .grid-header.form-header
 
     table.admin-gridview.advertisements-grid
+      
       thead
+        
         tr
           td Description
           td Advertiser
-          td Page
-          //- td Space
+          td Pages
           td Image
-          //- td Duration
           td Visible
           td(colspan='2') Actions
      
       tbody
-      - each advertisement in advertisements
-        include summary
-
+        
+        - each advertisement in advertisements
+          
+          include summary
+      
       tfoot
         tr
           td(colspan='7')

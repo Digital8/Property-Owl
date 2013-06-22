@@ -14,7 +14,7 @@ block content
         em
           u #{advertiser.name}
       
-      form.form-horizontal(action="/admin/advertisers/#{advertiser.advertiser_id}", method='post')
+      form.form-horizontal(action="/advertisers/#{advertiser.advertiser_id}", method='post')
         
         input(type='hidden', name='_method', value='delete')
         
@@ -23,4 +23,4 @@ block content
           div.controls
             input.btn.btn-danger(type='submit', value='Delete')
             | &nbsp;
-            a.btn(href='/admin/advertisers') Cancel
+            a.btn(href='/advertisers') Cancel

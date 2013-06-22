@@ -30,7 +30,7 @@ block content
         
           include summary
       
-      form.form-horizontal(action="/admin/advertisements/#{advertisement.advertisement_id}", method='post')
+      form.form-horizontal(action="/advertisements/#{advertisement.id}", method='post')
         
         input(type='hidden', name='_method', value='delete')
         
@@ -40,4 +40,4 @@ block content
             
             input.btn.btn-danger(type='submit', value='Delete')
             | &nbsp;
-            a.btn(href='/admin/advertisements') Cancel
+            a.btn(href='/advertisements') Cancel

@@ -33,22 +33,6 @@ block content
             img(src='images/grey-arrow.png')
             | Expressions of Interest
            td 0
-
-          //- tr
-          //-  td
-          //-   img(src='images/grey-arrow.png')
-          //-   | Deal Registrations
-          //-  td 135
-          //- tr
-          //-  td
-          //-   img(src='images/grey-arrow.png')
-          //-   | Shared Deal Registrations
-          //-  td 135
-         
-         //- tfoot
-         //-   tr
-         //-     td(colspan='4')
-         //-       a.button(href='#') View More Statistics
         
         .grid-header
           h2 Advertising
@@ -61,7 +45,7 @@ block content
           tfoot
             tr
               td(colspan='4')
-                a.button(href='/admin/advertisements') Manage Ads
+                a.button(href='/advertisements') Manage Ads
         
         .grid-header
           h2 Product and Service Suppliers
@@ -81,6 +65,9 @@ block content
       h1 Developer Dashboard
       
       h3
+        
         ul
+          
           li: a(href='/admin/owls') Owl Deals
+          
           li: a(href='/admin/barns') Barn Deals

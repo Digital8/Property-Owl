@@ -1,10 +1,14 @@
 module.exports = (model, args = {}) ->
   
-  {singular, plural} = (require './_inflect') arguments...
+  args.prefix ?= ''
+  
+  {singular, plural, prefix} = (require './_inflect') arguments...
   
   (req, res) ->
     
-    model.create req.body, (error, instance) ->
+    model.build req, (error, instance) ->
+      
+      console.log error
       
       if error?
         for key, message of error.errors
@@ -13,4 +17,4 @@ module.exports = (model, args = {}) ->
         return res.redirect 'back'
       
       req.flash 'success', "#{model.name} created!"
-      res.redirect "admin/#{plural}"
+      res.redirect "#{prefix}#{plural}"

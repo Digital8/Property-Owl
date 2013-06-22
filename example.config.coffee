@@ -1,4 +1,5 @@
 module.exports =
+  
   globals:
     site:
       name: 'Property Owl'
@@ -34,3 +35,51 @@ module.exports =
   hack:
     user:
       id: 1
+  
+  bucket: "#{__dirname}/public/uploads"
+  
+  s3:
+    key: null
+    secret: null
+    region: null
+    bucket: null
+  
+  mimes:
+    application: [
+      'javascript'
+      'json'
+      'pdf'
+      'x-shockwave-flash'
+      'xml'
+      'zip'
+    ]
+    image: [
+      'bmp'
+      'gif'
+      'jpeg'
+      'png'
+      'svg+xml'
+      'tiff'
+      'webp'
+    ]
+    video: [
+      'h261'
+      'h263'
+      'h264'
+      'mp4'
+      'mpeg'
+      'ogg'
+      'quicktime'
+      'x-flv'
+      'x-m4v'
+      'x-matroska'
+      'x-ms-wmv'
+      'x-msvideo'
+    ]
+    text: [
+      'css'
+      'csv'
+      'html'
+      'plain'
+      'xml'
+    ]

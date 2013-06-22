@@ -1,16 +1,17 @@
 .admin-actions
+  
   ul
     
-    if(action != 'add')
+    - if (action != 'add')
       li
-        a(href='/admin/advertisements/add')
+        a(href='/advertisements/add')
           img(src='/images/add.png')
           | &nbsp;
           | Add Advertisement
     
-    if(action != 'index')
+    - if (action != 'index')
       li
-        a(href="/admin/advertisements")
+        a(href="/advertisements")
           img(src='/images/manage.png')
           | &nbsp;
           | Manage Advertisements

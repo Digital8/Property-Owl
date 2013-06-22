@@ -14,7 +14,7 @@ block content
     
     .details
       
-      form.details-form(action='/admin/advertisements', method='post', enctype='multipart/form-data')
+      form.details-form(action='/advertisements', method='post', enctype='multipart/form-data')
         
         include ../../flashify
         
@@ -22,4 +22,4 @@ block content
         
         .submit
           input.button(type='submit', value='Post Advertisement')
-          a.left-button(href='/admin/advertisements') Cancel
+          a.left-button(href='/advertisements') Cancel

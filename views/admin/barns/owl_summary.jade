@@ -1,8 +1,8 @@
 tr.owl(data-owl-id=owl.id, data-barn-id=barn.id)
+  
   td(style='text-align: center;')= owl.owl_id
   
-  - var listed = new Date(owl.created_at)
-  td(style='text-align: center;') #{moment(listed).format('DD/MM/YYYY')}
+  td(style='text-align: center;')= moment(new Date(owl.created_at)).format('LLL')
   
   td= owl.title
   

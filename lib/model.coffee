@@ -20,6 +20,17 @@ module.exports = class Model
     @fields[key] = args
   
   ###
+  Model.has
+  - used statically inside models to define associations
+  ###
+  @has = (type, args = {}) ->
+    @links ?= {}
+    args.type ?= type
+    args.cardinality ?= Infinity
+    args.key ?= type.name.toLowerCase()
+    @links[args.key] = args
+  
+  ###
   Model(map)
   - if passed a map (key/value pairs), copies over all key/values to the record
   - some fields are special i.e. `id`
@@ -143,6 +154,20 @@ module.exports = class Model
     
     @constructor.create map, callback
   
+  @build = (req, callback) ->
+    
+    @create req.body, (error, instance) =>
+      
+      return callback error if error?
+      
+      async.map (_.values @links), (link, callback) =>
+        constructor = do link.type
+        constructor.build req, (error, linked) =>
+          return callback error if error?
+          instance[link.key] = linked
+          callback null
+      , callback
+  
   ###
   Model.patch
   - persists certain fields (changes) to the underlying row/record
@@ -156,7 +181,7 @@ module.exports = class Model
       
       values = {}
       
-      for key, field of model.constructor.fields when hash[key]?
+      for key, field of @fields when hash[key]?
         
         # store old value (for changes / diffs)
         values[key] ?= {}
@@ -179,17 +204,21 @@ module.exports = class Model
       for key, value of hash
         map[key] = model[key]
       
-      @db.query "UPDATE #{@table.name} SET ? WHERE #{@table.key} = ?", [map, model.id], (error) =>
+      model.validate {}, (error) =>
         
-        for key in (Object.keys hash)
+        return callback error if error?
+        
+        @db.query "UPDATE #{@table.name} SET ? WHERE #{@table.key} = ?", [map, model.id], (error) =>
           
-          continue unless values[key]?
-          
-          if values[key].new isnt values[key].old
+          for key in (Object.keys hash)
             
-            model.constructor.change?[key]? values: values[key], model: model
-        
-        callback error, model
+            continue unless values[key]?
+            
+            if values[key].new isnt values[key].old
+              
+              model.constructor.change?[key]? values: values[key], model: model
+          
+          callback error, model
   
   ###
   Model.update
@@ -201,9 +230,13 @@ module.exports = class Model
       
       model.set hash
       
-      model.save (error) =>
+      model.validate {}, (error) =>
         
-        callback error, model
+        return callback error if error?
+        
+        model.save (error) =>
+          
+          callback error, model
   
   ###
   Model.new

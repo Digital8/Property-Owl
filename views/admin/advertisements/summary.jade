@@ -1,7 +1,5 @@
 tr(data-id=advertisement.id, data-entity_type='advertisement')
   
-  //- td= advertisement.advertisement_id
-  
   td= advertisement.description
   
   if advertisement.advertiser != null
@@ -14,26 +12,20 @@ tr(data-id=advertisement.id, data-entity_type='advertisement')
   else
     td
   
-  //- td= advertisement.space
-  
   td
    if(advertisement.adspace_id==1)
      img(src='/uploads/' + advertisement.image_id)
    else
      img.small-advert(src='/uploads/' + advertisement.image_id)
   
-  //- td= advertisement.hyperlink
-  
-  //- td= advertisement.duration
-  
   td= advertisement.visible
   
   td.actions
-    a(href="/admin/advertisements/#{advertisement.advertisement_id}/edit", alt='edit')
+    a(href="/advertisements/#{advertisement.id}/edit", alt='edit')
       img(src='/images/edit.png', alt='edit')
       | Edit
   
   td.actions
-    a.delete(href="/admin/advertisements/#{advertisement.advertisement_id}/delete", alt='delete')
+    a.delete(href="/advertisements/#{advertisement.id}/delete", alt='delete')
       img(src='/images/delete.png', alt='delete')
       | Delete

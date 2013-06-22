@@ -18,7 +18,7 @@ block content
       
       hr
       
-      form.details-form(action="/admin/members/#{user.user_id}", method='post')
+      form.details-form(action="/users/#{user.user_id}", method='post')
         
         include ../../flashify
         
@@ -30,4 +30,4 @@ block content
           
          input.button(type='submit', value='Update User')
          
-         a.left-button(href="/admin/members") Cancel
+         a.left-button(href="/users") Cancel

@@ -1,4 +1,12 @@
-exports.index = (req, res) ->
+exports.index   = (require '../behaviors/index')   Page, views: 'admin/'
+exports.add     = (require '../behaviors/add')     Page, views: 'admin/'
+exports.create  = (require '../behaviors/create')  Page, views: 'admin/'
+exports.edit    = (require '../behaviors/edit')    Page, views: 'admin/'
+exports.update  = (require '../behaviors/update')  Page, views: 'admin/'
+exports.delete  = (require '../behaviors/delete')  Page, views: 'admin/'
+exports.destroy = (require '../behaviors/destroy') Page, views: 'admin/'
+
+exports.serve = (req, res) ->
   
   url = req.params.pop()
   

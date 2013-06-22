@@ -30,14 +30,10 @@ module.exports = ({app, controllers}) ->
   app.post '/account/recover', controllers.forgot_pwd.create
   
   # auth
-  app.all '/login', controllers.login.index
-  # app.get '/sign-out', controllers.misc.logout
+  app.get '/login', controllers.login.index
   app.get '/logout', controllers.misc.logout
-  app.get '/users/add', controllers.users.add
-  # app.post '/sign-up', controllers.signup.create
-  
-  ### users ###
-  app.post '/users', controllers.users.create
+  app.get '/signup', controllers.signup.add
+  app.post '/signup', controllers.signup.create
   
   # preferences - my account
   app.get '/preferences', authenticate, controllers.account.preferences
@@ -124,7 +120,7 @@ module.exports = ({app, controllers}) ->
   barn 'get', "/:id(\\d+)/owls", controllers.barns.owls
   
   for key in ['news', 'research'] then do (key) ->
-    app.get "/#{key}", (set type: key), controllers.posts.index
+    app.get "/#{key}", (set type: key), controllers.posts.type
     app.get "/#{key}/:id(\\d+)", authenticate, (set type: key), controllers.posts.view
   
   ### search ###
@@ -132,6 +128,24 @@ module.exports = ({app, controllers}) ->
     app[method] "/search#{path}", middleware...
   
   search 'get', '', controllers.search.index
+  
+  # advertisers
+  app.del  '/advertisers/:id(\\d+)',        controllers.advertisers.destroy
+  app.get  '/advertisers',                  controllers.advertisers.index
+  app.get  '/advertisers/:id(\\d+)/delete', controllers.advertisers.delete
+  app.get  '/advertisers/:id(\\d+)/edit',   controllers.advertisers.edit
+  app.get  '/advertisers/add',              controllers.advertisers.add
+  app.post '/advertisers',                  controllers.advertisers.create
+  app.put  '/advertisers/:id(\\d+)',        controllers.advertisers.update
+  
+  # advertisements
+  app.del  '/advertisements/:id(\\d+)',        controllers.advertisements.destroy
+  app.get  '/advertisements',                  controllers.advertisements.index
+  app.get  '/advertisements/:id(\\d+)/delete', controllers.advertisements.delete
+  app.get  '/advertisements/:id(\\d+)/edit',   controllers.advertisements.edit
+  app.get  '/advertisements/add',              controllers.advertisements.add
+  app.post '/advertisements',                  controllers.advertisements.create
+  app.put  '/advertisements/:id(\\d+)',        controllers.advertisements.update
   
   ### admin ###
   admin = (method, path, middleware...) ->
@@ -141,24 +155,6 @@ module.exports = ({app, controllers}) ->
       app[method] "/admin#{path}", (authorize acl.admin), middleware...
   
   admin 'get', '', controllers.admin.index.index
-  
-  # admin/advertisers
-  admin 'get', '/advertisers', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.advertisers.index
-  admin 'post', '/advertisers', controllers.admin.advertisers.create
-  admin 'get', '/advertisers/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.advertisers.add
-  admin 'get', '/advertisers/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.advertisers.edit
-  admin 'put', '/advertisers/:id(\\d+)', controllers.admin.advertisers.update
-  admin 'get', '/advertisers/:id(\\d+)/delete', controllers.admin.advertisers.delete
-  admin 'delete', '/advertisers/:id(\\d+)', controllers.admin.advertisers.destroy
-  
-  # admin/advertisements
-  admin 'get', '/advertisements', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.advertisements.index
-  admin 'post', '/advertisements', controllers.admin.advertisements.create
-  admin 'get', '/advertisements/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.advertisements.add
-  admin 'get', '/advertisements/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.advertisements.edit
-  admin 'put', '/advertisements/:id(\\d+)', controllers.admin.advertisements.update
-  admin 'get', '/advertisements/:id(\\d+)/delete', controllers.admin.advertisements.delete
-  admin 'delete', '/advertisements/:id(\\d+)', controllers.admin.advertisements.destroy
   
   # admin/affiliates
   admin 'get', '/affiliates', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.affiliates.index
@@ -170,39 +166,36 @@ module.exports = ({app, controllers}) ->
   admin 'delete', '/affiliates/:id(\\d+)', controllers.admin.affiliates.destroy
   
   # admin/posts
-  admin 'get', '/posts', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.posts.index
-  admin 'post', '/posts', controllers.admin.posts.create
-  admin 'get', '/posts/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.posts.add
-  admin 'get', '/posts/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.posts.edit
-  admin 'put', '/posts/:id(\\d+)', controllers.admin.posts.update
-  admin 'get', '/posts/:id(\\d+)/delete', controllers.admin.posts.delete
-  admin 'delete', '/posts/:id(\\d+)', controllers.admin.posts.destroy
+  app.get    '/posts',                  controllers.posts.index
+  app.post   '/posts',                  controllers.posts.create
+  app.get    '/posts/add',              controllers.posts.add
+  app.get    '/posts/:id(\\d+)/edit',   controllers.posts.edit
+  app.put    '/posts/:id(\\d+)',        controllers.posts.update
+  app.get    '/posts/:id(\\d+)/delete', controllers.posts.delete
+  app.delete '/posts/:id(\\d+)',        controllers.posts.destroy
   
   # admin/members
-  admin 'get', '/members', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.members.index
-  admin 'post', '/members', controllers.admin.members.create
-  admin 'put', '/members/:id(\\d+)', controllers.admin.members.update
-  admin 'delete', '/members/:id(\\d+)', controllers.admin.members.destroy
-  admin 'get', '/members/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.members.edit
-  admin 'get', '/members/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.members.add
-  admin 'get', '/members/:id(\\d+)/delete', controllers.admin.members.delete
+  app.get  '/users',                  controllers.users.index
+  app.post '/users',                  controllers.users.create
+  app.put  '/users/:id(\\d+)',        controllers.users.update
+  app.del  '/users/:id(\\d+)',        controllers.users.destroy
+  app.get  '/users/:id(\\d+)/edit',   controllers.users.edit
+  app.get  '/users/add',              controllers.users.add
+  app.get  '/users/:id(\\d+)/delete', controllers.users.delete
   
   # admin/pages
-  admin 'get', '/pages', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.pages.index
-  admin 'post', '/pages', controllers.admin.pages.create
-  admin 'put', '/pages/:id(\\d+)', controllers.admin.pages.update
-  admin 'delete', '/pages/:id(\\d+)', controllers.admin.pages.destroy
-  admin 'get', '/pages/add', ((req, res, next) -> res.locals.action = 'add' ; next()), controllers.admin.pages.add
-  admin 'get', '/pages/:id(\\d+)/edit', ((req, res, next) -> res.locals.action = 'edit' ; next()), controllers.admin.pages.edit
-  admin 'get', '/pages/:id(\\d+)/delete', controllers.admin.pages.delete
+  app.get    '/pages',                  controllers.pages.index
+  app.post   '/pages',                  controllers.pages.create
+  app.put    '/pages/:id(\\d+)',        controllers.pages.update
+  app.delete '/pages/:id(\\d+)',        controllers.pages.destroy
+  app.get    '/pages/add',              controllers.pages.add
+  app.get    '/pages/:id(\\d+)/edit',   controllers.pages.edit
+  app.get    '/pages/:id(\\d+)/delete', controllers.pages.delete
   
   # admin/files
   admin 'get', '/files', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.files.index
   admin 'post', '/files', controllers.admin.files.create
   admin 'delete', '/files/:id(\\d+)', controllers.admin.files.destroy
-  
-  # admin/advertising
-  admin 'get', '/deals', controllers.admin.deals.index
   
   # admin/owls
   admin 'get', '/owls', ((req, res, next) -> res.locals.action = 'index' ; next()), controllers.admin.owls.index
@@ -275,4 +268,4 @@ module.exports = ({app, controllers}) ->
   # adminAjax 'put', '/updateHero', controllers.ajax.updateHero
   # adminAjax 'del', '/deleteMedia', controllers.ajax.deleteMedia
   
-  app.all '*', controllers.pages.index
+  app.all '*', controllers.pages.serve

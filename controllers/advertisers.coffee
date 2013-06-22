@@ -1,0 +1,7 @@
+exports.index   = (require '../behaviors/index')   Advertiser, views: 'admin/'
+exports.add     = (require '../behaviors/add')     Advertiser, views: 'admin/'
+exports.create  = (require '../behaviors/create')  Advertiser, views: 'admin/'
+exports.edit    = (require '../behaviors/edit')    Advertiser, views: 'admin/'
+exports.update  = (require '../behaviors/update')  Advertiser, views: 'admin/'
+exports.delete  = (require '../behaviors/delete')  Advertiser, views: 'admin/'
+exports.destroy = (require '../behaviors/destroy') Advertiser, views: 'admin/'

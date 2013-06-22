@@ -36,11 +36,11 @@ block content
              a(href='http://maps.google.com/?q=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state.toUpperCase() + ',' + advertiser.postcode, target='_blank')
                img(src='http://maps.googleapis.com/maps/api/staticmap?sensor=false&center=' + advertiser.address + ',' + advertiser.suburb + ',' + advertiser.state + ',' + advertiser.postcode + '&zoom=7&size=192x128')
            td.actions
-             a(href='/admin/advertisers/#{advertiser.advertiser_id}/edit', alt='edit')
+             a(href='/advertisers/#{advertiser.advertiser_id}/edit', alt='edit')
                img(src='/images/edit.png', alt='edit')
                | Edit
            td.actions
-             a.delete(href='/admin/advertisers/#{advertiser.advertiser_id}/delete', alt='delete')
+             a.delete(href='/advertisers/#{advertiser.advertiser_id}/delete', alt='delete')
                img(src='/images/delete.png', alt='delete')
                | Delete
 
