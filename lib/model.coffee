@@ -34,7 +34,7 @@ module.exports = class Model
     
     for key, field of @constructor.fields
       if field.default?
-        @[key] ?= field.default
+        @[key] ?= _.result field, 'default'
   
   set: (hash) ->
     
@@ -220,6 +220,8 @@ module.exports = class Model
   ###
   @create = (map, callback) ->
     
+    console.log 'creating', map
+    
     @new map, (error, model) =>
       
       return callback error if error?
@@ -310,7 +312,7 @@ module.exports = class Model
     @db.query "SELECT * FROM #{@table.name} WHERE #{@table.key} = ?", [id], (error, rows) =>
       
       return callback error if error?
-      return callback 404 unless rows.length
+      return callback null, null unless rows.length
       
       model = new this rows[0]
       

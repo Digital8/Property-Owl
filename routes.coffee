@@ -17,6 +17,8 @@ module.exports = ({app, controllers}) ->
   
   app.get '/', (area 'index'), controllers.index.index
   
+  app.get '/tokens/:uuid', controllers.tokens.uuid
+  
   # advertisements
   app.get '/advertisements/:id(\\d+)/click', controllers.advertisements.click
   
@@ -29,10 +31,10 @@ module.exports = ({app, controllers}) ->
   
   # auth
   app.all '/login', controllers.login.index
-  app.get '/sign-out', controllers.misc.logout
+  # app.get '/sign-out', controllers.misc.logout
   app.get '/logout', controllers.misc.logout
-  app.get '/sign-up', controllers.signup.index
-  app.post '/sign-up', controllers.signup.create
+  app.get '/users/add', controllers.users.add
+  # app.post '/sign-up', controllers.signup.create
   
   ### users ###
   app.post '/users', controllers.users.create

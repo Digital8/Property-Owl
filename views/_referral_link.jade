@@ -1,0 +1,14 @@
+#referral-link-modal.refer-friend-overlay.overlay
+  
+  .modal.main.success
+    
+    a.close-refer-friend.close(href='#')
+      img(src='/images/modal-close-white.png', alt='Close')
+    
+    h1.modal-title Refer your Friends!
+    
+    form.modal-content.details-form
+      
+      p Share this link on Facebook, Twitter, etc.
+      
+      input.full.refer-friend-comment(type='text', name='link', value="https://www.propertyowl.com.au/tokens/#{req.user.token.uuid}", style="width:98%;")

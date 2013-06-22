@@ -139,6 +139,7 @@ app.configure ->
     
     app.use (req, res, next) ->
       if app.argv.hack
+        console.log req.user
         console.log url: req.url, body: req.body
       next error
     

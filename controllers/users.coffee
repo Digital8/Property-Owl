@@ -1,3 +1,15 @@
+exports.add = (req, res, next) ->
+  
+  respond = (args = {}) ->
+    
+    res.render 'users/add', args
+  
+  return respond null unless req.session.referrer_id?
+  
+  User.get req.session.referrer_id, (error, referrer) ->
+    return next error if error?
+    respond {referrer}
+
 exports.create = (req, res, next) ->
   
   email = req.param 'email'
@@ -42,6 +54,9 @@ exports.create = (req, res, next) ->
       req.session.user_id = user.id
       res.cookie 'user', user.id, maxAge: 604800000
       
-      res.send id: user.id
+      if req.xhr
+        res.send id: user.id
+      else
+        res.redirect '/'
       
       (require '../lib/mailer') 'signup-confirmation-special-launch', 'Registration Confirmation', user, {}, (error) ->

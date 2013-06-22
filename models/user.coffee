@@ -47,6 +47,13 @@ module.exports = class User extends Model
     
     super
   
+  hydrate: (callback) ->
+    
+    Token.upsertForEntityByKey this, 'master', user_id: @id, (error, token) =>
+      return callback error if error?
+      @token = token
+      super callback
+  
   isHacker: ->
     return no unless app?.argv?.hack
     return no unless @company is 'Digital8'

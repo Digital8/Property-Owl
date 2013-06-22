@@ -1,0 +1,74 @@
+extends ../layout
+
+block content
+  
+  .container.row.main
+    
+    include ../left_nav
+    
+    #center-col
+      
+      h1 Sign Up
+      
+      .details
+        
+        form.details-form(action='/users', method='post')
+          
+          include ../flashify
+          
+          - if (locals.referrer)
+            
+            .inputs
+              
+              label(for='referrer') Referrer
+              input(type='text', name='referrer', value=referrer.name, disabled='disabled', style='opacity: 0.5;')
+              
+              input(type='hidden', name='token', value=token.uuid)
+          
+          .left
+            
+            .inputs
+              
+              label(for='first_name') First Name
+              input#first_name(type='text', name='first_name', placeholder='First Name', value)
+            
+            .inputs
+              
+              label(for='email') Email
+              input#email(type='email', name="email", placeholder="Email", value)
+            
+            .inputs
+              
+              label(for='password') Password
+              input#password(type='password', name='password', placeholder='Password')
+          
+          .right
+            
+            .inputs
+              
+              label(for='last_name') Last Name
+              input#last_name(type='text', name="last_name", placeholder="Last Name", value)
+            
+            .inputs
+              
+              label(for='postcode') Postcode
+              input#postcode(type='text', name="postcode", placeholder="Postcode", value)
+            
+            .inputs
+              label(for='confirm') Confirm Password
+              input#confirm(type='password', name='confirm', placeholder='Confirm Password')
+          
+          .inputs(style='clear: both; padding: 2em;')
+            
+            label(for='terms_and_conditions', style='display: inline;')
+              input#terms_and_conditions(type='checkbox', name='terms_and_conditions')
+              | I agree to the
+              a(href='/terms-and-conditions',target="_blank") Terms & Conditions
+          
+          .submit
+            
+            a.left-button(href="/login") Login
+            
+            input.button(type="submit",value="Sign Up")
+    
+    include ../right_nav

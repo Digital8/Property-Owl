@@ -1,13 +1,13 @@
 exports.index = (req, res) ->
   
-  if res.locals.objUser.isAuthed()
-    return res.redirect '/'
+  # if res.locals.objUser.isAuthed()
+  #   return res.redirect '/'
   
   res.render 'user/sign-up', values: req.session.signup or {}
 
 exports.create = (req, res) ->
   
-  if res.locals.objUser.isAuthed() then res.redirect '/'
+  # if res.locals.objUser.isAuthed() then res.redirect '/'
   
   req.assert('email', 'Invalid Email Address').isEmail()
   req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()

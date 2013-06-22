@@ -11,7 +11,7 @@ module.exports.augmentDB = (app, db) ->
       unless (query.match /advertisements/g) or (query.match /account_type/g) or (query.match /SHOW\sCOLUMNS/g) or (query.match /pages/g) or (query.match /adspaces/g)
         console.log (_.filter arguments, (argument) -> typeof argument isnt 'function')...
       db._query query, args..., (error, args...) ->
-        console.log 'ERROR', error.red if error?
+        console.log 'ERROR', error.toString().red if error?
         callback error, args...
 
 module.exports.augmentApp = (app) ->
