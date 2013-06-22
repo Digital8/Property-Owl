@@ -38,12 +38,12 @@ block content
             td= affiliate.enquiries.length
             
             td.actions
-              a.edit(href='/admin/affiliates/#{affiliate.affiliate_id}/edit', alt='edit property')
+              a.edit(href='/affiliates/#{affiliate.affiliate_id}/edit', alt='edit property')
                 img(src='/images/edit.png', alt='Edit')
                 | Edit
             
             td.actions
-              a.delete(href='/admin/affiliates/#{affiliate.id}/delete', alt='delete property')
+              a.delete(href='/affiliates/#{affiliate.id}/delete', alt='delete property')
                 img(src='/images/delete.png', alt='Delete')
                 | Delete
       

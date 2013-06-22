@@ -16,6 +16,6 @@ module.exports = ->
         
         if confirm('Are you sure you want to remove this?')
           
-          $.delete "/admin/affiliates/#{id}", ->
+          $.delete "/affiliates/#{id}", ->
             
             $row.remove()

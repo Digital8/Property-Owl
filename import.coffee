@@ -28,11 +28,6 @@ module.exports = (argv) ->
     console.log "✓ [controller] #{module}" if argv.verbose
     controllers[module.split('.')[0]] = require "./controllers/#{module}"
   
-  fs.readdirSync('./controllers/admin').forEach (module) ->
-    return if module[0] is '.'
-    console.log "✓ [controller/admin] #{module}" if argv.verbose
-    controllers.admin[module.split('.')[0]] = require "./controllers/admin/#{module}"
-  
   console.stop 'import'
   
   return {models, controllers}

@@ -18,7 +18,7 @@ block content
       
       hr
       
-      form.details-form(action='/admin/affiliates/#{affiliate.id}', method='post', enctype='multipart/form-data')
+      form.details-form(action='/affiliates/#{affiliate.id}', method='post', enctype='multipart/form-data')
       
         input(type='hidden', name='_method', value='put')
         
@@ -28,4 +28,4 @@ block content
         
         .submit
           input.button(type='submit', value='Edit Affiliate')
-          a.left-button(href='/admin/affiliates') Cancel
+          a.left-button(href='/affiliates') Cancel

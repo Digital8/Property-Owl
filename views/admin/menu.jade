@@ -2,49 +2,24 @@ nav#admin-menu.admin-menu
   
   ul.sf-menu
     
-    li
-      - var c = (menu == 'dashboard') ? 'active' : ''
-      a(href='/admin', class="#{c}") Dashboard
+    li: a(href='/admin', class='inactive') Dashboard
     
     li
-      - var c = (menu == 'property-deals') ? 'active' : ''
-      a(href='/admin/owls', class="#{c}") Deals
+      a(href='/owls', class='inactive') Deals
       ul
-        li
-          a(href='/admin/owls') Owl Deals
-        li
-          a(href='/admin/barns') Barn Deals
+        li: a(href='/owls') Owl Deals
+        li: a(href='/barns') Barn Deals
+    
     - if (req.user && req.user.isAdmin())
       
       li
-        - var c = (menu == 'advertising') ? 'active' : ''
-        a(href='/advertisements', class="#{c}") Advertising
+        a(href='/advertisements', class='inactive') Advertising
         ul
-          li
-            a(href='/advertisements') Advertisements
-          li
-            a(href='/advertisers') Advertisers
-      
-      li
-        - var c = (menu == 'products-service-suppliers') ? 'active' : ''
-        a(href='/admin/affiliates', class="#{c}") Affiliates
-      
-      li
-        - var c = (menu == 'posts') ? 'active' : ''
-        a(href='/posts', class="#{c}") News / Research
-      
-      li
-        - var c = (menu == 'pages') ? 'active' : ''
-        a(href='/pages', class="#{c}") Pages
-      
-      li
-        - var c = (menu == 'pages') ? 'active' : ''
-        a(href='/admin/files', class="#{c}") Files
-      
-      li
-        - var c = (menu == 'reports') ? 'active' : ''
-        a(href='/admin/reports', class="#{c}") Reports
-      
-      li
-        - var c = (menu == 'members') ? 'active' : ''
-        a(href='/users', class="#{c}") Users
+          li: a(href='/advertisements') Advertisements
+          li: a(href='/advertisers') Advertisers
+      li: a(href='/affiliates', class='inactive') Affiliates
+      li: a(href='/posts', class='inactive') News / Research
+      li: a(href='/pages', class='inactive') Pages
+      li: a(href='/files', class='inactive') Files
+      li: a(href='/reports', class='inactive') Reports
+      li: a(href='/users', class='inactive') Users
