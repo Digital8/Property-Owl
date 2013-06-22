@@ -30,15 +30,11 @@ module.exports = class Referral extends Model
   
   hydrate: (callback) ->
     async.parallel
-      user: (callback) =>
-        User.get @user_id, (error, user) =>
-          @user = user
-          callback error
-      entity: (callback) =>
-        @constructor.models[@entity_type].dry @entity_id, (error, entity) =>
-          @entity = entity
-          callback error
-    , (error) =>
+      user: (callback) => User.dry @user_id, callback
+      entity: (callback) => @constructor.models[@entity_type].dry @entity_id, callback
+    , (error, map) =>
+      return callback error if error?
+      {@user, @entity} = map
       super callback
   
   @forUser = (user, callback) =>

@@ -5,7 +5,6 @@ exports.index = (req, res) ->
     affiliates: (callback) -> Affiliate.all callback
     categories: (callback) -> Category.for 'affiliate', callback
   , (error, {affiliates, categories}) ->
-    console.log arguments...
     res.render 'admin/affiliates/index', {affiliates, categories}
 
 exports.view = (req, res) ->
@@ -35,10 +34,8 @@ exports.create = (req, res) ->
       res.redirect '/admin/affiliates'
 
 exports.update = (req, res) ->
-  req.body.visible ?= no
   
-  console.log 'do we have an update'
-  console.log req.body
+  req.body.visible ?= no
   
   Affiliate.update req.params.id, req.body, (error, affiliate) ->
     console.log 'update', arguments

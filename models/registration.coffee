@@ -18,18 +18,12 @@ module.exports = class Registration extends Model
   
   hydrate: (callback) ->
     async.parallel
-      user: (callback) =>
-        User.dry @user_id, (error, user) =>
-          @user = user
-          callback error
-      entity: (callback) =>
-        @constructor.models[@entity_type].dry @entity_id, (error, entity) =>
-          @entity = entity
-          callback error
-    , (error) =>
+      user: (callback) => User.dry @user_id, callback
+      entity: (callback) => @constructor.models[@entity_type].dry @entity_id, callback
+    , (error, map) =>
       return callback error if error?
+      {@user, @entity} = map
       super callback
-    
   
   @registered = ({entity, user}, callback) ->
     @db.query """
@@ -47,8 +41,13 @@ module.exports = class Registration extends Model
       return callback error if error?
       callback null, rows.length > 0
   
-  @forUser = (user, callback) ->
-    @db.query "SELECT * FROM registrations WHERE user_id = ? AND status", [user.id], callback
+  @forUser = (user, callback) =>
+    
+    @db.query "SELECT * FROM #{@table.name} WHERE user_id = ? AND status", [user.id], (error, rows) =>
+      
+      return callback error if error?
+      
+      async.map rows, @new.bind(this), callback
   
   @report = (cred, callback) ->
     

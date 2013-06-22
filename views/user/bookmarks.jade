@@ -7,28 +7,49 @@ block content
     include ../left_nav
     
     #center-col
+      
       h1 My Account
         
       .grid-header.form-header.pane-nav
+        
         include menu
     
-      .tabs.account  
+      .tabs.account
+        
         .tabs-content
-          .padding  
-            table.admin-gridview
+          
+          .padding
+            
+            - if (bookmarks && bookmarks.length)
+            
+              table.admin-gridview
+                
                 thead
+                  
                   tr
-                    td Title
+                    
+                    td Deal
                     td Deal Type
-                    //- td Deal Status
                     td Date Listed
                     td Actions
                 
                 tbody
-                  - if (bookmarks && bookmarks.length)
-                    - each bookmark in bookmarks
-                      include bookmark
-                  -else
-                    h4 No deals have been bookmarked yet
+                  
+                  - each bookmark in bookmarks
+                  
+                    tr.bookmark(data-bookmark-id=bookmark.id)
+                      
+                      td(style="width:50%"): a(href=bookmark.entity.url)= bookmark.entity.title
+                      
+                      td: strong= bookmark.entity.constructor.name
+                      
+                      td= moment(bookmark.created_at).format('LL')
+                      
+                      td
+                        a.delete(href='#')
+                          img(src='images/delete.png')
+                          | Remove
+            - else
+              h4 No deals have been bookmarked yet
     
     include ../right_nav

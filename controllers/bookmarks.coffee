@@ -1,17 +1,21 @@
-exports.index = (req, res) ->
+exports.index = (req, res, next) ->
+  
   Bookmark.forUser req.user, (error, bookmarks) ->
-    return res.send 500, error if error?
-    console.log bookmarks
+    
+    return next error if error?
+    
     res.render 'user/bookmarks', {bookmarks}
 
-exports.create = (req, res) ->
+exports.create = (req, res, next) ->
   
-  map =
+  Bookmark.create
     entity_id: req.body.id
-    type: req.body.type
+    entity_type: req.body.type
     user_id: req.user.id
-  
-  Bookmark.create map, (error, bookmark) ->
-    res.send 200
+  , (error, bookmark) ->
+    
+    return next error if error?
+    
+    res.send {}
 
 exports.destroy = (require '../behaviors/destroy') Bookmark, prefix: ''

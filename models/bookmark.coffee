@@ -10,24 +10,16 @@ module.exports = class Bookmark extends Model
     key: 'bookmark_id'
   
   @field 'user_id'
-  @field 'type'
+  @field 'entity_type'
   @field 'entity_id'
   
   hydrate: (callback) ->
     async.parallel
-      deal: (callback) =>
-        
-        console.log @type, @entity_id
-        
-        if @type is 'owl'
-          Owl.get @entity_id, callback
-        
-        if @type is 'barn'
-          Barn.get @entity_id, callback
-    
-    , (error, results) =>
+      user: (callback) => User.dry @user_id, callback
+      entity: (callback) => @constructor.models[@entity_type].dry @entity_id, callback
+    , (error, map) =>
       return callback error if error?
-      @deal = results.deal
+      {@user, @entity} = map
       super callback
   
   @forUser = (user, callback) =>
