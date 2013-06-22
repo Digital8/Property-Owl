@@ -8,7 +8,9 @@ exports.add = (req, res, next) ->
   
   User.get req.session.referrer_id, (error, referrer) ->
     return next error if error?
-    respond {referrer}
+    respond
+      referrer: referrer
+      token: req.session.token
 
 exports.create = (req, res, next) ->
   
@@ -40,23 +42,26 @@ exports.create = (req, res, next) ->
     
     return if req.guard req, res, next
     
-    User.create
-      password: (require '../lib/hash') (req.param 'password')
-      account_type_id: 1
-      email: req.param 'email'
-      first_name: req.param 'first_name'
-      last_name: req.param 'last_name'
-      postcode: req.param 'postcode'
-    , (error, user) ->
+    Token.byUUID (req.param 'token'), (error, token) ->
       
-      return next error if error?
-      
-      req.session.user_id = user.id
-      res.cookie 'user', user.id, maxAge: 604800000
-      
-      if req.xhr
-        res.send id: user.id
-      else
-        res.redirect '/'
-      
-      (require '../lib/mailer') 'signup-confirmation-special-launch', 'Registration Confirmation', user, {}, (error) ->
+      User.create
+        password: (require '../lib/hash') (req.param 'password')
+        account_type_id: 1
+        email: req.param 'email'
+        first_name: req.param 'first_name'
+        last_name: req.param 'last_name'
+        postcode: req.param 'postcode'
+        referrer_id: token?.entity?.id
+      , (error, user) ->
+        
+        return next error if error?
+        
+        req.session.user_id = user.id
+        res.cookie 'user', user.id, maxAge: 604800000
+        
+        if req.xhr
+          res.send id: user.id
+        else
+          res.redirect '/'
+        
+        (require '../lib/mailer') 'signup-confirmation-special-launch', 'Registration Confirmation', user, {}, (error) ->

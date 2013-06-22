@@ -1,44 +1,47 @@
 .left
+  
   .inputs
+    
     label(for='group') User Type
+    
     select(name="group")
       - each group in groups
-         option(value="#{group.account_type_id}", selected=group.account_type_id == values.account_type_id)= group.name
+         option(value="#{group.account_type_id}", selected=group.account_type_id == user.account_type_id)= group.name
   
   .inputs
     label.required(for='first_name') Full Name *
-    - if (values.fname == undefined) values.fname = ''
-      input#first_name(type="text",name="fname",placeholder="First Name",value="#{values.fname}",class="half-field",maxlength='100')
+    - if (user.first_name == undefined) user.first_name = ''
+      input#first_name(type="text",name="first_name",placeholder="First Name",value="#{user.first_name}",class="half-field",maxlength='100')
       | &nbsp;
-    - if (values.lname == undefined) values.lname = ''
-      input#last_name(type="text",name="lname",placeholder="Last Name",value="#{values.lname}",class="half-field",maxlength='100')
+    - if (user.last_name == undefined) user.last_name = ''
+      input#last_name(type="text",name="last_name",placeholder="Last Name",value="#{user.last_name}",class="half-field",maxlength='100')
   
   .inputs
     label(for='company') Company
-    - if (values.company == undefined) values.company = ''
-      input#company(type="text",placeholder="Company",name="company",value="#{values.company}",maxlength='100')
+    - if (user.company == undefined) user.company = ''
+      input#company(type="text",placeholder="Company",name="company",value="#{user.company}",maxlength='100')
   
   .inputs
     label.required(for='phone') Phone
-    - if (values.phone == undefined) values.phone = ''
-      input#phone(type="text",placeholder="Phone",name="phone",value="#{values.phone}",maxlength='100')
+    - if (user.phone == undefined) user.phone = ''
+      input#phone(type="text",placeholder="Phone",name="phone",value="#{user.phone}",maxlength='100')
   
   .inputs
     label(for='workPhone') Work Phone
-    - if (values.work_phone == undefined) values.work_phone = ''
-      input#work_phone(type="text",placeholder="Work Phone",name="work_phone",value="#{values.work_phone}",maxlength='100')
+    - if (user.work_phone == undefined) user.work_phone = ''
+      input#work_phone(type="text",placeholder="Work Phone",name="work_phone",value="#{user.work_phone}",maxlength='100')
   
   .inputs
     label(for='mobile') Mobile
-    - if (values.mobile == undefined) values.mobile = ''
-     input#mobile(type="text",placeholder="Mobile",name="mobile",value="#{values.mobile}",maxlength='100')
+    - if (user.mobile == undefined) user.mobile = ''
+     input#mobile(type="text",placeholder="Mobile",name="mobile",value="#{user.mobile}",maxlength='100')
 
 .right
   
   .inputs
    label.required(for='email') Email *
-   - if (values.email == undefined) values.email = ''
-    input#email(type="text",placeholder="Email",name="email",value="#{values.email}",maxlength='100')
+   - if (user.email == undefined) user.email = ''
+    input#email(type="text",placeholder="Email",name="email",value="#{user.email}",maxlength='100')
   
   .inputs
    label.required(for='password') Password *
@@ -50,32 +53,32 @@
   
   .inputs
    label.required(for='address') Address
-   - if (values.address == undefined) values.address = ''
-    input#address(type="text",placeholder="Address",name="address",value="#{values.address}",maxlength='100')
+   - if (user.address == undefined) user.address = ''
+    input#address(type="text",placeholder="Address",name="address",value="#{user.address}",maxlength='100')
   
   .left
     .inputs
      label.required(for='suburb') Suburb
-     - if (values.suburb == undefined) values.suburb = ''
-      input#suburb(type="text",placeholder="Suburb",name="suburb",value="#{values.suburb}",maxlength='100')
+     - if (user.suburb == undefined) user.suburb = ''
+      input#suburb(type="text",placeholder="Suburb",name="suburb",value="#{user.suburb}",maxlength='100')
   .right
     .inputs
      label.required(for='postcode') Postcode
-     - if (values.postcode == undefined) values.postcode = ''
-      input#postcode(type="text",name="postcode",placeholder="Postcode",value="",maxlength='100')
+     - if (user.postcode == undefined) user.postcode = ''
+      input#postcode(type="text", name="postcode", placeholder="Postcode", value=user.postcode, maxlength='100')
   
   br
 
   .inputs
     |  Subscribed to newsletter
     select(name='subscribed_news')
-      option(value='1',selected=(values.subscribed_newsletter == 1) ? true : false) Yes
-      option(value='0',selected=(values.subscribed_newsletter == 0) ? true : false) No
+      option(value='1',selected=(user.subscribed_newsletter == 1) ? true : false) Yes
+      option(value='0',selected=(user.subscribed_newsletter == 0) ? true : false) No
 
   .inputs
     |  Subscribed to property alerts
     select(name='property_alerts')
-      option(value='1',selected=(values.subscribed_alerts == 1) ? true : false) Yes
-      option(value='0',selected=(values.subscribed_alerts == 0) ? true : false) No
+      option(value='1',selected=(user.subscribed_alerts == 1) ? true : false) Yes
+      option(value='0',selected=(user.subscribed_alerts == 0) ? true : false) No
 
 .inputs

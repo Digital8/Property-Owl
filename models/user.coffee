@@ -28,10 +28,13 @@ module.exports = class User extends Model
   @field 'subscribed_newsletter', type: Boolean
   @field 'subscribed_alerts', type: Boolean
   
+  @field 'referrer_id'
+  
   constructor: (args = {}) ->
     
     Object.defineProperty this, 'level', get: => @account_type_id
     Object.defineProperty this, 'name', get: => "#{@first_name} #{@last_name}"
+    Object.defineProperty this, 'role', get: => ['Member', 'Buyer', 'Developer', 'Admin'][@account_type_id]
     Object.defineProperty this, 'preferences', get: =>
       suburb: @pref_suburb or ''
       state: @pref_state or ''
@@ -49,9 +52,12 @@ module.exports = class User extends Model
   
   hydrate: (callback) ->
     
-    Token.upsertForEntityByKey this, 'master', user_id: @id, (error, token) =>
+    async.parallel
+      token: (callback) => Token.upsertForEntityByKey this, 'master', user_id: @id, callback
+      referrer: (callback) => User.dry @referrer_id, callback
+    , (error, map) =>
       return callback error if error?
-      @token = token
+      {@token, @referrer} = map
       super callback
   
   isHacker: ->
@@ -96,7 +102,7 @@ module.exports = class User extends Model
       return callback error if error?
       callback null, rows
   
-  @getAllGroups = (callback) =>
+  @groups = (callback) =>
     @db.query "SELECT * FROM account_types", (error, rows) ->
       return callback error if error?
       callback null, rows

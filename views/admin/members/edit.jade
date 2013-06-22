@@ -6,18 +6,19 @@ block content
     
     include ../menu
     
-    h1 Edit Member: #{values.first_name} #{values.last_name}
+    h1 Edit Member: #{user.first_name} #{user.last_name}
     
     include actions
-
+    
     .grid-header.form-header
-
+    
     .details
+      
       h2 User Details
       
       hr
       
-      form.details-form(action="/admin/members/#{values.user_id}", method='post')
+      form.details-form(action="/admin/members/#{user.user_id}", method='post')
         
         include ../../flashify
         
@@ -26,5 +27,7 @@ block content
         include inputs
         
         .submit
+          
          input.button(type='submit', value='Update User')
+         
          a.left-button(href="/admin/members") Cancel

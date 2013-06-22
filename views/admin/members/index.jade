@@ -22,16 +22,25 @@ block content
           td Name
           td Email
           td Member Type
+          td Referrer
           td(colspan='2') Actions
       
       tbody
+      
       - each user in users
+        
         tr
           td #{user.first_name} #{user.last_name}
           
           td= user.email
           
-          td= user.account_type
+          td= user.role
+          
+          td
+            - if (user.referrer)
+              a(href="/admin/members/#{user.referrer.id}/edit")= user.referrer.name
+            - else
+              span -
           
           td.actions
             a(href="/admin/members/#{user.user_id}/edit")

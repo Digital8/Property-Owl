@@ -6,6 +6,8 @@ exports.uuid = (req, res, next) ->
     
     return next 404 unless token?
     
+    req.session.token = token.uuid
+    
     map = {}
     
     map[User.name] = (req, res, next) ->

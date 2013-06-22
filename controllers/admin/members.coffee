@@ -9,15 +9,17 @@ exports.index = (req,res) ->
   else
     User.all callback
 
-exports.add = (req,res) ->
+exports.add = (req, res, next) ->
   
-  values = req.session.signup or {}
-  delete req.session.signup
-  
-  User.getAllGroups (err, groups) ->
-    if err then throw err
+  User.groups (error, groups) ->
     
-    res.render 'admin/members/add', values:  values, groups: groups or {}, menu: 'members'
+    return next error if error?
+    
+    user = {}
+    
+    menu = 'members'
+    
+    res.render 'admin/members/add', {user, groups, menu}
 
 exports.create = (req,res) ->
   
@@ -51,19 +53,23 @@ exports.create = (req,res) ->
          req.flash 'success', 'User created!'
          res.redirect 'admin/members'
 
-exports.edit = (req,res) ->
+exports.edit = (req, res, next) ->
   
-  User.getUserById req.params.id, (err, results) ->
-    if not results
+  User.get req.params.id, (error, user) ->
+    
+    return next error if error?
+    
+    unless user?
       req.flash 'error', 'User not found'
+      res.status = 404
       res.redirect 'back'
-    else
-      User.getAllGroups (err, groups) ->
-        member = results.pop()
-        member.fname ?= member.first_name
-        member.lname ?= member.last_name
-        
-        res.render 'admin/members/edit', values: member, groups: groups
+      return
+    
+    User.groups (error, groups) ->
+      
+      return next error if error?
+      
+      res.render 'admin/members/edit', {user, groups}
 
 exports.update = (req,res) ->
   
