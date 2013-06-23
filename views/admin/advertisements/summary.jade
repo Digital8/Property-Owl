@@ -2,21 +2,24 @@ tr(data-id=advertisement.id, data-entity_type='advertisement')
   
   td= advertisement.description
   
-  if advertisement.advertiser != null
+  if advertisement.advertiser
     td= advertisement.advertiser.name
   else
     td
   
-  if advertisement.pages != null
+  if advertisement.pages
     td= _.pluck(advertisement.pages, 'header').join(', ')
   else
     td
   
-  td
-   if(advertisement.adspace_id==1)
-     img(src='/uploads/' + advertisement.image_id)
-   else
-     img.small-advert(src='/uploads/' + advertisement.image_id)
+  if advertisement.image
+    td
+      if advertisement.adspace_id == 1
+        img(src=advertisement.image.url)
+      else
+        img.small-advert(src=advertisement.image.url)
+  else
+    td
   
   td= advertisement.visible
   

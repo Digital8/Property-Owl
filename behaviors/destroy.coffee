@@ -16,4 +16,4 @@ module.exports = (model, args = {}) ->
       if req.xhr
         res.send {}
       else
-        res.redirect "#{prefix}/#{plural}"
+        res.redirect args.redirect or "#{prefix}/#{plural}"

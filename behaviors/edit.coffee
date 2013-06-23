@@ -12,8 +12,6 @@ module.exports = (model, args = {}) ->
       
       res.locals[singular] = instance
       
-      # console.log instance
-      
       (require './_all') req, res, args.all, ->
       
         res.render "admin/#{plural}/edit"

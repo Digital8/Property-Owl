@@ -8,13 +8,12 @@ module.exports = (model, args = {}) ->
     
     model.build req, (error, instance) ->
       
-      console.log error
-      
       if error?
         for key, message of error.errors
           req.flash 'error', "#{key} - #{message}"
         req.session.form = req.body
         return res.redirect 'back'
       
-      req.flash 'success', "#{model.name} created!"
-      res.redirect "#{prefix}#{plural}"
+      req.flash 'success', "#{model.name} (##{model.id}) created!"
+      
+      res.redirect args.redirect or "#{prefix}#{plural}"

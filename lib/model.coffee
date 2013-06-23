@@ -38,38 +38,92 @@ module.exports = class Model
   - i.e. `new Model`
   ###
   constructor: (args = {}) ->
-    for key, value of args
-      @[key] = value
     
-    @id = this[@constructor.table.key]
+    @set args
     
-    for key, field of @constructor.fields
-      if field.default?
-        @[key] ?= _.result field, 'default'
+    @id = @[@constructor.table.key]
+    
+    do @default
+  
+  default: ->
+    for key, field of @constructor.fields when field.default?
+      @[key] ?= (field.default? null) or field.default
+  
+  cast: (key, value) ->
+    
+    field = @constructor.fields[key]
+    
+    if field?.type is Boolean
+      
+      return {
+        true: true
+        false: false
+        on: on
+        off: off
+        yes: yes
+        no: no
+        0: false
+        1: true
+      }[value]
+    
+    return value
   
   set: (hash) ->
     
-    for key, field of @constructor.fields when hash[key]?
+    for key, value of hash
       
-      if field.type? and field.type is Boolean
-        
-        value = hash[key]
-        
-        map =
-          true: true
-          false: false
-          on: on
-          off: off
-          0: false
-          1: true
-        
-        @[key] = map[value]
-      
-      else
-        
-        @[key] = hash[key]
+      @[key] = @cast key, value
     
     return
+  
+  patchLinks: (hash, args..., callback) ->
+    
+    return callback null unless args[0]?.req?
+    
+    {req} = args[0]
+    
+    async.map (_.values @constructor.links), (link, callback) =>
+      
+      return callback null unless req.body[link.key]? or req.files[link.key]?
+      
+      constructor = do link.type
+      
+      # delete existing linked models
+      constructor.forEntity this, (error, linkedModels) =>
+        
+        return calback error if error?
+        
+        async.map linkedModels, (linkedModel, callback) =>
+          linkedModel.patch deleted: yes, callback
+        , (error) =>
+          
+          return callback error if error?
+          
+          @buildLinks req, callback
+    
+    , callback
+  
+  patch: (hash, args..., callback) ->
+    
+    for key, field of @constructor.fields when field.type is Boolean
+      hash[key] ?= false
+    
+    @set hash
+    
+    map = {}
+    map[key] = @[key] for key, value of hash
+    
+    @validate {}, (error) =>
+      
+      return callback error if error?
+      
+      @constructor.db.query """
+      UPDATE #{@constructor.table.name}
+      SET ?
+      WHERE #{@constructor.table.key} = ?
+      """, [map, @id], (error) =>
+        
+        @patchLinks hash, args..., callback
   
   validate: (args = {}, callback) ->
     
@@ -79,13 +133,9 @@ module.exports = class Model
       errors[field.key] ?= []
       errors[field.key].push message
     
-    console.log 'validating'
-    
     for key, field of @constructor.fields
       
       value = @[key]
-      
-      console.log 'validating', key, field
       
       if field.required
         
@@ -123,10 +173,29 @@ module.exports = class Model
       for key, field of @constructor.table.columns
         if @constructor.fields?[key]?.type?
           if @constructor.fields?[key]?.type is Boolean
-            # console.log 'TYPE', key, this[key], typeof this[key] # @constructor.fields[key]?.type
             this[key] = Boolean this[key]
     
-    callback null, this
+    async.map (_.values @constructor.links), (link, callback) =>
+      
+      model = do link.type
+      
+      model.forEntity this, (error, linked) =>
+        
+        return callback error if error?
+        
+        if link.cardinality is Infinity
+          @[link.key] = linked
+        else
+          # TODO check for ambiguity
+          @[link.key] = linked[0]
+        
+        callback null
+    
+    , (error) =>
+      
+      return callback error if error?
+      
+      callback null, this
   
   ###
   Model::save
@@ -140,7 +209,11 @@ module.exports = class Model
       
       map[key] = @[key]
     
-    @constructor.db.query "UPDATE #{@constructor.table.name} SET ? WHERE #{@constructor.table.key} = ?", [map, @id], (error, result) ->
+    @constructor.db.query """
+    UPDATE #{@constructor.table.name}
+    SET ?
+    WHERE #{@constructor.table.key} = ?
+    """, [map, @id], (error, result) ->
       
       callback error result
   
@@ -154,71 +227,59 @@ module.exports = class Model
     
     @constructor.create map, callback
   
+  buildLinks: (req, callback) ->
+    
+    async.map (_.values @constructor.links), (link, callback) =>
+      
+      constructor = do link.type
+      
+      req.body.entity_id = @id
+      req.body.entity_type = @constructor.name.toLowerCase()
+      
+      constructor.build req, (error, linked) =>
+        return callback error if error?
+        @[link.key] = linked
+        callback null
+    , callback
+  
+  @forEntity = (entity, callback) ->
+    
+    @db.query """
+    SELECT *
+    FROM #{@table.name}
+    WHERE
+      entity_id = ?
+      AND entity_type = ?
+      AND NOT deleted
+    """, [
+      entity.id
+      entity.constructor.name.toLowerCase()
+    ], (error, rows) =>
+      
+      return callback error if error?
+      
+      async.map rows, @new.bind(this), callback
+  
   @build = (req, callback) ->
     
     @create req.body, (error, instance) =>
       
       return callback error if error?
       
-      async.map (_.values @links), (link, callback) =>
-        constructor = do link.type
-        constructor.build req, (error, linked) =>
-          return callback error if error?
-          instance[link.key] = linked
-          callback null
-      , callback
+      instance.buildLinks req, callback
   
   ###
   Model.patch
   - persists certain fields (changes) to the underlying row/record
   - bit of a hack
   ###
-  @patch = (id, hash, callback) ->
+  @patch = (id, hash, args..., callback) ->
     
     @get id, (error, model) =>
       
       return callback error if error?
       
-      values = {}
-      
-      for key, field of @fields when hash[key]?
-        
-        # store old value (for changes / diffs)
-        values[key] ?= {}
-        values[key].old = model[key]
-        
-        # determine new value
-        value = if field.type? and field.type is Boolean
-          {true: true, false: false}[hash[key]]
-        else
-          hash[key]
-        
-        # update the model
-        model[key] = value
-        
-        # store the new value (for changes / diffs)
-        values[key].new = model[key]
-      
-      map = {}
-      
-      for key, value of hash
-        map[key] = model[key]
-      
-      model.validate {}, (error) =>
-        
-        return callback error if error?
-        
-        @db.query "UPDATE #{@table.name} SET ? WHERE #{@table.key} = ?", [map, model.id], (error) =>
-          
-          for key in (Object.keys hash)
-            
-            continue unless values[key]?
-            
-            if values[key].new isnt values[key].old
-              
-              model.constructor.change?[key]? values: values[key], model: model
-          
-          callback error, model
+      model.patch hash, args..., callback
   
   ###
   Model.update
@@ -253,7 +314,8 @@ module.exports = class Model
   ###
   @create = (map, callback) ->
     
-    console.log 'creating', map
+    for key, field of @fields when field.type is Boolean
+      map[key] ?= false
     
     @new map, (error, model) =>
       
@@ -299,13 +361,7 @@ module.exports = class Model
       
       return callback error if error?
       
-      models = (new this row for row in rows)
-      
-      async.forEach models, (model, callback) ->
-        model.hydrate ->
-          callback()
-      , (error) ->
-        callback null, models
+      async.map rows, @new.bind(this), callback
   
   ###
   Model.delete
@@ -347,6 +403,4 @@ module.exports = class Model
       return callback error if error?
       return callback null, null unless rows.length
       
-      model = new this rows[0]
-      
-      callback null, model
+      callback null, (new this rows[0])

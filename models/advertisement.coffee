@@ -11,11 +11,11 @@ module.exports = class Advertisement extends Model
   
   @has (-> Media), key: 'image', cardinality: 1
   
-  @field 'description'
+  @field 'description', type: String, required: yes
   @field 'advertiser_id'
   @field 'adspace_id'
-  @field 'image_id'
-  @field 'hyperlink'
+  # @field 'image_id'
+  @field 'hyperlink', type: String, required: yes
   @field 'visible'
   @field 'start', type: Date
   @field 'stop', type: Date

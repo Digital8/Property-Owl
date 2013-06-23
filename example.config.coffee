@@ -38,6 +38,9 @@ module.exports =
   
   bucket: "#{__dirname}/public/uploads"
   
+  fs:
+    root: "#{__dirname}/public/uploads"
+  
   s3:
     key: null
     secret: null

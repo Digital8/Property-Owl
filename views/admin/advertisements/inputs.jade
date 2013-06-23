@@ -1,9 +1,9 @@
-
 h2 Advertisement Details
 
 hr
 
 .left
+  
   .inputs
     label.required(for="description") Description *
     input#description(type="text", name="description", maxlength='100', value=advertisement.description)
@@ -16,23 +16,20 @@ hr
         option(value="#{advertiser.id}", selected=advertisement.advertiser_id == advertiser.id)= advertiser.name
   
   .inputs
-    
     label(for='page') Page
-    
     select(name="page_ids", class="select3", data-placeholder="Choose pages", multiple, size=32)
       
       - each page in pages
-        
         option(value="#{page.page_id}", selected=_.contains(_.pluck(advertisement.pages, 'page_id'), page.page_id))= page.header
-
+  
   .inputs
     label(for='adspace') Space
     select(name="adspace_id", class="select2 iconed", data-placeholder="Choose a position")
       option(value="")
       - each adspace in adspaces
         option(value="#{adspace.adspace_id}", selected=advertisement.adspace_id == adspace.adspace_id)= adspace.name
-
-  input(type='hidden', name='image_id', value=advertisement.image_id)
+  
+  //- input(type='hidden', name='image_id', value=advertisement.image_id)
 
 .right
 
@@ -57,5 +54,6 @@ hr
 
 .inputs
   label.required(for='image') Image
-  img.small-advert(src="/uploads/#{advertisement.image_id}")
+  if advertisement.image
+    img(src=advertisement.image.url, style='max-width: 50%;')
   input#image(type="file", name="image")

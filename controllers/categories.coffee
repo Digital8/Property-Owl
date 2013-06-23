@@ -1,7 +1,7 @@
-exports.index   = (require '../behaviors/index')   Category, plural: 'categories'
-exports.add     = (require '../behaviors/add')     Category, plural: 'categories'
-exports.create  = (require '../behaviors/create')  Category, plural: 'categories'
-exports.edit    = (require '../behaviors/edit')    Category, plural: 'categories'
-exports.update  = (require '../behaviors/update')  Category, plural: 'categories'
-exports.delete  = (require '../behaviors/delete')  Category, plural: 'categories'
-exports.destroy = (require '../behaviors/destroy') Category, plural: 'categories'
+# exports.delete  = (require '../behaviors/delete')  Category
+# exports.edit    = (require '../behaviors/edit')    Category
+# exports.index   = (require '../behaviors/index')   Category
+exports.add     = (require '../behaviors/add')     Category
+exports.create  = (require '../behaviors/create')  Category, redirect: '/affiliates'
+exports.destroy = (require '../behaviors/destroy') Category, redirect: '/affiliates'
+exports.update  = (require '../behaviors/update')  Category, redirect: '/affiliates'

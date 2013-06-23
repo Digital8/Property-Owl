@@ -10,4 +10,6 @@ module.exports = (model, args = {}) ->
       
       res.locals[plural] = instances
       
-      res.render "admin/#{plural}/index"
+      (require './_all') req, res, args.all, ->
+        
+        res.render "admin/#{plural}/index"

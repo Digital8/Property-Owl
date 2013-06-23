@@ -1,6 +1,7 @@
 extends ../../layout
 
 block content
+  
   .container.row.main
     
     include ../menu
@@ -13,15 +14,15 @@ block content
     
     .details
       
-      form.details-form(action='/categories/add',method='post')
+      form.details-form(action='/categories', method='post')
         
         include ../../flashify
         
         .inputs
           label.required(for='Name') Name *
-          input#name(type='text',name="key")
+          input#name(type='text', name='key')
         
-          input(type="hidden",name="entity_type",value="affiliate")
+          input(type="hidden", name="entity_type", value='affiliate')
 
         .submit
           input.button(type='submit', value='Create Category')

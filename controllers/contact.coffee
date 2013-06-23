@@ -1,10 +1,8 @@
 {Email} = require 'email'
 
-exports.index = (req,res) -> res.render 'contact/index'
-
-exports.view = (req,res) ->
-
-exports.add = (req,res) ->
+exports.index = (req,res) ->
+  
+  res.render 'contact/index'
 
 exports.create = (req,res) ->
   req.assert('email', 'Invalid Email Address').isEmail()
@@ -41,9 +39,3 @@ exports.create = (req,res) ->
         req.flash 'success', 'message sent successfully'
       
       res.redirect '/contact'
-
-exports.edit = (req,res) ->
-
-exports.update = (req,res) ->
-
-exports.destroy = (req,res) ->

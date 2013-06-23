@@ -2,16 +2,16 @@
   
   ul
     
-    - if (action != 'add')
+    unless action == 'add'
       li
         a(href='/advertisements/add')
           img(src='/images/add.png')
           | &nbsp;
           | Add Advertisement
     
-    - if (action != 'index')
+    unless action == 'index'
       li
-        a(href="/advertisements")
+        a(href='/advertisements')
           img(src='/images/manage.png')
           | &nbsp;
           | Manage Advertisements

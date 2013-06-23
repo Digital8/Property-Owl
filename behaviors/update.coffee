@@ -6,7 +6,7 @@ module.exports = (model, args = {}) ->
   
   (req, res) ->
     
-    model.patch req.params.id, req.body, (error, instance) ->
+    model.patch req.params.id, req.body, req: req, (error, instance) ->
       
       if error?
         for key, message of error.errors
@@ -17,4 +17,4 @@ module.exports = (model, args = {}) ->
       return res.send 404 unless instance?
       
       req.flash 'success', "#{model.name} updated!"
-      res.redirect "#{prefix}#{plural}"
+      res.redirect args.redirect or "#{prefix}#{plural}"

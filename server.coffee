@@ -67,7 +67,7 @@ app.configure ->
     app.set 'view engine', 'jade'
     
     app.use express.responseTime()
-    app.use express.timeout()
+    app.use express.timeout 1000 * 60
     app.use express.static "#{__dirname}/public", maxAge: 1024
     app.use express.logger 'dev'
     app.use express.compress()
@@ -94,7 +94,7 @@ app.configure ->
       res.locals.util = require 'util'
       res.locals._ = require 'underscore'
       res.locals.date_input = (date) -> (moment date)?.format 'YYYY-MM-DD'
-      res.locals.action = 'index'
+      res.locals.action = ''
       
       if app.argv.hack then req.session.user_id = config.hack?.user?.id or 1
       
@@ -105,6 +105,8 @@ app.configure ->
     app.use do require './lib/ads'
     
     app.use do require './lib/auth'
+    
+    app.use do require './lib/files'
     
     # ?sort= middleware
     app.use (req, res, next) ->

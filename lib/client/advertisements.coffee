@@ -18,7 +18,7 @@ module.exports = ->
         entity_type = $row.data 'entity_type'
         
         if confirm "Really delete #{entity_type} #{id} ?"
-        
-          $.delete "/admin/#{entity_type}s/#{id}", ->
+          
+          $.delete "/#{entity_type}s/#{id}", ->
             console.log arguments...
             $row.remove()
