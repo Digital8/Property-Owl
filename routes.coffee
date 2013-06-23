@@ -167,19 +167,19 @@ module.exports = ({app, controllers}) ->
   
   app.post '/owls/:id(\\d+)/clone', (authorize acl.admin), controllers.owls.clone
   
-  # nesting
-  app.post '/barns/:id(\\d+)/owls',                    (authorize acl.admin), controllers.barns.nest
-  app.del  '/barns/:barn_id(\\d+)/owls/:owl_id(\\d+)', (authorize acl.admin), controllers.barns.unnest
+  # # nesting
+  # app.post '/barns/:id(\\d+)/owls',                    (authorize acl.admin), controllers.barns.nest
+  # app.del  '/barns/:barn_id(\\d+)/owls/:owl_id(\\d+)', (authorize acl.admin), controllers.barns.unnest
   
-  # owl deals
-  app.post  '/owls/:id(\\d+)/deals',                    (authorize acl.admin), controllers.owls.addDeal
-  app.patch '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), controllers.owls.patchDeal
-  app.del   '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), controllers.owls.removeDeal
+  # # owl deals
+  # app.post  '/owls/:id(\\d+)/deals',                    (authorize acl.admin), controllers.owls.addDeal
+  # app.patch '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), controllers.owls.patchDeal
+  # app.del   '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), controllers.owls.removeDeal
   
-  # barn deals
-  app.post  '/barns/:id(\\d+)/deals',                     (authorize acl.admin), controllers.barns.addDeal
-  app.patch '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), controllers.barns.patchDeal
-  app.del   '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), controllers.barns.removeDeal
+  # # barn deals
+  # app.post  '/barns/:id(\\d+)/deals',                     (authorize acl.admin), controllers.barns.addDeal
+  # app.patch '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), controllers.barns.patchDeal
+  # app.del   '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), controllers.barns.removeDeal
   
   # reports
   app.get '/reports',                      (authorize acl.admin), controllers.reports.index

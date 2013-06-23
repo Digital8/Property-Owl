@@ -11,23 +11,26 @@ module.exports = class Owl extends Model
     name: 'owls'
     key: 'owl_id'
   
+  @has (-> Media), cardinality: Infinity, key: 'images'
+  @has (-> Media), cardinality: Infinity, key: 'files'
+  
   @field 'barn_id', null: yes
   
   @field 'approved', type: Boolean, default: no
   
   @field 'approved_at', type: Date
   
-  @field 'title'
-  @field 'address'
-  @field 'suburb'
-  @field 'postcode'
-  @field 'state'
-  @field 'description'
-  @field 'price'
-  @field 'level'
-  @field 'bedrooms'
-  @field 'bathrooms'
-  @field 'cars'
+  @field 'title', type: String, required: yes
+  @field 'address', type: String, required: yes
+  @field 'suburb', type: String, required: yes
+  @field 'postcode', type: String, required: yes
+  @field 'state', type: String, required: yes
+  @field 'description', type: String, required: yes
+  @field 'price', type: Number, required: yes
+  @field 'level', type: Number, required: yes
+  @field 'bedrooms', type: Number, required: yes
+  @field 'bathrooms', type: Number, required: yes
+  @field 'cars', type: Number, required: yes
   @field 'internal_area'
   @field 'external_area'
 
@@ -67,6 +70,7 @@ module.exports = class Owl extends Model
     super
   
   hydrate: (callback) ->
+    
     async.series
       developmentType: (callback) =>
         DevelopmentType.get @development_type_id, (error, developmentType) =>
@@ -177,8 +181,8 @@ module.exports = class Owl extends Model
       do callback
   
   heroImageURL: ->
-    unless @images? and @images.length then return '/images/placeholder.png'
     
+    unless @images? and @images.length then return '/images/placeholder.png'
     
     if @feature_image != ''
       return "/uploads/#{@feature_image}"
@@ -186,9 +190,9 @@ module.exports = class Owl extends Model
       # default to latest image
       # # find the hero
       hero = _.find @images, (image) => return Number(image.filename) is Number(@feature_image)
-    
-      # console.log owl: @, hero: hero
+      
       hero ?= @images.pop()
+      
       return "/uploads/#{hero.filename}"
   
   displayTitleShort: ->
@@ -199,7 +203,9 @@ module.exports = class Owl extends Model
     "#{@address}, #{@suburb}, #{@state.toUpperCase()}"
 
   deals: (callback) ->
+    
     @db.query "SELECT * FROM deals WHERE #{@table.key} = ?", [@id], (error) ->
+      
       return callback error if error
       
       callback null
@@ -269,16 +275,13 @@ module.exports = class Owl extends Model
         
         model.constructor.patch model.id, approved_at: 0, ->
   
-  @inBarn = (barnId, callback) =>
-    @db.query "SELECT * FROM #{@table.name} WHERE barn_id = ?", [barnId], (error, rows) =>
-      return callback error if error
+  @inBarn = (id, callback) =>
+    
+    @db.query "SELECT * FROM #{@table.name} WHERE barn_id = ?", [id], (error, rows) =>
       
-      models = (new this row for row in rows)
+      return callback error if error?
       
-      async.forEach models, (model, callback) =>
-        model.hydrate callback
-      , (error) ->
-        callback null, models
+      async.map rows, @new.bind(this), callback
   
   @state = (state, callback) ->
     @db.query """
@@ -290,14 +293,10 @@ module.exports = class Owl extends Model
           approved
       ORDER BY created_at ASC
     """, [state], (error, rows) =>
-      return callback error if error
       
-      models = (new this row for row in rows)
+      return callback error if error?
       
-      async.forEach models, (model, callback) =>
-        model.hydrate callback
-      , (error) ->
-        callback null, models
+      async.map rows, @new.bind(this), callback
   
   @top = (callback) ->
     @db.query """
@@ -318,15 +317,12 @@ module.exports = class Owl extends Model
     HAVING discount) AS TEMP
     ORDER BY ratio DESC
     LIMIT 1
-    """, [], (error, rows) ->
-      return callback error if error
+    """, [], (error, rows) =>
       
-      owl = new Owl rows[0]
+      return callback error if error?
       
-      owl.hydrate ->
-        
-        callback null, owl
-        
+      @new rows[0], callback
+  
   @topstate = (state, callback) ->
     @db.query """
     SELECT
@@ -348,38 +344,29 @@ module.exports = class Owl extends Model
     HAVING discount) AS TEMP
     ORDER BY ratio DESC
     LIMIT 1
-    """, [state], (error, rows) ->
-      return callback error if error
+    """, [state], (error, rows) =>
       
-      owl = new Owl rows[0]
+      return callback error if error?
       
-      owl.hydrate ->
-        callback null, owl
+      @new rows[0], callback
   
   @byDeveloper = (id, callback) ->
+    
     @db.query "SELECT * FROM owls WHERE listed_by = ?", [id] ,(error, rows) =>
-      return callback error if error
       
-      models = (new this row for row in rows)
+      return callback error if error?
       
-      async.forEach models, (model, callback) =>
-        model.hydrate callback
-      , (error) ->
-        callback null, models
+      async.map rows, @new.bind(this), callback
 
   @pending = (callback) ->
+    
     @db.query "SELECT * FROM owls WHERE approved = false", (error, rows) =>
-      return callback error if error
       
-      models = (new this row for row in rows)
+      return callback error if error?
       
-      async.forEach models, (model, callback) =>
-        model.hydrate callback
-      , (error) ->
-        callback null, models
+      async.map rows, @new.bind(this), callback
   
   @search: (q, callback) ->
-    console.log 'search', q
     
     query = """
       SELECT *
@@ -403,8 +390,6 @@ module.exports = class Owl extends Model
       GROUP BY owl_id
     """
     
-    console.log query
-    
     args = [
       q.minPrice
       q.maxPrice
@@ -414,14 +399,8 @@ module.exports = class Owl extends Model
       q.cars
     ]
     
-    console.log args
-    
     @db.query query, args, (error, rows) =>
-      return callback error if error
       
-      models = (new this row for row in rows)
+      return callback error if error?
       
-      async.forEach models, (model, callback) =>
-        model.hydrate callback
-      , (error) ->
-        callback null, models
+      async.map rows, @new.bind(this), callback

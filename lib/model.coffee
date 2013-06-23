@@ -111,7 +111,8 @@ module.exports = class Model
     @set hash
     
     map = {}
-    map[key] = @[key] for key, value of hash
+    for key, field of @constructor.fields when hash[key]?
+      map[key] = @[key]
     
     @validate {}, (error) =>
       
@@ -266,7 +267,11 @@ module.exports = class Model
       
       return callback error if error?
       
-      instance.buildLinks req, callback
+      instance.buildLinks req, (error, results) =>
+        
+        return callback error if error?
+        
+        callback null, instance
   
   ###
   Model.patch
@@ -279,7 +284,11 @@ module.exports = class Model
       
       return callback error if error?
       
-      model.patch hash, args..., callback
+      model.patch hash, args..., (error, patches) =>
+        
+        return callback error if error?
+        
+        callback null, model
   
   ###
   Model.update

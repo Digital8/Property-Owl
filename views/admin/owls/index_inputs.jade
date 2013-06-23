@@ -1,0 +1,75 @@
+h2 Property Details
+
+hr
+
+if req.user && req.user.isAdmin()
+  
+  .left
+    
+    .inputs
+      label(for='listed_by') Listed By 
+      select#listed_by(name='listed_by')
+        option Select
+        - each developer in developers
+          option(value='#{developer.user_id}', selected=developer.user_id == owl.listed_by) #{developer.first_name} #{developer.last_name}        
+    
+    .inputs
+      label(for='title') Approved
+        | &nbsp;
+        input.big(id='approved', name='approved', type='checkbox', checked=owl.approved)
+
+.inputs
+
+.left
+  
+  .inputs
+    label(for='development_type_id') Development Type
+    select.development_type_id(type='text', name='development_type_id')
+      option Select
+      - for type in developmentTypes
+        option(value='#{type.id}', selected=owl.development_type_id == type.id)= type.name
+  
+  .inputs
+    label(for='development_status_id') Development Stage
+    select.development_status_id(type='text', name='development_status_id')
+      option Select
+      - for status in developmentStatuses
+        option(value='#{status.id}', selected=owl.development_status_id == status.id)= status.name
+  
+  .inputs
+    label(for='price') Price
+    input.price(type='number', name='price', value=owl.price, min='0', max='100000000', pattern='^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$')
+
+.inputs
+
+.inputs
+  label(for='title') Title
+  input#title(type='text', name='title', value=owl.title, maxlength='100')
+
+.inputs
+  label(for='description') Description
+    textarea#description(name='description', rows='7', style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 181px;")
+      = owl.description
+
+//- - var display = (owl.approved == true) ? 'block' : 'none';
+
+//- div#approved_at(style="display: #{display}")
+//-   label(for='title') Approved at
+//-   if owl.approved_at
+//-     input(id='approved_at_val', name='approved_at', type='date', value=moment(owl.approved_at).format('YYYY-MM-DD'))
+//-   else
+//-     input(id='approved_at_val', name='approved_at', type='date')
+
+//- script
+//-   $(document).ready(function(){
+//-     $("#approved").click(function(){
+//-       if ($(this).attr('checked'))
+//-       {
+//-         $("#approved_at").show();
+//-       }
+//-     else
+//-       {
+//-         $("#approved_at").hide();
+//-       }
+//-     });
+//-   });

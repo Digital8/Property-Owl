@@ -12,6 +12,7 @@ hr
         td Actions
     
     tbody.body
+      //- pre= JSON.stringify(owl.deals)
       - if (owl.deals && owl.deals.length)
         - each deal in owl.deals
           include deal_input

@@ -22,14 +22,3 @@ block content
         .submit
           input.button(type='submit', value='Create Owl').owl-button
           a.left-button(href='/owls') Cancel
-  script
-    $(document).ready(function(){
-        $('.owl-button').click(function(e){
-          e.preventDefault();
-          $("#generic-modal, #generic-modal .modal.main").removeClass('success');
-          $('#generic-modal-title').html('Processing...');
-          $('#generic-modal-content').html('Processing your request. Please be patient..');        
-          $('#generic-modal').show(150);
-          $('.details-form').submit();
-        });
-    });
