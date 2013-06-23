@@ -28,8 +28,8 @@ exports.create = (req,res) ->
   else
     
     myMsg = new Email
-      from: 'bscarvell@gmail.com'
-      to:   'bscarvell@gmail.com'
+      from: 'alex@digital8.com.au'
+      to:   'jeff@digital8.com.au'
       subject: 'Knock knock...'
       body: "Who's there?"
     
