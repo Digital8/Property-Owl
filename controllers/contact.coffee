@@ -39,7 +39,7 @@ exports.create = (req,res) ->
         console.log err
         req.flash 'error', 'an error occured'
       else
-        req.flash 'success', 'message sent successfully'
+        req.flash 'success', 'Contact Enquiry Sent'
       
       res.redirect '/contact'
 
