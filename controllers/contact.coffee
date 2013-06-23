@@ -10,6 +10,15 @@ exports.create = (req,res) ->
   req.assert('email', 'Invalid Email Address').isEmail()
   req.assert('name', 'Please enter a name').notEmpty()
   req.assert('comments', 'Please enter the comments').notEmpty()
+  #TODO: Add some more validation
+  #enquiry type
+  #company
+  #name
+  #address
+  #phone
+  #city/suburb
+  #state
+  #phone
   
   console.log req.body
   
@@ -27,6 +36,7 @@ exports.create = (req,res) ->
   
   else
     
+    #TODO: change this to an email template
     myMsg = new Email
       from: 'alex@digital8.com.au'
       to:   'jeff@digital8.com.au'
