@@ -36,6 +36,7 @@ exports.create = (req,res) ->
     myMsg.send (err) ->
       
       if err
+        console.log err
         req.flash 'error', 'an error occured'
       else
         req.flash 'success', 'message sent successfully'
