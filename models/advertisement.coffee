@@ -22,6 +22,15 @@ module.exports = class Advertisement extends Model
   @field 'created_at'
   @field 'updated_at'
   
+  constructor: (args = {}) ->
+    
+    @_image = null
+    Object.defineProperty this, 'image',
+      get: => @_image or url: "https://propertyowl.s3.amazonaws.com/#{@image_id}"
+      set: (value) => @_image = value
+    
+    super
+  
   hydrate: (callback) ->
     
     async.parallel

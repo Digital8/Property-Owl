@@ -8,18 +8,17 @@ block content
     
     #center-col
       
-      h1 #{_s.capitalize(req.type)}
+      h1= _s.capitalize(req.type)
       
       h3 Innovation in delivering Australia's best property deals
       
-      unless posts.length
-        
-        p There are no #{req.type} items for now. Please check back soon. 
-      
-      else
+      if posts.length
         
         each post in posts
           
           include summary
+      
+      else
+        p There are no #{req.type} items for now. Please check back soon. 
     
     include ../right_nav

@@ -12,19 +12,19 @@
       
       a.details-button(href="/#{req.type}/#{post.id}")
         
-        if post.images[0]
+        - if (post.images[0])
          
           img.thumb(src='/uploads/#{post.imageURL()}', alt='#{post.title}')
         
-        else
+        - else
         
           img.thumb(src='/images/placeholder.png', alt='#{post.title}')
     
     .listing-details
       
       .summary
-        p= moment(new Date(post.created_at)).format('LLL')}
-        p !{_s.prune(post.content, 200)}
+        p= moment(new Date(post.created_at)).format('LLL')
+        p= _s.prune(post.content, 200)
       
       .listing-links
         a.details-button(href="/#{req.type}/#{post.id}")
