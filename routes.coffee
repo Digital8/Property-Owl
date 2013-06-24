@@ -176,18 +176,18 @@ module.exports = ({app, controllers}) ->
         next null
   
   # nesting
-  app.post '/barns/:barn_id(\\d+)/owls',               (authorize acl.admin), (entity Barn), controllers.barns.nest
-  app.del  '/barns/:barn_id(\\d+)/owls/:owl_id(\\d+)', (authorize acl.admin), (entity Barn), controllers.barns.unnest
+  app.post '/barns/:barn_id(\\d+)/owls',               (authorize acl.developer), (entity Barn), controllers.barns.nest
+  app.del  '/barns/:barn_id(\\d+)/owls/:owl_id(\\d+)', (authorize acl.developer), (entity Barn), controllers.barns.unnest
   
   # owl deals
-  app.post  '/owls/:owl_id(\\d+)/deals',                (authorize acl.admin), (entity Owl), controllers.deals.create
-  app.patch '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), (entity Owl), controllers.deals.update
-  app.del   '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), (entity Owl), controllers.deals.destroy
+  app.post  '/owls/:owl_id(\\d+)/deals',                (authorize acl.developer), (entity Owl), controllers.deals.create
+  app.patch '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Owl), controllers.deals.update
+  app.del   '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Owl), controllers.deals.destroy
   
   # barn deals
-  app.post  '/barns/:barn_id(\\d+)/deals',                (authorize acl.admin), (entity Barn), controllers.deals.create
-  app.patch '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), (entity Barn), controllers.deals.update
-  app.del   '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.admin), (entity Barn), controllers.deals.destroy
+  app.post  '/barns/:barn_id(\\d+)/deals',                (authorize acl.developer), (entity Barn), controllers.deals.create
+  app.patch '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Barn), controllers.deals.update
+  app.del   '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Barn), controllers.deals.destroy
   
   # reports
   app.get '/reports',                      (authorize acl.admin), controllers.reports.index
