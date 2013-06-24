@@ -1,5 +1,10 @@
 exports.get = (req, res, next) ->
   
+  if req.user?
+    req.flash 'error', "You have already signed up!"
+    res.redirect '/'
+    return
+  
   respond = (args = {}) ->
     
     res.render 'users/add', args
