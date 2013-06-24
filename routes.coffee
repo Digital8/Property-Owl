@@ -165,18 +165,18 @@ module.exports = ({app, controllers}) ->
     app.post  "/#{key}", (authorize 2),   (authorize acl.developer), controllers[key].create
     app.put   "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].update
   
-  app.post '/owls/:id(\\d+)/clone', (authorize acl.admin), controllers.owls.clone
-  
-  # # nesting
-  # app.post '/barns/:id(\\d+)/owls',                    (authorize acl.admin), controllers.barns.nest
-  # app.del  '/barns/:barn_id(\\d+)/owls/:owl_id(\\d+)', (authorize acl.admin), controllers.barns.unnest
+  # app.post '/owls/:id(\\d+)/clone', (authorize acl.admin), controllers.owls.clone
   
   entity = (model) ->
     (req, res, next) ->
-      model.get req.params.owl_id, (error, entity) ->
+      model.get req.params["#{model.name.toLowerCase()}_id"], (error, entity) ->
         return next error if error?
         req.entity = entity
         next null
+  
+  # nesting
+  app.post '/barns/:barn_id(\\d+)/owls',               (authorize acl.admin), (entity Barn), controllers.barns.nest
+  app.del  '/barns/:barn_id(\\d+)/owls/:owl_id(\\d+)', (authorize acl.admin), (entity Barn), controllers.barns.unnest
   
   # owl deals
   app.post  '/owls/:owl_id(\\d+)/deals',                (authorize acl.admin), (entity Owl), controllers.deals.create

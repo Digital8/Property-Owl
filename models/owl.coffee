@@ -82,30 +82,6 @@ module.exports = class Owl extends Model
           @developmentStatus = developmentStatus
           callback()
       
-      # images: (callback) =>
-      #   Media.forEntityWithClass this, klass: 'image', (error, medias) =>
-
-      #     @images = medias
-          
-      #     if @feature_image? and @images.length
-            
-      #       feature_id = parseInt @feature_image
-            
-      #       feature_image = _.detect @images, (image) -> image.id is feature_id
-            
-      #       @images = _.filter @images, (image) -> image.id isnt feature_id
-            
-      #       @images.unshift feature_image
-            
-      #       @images = _.filter @images, (image) -> image?
-          
-      #     callback error
-      
-      # files: (callback) =>
-      #   Media.forEntityWithClass this, klass: 'file', (error, medias) =>
-      #     @files = medias
-      #     callback error
-      
       deals: (callback) =>
         Deal.for this, (error, deals) =>
           @deals = deals
