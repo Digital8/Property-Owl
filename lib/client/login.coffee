@@ -1,8 +1,8 @@
 module.exports = ->
   
   ($ '#login-modal input').keypress (event) ->
-    event.preventDefault()
     if event.keyCode is 13
+      event.preventDefault()
       $(".login-button").click()
   
   $(".login-button").on "click", (event) ->

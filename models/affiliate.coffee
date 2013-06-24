@@ -64,11 +64,11 @@ module.exports = class Affiliate extends Model
     , callback
   
   imageURL: ->
-    if @images.length
+    if @images?.length
       return '/uploads/' + @images.pop().filename
     else
       return '/images/placeholder.png' # or whatever it is
-
+  
   @byCategory = (category_id, callback) ->
     @db.query "SELECT * FROM affiliates WHERE visible AND category_id = ?", [category_id], (error, rows) =>
       return callback error if error
