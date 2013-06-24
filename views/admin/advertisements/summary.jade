@@ -12,7 +12,7 @@ tr(data-id=advertisement.id, data-entity_type='advertisement')
   else
     td
   
-  if advertisement.image
+  if advertisement.image && advertisement.image.url
     td
       if advertisement.adspace_id == 1
         img(src=advertisement.image.url)

@@ -54,6 +54,6 @@ hr
 
 .inputs
   label.required(for='image') Image
-  if advertisement.image
+  if advertisement.image && advertisement.image.url
     img(src=advertisement.image.url, style='max-width: 50%;')
   input#image(type="file", name="image")

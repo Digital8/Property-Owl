@@ -26,7 +26,9 @@ module.exports = class Advertisement extends Model
     
     @_image = null
     Object.defineProperty this, 'image',
-      get: => @_image or url: "https://propertyowl.s3.amazonaws.com/#{@image_id}"
+      get: =>
+        return @_image if @_image
+        return url: "https://propertyowl.s3.amazonaws.com/#{@image_id}" if @image_id
       set: (value) => @_image = value
     
     super
