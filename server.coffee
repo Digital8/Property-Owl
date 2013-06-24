@@ -28,6 +28,7 @@ argv = optimist
   .alias('fake', 'f')
   .alias('time', 't')
   .alias('hack', 'h')
+  .alias('user', 'u')
   .argv
 
 db = null
@@ -101,8 +102,8 @@ app.configure ->
       res.locals.date_input = (date) -> (moment date)?.format 'YYYY-MM-DD'
       res.locals.action = ''
       
-      if app.argv.hack
-        req.session.user_id = app.argv.hack or config.hack?.user?.id or 1
+      if app.argv.user
+        req.session.user_id = app.argv.user or config.hack?.user?.id or 1
       
       next? null
     
