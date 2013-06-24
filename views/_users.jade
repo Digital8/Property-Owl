@@ -51,8 +51,7 @@
 
   script
     setTimeout(function() {
-      if(!$.isAuthed()) {
+      if(!$.isAuthed) {
         $("#users-modal").show();
       }
     }, 15000);
-    
