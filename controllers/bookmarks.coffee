@@ -4,6 +4,8 @@ exports.index = (req, res, next) ->
     
     return next error if error?
     
+    bookmarks = bookmark for bookmark in bookmarks when bookmark.entity?
+    
     res.render 'user/bookmarks', {bookmarks}
 
 exports.create = (req, res, next) ->
