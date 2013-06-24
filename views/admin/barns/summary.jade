@@ -2,7 +2,12 @@ tr(data-id=barn.id, data-entity_type='barn')
   td= barn.code
   - var listed = new Date(barn.created_at)
   td(style='text-align: center;') #{moment(listed).format('DD/MM/YYYY')}
-  td= barn.user.first_name + ' ' + barn.user.last_name
+  
+  if barn.user
+    td= barn.user.first_name + ' ' + barn.user.last_name
+  else
+    td
+  
   td= barn.fullAddress
   td Current
   - if (typeof(barn.owls) != 'undefined')
