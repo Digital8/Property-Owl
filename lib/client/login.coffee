@@ -4,14 +4,15 @@ module.exports = ->
     
     event.preventDefault()
     
-    email = $(".login-email").val()
-    pass = $(".login-password").val()
     error = $(".login-error")
     
     $.ajax
-      url: "/ajax/login"
+      url: "/login"
       type: "post"
-      data: "e=" + email + "&p=" + pass + "&r=" + $("#remember").attr("checked")
+      data:
+        email: $(".login-email").val()
+        password: pass = $(".login-password").val()
+        remember: $("#remember").attr("checked")
       error: (jqXHR, textStatus, errorThrown) ->
         error.html "Login Failed, Please try again."
         error.stop().fadeOut(100).fadeIn(350).fadeOut(350).fadeIn(350).fadeOut(350).fadeIn 350
