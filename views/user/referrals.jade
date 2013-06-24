@@ -27,7 +27,8 @@ block content
                 thead
                   tr
                     td Email
-                    td Name
+                    td First Name
+                    td Last Name
                     td Comment
                     td Sent
                     td
@@ -37,7 +38,8 @@ block content
                   - each referral in referrals
                     tr
                       td= referral.email
-                      td #{referral.first_name} #{referral.last_name}
+                      td= referral.first_name
+                      td= referral.last_name
                       td= referral.comment
                       td= moment(referral.created_at).format('L')
                       td: a(href=referral.entity.url) View

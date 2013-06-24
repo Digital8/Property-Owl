@@ -22,7 +22,8 @@ block content
           td Name
           td Email
           td Member Type
-          td Referrer
+          td Referrer First Name
+          td Referrer Last Name
           td(colspan='2') Actions
       
       tbody
@@ -38,7 +39,13 @@ block content
           
           td
             - if (user.referrer)
-              a(href="/users/#{user.referrer.id}/edit")= user.referrer.name
+              a(href="/users/#{user.referrer.id}/edit")= user.referrer.first_name
+            - else
+              span -
+          
+          td
+            - if (user.referrer)
+              a(href="/users/#{user.referrer.id}/edit")= user.referrer.last_name
             - else
               span -
           
