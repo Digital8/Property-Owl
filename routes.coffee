@@ -168,26 +168,31 @@ module.exports = ({app, controllers}) ->
   
   # app.post '/owls/:id(\\d+)/clone', (authorize acl.admin), controllers.owls.clone
   
-  entity = (model) ->
+  entity = (model, key) ->
+    
+    key ?= model.name.toLowerCase()
+    
     (req, res, next) ->
-      model.get req.params["#{model.name.toLowerCase()}_id"], (error, entity) ->
+      
+      model.get (req.param "#{model.name.toLowerCase()}_id"), (error, entity) ->
         return next error if error?
-        req.entity = entity
+        return next 404 unless entity?
+        req[key] = entity
         next null
   
   # nesting
-  app.post '/barns/:barn_id(\\d+)/owls',               (authorize acl.developer), (entity Barn), controllers.barns.nest
-  app.del  '/barns/:barn_id(\\d+)/owls/:owl_id(\\d+)', (authorize acl.developer), (entity Barn), controllers.barns.unnest
+  app.post '/barns/:barn_id(\\d+)/owls',               (authorize acl.developer), (entity Barn), (entity Owl), controllers.barns.nest
+  app.del  '/barns/:barn_id(\\d+)/owls/:owl_id(\\d+)', (authorize acl.developer), (entity Barn), (entity Owl), controllers.barns.unnest
   
   # owl deals
-  app.post  '/owls/:owl_id(\\d+)/deals',                (authorize acl.developer), (entity Owl), controllers.deals.create
-  app.patch '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Owl), controllers.deals.update
-  app.del   '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Owl), controllers.deals.destroy
+  app.post  '/owls/:owl_id(\\d+)/deals',                (authorize acl.developer), (entity Owl, 'entity'),                controllers.deals.create
+  app.patch '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Owl, 'entity'), (entity Deal), controllers.deals.update
+  app.del   '/owls/:owl_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Owl, 'entity'), (entity Deal), controllers.deals.destroy
   
   # barn deals
-  app.post  '/barns/:barn_id(\\d+)/deals',                (authorize acl.developer), (entity Barn), controllers.deals.create
-  app.patch '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Barn), controllers.deals.update
-  app.del   '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Barn), controllers.deals.destroy
+  app.post  '/barns/:barn_id(\\d+)/deals',                (authorize acl.developer), (entity Barn, 'entity'),                controllers.deals.create
+  app.patch '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Barn, 'entity'), (entity Deal), controllers.deals.update
+  app.del   '/barns/:barn_id(\\d+)/deals/:deal_id(\\d+)', (authorize acl.developer), (entity Barn, 'entity'), (entity Deal), controllers.deals.destroy
   
   # reports
   app.get '/reports',                      (authorize acl.admin), controllers.reports.index

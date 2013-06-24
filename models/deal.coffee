@@ -28,6 +28,7 @@ module.exports = class Deal extends Model
     async.parallel
       developmentType: (callback) =>
         DealType.get @deal_type_id, (error, dealType) =>
+          
           @type = dealType
           
           callback()

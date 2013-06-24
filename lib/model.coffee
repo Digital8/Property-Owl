@@ -116,7 +116,7 @@ module.exports = class Model
     @set hash
     
     map = {}
-    for key, field of @constructor.fields when hash[key]?
+    for key, field of @constructor.fields when key of hash
       map[key] = @[key]
     
     @validate {}, (error) =>

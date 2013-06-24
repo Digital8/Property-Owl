@@ -11,15 +11,22 @@ exports.index = (req, res) ->
     Barn.all (error, barns) ->
       res.render 'admin/barns/index', {barns}
 
-exports.edit = (req, res) ->
+exports.edit = (req, res, next) ->
+  
+  console.log req.params.id
   
   async.parallel
     barn: (callback) -> Barn.get req.params.id, callback
     developers: (callback) -> User.developers callback
     dealTypes: (callback) -> DealType.all callback
   , (error, results) ->
+    
+    return next 404 unless results.barn?
+    
     results.barn.set req.session.form
+    
     delete req.session.form
+    
     res.render 'admin/barns/edit', results
 
 exports.add = (req, res, next) ->
@@ -143,19 +150,25 @@ exports.owls = (req,res) ->
     return res.render 'errors/404' unless barn?
     res.send barn.owls
 
-exports.nest = (req, res) ->
+exports.nest = (req, res, next) ->
   
-  exports.db.query "UPDATE barns SET barn_id = ? WHERE barn_id = ?", [req.params.id, req.body.id], (error, results) ->
+  {barn, owl} = req
+  
+  owl.patch barn_id: barn.id, (error) ->
     
-    res.send [error, results]
+    return next error if error?
+    
+    res.send 200
 
-exports.unnest = (req, res) ->
+exports.unnest = (req, res, next) ->
   
-  {barn_id, barn_id} = req.params
+  {barn, owl} = req
   
-  exports.db.query "UPDATE barns SET barn_id = NULL WHERE barn_id = ?", [barn_id], (error, results) ->
+  owl.patch barn_id: null, (error) ->
     
-    res.send [error, results]
+    return next error if error?
+    
+    res.send 200
 
 exports.print = (req, res, next) ->
   

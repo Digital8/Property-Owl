@@ -59,11 +59,11 @@ module.exports = ->
             event.preventDefault()
             p = $(this)
             
-            $.post "/barns/#{barnId}/owls", id: owl.id,
+            $.post "/barns/#{barnId}/owls", owl_id: owl.id, ->
               row = makeListRow owl
               row.appendTo $('.owl-matrix.nested tbody')
               p.parent().parent().remove()
-
+              
               do (row) ->
                 $row = $ row
                 $row.find('.unnest').click (event) ->

@@ -8,6 +8,8 @@ module.exports = (acl) ->
     if req.user?.level is acl
       return next? null
     
+    return next 403 if req.xhr
+    
     req.session.redirect_to = req.url
     
     res.redirect '/login'
