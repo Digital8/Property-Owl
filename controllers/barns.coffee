@@ -40,6 +40,8 @@ exports.add = (req, res, next) ->
 
 exports.create = (req, res) ->
   
+  req.body.listed_by ?= req.user.id
+  
   Barn.build req, (error, barn) ->
     
     if error?.errors?

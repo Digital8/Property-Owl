@@ -48,6 +48,8 @@ exports.add = (req, res, next) ->
 
 exports.create = (req, res, next) ->
   
+  req.body.listed_by ?= req.user.id
+  
   Owl.build req, (error, owl) ->
     
     if error?.errors?
