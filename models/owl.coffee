@@ -33,7 +33,7 @@ module.exports = class Owl extends Model
   @field 'cars', type: Number, required: yes
   @field 'internal_area'
   @field 'external_area'
-
+  
   @field 'listed_by'
   
   @field 'indoor_features'
@@ -185,61 +185,6 @@ module.exports = class Owl extends Model
       return callback error if error
       
       callback null
-
-  upload: (req, callback) ->
-    
-    # process(Req, String, Function)
-    # creates Media for each filea req's uploads
-    # takes
-    processFiles = (req, key, callback = ->) =>
-      files = req.files["#{key}s"]
-      
-      do callback unless files?
-      
-      files = [].concat files
-      
-      async.forEach files, (file, callback) =>
-        console.log "processing #{key} file...", file
-        
-        return do callback unless file.size
-        
-        Media.upload
-          entity_id: @id
-          owner_id: req.user.id
-          file: file
-          type: 'owl'
-          class: key
-        , callback
-      
-      , callback
-    
-    # uploads
-    
-    async.series
-      
-      uploads: (callback) =>
-        
-        async.parallel
-        
-          image: (callback) =>
-            processFiles req, 'image', callback
-          
-          file: (callback) =>
-            processFiles req, 'file', callback
-        
-        , callback
-      
-      nested: (callback) =>
-        return do callback unless req.body.files? 
-        
-        for file in req.body.files when file? and file.id? and file.description?
-          Media.update file.id, description: file.description, ->
-        
-        do callback
-    
-    , (error) ->
-      console.log 'done'
-      do callback
   
   @change =
     approved: ({values, model}) ->
