@@ -192,7 +192,12 @@ module.exports = class Model
       
       model = do link.type
       
-      model.forEntityByKey this, link.tag, (error, linked) =>
+      task = if link.cardinality is Infinity
+        (callback) => model.forEntityByKey this, link.tag, callback
+      else
+        (callback) => model.forEntity this, callback
+      
+      task (error, linked) =>
         
         return callback error if error?
         

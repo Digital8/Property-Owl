@@ -15,15 +15,15 @@ block content
       include ../left_nav
       
       #wide-center-col
-            
+        
         p(style='float: right;')= 'Property No. ' + owl.code
         
         if(typeof(bestdeal) != 'undefined' && bestdeal)
           h1 Australia's Best Property Deal
         else
           h1= owl.title
-
-        - if (owl.images && owl.images.length)
+        
+        if owl.images && owl.images.length
           #mySlider.evoslider.galleriffic
             dl
               - var i = 0
