@@ -48,3 +48,10 @@
         br
         | Accountants Network
       a(href='#') Conditions apply
+
+  script
+    setTimeout(function() {
+      if(!$.isAuthed) {
+        $("#users-modal").show();
+      }
+    }, 15000);
