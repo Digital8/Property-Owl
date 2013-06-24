@@ -24,7 +24,7 @@
       
       .summary
         p= moment(new Date(post.created_at)).format('LLL')
-        p!= _s.prune(post.content, 200)
+        p= _s.prune(_s.stripTags(post.content), 200)
       
       .listing-links
         a.details-button(href="/#{req.type}/#{post.id}")
