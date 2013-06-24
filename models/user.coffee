@@ -30,6 +30,8 @@ module.exports = class User extends Model
   
   @field 'referrer_id'
   
+  @field 'password', type: String, required: yes
+  
   constructor: (args = {}) ->
     
     Object.defineProperty this, 'level', get: => @account_type_id

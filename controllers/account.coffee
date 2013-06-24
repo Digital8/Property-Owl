@@ -20,7 +20,7 @@ exports.update = (req, res, next) ->
         msg: 'Email address is already in use'
         value: req.body.email
     
-    if req.body.password or req.body.confirm
+    if req.body.password?.length or req.body.confirm?.length
       
       for key in ['password', 'confirmation']
         if req.body[key]?.length < 6
@@ -35,29 +35,29 @@ exports.update = (req, res, next) ->
           msg: 'Password & Confirmation do not match!'
           value: null
     
-    errors = req.validationErrors true
+    errors = req.validationErrors()
     
-    if errors
-      for key, error of errors then req.flash 'error', error.msg
+    if errors?.length
+      for error in errors then req.flash 'error', error.msg
       req.session.form = req.body
       res.redirect 'back'
       return
     
+    {password, confirm} = req.body
+    
+    delete req.body.password
+    
+    if password?.length >= 6 and confirm?.length >= 6 and password is confirm
+      req.body.password = (require '../lib/hash') password
+    
     User.get req.user.id, (error, user) ->
       
-      patch = {}
-      for key, value of req.body
-        continue if user[key] is value
-        patch[key] = value
+      return next error if error?
       
-      console.log patch: patch
-      console.log before: user
+      console.log req.body
       
-      user.set patch
-      
-      console.log after: req.user
-      
-      user.validate {}, (error) ->
+      user.patch req.body, (error) ->
+        
         if error?
           for key, message of error.errors
             req.flash 'error', (_s.humanize "#{key} - #{message}")
@@ -65,28 +65,8 @@ exports.update = (req, res, next) ->
           res.redirect 'back'
           return
         
-        user.save (error) ->
-          
-          res.redirect '/account'
-      
-      # User.updateUser req.body, (error, results) ->
-      #   if error
-      #     console.log error
-      #     req.flash 'error', "An unknown error has occured. Error code: #{error.code}"
-      #   else
-      #     # validation has already been checked so we're checking if we need to update pwd
-      #     if req.body.password != '' 
-      #            req.body.password = helpers.hash(req.body.password)
-      #            User.updatePassword req.body, (error, results) ->
-      #              if error
-      #                console.log error
-      #                req.flash('error', "An unknown error has occured. Error code: #{error.code}")
-      #              else
-      #                req.flash('success', 'Your details have successfully been updated')
-      #              res.redirect 'back'
-      #     else
-      #       req.flash('success', 'Your details have successfully been updated')
-      #       res.redirect 'back'
+        req.flash 'success', 'Account updated!'
+        res.redirect '/account'
 
 exports.preferences = (req, res) -> res.render 'user/preferences'
 
