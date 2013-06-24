@@ -16,7 +16,7 @@ module.exports = class Advertisement extends Model
   @field 'adspace_id'
   # @field 'image_id'
   @field 'hyperlink', type: String, required: yes
-  @field 'visible'
+  @field 'visible', type: Boolean, default: on
   @field 'start', type: Date
   @field 'stop', type: Date
   @field 'created_at'
