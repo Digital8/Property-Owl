@@ -1,4 +1,4 @@
-exports.add = (req, res, next) ->
+exports.get = (req, res, next) ->
   
   respond = (args = {}) ->
     
@@ -12,7 +12,7 @@ exports.add = (req, res, next) ->
       referrer: referrer
       token: req.session.token
 
-exports.create = (req, res, next) ->
+exports.post = (req, res, next) ->
   
   email = req.param 'email'
   

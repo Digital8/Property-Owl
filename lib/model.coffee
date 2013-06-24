@@ -233,7 +233,7 @@ module.exports = class Model
     WHERE #{@constructor.table.key} = ?
     """, [map, @id], (error, result) ->
       
-      callback error result
+      callback error, result
   
   clone: (callback) ->
     
