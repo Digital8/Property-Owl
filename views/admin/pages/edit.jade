@@ -15,7 +15,7 @@ block content
     
     .details
       
-      form.details-form(action="/admin/pages/#{page.page_id}", method='post')
+      form.details-form(action="/pages/#{page.page_id}", method='post')
       
         input(type='hidden', name='_method', value='put')
         
@@ -23,4 +23,4 @@ block content
         
         .submit
           input.button(type='submit', value='Update Page')
-          a.left-button(href='/admin/pages/') Cancel
+          a.left-button(href='/pages/') Cancel

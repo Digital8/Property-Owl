@@ -7,7 +7,7 @@ module.exports = ->
   $form.on 'submit', (event) ->
     event.preventDefault()
     (require './ajax')
-      url: '/users'
+      url: '/signup'
       form: $form
       success: (data, textStatus, jqXHR) ->
         window.location.reload()

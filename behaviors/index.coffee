@@ -1,6 +1,6 @@
 module.exports = (model, args = {}) ->
   
-  {singular, plural} = (require './_inflect') arguments...
+  {singular, plural, views, prefix} = (require './_inflect') arguments...
   
   (req, res) ->
   
@@ -12,4 +12,4 @@ module.exports = (model, args = {}) ->
       
       (require './_all') req, res, args.all, ->
         
-        res.render "admin/#{plural}/index"
+        res.render "#{views}#{plural}/index"

@@ -1,6 +1,6 @@
 module.exports = (model, args = {}) ->
   
-  {singular, plural} = (require './_inflect') arguments...
+  {singular, plural, views, prefix} = (require './_inflect') arguments...
   
   (req, res) ->
     
@@ -10,6 +10,6 @@ module.exports = (model, args = {}) ->
       
       (require './_all') req, res, args.all, (error) ->
         
-        res.render "admin/#{plural}/add"
+        res.render "#{views}#{plural}/add"
         
         delete req.session.form

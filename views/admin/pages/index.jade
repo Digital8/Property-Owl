@@ -31,12 +31,12 @@ block content
             td=(page.enabled == 1) ? 'Enabled' : 'Disabled'
             
             td.actions
-              a(href="/admin/pages/#{page.page_id}/edit")
+              a(href="/pages/#{page.page_id}/edit")
                 img(src='/images/edit.png', alt='Edit')
                 | Edit
             
             td.actions
-              a(href="/admin/pages/#{page.page_id}/delete")
+              a(href="/pages/#{page.page_id}/delete")
                 img(src='/images/delete.png', alt='Delete')
                 | Delete
       

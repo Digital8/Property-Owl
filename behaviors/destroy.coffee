@@ -1,8 +1,6 @@
 module.exports = (model, args = {}) ->
   
-  args.prefix ?= 'admin'
-  
-  {singular, plural, prefix} = (require './_inflect') arguments...
+  {singular, plural, views, prefix} = (require './_inflect') arguments...
   
   (req, res, next) ->
     

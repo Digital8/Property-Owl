@@ -1,6 +1,6 @@
 module.exports = (model, args = {}) ->
   
-  {singular, plural} = (require './_inflect') arguments...
+  {singular, plural, views, prefix} = (require './_inflect') arguments...
   
   (req, res) ->
     
@@ -11,4 +11,4 @@ module.exports = (model, args = {}) ->
       
       res.locals[singular] = instance
       
-      res.render "#{plural}/view"
+      res.render "#{views}#{plural}/view"

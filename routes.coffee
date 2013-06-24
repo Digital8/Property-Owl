@@ -28,9 +28,9 @@ module.exports = ({app, controllers}) ->
   # auth
   app.get '/login',   controllers.login.get
   app.post '/login',   controllers.login.post
-  app.get '/logout',  controllers.misc.logout
-  app.get '/signup',  controllers.signup.add
-  app.post '/signup', controllers.signup.create
+  app.get '/logout',  controllers.logout.get
+  app.get '/signup',  controllers.signup.get
+  app.post '/signup', controllers.signup.post
   
   # preferences - my account
   app.get '/preferences', authenticate, controllers.account.preferences
@@ -200,7 +200,6 @@ module.exports = ({app, controllers}) ->
   app.get '/reports/referrals',            (authorize acl.admin), controllers.reports.referrals
   
   # ajax TODO
-  # app.post '/ajax/login', controllers.ajax.login
   app.get '/ajax/search', controllers.ajax.search
   
   app.all '*', controllers.pages.serve
