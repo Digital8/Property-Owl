@@ -7,6 +7,7 @@
     "addressit": "~0.1.4",
     "async": "latest",
     "browserify": "~1.16.6",
+    "cloudy": "git://github.com/feisty/cloudy.git",
     "coffee-script": "~1.4.0",
     "colors": "~0.6.0-1",
     "concat-stream": "~1.0.0",
