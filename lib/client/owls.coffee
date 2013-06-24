@@ -61,7 +61,7 @@ module.exports = ->
   
   #this wasn't really documented but its pretty annoying putting #detail over everything
   #i think its just for admin...
-  if window.location.pathname.indexOf('admin') != -1
+  if ($ '.pane-nav').length
     if window.location.hash? and window.location.hash.length
       activate window.location.hash[1..]
     else
