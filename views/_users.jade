@@ -51,7 +51,8 @@
 
   script
     setTimeout(function() {
-      if(!$.isAuthed) {
+
+      if(!$.isAuthed && !$('#users-modal').is(':visible') && (window.location.hostname.indexOf('elb') == -1) {
         $("#users-modal").show();
       }
     }, 15000);
