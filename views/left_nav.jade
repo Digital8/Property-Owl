@@ -38,7 +38,7 @@
         span.refer-emphasis $1000 
         | Nest Egg!      
   
-  - if (locals.barn || locals.share || (locals.owl && locals.area != 'index'))
+  - if (locals.barn || locals.share || (locals.owl && req.url != '/'))
     include share
 
   - if ((req.url!='/owls/top' && req.url!='/owls/' && !locals.owl && !locals.barn) || req.url == '/')
@@ -66,6 +66,6 @@
     
     include _enquire
   
-  - if ((!locals.owl && !locals.barn) || (locals.area && locals.area == 'index'))
+  - if ((!locals.owl && !locals.barn) || req.url == '/')
     
     include search
