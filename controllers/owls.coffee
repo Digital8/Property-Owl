@@ -108,7 +108,7 @@ exports.delete = (req, res) ->
   
   Owl.get req.params.id, (error, owl) ->
     
-    res.render 'admin/owls/delete', owl: owl
+    res.render 'admin/owls/delete', {owl}
 
 exports.destroy = (req, res) ->
   
@@ -116,26 +116,26 @@ exports.destroy = (req, res) ->
     
     res.send 200
 
-exports.clone = (req, res) ->
+# exports.clone = (req, res) ->
   
-  id = req.params.id
+#   id = req.params.id
   
-  count = parseInt req.body.count
+#   count = parseInt req.body.count
   
-  unless 0 <= count <= Infinity
-    return req.send status: 500
+#   unless 0 <= count <= Infinity
+#     return req.send status: 500
   
-  Owl.get id, (error, owl) ->
-    if error? then return req.send status: 500
+#   Owl.get id, (error, owl) ->
+#     if error? then return req.send status: 500
     
-    console.log arguments...
+#     console.log arguments...
     
-    async.map [0..count], (index, callback) ->
-      owl.clone callback
-    , (error) ->
-      return res.send status: 500 if error?
+#     async.map [0..count], (index, callback) ->
+#       owl.clone callback
+#     , (error) ->
+#       return res.send status: 500 if error?
       
-      res.send status: 200
+#       res.send status: 200
 
 # exports.index = (req, res) ->
   

@@ -11,6 +11,9 @@ module.exports = class Barn extends Model
     name: 'barns'
     key: 'barn_id'
   
+  @has (-> Media), cardinality: Infinity, key: 'images', tag: 'image'
+  @has (-> Media), cardinality: Infinity, key: 'files', tag: 'file'
+  
   @field 'title'
   @field 'description'
   
@@ -51,30 +54,6 @@ module.exports = class Barn extends Model
           do @tagOwls
           callback error
       
-      # images: (callback) =>
-      #   Media.forEntityWithClass this, klass: 'image', (error, medias) =>
-          
-      #     @images = medias
-          
-      #     if @feature_image? and @images.length
-            
-      #       feature_id = parseInt @feature_image
-            
-      #       feature_image = _.detect @images, (image) -> image.id is feature_id
-            
-      #       @images = _.filter @images, (image) -> image.id isnt feature_id
-            
-      #       @images.unshift feature_image
-            
-      #       @images = _.filter @images, (image) -> image?
-          
-      #     callback error
-      
-      # files: (callback) =>
-      #   Media.forEntityWithClass this, klass: 'file', (error, medias) =>
-      #     @files = medias
-      #     callback error
-      
       deals: (callback) =>
         Deal.for this, (error, deals) =>
           @deals = deals
@@ -101,6 +80,12 @@ module.exports = class Barn extends Model
     , (error) =>
       @user ?= {}
       callback error, this
+  
+  hydrateForUser: (user, callback) ->
+    Bookmark.forUserAndDeal user, this, (error, bookmark) =>
+      return callback error if error?
+      @bookmark = bookmark
+      do callback
   
   tagOwls: ->
     for owl, index in @owls

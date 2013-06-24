@@ -85,6 +85,8 @@ app.configure ->
     
     app.use (require './lib/epoch') app
     
+    app.use do require './lib/ping'
+    
     app.use (req, res, next) ->
       res.locals.session  = req.session
       res.locals.globals  = config.globals
