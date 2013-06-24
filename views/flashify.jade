@@ -1,6 +1,6 @@
 if (flash.error != undefined)
   .alert.alert-error
-    h4 Houston, we have a problem:
+    h4 Uh oh, we have a problem:
     ul
       each error in flash.error
         li= error
@@ -21,7 +21,7 @@ if (flash.info != undefined)
       
 if (flash.success != undefined)
   .alert.alert-success
-    h4 Woot!
+    h4 Success!
     ul
       each success in flash.success
         li= success
