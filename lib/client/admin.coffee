@@ -4,7 +4,7 @@ module.exports = ->
   
   do require './approval'
   
-  do require './adding'
+  do require './images'
   
   do require './deals'
   

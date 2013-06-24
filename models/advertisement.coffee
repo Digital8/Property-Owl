@@ -113,7 +113,7 @@ module.exports = class Advertisement extends Model
           callback null, advertisements
 
 # exports.update = (ad, callback) =>
-  
+
 #   map =
 #     description: ad.description
 #     page_id: ad.page_id

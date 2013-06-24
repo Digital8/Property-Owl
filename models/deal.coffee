@@ -19,8 +19,7 @@ module.exports = class Deal extends Model
   @field 'user_id'
   
   @field 'entity_id'
-  
-  @field 'type'
+  @field 'entity_type'
   
   constructor: (args = {}) ->
     super
@@ -35,20 +34,23 @@ module.exports = class Deal extends Model
     , (error) =>
       super callback
   
+  # todo make Model.forEntity use optional `deleted`
   @for = (model, callback) =>
-    type = model.constructor.name.toLowerCase()
     
-    @db.query "SELECT * FROM deals WHERE entity_id = ? AND type = '#{type}'", [model.id], (error, rows) =>
+    @db.query """
+    SELECT *
+    FROM deals
+    WHERE
+      entity_id = ?
+      AND entity_type = ?
+    """, [
+      model.id
+      model.constructor.name.toLowerCase()
+    ], (error, rows) =>
+      
       return callback error if error?
       
-      models = (new this row for row in rows)
-      
-      callback null, models
-
-  @owl_create = (values, callback) =>
-    @db.query "INSERT INTO deals(description,entity_id,user_id,value,deal_type_id) VALUES(?,?,?,?,?)", [values.desc, values.entity_id, values.user_id, values.value, values.deal_type_id], (err, results) =>
-      console.log 'callback?'
-      callback(err, results)
+      async.map rows, @new.bind(this), callback
 
   @getByMonth = (cred, callback) ->
 

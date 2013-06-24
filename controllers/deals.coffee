@@ -1,25 +1,28 @@
-exports.create = (req, res) ->
+exports.create = (req, res, next) ->
   
   map = req.body
-  map.entity_id = req.params.id
-  map.type = 'owl'
+  map.entity_id = req.entity.id
+  map.entity_type = req.entity.constructor.name.toLowerCase()
   map.user_id = req.user.id
   
-  Deal.create req.body, (error, deal) ->
+  Deal.create map, (error, deal) ->
+    
+    return next error if error?
     
     res.send deal
 
-exports.destroy = (req, res) ->
+exports.destroy = (req, res, next) ->
   
-  Deal.delete req.params.deal_id, ->
+  Deal.delete req.params.deal_id, (error) ->
     
-    res.send 'OK'
+    return next error if error?
+    
+    res.send 200
 
-exports.update = (req, res) ->
+exports.update = (req, res, next) ->
   
-  owlId = req.params.owl_id
-  dealId = req.params.deal_id
-  
-  Deal.patch dealId, req.body, (error, model) ->
+  Deal.patch req.params.deal_id, req.body, (error) ->
     
-    res.send status: 200
+    return next error if error?
+    
+    res.send 200
