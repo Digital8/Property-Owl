@@ -56,15 +56,7 @@ module.exports = class User extends Model
     
     async.parallel
       token: (callback) =>
-        #Token.upsertForEntityByKey this, 'master', user_id: @id, callback
-        Token.new
-          uuid: (require '../lib/hash') @id.toString()
-          entity_id: @id
-          entity_type: @constructor.name.toLowerCase()
-          key: 'master'
-          created_at: Date.now()
-          updated_at: Date.now()
-        , callback
+        Token.upsertForEntityByKey this, 'master', user_id: @id, callback
       referrer: (callback) => User.dry @referrer_id, callback
     , (error, map) =>
       return callback error if error?
