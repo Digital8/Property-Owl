@@ -77,9 +77,7 @@ module.exports = class Barn extends Model
           @registrations = results
           callback()
     
-    , (error) =>
-      @user ?= {}
-      callback error, this
+    , (error) => super callback
   
   hydrateForUser: (user, callback) ->
     Bookmark.forUserAndDeal user, this, (error, bookmark) =>

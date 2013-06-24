@@ -6,6 +6,8 @@ window.commas = commas = require './commas'
 $ ->
   (require './shim') $
   
+  do require './login'
+  
   do require './admin'
   
   do require './media'

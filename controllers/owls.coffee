@@ -36,6 +36,9 @@ exports.add = (req, res, next) ->
     developmentStatuses: (callback) -> DevelopmentStatus.all callback
     dealTypes: (callback) -> DealType.all callback
   , (error, results) ->
+    
+    return next error if error?
+    
     Owl.new req.session.form, (error, owl) =>
       delete req.session.form
       return next error if error?

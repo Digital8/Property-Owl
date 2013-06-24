@@ -69,7 +69,7 @@ html.no-js(lang='en')
     
     include _generic
     
-    - if (locals.req && locals.req.user)
+    if locals.req && locals.req.user
       include _registration
       include _referral
       include _referral_link
