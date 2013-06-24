@@ -1,5 +1,10 @@
 exports.get = (req, res) ->
   
+  if req.user?
+    req.flash 'error', "You are already signed in!"
+    res.redirect '/'
+    return
+  
   res.render 'user/login'
 
 exports.post = (req, res, next) ->
