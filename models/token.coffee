@@ -44,10 +44,7 @@ module.exports = class Token extends Model
       # none
       return callback null, null unless rows.length
       
-      # many
-      return callback 'ambiguous' if rows.length > 1
-      
-      # one
+      # many/one
       @new rows[0], callback
   
   @for = (entity, args..., callback) =>
@@ -83,9 +80,9 @@ module.exports = class Token extends Model
       return callback null, null unless rows.length
       
       # many
-      return callback 'ambiguous' if rows.length > 1
+      # return callback 'ambiguous' if rows.length > 1
       
-      # one
+      # many/one
       @new rows[0], callback
   
   @createForEntityWithKey = (entity, key, map, callback) =>
