@@ -1,6 +1,7 @@
 extends ../../layout
 
 block content
+  
   .container.row.main
     
     include ../menu
@@ -13,7 +14,7 @@ block content
     
     .details
       
-      form.details-form.fake(action='/owls', method='post', enctype='multipart/form-data', data-id=owl.id)
+      form.details-form.deal.fake(action='/owls', method='post', enctype='multipart/form-data', data-id=owl.id)
         
         include ../../flashify
         

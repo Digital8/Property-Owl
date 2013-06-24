@@ -22,12 +22,14 @@ exports.edit = (req, res) ->
     delete req.session.form
     res.render 'admin/barns/edit', results
 
-exports.add = (req, res) ->
+exports.add = (req, res, next) ->
   
   async.parallel
     developers: (callback) -> User.developers callback
     dealTypes: (callback) -> DealType.all callback
   , (error, results) ->
+    
+    return next error if error?
     
     Barn.new req.session.form, (error, barn) =>
       delete req.session.form
@@ -35,8 +37,6 @@ exports.add = (req, res) ->
       barn.listed_by ?= req.user.id
       results.barn = barn
       res.render 'admin/barns/add', results
-    
-    res.render 'admin/barns/add', results
 
 exports.create = (req, res) ->
   

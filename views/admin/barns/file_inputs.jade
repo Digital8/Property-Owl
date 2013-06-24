@@ -1,12 +1,16 @@
 h2 Files
+
 hr
+
 .inputs
   label Browse
   input#files(type='file', name='files', multiple='multiple')
   span.note Max file size 4MB.
 
 .inputs
+  
   table.admin-gridview.files
+    
     thead
       tr
         td.thumb Thumb
@@ -14,6 +18,9 @@ hr
         td Actions
     
     tbody.body
-      - if (barn.files && barn.files.length)
-        - each file in barn.files
+      
+      if barn.files && barn.files.length
+        
+        each file in barn.files
+        
           include file_input

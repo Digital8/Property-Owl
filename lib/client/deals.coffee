@@ -1,6 +1,6 @@
 module.exports = ->
   
-  $form = $ 'form.owl'
+  $form = $ 'form.details-form.deal'
   
   $grid = $ '.admin-gridview.deals'
   
