@@ -1,32 +1,39 @@
+_s = require 'underscore.string'
+
 exports.index = (req, res) ->
+  
   res.render 'user/settings'
+  
   delete req.session.form
 
-exports.update = (req, res) ->
-  
-  # req.body.email ?= ''
-  # req.body.fname ?= ''
-  # req.body.lname ?= ''
-  
-  # req.assert('fname', 'First name is invalid').isAlpha().len(2, 20).notEmpty()
-  # req.assert('lname', 'Last name is invalid').isAlpha().len(2, 20).notEmpty()
-  
-  # if req.body.password?.length
-  #   req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
-  #   req.assert('confirm', 'Password does not match').isIn [req.body.password]
-  
-  # req.assert('email', 'Invalid Email Address').isEmail()
+exports.update = (req, res, next) ->
   
   User.byEmail req.body.email, (error, user) ->
     
-    return res.send 500, error if error?
+    return next error if error?
+    
+    req._validationErrors ?= []
     
     if user? and user.id isnt req.user.id
-      req._validationErrors ?= []
       req._validationErrors.push
         param: 'email'
         msg: 'Email address is already in use'
         value: req.body.email
+    
+    if req.body.password or req.body.confirm
+      
+      for key in ['password', 'confirmation']
+        if req.body[key]?.length < 6
+          req._validationErrors.push
+            param: key
+            msg: (_s.humanize "#{key} too short")
+            value: req.body[key]
+      
+      if req.body.password isnt req.body.confirm
+        req._validationErrors.push
+          param: 'password/confirmation'
+          msg: 'Password & Confirmation do not match!'
+          value: null
     
     errors = req.validationErrors true
     
@@ -52,12 +59,14 @@ exports.update = (req, res) ->
       
       user.validate {}, (error) ->
         if error?
-          for key, message of error.errors then req.flash 'error', "#{key} - #{message}"
+          for key, message of error.errors
+            req.flash 'error', (_s.humanize "#{key} - #{message}")
           req.session.form = user
           res.redirect 'back'
           return
         
         user.save (error) ->
+          
           res.redirect '/account'
       
       # User.updateUser req.body, (error, results) ->
@@ -129,5 +138,7 @@ exports.registrations = (req, res, next) ->
     res.render 'user/registrations', {registrations}
 
 exports.referrals = (req, res) ->
+  
   Referral.forUser req.user, (error, referrals) ->
+    
     res.render 'user/referrals', {referrals}
