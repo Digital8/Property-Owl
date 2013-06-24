@@ -52,7 +52,7 @@ exports.update = (req, res) ->
       
       user.validate {}, (error) ->
         if error?
-          for key, message of error.errors then req.flash 'error', message
+          for key, message of error.errors then req.flash 'error', "#{key} - #{message}"
           req.session.form = user
           res.redirect 'back'
           return
