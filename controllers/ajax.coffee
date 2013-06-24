@@ -1,6 +1,6 @@
 async = require 'async'
 
-exports.login = (req, res) ->
+exports.login = (req, res, next) ->
   
   email = req.body.e
   password = req.body.p
@@ -9,15 +9,18 @@ exports.login = (req, res) ->
   
   User.byEmail email, (error, user) ->
     
-    return res.send 500, error if error?
+    console.log arguments
+    
+    return next error if error?
     
     unless user?
-      res.send status: 401
+      res.send 401
       return
     
     # TODO timing attacks [@pyro]
+    console.log user.password, digest
     unless user.password is digest
-      res.send status: 401
+      res.send 401
       return
     
     req.session.user_id = user.id
@@ -26,7 +29,7 @@ exports.login = (req, res) ->
       res.cookie 'pouser', user.id, maxAge: 604800000
       res.cookie 'popwd', user.password, maxAge: 604800000
     
-    res.send status: 200
+    res.send 200
 
 exports.registerStatus = (req, res) ->
   req.body.id ?= 0

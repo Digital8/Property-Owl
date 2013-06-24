@@ -141,41 +141,10 @@ $(function(){
     });
     return false;
   });
-  
-  // Login
-  var login = function(email, pass, callback){
-    $.ajax({
-      url: '/ajax/login',
-      type: 'post',
-      data: 'e=' + email + '&p=' + pass + '&r=' + $("#remember").attr('checked')
-    }).done(function(d){
-      callback(d.status == 200);
-    });
-    //return false;
-  }
 
 $("#close-errors").on("click", function(){
   var errorList = $(this).closest("ul");
   errorList.fadeOut(150);
 });
-  
-  $(".login-button").on("click", function(event){
-    event.preventDefault();
-    var email = $(".login-email").val();
-    var pass = $(".login-password").val();
-    var error = $(".login-error");
-    
-    login(email, pass, function(success){
-      if (success){
-        window.location.replace("/");
-      }
-      else {
-        error.html("Login Failed, Please try again.");
-        error.stop().fadeOut(100).fadeIn(350).fadeOut(350).fadeIn(350).fadeOut(350).fadeIn(350);
-      }
-    });
-    
-    return false;
-  });
 
 });

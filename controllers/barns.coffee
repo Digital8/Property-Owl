@@ -94,7 +94,7 @@ exports.update = (req, res, next) ->
       return res.redirect 'back'
     
     if barn.approved
-      (require '../../lib/mailer') 'listing-approval', 'Property Approved',
+      (require '../lib/mailer') 'listing-approval', 'Property Approved',
         email: barn.user.email
       ,
         contactName: barn.user.first_name

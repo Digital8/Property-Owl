@@ -13,6 +13,7 @@ module.exports = ->
         window.location.reload()
   
   $(".show-register").on "click", (event) ->
+    
     event.preventDefault()
     
     ($ '#login-modal').fadeOut 150
