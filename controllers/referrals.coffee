@@ -31,8 +31,6 @@ exports.create = (req, res, next) ->
     
     res.send id: referral.id
     
-    # emails
     #swap out the friends email
     req.user?.email = req.body.email
-    template = 'refer-property'
-    (require '../lib/mailer') template, 'Referral', req.user, req.body, (error) ->
+    (require '../lib/mailer') 'refer-property', 'Referral', req.user, req.body, (error) ->

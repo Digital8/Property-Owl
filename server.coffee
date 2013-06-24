@@ -12,6 +12,8 @@ hack.augmentConsole()
 
 console.start 'boot'
 
+_ = require 'underscore'
+require './lib/underscore'
 async = require 'async'
 express = require 'express'
 expressValidator = require 'express-validator'
@@ -129,16 +131,7 @@ app.configure ->
       # req.assert('entity_id', 'required').notEmpty().isInt()
       # req.assert('entity_type', 'required').isIn ['owl', 'barn']
     
-    # guard
-    app.use (req, res, next) ->
-      req.guard = (req, res, done) ->
-        errors = req.validationErrors()
-        if errors
-          done errors
-        else
-          delete req._validationErrors
-        return errors
-      next null
+    app.use do require './lib/guard'
     
     app.use (req, res, next) ->
       if app.argv.hack

@@ -1,11 +1,20 @@
+_ = require 'underscore'
+
 module.exports = ->
   
   (req, res, next) ->
     
     return next null unless req.files?
     
-    for key, file of req.files
+    for key, files of req.files
       
-      delete req.files[key] unless file.size
+      if _.isArray files
+        for file, index in files
+          delete files[index] unless file.size
+        req.files[key] = _.compact files
+      
+      unless _.isArray files
+        
+        delete req.files[key] unless files.size
     
     next null

@@ -154,14 +154,12 @@ block content
             a(href="http://maps.google.com.au/maps?q=#{owl.fullAddress}", target="_blank") View Larger Map
             
             if owl.files && owl.files.length
+              
               .more-info
                 h2 
                   | More Information
                   img.arrow(src='/images/blue-arrow-icon-down.png', alt='More Information')
                 
-                if owl.files
-                  ul
-                    - each file in owl.files
-                      li: a(href="/uploads/#{file.filename}")= file.description
-                else
-                  ul: li No files have been uploaded
+                ul
+                  each file in owl.files
+                    li: a(href="/uploads/#{file.filename}")= file.description

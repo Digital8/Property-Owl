@@ -51,29 +51,29 @@ module.exports = class Barn extends Model
           do @tagOwls
           callback error
       
-      images: (callback) =>
-        Media.forEntityWithClass this, klass: 'image', (error, medias) =>
+      # images: (callback) =>
+      #   Media.forEntityWithClass this, klass: 'image', (error, medias) =>
           
-          @images = medias
+      #     @images = medias
           
-          if @feature_image? and @images.length
+      #     if @feature_image? and @images.length
             
-            feature_id = parseInt @feature_image
+      #       feature_id = parseInt @feature_image
             
-            feature_image = _.detect @images, (image) -> image.id is feature_id
+      #       feature_image = _.detect @images, (image) -> image.id is feature_id
             
-            @images = _.filter @images, (image) -> image.id isnt feature_id
+      #       @images = _.filter @images, (image) -> image.id isnt feature_id
             
-            @images.unshift feature_image
+      #       @images.unshift feature_image
             
-            @images = _.filter @images, (image) -> image?
+      #       @images = _.filter @images, (image) -> image?
           
-          callback error
+      #     callback error
       
-      files: (callback) =>
-        Media.forEntityWithClass this, klass: 'file', (error, medias) =>
-          @files = medias
-          callback error
+      # files: (callback) =>
+      #   Media.forEntityWithClass this, klass: 'file', (error, medias) =>
+      #     @files = medias
+      #     callback error
       
       deals: (callback) =>
         Deal.for this, (error, deals) =>

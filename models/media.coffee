@@ -1,3 +1,4 @@
+_ = require 'underscore'
 async = require 'async'
 cloudy = require 'cloudy'
 uuid = require 'node-uuid'
@@ -19,8 +20,9 @@ module.exports = class Media extends Model
   @field 'entity_id'
   @field 'entity_type'
   @field 'filename'
-  @field 'class'
+  @field 'key'
   @field 'description'
+  @field 'deleted', type: Boolean, default: no
   
   constructor: (args = {}) ->
     
@@ -29,23 +31,24 @@ module.exports = class Media extends Model
     Object.defineProperty this, 'url', get: =>
       "https://propertyowl.s3.amazonaws.com/#{@filename}"
   
-  @build = (req, callback) ->
+  @build = (req, args..., callback) ->
     
-    async.map (Object.keys req.files), (key, callback) =>
+    link = args[0]?.link
+    return callback null unless link?
+    return callback null unless req.files[link.key]?
+    
+    files = _.array req.files[link.key]
+    
+    async.map files, (file, callback) =>
       
-      file = req.files[key]
-      
-      return callback null unless file.size
-      
-      map =
+      @create
         entity_type: req.body.entity_type
         entity_id: req.body.entity_id
         user_id: req.user.id
         filename: uuid()
-        class: 'image'
+        key: link.tag
         description: file.name
-      
-      @create map, (error, instance) =>
+      , (error, instance) =>
         
         return callback error if error?
         
@@ -57,9 +60,7 @@ module.exports = class Media extends Model
     
     , callback
     
-    # instance.buildLinks req, (error, instances) =>
-    
-    #   return callback error if error?
+    # TODO recursive links
   
   @upload = (args, callback) =>
     callback null
@@ -70,9 +71,7 @@ module.exports = class Media extends Model
       
       return callback error if error?
       
-      models = (new this row for row in rows)
-      
-      callback null, models
+      async.map rows, @new.bind(this), callback
   
   @for = (model, callback) =>
     
@@ -80,21 +79,7 @@ module.exports = class Media extends Model
       model.id
       model.constructor.name.toLowerCase()
     ], (error, rows) =>
+      
       return callback error if error?
       
-      models = (new this row for row in rows)
-      
-      callback null, models
-  
-  @forEntityWithClass = (model, {klass}, callback) =>
-    
-    @db.query "SELECT * FROM #{@table.name} WHERE entity_id = ? AND entity_type = ? AND class = ?", [
-      model.id
-      model.constructor.name.toLowerCase()
-      klass
-    ], (error, rows) =>
-      return callback error if error?
-      
-      models = (new this row for row in rows)
-      
-      callback null, models
+      async.map rows, @new.bind(this), callback

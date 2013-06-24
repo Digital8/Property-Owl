@@ -1,4 +1,5 @@
 module.exports = ->
+  
   approvify = ($grid) ->
     
     entity_type = $grid.data 'entity_type'
@@ -14,7 +15,7 @@ module.exports = ->
         approve.click (event) ->
           event.preventDefault()
           
-          $.patch "/admin/#{entity_type}s/#{id}", approved: yes, (body, response, xhr) ->
+          $.patch "/#{entity_type}s/#{id}", approved: yes, (body, response, xhr) ->
             if xhr.status == 200
               $row.remove()
   

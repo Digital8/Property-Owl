@@ -78,9 +78,9 @@ module.exports = class Model
   
   patchLinks: (hash, args..., callback) ->
     
-    return callback null unless args[0]?.req?
+    req = args[0]?.req
     
-    {req} = args[0]
+    return callback null unless req
     
     async.map (_.values @constructor.links), (link, callback) =>
       
@@ -88,20 +88,25 @@ module.exports = class Model
       
       constructor = do link.type
       
-      # delete existing linked models
-      constructor.forEntity this, (error, linkedModels) =>
-        
-        return calback error if error?
-        
-        async.map linkedModels, (linkedModel, callback) =>
-          linkedModel.patch deleted: yes, callback
-        , (error) =>
-          
-          return callback error if error?
-          
-          @buildLinks req, callback
+      task = if link.cardinality isnt Infinity
+        (callback) =>
+          # delete existing linked models
+          constructor.forEntity this, (error, linkedModels) =>
+            
+            return calback error if error?
+            
+            async.map linkedModels, (linkedModel, callback) =>
+              linkedModel.patch deleted: yes, callback
+            , callback
+      else (callback) -> callback null
+      
+      task callback
     
-    , callback
+    , (error) =>
+      
+      return callback error if error?
+      
+      @buildLinks req, callback
   
   patch: (hash, args..., callback) ->
     
@@ -118,11 +123,18 @@ module.exports = class Model
       
       return callback error if error?
       
-      @constructor.db.query """
-      UPDATE #{@constructor.table.name}
-      SET ?
-      WHERE #{@constructor.table.key} = ?
-      """, [map, @id], (error) =>
+      task = if _.size map
+        (callback) =>
+          @constructor.db.query """
+          UPDATE #{@constructor.table.name}
+          SET ?
+          WHERE #{@constructor.table.key} = ?
+          """, [map, @id], callback
+      else (callback) -> callback null
+      
+      task (error) =>
+        
+        return callback error if error?
         
         @patchLinks hash, args..., callback
   
@@ -180,7 +192,7 @@ module.exports = class Model
       
       model = do link.type
       
-      model.forEntity this, (error, linked) =>
+      model.forEntityByKey this, link.tag, (error, linked) =>
         
         return callback error if error?
         
@@ -237,7 +249,7 @@ module.exports = class Model
       req.body.entity_id = @id
       req.body.entity_type = @constructor.name.toLowerCase()
       
-      constructor.build req, (error, linked) =>
+      constructor.build req, link: link, (error, linked) =>
         return callback error if error?
         @[link.key] = linked
         callback null
@@ -255,6 +267,26 @@ module.exports = class Model
     """, [
       entity.id
       entity.constructor.name.toLowerCase()
+    ], (error, rows) =>
+      
+      return callback error if error?
+      
+      async.map rows, @new.bind(this), callback
+  
+  @forEntityByKey = (entity, key, callback) ->
+    
+    @db.query """
+    SELECT *
+    FROM #{@table.name}
+    WHERE
+      entity_id = ?
+      AND entity_type = ?
+      AND `key` = ?
+      AND NOT deleted
+    """, [
+      entity.id
+      entity.constructor.name.toLowerCase()
+      key
     ], (error, rows) =>
       
       return callback error if error?
