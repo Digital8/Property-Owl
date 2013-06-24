@@ -2,4 +2,6 @@ module.exports = ->
   
   (req, res, next) ->
     
-    res.send 200 if req.url is '/ping'
+    return next null unless req.url is '/ping'
+    
+    res.send 200
