@@ -133,7 +133,7 @@ exports.show = (req, res) ->
     
     barn.hydrateForUser req.user, (error) ->
       
-      res.render 'bars/show', barn: barn, enquire: on, deal: barn
+      res.render 'barns/show', barn: barn, enquire: on, deal: barn
 
 exports.owls = (req,res) ->
   Barn.get req.params.id, (error, barn) ->

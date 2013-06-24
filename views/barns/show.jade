@@ -31,8 +31,6 @@ block content
                 dt "slide #{i}"
                   dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
                 - i = i+1
-      else
-        strong No barn images have been uploaded!
       
       .property-info
         
@@ -97,7 +95,7 @@ block content
               | Reveal the Deal
               img.arrow(src='/images/blue-arrow-icon-down.png', alt='Reveal the Deal')
             
-            - if (barn.deals.length)
+            - if (barn.deals && barn.deals.length)
               ul
                 - each deal in barn.deals
                   li.price $ #{deal.value} #{deal.description}
@@ -122,13 +120,13 @@ block content
           
           a(href='http://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=#{barn.address + ' ' + barn.suburb + ' ' + barn.state + ' ' + barn.postcode}&sll=37.0625,-95.677068&sspn=51.177128,65.390625&ie=UTF8&hq=&hnear=76+Orchard+Terrace,+St+Lucia+Queensland+4067,+Australia&t=m&z=14&ll=-27.499779,152.994913', target="_blank") View Larger Map
           
-          .more-info
-            h2
-              | More Information
-              img.arrow(src='/images/blue-arrow-icon-down.png', alt='More Information')
-            ul
-              unless barn.files.length
-                li No files have been uploaded
-              else
-                each file in barn.files
-                  li: a(href="/uploads/#{file.filename}")= file.description
+          if barn.files && barn.files.length
+              
+              .more-info
+                h2 
+                  | More Information
+                  img.arrow(src='/images/blue-arrow-icon-down.png', alt='More Information')
+                
+                ul
+                  each file in barn.files
+                    li: a(href="/uploads/#{file.filename}")= file.description

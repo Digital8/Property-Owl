@@ -11,6 +11,9 @@ module.exports = class Barn extends Model
     name: 'barns'
     key: 'barn_id'
   
+  @has (-> Media), cardinality: Infinity, key: 'images', tag: 'image'
+  @has (-> Media), cardinality: Infinity, key: 'files', tag: 'file'
+  
   @field 'title'
   @field 'description'
   
@@ -77,6 +80,12 @@ module.exports = class Barn extends Model
     , (error) =>
       @user ?= {}
       callback error, this
+  
+  hydrateForUser: (user, callback) ->
+    Bookmark.forUserAndDeal user, this, (error, bookmark) =>
+      return callback error if error?
+      @bookmark = bookmark
+      do callback
   
   tagOwls: ->
     for owl, index in @owls

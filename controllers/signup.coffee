@@ -44,6 +44,8 @@ exports.create = (req, res, next) ->
     
     Token.byUUID (req.param 'token'), (error, token) ->
       
+      return next error if error?
+      
       User.create
         password: (require '../lib/hash') (req.param 'password')
         account_type_id: 1
