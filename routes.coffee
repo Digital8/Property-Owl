@@ -93,7 +93,7 @@ module.exports = ({app, controllers}) ->
     app.get "/#{key}", (set type: key), controllers.posts.type
     app.get "/#{key}/:id(\\d+)", authenticate, (set type: key), controllers.posts.view
   
-  app.get 'search', controllers.search.index
+  app.get '/search', controllers.search.index
   
   # advertisers
   app.del  '/advertisers/:id(\\d+)',        (authorize acl.admin), controllers.advertisers.destroy
@@ -209,3 +209,4 @@ module.exports = ({app, controllers}) ->
   app.get '/ajax/search', controllers.ajax.search
   
   app.all '*', controllers.pages.serve
+  
