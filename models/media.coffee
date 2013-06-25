@@ -42,6 +42,7 @@ module.exports = class Media extends Model
       if ext in config.mimes.image
         @url
       else
+        if ext is 'mp4' then ext = 'mpeg'
         "https://digital8.s3.amazonaws.com/mime/#{ext}/#{ext}-128_32.png"
     
     Object.defineProperty this, 'extension', get: =>
