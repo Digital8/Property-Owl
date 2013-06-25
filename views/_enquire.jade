@@ -4,18 +4,22 @@
   
   form#input-form.enquire-form(method='post', action='/enquiries')
     
+    label(for='name') First Name
     if req.user
-      input(type='hidden', value=req.user.first_name, name='first_name')
-      input(type='hidden', value=req.user.first_name, name='last_name')
-      input(type='hidden', value=req.user.email, name='email')
+      input(type='text', value=req.user.first_name, name='first_name', disabled)
     else
-      label(for='name') First Name
       input.name(type='text', name='first_name')
-        
-      label(for='name') First Name
-      input.name(type='text', name='first_name')
-      
-      label(for='email') Email:
+    
+    label(for='name') Last Name
+    if req.user
+      input(type='text', value=req.user.last_name, name='last_name', disabled)
+    else
+      input.name(type='text', name='last_name')
+    
+    label(for='email') Email
+    if req.user
+      input(type='text', value=req.user.email, name='email', disabled)
+    else
       input.email(type='text', name='email')
     
     label(for='phone') Phone
