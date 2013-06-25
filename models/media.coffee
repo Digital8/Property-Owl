@@ -2,6 +2,8 @@ _ = require 'underscore'
 async = require 'async'
 cloudy = require 'cloudy'
 mime = require 'mime'
+mmmagic = require 'mmmagic'
+magic = new mmmagic.Magic mmmagic.MAGIC_MIME_TYPE
 request = require 'request'
 uuid = require 'node-uuid'
 
@@ -90,22 +92,27 @@ module.exports = class Media extends Model
     
     async.map files, (file, callback) =>
       
-      @create
-        entity_type: req.body.entity_type
-        entity_id: req.body.entity_id
-        user_id: req.user.id
-        filename: uuid()
-        key: link.tag
-        description: file.name
-      , (error, instance) =>
+      magic.detectFile file.path, (error, type) =>
         
         return callback error if error?
         
-        file = new cloudy.File
-          id: instance.filename
-          path: file.path
-        
-        cloud.file file, callback
+        @create
+          entity_type: req.body.entity_type
+          entity_id: req.body.entity_id
+          user_id: req.user.id
+          filename: uuid()
+          key: link.tag
+          description: file.name
+          mime: type
+        , (error, instance) =>
+          
+          return callback error if error?
+          
+          file = new cloudy.File
+            id: instance.filename
+            path: file.path
+          
+          cloud.file file, callback
     
     , callback
     
