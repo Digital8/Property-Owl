@@ -21,7 +21,7 @@ block content
               a(href='account#detail') settings tab
               | .
           
-          .left
+          .left.mobile-full
             .inputs
               label(for='propertySuburb') Suburb
               input#propertySuburb(type='text',name='suburb', value="#{req.user.preferences.suburb}")
@@ -61,7 +61,7 @@ block content
                   - var s = (req.user.preferences.maxPrice == price) ? true : false;
                   option(value=price, selected=s).price= price
           
-          .right
+          .right.mobile-full
             .inputs
               label(for='propertyMinBeds') Min. Beds
               - var beds = ['1', '2', '3', '4', '5']

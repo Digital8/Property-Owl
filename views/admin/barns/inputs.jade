@@ -7,7 +7,7 @@
     hr
       
     - if (req.user && req.user.isAdmin())
-      .left
+      .left.mobile-full
         .inputs
           label(for='listed_by') Listed By 
           select#listed_by(name='listed_by')

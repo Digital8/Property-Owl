@@ -1,4 +1,4 @@
-.left
+.left.mobile-full
   .inputs
     label.required(for='category_id') Category *
     select#category_id(name="category_id")
@@ -21,7 +21,7 @@
     label
       input(type='checkbox', name='visible', checked=affiliate.visible)
       | &nbsp;Visible
-.right
+.right.mobile-full
   .inputs
     label.required(for='affiliatePhone') Phone *
     input#affiliatePhone(type='text',name="phone",value='#{affiliate.phone}',maxlength='15')
