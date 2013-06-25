@@ -4,7 +4,7 @@ tr.media(data-id=image.id, data-type=image.type, data-entity-id=barn.id)
     img.grid-thumb(src=image.thumbnail)
   
   td
-    input(type='radio', name='feature_image', checked=barn.feature_image == image.id, value=image.id)
+    input(type='radio', name='feature_image_id', checked=barn.feature_image_id == image.id, value=image.id)
   
   td
     a.delete(href='/barns/#{barn.id}/delete', alt='delete barn deal')

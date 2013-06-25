@@ -1,10 +1,10 @@
 tr.media(data-id=image.id, data-type=image.type, data-entity-id=owl.id)
   
   td
-    img.grid-thumb(src=image.thumbnail, data-json=JSON.stringify(image))
+    img.grid-thumb(src=image.thumbnail)
   
   td
-    input(type='radio', name='feature_image', checked=owl.feature_image == image.id, value=image.id)
+    input(type='radio', name='feature_image_id', checked=owl.feature_image_id == image.id, value=image.id)
   
   td
     a.delete(href='/owls/#{owl.id}/delete', alt='delete owl deal')
