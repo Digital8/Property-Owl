@@ -4,8 +4,6 @@ module.exports = ->
   
   (req, res, next) ->
     
-    return next null unless req.method in ['post', 'put', 'patch']
-    
     return next null unless req.files?
     
     for key, files of req.files
