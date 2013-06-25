@@ -1,23 +1,23 @@
 tr(data-id=file.id)
   
   td
-    a.link(href="/uploads/#{file.filename}")= file.id
+    a.link(href=file.url)= file.id
   
   - var created_at = new Date(file.created_at)
   td #{moment(created_at).format('DD/MM/YYYY')}
   
   td
-    a.link(href="/uploads/#{file.filename}")
-      img(src="/uploads/#{file.filename}", style="height: auto; width: 25%;")
+    a.link(href=file.url)
+      img(src=file.url, style="height: auto; width: 25%;")
   
   td.actions
     
-    a.link(href="/uploads/#{file.filename}")
+    a.link(href=file.url)
       img(src='/images/manage.png', alt='Link')
       | Link
   
   td.actions
     
-    a.delete(href="/admin/files/#{file.id}/delete")
+    a.delete(href="/files/#{file.id}/delete")
       img(src='/images/delete.png', alt='Delete')
       | Delete
