@@ -72,7 +72,11 @@ module.exports = class Owl extends Model
         return if image.id is @feature_image_id
       if @images[0]?
         return @images[0]
-      return '/uploads/placeholder.png'
+      return {
+        id: 0
+        url: '/uploads/placeholder.png'
+        thumbnail: '/uploads/placeholder.png'
+      }
     
     super
   
