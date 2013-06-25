@@ -13,26 +13,32 @@ block content
       .details
         
         form.details-form(action="/login",method="post")
-        
-         include ../flashify
-         
-         .left
-           
-           .inputs
-             label(for='email') Email
-             input#email(type="text",name="email",placeholder="",value="")
-           
-           .inputs
-             label(for='password') Password
-             input#password(type="password",name="password",placeholder="",value="")
-         
-         .inputs
-         
-         .submit
           
-           a.left-button(href="/sign-up") Sign Up
+          include ../flashify
+          
+          .left
+            
+            .inputs
+              label(for='email') Email
+              input#email(type="text",name="email", placeholder="", value="")
+            
+            .inputs
+              label(for='password') Password
+              input#password(type="password",name="password", placeholder="", value="")
+         
+          .inputs(style='clear: both; padding: 2em;')
+            
+            label(for='remember', style='display: inline;')
+              input#remember(type='checkbox', name='remember')
+              | Remember me?
+          
+          .inputs
+          
+          .submit
            
-           input.button(type="submit",value="login")
+            a.left-button(href="/sign-up") Sign Up
+            
+            input.button(type="submit",value="login")
     
     - if (typeof(modal) != 'undefined' && modal == true)
       script

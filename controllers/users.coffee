@@ -18,6 +18,7 @@ exports.add = (req, res, next) ->
     return next error if error?
     
     user = req.session.users or {}
+    delete req.session.users
     
     menu = 'users'
     

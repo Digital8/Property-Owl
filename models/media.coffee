@@ -1,6 +1,8 @@
 _ = require 'underscore'
 async = require 'async'
 cloudy = require 'cloudy'
+mime = require 'mime'
+request = require 'request'
 uuid = require 'node-uuid'
 
 Model = require '../lib/model'
@@ -9,6 +11,8 @@ Table = require '../lib/table'
 cloud = new cloudy.Cloud
 cloud.use 'fs', (require '../config').fs, ->
 cloud.use 's3', (require '../config').s3, ->
+
+config = require '../config'
 
 module.exports = class Media extends Model
   
@@ -30,6 +34,40 @@ module.exports = class Media extends Model
     
     Object.defineProperty this, 'url', get: =>
       "https://propertyowl.s3.amazonaws.com/#{@filename}"
+    
+    Object.defineProperty this, 'thumbnail', get: =>
+      
+      ext = @extension # or 'ini'
+      
+      if ext in config.mimes.image
+        @url
+      else
+        "https://digital8.s3.amazonaws.com/mime/#{ext}/#{ext}-128_32.png"
+    
+    Object.defineProperty this, 'extension', get: =>
+      mime.extension @mime
+    
+    Object.defineProperty this, 'mime', get: =>
+      @_mime or 'application/octet-stream'
+  
+  hydrate: (callback) ->
+    
+    if global.cache?[@id]?.mime?
+      @_mime = global.cache[@id].mime
+      super callback
+    else
+      request.head "https://propertyowl.s3.amazonaws.com/#{@filename}", (error, response, body) =>
+        
+        unless error?
+          
+          mime = response?.headers?['content-type']
+          
+          @_mime = mime
+          
+          global.cache ?= {}
+          global.cache[@id] ?= {mime}
+        
+        super callback
   
   @build = (req, args..., callback) ->
     

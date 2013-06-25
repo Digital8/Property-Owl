@@ -4,8 +4,6 @@ module.exports = (app) ->
   
   (req, res, done) ->
     
-    console.log 'epoch'
-    
     if app.argv.time?
       now = moment app.argv.time
       epoch = moment app.argv.time

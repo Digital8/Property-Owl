@@ -1,7 +1,5 @@
 module.exports = (req, res, next) ->
   
-  return next? null if req.session.user_id?
+  return next? null if req.user?
   
-  req.session.redirect_to = req.url
-  
-  res.redirect '/login'
+  next? 401

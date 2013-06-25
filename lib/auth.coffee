@@ -2,35 +2,36 @@ module.exports = ->
   
   (req, res, next) ->
     
-    id = null
-    id ?= req.session.user_id
-    id ?= req.cookies.user_id
+    req.user_id ?= null
     
-    return next? null unless id?
+    source = null
     
-    User.get id, (error, user) ->
+    # pull off a session
+    if req.session.user_id?
+      req.user_id ?= req.session.user_id
+      source ?= 'session'
+    
+    # pull off a cookie
+    if req.cookies['user.id']?
+      req.user_id ?= req.cookies['user.id']
+      source ?= 'cookie'
+    
+    return next null unless req.user_id?
+    
+    User.get req.user_id, (error, user) ->
       
-      return res.send 500, error if error?
-      return res.send 404 unless user?
+      return next error if error?
+      return next 401 unless user?
+      
+      if source is 'cookie'
+        
+        if user.password isnt req.cookies['user.password']
+          console.log 'hacking?'
+          delete req.session.user_id
+          res.clearCookie 'user.id'
+          res.clearCookie 'user.name'
+          return next 401
       
       req.user = user
-      # res.locals.user = user
       
-      return next? null
-      
-      #   if req.cookies.pouser?
-      #     if results.password == req.cookies.popwd
-      #       req.session.user_id = user_id
-      #       res.locals.objUser = new classes.user results
-      #     else
-      #       # GO AWAY HAX0R
-      #       delete req.session.user_id
-      #       res.clearCookie 'pouser'
-      #       res.clearCookie 'popwd'
-      #       res.redirect '/'
-      #   else
-      #     res.locals.objUser = new classes.user results
-      
-      # req.user = res.locals.objUser
-      
-      # do next
+      next null
