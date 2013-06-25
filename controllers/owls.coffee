@@ -84,7 +84,7 @@ exports.create = (req, res, next) ->
     , (error) -> console.log error if error?
     
     req.flash 'success', 'Owl created!'
-    res.redirect "/owls/#{owl.id}"
+    res.redirect "/owls/#{owl.id}/admin"
 
 exports.update = (req, res, next) ->
   
@@ -109,7 +109,7 @@ exports.update = (req, res, next) ->
       , (error) -> console.log error if error?
     
     req.flash 'success', 'Owl updated!'
-    res.redirect "/owls/#{owl.id}"
+    res.redirect "/owls/#{owl.id}/admin"
 
 exports.patch = (req, res) ->
   
