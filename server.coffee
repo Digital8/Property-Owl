@@ -22,6 +22,8 @@ moment = require 'moment'
 mysql = require 'mysql'
 optimist = require 'optimist'
 prettyjson = require 'prettyjson'
+redis = require 'redis'
+RedisStore = (require 'connect-redis') express
 
 argv = optimist
   .alias('verbose', 'v')
@@ -30,8 +32,6 @@ argv = optimist
   .alias('hack', 'h')
   .alias('user', 'u')
   .argv
-
-db = null
 
 Model = require './lib/model'
 
@@ -46,7 +46,9 @@ hack.augmentApp app
 config = require './config'
 
 app.configure ->
-  async.series
+  
+  async.parallel
+    
     db: (callback) ->
       db = mysql.createConnection
         host: config.database.host
@@ -57,11 +59,34 @@ app.configure ->
       
       hack.augmentDB app, db
       
-      db.connect callback
-  
-  , (error) ->
+      db.connect ->
+        callback null, db
     
-    if error? then console.log error ; process.exit()
+    sessionStore: (callback) ->
+      
+      store = null
+      
+      client = redis.createClient()
+      client.on 'ready', ->
+        return if store?
+        console.log 'redis'
+        store = new RedisStore prefix: ''
+        callback null, store
+      client.on 'error', (error) ->
+        return if store?
+        console.log 'no redis'
+        store = new express.session.MemoryStore
+        callback null, store
+  
+  , (error, args) ->
+    
+    console.log 'starting'
+    
+    if error?
+      console.log error
+      process.exit -1
+    
+    {sessionStore, db} = args
     
     console.start 'configure'
     
@@ -78,7 +103,7 @@ app.configure ->
     app.use express.methodOverride()
     app.use expressValidator
     app.use express.cookieParser 'secretsnake'
-    app.use express.session 'monkeyjuice'
+    app.use express.session secret: 'monkeyjuice', store: sessionStore
     app.use flashify
     app.use do require './browserify.coffee'
     
