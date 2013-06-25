@@ -16,6 +16,8 @@ _ = require 'underscore'
 require './lib/underscore'
 async = require 'async'
 express = require 'express'
+RedisStore = require("connect-redis") express
+redis = require("redis").createClient()
 expressValidator = require 'express-validator'
 flashify = require 'flashify'
 moment = require 'moment'
@@ -78,7 +80,14 @@ app.configure ->
     app.use express.methodOverride()
     app.use expressValidator
     app.use express.cookieParser 'secretsnake'
-    app.use express.session 'monkeyjuice'
+    #app.use express.session 'monkeyjuice'
+    app.use express.session
+      secret: 'monkeyjuice'
+      store: new RedisStore
+        host: 'localhost'
+        port: 6379
+        client: redis
+
     app.use flashify
     app.use do require './browserify.coffee'
     
