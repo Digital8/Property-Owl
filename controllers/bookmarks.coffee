@@ -10,14 +10,22 @@ exports.index = (req, res, next) ->
 
 exports.create = (req, res, next) ->
   
-  Bookmark.create
-    entity_id: req.body.id
-    entity_type: req.body.type
-    user_id: req.user.id
-  , (error, bookmark) ->
+  {user, entity} = req
+  
+  Bookmark.forUserAndDeal user, entity, (error, bookmark) ->
     
-    return next error if error?
+    return next error if erorr?
     
-    res.send {}
+    return next 409 if bookmark?
+    
+    Bookmark.create
+      entity_id: entity.id
+      entity_type: entity.constructor.name.toLowerCase()
+      user_id: req.user.id
+    , (error, bookmark) ->
+      
+      return next error if error?
+      
+      res.send {}
 
 exports.destroy = (require '../behaviors/destroy') Bookmark, prefix: ''

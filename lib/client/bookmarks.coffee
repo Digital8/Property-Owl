@@ -7,8 +7,8 @@ module.exports = ->
       $this = $ this
       
       $.post '/bookmarks',
-        type: $this.data 'deal-type'
-        id: $this.data 'deal-id'
+        entity_type: $this.data 'deal-type'
+        entity_id: $this.data 'deal-id'
       , (response, status, jqXHR) ->
         if jqXHR.status is 200
           
