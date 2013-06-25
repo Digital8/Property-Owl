@@ -9,9 +9,11 @@ exports.index = (req, res) ->
   if req.user.isDeveloper() and not req.user.isAdmin()
     Owl.byDeveloper req.user.id, (error, owls) ->
       developers = []
+      owls = _.sortBy owls, 'id'
       res.render 'admin/owls/index', {owls, developers, action}
   else
     Owl.all (error, owls) ->
+      owls = _.sortBy owls, 'id'
       User.getUsersByGroup 2, (error, developers) ->
         res.render 'admin/owls/index', {owls, developers, action}
 
