@@ -40,6 +40,12 @@
             }
         }
     
+        #banner {
+            float: right;
+            width: 100%;
+            max-height: 59px;
+        }
+    
         #menu {
             ul {
                 .column(9, 0px);
@@ -207,6 +213,13 @@
                 }
                 
             }
+
+            &#home-center-col {
+                #mazda {
+                  margin-top:-10px !important;
+                  margin-right:-20px;
+                }
+            }
             
             &#center-col {
         
@@ -271,11 +284,6 @@
                             }
                         }
                     }
-                }
-
-                #mazda {
-                  margin-top:-10px;
-                  margin-right:-20px;
                 }
 
             }
@@ -457,8 +465,11 @@
 
     .mobile-full {
       width:100% !important;
-      padding:0 !important;
-      margin:0 !important;
+      padding-left:0 !important;
+      padding-right:0 !important;
+      margin-left:0 !important;
+      margin-right:0 !important;
+      float:none !important;
     }
     
     #header {
@@ -629,6 +640,7 @@
                 .no-column(0);
                 width: 320px;
                 padding-left: 0;
+                display:table-footer-group;
                 
                 .find-deals {
                   h2 {
@@ -645,16 +657,16 @@
                     }
                   }
                   
-                    #input-form {
-                      display: none;
-          }
+                  #input-form {
+                    display: none;
+                  }
           
-          &.display {
-            #input-form {
-              display: block;
-            }
-          }
-        }
+                  &.display {
+                    #input-form {
+                      display: block;
+                    }
+                  }
+                }
                 
                 .deal-stats {
                                 
@@ -683,8 +695,6 @@
             }
             &#home-center-col,
             &#center-col {
-                .no-column(0);
-                padding-left: 1.875em;
                 display: table-header-group;
 
                 a.show-refer-friend {
@@ -757,25 +767,10 @@
             &#wide-center-col { 
                 .no-column(0);
                 width: 320px;
+                display: table-header-group;
                 
                 .slider-box {
                     height: 17.6em;
-                }
-                
-                .property-info {
-                    #left {
-                      clear:both;
-                    }
-                    #left, #right {
-                        .no-column(0);
-                    }
-                    
-                    #right {
-                        position: none;
-                        float: left;
-                        padding-right: 0;
-                        width: 100%;
-                    }
                 }
             }
             &#right-col {
@@ -795,9 +790,13 @@
     }
     
     #footer {
+      font-size:1.3em;
+
         > div {
+          &.quarter-col {
             .column(6, 1.250em);
             padding-top: 0.313em;
+          }
         }
     }
 
@@ -887,6 +886,16 @@
       .controlNav,
       .control_wrapper {
         height: 150px !important;
+      }
+    }
+
+    .evoslider.galleriffic dl {
+      height:150px !important;
+
+      dd {
+        img {
+          height:150px !important;
+        }
       }
     }
 
