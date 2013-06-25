@@ -16,7 +16,7 @@
       
       a(href='/owls/#{owl.owl_id}')
         
-        img.thumb(src=owl.heroImageURL(), alt='#{owl.fullAddress}')
+        img.thumb(src=owl.feature_image.url, alt=owl.fullAddress)
         
         //- TODO show if top listing
         //- img.top-state-deal(src='/images/top-state-deal.png', alt='Top State Deal')

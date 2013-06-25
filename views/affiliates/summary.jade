@@ -8,7 +8,10 @@
     
     .listing-thumb
       
-      img.thumb(src=affiliate.imageURL(), alt=affiliate.name)
+      if affiliate.image
+        img.thumb(src=affiliate.image.url, alt=affiliate.name)
+      else
+        img.thumb(src='/images/placeholder.png', alt=post.title)
     
     .listing-details
       

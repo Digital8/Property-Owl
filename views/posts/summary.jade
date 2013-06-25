@@ -12,13 +12,13 @@
       
       a.details-button(href="/#{req.type}/#{post.id}")
         
-        - if (post.images[0])
+        if post.image
          
-          img.thumb(src=post.image.thumbnail, alt='#{post.title}')
+          img.thumb(src=post.image.thumbnail, alt=post.title)
         
-        - else
+        else
         
-          img.thumb(src='/images/placeholder.png', alt='#{post.title}')
+          img.thumb(src='/images/placeholder.png', alt=post.title)
     
     .listing-details
       

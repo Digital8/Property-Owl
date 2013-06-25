@@ -9,7 +9,7 @@
     .listing-thumb
       
       a(href='/barns/#{barn.barn_id}')
-        img.thumb(src=barn.heroImageURL(), alt='#{barn.fullAddress}')
+        img.thumb(src=barn.feature_image.url, alt=barn.fullAddress)
     
     .listing-details
       
