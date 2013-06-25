@@ -98,4 +98,4 @@ block content
       - var i = 0
       - each image in owl.images
         - i++
-        img(src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}',style="width: 200px;padding: 10px;")
+        img(src=image.thumbnail, data-thumb=image.thumbnail, style="width: 200px;padding: 10px;")

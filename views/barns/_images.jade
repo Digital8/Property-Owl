@@ -2,16 +2,17 @@
   #mySlider.evoslider.galleriffic
     dl
       - var i = 0
-      - var hero = barn.heroImageURL()
+      - var hero = barn.image.thumbnail
       - if (hero.length > 12)
         dt "slide #{i}"
           dd(data-src=hero, data-thumb=hero)
         - i = 1
       - each image in barn.images
-        - var currentImg = '/uploads/' + image.filename
+        - var currentImg = image.thumbnail
         - if (hero != currentImg)
           dt "slide #{i}"
-            dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
+            dd(data-src=image.thumbnail, data-thumb=image.thumbnail)
           - i = i+1
 - else
   strong No barn images have been uploaded!
+  

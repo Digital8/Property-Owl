@@ -14,7 +14,7 @@
         
         - if (post.images[0])
          
-          img.thumb(src='/uploads/#{post.imageURL()}', alt='#{post.title}')
+          img.thumb(src=post.image.thumbnail, alt='#{post.title}')
         
         - else
         

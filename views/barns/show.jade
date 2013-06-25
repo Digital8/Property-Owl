@@ -116,4 +116,4 @@ block content
                 
                 ul
                   each file in barn.files
-                    li: a(href="/uploads/#{file.filename}")= file.description
+                    li: a(href=file.url)= file.description
