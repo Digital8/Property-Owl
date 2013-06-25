@@ -1,0 +1,13 @@
+mixin gallery(deal)
+  
+  if deal.images && deal.images.length
+    
+    #mySlider.evoslider.galleriffic
+      
+      dl
+        dt "slide #{deal.hero.id}"
+          dd(data-src=deal.hero.url, data-thumb=deal.hero.thumbnail)
+        
+        each image in deal.images
+          dt "slide #{image.id}"
+            dd(data-src=image.url, data-thumb=image.thumbnail)

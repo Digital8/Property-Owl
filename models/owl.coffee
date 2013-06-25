@@ -44,7 +44,7 @@ module.exports = class Owl extends Model
   @field 'development_type_id'
   @field 'development_status_id'
   
-  @field 'feature_image'
+  @field 'feature_image_id'
   
   constructor: (args = {}) ->
     
@@ -66,6 +66,13 @@ module.exports = class Owl extends Model
     
     Object.defineProperty this, 'fullAddress', get: =>
       (_.compact [@address, @suburb, @state.toUpperCase(), @postcode]).join ', '
+    
+    Object.defineProperty this, 'feature_image', get: =>
+      for image in @images
+        return if image.id is @feature_image_id
+      if @images[0]?
+        return @images[0]
+      return '/uploads/placeholder.png'
     
     super
   
@@ -156,20 +163,20 @@ module.exports = class Owl extends Model
       @bookmark = bookmark
       do callback
   
-  heroImageURL: ->
+  # heroImageURL: ->
     
-    unless @images? and @images.length then return '/images/placeholder.png'
+  #   unless @images? and @images.length then return '/images/placeholder.png'
     
-    if @feature_image != ''
-      return "/uploads/#{@feature_image}"
-    else
-      # default to latest image
-      # # find the hero
-      hero = _.find @images, (image) => return Number(image.filename) is Number(@feature_image)
+  #   if @feature_image != ''
+  #     return "/uploads/#{@feature_image}"
+  #   else
+  #     # default to latest image
+  #     # # find the hero
+  #     hero = _.find @images, (image) => return Number(image.filename) is Number(@feature_image)
       
-      hero ?= @images.pop()
+  #     hero ?= @images.pop()
       
-      return "/uploads/#{hero.filename}"
+  #     return "/uploads/#{hero.filename}"
   
   displayTitleShort: ->
     shortAddress = _s.prune @address, 16

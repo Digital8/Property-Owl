@@ -16,21 +16,8 @@ block content
       
       h1= barn.title
       
-      if barn.images && barn.images.length
-        #mySlider.evoslider.galleriffic
-          dl
-            - var i = 0
-            - var hero = barn.heroImageURL()
-            - if (hero.length > 12)
-              dt "slide #{i}"
-                dd(data-src=hero, data-thumb=hero)
-              - i = 1
-            - each image in barn.images
-              - var currentImg = '/uploads/' + image.filename
-              - if (hero != currentImg)
-                dt "slide #{i}"
-                  dd(data-src='/uploads/#{image.filename}', data-thumb='/uploads/#{image.filename}')
-                - i = i+1
+      include ../common/_gallery
+      mixin gallery barn
       
       .property-info
         

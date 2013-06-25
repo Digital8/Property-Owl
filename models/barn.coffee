@@ -27,7 +27,8 @@ module.exports = class Barn extends Model
   @field 'other_features'
   
   @field 'listed_by'
-  @field 'feature_image'
+  
+  @field 'feature_image_id'
   
   @field 'approved', type: Boolean, default: no
   
@@ -41,6 +42,13 @@ module.exports = class Barn extends Model
     
     Object.defineProperty this, 'fullAddress', get: =>
       (_.compact [@address, @suburb, @state.toUpperCase(), @postcode]).join ', '
+    
+    Object.defineProperty this, 'feature_image', get: =>
+      for image in @images
+        return if image.id is @feature_image_id
+      if @images[0]?
+        return @images[0]
+      return '/uploads/placeholder.png'
     
     super
   
