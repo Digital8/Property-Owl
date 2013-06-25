@@ -96,6 +96,10 @@ $(function(){
   $(".terms-checkbox").on("click", function(event){
     event.stopPropagation();
   })
+
+  $(".cloud-thing").on("click", function(event){
+    event.stopPropagation();
+  })
   
   $(".overlay").on("click", function(event){
     event.preventDefault();
