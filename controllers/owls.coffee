@@ -3,13 +3,17 @@ async = require 'async'
 jade = require 'jade'
 
 exports.index = (req, res) ->
+  
+  action = 'index'
+  
   if req.user.isDeveloper() and not req.user.isAdmin()
     Owl.byDeveloper req.user.id, (error, owls) ->
-      res.render 'admin/owls/index', owls: owls, developers: []
+      developers = []
+      res.render 'admin/owls/index', {owls, developers, action}
   else
     Owl.all (error, owls) ->
       User.getUsersByGroup 2, (error, developers) ->
-        res.render 'admin/owls/index', {owls, developers}
+        res.render 'admin/owls/index', {owls, developers, action}
 
 exports.admin = (req, res) ->
   
@@ -36,6 +40,7 @@ exports.edit = (req, res) ->
   , (error, results) ->
     results.owl.set req.session.form
     delete req.session.form
+    results.action = 'edit'
     res.render 'admin/owls/edit', results
 
 exports.add = (req, res, next) ->
@@ -54,6 +59,7 @@ exports.add = (req, res, next) ->
       return next error if error?
       owl.listed_by ?= req.user.id
       results.owl = owl
+      results.action = 'add'
       res.render 'admin/owls/add', results
 
 exports.create = (req, res, next) ->

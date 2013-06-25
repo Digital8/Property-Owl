@@ -4,12 +4,14 @@ jade = require 'jade'
 
 exports.index = (req, res) ->
   
+  action = 'index'
+  
   if req.user.isDeveloper() and not req.user.isAdmin()
     Barn.byDeveloper req.user.id, (error, barns) ->
-      res.render 'admin/barns/index', {barns}
+      res.render 'admin/barns/index', {barns, action}
   else
     Barn.all (error, barns) ->
-      res.render 'admin/barns/index', {barns}
+      res.render 'admin/barns/index', {barns, action}
 
 exports.edit = (req, res, next) ->
   
@@ -24,6 +26,8 @@ exports.edit = (req, res, next) ->
     results.barn.set req.session.form
     
     delete req.session.form
+    
+    results.action = 'edit'
     
     res.render 'admin/barns/edit', results
 
@@ -41,6 +45,7 @@ exports.add = (req, res, next) ->
       return next error if error?
       barn.listed_by ?= req.user.id
       results.barn = barn
+      results.action = 'add'
       res.render 'admin/barns/add', results
 
 exports.create = (req, res) ->
