@@ -1,3 +1,5 @@
+_s = require 'underscore.string'
+
 exports.index = (req,res) ->
   
   callback = (err, results) ->
@@ -15,7 +17,7 @@ exports.add = (req, res, next) ->
     
     return next error if error?
     
-    user = {}
+    user = req.session.users or {}
     
     menu = 'users'
     
@@ -63,24 +65,18 @@ exports.create = (req,res) ->
       res.render 'back'
       return
     
-    User.create
-      password: (require '../lib/hash') (req.param 'password')
-      account_type_id: 1
-      email: req.param 'email'
-      first_name: req.param 'first_name'
-      last_name: req.param 'last_name'
-      postcode: req.param 'postcode'
-    , (error, user) ->
+    map = req.body
+    map.password = (require '../lib/hash') (req.param 'password')
     
-    user = req.body
-    user.password = helpers.hash user.password
-    user.group ?= 1
-    
-    User.createUser user, (err, results) ->
+    User.create map, (error, user) ->
+      
+      if error?
+        req.session.form = req.body
+        res.render 'back'
       
       req.flash 'success', 'User created!'
       
-      res.redirect 'admin/users'
+      res.redirect '/users'
 
 exports.edit = (req, res, next) ->
   
