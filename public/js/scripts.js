@@ -24,7 +24,7 @@ $(function(){
   var dealsHeight = 0;
   
   $('.forgot-password').click(function(){
-    window.location = '/account/recover';
+    window.location = '/recoveries';
   });
 
   $(".deal h2").on("click", function(){
