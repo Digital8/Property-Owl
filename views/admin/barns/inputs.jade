@@ -42,8 +42,10 @@
   .inputs.file.pane(data-key='file', data-label='files')
     include file_inputs
   
-  .inputs.deal.pane(data-key='deal')
-    include deal_inputs
+  unless req.url == '/barns/add'
+    .inputs.deal.pane(data-key='deal')
+      include deal_inputs
   
-  .inputs.owl.pane(data-key='owl', data-label='property lots')
-    include owl_inputs
+  unless req.url == '/barns/add'
+    .inputs.owl.pane(data-key='owl', data-label='property lots')
+      include owl_inputs
