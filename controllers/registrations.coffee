@@ -72,7 +72,7 @@ exports.create = (req, res, next) ->
           title: entity.title
           address: entity.address
           description: entity.description
-          image: if entity.feature_image then "uploads/#{entity.feature_image}" else 'images/placeholder.png'
+          image: if entity.feature_image then entity.feature_image.url else 'images/placeholder.png'
           entity_type: entity.constructor.name.toLowerCase()
         
         subject = "#{entity.constructor.name} Deal Registration"
@@ -108,3 +108,4 @@ exports.create = (req, res, next) ->
             primary
             secondary
           ]..., (error) ->
+            
