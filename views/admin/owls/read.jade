@@ -112,13 +112,12 @@
       tr
         td Sent By
         td Message
-        td Status
         td Date
     tbody.body
       if owl.enquiries.length == 0
         tr
-          td No enquiries for this owl
-          td
+          td(colspan='3') No enquiries for this owl
+
       - else
         each enquiry in owl.enquiries
           tr
