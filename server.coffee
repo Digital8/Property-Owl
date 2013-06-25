@@ -13,6 +13,7 @@ hack.augmentConsole()
 console.start 'boot'
 
 _ = require 'underscore'
+_s = require 'underscore.string'
 require './lib/underscore'
 async = require 'async'
 express = require 'express'
@@ -200,7 +201,7 @@ app.configure ->
         else
           console.log error
           for err in error
-            req.flash 'error', "#{err.param} - #{err.msg}"
+            req.flash 'error', (_s.humanize "#{err.param} - #{err.msg}")
           res.redirect 'back'
       else
         next error

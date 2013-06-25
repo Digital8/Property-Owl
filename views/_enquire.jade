@@ -2,18 +2,20 @@
   
   h2 Enquire About This Deal
   
-  form#input-form.enquire-form
+  form#input-form.enquire-form(method='post', action='/enquiries')
     
-    label(for='name') Name
-    - if (session.user)
-      input.name(type='text', disabled, value=session.user.name, name='name')
-    - else
-      input.name(type='text', name='name')
-    
-    label(for='email') Email:
-    - if (session.user)
-      input.email(type='text', disabled, value=session.user.email, name='email')
-    - else
+    if req.user
+      input(type='hidden', value=req.user.first_name, name='first_name')
+      input(type='hidden', value=req.user.first_name, name='last_name')
+      input(type='hidden', value=req.user.email, name='email')
+    else
+      label(for='name') First Name
+      input.name(type='text', name='first_name')
+        
+      label(for='name') First Name
+      input.name(type='text', name='first_name')
+      
+      label(for='email') Email:
       input.email(type='text', name='email')
     
     label(for='phone') Phone
@@ -22,12 +24,12 @@
     input(type='hidden', name='entity_id', value=deal.id)
     input(type='hidden', name='entity_type', value=entity_type)
     
-    label(for='contactMethod') Contact Method
-    select.contactMethod(name='contactMethod')
-     option(value='phone') Phone
-     option(value='email') Email
+    label(for='contact_method') Contact Method
+    select.contact_method(name='contact_method')
+      option(value='phone') Phone
+      option(value='email') Email
     
-    label(for='enquiry') Comments
-    textarea.enquiry-box(name='enquiry', rows='5')
+    label(for='comment') Comments
+    textarea.comment(name='comment', rows='5')
     
     input.enquire.button(type='submit', value='Submit')
