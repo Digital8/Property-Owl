@@ -1,37 +1,33 @@
 .enquiry
   
-  p
-    a(href='#', style='font-family: "proxima-nova-soft", "Arial Rounded MT Bold", Arial, sans-serif; text-align: center; font-size: 16px; font-weight: 100; display: block; text-decoration: none; color: black;', data-modal='enquiry', data-entity_id=deal.id, data-entity_type=deal.constructor.name.toLowerCase())
-      | ENQUIRE
+  h2 Enquire About This Deal
   
-  //- h2 Enquire About This Deal
-  
-  //- form#input-form.enquire-form
+  form#input-form.enquire-form
     
-  //-   label(for='name') Name
-  //-     - if (session.user)
-  //-       input.name(type='text', disabled, value=session.user.name, name='name')
-  //-     - else
-  //-       input.name(type='text', name='name')
+    label(for='name') Name
+      - if (session.user)
+        input.name(type='text', disabled, value=session.user.name, name='name')
+      - else
+        input.name(type='text', name='name')
     
-  //-   label(for='email') Email:
-  //-     - if (session.user)
-  //-       input.email(type='text', disabled, value=session.user.email, name='email')
-  //-     - else
-  //-       input.email(type='text', name='email')
+    label(for='email') Email:
+      - if (session.user)
+        input.email(type='text', disabled, value=session.user.email, name='email')
+      - else
+        input.email(type='text', name='email')
     
-  //-   label(for='phone') Phone
-  //-   input.phone(type='text',name="phone")
+    label(for='phone') Phone
+    input.phone(type='text',name="phone")
     
-  //-   input(type='hidden', name='entity_id', value=deal.id)
-  //-   input(type='hidden', name='entity_type', value=entity_type)
+    input(type='hidden', name='entity_id', value=deal.id)
+    input(type='hidden', name='entity_type', value=entity_type)
     
-  //-   label(for='contactMethod') Contact Method
-  //-   select.contactMethod(name='contactMethod')
-  //-    option(value='phone') Phone
-  //-    option(value='email') Email
+    label(for='contactMethod') Contact Method
+    select.contactMethod(name='contactMethod')
+     option(value='phone') Phone
+     option(value='email') Email
     
-  //-   label(for='enquiry') Comments
-  //-   textarea.enquiry-box(name='enquiry', rows='5')
+    label(for='enquiry') Comments
+    textarea.enquiry-box(name='enquiry', rows='5')
     
-  //-   input.enquire.button(type='submit', value='Submit')
+    input.enquire.button(type='submit', value='Submit')
