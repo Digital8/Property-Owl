@@ -1,3 +1,5 @@
+_s = require 'underscore.string'
+
 exports.get = (req, res, next) ->
   
   if req.user?
@@ -6,13 +8,17 @@ exports.get = (req, res, next) ->
     return
   
   respond = (args = {}) ->
-    
+    args.user ?= req.session.form
+    args.user ?= {}
     res.render 'users/add', args
+    delete req.session.form
   
   return respond null unless req.session.referrer_id?
   
   User.get req.session.referrer_id, (error, referrer) ->
+    
     return next error if error?
+    
     respond
       referrer: referrer
       token: req.session.token
@@ -38,14 +44,21 @@ exports.post = (req, res, next) ->
     if (req.param 'password')?.length
       req.assert('confirm', '').equals (req.param 'password')
     
-    req.assert('first_name', 'invalid').regex /^[A-Z][a-zA-Z '&-]*[A-Za-z]$/
-    req.assert('last_name', 'invalid').regex /^[A-Z][a-zA-Z '&-]*[A-Za-z]$/
+    req.assert('first_name', 'invalid').len 2 # regex /^[A-Z][a-zA-Z '&-]*[A-Za-z]$/
+    req.assert('last_name', 'invalid').len 2 # regex /^[A-Z][a-zA-Z '&-]*[A-Za-z]$/
     
     req.assert('terms_and_conditions', 'not accepted').isIn ['checked', 'Checked', 'on']
     
     req.assert('postcode', 'invalid').regex /[0-9]{4}/i
     
-    return if req.guard req, res, next
+    errors = req.validationErrors()
+    
+    if errors
+      for error in errors
+        req.flash 'error', (_s.humanize "#{error.param} - #{error.msg}")
+      req.session.form = req.body
+      res.render 'back'
+      return
     
     Token.byUUID (req.param 'token'), (error, token) ->
       

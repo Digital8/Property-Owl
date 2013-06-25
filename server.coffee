@@ -157,9 +157,15 @@ app.configure ->
     app.use (error, req, res, next) ->
       if req._validationErrors?
         console.log 'valid errors'
-        res.send 422,
-          message: 'Validation failed'
-          errors: error
+        if req.xhr
+          res.send 422,
+            message: 'Validation failed'
+            errors: error
+        else
+          console.log error
+          for err in error
+            req.flash 'error', "#{err.param} - #{err.msg}"
+          res.redirect 'back'
       else
         next error
     
