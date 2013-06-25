@@ -68,29 +68,29 @@ module.exports = ->
       level = $('.panes').data('tab')
       activate 'index'
   
-  for form in $ 'form.details-form.owl'
+  # for form in $ 'form.details-form.owl'
     
-    $form = $ form
+  #   $form = $ form
     
-    id = $form.data 'id'
+  #   id = $form.data 'id'
     
-    # approved bool
+  #   # approved bool
     
-    approved = $form.find '[name=approved]'
+  #   approved = $form.find '[name=approved]'
     
-    approved.change (event) ->
-      event.preventDefault()
+  #   approved.change (event) ->
+  #     event.preventDefault()
       
-      $.patch "/owls/#{id}",
-        approved: approved.is ':checked'
-      , ->
+  #     $.patch "/owls/#{id}",
+  #       approved: approved.is ':checked'
+  #     , ->
         
-    # date
+  #   # date
     
-    picker = $ '#approved_at_val'
+  #   picker = $ '#approved_at_val'
     
-    picker.change (event) ->
+  #   picker.change (event) ->
       
-      $.patch "/owls/#{id}",
-        approved_at: picker.val()
-      , (body, res, xhr) ->
+  #     $.patch "/owls/#{id}",
+  #       approved_at: picker.val()
+  #     , (body, res, xhr) ->

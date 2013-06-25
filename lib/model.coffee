@@ -84,7 +84,7 @@ module.exports = class Model
     
     async.map (_.values @constructor.links), (link, callback) =>
       
-      return callback null unless req.body[link.key]? or req.files[link.key]?
+      return callback null unless req.body?[link.key]? or req.files?[link.key]?
       
       constructor = do link.type
       
@@ -249,6 +249,8 @@ module.exports = class Model
     
     async.map (_.values @constructor.links), (link, callback) =>
       
+      return callback null unless req.body?[link.key]? or req.files?[link.key]?
+      
       constructor = do link.type
       
       req.body.entity_id = @id
@@ -258,6 +260,7 @@ module.exports = class Model
         return callback error if error?
         @[link.key] = linked
         callback null
+    
     , callback
   
   @forEntity = (entity, callback) ->

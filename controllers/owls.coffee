@@ -93,6 +93,8 @@ exports.update = (req, res, next) ->
   
   Owl.patch req.params.id, req.body, req: req, (error, owl) =>
     
+    # return if req.guard req, res, next
+    
     if error?.errors?
       for key, message of error.errors
         req.flash 'error', "#{key} - #{message}"
@@ -100,7 +102,7 @@ exports.update = (req, res, next) ->
       return res.redirect 'back'
     
     if owl.approved
-      (require '../../lib/mailer') 'listing-approval', 'Property Approved',
+      (require '../lib/mailer') 'listing-approval', 'Property Approved',
         email: owl.user.email
       ,
         contactName: owl.user.first_name
@@ -110,12 +112,6 @@ exports.update = (req, res, next) ->
     
     req.flash 'success', 'Owl updated!'
     res.redirect "/owls/#{owl.id}/admin"
-
-exports.patch = (req, res) ->
-  
-  Owl.patch req.params.id, req.body, (error, owl) ->
-    
-    res.send 200
 
 exports.delete = (req, res) ->
   
@@ -180,6 +176,7 @@ exports.top = (req, res) ->
       res.render 'owls/show', owl: owl, bestdeal: true, enquire: on, share: on, deal: owl
 
 exports.hot = (req, res) ->
+  
   async.map ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa'], (state, callback) ->
     Owl.topstate state, callback
   , (error, owls) ->
@@ -190,7 +187,6 @@ exports.hot = (req, res) ->
       
       owls = _.filter owls, (owl) -> owl?.id?
       owls = (_.sortBy owls, 'ratio').reverse()
-
       
       res.render 'owls/list', owls: owls, maxPages: 1, currentPage: 1
 
