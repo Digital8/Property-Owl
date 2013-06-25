@@ -57,22 +57,22 @@ block content
       
       .property-info
         
-        #left
+        #left.mobile-full
           | #{barn.address}, #{barn.suburb}, #{barn.state.toUpperCase()} #{barn.postcode}
           
           p !{barn.description.replace(/\r\n/g,"<br />")}
 
-          .general-features
+          .general-features.mobile-full
             h3 Indoor Features
             p !{barn.indoor_features.replace(/\r\n/g,"<br />")}
             h3 Outdoor Features
             p !{barn.outdoor_features.replace(/\r\n/g,"<br />")}
           
-          .other-features
+          .other-features.mobile-full
             h3 Other Features
             p !{barn.other_features.replace(/\r\n/g,"<br />")}
         
-        #right
+        #right.mobile-full
           - if (req.user && req.user.isAdmin())
             .more-info(style='text-align: center; background: #BADA55;')
               a(href="/barns/#{barn.id}/edit") Admin
@@ -116,4 +116,4 @@ block content
                 
                 ul
                   each file in barn.files
-                    li: a(href="/uploads/#{file.filename}")= file.description
+                    li: a(href=file.url)= file.description
