@@ -23,7 +23,6 @@ module.exports = () ->
   $tfoot = $ '.categories tfoot'
   
   sync = ($trs) ->
-    # console.log 'syncing', $trs
     
     for tr in $trs
       $tr = $ tr
@@ -35,8 +34,6 @@ module.exports = () ->
       do ($input, id, $tr) ->
       
         $input.bind 'input', (event) ->
-          
-          # console.log 'change'
           
           $.patch "/categories/#{id}", key: $input.val()
   

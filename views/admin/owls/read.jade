@@ -73,16 +73,17 @@
     label Description
 
     p= owl.description
+  
   .inputs
-
+  
   h3 Registrations
-
+  
   table.admin-gridview
     thead
       tr
         td Full Name
         td Email
-        td Status
+        //- td Status
         td Date
     tbody.body
       if owl.registrations.length == 0
@@ -94,12 +95,12 @@
           tr
             td #{registration.first_name} #{registration.last_name}
             td= registration.email
-            td
-              select.registration(data-id="#{registration.registration_id}")
-                - var c = (registration.status == 0) ? true : false
-                option(value='0',selected=c) Not Interested
-                - var c = (registration.status == 1) ? true : false
-                option(value='1',selected=c) Interested
+            //- td
+            //-   select.registration(data-id="#{registration.registration_id}")
+            //-     - var c = (registration.status == 0) ? true : false
+            //-     option(value='0',selected=c) Not Interested
+            //-     - var c = (registration.status == 1) ? true : false
+            //-     option(value='1',selected=c) Interested
             td= registration.created_at
 
   hr.light

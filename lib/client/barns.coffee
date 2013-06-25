@@ -76,8 +76,8 @@ module.exports = ->
                     $.delete "/barns/#{barnId}/owls/#{owlId}", ->
                       $row.remove()
                       update()
-        else
-          console.log 'Owl is Already in a Barn', owl
+        # else
+        #   console.log 'Owl is Already in a Barn', owl
 
   
   $address.bind 'change keyup', ->

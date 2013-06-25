@@ -19,8 +19,6 @@ exports.create = (req,res) ->
   req.body.address ?= ''
   req.body.city ?= ''
   req.body.state ?= ''
-
-  #console.log req.body
   
   errors = req.validationErrors true
   

@@ -27,7 +27,6 @@ module.exports = class Advertisement extends Model
     @_image = null
     Object.defineProperty this, 'image',
       get: =>
-        console.log @_image, @image_id
         return @_image if @_image
         if @image_id
           return {

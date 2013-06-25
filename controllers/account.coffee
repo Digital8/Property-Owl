@@ -54,8 +54,6 @@ exports.update = (req, res, next) ->
       
       return next error if error?
       
-      console.log req.body
-      
       user.patch req.body, (error) ->
         
         if error?

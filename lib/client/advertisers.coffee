@@ -21,5 +21,4 @@ module.exports = ->
         if confirm "Really delete #{entity_type} #{id} ?"
         
           $.delete "/#{entity_type}s/#{id}", ->
-            console.log arguments...
             $row.remove()

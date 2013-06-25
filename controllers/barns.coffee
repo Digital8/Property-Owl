@@ -13,8 +13,6 @@ exports.index = (req, res) ->
 
 exports.edit = (req, res, next) ->
   
-  console.log req.params.id
-  
   async.parallel
     barn: (callback) -> Barn.get req.params.id, callback
     developers: (callback) -> User.developers callback

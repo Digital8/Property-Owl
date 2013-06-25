@@ -16,8 +16,8 @@ module.exports = ->
           
           $this.append ' Saved'
           
-        else
-          console.log status
+        # else
+        #   console.log status
 
     else
       $.showRegister()

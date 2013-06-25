@@ -216,7 +216,7 @@ exports.show = (req, res) ->
     
     owl.hydrateForUser req.user, (error) ->
       
-      res.render 'owls/show', owl: owl, enquire: on, deal: owl
+      res.render 'owls/show', owl: owl, enquire: on, deal: owl, action: 'show'
 
 exports.print = (req, res) ->
   {id} = req.params

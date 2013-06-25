@@ -13,7 +13,6 @@ exports.create = (req, res) ->
   
   callback = (error) ->
     if error?
-      # console.log 'error', error
       req.flash 'error', error
       res.redirect 'back'
       return

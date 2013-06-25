@@ -3,8 +3,6 @@ async = require 'async'
 
 module.exports = ({models, db, controllers}) ->
   
-  console.log 'schema'
-  
   for key, controller of controllers
     controller.db = db
     Object.defineProperty controller, 'models', value: models
