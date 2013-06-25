@@ -5646,6 +5646,9 @@ li.sfHover > a > .sf-sub-indicator {
   .main > div#center-col .listing-summary .header {
     height: auto;
   }
+  .main > div#center-col .listing-summary .header .listing-title {
+    width: 100%;
+  }
   .main > div#center-col .listing-summary .listing-body .listing-thumb .thumb {
     height: auto;
   }
