@@ -161,7 +161,7 @@ module.exports = ({app, controllers}) ->
     app.get   "/#{key}",                  (authorize acl.developer), controllers[key].index
     app.get   "/#{key}/:id(\\d+)/edit",   (authorize acl.developer), controllers[key].edit
     app.get   "/#{key}/add",              (authorize acl.developer), controllers[key].add
-    app.patch "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].patch
+    app.patch "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].update
     app.post  "/#{key}", (authorize 2),   (authorize acl.developer), controllers[key].create
     app.put   "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].update
   
