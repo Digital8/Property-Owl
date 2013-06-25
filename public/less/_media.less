@@ -638,6 +638,19 @@
     
     .main {
         display: table;
+
+        .details {
+          .details-form {
+              .inputs {
+                padding-left: 20px;
+                padding-right: 20px;
+
+                input.half-field {
+                  width:49% !important;
+                }
+              }
+          }
+        }
                 
         > div {
             &#left-col {
@@ -708,7 +721,11 @@
                 .grid-header {
                   ol {
                     &.tabs {
-                      font-size:0.45em;
+                      font-size:0.75em;
+
+                      li {
+                        width:50%;
+                      }
                     }
                   }
                 }
@@ -768,6 +785,7 @@
                 }
                 
             }
+              
             &#wide-center-col { 
                 .no-column(0);
                 width: 320px;
