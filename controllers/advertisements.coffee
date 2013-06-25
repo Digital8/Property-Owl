@@ -27,7 +27,7 @@ exports.update  = (require '../behaviors/update')  Advertisement, views: 'admin/
 exports.delete  = (require '../behaviors/delete')  Advertisement, views: 'admin/'
 exports.destroy = (require '../behaviors/destroy') Advertisement, views: 'admin/'
 
-exports.click = (req, res) ->
+exports.click = (req, res, next) ->
   
   Advertisement.get req.params.id, (error, advertisement) ->
     
@@ -37,8 +37,11 @@ exports.click = (req, res) ->
     Click.create
       entity_id: advertisement.id
       ip: req.ip
-      user_id: req.session.user_id
+      user_id: req.user?.id
       headers: JSON.stringify req.headers
       type: 'advertisement'
     , (error, click) ->
+      
+      console.log error if error?
+      
       res.redirect advertisement.hyperlink
