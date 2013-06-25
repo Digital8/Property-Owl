@@ -9,6 +9,10 @@
     
     form.modal-content.details-form(autocomplete='off')
       
+      if req.session.referrer_id
+        
+        input(type='hidden', name='token', value=req.session.token)
+      
       input.half.register-first-name(name='first_name', type='text', placeholder='First Name')
       
       input.half.register-last-name(name='last_name', type='text', placeholder='Last Name')
