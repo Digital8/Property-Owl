@@ -1591,7 +1591,7 @@ body {
   width: 66.6666664%;
   padding: 25px;
   padding-top: 0.625em;
-  padding-bottom: 6.250em;
+  padding-bottom: 20px;
 }
 .main > div#home-center-col h1 {
   font-size: 2.4em;
@@ -1601,7 +1601,7 @@ body {
   width: 83.333333%;
   padding: 0;
   padding-left: 0.313em;
-  padding-bottom: 6.250em;
+  padding-bottom: 20px;
 }
 .main > div#wide-center-col #back-button {
   float: right;
@@ -1743,6 +1743,7 @@ body {
   float: left;
   width: 66.6666664%;
   padding: 0.625em;
+  padding-bottom: 20px;
 }
 .main > div#wide-center-col .property-info #left .price-highlight {
   font-weight: bold;
@@ -5501,6 +5502,11 @@ li.sfHover > a > .sf-sub-indicator {
     padding: 0px;
     margin-top: 0.625em;
   }
+  #header #banner {
+    float: right;
+    width: 100%;
+    max-height: 59px;
+  }
   #header #menu ul {
     float: left;
     width: 74.99999969999999%;
@@ -5610,6 +5616,10 @@ li.sfHover > a > .sf-sub-indicator {
   .main > div#left-col .share ul {
     font-size: 0.8em;
   }
+  .main > div#home-center-col #mazda {
+    margin-top: -10px !important;
+    margin-right: -20px;
+  }
   .main > div#center-col a.show-refer-friend {
     margin: auto 100px;
   }
@@ -5655,10 +5665,6 @@ li.sfHover > a > .sf-sub-indicator {
   }
   .main > div#center-col .listing-summary .listing-body .listing-details p {
     font-size: 0.9em;
-  }
-  .main > div#center-col #mazda {
-    margin-top: -10px;
-    margin-right: -20px;
   }
   .main > div#wide-center-col .slider-box {
     height: 24.9em;
@@ -5784,8 +5790,11 @@ li.sfHover > a > .sf-sub-indicator {
   }
   .mobile-full {
     width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    float: none !important;
   }
   #header {
     height: 11.2em;
@@ -6022,6 +6031,7 @@ li.sfHover > a > .sf-sub-indicator {
     padding: 0;
     width: 320px;
     padding-left: 0;
+    display: table-footer-group;
   }
   .main > div#left-col .find-deals h2 {
     cursor: pointer;
@@ -6067,10 +6077,6 @@ li.sfHover > a > .sf-sub-indicator {
   }
   .main > div#home-center-col,
   .main > div#center-col {
-    float: none;
-    width: auto;
-    padding: 0;
-    padding-left: 1.875em;
     display: table-header-group;
   }
   .main > div#home-center-col a.show-refer-friend,
@@ -6134,24 +6140,10 @@ li.sfHover > a > .sf-sub-indicator {
     width: auto;
     padding: 0;
     width: 320px;
+    display: table-header-group;
   }
   .main > div#wide-center-col .slider-box {
     height: 17.6em;
-  }
-  .main > div#wide-center-col .property-info #left {
-    clear: both;
-  }
-  .main > div#wide-center-col .property-info #left,
-  .main > div#wide-center-col .property-info #right {
-    float: none;
-    width: auto;
-    padding: 0;
-  }
-  .main > div#wide-center-col .property-info #right {
-    position: none;
-    float: left;
-    padding-right: 0;
-    width: 100%;
   }
   .main > div#right-col {
     float: none;
@@ -6166,7 +6158,10 @@ li.sfHover > a > .sf-sub-indicator {
   .quote {
     font-size: 0.9em;
   }
-  #footer > div {
+  #footer {
+    font-size: 1.3em;
+  }
+  #footer > div.quarter-col {
     float: left;
     width: 49.9999998%;
     padding: 1.25em;
@@ -6231,6 +6226,12 @@ li.sfHover > a > .sf-sub-indicator {
   .evoslider .outer_control,
   .evoslider .controlNav,
   .evoslider .control_wrapper {
+    height: 150px !important;
+  }
+  .evoslider.galleriffic dl {
+    height: 150px !important;
+  }
+  .evoslider.galleriffic dl dd img {
     height: 150px !important;
   }
   .evoslider.galleriffic .controlNav li.thumbnails {
