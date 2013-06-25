@@ -51,7 +51,17 @@
 
   script
     setTimeout(function() {
-      if(!$.isAuthed && !$('#login-modal').is(':visible') && (window.location.hostname.indexOf('elb') == -1)) {
+      var alreadySeen = false;
+      
+      if(window.localStorage) {
+        alreadySeen = !!window.localStorage.getItem('alreadySeen');
+      }
+
+      if(!$.isAuthed && !$('#login-modal').is(':visible') && !alreadySeen && (window.location.hostname.indexOf('elb') == -1)) {
         $("#users-modal").show();
+      }
+
+      if(window.localStorage) {
+        window.localStorage.setItem('alreadySeen', 'true');
       }
     }, 15000);
