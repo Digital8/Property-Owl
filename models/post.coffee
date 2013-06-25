@@ -9,33 +9,12 @@ module.exports = class Post extends Model
     name: 'posts'
     key: 'post_id'
   
+  @has (-> Media), key: 'image', cardinality: 1
+
   @field 'title'
   @field 'content'
   @field 'created_at'
   @field 'type'
-  
-  hydrate: (callback) ->
-    Media.for this, (error, medias) =>
-      @images = medias
-      super callback
-  
-  upload: (req, callback) ->
-    return callback null unless req.files? and (Object.keys req.files).length
-    
-    async.forEach (Object.keys req.files), (key, callback) =>
-      file = req.files[key]
-      
-      if file.size <= 0 then return callback null
-      
-      Media.upload
-        entity_id: @id
-        owner_id: req.session.user_id
-        file: file
-        type: 'post'
-      , (error, media) ->
-        callback error, media
-    
-    , callback
   
   @findByType = (type, callback) =>
     
@@ -50,9 +29,3 @@ module.exports = class Post extends Model
           callback()
       , (error) ->
         callback null, models
-
-  imageURL: ->
-    if @images.length
-      return @images.pop().filename
-    else
-      return '/placeholder.png' # or whatever it is
