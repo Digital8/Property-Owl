@@ -23,6 +23,20 @@ module.exports = class Affiliate extends Model
   
   @field 'category_id'
   
+  constructor: (args = {}) ->
+    
+    super
+    
+    @_image = null
+    Object.defineProperty this, 'image',
+      get: =>
+        return @_image if @_image
+        return {
+          url: "/images/placeholder.png"
+          thumbnail: "/images/placeholder.png"
+        }
+      set: (value) => @_image = value
+  
   hydrate: (callback) ->
     
     async.parallel
