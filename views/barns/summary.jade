@@ -19,9 +19,12 @@
       
       .listing-links
         
-        a.save-button(href='#')
+        a.save-button.add-bookmark(href='#', data-deal-type='barn', data-deal-id=barn.id)
           img#save-icon(src='/images/plus-icon.png', alt='Save this barn listing')
-          |  Save
+          - if (barn.bookmark)
+            |  Saved
+          - else
+            |  Save
         
         a.details-button(href='/barns/#{barn.id}')
           img#info-icon(src='/images/info-icon.png', alt='View barn deal')
