@@ -9,6 +9,13 @@ exports.create = (req,res) ->
   req.assert('name', 'Please enter a name').notEmpty()
   req.assert('comments', 'Please enter the comments').notEmpty()
   
+  #these probably don't need to be mandatory...
+  #company
+  #phone
+  #city
+  #state
+
+
   console.log req.body
   
   errors = req.validationErrors true
@@ -24,6 +31,12 @@ exports.create = (req,res) ->
     res.redirect '/contact'
   
   else
+
+  ###
+  Developer - rob@propertyowl.com.au
+  Agent - rob@propertyowl.com.au
+  Advertising - advertising@propertyowl.com.au
+  ###
     
     myMsg = new Email
       from: 'bscarvell@gmail.com'
