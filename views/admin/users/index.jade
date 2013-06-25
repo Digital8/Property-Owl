@@ -21,7 +21,8 @@ block content
     table.admin-gridview
       thead
         tr
-          td Name
+          td First Name
+          td Last Name
           td Email
           td Member Type
           td Referrer First Name
@@ -33,7 +34,9 @@ block content
       - each user in users
         
         tr
-          td #{user.first_name} #{user.last_name}
+          td #{user.first_name}
+
+          td #{user.last_name}
           
           td= user.email
           
@@ -62,7 +65,7 @@ block content
               | Delete
       tfoot
         tr
-          td(colspan='5')
+          td(colspan='8')
             &nbsp;
   script
     $(document).ready(function(){
