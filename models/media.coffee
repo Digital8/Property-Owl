@@ -27,6 +27,7 @@ module.exports = class Media extends Model
   @field 'key'
   @field 'description'
   @field 'deleted', type: Boolean, default: no
+  @field 'mime'
   
   constructor: (args = {}) ->
     
@@ -46,29 +47,38 @@ module.exports = class Media extends Model
         "https://digital8.s3.amazonaws.com/mime/#{ext}/#{ext}-128_32.png"
     
     Object.defineProperty this, 'extension', get: =>
-      mime.extension @mime
+      mime.extension @mime or 'application/octet-stream'
     
-    Object.defineProperty this, 'mime', get: =>
-      @_mime or 'application/octet-stream'
+    unless @mime?.length
+      url = "https://propertyowl.s3.amazonaws.com/#{@filename}"
+      console.log 'fetching mime', url
+      request.head url, (error, response, body) =>
+        @patch mime: response?.headers?['content-type'], (error) =>
+          console.log 'error fetching mime', error if error?
+    
+    # Object.defineProperty this, 'mime', get: =>
+    #   @_mime or 'application/octet-stream'
   
-  hydrate: (callback) ->
+  # hydrate: (callback) ->
     
-    if global.cache?[@id]?.mime?
-      @_mime = global.cache[@id].mime
-      super callback
-    else
-      request.head "https://propertyowl.s3.amazonaws.com/#{@filename}", (error, response, body) =>
+  #   if global.cache?[@id]?.mime?
+  #     @_mime = global.cache[@id].mime
+  #     super callback
+  #   else
+  #     url = "https://propertyowl.s3.amazonaws.com/#{@filename}"
+  #     console.log 'fetching', url
+  #     request.head url, (error, response, body) =>
         
-        unless error?
+  #       unless error?
           
-          type = response?.headers?['content-type']
+  #         type = response?.headers?['content-type']
           
-          @_mime = type
+  #         @_mime = type
           
-          global.cache ?= {}
-          global.cache[@id] ?= {type}
+  #         global.cache ?= {}
+  #         global.cache[@id] ?= {type}
         
-        super callback
+  #       super callback
   
   @build = (req, args..., callback) ->
     

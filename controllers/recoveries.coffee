@@ -1,4 +1,6 @@
-# exports.index = (req, res) ->
+exports.index = (req, res) ->
+  
+  res.render 'user/forgot_pwd'
 
 exports.show = (req, res, next) ->
   
@@ -13,8 +15,6 @@ exports.show = (req, res, next) ->
     # TODO token/recovery TTL [@pyro]
     
     req.session.user_id = token.user_id
-    
-    console.log req
     
     req.flash 'success', "We've logged you in for now. Please change your password."
     

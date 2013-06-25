@@ -21,7 +21,7 @@ module.exports = ({app, controllers}) ->
   app.get '/epoch', controllers.epoch
   
   # recovery
-  # app.get  '/recoveries', controllers.recoveries.index
+  app.get  '/recoveries', controllers.recoveries.index
   app.get  '/recoveries/:id', controllers.recoveries.show
   app.post '/recoveries', controllers.recoveries.create
   
