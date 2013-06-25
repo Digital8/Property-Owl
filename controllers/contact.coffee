@@ -1,4 +1,6 @@
-{Email} = require 'email'
+#{Email} = require 'email'
+{SendGrid, Email} = require 'sendgrid'
+sendgrid = new SendGrid 'digital8', '1lovedDMDN'
 
 exports.index = (req,res) ->
   
@@ -44,26 +46,75 @@ exports.create = (req,res) ->
       "general enquiry": "jeff@digital8.com.au"
       "developer enquiry": "jeff@digital8.com.au"
       "advertising enquiry": "jeff@digital8.com.au"
-    
-    console.log "cunt cunt cunt"
 
-    console.log
-      from: "#{req.body.email}"
+    email = new Email
       to: "#{agent[req.body.type.toLowerCase()]}"
-      subject: "#{req.body.type} - #{req.body.name}"
-      body: "Who's there?\n\nnewline\n\n<br /><br />rofl rofl<br /><br />lol"
-
-    myMsg = new Email
       from: "#{req.body.email}"
-      to: "#{agent[req.body.type.toLowerCase()]}"
+      fromname: "#{req.body.name}"
       subject: "#{req.body.type} - #{req.body.name}"
-      body: "Who's there?\n\nnewline\n\n<br /><br />rofl rofl<br /><br />lol"
+      html: """
+        <html>
+          <table>
+            <tr>
+              <td>Enquiry Type</td>
+              <td>{{type}}</td>
+            </tr>
+            <tr>
+              <td>Company</td>
+              <td>{{company}}</td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>{{name}}</td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>{{phone}}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>{{email}}</td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>{{address}}</td>
+            </tr>
+            <tr>
+              <td>City</td>
+              <td>{{city}}</td>
+            </tr>
+            <tr>
+              <td>State</td>
+              <td>{{state}}</td>
+            </tr>
+            <tr>
+              <td>Preferred Contact</td>
+              <td>{{contact_method}}</td>
+            </tr>
+            <tr>
+              <td>Enquiry Comments</td>
+              <td>{{comments}}</td>
+            </tr>
+          </table>
+        </html>
+      """
     
-    myMsg.send (err) ->
-      
-      if err
-        req.flash 'error', 'an error occured'
-      else
+    email.setCategory 'Property Owl'
+
+    email.addSubVal '{{email}}', req.body.email
+    email.addSubVal '{{name}}', req.body.name
+    email.addSubVal '{{comments}}', req.body.comments
+    email.addSubVal '{{type}}', req.body.type
+    email.addSubVal '{{phone}}', req.body.phone
+    email.addSubVal '{{state}}', req.body.state
+    email.addSubVal '{{contact_method}}', req.body.contact_method
+    email.addSubVal '{{company}}', req.body.company
+    email.addSubVal '{{address}}', req.body.address
+    email.addSubVal '{{city}}', req.body.city
+    
+    sendgrid.send email, ->
+      email.to = 'pyro@feisty.io'
+      sendgrid.send email, ->
+
         req.flash 'success', 'message sent successfully'
-      
-      res.redirect '/contact'
+        res.redirect '/contact'
