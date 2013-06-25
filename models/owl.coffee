@@ -163,20 +163,6 @@ module.exports = class Owl extends Model
       @bookmark = bookmark
       do callback
   
-  # heroImageURL: ->
-    
-  #   unless @images? and @images.length then return '/images/placeholder.png'
-    
-  #   if @feature_image != ''
-  #     return "/uploads/#{@feature_image}"
-  #   else
-  #     # default to latest image
-  #     # # find the hero
-  #     hero = _.find @images, (image) => return Number(image.filename) is Number(@feature_image)
-      
-  #     hero ?= @images.pop()
-      
-  #     return "/uploads/#{hero.filename}"
   
   displayTitleShort: ->
     shortAddress = _s.prune @address, 16
@@ -332,3 +318,4 @@ module.exports = class Owl extends Model
       return callback error if error?
       
       async.map rows, @new.bind(this), callback
+      

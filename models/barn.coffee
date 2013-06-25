@@ -98,70 +98,6 @@ module.exports = class Barn extends Model
       owl.index = index
       owl.alpha = 'ABCDE'[index]
   
-  heroImageURL: ->
-    
-    unless @images? and @images.length then return '/images/placeholder.png'
-    
-    # find the hero
-    hero = _.find @images, (image) =>
-      return Number(image.id) is Number(@feature_image)
-    
-    # default to latest image
-    hero ?= @images.pop()
-    
-    return "/uploads/#{hero.filename}"
-  
-  upload: (req, callback) ->
-    
-    processFiles = (req, key, callback = ->) =>
-      files = req.files["#{key}s"]
-      
-      do callback unless files?
-      
-      files = [].concat files
-      
-      async.forEach files, (file, callback) =>
-        console.log "processing #{key} file...", file
-        
-        return do callback unless file.size
-        
-        Media.upload
-          entity_id: @id
-          owner_id: req.user.id
-          file: file
-          type: 'barn'
-          class: key
-        , callback
-      
-      , callback
-    
-    # uploads
-    
-    async.series
-      
-      uploads: (callback) =>
-        
-        async.parallel
-        
-          image: (callback) =>
-            processFiles req, 'image', callback
-          
-          file: (callback) =>
-            processFiles req, 'file', callback
-        
-        , callback
-      
-      nested: (callback) =>
-        return do callback unless req.body.files? 
-        
-        for file in req.body.files when file? and file.id? and file.description?
-          Media.update file.id, description: file.description, ->
-        
-        do callback
-    
-    , (error) ->
-      console.log 'done'
-      do callback
   
   @byDeveloper = (id, callback) ->
     @db.query "SELECT * FROM barns WHERE listed_by = ?", [id],(error, rows) =>
@@ -184,3 +120,4 @@ module.exports = class Barn extends Model
         model.hydrate callback
       , (error) ->
         callback null, models
+        
