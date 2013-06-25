@@ -51,14 +51,7 @@ exports.post = (req, res, next) ->
     
     req.assert('postcode', 'invalid').regex /[0-9]{4}/i
     
-    return if req.guard req, res, next # errors = req.validationErrors()
-    
-    # if errors
-    #   for error in errors
-    #     req.flash 'error', (_s.humanize "#{error.param} - #{error.msg}")
-    #   req.session.form = req.body
-    #   res.render 'back'
-    #   return
+    return if req.guard req, res, next
     
     Token.byUUID (req.param 'token'), (error, token) ->
       
