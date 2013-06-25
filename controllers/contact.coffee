@@ -35,17 +35,10 @@ exports.create = (req,res) ->
     res.redirect '/contact'
   
   else
-
-    ###
-    Developer - rob@propertyowl.com.au
-    Agent - rob@propertyowl.com.au
-    Advertising - advertising@propertyowl.com.au
-    ###
-
     agent =
-      "general enquiry": "jeff@digital8.com.au"
-      "developer enquiry": "jeff@digital8.com.au"
-      "advertising enquiry": "jeff@digital8.com.au"
+      "general enquiry": "rob@propertyowl.com.au"
+      "developer enquiry": "rob@propertyowl.com.au"
+      "advertising enquiry": "advertising@propertyowl.com.au"
 
     email = new Email
       to: "#{agent[req.body.type.toLowerCase()]}"
