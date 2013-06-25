@@ -45,6 +45,8 @@ exports.create = (req,res) ->
       "developer enquiry": "jeff@digital8.com.au"
       "advertising enquiry": "jeff@digital8.com.au"
     
+    console.log "cunt cunt cunt"
+
     console.log
       from: "#{req.body.email}"
       to: "#{agent[req.body.type.toLowerCase()]}"
