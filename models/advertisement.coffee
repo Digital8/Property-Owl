@@ -77,48 +77,37 @@ module.exports = class Advertisement extends Model
       
       callback null, result[0]['COUNT(*)']
   
-  @random = (url, pos, callback) =>
+  @random = (page, adspace, callback) =>
     
-    # page
-    @db.query "SELECT * FROM pages WHERE url LIKE ?", [url], (error, pages) =>
-      
-      [page] = pages
-      
-      return callback null unless page?
-      
-      # space
-      @db.query "SELECT * FROM adspaces WHERE name LIKE ?", [pos], (error, spaces) =>
-        
-        [space] = spaces
-        
-        return callback null unless space?
-        
-        @db.query """
-        SELECT *
-        FROM advertisements
+    @db.query """
+    SELECT *
+    FROM advertisements
+    WHERE
+      (
+        (start and stop and (NOW() between start and stop))
+        OR
+        (NOT start and NOT stop)
+      )
+        AND
+      visible
+        AND
+      adspace_id = ?
+        AND
+      advertisement_id IN (
+        SELECT DISTINCT advertisement_id
+        FROM advertisement_page
         WHERE
-          (
-            (start and stop and (NOW() between start and stop))
-            OR
-            (NOT start and NOT stop)
-          )
-            AND
-          visible
-            AND
-          adspace_id = ?
-            AND
-          advertisement_id IN (
-            SELECT DISTINCT advertisement_id
-            FROM advertisement_page
-            WHERE
-              page_id = ?
-          )
-        ORDER BY RAND()
-        """, [space.adspace_id, page.page_id], (error, rows) =>
-          
-          # callback null, advertisements
-          
-          async.map rows, @new.bind(this), callback
+          page_id = ?
+      )
+    ORDER BY RAND()
+    LIMIT 1
+    """, [adspace.id, page.id], (error, rows) =>
+      
+      return callback error if error?
+      
+      return callback null unless rows.length
+      
+      @new rows[0], callback
 
 # exports.update = (ad, callback) =>
 

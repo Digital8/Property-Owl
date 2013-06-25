@@ -1,2 +1,4 @@
-a(href="/advertisements/#{ad.advertisement_id}/click",target="_blank")
-  img.ad-tower(src=ad.image.thumbnail, alt= ad.description)
+mixin tower_ad(ad)
+  if ad
+    a(href="/advertisements/#{ad.id}/click", target='_blank')
+      img.ad-tower(src=ad.image.thumbnail, alt= ad.description)

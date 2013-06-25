@@ -172,14 +172,17 @@ module.exports = class Model
   - sort of a hack [TODO] [@pyro]
   ###
   hydrate: (callback) ->
-    for key, field of @constructor.table.columns
-      continue if this[key]?
-      continue if @constructor?.fields?[key]?.null
+    
+    # for key, field of @constructor.table.columns
       
-      if /int\(\d+\)/.test field.Type
-        this[key] = 0
-      else
-        this[key] = ''
+    #   continue if this[key]?
+      
+    #   continue if @constructor?.fields?[key]?.null
+      
+    #   if /int\(\d+\)/.test field.Type
+    #     this[key] = 0
+    #   else
+    #     this[key] = ''
     
     if @constructor.fields?
       
@@ -406,7 +409,8 @@ module.exports = class Model
   ###
   @all = (callback) ->
     
-    @db.query "SELECT * FROM #{@table.name} ORDER BY #{@table.key}", (error, rows) =>
+    # ORDER BY #{@table.key}
+    @db.query "SELECT * FROM #{@table.name}", (error, rows) =>
       
       return callback error if error?
       
@@ -422,13 +426,13 @@ module.exports = class Model
       
       return callback error if error?
       
+      # needs mysql results (affectedRows)
       callback arguments...
   
   ###
   Model.get
   - fetches a row from the underlying datasource
   - instantiates
-  - needs alot of work [TODO] [@pyro]
   ###
   @get = (id, callback) ->
     
@@ -443,7 +447,6 @@ module.exports = class Model
   Model.dry
   - fetches a row from the underlying datasource
   - does not hydrate (no associations)
-  - needs alot of work [TODO] [@pyro]
   ###
   @dry = (id, callback) ->
     

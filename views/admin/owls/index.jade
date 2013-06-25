@@ -3,35 +3,35 @@ extends ../../layout
 block content
   
   .container.row.main
-      
-      include ../menu
     
-      h1 Owl Deals
+    include ../menu
+  
+    h1 Owl Deals
+    
+    include actions
+    
+    .grid-header.form-header
+    
+    table.admin-gridview.deal-grid
       
-      include actions
+      thead
+        tr
+          td.id(style='text-align: center;') ID
+          td.created_at(style='text-align: center;') Listed On
+          td.title(style='text-align: center;') Title
+          td.address(style='text-align: center;') Address
+          td.state(style='text-align: center;') State
+          td.status(style='text-align: center;') Status
+          td.deal_value(style='text-align: center;') Deal Value
+          td.registrations(style='text-align: center;') Registrations
+          td.actions(style='text-align: center;', colspan='3') Actions
       
-      .grid-header.form-header
+      tbody
+        if owls
+          each owl in owls
+            include summary
       
-      table.admin-gridview.deal-grid
-        
-        thead
-          tr
-            td(style='text-align: center;') ID
-            td(style='text-align: center;') Listed On
-            td(style='text-align: center;') Title
-            td(style='text-align: center;') Address
-            td(style='text-align: center;') State
-            td(style='text-align: center;') Status
-            td(style='text-align: center;') Deal Value
-            td(style='text-align: center;') Registrations
-            td(style='text-align: center;', colspan='3') Actions
-        
-        tbody
-          if owls
-            each owl in owls
-              include summary
-        
-        tfoot
-          tr
-            td(colspan='12')
-              | &nbsp;
+      tfoot
+        tr
+          td(colspan='12')
+            | &nbsp;

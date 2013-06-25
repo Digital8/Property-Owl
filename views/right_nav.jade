@@ -1,13 +1,5 @@
 #right-col.mobile-full
   
-  - var i = 0
-  each ad in adUpperTower
-    - i++
-    - if (i < 2)
-      include adverts/tower
-  
-  - var i = 0
-  each ad in adLowerTower
-    - i++
-    - if (i < 2)
-      include adverts/tower
+  include adverts/tower
+  mixin tower_ad(ads[1])
+  mixin tower_ad(ads[2])

@@ -1,9 +1,21 @@
 async = require 'async'
 
-module.exports = ->
+module.exports = (db) ->
+  
+  adspaces = [
+    {id: 1, key: 'top'}
+    {id: 2, key: 'upper tower'}
+    {id: 3, key: 'lower tower'}
+    {id: 4, key: 'upper box'}
+    {id: 5, key: 'lower box'}
+  ]
   
   (req, res, next) ->
-      
+    
+    # return next null unless req.method is 'get'
+    
+    res.locals.ads = []
+    
     console.start 'ads'
     
     url = req.url.split('?')[0]
@@ -17,20 +29,27 @@ module.exports = ->
     
     if url is '/%' then url = '/'
     
-    async.parallel
-      top       : (callback) -> Advertisement.random url, 'top',         callback
-      upperTower: (callback) -> Advertisement.random url, 'upper tower', callback
-      lowerTower: (callback) -> Advertisement.random url, 'lower tower', callback
-      upperBox  : (callback) -> Advertisement.random url, 'upper box',   callback
-      lowerBox  : (callback) -> Advertisement.random url, 'lower box',   callback
-    , (err, results) ->
+    # page
+    db.query "SELECT page_id AS id FROM pages WHERE url LIKE ?", [url], (error, pages) =>
       
-      res.locals.adspaceTop   = if results.top?         then results.top        else ''
-      res.locals.adUpperTower = if results.upperTower?  then results.upperTower else ''
-      res.locals.adLowerTower = if results.lowerTower?  then results.lowerTower else ''
-      res.locals.adUpperBox   = if results.upperBox?    then results.upperBox   else ''
-      res.locals.adLowerBox   = if results.lowerBox?    then results.lowerBox   else ''
+      return next null if error?
       
-      console.stop 'ads'
+      [page] = pages
       
-      next? null
+      return next null unless page?
+      
+      async.times 5, (i, callback) ->
+        Advertisement.random page, adspaces[i], callback
+      , (error, ads) ->
+        
+        if error?
+          console.log error
+          return next null
+        
+        console.log ads
+        
+        res.locals.ads = ads
+        
+        console.stop 'ads'
+        
+        next? null

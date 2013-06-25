@@ -40,4 +40,5 @@ module.exports = class Click extends Model
     
     #query += ' GROUP BY U.user_id, O.approved'
     query += ' 1=1'
+    console.log query
     @db.query query, vals, callback

@@ -11,26 +11,26 @@ hr
 .left.mobile-full
   
   .inputs
-    label(for='level') Level
-      input.level#level(type='number', name='level', value=owl.level, min='0')
+    label(for='level_input') Level
+      input.level#level_input(type='number', name='level', value=owl.level, min='0')
   
   .inputs
-    label(for='address') Address (e.g. 5 Owl Street)
-    input.address#address(type='text', name='address', value=owl.address)
+    label(for='address_input') Address (e.g. 5 Owl Street)
+    input.address#address_input(type='text', name='address', value=owl.address)
   
   .inputs
-    label(for='suburb') Suburb
-    input.suburb#suburb(type='text', name='suburb', value=owl.suburb, maxlength='100')
+    label(for='suburb_input') Suburb
+    input.suburb#suburb_input(type='text', name='suburb', value=owl.suburb, maxlength='100')
 
 .right.mobile-full
   
   .inputs
-    label(for='postcode') Postcode
-    input.postcode#postcode(type='text', name='postcode', value=owl.postcode, maxlength='10')
+    label(for='postcode_input') Postcode
+    input.postcode#postcode_input(type='text', name='postcode', value=owl.postcode, maxlength='10')
   
   .inputs
-    label(for='state') State
-    select.state#state(name='state')
+    label(for='state_input') State
+    select.state#state_input(name='state')
       option Select
       - each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
         option(value=state, selected=state == owl.state)= state.toUpperCase()

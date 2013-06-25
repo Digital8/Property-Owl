@@ -3,16 +3,13 @@
   header#header
     
     #top-header
-    
+      
       #logo-box
         
         a#logo(href='/'): img(src='/images/logo.png')
-
-      - var i = 0
-      each ad in adspaceTop
-        - i++
-        include adverts/horizontal.jade
-        - if (i == 1) break;
+      
+      include adverts/banner
+      mixin banner_ad(ads[0])
     
     nav#menu
       

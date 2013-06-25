@@ -1,2 +1,4 @@
-a(href="/advertisements/#{ad.advertisement_id}/click",target="_blank")
-  img.ad-box(src=ad.image.thumbnail, alt=ad.description)
+mixin box_ad(ad)
+  if ad
+    a(href="/advertisements/#{ad.id}/click", target='_blank')
+      img.ad-box(src=ad.image.thumbnail, alt=ad.description)

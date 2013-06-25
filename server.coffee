@@ -134,7 +134,7 @@ app.configure ->
     
     app.use do require './lib/nav'
     
-    app.use do require './lib/ads'
+    app.use (require './lib/ads') db
     
     app.use do require './lib/auth'
     

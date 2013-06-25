@@ -20,7 +20,56 @@ hr
 //-     }
 //- else
 
-.left
-	.inputs
-		label Number of clones:
-		input(type="text",name="clone_num",value="0")
+.inputs.clone-inputs
+  label
+    | Number of clones: 
+    span.clone_output
+  //- input(type="text",name="clone_num",value="0")
+  input.clone_input(type='range', min=0, max=4, step=1, value=0)
+  
+  .clone_template
+    
+    table.admin-gridview.deal-grid
+      
+      thead
+        
+        tr
+          th.id(style='text-align: center;') ID
+          th.created_at(style='text-align: center;') Listed On
+          th.title(style='text-align: center;') Title
+          th.address(style='text-align: center;') Address
+          th.state(style='text-align: center;') State
+          th.status(style='text-align: center;') Status
+          th.deal_value(style='text-align: center;') Deal Value
+          th.registrations(style='text-align: center;') Registrations
+          th.actions(style='text-align: center;', colspan='3') Actions
+      
+      tbody
+        
+        include summary
+  
+  :coffeescript
+    
+    template = $ '.clone_template'
+    body = template.find 'tbody'
+    row = template.find 'tbody tr'
+    
+    input = $ '.clone_input'
+    
+    update = ->
+      count = input.val()
+      ($ '.clone_output').text count
+      
+      body.empty()
+      for i in [0...count]
+        row.clone().appendTo body
+    
+    input.change update
+    
+    template.find('.actions').remove()
+    row.find('.id').text '-'
+    row.find('.status').text 'Pending'
+    row.find('.created_at').text moment().format 'L'
+    row.find('.registrations').text 0
+    
+    do update

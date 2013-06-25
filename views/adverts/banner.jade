@@ -1,0 +1,5 @@
+mixin banner_ad(ad)
+  if ad
+    #banner-box
+      a(href="/advertisements/#{ad.id}/click", target='_blank')
+        img#banner(src=ad.image.thumbnail, alt=ad.description)

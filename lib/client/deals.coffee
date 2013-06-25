@@ -28,10 +28,15 @@ module.exports = ->
         map[key] = $control.val()
         
         $.patch route, map, ->
+      
+      return $control
     
-    bind 'deal_type_id'
-    bind 'description'
-    bind 'value'
+    $deal_type_id = bind 'deal_type_id'
+    $description = bind 'description'
+    $value = bind 'value'
+    
+    $deal_type_id.change ->
+      $description.attr placeholder: $deal_type_id.find('option:selected').text()
     
     ($row.find '.delete').click (event) ->
       
