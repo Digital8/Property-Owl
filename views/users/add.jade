@@ -30,12 +30,12 @@ block content
             .inputs
               
               label(for='first_name') First Name
-              input#first_name(type='text', name='first_name', placeholder='First Name', value)
+              input#first_name(type='text', name='first_name', placeholder='First Name', value=user.first_name)
             
             .inputs
               
               label(for='email') Email
-              input#email(type='email', name="email", placeholder="Email", value)
+              input#email(type='email', name="email", placeholder="Email", value=user.email)
             
             .inputs
               
@@ -47,12 +47,12 @@ block content
             .inputs
               
               label(for='last_name') Last Name
-              input#last_name(type='text', name="last_name", placeholder="Last Name", value)
+              input#last_name(type='text', name="last_name", placeholder="Last Name", value=user.last_name)
             
             .inputs
               
               label(for='postcode') Postcode
-              input#postcode(type='text', name="postcode", placeholder="Postcode", value)
+              input#postcode(type='text', name="postcode", placeholder="Postcode", value=user.postcode)
             
             .inputs
               label(for='confirm') Confirm Password
