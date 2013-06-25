@@ -66,9 +66,9 @@ module.exports = class User extends Model
       super callback
   
   isHacker: ->
-    return no unless app?.argv?.hack
-    return no unless @company is 'Digital8'
-    return yes
+    # return no unless app?.argv?.hack
+    return yes if @company is 'Digital8'
+    return
   
   isBuyer: ->
     @level >= 1
