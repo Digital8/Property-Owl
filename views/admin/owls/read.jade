@@ -125,12 +125,14 @@
             td #{enquiry.first_name} #{enquiry.last_name}
             td= enquiry.enquiry
             td= enquiry.created_at
-
-
-  form(data-id=owl.id)
+  
+  //- # TODO take the layout off owls/show
+  //- include ../../owls/show
+  
+  //- form(data-id=owl.id)
     
-    include file_inputs
+  //-   include file_inputs
     
-    include image_inputs
+  //-   include image_inputs
     
-    include deal_inputs
+  //-   include deal_inputs

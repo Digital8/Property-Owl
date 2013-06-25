@@ -78,7 +78,7 @@ exports.create = (req, res) ->
     , (error) -> console.log error if error?
     
     req.flash 'success', 'Barn created!'
-    res.redirect "/barns"
+    res.redirect "/barns/#{barn.id}/edit"
 
 exports.delete = (req, res) ->
   
