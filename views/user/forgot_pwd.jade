@@ -12,7 +12,7 @@ block content
       
       .details
         
-        form.details-form(action="/account/recover",method="post")
+        form.details-form(action="/recoveries", method="post")
         
          include ../flashify
          
@@ -20,7 +20,7 @@ block content
            
            .inputs
              label(for='email') Email
-             input#email(type="text",name="email",placeholder="",value="")
+             input#email(type="text", name="email", placeholder="", value="")
            
          .inputs
          

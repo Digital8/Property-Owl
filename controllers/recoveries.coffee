@@ -1,4 +1,4 @@
-exports.index = (req, res) ->
+# exports.index = (req, res) ->
 
 exports.show = (req, res, next) ->
   
