@@ -4,7 +4,8 @@ tr.media(data-id=file.id, data-type=file.type, data-entity-id=barn.id)
   
   td
     if(file.filename)
-      img(src='#{file.thumbnail}', width='128', height='128', data-json=JSON.stringify(file))
+      a(href="#{file.url}", target="_blank")
+        img(src='#{file.thumbnail}', width='128', height='128', data-json=JSON.stringify(file))
   
   td
     input(type='text', name="files[#{file.id}][description]", value=file.description)
