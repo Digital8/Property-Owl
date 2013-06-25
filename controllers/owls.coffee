@@ -21,6 +21,8 @@ exports.admin = (req, res) ->
     dealTypes: (callback) -> DealType.all callback
   , (error, results) ->
     
+    results.action = 'show'
+    
     res.render 'admin/owls/show', results
 
 exports.edit = (req, res) ->
@@ -216,7 +218,7 @@ exports.show = (req, res) ->
     
     owl.hydrateForUser req.user, (error) ->
       
-      res.render 'owls/show', owl: owl, enquire: on, deal: owl, action: 'show'
+      res.render 'owls/show', owl: owl, enquire: on, deal: owl, _action: 'show'
 
 exports.print = (req, res) ->
   {id} = req.params

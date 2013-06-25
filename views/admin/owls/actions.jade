@@ -1,4 +1,5 @@
 .admin-actions
+  
   ul
     
     if(action != 'add' && action != 'show')
@@ -8,7 +9,7 @@
          | &nbsp;
          | Add Owl Deal
     
-    if(locals.owl && action == 'show')
+    if action == 'show'
       li
         a(href="/owls/#{owl.id}/edit")
          img(src='/images/manage.png')
