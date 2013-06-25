@@ -45,6 +45,12 @@ exports.create = (req,res) ->
       "developer enquiry": "jeff@digital8.com.au"
       "advertising enquiry": "jeff@digital8.com.au"
     
+    console.log
+      from: "#{req.body.email}"
+      to: "#{agent[req.body.type.toLowerCase()]}"
+      subject: "#{req.body.type} - #{req.body.name}"
+      body: "Who's there?\n\nnewline\n\n<br /><br />rofl rofl<br /><br />lol"
+
     myMsg = new Email
       from: "#{req.body.email}"
       to: "#{agent[req.body.type.toLowerCase()]}"
