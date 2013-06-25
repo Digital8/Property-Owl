@@ -71,7 +71,6 @@ app.configure ->
     app.set 'view engine', 'jade'
     
     app.use express.responseTime()
-    #app.use express.timeout 1000 * 60
     app.use express.static "#{__dirname}/public", maxAge: 1024
     app.use express.logger 'dev'
     app.use express.compress()
