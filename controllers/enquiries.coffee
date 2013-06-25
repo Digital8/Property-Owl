@@ -1,6 +1,13 @@
 # TODO error checking
 
-exports.create = (req, res) ->
+exports.create = (req, res, next) ->
+  
+  # req.assert('first_name', 'invalid').notEmpty()
+  # req.assert('last_name', 'invalid').notEmpty()
+  req.assert('email', 'invalid').isEmail()
+  req.assert('phone', 'invalid').len(8, 16).notEmpty()
+  req.assert('contact_method', 'invalid').notEmpty()
+  req.assert('comment', 'invalid').notEmpty()
   
   return if req.guard arguments...
   
@@ -17,7 +24,11 @@ exports.create = (req, res) ->
     
     return next error if error?
     
-    res.send id: enquiry.id
+    if req.xhr
+      res.send id: enquiry.id
+    else
+      req.flash 'success', 'Enquiry sent!'
+      res.redirect 'back'
     
     template = {
       affiliate: 'affiliate-enquiry'
