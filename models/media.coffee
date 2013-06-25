@@ -63,7 +63,27 @@ module.exports = class Media extends Model
     # TODO recursive links
   
   @upload = (args, callback) =>
-    callback null
+    
+    {req, file} = args
+    
+    console.log file
+    
+    @create
+      user_id: req.user.id
+      filename: uuid()
+      key: 'file'
+      description: file.name
+      entity_type: 'file'
+      entity_id: 0
+    , (error, instance) =>
+      
+      return callback error if error?
+      
+      file = new cloudy.File
+        id: instance.filename
+        path: file.path
+      
+      cloud.file file, callback
   
   @type = (type, callback) =>
     

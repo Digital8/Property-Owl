@@ -9,30 +9,9 @@ exports.index = (req, res) ->
 
 exports.create = (req, res) ->
   
-  async.series
-    
-    upload: (callback) ->
-      
-      return callback null unless req.files?
-      return callback null unless (Object.keys req.files).length
-      
-      async.forEach (_.values req.files), (file, callback) =>
-        
-        console.log 'uploading file...', file
-        
-        return callback null unless file.size
-        
-        Media.upload
-          entity_id: null
-          owner_id: req.session.user_id
-          file: file
-          type: 'file'
-        , callback
-      
-      , callback
+  files = req.files.file
   
-  , (error) ->
-    
+  callback = (error) ->
     if error?
       # console.log 'error', error
       req.flash 'error', error
@@ -40,6 +19,18 @@ exports.create = (req, res) ->
       return
     
     res.redirect 'back'
+  
+  return callback null unless files?
+  
+  files = _.compact (_.array files)
+  
+  return callback null unless files.length
+  
+  async.forEach files, (file, callback) =>
+    
+    Media.upload {file, req}, callback
+  
+  , callback
 
 exports.destroy = (req, res) ->
   
