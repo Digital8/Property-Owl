@@ -2,9 +2,9 @@ module.exports = (model, args = {}) ->
   
   args.prefix ?= ''
   
-  {singular, plural, prefix} = (require './_inflect') arguments...
+  {singular, plural, prefix, hooks} = (require './_inflect') arguments...
   
-  (req, res) ->
+  (req, res, next) ->
     
     model.build req, (error, instance) ->
       
@@ -14,6 +14,10 @@ module.exports = (model, args = {}) ->
         req.session.form = req.body
         return res.redirect 'back'
       
-      req.flash 'success', "#{model.name} (##{model.id}) created!"
-      
-      res.redirect args.redirect or "#{prefix}#{plural}"
+      hooks.tail instance, req, res, (error) ->
+        
+        return next error if error?
+        
+        req.flash 'success', "#{model.name} (##{instance.id}) created!"
+        
+        res.redirect args.redirect or "#{prefix}#{plural}"

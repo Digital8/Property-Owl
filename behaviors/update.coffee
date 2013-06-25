@@ -1,6 +1,6 @@
 module.exports = (model, args = {}) ->
   
-  {singular, plural, views, prefix} = (require './_inflect') arguments...
+  {singular, plural, views, prefix, hooks} = (require './_inflect') arguments...
   
   (req, res) ->
     
@@ -14,5 +14,10 @@ module.exports = (model, args = {}) ->
       
       return res.send 404 unless instance?
       
-      req.flash 'success', "#{model.name} updated!"
-      res.redirect args.redirect or "#{prefix}#{plural}"
+      hooks.tail instance, req, res, (error) ->
+        
+        return next error if error?
+        
+        req.flash 'success', "#{model.name} updated!"
+        
+        res.redirect args.redirect or "#{prefix}#{plural}"
