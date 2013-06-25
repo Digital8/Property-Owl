@@ -5482,7 +5482,7 @@ li.sfHover > a > .sf-sub-indicator {
     width: 640px;
   }
   #header {
-    height: 11.7em;
+    height: 9.4em;
   }
   #header > div#top-header {
     margin: 0 0 -2.188em 0;
@@ -5655,6 +5655,10 @@ li.sfHover > a > .sf-sub-indicator {
   }
   .main > div#center-col .listing-summary .listing-body .listing-details p {
     font-size: 0.9em;
+  }
+  .main > div#center-col #mazda {
+    margin-top: -10px;
+    margin-right: -20px;
   }
   .main > div#wide-center-col .slider-box {
     height: 24.9em;
@@ -6120,6 +6124,10 @@ li.sfHover > a > .sf-sub-indicator {
   .main > div#center-col .listing-summary .listing-body .listing-details .listing-links > a {
     font-size: 0.8em;
     margin-bottom: -1px;
+  }
+  .main > div#home-center-col #mazda,
+  .main > div#center-col #mazda {
+    margin: 0;
   }
   .main > div#wide-center-col {
     float: none;
