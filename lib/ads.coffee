@@ -46,8 +46,6 @@ module.exports = (db) ->
           console.log error
           return next null
         
-        console.log ads
-        
         res.locals.ads = ads
         
         console.stop 'ads'
