@@ -9,14 +9,16 @@ exports.create = (req,res) ->
   req.assert('name', 'Please enter a name').notEmpty()
   req.assert('comments', 'Please enter the comments').notEmpty()
   
-  #these probably don't need to be mandatory...
-  #company
-  #phone
-  #city
-  #state
+  req.body.type ?= 'General Enquiry'
+  req.body.phone ?= ''
+  req.body.state ?= ''
+  req.body.contact_method ?= 'Phone'
+  req.body.company ?= ''
+  req.body.address ?= ''
+  req.body.city ?= ''
+  req.body.state ?= ''
 
-
-  console.log req.body
+  #console.log req.body
   
   errors = req.validationErrors true
   
@@ -37,12 +39,17 @@ exports.create = (req,res) ->
     Agent - rob@propertyowl.com.au
     Advertising - advertising@propertyowl.com.au
     ###
+
+    agent =
+      "general enquiry": "jeff@digital8.com.au"
+      "developer enquiry": "jeff@digital8.com.au"
+      "advertising enquiry": "jeff@digital8.com.au"
     
     myMsg = new Email
-      from: 'bscarvell@gmail.com'
-      to:   'bscarvell@gmail.com'
-      subject: 'Knock knock...'
-      body: "Who's there?"
+      from: "#{req.body.email}"
+      to: "#{agent[req.body.type.toLowerCase()]}"
+      subject: "#{req.body.type} - #{req.body.name}"
+      body: "Who's there?\n\nnewline\n\n<br /><br />rofl rofl<br /><br />lol"
     
     myMsg.send (err) ->
       
