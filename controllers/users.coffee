@@ -99,15 +99,9 @@ exports.edit = (req, res, next) ->
 
 exports.update = (req,res) ->
   
-  req.body.email ?= ''
-  req.body.fname ?= ''
-  req.body.lname ?= ''
-  req.body.id = req.params.id
-  req.body.group ?= 1
-  
   req.assert('email', 'Invalid Email Address').isEmail()
   
-  if req.body.password != ''
+  if req.body.password?.length
     req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
     req.assert('confirmPassword', 'Password does not match').isIn [req.body.password]
   

@@ -60,12 +60,12 @@ module.exports = class Media extends Model
         
         unless error?
           
-          mime = response?.headers?['content-type']
+          type = response?.headers?['content-type']
           
-          @_mime = mime
+          @_mime = type
           
           global.cache ?= {}
-          global.cache[@id] ?= {mime}
+          global.cache[@id] ?= {type}
         
         super callback
   
