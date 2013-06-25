@@ -263,8 +263,8 @@ app.configure ->
         insecureApp.use express.static "#{__dirname}/public", maxAge: 1024
         
         insecureApp.get '*', (req, res) ->
-          #res.redirect "http://propertyowlnest.com/"
-          res.redirect "https://#{req.headers.host.split(':')[0]}#{req.url}"
+          res.redirect "http://propertyowlnest.com/"
+          #res.redirect "https://#{req.headers.host.split(':')[0]}#{req.url}"
         
         insecureServer = http.createServer insecureApp
         insecureServer.listen config.http.port, ->
