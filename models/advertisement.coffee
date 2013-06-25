@@ -27,8 +27,13 @@ module.exports = class Advertisement extends Model
     @_image = null
     Object.defineProperty this, 'image',
       get: =>
+        console.log @_image, @image_id
         return @_image if @_image
-        return url: "https://propertyowl.s3.amazonaws.com/#{@image_id}" if @image_id
+        if @image_id
+          return {
+            url: "https://propertyowl.s3.amazonaws.com/#{@image_id}"
+            thumbnail: "https://propertyowl.s3.amazonaws.com/#{@image_id}"
+          }
       set: (value) => @_image = value
     
     super
@@ -110,9 +115,11 @@ module.exports = class Advertisement extends Model
               page_id = ?
           )
         ORDER BY RAND()
-        """, [space.adspace_id, page.page_id], (error, advertisements) =>
+        """, [space.adspace_id, page.page_id], (error, rows) =>
           
-          callback null, advertisements
+          # callback null, advertisements
+          
+          async.map rows, @new.bind(this), callback
 
 # exports.update = (ad, callback) =>
 
