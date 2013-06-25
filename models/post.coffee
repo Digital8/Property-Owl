@@ -10,11 +10,25 @@ module.exports = class Post extends Model
     key: 'post_id'
   
   @has (-> Media), key: 'image', cardinality: 1
-
+  
   @field 'title'
   @field 'content'
   @field 'created_at'
   @field 'type'
+  
+  constructor: (args = {}) ->
+    
+    super
+    
+    @_image = null
+    Object.defineProperty this, 'image',
+      get: =>
+        return @_image if @_image
+        return {
+          url: "/images/placeholder.png"
+          thumbnail: "/images/placeholder.png"
+        }
+      set: (value) => @_image = value
   
   @findByType = (type, callback) =>
     

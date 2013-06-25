@@ -74,8 +74,8 @@ module.exports = class Owl extends Model
         return @images[0]
       return {
         id: 0
-        url: '/uploads/placeholder.png'
-        thumbnail: '/uploads/placeholder.png'
+        url: '/images/placeholder.png'
+        thumbnail: '/images/placeholder.png'
       }
     
     super

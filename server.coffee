@@ -163,7 +163,7 @@ app.configure ->
     app.use do require './lib/guard'
     
     app.use (req, res, next) ->
-      if app.argv.hack
+      if app.argv.verbose
         # console.log req.user
         console.log url: req.url, body: req.body
       next error

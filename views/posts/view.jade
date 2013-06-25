@@ -20,10 +20,7 @@ block content
         
         .listing-thumb
           
-          if post.images[0]
-            img.thumb(src=post.image.thumbnail, alt='#{post.title}')
-          else
-            img.thumb(src='/images/placeholder.png', alt='#{post.title}')
+          img.thumb(src=post.image.thumbnail, alt=post.title)
       
       div !{post.content.replace(/\n/g, '<p />')}
     
