@@ -1,4 +1,4 @@
 - if (ad)
   #banner-box
     a(href="/advertisements/#{ad.advertisement_id}/click",target="_blank")
-      img#banner(src='/uploads/' + ad.image_id + '?raw', alt='Banner Advert')
+      img#banner(src=ad.image.thumbnail, alt='Banner Advert')

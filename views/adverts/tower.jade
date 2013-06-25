@@ -1,2 +1,2 @@
 a(href="/advertisements/#{ad.advertisement_id}/click",target="_blank")
-  img.ad-tower(src='/uploads/' + ad.image_id + '?raw', alt= ad.description)
+  img.ad-tower(src=ad.image.thumbnail, alt= ad.description)
