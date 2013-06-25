@@ -103,7 +103,7 @@ exports.create = (req,res) ->
 
     email.addSubVal '{{email}}', req.body.email
     email.addSubVal '{{name}}', req.body.name
-    email.addSubVal '{{comments}}', req.body.comments
+    email.addSubVal '{{comments}}', req.body.comments.toString().replace /\n/g, '<br />'
     email.addSubVal '{{type}}', req.body.type
     email.addSubVal '{{phone}}', req.body.phone
     email.addSubVal '{{state}}', req.body.state
