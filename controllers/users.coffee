@@ -23,35 +23,64 @@ exports.add = (req, res, next) ->
 
 exports.create = (req,res) ->
   
-  req.session.signup  = req.body
-  req.assert('email', 'Invalid Email').isEmail()
-  req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
-  req.assert('confirmPassword', 'Password does not match').isIn [req.body.password]
-  req.assert('fname', 'First name is invalid').isAlpha().len(2,20).notEmpty()
-  req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
+  # req.session.users  = req.body
+  # req.assert('email', 'Invalid Email').isEmail()
+  # req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
+  # req.assert('confirmPassword', 'Password does not match').isIn [req.body.password]
+  # req.assert('fname', 'First name is invalid').isAlpha().len(2,20).notEmpty()
+  # req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
   
-  User.getUserByEmail req.body.email, (err, email) ->
-     if email.length > 0 then req.flash('error','Email address is already in use')
-     
-     errors = req.validationErrors true
-     
-     if errors
-       keys = Object.keys(errors)
-
-       for key in keys
-         req.flash('error', errors[key].msg)
-
-       req.session.signup = req.body
-
-       res.redirect 'back'
-     else
-       user = req.body
-       user.password = helpers.hash user.password
-       user.group ?= 1
-       
-       User.createUser user, (err, results) ->
-         req.flash 'success', 'User created!'
-         res.redirect 'admin/users'
+  email = req.param 'email'
+  
+  User.byEmail email, (error, user) ->
+    
+    return next error if error?
+    
+    if email?.length and user?
+      req._validationErrors ?= []
+      req._validationErrors.push
+        param: 'email'
+        msg: 'already in use'
+        value: user.email
+    else
+      req.assert('email', 'invalid').isEmail()
+    
+    req.assert('password', 'too short (6 characters minimum)').len 6
+    if (req.param 'password')?.length
+      req.assert('confirm', '').equals (req.param 'password')
+    
+    req.assert('first_name', 'invalid').len 2 # regex /^[A-Z][a-zA-Z '&-]*[A-Za-z]$/
+    req.assert('last_name', 'invalid').len 2 # regex /^[A-Z][a-zA-Z '&-]*[A-Za-z]$/
+    
+    req.assert('postcode', 'invalid').regex /[0-9]{4}/i
+    
+    errors = req.validationErrors()
+    
+    if errors
+      for error in errors
+        req.flash 'error', (_s.humanize "#{error.param} - #{error.msg}")
+      req.session.form = req.body
+      res.render 'back'
+      return
+    
+    User.create
+      password: (require '../lib/hash') (req.param 'password')
+      account_type_id: 1
+      email: req.param 'email'
+      first_name: req.param 'first_name'
+      last_name: req.param 'last_name'
+      postcode: req.param 'postcode'
+    , (error, user) ->
+    
+    user = req.body
+    user.password = helpers.hash user.password
+    user.group ?= 1
+    
+    User.createUser user, (err, results) ->
+      
+      req.flash 'success', 'User created!'
+      
+      res.redirect 'admin/users'
 
 exports.edit = (req, res, next) ->
   
@@ -78,9 +107,9 @@ exports.update = (req,res) ->
   req.body.lname ?= ''
   req.body.id = req.params.id
   req.body.group ?= 1
-    
+  
   req.assert('email', 'Invalid Email Address').isEmail()
- 
+  
   if req.body.password != ''
     req.assert('password', 'Password must be at least 6 characters').len(6).notEmpty()
     req.assert('confirmPassword', 'Password does not match').isIn [req.body.password]
@@ -89,6 +118,7 @@ exports.update = (req,res) ->
   req.assert('lname', 'Last name is invalid').isAlpha().len(2,20).notEmpty()
   
   User.getUserById req.body.id, (err, user) ->
+    
     user = user.pop()
     
     User.getUserByEmail req.body.email, (err, email) ->
@@ -102,8 +132,8 @@ exports.update = (req,res) ->
         
         for key in keys
           req.flash('error', errors[key].msg)
-    
-        req.session.signup = req.body
+        
+        req.session.users = req.body
         
         res.redirect 'back'
       

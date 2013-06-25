@@ -11,9 +11,17 @@ exports.index = (req, res) ->
       User.getUsersByGroup 2, (error, developers) ->
         res.render 'admin/owls/index', {owls, developers}
 
-exports.show = (req, res) ->
-  Owl.get req.params.id, (error, owl) ->
-    res.render 'admin/owls/show', {owl}
+exports.admin = (req, res) ->
+  
+  async.parallel
+    owl: (callback) -> Owl.get req.params.id, callback
+    developers: (callback) -> User.developers callback
+    developmentTypes: (callback) -> DevelopmentType.all callback
+    developmentStatuses: (callback) -> DevelopmentStatus.all callback
+    dealTypes: (callback) -> DealType.all callback
+  , (error, results) ->
+    
+    res.render 'admin/owls/show', results
 
 exports.edit = (req, res) ->
   

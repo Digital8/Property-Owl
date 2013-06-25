@@ -159,12 +159,13 @@ module.exports = ({app, controllers}) ->
   for key in ['owls', 'barns']
     app.del   "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].destroy
     app.get   "/#{key}",                  (authorize acl.developer), controllers[key].index
-    app.get   "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].show
     app.get   "/#{key}/:id(\\d+)/edit",   (authorize acl.developer), controllers[key].edit
     app.get   "/#{key}/add",              (authorize acl.developer), controllers[key].add
     app.patch "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].patch
     app.post  "/#{key}", (authorize 2),   (authorize acl.developer), controllers[key].create
     app.put   "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].update
+  
+  app.get   "/owls/:id(\\d+)/admin",  (authorize acl.developer), controllers.owls.admin
   
   # app.post '/owls/:id(\\d+)/clone', (authorize acl.admin), controllers.owls.clone
   

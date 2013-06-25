@@ -4,7 +4,7 @@
     
     label(for='group') User Type
     
-    select(name="group")
+    select(name="account_type_id")
       - each group in groups
          option(value="#{group.account_type_id}", selected=group.account_type_id == user.account_type_id)= group.name
   
@@ -47,7 +47,7 @@
    label.required(for='password') Password *
    input#password(type="password",name="password",class="half-field",placeholder="Password",maxlength='100')
    | &nbsp;
-   input#confirmPassword(type="password",placeholder="Confirm Password",name="confirmPassword",class="half-field",maxlength='100')
+   input#confirmPassword(type="password",placeholder="Confirm Password",name="confirm",class="half-field",maxlength='100')
     br
     p.note Password will not be changed if left blank
   
