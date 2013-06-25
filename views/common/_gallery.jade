@@ -5,10 +5,23 @@ mixin gallery(deal)
     #mySlider.evoslider.galleriffic
       
       dl
-        if deal.feature_image
-          dt "slide #{deal.feature_image.id}"
-            dd(data-src=deal.feature_image.url, data-thumb=deal.feature_image.thumbnail)
         
-        each image in deal.images
-          dt "slide #{image.id}"
-            dd(data-src=image.url, data-thumb=image.thumbnail)
+        if deal.feature_image
+          
+          dt "slide #{deal.feature_image.id}"
+            
+            dd(data-src=deal.feature_image.url, data-thumb=deal.feature_image.thumbnail)
+          
+          each image in _.without(deal.images, deal.feature_image)
+            
+            dt "slide #{image.id}"
+              
+              dd(data-src=image.url, data-thumb=image.thumbnail)
+        
+        else
+          
+          each image in deal.images
+            
+            dt "slide #{image.id}"
+              
+              dd(data-src=image.url, data-thumb=image.thumbnail)

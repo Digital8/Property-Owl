@@ -35,7 +35,7 @@ var VERSION = 2.11,
         
             fileTypes: {
                 images: {
-                    reg: /\.(jpg|jpeg|gif|png|bmp|tiff)(.*)?$/i,
+                    reg: /.*/,
                     type: "image"
                 },
                 
