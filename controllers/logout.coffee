@@ -2,7 +2,7 @@ exports.get = (req, res) ->
   
   delete req.session.user_id
   
-  res.clearCookie 'pouser'
-  res.clearCookie 'popwd'
+  res.clearCookie 'user.id'
+  res.clearCookie 'user.password'
   
   res.redirect '/'

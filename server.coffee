@@ -152,6 +152,18 @@ app.configure ->
     
     app.use app.router
     
+    # handle 401 - not authed
+    app.use (error, req, res, next) ->
+      
+      return next error unless error?.status is 401
+      
+      if error?.status is 401
+        if req.xhr
+          res.send 401
+        else
+          req.session.redirect_to = req.url
+          res.redirect '/login'
+    
     # handle validation errors
     app.use (error, req, res, next) ->
       if req._validationErrors?

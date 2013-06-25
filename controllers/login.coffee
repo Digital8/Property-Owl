@@ -11,8 +11,6 @@ exports.post = (req, res, next) ->
   
   {email, password, remember} = req.body
   
-  console.log req.body
-  
   return next 400 unless email? and password?
   
   digest = (require '../lib/hash') password
@@ -45,9 +43,9 @@ exports.post = (req, res, next) ->
     req.session.user_id = user.id
     req.user = user
     
-    if remember?.toLowerCase() is 'checked'
-      res.cookie 'pouser', user.id, maxAge: 604800000
-      res.cookie 'popwd', user.password, maxAge: 604800000
+    if remember?.toLowerCase() in ['checked', 'on']
+      res.cookie 'user.id', user.id, maxAge: 604800000
+      res.cookie 'user.password', user.password, maxAge: 604800000
     
     req.flash 'success', 'Welcome!'
     if req.xhr
