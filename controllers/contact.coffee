@@ -35,17 +35,10 @@ exports.create = (req,res) ->
     res.redirect '/contact'
   
   else
-
-    ###
-    Developer - rob@propertyowl.com.au
-    Agent - rob@propertyowl.com.au
-    Advertising - advertising@propertyowl.com.au
-    ###
-
     agent =
-      "general enquiry": "jeff@digital8.com.au"
-      "developer enquiry": "jeff@digital8.com.au"
-      "advertising enquiry": "jeff@digital8.com.au"
+      "general enquiry": "rob@propertyowl.com.au"
+      "developer enquiry": "rob@propertyowl.com.au"
+      "advertising enquiry": "advertising@propertyowl.com.au"
 
     email = new Email
       to: "#{agent[req.body.type.toLowerCase()]}"
@@ -103,7 +96,7 @@ exports.create = (req,res) ->
 
     email.addSubVal '{{email}}', req.body.email
     email.addSubVal '{{name}}', req.body.name
-    email.addSubVal '{{comments}}', req.body.comments
+    email.addSubVal '{{comments}}', req.body.comments.toString().replace /\n/g, '<br />'
     email.addSubVal '{{type}}', req.body.type
     email.addSubVal '{{phone}}', req.body.phone
     email.addSubVal '{{state}}', req.body.state
