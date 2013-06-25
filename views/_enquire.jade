@@ -6,19 +6,19 @@
     
     label(for='name') First Name
     if req.user
-      input(type='text', value=req.user.first_name, name='first_name', disabled)
+      input(type='text', value=req.user.first_name, name='first_name', readonly)
     else
       input.name(type='text', name='first_name')
     
     label(for='name') Last Name
     if req.user
-      input(type='text', value=req.user.last_name, name='last_name', disabled)
+      input(type='text', value=req.user.last_name, name='last_name', readonly)
     else
       input.name(type='text', name='last_name')
     
     label(for='email') Email
     if req.user
-      input(type='text', value=req.user.email, name='email', disabled)
+      input(type='text', value=req.user.email, name='email', readonly)
     else
       input.email(type='text', name='email')
     
