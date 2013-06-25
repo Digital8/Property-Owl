@@ -5,16 +5,16 @@
   form#input-form.enquire-form
     
     label(for='name') Name
-      - if (session.user)
-        input.name(type='text', disabled, value=session.user.name, name='name')
-      - else
-        input.name(type='text', name='name')
+    - if (session.user)
+      input.name(type='text', disabled, value=session.user.name, name='name')
+    - else
+      input.name(type='text', name='name')
     
     label(for='email') Email:
-      - if (session.user)
-        input.email(type='text', disabled, value=session.user.email, name='email')
-      - else
-        input.email(type='text', name='email')
+    - if (session.user)
+      input.email(type='text', disabled, value=session.user.email, name='email')
+    - else
+      input.email(type='text', name='email')
     
     label(for='phone') Phone
     input.phone(type='text',name="phone")
