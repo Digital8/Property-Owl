@@ -2,8 +2,6 @@ _s = require 'underscore.string'
 
 exports.index = (req, res) ->
   
-  console.log req.session.account
-  
   user = {}
   
   for key, value of req.user
@@ -12,8 +10,6 @@ exports.index = (req, res) ->
   if req.session.account?
     for key, value of req.session.account
       user[key] = value
-  
-  console.log user
   
   req.session.account = null
   
