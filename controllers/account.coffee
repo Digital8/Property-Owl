@@ -4,7 +4,7 @@ exports.index = (req, res) ->
   
   res.render 'user/settings'
   
-  delete req.session.account
+  req.session.account = null
 
 exports.update = (req, res, next) ->
   
