@@ -1,6 +1,6 @@
 #enquiry-modal.secure-deal-overlay.overlay
   
-  - var user = req.user || {};
+  - var _user = req._user || {};
   
   .modal.main.success
     
@@ -11,16 +11,16 @@
     
     form.modal-content.details-form
       
-      input.half.secure-deal-first-name(type='hidden', name='first_name', placeholder='First Name', value=user.first_name)
-      input.half.secure-deal-last-name(type='hidden', name='last_name', placeholder='Last Name', value=user.last_name)
+      input.half.secure-deal-first-name(type='hidden', name='first_name', placeholder='First Name', value=_user.first_name)
+      input.half.secure-deal-last-name(type='hidden', name='last_name', placeholder='Last Name', value=_user.last_name)
       
-      input.half.secure-deal-phone(type='tel', name='phone', placeholder='Phone Number', value=user.phone)
+      input.half.secure-deal-phone(type='tel', name='phone', placeholder='Phone Number', value=_user.phone)
       
       select(name="contact_method", style="width: 14.063em;").half.secure-deal-email
         option(value="phone") Contact me by phone
         option(value="email") Contact me by email
       
-      input.full.secure-deal-email(type='hidden', name='email', placeholder='Email Address', value=user.email, style="width:98%;")
+      input.full.secure-deal-email(type='hidden', name='email', placeholder='Email Address', value=_user.email, style="width:98%;")
       
       textarea.full.secure-deal-comment(name='comment', placeholder='Place your enquiry here', style="width:98%;")
       
