@@ -9,17 +9,15 @@ exports.index = (req, res) ->
   for key, value of req.user
     user[key] = value
   
-  
-  
   if req.session.account?
     for key, value of req.session.account
       user[key] = value
   
   console.log user
   
-  res.render 'user/settings', {user}
+  req.session.account = null
   
-  delete req.session.account
+  res.render 'user/settings', {user}
 
 exports.update = (req, res, next) ->
   
