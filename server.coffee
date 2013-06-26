@@ -32,6 +32,7 @@ argv = optimist
   .alias('time', 't')
   .alias('hack', 'h')
   .alias('user', 'u')
+  .alias('body', 'b')
   .argv
 
 Model = require './lib/model'
@@ -163,11 +164,11 @@ app.configure ->
     
     app.use do require './lib/guard'
     
-    app.use (req, res, next) ->
-      if app.argv.verbose
-        # console.log req.user
-        console.log url: req.url, body: req.body
-      next error
+    if app.argv.body
+      app.use (req, res, next) ->
+        if req.method isnt 'GET'
+          console.log url: req.url, body: req.body
+        next error
     
     # # debug
     # app.get '/debug', (req, res, next) ->
