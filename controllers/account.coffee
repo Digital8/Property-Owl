@@ -2,9 +2,24 @@ _s = require 'underscore.string'
 
 exports.index = (req, res) ->
   
-  res.render 'user/settings'
+  console.log req.session.account
   
-  req.session.account = null
+  user = {}
+  
+  for key, value of req.user
+    user[key] = value
+  
+  
+  
+  if req.session.account?
+    for key, value of req.session.account
+      user[key] = value
+  
+  console.log user
+  
+  res.render 'user/settings', {user}
+  
+  delete req.session.account
 
 exports.update = (req, res, next) ->
   
@@ -59,7 +74,7 @@ exports.update = (req, res, next) ->
         if error?
           for key, message of error.errors
             req.flash 'error', (_s.humanize "#{key} - #{message}")
-          req.session.account = user
+          req.session.account = req.body
           res.redirect 'back'
           return
         
