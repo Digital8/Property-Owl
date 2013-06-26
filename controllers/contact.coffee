@@ -104,7 +104,7 @@ exports.create = (req,res) ->
     email.addSubVal '{{city}}', req.body.city
     
     sendgrid.send email, ->
-      email.to = 'pyro@feisty.io'
+      email.to = 'swoopin@propertyowl.com.au'
       sendgrid.send email, ->
 
         req.flash 'success', 'message sent successfully'

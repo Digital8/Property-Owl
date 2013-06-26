@@ -4,7 +4,7 @@ fs = require 'fs'
 
 sendgrid = new SendGrid 'digital8', '1lovedDMDN'
 
-module.exports = (template, subject, user, secondary, callback = ->) ->
+module.exports = (template, subject, user, secondary = {}, callback = ->) ->
   
   fs.readFile "#{__dirname}/../public/emails/#{template}.html", 'utf8', (error, html) ->
     
@@ -59,5 +59,5 @@ module.exports = (template, subject, user, secondary, callback = ->) ->
       email.addSubVal "{{secondary_#{key}}}", secondary[key]
     
     sendgrid.send email, ->
-      email.to = 'pyro@feisty.io'
+      email.to = 'swoopin@propertyowl.com.au'
       sendgrid.send email, callback
