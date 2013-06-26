@@ -18,7 +18,7 @@ block content
       
       .details
         
-        - var user = session.form || req.user;
+        - var _user = session.account || req.user;
         
         form.details-form(action='/account', method='post', autocomplete='off')
           
@@ -30,31 +30,31 @@ block content
             
             .inputs 
               label(for='first_name') First name
-              input(type='text', name='first_name', value=user.first_name)
+              input(type='text', name='first_name', value=_user.first_name)
             
             .inputs 
               label(for='last_name') Last name
-              input(type='text', name='last_name', value=user.last_name)
+              input(type='text', name='last_name', value=_user.last_name)
            
             .inputs
               label(for='company') Company
-              input(type='text', name='company', value=user.company)
+              input(type='text', name='company', value=_user.company)
          
             .inputs
               label(for='email') Email
-              input(type='email', name='email', value=user.email)
+              input(type='email', name='email', value=_user.email)
       
             .inputs
               label(for='phone') Phone
-              input(type='tel', name='phone', value=user.phone)
+              input(type='tel', name='phone', value=_user.phone)
        
             .inputs
               label(for='work_phone') Work Phone
-              input(type='tel', name='work_phone', value=user.work_phone)
+              input(type='tel', name='work_phone', value=_user.work_phone)
          
             .inputs
               label(for='mobile') Mobile
-              input(type='tel', name='mobile', value=user.mobile)
+              input(type='tel', name='mobile', value=_user.mobile)
           
           .right.mobile-full
             
@@ -69,27 +69,27 @@ block content
             
             .inputs
               label(for='address') Address
-              textarea(name='address')= user.address
+              textarea(name='address')= _user.address
             
             .inputs
               label(for='suburb') Suburb
-              input(type='text', name='suburb', value=user.suburb)
+              input(type='text', name='suburb', value=_user.suburb)
             
             .inputs
               label(for='postcode') Postcode
-              input(type='text', name='postcode', value=user.postcode)
+              input(type='text', name='postcode', value=_user.postcode)
             
             .inputs
               label(for='subscribed_newsletter') Subscribed to Newsletter
               select(name='subscribed_newsletter')
-                option(value=1, selected=user.subscribed_newsletter) Yes
-                option(value=0, selected=!user.subscribed_newsletter) No
+                option(value=1, selected=_user.subscribed_newsletter) Yes
+                option(value=0, selected=!_user.subscribed_newsletter) No
             
             .inputs
               label(for='subscribed_alerts') Subscribed to Property Alerts
               select(name='subscribed_alerts')
-                option(value=1, selected=user.subscribed_alerts) Yes
-                option(value=0, selected=!user.subscribed_alerts) No
+                option(value=1, selected=_user.subscribed_alerts) Yes
+                option(value=0, selected=!_user.subscribed_alerts) No
           
           .inputs
           

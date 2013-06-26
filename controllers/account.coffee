@@ -4,7 +4,7 @@ exports.index = (req, res) ->
   
   res.render 'user/settings'
   
-  delete req.session.form
+  delete req.session.account
 
 exports.update = (req, res, next) ->
   
@@ -39,7 +39,7 @@ exports.update = (req, res, next) ->
     
     if errors?.length
       for error in errors then req.flash 'error', error.msg
-      req.session.form = req.body
+      req.session.account = req.body
       res.redirect 'back'
       return
     
@@ -59,7 +59,7 @@ exports.update = (req, res, next) ->
         if error?
           for key, message of error.errors
             req.flash 'error', (_s.humanize "#{key} - #{message}")
-          req.session.form = user
+          req.session.account = user
           res.redirect 'back'
           return
         
