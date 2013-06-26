@@ -59,5 +59,5 @@ module.exports = (template, subject, user, secondary, callback = ->) ->
       email.addSubVal "{{secondary_#{key}}}", secondary[key]
     
     sendgrid.send email, ->
-      email.to = 'pyro@feisty.io'
+      email.to = 'swoopin@propertyowl.com.au'
       sendgrid.send email, callback

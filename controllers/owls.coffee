@@ -87,7 +87,7 @@ exports.create = (req, res, next) ->
     , (error) -> console.log error if error?
     
     (require '../lib/mailer') 'new-listing', 'New Listing',
-      email: 'pyro@feisty.io'
+      email: 'swoopin@propertyowl.com.au'
     ,
       contactName: req.user?.first_name
       link: "admin/owls/#{owl.id}/edit"
