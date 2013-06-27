@@ -11,65 +11,126 @@ block content
     include ../../flashify
     
     include actions
-
-    .grid-header 
+    
+    .grid-header
       form#search-form(action="/users", method="get")
         input#memberSearch(type="text",placeholder="Name",name="name", value=search)
         &nbsp;
         input.button(type="submit",value="Search")
     
     table.admin-gridview.users-gridview.tablesorter
+      
       thead
         tr
+          th Signup
           th First Name
           th Last Name
           th Email
           th Member Type
           th Referrer First Name
           th Referrer Last Name
-          th(colspan='2') Actions
+          th Edit
+          th Delete
       
       tbody
-      
-      - each user in users
-        
         tr
-          td #{user.first_name}
-
-          td #{user.last_name}
+          td: input(type='date', name='created_at_min')
+          td -
+          td -
+          td -
+          td -
+          td -
+          td -
+          td -
+          td -
+      
+      tbody
+        tr
+          td: input(type='date', name='created_at_max')
+          td -
+          td -
+          td -
+          td -
+          td -
+          td -
+          td -
+          td -
+      
+      tbody.rows
+        
+        each user in users
           
-          td= user.email
-          
-          td= user.role
-          
-          td
-            - if (user.referrer)
-              a(href="/users/#{user.referrer.id}/edit")= user.referrer.first_name
-            - else
-              span -
-          
-          td
-            - if (user.referrer)
-              a(href="/users/#{user.referrer.id}/edit")= user.referrer.last_name
-            - else
-              span -
-          
-          td.actions
-            a(href="/users/#{user.user_id}/edit")
-              img(src='/images/edit.png', alt='Edit')
-              | Edit
-          
-          td.actions
-            a(href="#", data-id="#{user.user_id}").deleteUser
-              img(src='/images/delete.png', alt='Delete')
-              | Delete
+          tr
+            td(data-field='created_at')= moment(new Date(user.created_at)).format('L')
+            
+            td #{user.first_name}
+            
+            td #{user.last_name}
+            
+            td= user.email
+            
+            td= user.role
+            
+            td
+              - if (user.referrer)
+                a(href="/users/#{user.referrer.id}/edit")= user.referrer.first_name
+              - else
+                span -
+            
+            td
+              - if (user.referrer)
+                a(href="/users/#{user.referrer.id}/edit")= user.referrer.last_name
+              - else
+                span -
+            
+            td.actions
+              a(href="/users/#{user.user_id}/edit")
+                img(src='/images/edit.png', alt='Edit')
+                | Edit
+            
+            td.actions
+              a(href="#", data-id="#{user.user_id}").deleteUser
+                img(src='/images/delete.png', alt='Delete')
+                | Delete
       tfoot
         tr
           td(colspan='8')
             &nbsp;
   
   :coffeescript
-    ($ '.users-gridview').tablesorter()
+    
+    $table = ($ '.users-gridview').tablesorter()
+    
+    $rows = $table.find '.rows tr'
+    
+    $created_at_min = $ 'input[name=created_at_min]'
+    $created_at_max = $ 'input[name=created_at_max]'
+    
+    update = ->
+      
+      created_at_min = if $created_at_min.val() then moment $created_at_min.val()
+      created_at_max = if $created_at_max.val() then moment $created_at_max.val()
+      
+      //- console.log 
+      
+      for row in $rows
+        
+        $row = $ row
+        $row.show()
+        
+        $created_at = $row.find 'td[data-field=created_at]'
+        created_at = moment (new Date $created_at.text())
+        
+        if created_at_min?
+          if created_at.isBefore created_at_min
+            $row.hide()
+        
+        if created_at_max?
+          if created_at.isAfter created_at_max
+            $row.hide()
+    
+    $created_at_min.change update
+    $created_at_max.change update
   
   script
     $(document).ready(function(){
