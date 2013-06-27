@@ -68,10 +68,11 @@ module.exports = class Owl extends Model
       (_.compact [@address, @suburb, @state.toUpperCase(), @postcode]).join ', '
     
     Object.defineProperty this, 'feature_image', get: =>
-      for image in @images
-        return image if image.id is @feature_image_id
-      if @images[0]?
-        return @images[0]
+      if @images? and @images.length
+        for image in @images
+          return image if image.id is @feature_image_id
+        if @images[0]?
+          return @images[0]
       return {
         id: 0
         url: '/images/placeholder.png'

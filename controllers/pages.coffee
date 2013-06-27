@@ -1,3 +1,5 @@
+jade = require 'jade'
+
 exports.index   = (require '../behaviors/index')   Page, views: 'admin/'
 exports.add     = (require '../behaviors/add')     Page, views: 'admin/'
 exports.create  = (require '../behaviors/create')  Page, views: 'admin/'
@@ -6,7 +8,7 @@ exports.update  = (require '../behaviors/update')  Page, views: 'admin/'
 exports.delete  = (require '../behaviors/delete')  Page, views: 'admin/'
 exports.destroy = (require '../behaviors/destroy') Page, views: 'admin/'
 
-exports.serve = (req, res) ->
+exports.serve = (req, res, next) ->
   
   url = req.params.pop()
   
@@ -16,6 +18,11 @@ exports.serve = (req, res) ->
     return res.send 404 unless page?
     
     unless page.enabled
+      
       return res.render 'errors/404'
     
-    res.render 'page', {page}
+    try
+      page.html = (jade.compile page.content) {req}
+      res.render 'page', {page}
+    catch error
+      next error

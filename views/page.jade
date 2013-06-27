@@ -7,8 +7,9 @@ block content
     include left_nav
     
     #center-col.mobile-full
+      
       h1= page.header
-      p
-        !{page.content}
+      
+      p!= page.html
     
     include right_nav
