@@ -42,10 +42,10 @@ module.exports =
     root: "#{__dirname}/public/uploads"
   
   s3:
-    key: null
-    secret: null
-    region: null
-    bucket: null
+    key: 'AKIAI3RTJVU35L7JCJLA'
+    secret: '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'
+    region: 'ap-southeast-2'
+    bucket: 'propertyowl'
   
   mimes:
     application: [
