@@ -3,7 +3,7 @@ extends ../layout
 block content
   
   .container.row.main
-  
+    
     include ../left_nav
     
     #center-col.mobile-full
@@ -11,66 +11,61 @@ block content
       h1 Contact Us
       
       .details
+        
         form.details-form(action='/contact', method='post')
           
           include ../flashify
           
           .left.mobile-full
-            .inputs 
+            .inputs
               label(for='type') Enquiry Type
-              select#type(name='type', class='select2')
-                option General Enquiry
-                option Developer Enquiry
-                option Advertising Enquiry
+              select#type(name='type', name='type')
+                each type in ['general', 'developer', 'advertising']
+                  option(value=type, selected=form.type == type) #{_s.humanize(type)} Enquiry
             
             .inputs
               label(for='name') Name
-              input#name(type='text', name='name', placeholder='Full Name')
+              input#name(type='text', name='name', value=form.name, placeholder='Full Name')
             
             .inputs
               label(for='phone') Phone
-              input#phone(type='tel', name='phone', placeholder='Contact Phone')
+              input#phone(type='tel', name='phone', value=form.phone, placeholder='Contact Phone')
             
             .inputs
               label(for='email') Email
-              input#email(type='email', name='email', placeholder='Email')
+              input#email(type='email', name='email', value=form.email, placeholder='Email')
             
             .inputs
               label(for='contact_method') Preferred Contact Method
-              select#contact_method(name='contact_method', class='select2', style="width:10em;")
-                option Phone
-                option Email
+              select#contact_method(name='contact_method')
+                each contact_method in ['phone', 'email']
+                  option(value=contact_method, selected=form.contact_method == contact_method)= _s.humanize(contact_method)
           
           .right.mobile-full
             .inputs
               label(for='company') Company
-              input#company(type='text', name='company', placeholder='Company')
+              input#company(type='text', name='company', value=form.company, placeholder='Company')
             
             .inputs
               label(for='address') Address
-              input#email(type='text', name='address', placeholder='Address')
+              input#email(type='text', name='address', value=form.address, placeholder='Address')
             
             .inputs
               label(for='city') City/Suburb
-              input#city(type='text', name='city', placeholder='City or Suburb')
+              input#city(type='text', name='city', value=form.suburb, placeholder='City or Suburb')
             
             .inputs
               label(for='state') State
-              select#state(name='state', class='select2', style="width:10em;")
+              select#state(name='state', value=form.state, class='select2', style="width:10em;")
                 option
-                option ACT
-                option NSW
-                option QLD
-                option NT
-                option VIC
-                option WA
-                option TAS
+                each state in ['act', 'nsw', 'nt', 'qld', 'sa', 'tas', 'vic', 'wa']
+                  option(value=state, selected=state == form.state)= state.toUpperCase()
           
           .inputs
           
           .inputs 
             label(for='city') Comments
-            textarea(rows='7', name='comments', placeholder='Comments')
+            textarea(rows='7', name='comment', placeholder='Comments')= form.comment
           
           .submit
             button.button Send Enquiry

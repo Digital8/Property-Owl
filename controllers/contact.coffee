@@ -1,15 +1,17 @@
-#{Email} = require 'email'
 {SendGrid, Email} = require 'sendgrid'
 sendgrid = new SendGrid 'digital8', '1lovedDMDN'
 
 exports.index = (req,res) ->
   
-  res.render 'contact/index'
+  form = req.session.form or {}
+  delete req.session.form
+  res.render 'contact/index', {form}
 
 exports.create = (req,res) ->
+  
   req.assert('email', 'Invalid Email Address').isEmail()
   req.assert('name', 'Please enter a name').notEmpty()
-  req.assert('comments', 'Please enter the comments').notEmpty()
+  req.assert('comment', 'Please enter a comment').notEmpty()
   
   req.body.type ?= 'General Enquiry'
   req.body.phone ?= ''
@@ -28,7 +30,10 @@ exports.create = (req,res) ->
     
     keys = Object.keys errors
     
-    req.flash('error', errors[key].msg) for key in keys
+    for key in keys
+      req.flash 'error', errors[key].msg
+    
+    req.session.form = req.body
     
     res.redirect '/contact'
   
@@ -91,10 +96,10 @@ exports.create = (req,res) ->
       """
     
     email.setCategory 'Property Owl'
-
+    
     email.addSubVal '{{email}}', req.body.email
     email.addSubVal '{{name}}', req.body.name
-    email.addSubVal '{{comments}}', req.body.comments.toString().replace /\n/g, '<br />'
+    email.addSubVal '{{comments}}', req.body.comment.toString().replace /\n/g, '<br />'
     email.addSubVal '{{type}}', req.body.type
     email.addSubVal '{{phone}}', req.body.phone
     email.addSubVal '{{state}}', req.body.state
@@ -104,8 +109,13 @@ exports.create = (req,res) ->
     email.addSubVal '{{city}}', req.body.city
     
     sendgrid.send email, ->
+      
       email.to = 'swoopin@propertyowl.com.au'
+      
       sendgrid.send email, ->
-
+        
         req.flash 'success', 'message sent successfully'
+        
+        req.session.form = {}
+        
         res.redirect '/contact'
