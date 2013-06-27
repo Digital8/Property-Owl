@@ -18,16 +18,16 @@ block content
         &nbsp;
         input.button(type="submit",value="Search")
     
-    table.admin-gridview
+    table.admin-gridview.users-gridview.tablesorter
       thead
         tr
-          td First Name
-          td Last Name
-          td Email
-          td Member Type
-          td Referrer First Name
-          td Referrer Last Name
-          td(colspan='2') Actions
+          th First Name
+          th Last Name
+          th Email
+          th Member Type
+          th Referrer First Name
+          th Referrer Last Name
+          th(colspan='2') Actions
       
       tbody
       
@@ -67,6 +67,10 @@ block content
         tr
           td(colspan='8')
             &nbsp;
+  
+  :coffeescript
+    ($ '.users-gridview').tablesorter()
+  
   script
     $(document).ready(function(){
       $('.deleteUser').click(function(e){
