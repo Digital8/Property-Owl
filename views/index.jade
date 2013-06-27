@@ -5,8 +5,11 @@ block content
   if (locals.owl && owl.id)
     
     .container.row.best-deal
+      
       .home-deal-stats
+        
         .home-timer
+          
           #timer
             #day-timer
               span.label Days
@@ -22,7 +25,7 @@ block content
         
         .home-counter
           span.label Number of Enquiries
-          span.value= (owl.enquiries.length + 31)
+          span.value= (owl.registrations.length + owl.enquiries.length + 31)
            //- + Math.floor((Math.random() * 1337))
       
       .deal-summary.clickable(style="background-image: url('#{owl.feature_image.url}');", url='owls/top')
