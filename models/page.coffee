@@ -23,7 +23,7 @@ module.exports = class Page extends Model
     
     Object.defineProperty this, 'html', get: =>
       try
-        return do (jade.compile @content, req: @req)
+        return (jade.compile @content) req: @req
       catch e
         console.log 'could not render page', @id, e
         return ''

@@ -22,7 +22,7 @@ block content
           td(colspan='2') Actions
       
       tbody
-        - each page in pages
+        - each page in _.filter(pages, function(page) { return page.type == 'block' || page.type == 'page'; })
           tr
             td= page.header
             
