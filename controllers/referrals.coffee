@@ -31,7 +31,7 @@ exports.create = (req, res, next) ->
     
     res.send id: referral.id
     
-    primary:
+    primary =
       dear: req.user?.first_name
       email: req.body.email
     
