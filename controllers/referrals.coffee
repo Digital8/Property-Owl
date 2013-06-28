@@ -32,8 +32,10 @@ exports.create = (req, res, next) ->
     res.send id: referral.id
     
     primary =
-      dear: req.user?.first_name
+      dear: req.body.first_name
       email: req.body.email
+      first_name: req.user?.first_name
+      last_name: req.user?.last_name
     
     if entity.constructor is User
       (require '../lib/mailer') 'refer-friend', 'Friend Referral', primary, req.body, (error) ->
