@@ -31,6 +31,11 @@ exports.create = (req, res, next) ->
     
     res.send id: referral.id
     
-    #swap out the friends email
-    req.user?.email = req.body.email
-    (require '../lib/mailer') 'refer-property', 'Referral', req.user, req.body, (error) ->
+    primary:
+      dear: req.user?.first_name
+      email: req.body.email
+    
+    if entity.constructor is User
+      (require '../lib/mailer') 'refer-friend', 'Friend Referral', primary, req.body, (error) ->
+    else
+      (require '../lib/mailer') 'refer-property', 'Property Referral', primary, req.body, (error) ->
