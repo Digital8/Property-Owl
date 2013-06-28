@@ -22,7 +22,6 @@ exports.serve = (req, res, next) ->
       return res.render 'errors/404'
     
     try
-      req.user ?= {}
       page.html = (jade.compile page.content) {req}
       res.render 'page', {page}
     catch error
