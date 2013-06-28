@@ -128,7 +128,7 @@ exports.browse = (req, res) ->
     
     barns = _.sortBy barns, 'created_at'
     
-    Page.block req.url 'master', (error, page) ->
+    Page.block req.url, 'master', (error, page) ->
       
       try
         res.render 'barns/index',

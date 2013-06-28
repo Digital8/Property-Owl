@@ -1,3 +1,4 @@
+_ = require 'underscore'
 async = require 'async'
 
 Model = require '../lib/model'
@@ -77,7 +78,12 @@ module.exports = class Advertisement extends Model
       
       callback null, result[0]['COUNT(*)']
   
-  @random = (page, adspace, callback) =>
+  @random = (pages, adspace, callback) =>
+    
+    page_ids = _.pluck pages, 'id'
+    
+    unless page_ids.length
+      page_ids.push 0
     
     @db.query """
     SELECT *
@@ -97,11 +103,11 @@ module.exports = class Advertisement extends Model
         SELECT DISTINCT advertisement_id
         FROM advertisement_page
         WHERE
-          page_id = ?
+          page_id IN (?)
       )
     ORDER BY RAND()
     LIMIT 1
-    """, [adspace.id, page.id], (error, rows) =>
+    """, [adspace.id, page_ids], (error, rows) =>
       
       return callback error if error?
       

@@ -1,3 +1,4 @@
+_ = require 'underscore'
 async = require 'async'
 
 module.exports = (db) ->
@@ -19,13 +20,18 @@ module.exports = (db) ->
     console.start 'ads'
     
     url = req.url.split('?')[0]
-    tmpUrl = url.split('/')
-    url = '/' + tmpUrl[1]
     
-    if tmpUrl[1] is 'owls' 
-      if tmpUrl[2] in ['hot','top', 'locate'] then url += "/#{tmpUrl[2]}"
+    # tmpUrl = url.split '/'
+    # url = '/' + tmpUrl[1]
     
-    url += '%'
+    # console.log tmpUrl
+    
+    # if tmpUrl[1] is 'owls' 
+    #   if tmpUrl[2] in ['hot','top', 'locate'] then url += "/#{tmpUrl[2]}"
+    
+    [nil, resource, action] = url.split '/'
+    
+    url = "/#{resource}%"
     
     if url is '/%' then url = '/'
     
@@ -34,12 +40,10 @@ module.exports = (db) ->
       
       return next null if error?
       
-      [page] = pages
-      
-      return next null unless page?
+      return next null unless pages.length?
       
       async.times 5, (i, callback) ->
-        Advertisement.random page, adspaces[i], callback
+        Advertisement.random pages, adspaces[i], callback
       , (error, ads) ->
         
         if error?
