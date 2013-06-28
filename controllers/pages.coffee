@@ -12,7 +12,7 @@ exports.serve = (req, res, next) ->
   
   url = req.params.pop()
   
-  Page.findByUrl url, (error, page) ->
+  Page.cms url, (error, page) ->
     
     return res.send 500, error if error?
     return res.send 404 unless page?
@@ -22,7 +22,7 @@ exports.serve = (req, res, next) ->
       return res.render 'errors/404'
     
     try
-      page.html = (jade.compile page.content) {req}
+      page.req = req
       res.render 'page', {page}
     catch error
       next error

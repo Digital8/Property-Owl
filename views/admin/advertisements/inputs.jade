@@ -19,8 +19,9 @@ hr
     label(for='page') Page
     select(name="page_ids", class="select3", data-placeholder="Choose pages", multiple, size=32)
       
-      - each page in _.filter(pages, function(page) { return !(page.id == 34 || page.id == 35) })
-        option(value="#{page.page_id}", selected=_.contains(_.pluck(advertisement.pages, 'page_id'), page.page_id))= page.header
+      - each page in _.filter(pages, function(page) { return page.type == 'route' || page.type == 'page'; })
+        - var label = page.type == 'route' ? (page.header + ' (' + page.url + '*)') : (page.header + ' (' + page.url + ')');
+        option(value="#{page.page_id}", selected=_.contains(_.pluck(advertisement.pages, 'page_id'), page.page_id))= label
   
   .inputs
     label(for='adspace') Space

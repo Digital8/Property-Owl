@@ -8,7 +8,6 @@ exports.destroy = (require '../behaviors/destroy') Affiliate, views: 'admin/', a
 exports.view    = (require '../behaviors/view')    Affiliate, views: 'admin/'
 
 async = require 'async'
-jade = require 'jade'
 
 exports.browse = (req, res) ->
     
@@ -22,7 +21,7 @@ exports.browse = (req, res) ->
       
       categories: (callback) -> Category.for 'affiliate', callback
       
-      page: (callback) -> Page.findByUrl '/affiliates', callback
+      page: (callback) -> Page.block '/affiliates', 'master', callback
     
     , (error, {affiliates, categories, page}) ->
       
@@ -32,7 +31,7 @@ exports.browse = (req, res) ->
           affiliates: affiliates
           categories: categories
           id: req.query.category or 0
-          cms: do jade.compile page.content
+          cms: page.html
       
       catch e
         

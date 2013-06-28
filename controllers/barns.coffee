@@ -1,6 +1,5 @@
 _ = require 'underscore'
 async = require 'async'
-jade = require 'jade'
 
 exports.index = (req, res) ->
   
@@ -129,12 +128,12 @@ exports.browse = (req, res) ->
     
     barns = _.sortBy barns, 'created_at'
     
-    Page.findByUrl '/barn', (error, page) ->
+    Page.block req.url 'master', (error, page) ->
       
       try
         res.render 'barns/index',
           barns: barns
-          cms: do jade.compile page.content
+          cms: page.html
       
       catch {message}
         res.render 'errors/500', {message}

@@ -1,6 +1,5 @@
 _ = require 'underscore'
 async = require 'async'
-jade = require 'jade'
 
 exports.index = (req, res) ->
   
@@ -157,25 +156,25 @@ exports.destroy = (req, res) ->
 #       res.send status: 200
 
 # exports.index = (req, res) ->
-  
+
 #   Owl.all (error, owls) ->
-    
+
 #     res.render 'owls/index', owls: owls
 
 exports.locate = (req, res) ->
   
   async.parallel
     
-    page_top: (callback) -> Page.findByUrl '/owl-deals-top', callback
+    page_top: (callback) -> Page.block req.url, 'top', callback
     
-    page_bottom: (callback) -> Page.findByUrl '/owl-deals-bottom', callback
+    page_bottom: (callback) -> Page.block req.url, 'bottom', callback
     
   , (error, {page_top, page_bottom}) ->
     
     try
       res.render 'owls/locate',
-        cms_top: do jade.compile page_top.content
-        cms_bottom: do jade.compile page_bottom.content
+        cms_top: page_top.html
+        cms_bottom: page_bottom.html
     
     catch {message}
       res.render 'errors/500', {message}
