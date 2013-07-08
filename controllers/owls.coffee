@@ -134,32 +134,58 @@ exports.destroy = (req, res) ->
     
     res.send 200
 
-# exports.clone = (req, res) ->
+exports.clone = (req, res, next) ->
   
-#   id = req.params.id
+  id = req.params.id
   
-#   count = parseInt req.body.count
+  count = parseInt req.body.count
   
-#   unless 0 <= count <= Infinity
-#     return req.send status: 500
+  console.log 'cloning owl', id, count, 'times'
   
-#   Owl.get id, (error, owl) ->
-#     if error? then return req.send status: 500
+  unless 0 < count < Infinity
+    return next 400
+  
+  Owl.get id, (error, owl) ->
     
-#     console.log arguments...
+    return next error if error?
     
-#     async.map [0..count], (index, callback) ->
-#       owl.clone callback
-#     , (error) ->
-#       return res.send status: 500 if error?
+    async.times count, (i, callback) -> 
       
-#       res.send status: 200
-
-# exports.index = (req, res) ->
-
-#   Owl.all (error, owls) ->
-
-#     res.render 'owls/index', owls: owls
+      owl.clone (error, clone) ->
+        
+        return next error if error?
+        
+        patch = {}
+        patch.entity_id = clone.id
+        
+        async.parallel
+          deals: (callback) ->
+            async.map owl.deals, (deal, callback) ->
+              deal.clone (error, clone) ->
+                return callback error if error?
+                deal.patch patch, callback
+            , callback
+          files: (callback) ->
+            async.map owl.files, (file, callback) ->
+              file.clone (error, clone) ->
+                return callback error if error?
+                file.patch patch, callback
+            , callback
+          images: (callback) ->
+            async.map owl.images, (image, callback) ->
+              image.clone (error, clone) ->
+                return callback error if error?
+                image.patch patch, callback
+            , callback
+        , callback
+    
+    , (error) ->
+      
+      return next error if error?
+      
+      req.flash 'success', 'Owl cloned!'
+      
+      res.send 200
 
 exports.locate = (req, res) ->
   

@@ -1,16 +1,22 @@
 module.exports = ->
+  
   suffixes = ['pad', 'once', 'twice', 'three times', 'four times', 'five times']
   
-  $form = $ 'form'
+  suffix = (count) ->
+    
+    suffixes[count]
+  
+  $form = $ '.owl.details-form'
   
   clone = (count) ->
+    
     id = $form.data 'id'
     
     $.post "/owls/#{id}/clone", count: count, (body, res, jqXHR) ->
-      if jqXHR.status is 200 then alert 'Clone completed'
-      # window.location = '/owls'
+      if jqXHR.status is 200
+        window.location = '/owls'
   
-  $range = $ '.clone_range'
+  $range = $ '.clone_input'
   $clone_label = $ '.clone_label'
   $clone_range_label = $ '.clone_range_label'
 
@@ -50,6 +56,8 @@ module.exports = ->
     $tbody = $ '<tbody>'
     $tbody.appendTo $table
     
+    console.log rangeValue
+    console.count 'wtf'
     for i in [0...rangeValue]
       $row = $ '<tr>'
       
@@ -59,13 +67,24 @@ module.exports = ->
         $cell = $ '<td>'
         $cell.text owl[key]
         $cell.appendTo $row
+    
+    if rangeValue >= 1
+      $button.show()
+      $button.text "Clone Owl #{suffix rangeValue}"
+    else
+      $button.hide()
 
   $range.change (event) ->
     syncView $range
-
+  
+  $button = $ '<button>'
+  $button.appendTo $ '.pane.clone'
+  $button.hide()
+  
   syncView $range
   
-  $('.clone_button').click (event) ->
+  $button.click (event) ->
+    
     event.preventDefault()
     
     clone parseInt $range.val()

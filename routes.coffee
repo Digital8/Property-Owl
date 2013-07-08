@@ -166,8 +166,7 @@ module.exports = ({app, controllers}) ->
     app.put   "/#{key}/:id(\\d+)",        (authorize acl.developer), controllers[key].update
   
   app.get   "/owls/:id(\\d+)/admin",  (authorize acl.developer), controllers.owls.admin
-  
-  # app.post '/owls/:id(\\d+)/clone', (authorize acl.admin), controllers.owls.clone
+  app.post '/owls/:id(\\d+)/clone', (authorize acl.developer), controllers.owls.clone
   
   entity = (model, key) ->
     
