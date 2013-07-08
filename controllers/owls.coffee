@@ -140,8 +140,6 @@ exports.clone = (req, res, next) ->
   
   count = parseInt req.body.count
   
-  console.log 'cloning owl', id, count, 'times'
-  
   unless 0 < count < Infinity
     return next 400
   
