@@ -8,6 +8,8 @@ http: http://propertyowl.com.au:1337
 
 https: https://propertyowl.com.au
 
+NODE_ENV=production sudo supervisor --ignore . -- server.coffee
+
 ### Staging
 
 http: http://propertyowl.com.au:10080
