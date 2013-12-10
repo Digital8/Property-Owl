@@ -245,7 +245,6 @@ app.configure ->
         server = https.createServer
           key: fs.readFileSync config.ssl.key
           cert: fs.readFileSync config.ssl.cert
-          passphrase: config.ssl.passphrase
         , app
         
         server.listen config.https.port, ->
@@ -265,7 +264,7 @@ app.configure ->
         
         insecureApp.get '*', (req, res) ->
           #res.redirect "http://propertyowlnest.com/"
-          res.redirect "https://#{req.headers.host.split(':')[0]}#{req.url}"
+          res.redirect "https://#{req.headers.host.split(':')[0].replace(/^(www\.)?(.+)$/, '$2')}#{req.url}"
         
         insecureServer = http.createServer insecureApp
         insecureServer.listen config.http.port, ->
