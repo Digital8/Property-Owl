@@ -109,11 +109,12 @@ app.configure ->
     app.use flashify
 
     app.use (req, res, next) ->
-      if req.headers.host.split(':')[0].indexOf 'www' is 0
+      if req.headers.host.split(':')[0].indexOf('www') == 0
+        console.log 'redirect'
         res.redirect "https://#{req.headers.host.split(':')[0].replace(/^(www\.)?(.+)$/, '$2')}#{req.url}"
       else
-        next
-
+        return next null
+        
     app.use do require './browserify.coffee'
     
     (require './lib/schema') {models, db, controllers}
