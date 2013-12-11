@@ -107,6 +107,13 @@ app.configure ->
     app.use express.cookieParser 'secretsnake'
     app.use express.session secret: 'monkeyjuice', store: sessionStore
     app.use flashify
+
+    app.use (req, res, next) ->
+      if req.headers.host.split(':')[0].indexOf 'www' is 0
+        res.redirect "https://#{req.headers.host.split(':')[0].replace(/^(www\.)?(.+)$/, '$2')}#{req.url}"
+      else
+        next
+
     app.use do require './browserify.coffee'
     
     (require './lib/schema') {models, db, controllers}
